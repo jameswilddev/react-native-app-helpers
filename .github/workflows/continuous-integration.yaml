@@ -22,10 +22,8 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - run: npm ci
     - run: npm run-script buildLint
-    - run: npm run-script buildToolsTypeScript
-    - run: npm run-script buildToolsRun
     - run: npm run-script buildTypeScript
-    - run: npm run-script buildNyc
+    - run: npm run-script buildJest
   release:
     if: github.event_name == 'release' && github.event.action == 'created'
     needs: test
@@ -37,8 +35,6 @@ jobs:
         node-version: '16.x'
         registry-url: 'https://registry.npmjs.org'
     - run: npm ci
-    - run: npm run-script buildToolsTypeScript
-    - run: npm run-script buildToolsRun
     - run: npm run-script buildTypeScript
     - run: echo ${{ secrets.NPMRC }} > ${NPM_CONFIG_USERCONFIG}
     - run: "sed -i \"s/\\\"version\\\": \\\"0.0.0\\\",/\\\"version\\\": \\\"${GITHUB_REF/refs\\/tags\\/v/}\\\",/g\" package.json"
