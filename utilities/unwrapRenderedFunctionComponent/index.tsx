@@ -6,7 +6,7 @@
  */
 export const unwrapRenderedFunctionComponent = (
   element: JSX.Element
-): unknown => {
+): JSX.Element => {
   if (
     element.type instanceof Function &&
     Object.prototype.hasOwnProperty.call(element.type, `arguments`)
