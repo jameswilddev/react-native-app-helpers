@@ -1,0 +1,18 @@
+{
+  "clearMocks": true,
+  "collectCoverage": true,
+  "coverageProvider": "v8",
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  },
+  "testRegex": "[\\/]unit.jsx?$",
+  "preset": "react-native",
+  "transformIgnorePatterns": [
+    "/node_modules/(?!(@react-native|react-native)/).*/"
+  ]
+}
