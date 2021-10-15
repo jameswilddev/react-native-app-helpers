@@ -15,6 +15,7 @@ import { createTextComponent } from "react-native-app-helpers";
 ## Exports
 
 - [createTextComponent](./components/createTextComponent/readme.md)
+- [flattenRenderedToArray](./utilities/flattenRenderedToArray/readme.md)
 - [unwrapRenderedFunctionComponent](./utilities/unwrapRenderedFunctionComponent/readme.md)
 
 ## Concepts
