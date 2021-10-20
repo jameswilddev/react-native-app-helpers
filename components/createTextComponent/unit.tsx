@@ -21,6 +21,7 @@ test(`renders as expected`, () => {
         lineHeight: 51.8,
         color: `#34AE17`,
         textAlign: `left`,
+        width: "100%",
       }}
     >
       Test Content
