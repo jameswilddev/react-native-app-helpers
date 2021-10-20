@@ -1,7 +1,7 @@
 {
   "clearMocks": true,
   "collectCoverage": true,
-  "coverageProvider": "v8",
+  "coverageProvider": "babel",
   "coverageThreshold": {
     "global": {
       "branches": 100,
