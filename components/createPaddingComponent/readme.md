@@ -5,7 +5,7 @@ Creates a new React component which surrounds its children with padding.
 ## Usage
 
 ```tsx
-import { createTextComponent } from "react-native-app-helpers";
+import { createPaddingComponent } from "react-native-app-helpers";
 
 const ExamplePadding = createPaddingComponent(25);
 
@@ -19,7 +19,7 @@ const ExampleScreen = () => (
 ```
 
 ```tsx
-import { createTextComponent } from "react-native-app-helpers";
+import { createPaddingComponent } from "react-native-app-helpers";
 
 const ExamplePadding = createPaddingComponent(25, 50);
 
@@ -34,7 +34,7 @@ const ExampleScreen = () => (
 ```
 
 ```tsx
-import { createTextComponent } from "react-native-app-helpers";
+import { createTexcreatePaddingComponenttComponent } from "react-native-app-helpers";
 
 const ExamplePadding = createPaddingComponent(25, 50, 10, 30);
 
