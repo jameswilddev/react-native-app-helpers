@@ -57,19 +57,11 @@ export const createHeaderBodyFooterComponent = (
     },
   });
 
-  return ({ header, body, footer }) => (
-    <View
-      style={
-        !header && !footer && !body
-          ? globalStyles.emptyWrappingView
-          : header && footer && !body
-            ? globalStyles.wrappingViewWithoutBody
-            : footer && !body && !header
-              ? globalStyles.wrappingViewWithOnlyFooter
-              : globalStyles.wrappingView
-      }
-    >
-      {header ? (
+  return ({ header, body, footer }) => {
+    const children = [];
+
+    if (header) {
+      children.push(
         <View
           {...(body && headerBodySpacing
             ? { style: localStyles.headerView }
@@ -77,9 +69,15 @@ export const createHeaderBodyFooterComponent = (
         >
           {header}
         </View>
-      ) : null}
-      {body ? <View style={globalStyles.bodyView}>{body}</View> : null}
-      {footer ? (
+      );
+    }
+
+    if (body) {
+      children.push(<View style={globalStyles.bodyView}>{body}</View>);
+    }
+
+    if (footer) {
+      children.push(
         <View
           {...(body && bodyFooterSpacing
             ? { style: localStyles.footerView }
@@ -87,7 +85,26 @@ export const createHeaderBodyFooterComponent = (
         >
           {footer}
         </View>
-      ) : null}
-    </View>
-  );
+      );
+    }
+
+    return (
+      <View
+        style={
+          !header && !footer && !body
+            ? globalStyles.emptyWrappingView
+            : header && footer && !body
+              ? globalStyles.wrappingViewWithoutBody
+              : footer && !body && !header
+                ? globalStyles.wrappingViewWithOnlyFooter
+                : globalStyles.wrappingView
+        }
+        {...(children.length === 0
+          ? {}
+          : children.length === 1
+            ? { children: children[0] }
+            : { children })}
+      />
+    );
+  };
 };
