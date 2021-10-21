@@ -4,4 +4,5 @@ export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFo
 export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createTextComponent } from "./components/createTextComponent";
 export { flattenRenderedToArray } from "./utilities/flattenRenderedToArray";
+export { intercalateRendered } from "./utilities/intercalateRendered";
 export { unwrapRenderedFunctionComponent } from "./utilities/unwrapRenderedFunctionComponent";
