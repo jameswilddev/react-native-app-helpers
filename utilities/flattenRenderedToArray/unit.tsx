@@ -15,6 +15,7 @@ test(`flattens elements`, () => {
           <Text key="z">Example Content E</Text>,
         ]}
       </View>
+      <React.Fragment />
       {[
         <Text key="a">Example Content F</Text>,
         <Text key="b">Example Content G</Text>,
