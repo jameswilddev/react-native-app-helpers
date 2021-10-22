@@ -9,9 +9,7 @@ element.
 import { intercalateRendered } from "react-native-app-helpers";
 
 const a = flattenRenderedToArray(
-  () => (
-    <Text>Separator</Text>
-  ),
+  <Text>Separator</Text>,
   <React.Fragment>
     <Text>A</Text>
     <Text>B</Text>
