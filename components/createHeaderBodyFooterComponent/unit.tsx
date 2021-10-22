@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, Text } from "react-native";
-import { createHeaderBodyFooterComponent } from "../../index";
+import { createHeaderBodyFooterComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
 test(`renders without spacings without a header body or footer`, () => {

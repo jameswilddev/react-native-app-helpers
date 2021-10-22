@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, Text } from "react-native";
-import { createPaddingComponent } from "../../index";
+import { createPaddingComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
 test(`renders with one zero`, () => {

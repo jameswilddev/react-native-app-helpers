@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, Text } from "react-native";
-import { createFlatColorBackgroundComponent } from "../../index";
+import { createFlatColorBackgroundComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
 test(`renders as expected`, () => {

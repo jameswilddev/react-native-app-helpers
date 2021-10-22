@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Text } from "react-native";
-import { createTextComponent } from "../../index";
+import { createTextComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
 test(`renders single-line`, () => {

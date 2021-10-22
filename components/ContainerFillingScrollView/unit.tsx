@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Text, ScrollView } from "react-native";
-import { ContainerFillingScrollView } from "../../index";
+import { ContainerFillingScrollView } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
 test(`renders as expected`, () => {
