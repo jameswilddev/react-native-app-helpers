@@ -3,7 +3,7 @@ import { Text } from "react-native";
 import { intercalateRendered } from "../..";
 
 test(`intercalates nothing`, () => {
-  const separator = () => <Text>Example Separator</Text>;
+  const separator = <Text>Example Separator</Text>;
 
   const between: JSX.Element = <React.Fragment />;
 
@@ -13,7 +13,7 @@ test(`intercalates nothing`, () => {
 });
 
 test(`intercalates one`, () => {
-  const separator = () => <Text>Example Separator</Text>;
+  const separator = <Text>Example Separator</Text>;
 
   const between: JSX.Element = <Text>Example Item A</Text>;
 
@@ -23,7 +23,7 @@ test(`intercalates one`, () => {
 });
 
 test(`intercalates two`, () => {
-  const Separator = () => <Text>Example Separator</Text>;
+  const separator = <Text>Example Separator</Text>;
 
   const between: JSX.Element = (
     <React.Fragment>
@@ -32,17 +32,17 @@ test(`intercalates two`, () => {
     </React.Fragment>
   );
 
-  const flattened = intercalateRendered(Separator, between);
+  const flattened = intercalateRendered(separator, between);
 
   expect(flattened).toEqual([
     <Text key="0">Example Item A</Text>,
-    <Separator key="separator0" />,
+    <Text key="separator0">Example Separator</Text>,
     <Text key="1">Example Item B</Text>,
   ]);
 });
 
 test(`intercalates three`, () => {
-  const Separator = () => <Text>Example Separator</Text>;
+  const separator = <Text>Example Separator</Text>;
 
   const between: JSX.Element = (
     <React.Fragment>
@@ -52,19 +52,19 @@ test(`intercalates three`, () => {
     </React.Fragment>
   );
 
-  const flattened = intercalateRendered(Separator, between);
+  const flattened = intercalateRendered(separator, between);
 
   expect(flattened).toEqual([
     <Text key="0">Example Item A</Text>,
-    <Separator key="separator0" />,
+    <Text key="separator0">Example Separator</Text>,
     <Text key="1">Example Item B</Text>,
-    <Separator key="separator1" />,
+    <Text key="separator1">Example Separator</Text>,
     <Text key="2">Example Item C</Text>,
   ]);
 });
 
 test(`intercalates four`, () => {
-  const Separator = () => <Text>Example Separator</Text>;
+  const separator = <Text>Example Separator</Text>;
 
   const between: JSX.Element = (
     <React.Fragment>
@@ -75,15 +75,15 @@ test(`intercalates four`, () => {
     </React.Fragment>
   );
 
-  const flattened = intercalateRendered(Separator, between);
+  const flattened = intercalateRendered(separator, between);
 
   expect(flattened).toEqual([
     <Text key="0">Example Item A</Text>,
-    <Separator key="separator0" />,
+    <Text key="separator0">Example Separator</Text>,
     <Text key="1">Example Item B</Text>,
-    <Separator key="separator1" />,
+    <Text key="separator1">Example Separator</Text>,
     <Text key="2">Example Item C</Text>,
-    <Separator key="separator2" />,
+    <Text key="separator2">Example Separator</Text>,
     <Text key="3">Example Item D</Text>,
   ]);
 });
