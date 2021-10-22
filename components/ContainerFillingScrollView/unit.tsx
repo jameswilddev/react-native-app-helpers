@@ -14,7 +14,7 @@ test(`renders as expected`, () => {
     <ScrollView
       horizontal
       decelerationRate="fast"
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: `100%`, height: `100%` }}
     >
       <Text>Test Content</Text>
     </ScrollView>

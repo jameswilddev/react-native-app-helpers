@@ -2,8 +2,8 @@ import * as React from "react";
 import { View, StyleSheet } from "react-native";
 
 const wrappingViewBase = {
-  width: "100%",
-  height: "100%",
+  width: `100%`,
+  height: `100%`,
 };
 
 const globalStyles = StyleSheet.create({
@@ -17,17 +17,17 @@ const globalStyles = StyleSheet.create({
   wrappingViewWithoutBody: {
     ...wrappingViewBase,
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: `space-between`,
   },
   wrappingViewWithOnlyFooter: {
     ...wrappingViewBase,
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: `flex-end`,
   },
   bodyView: {
     flexShrink: 1,
     flexGrow: 1,
-    overflow: "hidden",
+    overflow: `hidden`,
   },
 });
 

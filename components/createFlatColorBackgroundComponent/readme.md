@@ -8,7 +8,7 @@ children.
 ```tsx
 import { createFlatColorBackgroundComponent } from "react-native-app-helpers";
 
-const ExampleFlatColorBackground = createFlatColorBackgroundComponent("red");
+const ExampleFlatColorBackground = createFlatColorBackgroundComponent(`red`);
 
 const ExampleScreen = () => (
   <ExampleFlatColorBackground>

@@ -16,7 +16,7 @@ export const createTextComponent = (
   fontFamily: string,
   fontSize: number,
   color: ColorValue,
-  alignment: "left" | "center" | "right",
+  alignment: `left` | `center` | `right`,
   multiLine: boolean
 ): React.FunctionComponent => {
   const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ export const createTextComponent = (
       lineHeight: fontSize * 1.4,
       color,
       textAlign: alignment,
-      width: "100%",
+      width: `100%`,
     },
   });
 

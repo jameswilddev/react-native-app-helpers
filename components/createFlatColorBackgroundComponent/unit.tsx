@@ -4,7 +4,7 @@ import { createFlatColorBackgroundComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
 test(`renders as expected`, () => {
-  const Component = createFlatColorBackgroundComponent("red");
+  const Component = createFlatColorBackgroundComponent(`red`);
 
   const rendered = (
     <Component>
@@ -13,7 +13,7 @@ test(`renders as expected`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ backgroundColor: "red" }}>
+    <View style={{ backgroundColor: `red` }}>
       <Text>Test Content</Text>
     </View>
   );

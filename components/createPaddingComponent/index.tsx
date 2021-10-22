@@ -21,35 +21,35 @@ export const createPaddingComponent = (
   switch (paddings.length) {
     case 1:
       if (paddings[0]) {
-        view["padding"] = paddings[0];
+        view[`padding`] = paddings[0];
       }
       break;
 
     case 2:
       if (paddings[0]) {
-        view["paddingVertical"] = paddings[0];
+        view[`paddingVertical`] = paddings[0];
       }
 
       if (paddings[1]) {
-        view["paddingHorizontal"] = paddings[1];
+        view[`paddingHorizontal`] = paddings[1];
       }
       break;
 
     case 4:
       if (paddings[0]) {
-        view["paddingTop"] = paddings[0];
+        view[`paddingTop`] = paddings[0];
       }
 
       if (paddings[1]) {
-        view["paddingRight"] = paddings[1];
+        view[`paddingRight`] = paddings[1];
       }
 
       if (paddings[2]) {
-        view["paddingBottom"] = paddings[2];
+        view[`paddingBottom`] = paddings[2];
       }
 
       if (paddings[3]) {
-        view["paddingLeft"] = paddings[3];
+        view[`paddingLeft`] = paddings[3];
       }
       break;
   }

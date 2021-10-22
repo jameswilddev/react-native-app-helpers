@@ -7,7 +7,7 @@ Creates a new React component which can be used to render text.
 ```tsx
 import { createTextComponent } from "react-native-app-helpers";
 
-const ExampleText = createTextComponent("example", "red", 12, "left", false);
+const ExampleText = createTextComponent(`example`, `red`, 12, `left`, false);
 
 const ExampleScreen = () => (
   <ExampleText>
@@ -25,7 +25,7 @@ const ExampleScreen = () => (
 ```tsx
 import { createTextComponent } from "react-native-app-helpers";
 
-const ExampleText = createTextComponent("example", "red", 12, "left", true);
+const ExampleText = createTextComponent(`example`, `red`, 12, `left`, true);
 
 const ExampleScreen = () => (
   <ExampleText>

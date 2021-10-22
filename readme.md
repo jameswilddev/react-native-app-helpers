@@ -39,7 +39,7 @@ To use them, you would do something similar to the following:
 ```tsx
 import { createTextComponent } from "react-native-app-helpers";
 
-const ExampleText = createTextComponent("example", "red", 12, "left", false);
+const ExampleText = createTextComponent(`example`, `red`, 12, `left`, false);
 
 const ExampleScreen = () => (
   <ExampleText>

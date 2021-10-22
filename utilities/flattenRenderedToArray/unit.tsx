@@ -23,7 +23,7 @@ test(`flattens elements`, () => {
         false,
         true,
         null,
-        <Text key="b"> Example Content G</Text>,
+        <Text key="b">Example Content G</Text>,
         [
           <Text key="x">Example Content H</Text>,
           <Text key="y">Example Content I</Text>,
@@ -61,7 +61,7 @@ test(`flattens elements`, () => {
     <Text key="a">Example Content F</Text>,
     false,
     true,
-    <Text key="b"> Example Content G</Text>,
+    <Text key="b">Example Content G</Text>,
     <Text key="x">Example Content H</Text>,
     <Text key="y">Example Content I</Text>,
     <Text key="z">Example Content J</Text>,
