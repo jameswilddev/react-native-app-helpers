@@ -13,8 +13,8 @@ import { flattenRenderedToArray } from "../flattenRenderedToArray";
  */
 export const intercalateRendered = (
   separator: React.FunctionComponent | React.ComponentClass,
-  between: JSX.Element
-): ReadonlyArray<JSX.Element> => {
+  between: undefined | React.ReactNode | JSX.Element
+): ReadonlyArray<React.ReactNode | JSX.Element> => {
   const flattenedBetween = flattenRenderedToArray(between);
 
   if (flattenedBetween.length === 0) {

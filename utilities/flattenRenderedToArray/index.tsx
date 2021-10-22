@@ -7,14 +7,20 @@ import * as React from "react";
  * @returns The elements within the given JSX element, flattened into an array.
  */
 export const flattenRenderedToArray = (
-  element: JSX.Element
-): ReadonlyArray<JSX.Element> => {
-  const recurseChildren = (child: JSX.Element): ReadonlyArray<JSX.Element> => {
-    if (child === null) {
+  element: undefined | React.ReactNode | JSX.Element
+): ReadonlyArray<React.ReactNode | JSX.Element> => {
+  const recurseChildren = (
+    child: undefined | React.ReactNode | JSX.Element
+  ): ReadonlyArray<React.ReactNode | JSX.Element> => {
+    if (child === null || child === undefined) {
       return [];
     } else if (Array.isArray(child)) {
       return child.flatMap(recurseChildren);
-    } else if (child.type === React.Fragment) {
+    } else if (
+      typeof child === `object` &&
+      `type` in child &&
+      child.type === React.Fragment
+    ) {
       return child.props.children
         ? child.props.children.flatMap(recurseChildren)
         : [];
@@ -23,8 +29,12 @@ export const flattenRenderedToArray = (
     }
   };
 
-  return recurseChildren(element).map((element, index) => ({
-    ...element,
-    key: element.key ?? String(index),
-  }));
+  return recurseChildren(element).map((element, index) =>
+    typeof element === `object` && element !== null && `key` in element
+      ? {
+        ...element,
+        key: element.key ?? String(index),
+      }
+      : element
+  );
 };

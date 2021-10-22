@@ -17,8 +17,13 @@ test(`flattens elements`, () => {
       </View>
       <React.Fragment />
       {[
+        3,
         <Text key="a">Example Content F</Text>,
-        <Text key="b">Example Content G</Text>,
+        undefined,
+        false,
+        true,
+        null,
+        <Text key="b"> Example Content G</Text>,
         [
           <Text key="x">Example Content H</Text>,
           <Text key="y">Example Content I</Text>,
@@ -52,13 +57,16 @@ test(`flattens elements`, () => {
         <Text key="z">Example Content E</Text>,
       ]}
     </View>,
+    3,
     <Text key="a">Example Content F</Text>,
-    <Text key="b">Example Content G</Text>,
+    false,
+    true,
+    <Text key="b"> Example Content G</Text>,
     <Text key="x">Example Content H</Text>,
     <Text key="y">Example Content I</Text>,
     <Text key="z">Example Content J</Text>,
     <div key="c">Example Content K</div>,
-    <div key={8}>
+    <div key={11}>
       <Text>Example Content L</Text>
       {null}
       {[
