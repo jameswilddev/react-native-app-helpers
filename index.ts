@@ -2,6 +2,7 @@ export { ContainerFillingScrollView } from "./components/ContainerFillingScrollV
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";
 export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFooterComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
+export { createStackComponent } from "./components/createStackComponent";
 export { createTextComponent } from "./components/createTextComponent";
 export { flattenRenderedToArray } from "./utilities/flattenRenderedToArray";
 export { intercalateRendered } from "./utilities/intercalateRendered";

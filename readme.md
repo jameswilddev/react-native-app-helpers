@@ -18,6 +18,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createFlatColorBackgroundComponent](./components/createFlatColorBackgroundComponent/readme.md)
 - [createHeaderBodyFooterComponent](./components/createHeaderBodyFooterComponent/readme.md)
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
+- [createStackComponent](./components/createStackComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
 - [flattenRenderedToArray](./utilities/flattenRenderedToArray/readme.md)
 - [intercalateRendered](./utilities/intercalateRendered/readme.md)
