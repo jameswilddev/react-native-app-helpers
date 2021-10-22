@@ -1,4 +1,5 @@
 import * as React from "react";
+import { setRenderedKey } from "../setRenderedKey";
 
 /**
  * Flattens a rendered JSX element (which could be empty, a fragment, a
@@ -30,11 +31,6 @@ export const flattenRenderedToArray = (
   };
 
   return recurseChildren(element).map((element, index) =>
-    typeof element === `object` && element !== null && `key` in element
-      ? {
-        ...element,
-        key: element.key ?? String(index),
-      }
-      : element
+    setRenderedKey(element, String(index))
   );
 };
