@@ -173,3 +173,45 @@ test(`uses the React Native modal in a web browser`, () => {
   );
   expect(onClose).not.toHaveBeenCalled();
 });
+
+test(`uses the React Native modal in a web browser on a second run`, () => {
+  (Platform as unknown as { OS: string }).OS = `web`;
+  const onClose = jest.fn();
+
+  const rendered = (
+    <SimpleModal onClose={onClose}>
+      <Text>Example Content</Text>
+    </SimpleModal>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <React.Fragment>
+      <TouchableWithoutFeedback onPress={onClose}>
+        <View
+          style={{
+            position: `fixed` as unknown as undefined,
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            zIndex: 9998,
+          }}
+        />
+      </TouchableWithoutFeedback>
+      <View
+        style={{
+          position: `fixed` as unknown as undefined,
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          zIndex: 9999,
+        }}
+        pointerEvents="box-none"
+      >
+        <Text>Example Content</Text>
+      </View>
+    </React.Fragment>
+  );
+  expect(onClose).not.toHaveBeenCalled();
+});
