@@ -4,6 +4,7 @@ export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFo
 export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createStackComponent } from "./components/createStackComponent";
 export { createTextComponent } from "./components/createTextComponent";
+export { SimpleModal } from "./components/SimpleModal";
 export { flattenRenderedToArray } from "./utilities/flattenRenderedToArray";
 export { intercalateRendered } from "./utilities/intercalateRendered";
 export { setRenderedKey } from "./utilities/setRenderedKey";

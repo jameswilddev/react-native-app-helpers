@@ -20,6 +20,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
 - [createStackComponent](./components/createStackComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
+- [SimpleModal](./components/SimpleModal/readme.md)
 - [flattenRenderedToArray](./utilities/flattenRenderedToArray/readme.md)
 - [intercalateRendered](./utilities/intercalateRendered/readme.md)
 - [setRenderedKey](./utilities/setRenderedKey/readme.md)
