@@ -22,7 +22,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createTextComponent](./components/createTextComponent/readme.md)
 - [flattenRenderedToArray](./utilities/flattenRenderedToArray/readme.md)
 - [intercalateRendered](./utilities/intercalateRendered/readme.md)
-- [setRenderedKey](./components/setRenderedKey/readme.md)
+- [setRenderedKey](./utilities/setRenderedKey/readme.md)
 - [unwrapRenderedFunctionComponent](./utilities/unwrapRenderedFunctionComponent/readme.md)
 
 ## Concepts
