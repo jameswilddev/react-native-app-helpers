@@ -13,7 +13,7 @@ test(`renders with one zero`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View>
+    <View pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -29,7 +29,7 @@ test(`renders with one non-zero`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ padding: 30 }}>
+    <View style={{ padding: 30 }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -45,7 +45,7 @@ test(`renders with two zeroes`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View>
+    <View pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -61,7 +61,7 @@ test(`renders with one non-zero and one zero`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ paddingVertical: 30 }}>
+    <View style={{ paddingVertical: 30 }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -77,7 +77,7 @@ test(`renders with one zero and one non-zero`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ paddingHorizontal: 30 }}>
+    <View style={{ paddingHorizontal: 30 }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -93,7 +93,10 @@ test(`renders with two non-zeroes`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ paddingVertical: 30, paddingHorizontal: 50 }}>
+    <View
+      style={{ paddingVertical: 30, paddingHorizontal: 50 }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
@@ -109,7 +112,7 @@ test(`renders with four zeroes`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View>
+    <View pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -125,7 +128,7 @@ test(`renders with non-zero top`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ paddingTop: 30 }}>
+    <View style={{ paddingTop: 30 }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -141,7 +144,7 @@ test(`renders with non-zero right`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ paddingRight: 30 }}>
+    <View style={{ paddingRight: 30 }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -157,7 +160,7 @@ test(`renders with non-zero bottom`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ paddingBottom: 30 }}>
+    <View style={{ paddingBottom: 30 }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -173,7 +176,7 @@ test(`renders with non-zero left`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ paddingLeft: 30 }}>
+    <View style={{ paddingLeft: 30 }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -196,6 +199,7 @@ test(`renders with four non-zeroes`, () => {
         paddingBottom: 27,
         paddingLeft: 60,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>

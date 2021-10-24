@@ -5,7 +5,11 @@ import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedF
 
 test(`renders as expected`, () => {
   const rendered = (
-    <ContainerFillingScrollView horizontal decelerationRate="fast">
+    <ContainerFillingScrollView
+      horizontal
+      decelerationRate="fast"
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </ContainerFillingScrollView>
   );
@@ -15,6 +19,7 @@ test(`renders as expected`, () => {
       horizontal
       decelerationRate="fast"
       style={{ width: `100%`, height: `100%` }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </ScrollView>

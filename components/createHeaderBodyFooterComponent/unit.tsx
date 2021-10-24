@@ -9,7 +9,10 @@ test(`renders without spacings without a header body or footer`, () => {
   const rendered = <Component />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }}></View>
+    <View
+      style={{ width: `100%`, height: `100%` }}
+      pointerEvents="box-none"
+    ></View>
   );
 });
 
@@ -19,8 +22,11 @@ test(`renders without spacings with only a header`, () => {
   const rendered = <Component header={<Text>Example Header</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
@@ -33,8 +39,14 @@ test(`renders without spacings with only a body`, () => {
   const rendered = <Component body={<Text>Example Body</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -52,11 +64,17 @@ test(`renders without spacings with only a header and body`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -76,8 +94,9 @@ test(`renders without spacings with only a footer`, () => {
         flex: 1,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -102,12 +121,12 @@ test(`renders without spacings with only a header and footer`, () => {
         flex: 1,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -125,11 +144,17 @@ test(`renders without spacings with only a body and footer`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -148,14 +173,20 @@ test(`renders without spacings with a header body and footer`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -168,7 +199,7 @@ test(`renders with only a positive header-body spacing without a header body or 
   const rendered = <Component />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }}></View>
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
   );
 });
 
@@ -178,8 +209,11 @@ test(`renders with only a positive header-body spacing with only a header`, () =
   const rendered = <Component header={<Text>Example Header</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
@@ -192,8 +226,14 @@ test(`renders with only a positive header-body spacing with only a body`, () => 
   const rendered = <Component body={<Text>Example Body</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -211,11 +251,17 @@ test(`renders with only a positive header-body spacing with only a header and bo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ marginBottom: 53 }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View style={{ marginBottom: 53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -235,8 +281,9 @@ test(`renders with only a positive header-body spacing with only a footer`, () =
         flex: 1,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -261,12 +308,12 @@ test(`renders with only a positive header-body spacing with only a header and fo
         flex: 1,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -284,11 +331,17 @@ test(`renders with only a positive header-body spacing with only a body and foot
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -307,14 +360,20 @@ test(`renders with only a positive header-body spacing with a header body and fo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ marginBottom: 53 }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View style={{ marginBottom: 53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -327,7 +386,7 @@ test(`renders with only a negative header-body spacing without a header body or 
   const rendered = <Component />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }}></View>
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
   );
 });
 
@@ -337,8 +396,11 @@ test(`renders with only a negative header-body spacing with only a header`, () =
   const rendered = <Component header={<Text>Example Header</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
@@ -351,8 +413,14 @@ test(`renders with only a negative header-body spacing with only a body`, () => 
   const rendered = <Component body={<Text>Example Body</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -370,11 +438,17 @@ test(`renders with only a negative header-body spacing with only a header and bo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ marginBottom: -53 }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View style={{ marginBottom: -53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -394,8 +468,9 @@ test(`renders with only a negative header-body spacing with only a footer`, () =
         flex: 1,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -420,12 +495,12 @@ test(`renders with only a negative header-body spacing with only a header and fo
         flex: 1,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -443,11 +518,17 @@ test(`renders with only a negative header-body spacing with only a body and foot
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -466,14 +547,20 @@ test(`renders with only a negative header-body spacing with a header body and fo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ marginBottom: -53 }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View style={{ marginBottom: -53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -486,7 +573,7 @@ test(`renders with only a positive body-footer spacing without a header body or 
   const rendered = <Component />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }}></View>
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
   );
 });
 
@@ -496,8 +583,11 @@ test(`renders with only a positive body-footer spacing with only a header`, () =
   const rendered = <Component header={<Text>Example Header</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
@@ -510,8 +600,14 @@ test(`renders with only a positive body-footer spacing with only a body`, () => 
   const rendered = <Component body={<Text>Example Body</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -529,11 +625,17 @@ test(`renders with only a positive body-footer spacing with only a header and bo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -553,8 +655,9 @@ test(`renders with only a positive body-footer spacing with only a footer`, () =
         flex: 1,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -579,12 +682,12 @@ test(`renders with only a positive body-footer spacing with only a header and fo
         flex: 1,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -602,11 +705,17 @@ test(`renders with only a positive body-footer spacing with only a body and foot
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View style={{ marginTop: 53 }}>
+      <View style={{ marginTop: 53 }} pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -625,14 +734,20 @@ test(`renders with only a positive body-footer spacing with a header body and fo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View style={{ marginTop: 53 }}>
+      <View style={{ marginTop: 53 }} pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -645,7 +760,7 @@ test(`renders with only a negative body-footer spacing without a header body or 
   const rendered = <Component />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }}></View>
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
   );
 });
 
@@ -655,8 +770,11 @@ test(`renders with only a negative body-footer spacing with only a header`, () =
   const rendered = <Component header={<Text>Example Header</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
@@ -669,8 +787,14 @@ test(`renders with only a negative body-footer spacing with only a body`, () => 
   const rendered = <Component body={<Text>Example Body</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -688,11 +812,17 @@ test(`renders with only a negative body-footer spacing with only a header and bo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -712,8 +842,9 @@ test(`renders with only a negative body-footer spacing with only a footer`, () =
         flex: 1,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -738,12 +869,12 @@ test(`renders with only a negative body-footer spacing with only a header and fo
         flex: 1,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -761,11 +892,17 @@ test(`renders with only a negative body-footer spacing with only a body and foot
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View style={{ marginTop: -53 }}>
+      <View style={{ marginTop: -53 }} pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -784,14 +921,20 @@ test(`renders with only a negative body-footer spacing with a header body and fo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View style={{ marginTop: -53 }}>
+      <View style={{ marginTop: -53 }} pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -804,7 +947,7 @@ test(`renders with with both header-body and body-footer spacings without a head
   const rendered = <Component />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }}></View>
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
   );
 });
 
@@ -814,8 +957,11 @@ test(`renders with with both header-body and body-footer spacings with only a he
   const rendered = <Component header={<Text>Example Header</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
@@ -828,8 +974,14 @@ test(`renders with with both header-body and body-footer spacings with only a bo
   const rendered = <Component body={<Text>Example Body</Text>} />;
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -847,11 +999,17 @@ test(`renders with with both header-body and body-footer spacings with only a he
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ marginBottom: 27 }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View style={{ marginBottom: 27 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
     </View>
@@ -871,8 +1029,9 @@ test(`renders with with both header-body and body-footer spacings with only a fo
         flex: 1,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -897,12 +1056,12 @@ test(`renders with with both header-body and body-footer spacings with only a he
         flex: 1,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-
-      <View>
+      <View pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -920,11 +1079,17 @@ test(`renders with with both header-body and body-footer spacings with only a bo
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View style={{ marginTop: 53 }}>
+      <View style={{ marginTop: 53 }} pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>
@@ -943,14 +1108,20 @@ test(`renders with with both header-body and body-footer spacings with a header 
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flex: 1 }}>
-      <View style={{ marginBottom: 27 }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
+      <View style={{ marginBottom: 27 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
-      <View style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}>
+      <View
+        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        pointerEvents="box-none"
+      >
         <Text>Example Body</Text>
       </View>
-      <View style={{ marginTop: 53 }}>
+      <View style={{ marginTop: 53 }} pointerEvents="box-none">
         <Text>Example Footer</Text>
       </View>
     </View>

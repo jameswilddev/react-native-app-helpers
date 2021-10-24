@@ -63,6 +63,7 @@ export const createHeaderBodyFooterComponent = (
     if (header) {
       children.push(
         <View
+          pointerEvents="box-none"
           {...(body && headerBodySpacing
             ? { style: localStyles.headerView }
             : {})}
@@ -73,12 +74,17 @@ export const createHeaderBodyFooterComponent = (
     }
 
     if (body) {
-      children.push(<View style={globalStyles.bodyView}>{body}</View>);
+      children.push(
+        <View style={globalStyles.bodyView} pointerEvents="box-none">
+          {body}
+        </View>
+      );
     }
 
     if (footer) {
       children.push(
         <View
+          pointerEvents="box-none"
           {...(body && bodyFooterSpacing
             ? { style: localStyles.footerView }
             : {})}
@@ -90,6 +96,7 @@ export const createHeaderBodyFooterComponent = (
 
     return (
       <View
+        pointerEvents="box-none"
         style={
           !header && !footer && !body
             ? globalStyles.emptyWrappingView

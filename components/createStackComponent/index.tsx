@@ -36,12 +36,13 @@ export const createStackComponent = (
 
     return ({ children }) => {
       const childArray = intercalateRendered(
-        <View style={localStyles.spacingView} />,
+        <View pointerEvents="none" style={localStyles.spacingView} />,
         children
       );
 
       return (
         <View
+          pointerEvents="box-none"
           style={globalStyles[`${direction}WrappingView`]}
           {...(childArray.length === 0
             ? {}
@@ -54,6 +55,7 @@ export const createStackComponent = (
   } else {
     return ({ children }) => (
       <View
+        pointerEvents="box-none"
         style={globalStyles[`${direction}WrappingView`]}
         children={children}
       />

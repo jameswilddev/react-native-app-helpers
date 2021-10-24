@@ -55,10 +55,14 @@ export const createPaddingComponent = (
   }
 
   if (Object.keys(view).length === 0) {
-    return ({ children }) => <View>{children}</View>;
+    return ({ children }) => <View pointerEvents="box-none">{children}</View>;
   } else {
     const styles = StyleSheet.create({ view });
 
-    return ({ children }) => <View style={styles.view}>{children}</View>;
+    return ({ children }) => (
+      <View pointerEvents="box-none" style={styles.view}>
+        {children}
+      </View>
+    );
   }
 };
