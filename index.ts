@@ -1,3 +1,4 @@
+export { Aligned } from "./components/Aligned";
 export { ContainerFillingScrollView } from "./components/ContainerFillingScrollView";
 export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";

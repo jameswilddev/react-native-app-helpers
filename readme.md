@@ -14,6 +14,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ## Exports
 
+- [Aligned](./components/Aligned/readme.md)
 - [ContainerFillingScrollView](./components/ContainerFillingScrollView/readme.md)
 - [createDropDownComponent](./components/createDropDownComponent/readme.md)
 - [createFlatColorBackgroundComponent](./components/createFlatColorBackgroundComponent/readme.md)
