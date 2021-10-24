@@ -4,8 +4,6 @@ import * as TestRenderer from "react-test-renderer";
 import { createDropDownComponent } from "../..";
 import { SimpleModal } from "../SimpleModal";
 
-(global as unknown as { __DEV__: boolean }).__DEV__ = false;
-
 test(`renders as expected when not disabled`, () => {
   Dimensions.set({
     window: {
