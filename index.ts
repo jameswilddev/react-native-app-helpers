@@ -7,6 +7,7 @@ export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createStackComponent } from "./components/createStackComponent";
 export { createTextComponent } from "./components/createTextComponent";
 export { SimpleModal } from "./components/SimpleModal";
+export { SessionStore } from "./services/SessionStore";
 export { StateStore } from "./services/StateStore";
 export { Json } from "./types/Json";
 export { flattenRenderedToArray } from "./utilities/flattenRenderedToArray";

@@ -23,6 +23,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createStackComponent](./components/createStackComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
 - [SimpleModal](./components/SimpleModal/readme.md)
+- [SessionStore](./services/SessionStore/readme.md)
 - [StateStore](./services/StateStore/readme.md)
 - [Json](./types/Json/readme.md)
 - [flattenRenderedToArray](./utilities/flattenRenderedToArray/readme.md)
