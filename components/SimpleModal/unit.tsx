@@ -8,143 +8,172 @@ import {
 } from "react-native";
 import { SimpleModal, unwrapRenderedFunctionComponent } from "../..";
 
+const withPlatformOs = (os: string, callback: () => void): void => {
+  const platform = Platform as unknown as { OS: string };
+
+  const originalOs = platform.OS;
+
+  try {
+    platform.OS = os;
+
+    callback();
+  } finally {
+    platform.OS = originalOs;
+  }
+};
+
 test(`uses the React Native modal on iOS`, () => {
-  (Platform as unknown as { OS: string }).OS = `ios`;
-  const onClose = jest.fn();
+  withPlatformOs(`ios`, () => {
+    const onClose = jest.fn();
 
-  const rendered = (
-    <SimpleModal onClose={onClose}>
-      <Text>Example Content</Text>
-    </SimpleModal>
-  );
-
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <Modal onRequestClose={onClose} transparent>
-      <React.Fragment>
-        <TouchableWithoutFeedback onPress={onClose}>
-          <View
-            style={{
-              position: `absolute`,
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-            }}
-          />
-        </TouchableWithoutFeedback>
+    const rendered = (
+      <SimpleModal onClose={onClose}>
         <Text>Example Content</Text>
-      </React.Fragment>
-    </Modal>
-  );
-  expect(onClose).not.toHaveBeenCalled();
+      </SimpleModal>
+    );
+
+    expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+      <Modal onRequestClose={onClose} transparent>
+        <React.Fragment>
+          <TouchableWithoutFeedback onPress={onClose}>
+            <View
+              style={{
+                position: `absolute`,
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+              }}
+            />
+          </TouchableWithoutFeedback>
+          <Text>Example Content</Text>
+        </React.Fragment>
+      </Modal>
+    );
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });
 
 test(`uses the React Native modal on Android`, () => {
-  (Platform as unknown as { OS: string }).OS = `android`;
-  const onClose = jest.fn();
+  withPlatformOs(`android`, () => {
+    const onClose = jest.fn();
 
-  const rendered = (
-    <SimpleModal onClose={onClose}>
-      <Text>Example Content</Text>
-    </SimpleModal>
-  );
-
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <Modal onRequestClose={onClose} transparent>
-      <React.Fragment>
-        <TouchableWithoutFeedback onPress={onClose}>
-          <View
-            style={{
-              position: `absolute`,
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-            }}
-          />
-        </TouchableWithoutFeedback>
+    const rendered = (
+      <SimpleModal onClose={onClose}>
         <Text>Example Content</Text>
-      </React.Fragment>
-    </Modal>
-  );
-  expect(onClose).not.toHaveBeenCalled();
+      </SimpleModal>
+    );
+
+    expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+      <Modal onRequestClose={onClose} transparent>
+        <React.Fragment>
+          <TouchableWithoutFeedback onPress={onClose}>
+            <View
+              style={{
+                position: `absolute`,
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+              }}
+            />
+          </TouchableWithoutFeedback>
+          <Text>Example Content</Text>
+        </React.Fragment>
+      </Modal>
+    );
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });
 
 test(`uses the React Native modal on Windows`, () => {
-  (Platform as unknown as { OS: string }).OS = `windows`;
-  const onClose = jest.fn();
+  withPlatformOs(`windows`, () => {
+    const onClose = jest.fn();
 
-  const rendered = (
-    <SimpleModal onClose={onClose}>
-      <Text>Example Content</Text>
-    </SimpleModal>
-  );
-
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <Modal onRequestClose={onClose} transparent>
-      <React.Fragment>
-        <TouchableWithoutFeedback onPress={onClose}>
-          <View
-            style={{
-              position: `absolute`,
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-            }}
-          />
-        </TouchableWithoutFeedback>
+    const rendered = (
+      <SimpleModal onClose={onClose}>
         <Text>Example Content</Text>
-      </React.Fragment>
-    </Modal>
-  );
-  expect(onClose).not.toHaveBeenCalled();
+      </SimpleModal>
+    );
+
+    expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+      <Modal onRequestClose={onClose} transparent>
+        <React.Fragment>
+          <TouchableWithoutFeedback onPress={onClose}>
+            <View
+              style={{
+                position: `absolute`,
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+              }}
+            />
+          </TouchableWithoutFeedback>
+          <Text>Example Content</Text>
+        </React.Fragment>
+      </Modal>
+    );
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });
 
 test(`uses the React Native modal on macOS`, () => {
-  (Platform as unknown as { OS: string }).OS = `macos`;
-  const onClose = jest.fn();
+  withPlatformOs(`macos`, () => {
+    const onClose = jest.fn();
 
-  const rendered = (
-    <SimpleModal onClose={onClose}>
-      <Text>Example Content</Text>
-    </SimpleModal>
-  );
+    const rendered = (
+      <SimpleModal onClose={onClose}>
+        <Text>Example Content</Text>
+      </SimpleModal>
+    );
 
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <Modal onRequestClose={onClose} transparent>
+    expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+      <Modal onRequestClose={onClose} transparent>
+        <React.Fragment>
+          <TouchableWithoutFeedback onPress={onClose}>
+            <View
+              style={{
+                position: `absolute`,
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+              }}
+            />
+          </TouchableWithoutFeedback>
+          <Text>Example Content</Text>
+        </React.Fragment>
+      </Modal>
+    );
+    expect(onClose).not.toHaveBeenCalled();
+  });
+});
+
+test(`uses the React Native modal in a web browser`, () => {
+  withPlatformOs(`web`, () => {
+    const onClose = jest.fn();
+
+    const rendered = (
+      <SimpleModal onClose={onClose}>
+        <Text>Example Content</Text>
+      </SimpleModal>
+    );
+
+    expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
       <React.Fragment>
         <TouchableWithoutFeedback onPress={onClose}>
           <View
             style={{
-              position: `absolute`,
+              position: `fixed` as unknown as undefined,
               left: 0,
-              top: 0,
               right: 0,
+              top: 0,
               bottom: 0,
+              zIndex: 9998,
             }}
           />
         </TouchableWithoutFeedback>
-        <Text>Example Content</Text>
-      </React.Fragment>
-    </Modal>
-  );
-  expect(onClose).not.toHaveBeenCalled();
-});
-
-test(`uses the React Native modal in a web browser`, () => {
-  (Platform as unknown as { OS: string }).OS = `web`;
-  const onClose = jest.fn();
-
-  const rendered = (
-    <SimpleModal onClose={onClose}>
-      <Text>Example Content</Text>
-    </SimpleModal>
-  );
-
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <React.Fragment>
-      <TouchableWithoutFeedback onPress={onClose}>
         <View
           style={{
             position: `fixed` as unknown as undefined,
@@ -152,41 +181,42 @@ test(`uses the React Native modal in a web browser`, () => {
             right: 0,
             top: 0,
             bottom: 0,
-            zIndex: 9998,
+            zIndex: 9999,
           }}
-        />
-      </TouchableWithoutFeedback>
-      <View
-        style={{
-          position: `fixed` as unknown as undefined,
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 0,
-          zIndex: 9999,
-        }}
-        pointerEvents="box-none"
-      >
-        <Text>Example Content</Text>
-      </View>
-    </React.Fragment>
-  );
-  expect(onClose).not.toHaveBeenCalled();
+          pointerEvents="box-none"
+        >
+          <Text>Example Content</Text>
+        </View>
+      </React.Fragment>
+    );
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });
 
 test(`uses the React Native modal in a web browser on a second run`, () => {
-  (Platform as unknown as { OS: string }).OS = `web`;
-  const onClose = jest.fn();
+  withPlatformOs(`web`, () => {
+    const onClose = jest.fn();
 
-  const rendered = (
-    <SimpleModal onClose={onClose}>
-      <Text>Example Content</Text>
-    </SimpleModal>
-  );
+    const rendered = (
+      <SimpleModal onClose={onClose}>
+        <Text>Example Content</Text>
+      </SimpleModal>
+    );
 
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <React.Fragment>
-      <TouchableWithoutFeedback onPress={onClose}>
+    expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+      <React.Fragment>
+        <TouchableWithoutFeedback onPress={onClose}>
+          <View
+            style={{
+              position: `fixed` as unknown as undefined,
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              zIndex: 9998,
+            }}
+          />
+        </TouchableWithoutFeedback>
         <View
           style={{
             position: `fixed` as unknown as undefined,
@@ -194,24 +224,14 @@ test(`uses the React Native modal in a web browser on a second run`, () => {
             right: 0,
             top: 0,
             bottom: 0,
-            zIndex: 9998,
+            zIndex: 9999,
           }}
-        />
-      </TouchableWithoutFeedback>
-      <View
-        style={{
-          position: `fixed` as unknown as undefined,
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 0,
-          zIndex: 9999,
-        }}
-        pointerEvents="box-none"
-      >
-        <Text>Example Content</Text>
-      </View>
-    </React.Fragment>
-  );
-  expect(onClose).not.toHaveBeenCalled();
+          pointerEvents="box-none"
+        >
+          <Text>Example Content</Text>
+        </View>
+      </React.Fragment>
+    );
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });
