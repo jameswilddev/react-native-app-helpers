@@ -1,4 +1,5 @@
 export { ContainerFillingScrollView } from "./components/ContainerFillingScrollView";
+export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";
 export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFooterComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
