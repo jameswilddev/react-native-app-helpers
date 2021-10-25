@@ -1,9 +1,9 @@
-import EncryptedStorage from "react-native-encrypted-storage";
+import * as SecureStore from "expo-secure-store";
 import { EventEmitter } from "events";
 import type { Json } from "../../types/Json";
 
 /**
- * A wrapper around EncryptedStorage which adds:
+ * A wrapper around expo-secure-store which adds:
  * - Concurrency control.
  * - JSON parsing and serialization.
  * - Change events.
@@ -11,7 +11,7 @@ import type { Json } from "../../types/Json";
  * @template T The type of JSON stored.
  */
 export class SessionStore<T extends Json> {
-  private encryptedStorageKey: null | string = null;
+  private secureStorageKey: null | string = null;
   private value: undefined | T = undefined;
   private writeQueueLength: 0 | 1 | 2 = 0;
   private resolveOnUnload: null | (() => void) = null;
@@ -19,7 +19,7 @@ export class SessionStore<T extends Json> {
   private readonly eventEmitter = new EventEmitter();
 
   /**
-   * @param initial The value to use when no such record exists in EncryptedStorage.
+   * @param initial The value to use when no such record exists in the store.
    */
   constructor(private readonly initial: T) { }
 
@@ -43,24 +43,24 @@ export class SessionStore<T extends Json> {
   }
 
   /**
-   * Loads the content of a record in EncryptedStorage into memory.
-   * @param encryptedStorageKey The key of the record to read from/write to
-   *                            EncryptedStorage.
+   * Loads the content of a record in expo-secure-store into memory.
+   * @param secureStorageKey The key of the record to read from/write to
+   *                         expo-secure-store.
    * @throws When the session store is already loading.
    * @throws When the session store is already loaded.
    * @throws When the session store is currently unloading.
    */
-  async load(encryptedStorageKey: string): Promise<void> {
+  async load(secureStorageKey: string): Promise<void> {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The session store is currently unloading.`);
     } else if (this.value !== undefined) {
       throw new Error(`The session store is already loaded.`);
-    } else if (this.encryptedStorageKey !== null) {
+    } else if (this.secureStorageKey !== null) {
       throw new Error(`The session store is already loading.`);
     } else {
-      this.encryptedStorageKey = encryptedStorageKey;
+      this.secureStorageKey = secureStorageKey;
 
-      const raw = await EncryptedStorage.getItem(encryptedStorageKey);
+      const raw = await SecureStore.getItemAsync(secureStorageKey);
 
       if (raw === null) {
         this.value = this.initial;
@@ -80,7 +80,7 @@ export class SessionStore<T extends Json> {
   get(): T {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The session store is currently unloading.`);
-    } else if (this.encryptedStorageKey === null) {
+    } else if (this.secureStorageKey === null) {
       throw new Error(`The session store is not loaded.`);
     } else if (this.value === undefined) {
       throw new Error(`The session store is currently loading.`);
@@ -91,8 +91,8 @@ export class SessionStore<T extends Json> {
 
   private startWrite(): void {
     (async () => {
-      await EncryptedStorage.setItem(
-        this.encryptedStorageKey as string,
+      await SecureStore.setItemAsync(
+        this.secureStorageKey as string,
         JSON.stringify(this.value as T)
       );
 
@@ -102,7 +102,7 @@ export class SessionStore<T extends Json> {
         this.startWrite();
       } else if (this.resolveOnUnload !== null) {
         const resolveOnUnload = this.resolveOnUnload;
-        this.encryptedStorageKey = null;
+        this.secureStorageKey = null;
         this.value = undefined;
         this.resolveOnUnload = null;
         resolveOnUnload();
@@ -121,7 +121,7 @@ export class SessionStore<T extends Json> {
   set(to: T): void {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The session store is currently unloading.`);
-    } else if (this.encryptedStorageKey === null) {
+    } else if (this.secureStorageKey === null) {
       throw new Error(`The session store is not loaded.`);
     } else if (this.value === undefined) {
       throw new Error(`The session store is currently loading.`);
@@ -145,7 +145,7 @@ export class SessionStore<T extends Json> {
   async unload(): Promise<void> {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The session store is already unloading.`);
-    } else if (this.encryptedStorageKey === null) {
+    } else if (this.secureStorageKey === null) {
       throw new Error(`The session store is not loaded.`);
     } else if (this.value === undefined) {
       throw new Error(`The session store is currently loading.`);
@@ -154,7 +154,7 @@ export class SessionStore<T extends Json> {
         this.resolveOnUnload = resolve;
       });
     } else {
-      this.encryptedStorageKey = null;
+      this.secureStorageKey = null;
       this.value = undefined;
     }
   }

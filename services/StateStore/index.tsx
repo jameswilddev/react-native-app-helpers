@@ -1,9 +1,9 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as FileSystem from "expo-file-system";
 import { EventEmitter } from "events";
 import type { Json } from "../../types/Json";
 
 /**
- * A wrapper around AsyncStorage which adds:
+ * A wrapper around expo-file-system which adds:
  * - Concurrency control.
  * - JSON parsing and serialization.
  * - Change events.
@@ -11,7 +11,7 @@ import type { Json } from "../../types/Json";
  * @template T The type of JSON stored.
  */
 export class StateStore<T extends Json> {
-  private asyncStorageKey: null | string = null;
+  private fileUri: null | string = null;
   private value: undefined | T = undefined;
   private writeQueueLength: 0 | 1 | 2 = 0;
   private resolveOnUnload: null | (() => void) = null;
@@ -19,7 +19,8 @@ export class StateStore<T extends Json> {
   private readonly eventEmitter = new EventEmitter();
 
   /**
-   * @param initial The value to use when no such record exists in AsyncStorage.
+   * @param initial The value to use when no such record exists
+   *                in expo-file-system.
    */
   constructor(private readonly initial: T) { }
 
@@ -43,29 +44,34 @@ export class StateStore<T extends Json> {
   }
 
   /**
-   * Loads the content of a record in AsyncStorage into memory.
-   * @param asyncStorageKey The key of the record to read from/write to
-   *                        AsyncStorage.
+   * Loads the content of a record in expo-file-system into memory.
+   * @param key The key of the record to read from/write to expo-file-store.
    * @throws When the state store is already loading.
    * @throws When the state store is already loaded.
    * @throws When the state store is currently unloading.
    */
-  async load(asyncStorageKey: string): Promise<void> {
+  async load(key: string): Promise<void> {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The state store is currently unloading.`);
     } else if (this.value !== undefined) {
       throw new Error(`The state store is already loaded.`);
-    } else if (this.asyncStorageKey !== null) {
+    } else if (this.fileUri !== null) {
       throw new Error(`The state store is already loading.`);
     } else {
-      this.asyncStorageKey = asyncStorageKey;
+      const directoryUri = `${FileSystem.documentDirectory}/react-native-app-helpers/state-store`;
+      const fileUri = `${directoryUri}/${key}`;
 
-      const raw = await AsyncStorage.getItem(asyncStorageKey);
+      this.fileUri = fileUri;
 
-      if (raw === null) {
-        this.value = this.initial;
-      } else {
+      await FileSystem.makeDirectoryAsync(directoryUri, {
+        intermediates: true,
+      });
+
+      if ((await FileSystem.getInfoAsync(fileUri)).exists) {
+        const raw = await FileSystem.readAsStringAsync(fileUri);
         this.value = JSON.parse(raw);
+      } else {
+        this.value = this.initial;
       }
     }
   }
@@ -80,7 +86,7 @@ export class StateStore<T extends Json> {
   get(): T {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The state store is currently unloading.`);
-    } else if (this.asyncStorageKey === null) {
+    } else if (this.fileUri === null) {
       throw new Error(`The state store is not loaded.`);
     } else if (this.value === undefined) {
       throw new Error(`The state store is currently loading.`);
@@ -91,8 +97,8 @@ export class StateStore<T extends Json> {
 
   private startWrite(): void {
     (async () => {
-      await AsyncStorage.setItem(
-        this.asyncStorageKey as string,
+      await FileSystem.writeAsStringAsync(
+        this.fileUri as string,
         JSON.stringify(this.value as T)
       );
 
@@ -102,7 +108,7 @@ export class StateStore<T extends Json> {
         this.startWrite();
       } else if (this.resolveOnUnload !== null) {
         const resolveOnUnload = this.resolveOnUnload;
-        this.asyncStorageKey = null;
+        this.fileUri = null;
         this.value = undefined;
         this.resolveOnUnload = null;
         resolveOnUnload();
@@ -121,7 +127,7 @@ export class StateStore<T extends Json> {
   set(to: T): void {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The state store is currently unloading.`);
-    } else if (this.asyncStorageKey === null) {
+    } else if (this.fileUri === null) {
       throw new Error(`The state store is not loaded.`);
     } else if (this.value === undefined) {
       throw new Error(`The state store is currently loading.`);
@@ -145,7 +151,7 @@ export class StateStore<T extends Json> {
   async unload(): Promise<void> {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The state store is already unloading.`);
-    } else if (this.asyncStorageKey === null) {
+    } else if (this.fileUri === null) {
       throw new Error(`The state store is not loaded.`);
     } else if (this.value === undefined) {
       throw new Error(`The state store is currently loading.`);
@@ -154,7 +160,7 @@ export class StateStore<T extends Json> {
         this.resolveOnUnload = resolve;
       });
     } else {
-      this.asyncStorageKey = null;
+      this.fileUri = null;
       this.value = undefined;
     }
   }
