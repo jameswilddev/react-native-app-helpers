@@ -9,15 +9,17 @@ A wrapper around EncryptedStorage which adds:
 
 ## Usage
 
+TODO
+
 ```tsx
 import type { SessionStore } from "react-native-app-helpers";
 
 type Session = `Session A` | `Session B`;
 
-const store = new SessionStore<Session>(`Session A`);
+const store = new SessionStore<Session>(`Session A`, `SecureStorage Key`);
 
 
-await store.load(`EncryptedStorage Key A`);
+await store.load();
 
 // Session A
 console.log(store.get());
@@ -30,15 +32,7 @@ console.log(store.get());
 await store.unload();
 
 
-await store.load(`EncryptedStorage Key A`);
-
-// Session A
-console.log(store.get());
-
-await store.unload();
-
-
-await store.load(`EncryptedStorage Key A`);
+await store.load();
 
 // Session B
 console.log(store.get());
