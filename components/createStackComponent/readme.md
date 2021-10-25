@@ -1,6 +1,7 @@
 # `react-native-app-helpers/createStackComponent`
 
-Creates a new React component which surrounds its children with padding.
+Creates a new React component which displays its children in a stack with a set
+spacing between each item.
 
 ## Usage
 
