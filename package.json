@@ -18,7 +18,7 @@
   "devDependencies": {
     "@types/jest": "27.0.2",
     "@types/react": "17.0.32",
-    "@types/react-native": "0.66.0",
+    "@types/react-native": "0.66.1",
     "@types/react-test-renderer": "17.0.1",
     "@types/uuid": "8.3.1",
     "@typescript-eslint/eslint-plugin": "5.1.0",
