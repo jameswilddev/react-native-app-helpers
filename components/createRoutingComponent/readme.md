@@ -5,7 +5,9 @@ Creates a React component which renders a route from state.
 ## Usage
 
 ```tsx
-import { createRoutingComponent, RouteTable } from "react-native-app-helpers";
+import React from "react";
+import { Button, SafeAreaView, Text } from "react-native";
+import { createRoutingComponent, RouteState, RouteTable } from "react-native-app-helpers";
 
 type RouteAParameters = null;
 type RouteBParameters = { readonly value: number };
@@ -20,7 +22,7 @@ type OtherProps = {
 };
 
 const routeTable: RouteTable<RouteParameters, OtherProps> = {
-  routeA: ({ setRouteState }) => (
+  routeAKey: ({ setRouteState }) => (
     <React.Fragment>
       <Text>This is route A.</Text>
       <Button
@@ -28,7 +30,7 @@ const routeTable: RouteTable<RouteParameters, OtherProps> = {
         onPress={() => {
           setRouteState({
             key: `routeBKey`,
-            parameters: 1,
+            parameters: { value: 1 },
           });
         }}
       />
@@ -37,15 +39,15 @@ const routeTable: RouteTable<RouteParameters, OtherProps> = {
         onPress={() => {
           setRouteState({
             key: `routeBKey`,
-            parameters: 2,
+            parameters: { value: 2 },
           });
         }}
       />
     </React.Fragment>
   ),
-  routeB: ({ routeState: { parameters }, setRouteState }) => (
+  routeBKey: ({ routeState: { parameters: { value } }, setRouteState }) => (
     <React.Fragment>
-      <Text>This is route B.  Your parameter is {parameters}.</Text>
+      <Text>This is route B.  Your parameter is {value}.</Text>
       <Button
         title="Return to route A"
         onPress={() => {
@@ -59,16 +61,18 @@ const routeTable: RouteTable<RouteParameters, OtherProps> = {
   ),
 };
 
-const RouteComponent = createRouteComponent(routeTable);
+const RoutingComponent = createRoutingComponent(routeTable);
 
-const ExampleApp = () => {
+export default () => {
   const [routeState, setRouteState] = React.useState<RouteState<RouteParameters>>({
     key: `routeAKey`,
     parameters: null,
   });
 
   return (
-    <RouteComponent routeState={routeState} setRouteState={setRouteState} />
+    <SafeAreaView>
+    <RoutingComponent routeState={routeState} setRouteState={setRouteState} />
+    </SafeAreaView>
   );
 };
 ```
