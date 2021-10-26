@@ -29,6 +29,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ### Hooks
 
+- [useEffectRefresh](./hooks/useEffectRefresh/readme.md)
 - [useRefresh](./hooks/useRefresh/readme.md)
 
 ### Services
