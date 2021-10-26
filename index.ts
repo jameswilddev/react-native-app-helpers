@@ -8,6 +8,7 @@ export { createRoutingComponent } from "./components/createRoutingComponent";
 export { createStackComponent } from "./components/createStackComponent";
 export { createTextComponent } from "./components/createTextComponent";
 export { SimpleModal } from "./components/SimpleModal";
+export { useRefresh } from "./hooks/useRefresh";
 export { SessionStore } from "./services/SessionStore";
 export { StateStore } from "./services/StateStore";
 export { Json } from "./types/Json";
