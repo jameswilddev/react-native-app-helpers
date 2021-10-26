@@ -111,6 +111,7 @@ jest.mock(`expo-secure-store`, () => {
   return {
     async getItemAsync(key: string, options?: unknown): Promise<null | string> {
       if (options === undefined) {
+        await new Promise<void>((resolve) => setTimeout(resolve, 50));
         return encryptedStorage.get(key) ?? null;
       } else {
         throw new Error(
@@ -124,6 +125,7 @@ jest.mock(`expo-secure-store`, () => {
       options?: unknown
     ): Promise<void> {
       if (options === undefined) {
+        await new Promise<void>((resolve) => setTimeout(resolve, 50));
         encryptedStorage.set(key, value);
       } else {
         throw new Error(

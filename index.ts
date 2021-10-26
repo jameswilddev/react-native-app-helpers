@@ -5,6 +5,7 @@ export { createFlatColorBackgroundComponent } from "./components/createFlatColor
 export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFooterComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createRoutingComponent } from "./components/createRoutingComponent";
+export { createSessionStoreManagerComponent } from "./components/createSessionStoreManagerComponent";
 export { createStackComponent } from "./components/createStackComponent";
 export { createTextComponent } from "./components/createTextComponent";
 export { SimpleModal } from "./components/SimpleModal";
