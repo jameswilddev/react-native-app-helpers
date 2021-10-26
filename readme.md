@@ -14,6 +14,8 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ## Exports
 
+### Components
+
 - [Aligned](./components/Aligned/readme.md)
 - [ContainerFillingScrollView](./components/ContainerFillingScrollView/readme.md)
 - [createDropDownComponent](./components/createDropDownComponent/readme.md)
@@ -24,8 +26,14 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createStackComponent](./components/createStackComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
 - [SimpleModal](./components/SimpleModal/readme.md)
+
+### Services
+
 - [SessionStore](./services/SessionStore/readme.md)
 - [StateStore](./services/StateStore/readme.md)
+
+### Types
+
 - [Json](./types/Json/readme.md)
 - [Route](./types/Route/readme.md)
 - [RouteParameters](./types/RouteParameters/readme.md)
