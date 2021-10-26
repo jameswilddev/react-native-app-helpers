@@ -27,6 +27,8 @@ test(`does not refresh the component before the returned function is invoked`, (
       }),
     })
   );
+
+  renderer.unmount();
 });
 
 test(`refreshes the component the first time that the returned function is invoked`, () => {
@@ -59,6 +61,8 @@ test(`refreshes the component the first time that the returned function is invok
       }),
     })
   );
+
+  renderer.unmount();
 });
 
 test(`refreshes the component the second time that the returned function is invoked`, () => {
@@ -97,4 +101,6 @@ test(`refreshes the component the second time that the returned function is invo
       }),
     })
   );
+
+  renderer.unmount();
 });
