@@ -21,6 +21,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createDropDownComponent](./components/createDropDownComponent/readme.md)
 - [createFlatColorBackgroundComponent](./components/createFlatColorBackgroundComponent/readme.md)
 - [createHeaderBodyFooterComponent](./components/createHeaderBodyFooterComponent/readme.md)
+- [createImageBackgroundComponent](./components/createImageBackgroundComponent/readme.md)
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
 - [createRoutingComponent](./components/createRoutingComponent/readme.md)
 - [createSessionStoreManagerComponent](./components/createSessionStoreManagerComponent/readme.md)
