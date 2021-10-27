@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRefresh } from "../../hooks/useRefresh";
 import { useEventRefresh } from "../../hooks/useEventRefresh";
 import type { SessionStore } from "../../services/SessionStore";
 import type { Json } from "../../types/Json";
@@ -26,7 +27,8 @@ export const createSessionStoreManagerComponent = <T extends Json>(
   ) => React.ReactElement<any, any> | null;
 }> => {
   return ({ loading, ready }) => {
-    const [loaded, setLoaded] = React.useState(false);
+    const loaded = React.useRef(false);
+    const refresh = useRefresh();
     useEventRefresh(sessionStore, `set`);
 
     React.useEffect(() => {
@@ -38,7 +40,8 @@ export const createSessionStoreManagerComponent = <T extends Json>(
         switch (state as `loading` | `aborting`) {
           case `loading`:
             state = `loaded`;
-            setLoaded(true);
+            loaded.current = true;
+            refresh();
             break;
 
           case `aborting`:
@@ -61,7 +64,7 @@ export const createSessionStoreManagerComponent = <T extends Json>(
       };
     }, []);
 
-    if (loaded) {
+    if (loaded.current) {
       return ready(sessionStore.get(), (to: T) => {
         sessionStore.set(to);
       });
