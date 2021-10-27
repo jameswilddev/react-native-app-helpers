@@ -15,13 +15,14 @@ import {
 
 const stateStore = new StateStore<number>(0);
 
-const StateStoreManager = createStateStoreManager(stateStore);
+const StateStoreManager = createStateStoreManagerComponent(stateStore);
 
-const ExampleScreen = () => {
+export default () => {
   const [key, setKey] = React.useState<null | string>(null);
 
   return (
     <StateStoreManager
+      stateKey={key}
       unloaded={(
         <React.Fragment>
           <Button
@@ -55,6 +56,7 @@ const ExampleScreen = () => {
           />
         </React.Fragment>
       )}
+      unloading={<Text>The state store is unloading...</Text>}
     />
   );
 };
