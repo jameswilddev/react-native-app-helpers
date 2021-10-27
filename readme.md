@@ -26,6 +26,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createRoutingComponent](./components/createRoutingComponent/readme.md)
 - [createSessionStoreManagerComponent](./components/createSessionStoreManagerComponent/readme.md)
 - [createStackComponent](./components/createStackComponent/readme.md)
+- [createStateStoreManagerComponent](./components/createStateStoreManagerComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
 - [SimpleModal](./components/SimpleModal/readme.md)
 

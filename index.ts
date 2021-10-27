@@ -8,6 +8,7 @@ export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createRoutingComponent } from "./components/createRoutingComponent";
 export { createSessionStoreManagerComponent } from "./components/createSessionStoreManagerComponent";
 export { createStackComponent } from "./components/createStackComponent";
+export { createStateStoreManagerComponent } from "./components/createStateStoreManagerComponent";
 export { createTextComponent } from "./components/createTextComponent";
 export { SimpleModal } from "./components/SimpleModal";
 export { useEventRefresh } from "./hooks/useEventRefresh";
