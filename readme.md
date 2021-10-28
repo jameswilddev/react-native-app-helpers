@@ -28,6 +28,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createStackComponent](./components/createStackComponent/readme.md)
 - [createStateStoreManagerComponent](./components/createStateStoreManagerComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
+- [Row](./components/Row/readme.md)
 - [SimpleModal](./components/SimpleModal/readme.md)
 
 ### Hooks

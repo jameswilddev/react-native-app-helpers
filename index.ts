@@ -10,6 +10,7 @@ export { createSessionStoreManagerComponent } from "./components/createSessionSt
 export { createStackComponent } from "./components/createStackComponent";
 export { createStateStoreManagerComponent } from "./components/createStateStoreManagerComponent";
 export { createTextComponent } from "./components/createTextComponent";
+export { Row } from "./components/Row";
 export { SimpleModal } from "./components/SimpleModal";
 export { useEventRefresh } from "./hooks/useEventRefresh";
 export { useRefresh } from "./hooks/useRefresh";
