@@ -17,5 +17,6 @@
   ],
   "setupFiles": [
     "./jest.js"
-  ]
+  ],
+  "testTimeout": 60000
 }

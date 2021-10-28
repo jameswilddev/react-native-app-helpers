@@ -7,7 +7,6 @@ import { createStateStoreManagerComponent, StateStore } from "../../";
 type TestState = { readonly value: number };
 
 test(`displays the loading screen`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -49,7 +48,6 @@ test(`displays the loading screen`, async () => {
 });
 
 test(`shows the ready screen once given time to load`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -93,7 +91,6 @@ test(`shows the ready screen once given time to load`, async () => {
 });
 
 test(`re-renders when the state is changed externally once`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -138,7 +135,6 @@ test(`re-renders when the state is changed externally once`, async () => {
 });
 
 test(`re-renders when the state is changed externally twice`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -184,7 +180,6 @@ test(`re-renders when the state is changed externally twice`, async () => {
 });
 
 test(`re-renders when the state is changed internally once`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -231,7 +226,6 @@ test(`re-renders when the state is changed internally once`, async () => {
 });
 
 test(`re-renders when the state is changed internally twice`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -281,7 +275,6 @@ test(`re-renders when the state is changed internally twice`, async () => {
 });
 
 test(`does not try to load without a key`, async () => {
-  jest.setTimeout(30000);
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
 
@@ -314,7 +307,6 @@ test(`does not try to load without a key`, async () => {
 });
 
 test(`starts unloading when the state key changes to null during loading`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -375,7 +367,6 @@ test(`starts unloading when the state key changes to null during loading`, async
 });
 
 test(`fully unloads when the state key changes to null during loading`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -440,7 +431,6 @@ test(`fully unloads when the state key changes to null during loading`, async ()
 });
 
 test(`starts unloading when the state key changes to null after loading`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -505,7 +495,6 @@ test(`starts unloading when the state key changes to null after loading`, async 
 });
 
 test(`fully unloads when the state key changes to null after loading`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -574,7 +563,6 @@ test(`fully unloads when the state key changes to null after loading`, async () 
 });
 
 test(`starts reloading when the state key changes to another value during loading`, async () => {
-  jest.setTimeout(30000);
   const stateKeyA = uuid.v4();
   const stateKeyB = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
@@ -643,7 +631,6 @@ test(`starts reloading when the state key changes to another value during loadin
 });
 
 test(`fully reloads when the state key changes to another value during loading`, async () => {
-  jest.setTimeout(30000);
   const stateKeyA = uuid.v4();
   const stateKeyB = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
@@ -716,7 +703,6 @@ test(`fully reloads when the state key changes to another value during loading`,
 });
 
 test(`starts reloading when the state key changes to another value after loading`, async () => {
-  jest.setTimeout(30000);
   const stateKeyA = uuid.v4();
   const stateKeyB = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
@@ -789,7 +775,6 @@ test(`starts reloading when the state key changes to another value after loading
 });
 
 test(`fully reloads when the state key changes to another value after loading`, async () => {
-  jest.setTimeout(30000);
   const stateKeyA = uuid.v4();
   const stateKeyB = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
@@ -866,7 +851,6 @@ test(`fully reloads when the state key changes to another value after loading`, 
 });
 
 test(`displays the loading screen from null`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
@@ -927,7 +911,6 @@ test(`displays the loading screen from null`, async () => {
 });
 
 test(`shows the ready screen once given time to load from null`, async () => {
-  jest.setTimeout(30000);
   const stateKey = uuid.v4();
   const stateStore = new StateStore<TestState>({ value: 5 });
   const StateStoreManager = createStateStoreManagerComponent(stateStore);
