@@ -8,7 +8,7 @@ import { ColorValue, StyleSheet, Text } from "react-native";
  * @param color The color to use.
  * @param alignment The horizontal alignment to use.
  * @param multiLine When true, text will wrap across multiple lines when it does
- *                  not fit within the available wideth.  When false, text will
+ *                  not fit within the available width.  When false, text will
  *                  be truncated with an ellipsis.
  * @returns A new React component which can be used to render text.
  */
