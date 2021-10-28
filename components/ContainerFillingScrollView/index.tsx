@@ -13,5 +13,10 @@ const styles = StyleSheet.create({
  */
 export const ContainerFillingScrollView: React.FunctionComponent<ScrollViewProps> =
   (props) => (
-    <ScrollView pointerEvents="box-none" style={styles.scrollView} {...props} />
+    <ScrollView
+      pointerEvents="box-none"
+      style={styles.scrollView}
+      keyboardShouldPersistTaps="handled"
+      {...props}
+    />
   );
