@@ -61,5 +61,9 @@ export const Row: React.FunctionComponent<{
     styles[styleKey] = StyleSheet.create({ view }).view;
   }
 
-  return <View style={styles[styleKey]}>{children}</View>;
+  return (
+    <View style={styles[styleKey]} pointerEvents="box-none">
+      {children}
+    </View>
+  );
 };

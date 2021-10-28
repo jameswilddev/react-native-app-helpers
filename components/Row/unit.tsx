@@ -17,6 +17,7 @@ test(`renders as expected when height fits content and horizontal distribution i
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{ width: `100%`, flexDirection: `row`, alignItems: `flex-start` }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -35,7 +36,10 @@ test(`renders as expected when height fits content and horizontal distribution i
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, flexDirection: `row`, alignItems: `center` }}>
+    <View
+      style={{ width: `100%`, flexDirection: `row`, alignItems: `center` }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
@@ -55,6 +59,7 @@ test(`renders as expected when height fits content and horizontal distribution i
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{ width: `100%`, flexDirection: `row`, alignItems: `flex-end` }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -73,7 +78,10 @@ test(`renders as expected when height fits content and horizontal distribution i
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, flexDirection: `row` }}>
+    <View
+      style={{ width: `100%`, flexDirection: `row` }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
@@ -98,6 +106,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-start`,
         justifyContent: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -123,6 +132,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `center`,
         justifyContent: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -148,6 +158,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-end`,
         justifyContent: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -168,6 +179,7 @@ test(`renders as expected when height fits content and horizontal distribution i
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{ width: `100%`, flexDirection: `row`, justifyContent: `center` }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -193,6 +205,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-start`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -218,6 +231,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `center`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -243,6 +257,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-end`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -267,6 +282,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         flexDirection: `row`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -292,6 +308,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-start`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -317,6 +334,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `center`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -342,6 +360,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-end`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -366,6 +385,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         flexDirection: `row`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -391,6 +411,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-start`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -416,6 +437,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `center`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -441,6 +463,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         alignItems: `flex-end`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -465,6 +488,7 @@ test(`renders as expected when height fits content and horizontal distribution i
         flexDirection: `row`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -490,6 +514,7 @@ test(`renders as expected when height fills container and horizontal distributio
         flexDirection: `row`,
         alignItems: `flex-start`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -515,6 +540,7 @@ test(`renders as expected when height fills container and horizontal distributio
         flexDirection: `row`,
         alignItems: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -540,6 +566,7 @@ test(`renders as expected when height fills container and horizontal distributio
         flexDirection: `row`,
         alignItems: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -558,7 +585,10 @@ test(`renders as expected when height fills container and horizontal distributio
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%`, flexDirection: `row` }}>
+    <View
+      style={{ width: `100%`, height: `100%`, flexDirection: `row` }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
@@ -584,6 +614,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-start`,
         justifyContent: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -610,6 +641,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `center`,
         justifyContent: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -636,6 +668,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-end`,
         justifyContent: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -661,6 +694,7 @@ test(`renders as expected when height fills container and horizontal distributio
         flexDirection: `row`,
         justifyContent: `center`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -687,6 +721,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-start`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -713,6 +748,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `center`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -739,6 +775,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-end`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -764,6 +801,7 @@ test(`renders as expected when height fills container and horizontal distributio
         flexDirection: `row`,
         justifyContent: `flex-end`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -790,6 +828,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-start`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -816,6 +855,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `center`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -842,6 +882,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-end`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -867,6 +908,7 @@ test(`renders as expected when height fills container and horizontal distributio
         flexDirection: `row`,
         justifyContent: `space-evenly`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -893,6 +935,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-start`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -919,6 +962,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `center`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -945,6 +989,7 @@ test(`renders as expected when height fills container and horizontal distributio
         alignItems: `flex-end`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -970,6 +1015,7 @@ test(`renders as expected when height fills container and horizontal distributio
         flexDirection: `row`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
@@ -995,6 +1041,7 @@ test(`renders as expected a second time`, () => {
         flexDirection: `row`,
         justifyContent: `space-between`,
       }}
+      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
