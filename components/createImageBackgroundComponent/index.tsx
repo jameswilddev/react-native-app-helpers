@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     width: `100%`,
     height: `100%`,
   },
+  containerFillingView: {
+    flexGrow: 1,
+  },
 });
 
 /**
@@ -20,9 +23,13 @@ const styles = StyleSheet.create({
  */
 export const createImageBackgroundComponent = (
   source: ImageSourcePropType
-): React.FunctionComponent => {
-  return ({ children }) => (
-    <View>
+): React.FunctionComponent<{ size: `fitsContent` | `fillsContainer` }> => {
+  return ({ size, children }) => (
+    <View
+      {...(size === `fillsContainer`
+        ? { style: styles.containerFillingView }
+        : {})}
+    >
       <Image source={source} style={styles.image} resizeMode="cover" />
       {children}
     </View>

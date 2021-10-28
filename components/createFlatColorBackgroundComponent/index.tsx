@@ -10,12 +10,16 @@ import { ColorValue, StyleSheet, View } from "react-native";
  */
 export const createFlatColorBackgroundComponent = (
   color: ColorValue
-): React.FunctionComponent => {
+): React.FunctionComponent<{ size: `fitsContent` | `fillsContainer` }> => {
   const styles = StyleSheet.create({
-    view: {
+    fitsContent: {
       backgroundColor: color,
+    },
+    fillsContainer: {
+      backgroundColor: color,
+      flexGrow: 1,
     },
   });
 
-  return ({ children }) => <View style={styles.view}>{children}</View>;
+  return ({ size, children }) => <View style={styles[size]}>{children}</View>;
 };

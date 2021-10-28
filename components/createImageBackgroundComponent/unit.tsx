@@ -3,17 +3,44 @@ import { View, Text, Image } from "react-native";
 import { createImageBackgroundComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
-test(`renders as expected`, () => {
+test(`renders as expected when fitting the content`, () => {
   const Component = createImageBackgroundComponent({ uri: `Example Uri` });
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View>
+      <Image
+        source={{ uri: `Example Uri` }}
+        style={{
+          position: `absolute`,
+          left: 0,
+          top: 0,
+          width: `100%`,
+          height: `100%`,
+        }}
+        resizeMode="cover"
+      />
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders as expected when filling the container`, () => {
+  const Component = createImageBackgroundComponent({ uri: `Example Uri` });
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ flexGrow: 1 }}>
       <Image
         source={{ uri: `Example Uri` }}
         style={{

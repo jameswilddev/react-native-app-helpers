@@ -7,15 +7,20 @@ children.
 
 ```tsx
 import { createImageBackgroundComponent } from "react-native-app-helpers";
-import exampleImageSource from "./assets/example.jpg";
+import exampleImageSourceA from "./assets/example-a.jpg";
+import exampleImageSourceB from "./assets/example-b.jpg";
 
-const ExampleImageBackground = createImageBackgroundComponent(exampleImageSource);
+const ExampleImageBackgroundA = createImageBackgroundComponent(exampleImageSourceA);
+
+const ExampleImageBackgroundB = createImageBackgroundComponent(exampleImageSourceB);
 
 const ExampleScreen = () => (
-  <ExampleImageBackground>
-    <Text>
-      The entire background of this element is covered by the example image.
-    </Text>
-  </ExampleImageBackground>
+  <ExampleImageBackgroundA size="fillsContainer">
+    <ExampleImageBackgroundB size="fitsContent">
+      <Text>
+        The entire background of this element is covered by the example image.
+      </Text>
+    </ExampleImageBackgroundB>
+  </ExampleImageBackgroundA>
 );
 ```

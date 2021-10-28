@@ -3,17 +3,33 @@ import { View, Text } from "react-native";
 import { createFlatColorBackgroundComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
-test(`renders as expected`, () => {
+test(`renders as expected when fitting the content`, () => {
   const Component = createFlatColorBackgroundComponent(`red`);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View style={{ backgroundColor: `red` }}>
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders as expected when filling the container`, () => {
+  const Component = createFlatColorBackgroundComponent(`red`);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ backgroundColor: `red`, flexGrow: 1 }}>
       <Text>Test Content</Text>
     </View>
   );

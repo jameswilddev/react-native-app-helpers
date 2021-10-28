@@ -8,13 +8,22 @@ children.
 ```tsx
 import { createFlatColorBackgroundComponent } from "react-native-app-helpers";
 
-const ExampleFlatColorBackground = createFlatColorBackgroundComponent(`red`);
+const RedBackground = createFlatColorBackgroundComponent(`red`);
+const YellowBackground = createFlatColorBackgroundComponent(`yellow`);
 
 const ExampleScreen = () => (
-  <ExampleFlatColorBackground>
+  <RedBackground size="fillsContainer">
     <Text>
       A red background is shown behind this text.
     </Text>
-  </ExampleFlatColorBackground>
+    <YellowBackground size="fitsContent">
+      <Text>
+        A yellow background is shown behind this text.
+      </Text>
+    </YellowBackground>
+    <Text>
+      A red background is shown behind this text.
+    </Text>
+  </RedBackground>
 );
 ```
