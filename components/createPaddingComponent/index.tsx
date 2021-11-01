@@ -1,6 +1,13 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
 
+const globalStyles = StyleSheet.create({
+  containerFillingView: {
+    width: `100%`,
+    height: `100%`,
+  },
+});
+
 /**
  * Creates a new React component which surrounds its children with padding.
  * @param paddings The padding values, where:
@@ -15,54 +22,78 @@ export const createPaddingComponent = (
     | readonly [number]
     | readonly [number, number]
     | readonly [number, number, number, number]
-): React.FunctionComponent => {
-  const view: { [key: string]: number } = {};
+): React.FunctionComponent<{
+  readonly size: `fitsContent` | `fillsContainer`;
+}> => {
+  const contentFittingView: { [key: string]: number } = {};
 
   switch (paddings.length) {
     case 1:
       if (paddings[0]) {
-        view[`padding`] = paddings[0];
+        contentFittingView[`padding`] = paddings[0];
       }
       break;
 
     case 2:
       if (paddings[0]) {
-        view[`paddingVertical`] = paddings[0];
+        contentFittingView[`paddingVertical`] = paddings[0];
       }
 
       if (paddings[1]) {
-        view[`paddingHorizontal`] = paddings[1];
+        contentFittingView[`paddingHorizontal`] = paddings[1];
       }
       break;
 
     case 4:
       if (paddings[0]) {
-        view[`paddingTop`] = paddings[0];
+        contentFittingView[`paddingTop`] = paddings[0];
       }
 
       if (paddings[1]) {
-        view[`paddingRight`] = paddings[1];
+        contentFittingView[`paddingRight`] = paddings[1];
       }
 
       if (paddings[2]) {
-        view[`paddingBottom`] = paddings[2];
+        contentFittingView[`paddingBottom`] = paddings[2];
       }
 
       if (paddings[3]) {
-        view[`paddingLeft`] = paddings[3];
+        contentFittingView[`paddingLeft`] = paddings[3];
       }
       break;
   }
 
-  if (Object.keys(view).length === 0) {
-    return ({ children }) => <View pointerEvents="box-none">{children}</View>;
+  if (Object.keys(contentFittingView).length === 0) {
+    return ({ size, children }) =>
+      size === `fillsContainer` ? (
+        <View
+          style={globalStyles.containerFillingView}
+          pointerEvents="box-none"
+        >
+          {children}
+        </View>
+      ) : (
+        <View pointerEvents="box-none">{children}</View>
+      );
   } else {
-    const styles = StyleSheet.create({ view });
+    const localStyles = StyleSheet.create({
+      contentFittingView,
+      containerFillingView: {
+        ...contentFittingView,
+        width: `100%`,
+        height: `100%`,
+      },
+    });
 
-    return ({ children }) => (
-      <View pointerEvents="box-none" style={styles.view}>
-        {children}
-      </View>
-    );
+    return ({ size, children }) =>
+      size === `fillsContainer` ? (
+        <View pointerEvents="box-none" style={localStyles.containerFillingView}>
+          {children}
+        </View>
+      ) : (
+        <View pointerEvents="box-none" style={localStyles.contentFittingView}>
+          {children}
+        </View>
+      );
   }
 };

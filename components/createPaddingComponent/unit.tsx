@@ -3,11 +3,11 @@ import { View, Text } from "react-native";
 import { createPaddingComponent } from "../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
-test(`renders with one zero`, () => {
+test(`renders content-fitting with one zero`, () => {
   const Component = createPaddingComponent(0);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -19,11 +19,11 @@ test(`renders with one zero`, () => {
   );
 });
 
-test(`renders with one non-zero`, () => {
+test(`renders content-fitting with one non-zero`, () => {
   const Component = createPaddingComponent(30);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -35,11 +35,11 @@ test(`renders with one non-zero`, () => {
   );
 });
 
-test(`renders with two zeroes`, () => {
+test(`renders content-fitting with two zeroes`, () => {
   const Component = createPaddingComponent(0, 0);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -51,11 +51,11 @@ test(`renders with two zeroes`, () => {
   );
 });
 
-test(`renders with one non-zero and one zero`, () => {
+test(`renders content-fitting with one non-zero and one zero`, () => {
   const Component = createPaddingComponent(30, 0);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -67,11 +67,11 @@ test(`renders with one non-zero and one zero`, () => {
   );
 });
 
-test(`renders with one zero and one non-zero`, () => {
+test(`renders content-fitting with one zero and one non-zero`, () => {
   const Component = createPaddingComponent(0, 30);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -83,11 +83,11 @@ test(`renders with one zero and one non-zero`, () => {
   );
 });
 
-test(`renders with two non-zeroes`, () => {
+test(`renders content-fitting with two non-zeroes`, () => {
   const Component = createPaddingComponent(30, 50);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -102,11 +102,11 @@ test(`renders with two non-zeroes`, () => {
   );
 });
 
-test(`renders with four zeroes`, () => {
+test(`renders content-fitting with four zeroes`, () => {
   const Component = createPaddingComponent(0, 0, 0, 0);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -118,11 +118,11 @@ test(`renders with four zeroes`, () => {
   );
 });
 
-test(`renders with non-zero top`, () => {
+test(`renders content-fitting with non-zero top`, () => {
   const Component = createPaddingComponent(30, 0, 0, 0);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -134,11 +134,11 @@ test(`renders with non-zero top`, () => {
   );
 });
 
-test(`renders with non-zero right`, () => {
+test(`renders content-fitting with non-zero right`, () => {
   const Component = createPaddingComponent(0, 30, 0, 0);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -150,11 +150,11 @@ test(`renders with non-zero right`, () => {
   );
 });
 
-test(`renders with non-zero bottom`, () => {
+test(`renders content-fitting with non-zero bottom`, () => {
   const Component = createPaddingComponent(0, 0, 30, 0);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -166,11 +166,11 @@ test(`renders with non-zero bottom`, () => {
   );
 });
 
-test(`renders with non-zero left`, () => {
+test(`renders content-fitting with non-zero left`, () => {
   const Component = createPaddingComponent(0, 0, 0, 30);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -182,11 +182,11 @@ test(`renders with non-zero left`, () => {
   );
 });
 
-test(`renders with four non-zeroes`, () => {
+test(`renders content-fitting with four non-zeroes`, () => {
   const Component = createPaddingComponent(30, 50, 27, 60);
 
   const rendered = (
-    <Component>
+    <Component size="fitsContent">
       <Text>Test Content</Text>
     </Component>
   );
@@ -194,6 +194,237 @@ test(`renders with four non-zeroes`, () => {
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
+        paddingTop: 30,
+        paddingRight: 50,
+        paddingBottom: 27,
+        paddingLeft: 60,
+      }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with one zero`, () => {
+  const Component = createPaddingComponent(0);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none">
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with one non-zero`, () => {
+  const Component = createPaddingComponent(30);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{ width: `100%`, height: `100%`, padding: 30 }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with two zeroes`, () => {
+  const Component = createPaddingComponent(0, 0);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none">
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with one non-zero and one zero`, () => {
+  const Component = createPaddingComponent(30, 0);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{ width: `100%`, height: `100%`, paddingVertical: 30 }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with one zero and one non-zero`, () => {
+  const Component = createPaddingComponent(0, 30);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{ width: `100%`, height: `100%`, paddingHorizontal: 30 }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with two non-zeroes`, () => {
+  const Component = createPaddingComponent(30, 50);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{
+        width: `100%`,
+        height: `100%`,
+        paddingVertical: 30,
+        paddingHorizontal: 50,
+      }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with four zeroes`, () => {
+  const Component = createPaddingComponent(0, 0, 0, 0);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none">
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with non-zero top`, () => {
+  const Component = createPaddingComponent(30, 0, 0, 0);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{ width: `100%`, height: `100%`, paddingTop: 30 }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with non-zero right`, () => {
+  const Component = createPaddingComponent(0, 30, 0, 0);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{ width: `100%`, height: `100%`, paddingRight: 30 }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with non-zero bottom`, () => {
+  const Component = createPaddingComponent(0, 0, 30, 0);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{ width: `100%`, height: `100%`, paddingBottom: 30 }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with non-zero left`, () => {
+  const Component = createPaddingComponent(0, 0, 0, 30);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{ width: `100%`, height: `100%`, paddingLeft: 30 }}
+      pointerEvents="box-none"
+    >
+      <Text>Test Content</Text>
+    </View>
+  );
+});
+
+test(`renders container-filling with four non-zeroes`, () => {
+  const Component = createPaddingComponent(30, 50, 27, 60);
+
+  const rendered = (
+    <Component size="fillsContainer">
+      <Text>Test Content</Text>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{
+        width: `100%`,
+        height: `100%`,
         paddingTop: 30,
         paddingRight: 50,
         paddingBottom: 27,
