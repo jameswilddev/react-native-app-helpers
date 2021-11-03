@@ -22,6 +22,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createFlatColorBackgroundComponent](./components/createFlatColorBackgroundComponent/readme.md)
 - [createHeaderBodyFooterComponent](./components/createHeaderBodyFooterComponent/readme.md)
 - [createImageBackgroundComponent](./components/createImageBackgroundComponent/readme.md)
+- [createInputComponent](./components/createInputComponent/readme.md)
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
 - [createRoutingComponent](./components/createRoutingComponent/readme.md)
 - [createSessionStoreManagerComponent](./components/createSessionStoreManagerComponent/readme.md)
@@ -43,6 +44,9 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ### Types
 
+- [BorderStyle](./types/BorderStyle/readme.md)
+- [ControlStateStyle](./types/ControlStateStyle/readme.md)
+- [ControlStyle](./types/ControlStyle/readme.md)
 - [Json](./types/Json/readme.md)
 - [Route](./types/Route/readme.md)
 - [RouteParameters](./types/RouteParameters/readme.md)
