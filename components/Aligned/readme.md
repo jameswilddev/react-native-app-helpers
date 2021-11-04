@@ -13,6 +13,6 @@ const ExampleScreen = () => (
     <Text>
       This is aligned to the top left.
     </Text>
-  </ContainerFillingScrollView>
+  </Aligned>
 );
 ```
