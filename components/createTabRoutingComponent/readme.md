@@ -97,6 +97,70 @@ const routeTable: TabRouteTable<RouteKey, OtherProps> = {
         <Text>This fills the ScrollView.</Text>
         <Text>This fills the ScrollView.</Text>
         <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
+        <Text>This fills the ScrollView.</Text>
         <Button
           title="Go to route B"
           onPress={() => {
@@ -111,7 +175,7 @@ const routeTable: TabRouteTable<RouteKey, OtherProps> = {
 const RoutingComponent = createTabRoutingComponent(routeTable);
 
 export default () => {
-  const [route, setRout] = React.useState<RouteKey>(`routeAKey`);
+  const [route, setRoute] = React.useState<RouteKey>(`routeAKey`);
 
   return (
     <SafeAreaView>
