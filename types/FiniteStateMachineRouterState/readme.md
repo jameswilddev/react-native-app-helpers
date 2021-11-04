@@ -5,7 +5,7 @@ The state which can be persisted for a specific route key and parameter set.
 ## Usage
 
 ```tsx
-import type { RouteState } from "react-native-app-helpers";
+import type { FiniteStateMachineRouterState } from "react-native-app-helpers";
 
 type RouteParameters = {
   routeAKey: {
@@ -19,7 +19,7 @@ type RouteParameters = {
   },
 };
 
-const routeState<RouteParameters> = {
+const routeState: FiniteStateMachineRouterState<RouteParameters> = {
   key: routeBKey,
   parameters: {
     routeBParameterKey: `Route B Parameter Value`,

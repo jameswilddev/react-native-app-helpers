@@ -1,7 +1,12 @@
 import * as React from "react";
 import { Text } from "react-native";
-import { Route, unwrapRenderedFunctionComponent } from "../..";
-import { createRoutingComponent, RouteState, RouteTable } from "../..";
+import {
+  Route,
+  unwrapRenderedFunctionComponent,
+  createFiniteStateMachineRoutingComponent,
+  FiniteStateMachineRouterState,
+  RouteTable,
+} from "../..";
 
 test(`passes through to the appropriate route`, () => {
   type ParametersB = {
@@ -60,14 +65,14 @@ test(`passes through to the appropriate route`, () => {
     ),
   };
 
-  const routeState: RouteState<Parameters> = {
+  const routeState: FiniteStateMachineRouterState<Parameters> = {
     key: `testRouteBKey`,
     parameters: {
       testRouteBParameterKey: `Test Route B Parameter Value`,
     },
   };
 
-  const Component = createRoutingComponent(routeTable);
+  const Component = createFiniteStateMachineRoutingComponent(routeTable);
 
   const rendered = (
     <Component

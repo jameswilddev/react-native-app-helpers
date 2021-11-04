@@ -1,13 +1,17 @@
-# `react-native-app-helpers/createRoutingComponent`
+# `react-native-app-helpers/createFiniteStateMachineRoutingComponent`
 
-Creates a React component which renders a route from state.
+Creates a React component which renders a single route from state.
 
 ## Usage
 
 ```tsx
 import React from "react";
 import { Button, SafeAreaView, Text } from "react-native";
-import { createRoutingComponent, RouteState, RouteTable } from "react-native-app-helpers";
+import {
+  createFiniteStateMachineRoutingComponent,
+  FiniteStateMachineRouterState,
+  RouteTable,
+} from "react-native-app-helpers";
 
 type RouteAParameters = null;
 type RouteBParameters = { readonly value: number };
@@ -18,7 +22,7 @@ type RouteParameters = {
 };
 
 type OtherProps = {
-  setRouteState: (state: RouteState<RouteParameters>) => void,
+  setRouteState: (to: FiniteStateMachineRouterState<RouteParameters>) => void,
 };
 
 const routeTable: RouteTable<RouteParameters, OtherProps> = {
@@ -45,7 +49,10 @@ const routeTable: RouteTable<RouteParameters, OtherProps> = {
       />
     </React.Fragment>
   ),
-  routeBKey: ({ routeState: { parameters: { value } }, setRouteState }) => (
+  routeBKey: ({
+    routeState: { parameters: { value } },
+    setRouteState,
+  }) => (
     <React.Fragment>
       <Text>This is route B.  Your parameter is {value}.</Text>
       <Button
@@ -61,17 +68,20 @@ const routeTable: RouteTable<RouteParameters, OtherProps> = {
   ),
 };
 
-const RoutingComponent = createRoutingComponent(routeTable);
+const RoutingComponent = createFiniteStateMachineRoutingComponent(routeTable);
 
 export default () => {
-  const [routeState, setRouteState] = React.useState<RouteState<RouteParameters>>({
+  const [routeState, setRouteState] = React.useState<FiniteStateMachineRouterState<RouteParameters>>({
     key: `routeAKey`,
     parameters: null,
   });
 
   return (
     <SafeAreaView>
-    <RoutingComponent routeState={routeState} setRouteState={setRouteState} />
+      <RoutingComponent
+        routeState={routeState}
+        setRouteState={setRouteState}
+      />
     </SafeAreaView>
   );
 };
