@@ -14,4 +14,4 @@ type Item<T extends RouteParameters> = {
  */
 export type StackRouterState<T extends RouteParameters> = ReadonlyArray<
   Item<T>
-> & { readonly 0: Item<T> };
+>;
