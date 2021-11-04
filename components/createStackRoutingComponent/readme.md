@@ -12,6 +12,7 @@ import {
   createStackRoutingComponent,
   StackRouterState,
   RouteTable,
+  ContainerFillingScrollView,
 } from "react-native-app-helpers";
 
 type RouteAParameters = null;
@@ -23,21 +24,19 @@ type RouteParameters = {
 };
 
 type OtherProps = {
-  push: (value: number) => void,
+  pushA: () => void,
+  pushB: (value: number) => void,
   pop: () => void,
 };
 
 const routeTable: RouteTable<RouteParameters, OtherProps> = {
-  routeAKey: ({ push }) => (
+  routeAKey: ({ pushA, pushB, pop }) => (
     <ContainerFillingScrollView>
       <Text>This is route A.</Text>
       <Button
         title="Go to route B with 1"
         onPress={() => {
-          push({
-            key: `routeBKey`,
-            parameters: { value: 1 },
-          });
+          pushB(1);
         }}
       />
       <Text>This fills the ScrollView.</Text>
@@ -72,25 +71,150 @@ const routeTable: RouteTable<RouteParameters, OtherProps> = {
       <Text>This fills the ScrollView.</Text>
       <Text>This fills the ScrollView.</Text>
       <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Text>This fills the ScrollView.</Text>
+      <Button
+        title="Go to route A"
+        onPress={() => {
+          pushA();
+        }}
+      />
       <Button
         title="Go to route B with 2"
         onPress={() => {
-          push({
-            key: `routeBKey`,
-            parameters: { value: 2 },
-          });
+          pushB(2);
+        }}
+      />
+      <Button
+        title="Go back"
+        onPress={() => {
+          pop();
         }}
       />
     </ContainerFillingScrollView>
   ),
   routeBKey: ({
     routeState: { parameters: { value } },
+    pushA,
+    pushB,
     pop,
   }) => (
     <React.Fragment>
       <Text>This is route B.  Your parameter is {value}.</Text>
       <Button
-        title="Return"
+        title="Go to route A"
+        onPress={() => {
+          pushA();
+        }}
+      />
+      <Button
+        title="Go to route B with 1"
+        onPress={() => {
+          pushB(1);
+        }}
+      />
+      <Button
+        title="Go to route B with 2"
+        onPress={() => {
+          pushB(2);
+        }}
+      />
+      <Button
+        title="Go back"
         onPress={() => {
           pop();
         }}
@@ -111,17 +235,14 @@ export default () => {
     <SafeAreaView>
       <RoutingComponent
         routeState={routeState}
-        push={(value) => {
-          setRouteState([
-            ...routeState,
-            {
-              key: `routeBKey`,
-              parameters: { value },
-            },
-          ]);
+        pushA={() => {
+          setRouteState([ ...routeState, { key: `routeAKey`, parameters: null } ]);
+        }}
+        pushB={(value) => {
+          setRouteState([ ...routeState, { key: `routeBKey`, parameters: { value } } ]);
         }}
         pop={() => {
-          setRouteState(routeState.slice(0, 1));
+          setRouteState(routeState.slice(0, routeState.length - 1));
         }}
       />
     </SafeAreaView>
