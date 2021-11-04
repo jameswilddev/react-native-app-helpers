@@ -34,7 +34,7 @@ test(`passes through to the appropriate route`, () => {
     exampleOtherPropKey,
   }) => (
     <Text>
-      Example Route A with parameter {testRouteBParameterKey}{" "}
+      Example Route B with parameter {testRouteBParameterKey}{" "}
       {exampleOtherPropKey}
     </Text>
   );
@@ -59,7 +59,7 @@ test(`passes through to the appropriate route`, () => {
       exampleOtherPropKey,
     }) => (
       <Text>
-        Example Route A with parameter {testRouteCParameterKey}{" "}
+        Example Route C with parameter {testRouteCParameterKey}{" "}
         {exampleOtherPropKey}
       </Text>
     ),
