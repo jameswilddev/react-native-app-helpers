@@ -28,6 +28,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createSessionStoreManagerComponent](./components/createSessionStoreManagerComponent/readme.md)
 - [createStackComponent](./components/createStackComponent/readme.md)
 - [createStateStoreManagerComponent](./components/createStateStoreManagerComponent/readme.md)
+- [createTabRoutingComponent](./components/createTabRoutingComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
 - [Row](./components/Row/readme.md)
 - [SimpleModal](./components/SimpleModal/readme.md)
@@ -52,6 +53,11 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Route](./types/Route/readme.md)
 - [RouteParameters](./types/RouteParameters/readme.md)
 - [RouteTable](./types/RouteTable/readme.md)
+- [TabRoute](./types/TabRoute/readme.md)
+- [TabRouteTable](./types/TabRouteTable/readme.md)
+
+### Utilities
+
 - [flattenRenderedToArray](./utilities/flattenRenderedToArray/readme.md)
 - [intercalateRendered](./utilities/intercalateRendered/readme.md)
 - [setRenderedKey](./utilities/setRenderedKey/readme.md)
