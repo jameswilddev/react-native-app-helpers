@@ -1,6 +1,6 @@
-# `react-native-app-helpers/Route`
+# `react-native-app-helpers/FiniteStateMachineRouterState`
 
-The state which can be persisted for a specific route key and parameter set.
+The state of a finite state machine router.
 
 ## Usage
 
@@ -20,7 +20,7 @@ type RouteParameters = {
 };
 
 const routeState: FiniteStateMachineRouterState<RouteParameters> = {
-  key: routeBKey,
+  key: `routeBKey`,
   parameters: {
     routeBParameterKey: `Route B Parameter Value`,
   },
