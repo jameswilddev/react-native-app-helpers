@@ -1,5 +1,6 @@
 export { Aligned } from "./components/Aligned";
 export { ContainerFillingScrollView } from "./components/ContainerFillingScrollView";
+export { createButtonComponent } from "./components/createButtonComponent";
 export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFiniteStateMachineRoutingComponent } from "./components/createFiniteStateMachineRoutingComponent";
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";
@@ -20,6 +21,8 @@ export { useRefresh } from "./hooks/useRefresh";
 export { SessionStore } from "./services/SessionStore";
 export { StateStore } from "./services/StateStore";
 export { BorderStyle } from "./types/BorderStyle";
+export { ButtonStateStyle } from "./types/ButtonStateStyle";
+export { ButtonStyle } from "./types/ButtonStyle";
 export { ControlStateStyle } from "./types/ControlStateStyle";
 export { ControlStyle } from "./types/ControlStyle";
 export { FiniteStateMachineRouterState } from "./types/FiniteStateMachineRouterState";

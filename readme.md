@@ -18,6 +18,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 - [Aligned](./components/Aligned/readme.md)
 - [ContainerFillingScrollView](./components/ContainerFillingScrollView/readme.md)
+- [createButtonComponent](./components/createButtonComponent/readme.md)
 - [createDropDownComponent](./components/createDropDownComponent/readme.md)
 - [createFiniteStateMachineRoutingComponent](./components/createFiniteStateMachineRoutingComponent/readme.md)
 - [createFlatColorBackgroundComponent](./components/createFlatColorBackgroundComponent/readme.md)
@@ -47,6 +48,8 @@ import { createTextComponent } from "react-native-app-helpers";
 ### Types
 
 - [BorderStyle](./types/BorderStyle/readme.md)
+- [ButtonStateStyle](./types/ButtonStateStyle/readme.md)
+- [ButtonStyle](./types/ButtonStyle/readme.md)
 - [ControlStateStyle](./types/ControlStateStyle/readme.md)
 - [ControlStyle](./types/ControlStyle/readme.md)
 - [FiniteStateMachineRouterState](./types/FiniteStateMachineRouterState/readme.md)
