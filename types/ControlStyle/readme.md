@@ -47,5 +47,22 @@ const value: ControlStyle = {
       color: `red`,
     },
   },
+  disabledValid: {
+    textColor: `blue`,
+    placeholderColor: `green`,
+    backgroundColor: `yellow`,
+    radius: 10,
+    border: null,
+  },
+  disabledInvalid: {
+    textColor: `blue`,
+    placeholderColor: `green`,
+    backgroundColor: `yellow`,
+    radius: 10,
+    border: {
+      width: 5,
+      color: `red`,
+    },
+  },
 };
 ```

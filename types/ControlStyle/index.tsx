@@ -48,4 +48,16 @@ export type ControlStyle = {
    * invalid.
    */
   readonly focusedInvalid: ControlStateStyle;
+
+  /**
+   * The styling to apply when the control is in disabled, and its content is
+   * valid.
+   */
+  readonly disabledValid: ControlStateStyle;
+
+  /**
+   * The styling to apply when the control is in disabled, but its content is
+   * invalid.
+   */
+  readonly disabledInvalid: ControlStateStyle;
 };

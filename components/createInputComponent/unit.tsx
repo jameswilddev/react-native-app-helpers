@@ -27,7 +27,6 @@ test(`renders as expected with a value`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -52,6 +51,26 @@ test(`renders as expected with a value`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -180,6 +199,26 @@ test(`renders as expected without a value`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -311,6 +350,26 @@ test(`renders as expected when disabled with a value`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -338,14 +397,14 @@ test(`renders as expected when disabled with a value`, () => {
       type: View,
       props: expect.objectContaining({
         style: {
-          backgroundColor: `#32AE12`,
+          backgroundColor: `#772728`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-          opacity: 0.5,
+          borderWidth: 14,
+          borderColor: `#5E5E5E`,
+          borderRadius: 100,
+          margin: -10,
         },
       }),
       rendered: expect.objectContaining({
@@ -356,7 +415,7 @@ test(`renders as expected when disabled with a value`, () => {
             props: {
               style: {
                 flexGrow: 1,
-                color: `#FFEE00`,
+                color: `#AE2195`,
                 paddingVertical: 12,
                 fontFamily: `Example Font Family`,
                 fontSize: 37,
@@ -370,7 +429,7 @@ test(`renders as expected when disabled with a value`, () => {
               keyboardType: `numeric`,
               editable: false,
               placeholder: `Test Placeholder`,
-              placeholderTextColor: `#E7AA32`,
+              placeholderTextColor: `#FFAAEE`,
               onChangeText: expect.any(Function),
               onEndEditing: expect.any(Function),
               onFocus: expect.any(Function),
@@ -440,6 +499,26 @@ test(`renders as expected when disabled without a value`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -467,15 +546,14 @@ test(`renders as expected when disabled without a value`, () => {
       type: View,
       props: expect.objectContaining({
         style: {
-          backgroundColor: `#259284`,
+          backgroundColor: `#938837`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 6,
-          borderColor: `#9A9A8E`,
-          borderRadius: 10,
-          margin: -2,
-          opacity: 0.5,
+          borderWidth: 19,
+          borderColor: `#573829`,
+          borderRadius: 2,
+          margin: -15,
         },
       }),
       rendered: expect.objectContaining({
@@ -486,7 +564,7 @@ test(`renders as expected when disabled without a value`, () => {
             props: {
               style: {
                 flexGrow: 1,
-                color: `#99FE88`,
+                color: `#340297`,
                 paddingVertical: 12,
                 fontFamily: `Example Font Family`,
                 fontSize: 37,
@@ -500,7 +578,7 @@ test(`renders as expected when disabled without a value`, () => {
               keyboardType: `numeric`,
               editable: false,
               placeholder: `Test Placeholder`,
-              placeholderTextColor: `#CACA3A`,
+              placeholderTextColor: `#233832`,
               onChangeText: expect.any(Function),
               onEndEditing: expect.any(Function),
               onFocus: expect.any(Function),
@@ -568,6 +646,26 @@ test(`can be focused when valid`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -710,6 +808,26 @@ test(`can be focused when invalid`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -848,6 +966,26 @@ test(`can be blurred`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -1000,6 +1138,26 @@ test(`can be disabled during edit`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -1062,14 +1220,14 @@ test(`can be disabled during edit`, () => {
       type: View,
       props: expect.objectContaining({
         style: {
-          backgroundColor: `#32AE12`,
+          backgroundColor: `#772728`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-          opacity: 0.5,
+          borderWidth: 14,
+          borderColor: `#5E5E5E`,
+          borderRadius: 100,
+          margin: -10,
         },
       }),
       rendered: expect.objectContaining({
@@ -1080,7 +1238,7 @@ test(`can be disabled during edit`, () => {
             props: {
               style: {
                 flexGrow: 1,
-                color: `#FFEE00`,
+                color: `#AE2195`,
                 paddingVertical: 12,
                 fontFamily: `Example Font Family`,
                 fontSize: 37,
@@ -1094,7 +1252,7 @@ test(`can be disabled during edit`, () => {
               keyboardType: `numeric`,
               editable: false,
               placeholder: `Test Placeholder`,
-              placeholderTextColor: `#E7AA32`,
+              placeholderTextColor: `#FFAAEE`,
               onChangeText: expect.any(Function),
               onEndEditing: expect.any(Function),
               onFocus: expect.any(Function),
@@ -1163,6 +1321,26 @@ test(`can be re-enabled following edit`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -1342,6 +1520,26 @@ test(`does not lose pending changes on update`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -1505,6 +1703,26 @@ test(`resets the value on external changes`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -1672,6 +1890,26 @@ test(`allows valid incomplete edits`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -1822,6 +2060,26 @@ test(`allows valid incomplete edits`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -1980,6 +2238,26 @@ test(`allows valid incomplete edits`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -2136,6 +2414,26 @@ test(`allows invalid incomplete edits`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -2286,6 +2584,26 @@ test(`allows invalid incomplete edits`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -2444,6 +2762,26 @@ test(`allows invalid incomplete edits`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -2599,6 +2937,26 @@ test(`renders as expected when the border width does not change`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -2701,7 +3059,6 @@ test(`passes down secureTextEntry`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -2726,6 +3083,26 @@ test(`passes down secureTextEntry`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -2830,7 +3207,6 @@ test(`renders with a left icon`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -2855,6 +3231,26 @@ test(`renders with a left icon`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -2967,7 +3363,6 @@ test(`renders with a right icon`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -2992,6 +3387,26 @@ test(`renders with a right icon`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -3104,7 +3519,6 @@ test(`renders with left and right icons`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -3129,6 +3543,26 @@ test(`renders with left and right icons`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -3274,6 +3708,26 @@ test(`renders as expected with a left icon without a value`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -3411,6 +3865,26 @@ test(`renders as expected with a left icon without a value`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -3546,6 +4020,26 @@ test(`renders as expected with left and right icons without a value`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -3690,6 +4184,26 @@ test(`renders as expected with a left icon when focused and valid`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -3840,6 +4354,26 @@ test(`renders as expected with a right icon when focused and valid`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -3986,6 +4520,26 @@ test(`renders as expected with a right icon when focused and valid`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -4143,6 +4697,26 @@ test(`renders as expected with a left icon when focused and invalid`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -4289,6 +4863,26 @@ test(`renders as expected with a right icon when focused and invalid`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -4439,6 +5033,26 @@ test(`renders as expected with left and right icons when focused and invalid`, (
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -4568,7 +5182,6 @@ test(`renders without horizontal padding`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -4593,6 +5206,26 @@ test(`renders without horizontal padding`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -4696,7 +5329,6 @@ test(`renders with a left icon without horizontal padding`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -4721,6 +5353,26 @@ test(`renders with a left icon without horizontal padding`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -4831,7 +5483,6 @@ test(`renders with a right icon without horizontal padding`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -4856,6 +5507,26 @@ test(`renders with a right icon without horizontal padding`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -4966,7 +5637,6 @@ test(`renders with left and right icons without horizontal padding`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -4991,6 +5661,26 @@ test(`renders with left and right icons without horizontal padding`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -5108,7 +5798,6 @@ test(`renders as expected without vertical padding`, () => {
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -5133,6 +5822,26 @@ test(`renders as expected without vertical padding`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -5249,6 +5958,26 @@ test(`renders as expected without borders`, () => {
         backgroundColor: `#32AA88`,
         radius: 47,
         border: null,
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
       },
     },
     false,
@@ -5374,6 +6103,26 @@ test(`renders as expected when a state does not alter border thickness`, () => {
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },
@@ -5504,6 +6253,26 @@ test(`renders as expected without a radius`, () => {
           color: `#98ADAA`,
         },
       },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
     },
     false,
     `email`,
@@ -5568,6 +6337,962 @@ test(`renders as expected without a radius`, () => {
               onBlur: expect.any(Function),
               blurOnSubmit: true,
               onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders when disabled with a left icon`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled
+      placeholder="Test Placeholder"
+      leftIcon={<Text>Left Icon</Text>}
+      rightIcon={null}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#772728`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 14,
+          borderColor: `#5E5E5E`,
+          borderRadius: 100,
+          margin: -10,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Left Icon`,
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#AE2195`,
+                paddingLeft: 29,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: `GGGGGG`,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: false,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#FFAAEE`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: true,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders when disabled with a right icon`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={<Text>Right Icon</Text>}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#772728`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 14,
+          borderColor: `#5E5E5E`,
+          borderRadius: 100,
+          margin: -10,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#AE2195`,
+                paddingRight: 29,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: `GGGGGG`,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: false,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#FFAAEE`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: true,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Right Icon`,
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders when disabled with left and right icons`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled
+      placeholder="Test Placeholder"
+      leftIcon={<Text>Left Icon</Text>}
+      rightIcon={<Text>Right Icon</Text>}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#772728`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 14,
+          borderColor: `#5E5E5E`,
+          borderRadius: 100,
+          margin: -10,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Left Icon`,
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#AE2195`,
+                paddingHorizontal: 29,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: `GGGGGG`,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: false,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#FFAAEE`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: true,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Right Icon`,
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders as expected when disabled with a left icon without a value`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={undefined}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled
+      placeholder="Test Placeholder"
+      leftIcon={<Text>Left Icon</Text>}
+      rightIcon={null}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#938837`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 19,
+          borderColor: `#573829`,
+          borderRadius: 2,
+          margin: -15,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Left Icon`,
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#340297`,
+                paddingVertical: 12,
+                paddingLeft: 29,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: ``,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: false,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#233832`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: false,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders as expected when disabled with a right icon without a value`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={undefined}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={<Text>Right Icon</Text>}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#938837`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 19,
+          borderColor: `#573829`,
+          borderRadius: 2,
+          margin: -15,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#340297`,
+                paddingVertical: 12,
+                paddingRight: 29,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: ``,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: false,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#233832`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: false,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Right Icon`,
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders as expected when disabled with left and right icons without a value`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={undefined}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled
+      placeholder="Test Placeholder"
+      leftIcon={<Text>Left Icon</Text>}
+      rightIcon={<Text>Right Icon</Text>}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#938837`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 19,
+          borderColor: `#573829`,
+          borderRadius: 2,
+          margin: -15,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Left Icon`,
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#340297`,
+                paddingVertical: 12,
+                paddingHorizontal: 29,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: ``,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: false,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#233832`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: false,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+          expect.objectContaining({
+            nodeType: `component`,
+            type: Text,
+            props: {
+              children: `Right Icon`,
             },
           }),
         ],

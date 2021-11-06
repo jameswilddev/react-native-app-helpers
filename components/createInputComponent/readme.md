@@ -32,7 +32,6 @@ const ExampleInput = createInputComponent<number>(
         textColor: `#99FE88`,
         placeholderColor: `#CACA3A`,
         backgroundColor: `#259284`,
-
         radius: 10,
         border: {
           width: 6,
@@ -57,6 +56,26 @@ const ExampleInput = createInputComponent<number>(
         border: {
           width: 12,
           color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
         },
       },
     },

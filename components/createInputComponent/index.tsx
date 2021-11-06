@@ -174,18 +174,24 @@ export function createInputComponent<T>(
       controlStyle.focusedInvalid,
       controlStyle.blurredValid
     ),
-    disabledValidView: {
-      ...createViewStyle(controlStyle, controlStyle.blurredValid),
-      opacity: 0.5,
-    },
-    disabledInvalidView: {
-      ...createRelativeViewStyle(
-        controlStyle,
-        controlStyle.blurredInvalid,
-        controlStyle.blurredValid
-      ),
-      opacity: 0.5,
-    },
+    disabledValidView: createRelativeViewStyle(
+      controlStyle,
+      controlStyle.disabledValid,
+      controlStyle.blurredValid
+    ),
+    disabledInvalidView: createRelativeViewStyle(
+      controlStyle,
+      controlStyle.disabledInvalid,
+      controlStyle.blurredValid
+    ),
+    disabledValidTextInput: createTextInputStyle(
+      controlStyle,
+      controlStyle.disabledValid
+    ),
+    disabledInvalidTextInput: createTextInputStyle(
+      controlStyle,
+      controlStyle.disabledInvalid
+    ),
     blurredValidTextInput: createTextInputStyle(
       controlStyle,
       controlStyle.blurredValid
@@ -202,6 +208,14 @@ export function createInputComponent<T>(
       controlStyle,
       controlStyle.focusedInvalid
     ),
+    disabledValidTextInputWithLeftIcon: {
+      ...createTextInputStyle(controlStyle, controlStyle.disabledValid),
+      ...withLeftIcon,
+    },
+    disabledInvalidTextInputWithLeftIcon: {
+      ...createTextInputStyle(controlStyle, controlStyle.disabledInvalid),
+      ...withLeftIcon,
+    },
     blurredValidTextInputWithLeftIcon: {
       ...createTextInputStyle(controlStyle, controlStyle.blurredValid),
       ...withLeftIcon,
@@ -218,6 +232,14 @@ export function createInputComponent<T>(
       ...createTextInputStyle(controlStyle, controlStyle.focusedInvalid),
       ...withLeftIcon,
     },
+    disabledValidTextInputWithRightIcon: {
+      ...createTextInputStyle(controlStyle, controlStyle.disabledValid),
+      ...withRightIcon,
+    },
+    disabledInvalidTextInputWithRightIcon: {
+      ...createTextInputStyle(controlStyle, controlStyle.disabledInvalid),
+      ...withRightIcon,
+    },
     blurredValidTextInputWithRightIcon: {
       ...createTextInputStyle(controlStyle, controlStyle.blurredValid),
       ...withRightIcon,
@@ -233,6 +255,14 @@ export function createInputComponent<T>(
     focusedInvalidTextInputWithRightIcon: {
       ...createTextInputStyle(controlStyle, controlStyle.focusedInvalid),
       ...withRightIcon,
+    },
+    disabledValidTextInputWithLeftAndRightIcons: {
+      ...createTextInputStyle(controlStyle, controlStyle.disabledValid),
+      ...withLeftAndRightIcons,
+    },
+    disabledInvalidTextInputWithLeftAndRightIcons: {
+      ...createTextInputStyle(controlStyle, controlStyle.disabledInvalid),
+      ...withLeftAndRightIcons,
     },
     blurredValidTextInputWithLeftAndRightIcons: {
       ...createTextInputStyle(controlStyle, controlStyle.blurredValid),
@@ -302,37 +332,53 @@ export function createInputComponent<T>(
         {leftIcon}
         <TextInput
           style={
-            focused.current
+            disabled
               ? valid
                 ? leftIcon === null
                   ? rightIcon === null
-                    ? styles.focusedValidTextInput
-                    : styles.focusedValidTextInputWithRightIcon
+                    ? styles.disabledValidTextInput
+                    : styles.disabledValidTextInputWithRightIcon
                   : rightIcon === null
-                    ? styles.focusedValidTextInputWithLeftIcon
-                    : styles.focusedValidTextInputWithLeftAndRightIcons
+                    ? styles.disabledValidTextInputWithLeftIcon
+                    : styles.disabledValidTextInputWithLeftAndRightIcons
                 : leftIcon === null
                   ? rightIcon === null
-                    ? styles.focusedInvalidTextInput
-                    : styles.focusedInvalidTextInputWithRightIcon
+                    ? styles.disabledInvalidTextInput
+                    : styles.disabledInvalidTextInputWithRightIcon
                   : rightIcon === null
-                    ? styles.focusedInvalidTextInputWithLeftIcon
-                    : styles.focusedInvalidTextInputWithLeftAndRightIcons
-              : valid
-                ? leftIcon === null
-                  ? rightIcon === null
-                    ? styles.blurredValidTextInput
-                    : styles.blurredValidTextInputWithRightIcon
-                  : rightIcon === null
-                    ? styles.blurredValidTextInputWithLeftIcon
-                    : styles.blurredValidTextInputWithLeftAndRightIcons
-                : leftIcon === null
-                  ? rightIcon === null
-                    ? styles.blurredInvalidTextInput
-                    : styles.blurredInvalidTextInputWithRightIcon
-                  : rightIcon === null
-                    ? styles.blurredInvalidTextInputWithLeftIcon
-                    : styles.blurredInvalidTextInputWithLeftAndRightIcons
+                    ? styles.disabledInvalidTextInputWithLeftIcon
+                    : styles.disabledInvalidTextInputWithLeftAndRightIcons
+              : focused.current
+                ? valid
+                  ? leftIcon === null
+                    ? rightIcon === null
+                      ? styles.focusedValidTextInput
+                      : styles.focusedValidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.focusedValidTextInputWithLeftIcon
+                      : styles.focusedValidTextInputWithLeftAndRightIcons
+                  : leftIcon === null
+                    ? rightIcon === null
+                      ? styles.focusedInvalidTextInput
+                      : styles.focusedInvalidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.focusedInvalidTextInputWithLeftIcon
+                      : styles.focusedInvalidTextInputWithLeftAndRightIcons
+                : valid
+                  ? leftIcon === null
+                    ? rightIcon === null
+                      ? styles.blurredValidTextInput
+                      : styles.blurredValidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.blurredValidTextInputWithLeftIcon
+                      : styles.blurredValidTextInputWithLeftAndRightIcons
+                  : leftIcon === null
+                    ? rightIcon === null
+                      ? styles.blurredInvalidTextInput
+                      : styles.blurredInvalidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.blurredInvalidTextInputWithLeftIcon
+                      : styles.blurredInvalidTextInputWithLeftAndRightIcons
           }
           value={editing.current}
           multiline={multiLine}
@@ -343,13 +389,17 @@ export function createInputComponent<T>(
           editable={!disabled}
           placeholder={placeholder}
           placeholderTextColor={
-            focused.current
+            disabled
               ? valid
-                ? controlStyle.focusedValid.placeholderColor
-                : controlStyle.focusedInvalid.placeholderColor
-              : valid
-                ? controlStyle.blurredValid.placeholderColor
-                : controlStyle.blurredInvalid.placeholderColor
+                ? controlStyle.disabledValid.placeholderColor
+                : controlStyle.disabledInvalid.placeholderColor
+              : focused.current
+                ? valid
+                  ? controlStyle.focusedValid.placeholderColor
+                  : controlStyle.focusedInvalid.placeholderColor
+                : valid
+                  ? controlStyle.blurredValid.placeholderColor
+                  : controlStyle.blurredInvalid.placeholderColor
           }
           onChangeText={(to) => {
             editing.current = to;
