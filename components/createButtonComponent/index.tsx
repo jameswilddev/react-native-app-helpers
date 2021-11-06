@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   ViewStyle,
 } from "react-native";
 import type { ButtonStyle } from "../../types/ButtonStyle";
@@ -42,18 +42,17 @@ export const createButtonComponent = (
    */
   readonly disabled: boolean;
 }> => {
-  const touchableWithoutFeedbackBase: ViewStyle = {
+  const TouchableOpacityBase: ViewStyle = {
     justifyContent: `center`,
     alignItems: `center`,
   };
 
   if (buttonStyle.horizontalPadding) {
-    touchableWithoutFeedbackBase.paddingHorizontal =
-      buttonStyle.horizontalPadding;
+    TouchableOpacityBase.paddingHorizontal = buttonStyle.horizontalPadding;
   }
 
   if (buttonStyle.verticalPadding) {
-    touchableWithoutFeedbackBase.paddingVertical = buttonStyle.verticalPadding;
+    TouchableOpacityBase.paddingVertical = buttonStyle.verticalPadding;
   }
 
   const textBase: TextStyle = {
@@ -62,38 +61,34 @@ export const createButtonComponent = (
     lineHeight: buttonStyle.fontSize * 1.4,
   };
 
-  const defaultTouchableWithoutFeedback: ViewStyle = {
-    ...touchableWithoutFeedbackBase,
+  const defaultTouchableOpacity: ViewStyle = {
+    ...TouchableOpacityBase,
     backgroundColor: buttonStyle.default.backgroundColor,
   };
 
   if (buttonStyle.default.radius !== 0) {
-    defaultTouchableWithoutFeedback.borderRadius = buttonStyle.default.radius;
+    defaultTouchableOpacity.borderRadius = buttonStyle.default.radius;
   }
 
   if (buttonStyle.default.border !== null) {
-    defaultTouchableWithoutFeedback.borderWidth =
-      buttonStyle.default.border.width;
+    defaultTouchableOpacity.borderWidth = buttonStyle.default.border.width;
 
-    defaultTouchableWithoutFeedback.borderColor =
-      buttonStyle.default.border.color;
+    defaultTouchableOpacity.borderColor = buttonStyle.default.border.color;
   }
 
-  const disabledTouchableWithoutFeedback: ViewStyle = {
-    ...touchableWithoutFeedbackBase,
+  const disabledTouchableOpacity: ViewStyle = {
+    ...TouchableOpacityBase,
     backgroundColor: buttonStyle.disabled.backgroundColor,
   };
 
   if (buttonStyle.disabled.radius !== 0) {
-    disabledTouchableWithoutFeedback.borderRadius = buttonStyle.disabled.radius;
+    disabledTouchableOpacity.borderRadius = buttonStyle.disabled.radius;
   }
 
   if (buttonStyle.disabled.border !== null) {
-    disabledTouchableWithoutFeedback.borderWidth =
-      buttonStyle.disabled.border.width;
+    disabledTouchableOpacity.borderWidth = buttonStyle.disabled.border.width;
 
-    disabledTouchableWithoutFeedback.borderColor =
-      buttonStyle.disabled.border.color;
+    disabledTouchableOpacity.borderColor = buttonStyle.disabled.border.color;
   }
 
   const defaultBorderWidth =
@@ -105,8 +100,7 @@ export const createButtonComponent = (
       : buttonStyle.disabled.border.width;
 
   if (defaultBorderWidth !== disabledBorderWidth) {
-    disabledTouchableWithoutFeedback.margin =
-      defaultBorderWidth - disabledBorderWidth;
+    disabledTouchableOpacity.margin = defaultBorderWidth - disabledBorderWidth;
   }
 
   const leftIconBase: TextStyle = {};
@@ -128,7 +122,7 @@ export const createButtonComponent = (
   }
 
   const styles = StyleSheet.create({
-    defaultTouchableWithoutFeedback,
+    defaultTouchableOpacity,
     defaultText: {
       ...textBase,
       color: buttonStyle.default.color,
@@ -148,7 +142,7 @@ export const createButtonComponent = (
       color: buttonStyle.default.color,
       ...leftAndRightIconsBase,
     },
-    disabledTouchableWithoutFeedback,
+    disabledTouchableOpacity,
     disabledText: {
       ...textBase,
       color: buttonStyle.disabled.color,
@@ -181,29 +175,29 @@ export const createButtonComponent = (
     if (leftIconElement === null) {
       if (rightIconElement === null) {
         return (
-          <TouchableWithoutFeedback
+          <TouchableOpacity
             onPress={onPress}
             disabled={disabled}
             style={
               disabled
-                ? styles.disabledTouchableWithoutFeedback
-                : styles.defaultTouchableWithoutFeedback
+                ? styles.disabledTouchableOpacity
+                : styles.defaultTouchableOpacity
             }
           >
             <Text style={disabled ? styles.disabledText : styles.defaultText}>
               {children}
             </Text>
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         );
       } else {
         return (
-          <TouchableWithoutFeedback
+          <TouchableOpacity
             onPress={onPress}
             disabled={disabled}
             style={
               disabled
-                ? styles.disabledTouchableWithoutFeedback
-                : styles.defaultTouchableWithoutFeedback
+                ? styles.disabledTouchableOpacity
+                : styles.defaultTouchableOpacity
             }
           >
             <Text
@@ -216,19 +210,19 @@ export const createButtonComponent = (
               {children}
             </Text>
             {rightIconElement}
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         );
       }
     } else {
       if (rightIconElement === null) {
         return (
-          <TouchableWithoutFeedback
+          <TouchableOpacity
             onPress={onPress}
             disabled={disabled}
             style={
               disabled
-                ? styles.disabledTouchableWithoutFeedback
-                : styles.defaultTouchableWithoutFeedback
+                ? styles.disabledTouchableOpacity
+                : styles.defaultTouchableOpacity
             }
           >
             {leftIconElement}
@@ -241,17 +235,17 @@ export const createButtonComponent = (
             >
               {children}
             </Text>
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         );
       } else {
         return (
-          <TouchableWithoutFeedback
+          <TouchableOpacity
             onPress={onPress}
             disabled={disabled}
             style={
               disabled
-                ? styles.disabledTouchableWithoutFeedback
-                : styles.defaultTouchableWithoutFeedback
+                ? styles.disabledTouchableOpacity
+                : styles.defaultTouchableOpacity
             }
           >
             {leftIconElement}
@@ -265,7 +259,7 @@ export const createButtonComponent = (
               {children}
             </Text>
             {rightIconElement}
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         );
       }
     }

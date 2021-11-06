@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, TouchableWithoutFeedback } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { unwrapRenderedFunctionComponent } from "../..";
 import { createButtonComponent } from "../..";
 
@@ -42,7 +42,7 @@ test(`renders when enabled`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -66,7 +66,7 @@ test(`renders when enabled`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -110,7 +110,7 @@ test(`renders when disabled`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -135,7 +135,7 @@ test(`renders when disabled`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -173,7 +173,7 @@ test(`renders without borders when enabled`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -195,7 +195,7 @@ test(`renders without borders when enabled`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -233,7 +233,7 @@ test(`renders without borders when disabled`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -255,7 +255,7 @@ test(`renders without borders when disabled`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -299,7 +299,7 @@ test(`renders when enabled with identically sized borders`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -323,7 +323,7 @@ test(`renders when enabled with identically sized borders`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -367,7 +367,7 @@ test(`renders when disabled with identically sized borders`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -391,7 +391,7 @@ test(`renders when disabled with identically sized borders`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -435,7 +435,7 @@ test(`renders when enabled with a left icon`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -465,7 +465,7 @@ test(`renders when enabled with a left icon`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -509,7 +509,7 @@ test(`renders when disabled with a left icon`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -540,7 +540,7 @@ test(`renders when disabled with a left icon`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -584,7 +584,7 @@ test(`renders when enabled with a right icon`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -614,7 +614,7 @@ test(`renders when enabled with a right icon`, () => {
         {`blue`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -658,7 +658,7 @@ test(`renders when disabled with a right icon`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -689,7 +689,7 @@ test(`renders when disabled with a right icon`, () => {
         {`purple`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -733,7 +733,7 @@ test(`renders when enabled with left and right icons`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -768,7 +768,7 @@ test(`renders when enabled with left and right icons`, () => {
         {`blue`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -812,7 +812,7 @@ test(`renders when disabled with left and right icons`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -848,7 +848,7 @@ test(`renders when disabled with left and right icons`, () => {
         {`purple`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -892,7 +892,7 @@ test(`renders when enabled without vertical padding`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -915,7 +915,7 @@ test(`renders when enabled without vertical padding`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -959,7 +959,7 @@ test(`renders when disabled without vertical padding`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -983,7 +983,7 @@ test(`renders when disabled without vertical padding`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1027,7 +1027,7 @@ test(`renders when enabled without horizontal padding`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -1050,7 +1050,7 @@ test(`renders when enabled without horizontal padding`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1094,7 +1094,7 @@ test(`renders when disabled without horizontal padding`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -1118,7 +1118,7 @@ test(`renders when disabled without horizontal padding`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1162,7 +1162,7 @@ test(`renders when enabled without horizontal padding with a left icon`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -1190,7 +1190,7 @@ test(`renders when enabled without horizontal padding with a left icon`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1234,7 +1234,7 @@ test(`renders when disabled without horizontal padding with a left icon`, () => 
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -1263,7 +1263,7 @@ test(`renders when disabled without horizontal padding with a left icon`, () => 
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1307,7 +1307,7 @@ test(`renders when enabled without horizontal padding with a right icon`, () => 
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -1335,7 +1335,7 @@ test(`renders when enabled without horizontal padding with a right icon`, () => 
         {`blue`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1379,7 +1379,7 @@ test(`renders when disabled without horizontal padding with a right icon`, () =>
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -1408,7 +1408,7 @@ test(`renders when disabled without horizontal padding with a right icon`, () =>
         {`purple`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1452,7 +1452,7 @@ test(`renders when enabled without horizontal padding with left and right icons`
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -1485,7 +1485,7 @@ test(`renders when enabled without horizontal padding with left and right icons`
         {`blue`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1529,7 +1529,7 @@ test(`renders when disabled without horizontal padding with left and right icons
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -1563,7 +1563,7 @@ test(`renders when disabled without horizontal padding with left and right icons
         {`purple`}
         {`)`}
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1607,7 +1607,7 @@ test(`renders when enabled without radius`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled={false}
       onPress={onPress}
       style={{
@@ -1630,7 +1630,7 @@ test(`renders when enabled without radius`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
@@ -1674,7 +1674,7 @@ test(`renders when disabled without radius`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableWithoutFeedback
+    <TouchableOpacity
       disabled
       onPress={onPress}
       style={{
@@ -1698,7 +1698,7 @@ test(`renders when disabled without radius`, () => {
       >
         Example Content
       </Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
 });
