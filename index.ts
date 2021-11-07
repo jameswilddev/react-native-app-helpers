@@ -14,6 +14,7 @@ export { createStackRoutingComponent } from "./components/createStackRoutingComp
 export { createStateStoreManagerComponent } from "./components/createStateStoreManagerComponent";
 export { createTabRoutingComponent } from "./components/createTabRoutingComponent";
 export { createTextComponent } from "./components/createTextComponent";
+export { Hitbox } from "./components/Hitbox";
 export { Row } from "./components/Row";
 export { SimpleModal } from "./components/SimpleModal";
 export { useEventRefresh } from "./hooks/useEventRefresh";
