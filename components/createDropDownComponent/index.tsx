@@ -47,6 +47,38 @@ export const createDropDownComponent = (
 
     const windowDimensions = useWindowDimensions();
 
+    let additionalModalViewStyle: null | ViewStyle;
+    let position: `closed` | `above` | `below`;
+
+    if (disabled || !state.current.open || state.current.layout === null) {
+      additionalModalViewStyle = null;
+      position = `closed`;
+    } else {
+      additionalModalViewStyle = {
+        position: `absolute`,
+        maxHeight: maximumHeight,
+        left: state.current.layout.x,
+        width: state.current.layout.width,
+      };
+
+      const distanceToBottom =
+        windowDimensions.height -
+        state.current.layout.y -
+        state.current.layout.height;
+
+      if (distanceToBottom < maximumHeight) {
+        additionalModalViewStyle.bottom =
+          windowDimensions.height - state.current.layout.y;
+
+        position = `above`;
+      } else {
+        additionalModalViewStyle.top =
+          state.current.layout.y + state.current.layout.height;
+
+        position = `below`;
+      }
+    }
+
     const inline = (
       <Hitbox
         onLayout={({
@@ -82,43 +114,23 @@ export const createDropDownComponent = (
       </Hitbox>
     );
 
-    if (disabled || !state.current.open || state.current.layout === null) {
+    if (position === `closed`) {
       return inline;
-    }
-
-    const additionalModalViewStyle: ViewStyle = {
-      position: `absolute`,
-      maxHeight: maximumHeight,
-      left: state.current.layout.x,
-      width: state.current.layout.width,
-    };
-
-    const distanceToBottom =
-      windowDimensions.height -
-      state.current.layout.y -
-      state.current.layout.height;
-
-    if (distanceToBottom < maximumHeight) {
-      additionalModalViewStyle.bottom =
-        windowDimensions.height - state.current.layout.y;
     } else {
-      additionalModalViewStyle.top =
-        state.current.layout.y + state.current.layout.height;
+      return (
+        <React.Fragment>
+          {inline}
+          <SimpleModal
+            onClose={() => {
+              state.current.open = false;
+
+              refresh();
+            }}
+          >
+            <View style={additionalModalViewStyle}>{children}</View>
+          </SimpleModal>
+        </React.Fragment>
+      );
     }
-
-    return (
-      <React.Fragment>
-        {inline}
-        <SimpleModal
-          onClose={() => {
-            state.current.open = false;
-
-            refresh();
-          }}
-        >
-          <View style={additionalModalViewStyle}>{children}</View>
-        </SimpleModal>
-      </React.Fragment>
-    );
   };
 };
