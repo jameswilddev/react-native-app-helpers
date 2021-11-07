@@ -1,12 +1,7 @@
 import * as React from "react";
-import {
-  TouchableWithoutFeedback,
-  View,
-  useWindowDimensions,
-  ViewStyle,
-  Text,
-} from "react-native";
-import { useRefresh } from "../..";
+import { View, useWindowDimensions, ViewStyle, Text } from "react-native";
+import { useRefresh } from "../../hooks/useRefresh";
+import { Hitbox } from "../Hitbox";
 import { SimpleModal } from "../SimpleModal";
 
 /**
@@ -53,7 +48,7 @@ export const createDropDownComponent = (
     const windowDimensions = useWindowDimensions();
 
     const inline = (
-      <TouchableWithoutFeedback
+      <Hitbox
         onLayout={({
           nativeEvent: {
             layout: { x, y, width, height },
@@ -84,7 +79,7 @@ export const createDropDownComponent = (
         disabled={disabled}
       >
         <Text>{label}</Text>
-      </TouchableWithoutFeedback>
+      </Hitbox>
     );
 
     if (disabled || !state.current.open || state.current.layout === null) {

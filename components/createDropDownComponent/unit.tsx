@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Dimensions, Text, TouchableWithoutFeedback, View } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import * as TestRenderer from "react-test-renderer";
-import { createDropDownComponent, SimpleModal } from "../..";
+import { createDropDownComponent, SimpleModal, Hitbox } from "../..";
 
 test(`renders as expected when not disabled`, () => {
   Dimensions.set({
@@ -24,7 +24,7 @@ test(`renders as expected when not disabled`, () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -61,7 +61,7 @@ test(`renders as expected when disabled`, () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -106,7 +106,7 @@ test(`renders as expected when not disabled after layout when too close to the b
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -151,7 +151,7 @@ test(`renders as expected when disabled after layout when too close to the botto
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -196,7 +196,7 @@ test(`renders as expected when not disabled after layout when not too close to t
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -241,7 +241,7 @@ test(`renders as expected when disabled after layout when not too close to the b
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -292,7 +292,7 @@ test(`renders as expected when not disabled after layout when too close to the b
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -368,7 +368,7 @@ test(`renders as expected when not disabled after layout when not too close to t
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -444,7 +444,7 @@ test(`renders as expected when not disabled after press after layout when too cl
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -520,7 +520,7 @@ test(`renders as expected when not disabled after press after layout when not to
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -606,7 +606,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -692,7 +692,7 @@ test(`correctly handles layout changes which only change width`, () => {
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -778,7 +778,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -864,7 +864,7 @@ test(`correctly handles layout changes which only change height`, () => {
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -950,7 +950,7 @@ test(`correctly handles layout changes which have no effect`, () => {
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1036,7 +1036,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1122,7 +1122,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1209,7 +1209,7 @@ test(`correctly handles window dimension changes which swap from being above to 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1301,7 +1301,7 @@ test(`correctly handles window dimension changes which swap from being below to 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1399,7 +1399,7 @@ test(`can be enabled after being created disabled`, async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1461,7 +1461,7 @@ test(`closes if disabled while open`, () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1524,7 +1524,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1593,7 +1593,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
@@ -1677,7 +1677,7 @@ test(`closes when the modal is dismissed`, () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
-      type: TouchableWithoutFeedback,
+      type: Hitbox,
       props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
