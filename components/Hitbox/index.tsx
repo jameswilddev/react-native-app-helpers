@@ -26,25 +26,6 @@ type Component = React.FunctionComponent<{
   readonly onPress: () => void;
 }>;
 
-const pretyping: Component & {
-  enabled?: boolean;
-} = ({ disabled, style, onLayout, onPress, children }) => (
-  <TouchableOpacity
-    disabled={disabled}
-    style={style}
-    onLayout={onLayout}
-    onPress={() => {
-      if (Hitbox.enabled) {
-        onPress();
-      }
-    }}
-  >
-    {children}
-  </TouchableOpacity>
-);
-
-pretyping.enabled = true;
-
 /**
  * A React component which mimics TouchableOpacity, but can be remotely,
  * synchronously disabled using the "enabled" static property.
@@ -57,6 +38,21 @@ export const Hitbox: Component & {
    * prevent accidental concurrency where the user rapidly taps buttons.
    */
   enabled: boolean;
-} = pretyping as Component & {
+} = (({ disabled, style, onLayout, onPress, children }) => (
+  <TouchableOpacity
+    disabled={disabled}
+    style={style}
+    onLayout={onLayout}
+    onPress={() => {
+      if (Hitbox.enabled) {
+        onPress();
+      }
+    }}
+  >
+    {children}
+  </TouchableOpacity>
+)) as Component as unknown as Component & {
   enabled: boolean;
 };
+
+Hitbox.enabled = true;
