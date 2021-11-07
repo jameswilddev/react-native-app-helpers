@@ -4,6 +4,7 @@ import {
   View,
   useWindowDimensions,
   ViewStyle,
+  Text,
 } from "react-native";
 import { useRefresh } from "../..";
 import { SimpleModal } from "../SimpleModal";
@@ -18,21 +19,16 @@ export const createDropDownComponent = (
   maximumHeight: number
 ): React.FunctionComponent<{
   /**
-   * Shown in-line.  Tapping this element will open the drop-down.
+   * The text shown in the button.  When null, the placeholder is shown instead.
    */
-  readonly button: JSX.Element;
-
-  /**
-   * Shown when the drop-down is open, above or below the button.
-   */
-  readonly body: (position: `above` | `below`) => JSX.Element;
+  readonly label: null | string;
 
   /**
    * When true, the button cannot be pressed and the body is not shown.
    */
   readonly disabled: boolean;
 }> => {
-  return ({ button, body, disabled }) => {
+  return ({ label, disabled, children }) => {
     const refresh = useRefresh();
 
     const state = React.useRef<{
@@ -87,7 +83,7 @@ export const createDropDownComponent = (
         }}
         disabled={disabled}
       >
-        <View>{button}</View>
+        <Text>{label}</Text>
       </TouchableWithoutFeedback>
     );
 
@@ -125,11 +121,7 @@ export const createDropDownComponent = (
             refresh();
           }}
         >
-          <View style={additionalModalViewStyle}>
-            {body(
-              additionalModalViewStyle.top === undefined ? `above` : `below`
-            )}
-          </View>
+          <View style={additionalModalViewStyle}>{children}</View>
         </SimpleModal>
       </React.Fragment>
     );

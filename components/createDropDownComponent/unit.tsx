@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Dimensions, Text, TouchableWithoutFeedback, View } from "react-native";
 import * as TestRenderer from "react-test-renderer";
-import { createDropDownComponent } from "../..";
-import { SimpleModal } from "../SimpleModal";
+import { createDropDownComponent, SimpleModal } from "../..";
 
 test(`renders as expected when not disabled`, () => {
   Dimensions.set({
@@ -17,37 +16,24 @@ test(`renders as expected when not disabled`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -67,37 +53,24 @@ test(`renders as expected when disabled`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled
-    />
+    <Component label="Example Button Content" disabled>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -117,11 +90,9 @@ test(`renders as expected when not disabled after layout when too close to the b
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -136,26 +107,15 @@ test(`renders as expected when not disabled after layout when too close to the b
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -175,11 +135,9 @@ test(`renders as expected when disabled after layout when too close to the botto
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled
-    />
+    <Component label="Example Button Content" disabled>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -194,26 +152,15 @@ test(`renders as expected when disabled after layout when too close to the botto
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -233,11 +180,9 @@ test(`renders as expected when not disabled after layout when not too close to t
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -252,26 +197,15 @@ test(`renders as expected when not disabled after layout when not too close to t
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -291,11 +225,9 @@ test(`renders as expected when disabled after layout when not too close to the b
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled
-    />
+    <Component label="Example Button Content" disabled>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -310,26 +242,15 @@ test(`renders as expected when disabled after layout when not too close to the b
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -349,11 +270,9 @@ test(`renders as expected when not disabled after layout when too close to the b
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -374,26 +293,15 @@ test(`renders as expected when not disabled after layout when too close to the b
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -402,7 +310,7 @@ test(`renders as expected when not disabled after layout when too close to the b
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -413,10 +321,10 @@ test(`renders as expected when not disabled after layout when too close to the b
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `above`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -438,11 +346,9 @@ test(`renders as expected when not disabled after layout when not too close to t
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -463,26 +369,15 @@ test(`renders as expected when not disabled after layout when not too close to t
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -491,7 +386,7 @@ test(`renders as expected when not disabled after layout when not too close to t
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -502,10 +397,10 @@ test(`renders as expected when not disabled after layout when not too close to t
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -527,11 +422,9 @@ test(`renders as expected when not disabled after press after layout when too cl
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -552,26 +445,15 @@ test(`renders as expected when not disabled after press after layout when too cl
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -580,7 +462,7 @@ test(`renders as expected when not disabled after press after layout when too cl
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -591,10 +473,10 @@ test(`renders as expected when not disabled after press after layout when too cl
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `above`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -616,11 +498,9 @@ test(`renders as expected when not disabled after press after layout when not to
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -641,26 +521,15 @@ test(`renders as expected when not disabled after press after layout when not to
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -669,7 +538,7 @@ test(`renders as expected when not disabled after press after layout when not to
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -680,10 +549,10 @@ test(`renders as expected when not disabled after press after layout when not to
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -705,11 +574,9 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -740,26 +607,15 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -768,7 +624,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -779,10 +635,10 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -804,11 +660,9 @@ test(`correctly handles layout changes which only change width`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -839,26 +693,15 @@ test(`correctly handles layout changes which only change width`, () => {
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -867,7 +710,7 @@ test(`correctly handles layout changes which only change width`, () => {
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -878,10 +721,10 @@ test(`correctly handles layout changes which only change width`, () => {
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -903,11 +746,9 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -938,26 +779,15 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -966,7 +796,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -977,10 +807,10 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1002,11 +832,9 @@ test(`correctly handles layout changes which only change height`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1037,26 +865,15 @@ test(`correctly handles layout changes which only change height`, () => {
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -1065,7 +882,7 @@ test(`correctly handles layout changes which only change height`, () => {
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -1076,10 +893,10 @@ test(`correctly handles layout changes which only change height`, () => {
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1101,11 +918,9 @@ test(`correctly handles layout changes which have no effect`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1136,26 +951,15 @@ test(`correctly handles layout changes which have no effect`, () => {
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -1164,7 +968,7 @@ test(`correctly handles layout changes which have no effect`, () => {
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -1175,10 +979,10 @@ test(`correctly handles layout changes which have no effect`, () => {
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1200,11 +1004,9 @@ test(`correctly handles layout changes which swap from being above to below`, ()
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1235,26 +1037,15 @@ test(`correctly handles layout changes which swap from being above to below`, ()
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -1263,7 +1054,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -1274,10 +1065,10 @@ test(`correctly handles layout changes which swap from being above to below`, ()
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1299,11 +1090,9 @@ test(`correctly handles layout changes which swap from being below to above`, ()
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1334,26 +1123,15 @@ test(`correctly handles layout changes which swap from being below to above`, ()
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -1362,7 +1140,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -1373,10 +1151,10 @@ test(`correctly handles layout changes which swap from being below to above`, ()
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `above`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1398,11 +1176,9 @@ test(`correctly handles window dimension changes which swap from being above to 
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1434,26 +1210,15 @@ test(`correctly handles window dimension changes which swap from being above to 
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -1462,7 +1227,7 @@ test(`correctly handles window dimension changes which swap from being above to 
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -1473,10 +1238,10 @@ test(`correctly handles window dimension changes which swap from being above to 
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1503,11 +1268,9 @@ test(`correctly handles window dimension changes which swap from being below to 
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1539,26 +1302,15 @@ test(`correctly handles window dimension changes which swap from being below to 
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -1567,7 +1319,7 @@ test(`correctly handles window dimension changes which swap from being below to 
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -1578,10 +1330,10 @@ test(`correctly handles window dimension changes which swap from being below to 
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `above`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1608,11 +1360,9 @@ test(`can be enabled after being created disabled`, async () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled
-    />
+    <Component label="Example Button Content" disabled>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1641,37 +1391,24 @@ test(`can be enabled after being created disabled`, async () => {
   });
 
   renderer.update(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -1696,11 +1433,9 @@ test(`closes if disabled while open`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1718,37 +1453,24 @@ test(`closes if disabled while open`, () => {
   });
 
   renderer.update(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled
-    />
+    <Component label="Example Button Content" disabled>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -1768,11 +1490,9 @@ test(`does not re-open if enabled after disabled while open`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1790,45 +1510,30 @@ test(`does not re-open if enabled after disabled while open`, () => {
   });
 
   renderer.update(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled
-    />
+    <Component label="Example Button Content" disabled>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   renderer.update(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
@@ -1848,11 +1553,9 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1870,19 +1573,15 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
   });
 
   renderer.update(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled
-    />
+    <Component label="Example Button Content" disabled>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   renderer.update(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1895,26 +1594,15 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     }),
     expect.objectContaining({
       nodeType: `component`,
@@ -1923,7 +1611,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         onClose: expect.any(Function),
         children: expect.objectContaining({
           type: View,
-          props: expect.objectContaining({
+          props: {
             style: {
               position: `absolute`,
               maxHeight: 150,
@@ -1934,10 +1622,10 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
             children: expect.objectContaining({
               type: Text,
               props: {
-                children: [`Example `, `below`, ` Drop Down Content`],
+                children: `Example Drop Down Content`,
               },
             }),
-          }),
+          },
         }),
       }),
     }),
@@ -1959,11 +1647,9 @@ test(`closes when the modal is dismissed`, () => {
   const Component = createDropDownComponent(150);
 
   const renderer = TestRenderer.create(
-    <Component
-      button={<Text>Example Button Content</Text>}
-      body={(position) => <Text>Example {position} Drop Down Content</Text>}
-      disabled={false}
-    />
+    <Component label="Example Button Content" disabled={false}>
+      <Text>Example Drop Down Content</Text>
+    </Component>
   );
 
   TestRenderer.act(() => {
@@ -1992,26 +1678,15 @@ test(`closes when the modal is dismissed`, () => {
     expect.objectContaining({
       nodeType: `component`,
       type: TouchableWithoutFeedback,
-      props: expect.objectContaining({
+      props: {
         onLayout: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-      }),
-      rendered: expect.objectContaining({
-        nodeType: `component`,
-        type: View,
-        rendered: expect.objectContaining({
-          rendered: [
-            expect.objectContaining({
-              nodeType: `component`,
-              type: Text,
-              props: expect.objectContaining({
-                children: `Example Button Content`,
-              }),
-            }),
-          ],
+        children: expect.objectContaining({
+          type: Text,
+          props: { children: `Example Button Content` },
         }),
-      }),
+      },
     })
   );
 
