@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TouchableOpacity, ViewStyle } from "react-native";
+import { LayoutChangeEvent, TouchableOpacity, ViewStyle } from "react-native";
 
 type Component = React.FunctionComponent<{
   /**
@@ -7,12 +7,17 @@ type Component = React.FunctionComponent<{
    * This will, of course, not apply until the next render.  To synchronously
    * disable all Hitboxes, use the "enabled" static property.
    */
-  readonly disabled: boolean;
+  readonly disabled?: boolean;
 
   /**
    * Passed down to TouchableOpacity.
    */
-  readonly style: ViewStyle;
+  readonly style?: ViewStyle;
+
+  /**
+   * Passed down to TouchableOpacity.
+   */
+  readonly onLayout?: (event: LayoutChangeEvent) => void;
 
   /**
    * Similar to TouchableOpacity's onPress, but remote-controlled using the
@@ -23,10 +28,11 @@ type Component = React.FunctionComponent<{
 
 const pretyping: Component & {
   enabled?: boolean;
-} = ({ disabled, style, onPress, children }) => (
+} = ({ disabled, style, onLayout, onPress, children }) => (
   <TouchableOpacity
     disabled={disabled}
     style={style}
+    onLayout={onLayout}
     onPress={() => {
       if (Hitbox.enabled) {
         onPress();

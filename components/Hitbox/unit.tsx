@@ -9,12 +9,14 @@ test(`hitboxes are enabled by default`, () => {
 
 test(`renders as expected when enabled`, () => {
   const onPress = jest.fn();
+  const onLayout = jest.fn();
 
   const rendered = (
     <Hitbox
       disabled={false}
       style={{ backgroundColor: `red` }}
       onPress={onPress}
+      onLayout={onLayout}
     >
       <Text>Test Children</Text>
     </Hitbox>
@@ -25,18 +27,26 @@ test(`renders as expected when enabled`, () => {
       disabled={false}
       style={{ backgroundColor: `red` }}
       onPress={expect.any(Function)}
+      onLayout={onLayout}
     >
       <Text>Test Children</Text>
     </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
+  expect(onLayout).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled`, () => {
   const onPress = jest.fn();
+  const onLayout = jest.fn();
 
   const rendered = (
-    <Hitbox disabled style={{ backgroundColor: `red` }} onPress={onPress}>
+    <Hitbox
+      disabled
+      style={{ backgroundColor: `red` }}
+      onPress={onPress}
+      onLayout={onLayout}
+    >
       <Text>Test Children</Text>
     </Hitbox>
   );
@@ -46,18 +56,26 @@ test(`renders as expected when disabled`, () => {
       disabled
       style={{ backgroundColor: `red` }}
       onPress={expect.any(Function)}
+      onLayout={onLayout}
     >
       <Text>Test Children</Text>
     </TouchableOpacity>
   );
   expect(onPress).not.toHaveBeenCalled();
+  expect(onLayout).not.toHaveBeenCalled();
 });
 
 test(`executes the press callback once when hitboxes are enabled`, () => {
   const onPress = jest.fn();
+  const onLayout = jest.fn();
 
   const rendered = (
-    <Hitbox disabled style={{ backgroundColor: `red` }} onPress={onPress}>
+    <Hitbox
+      disabled
+      style={{ backgroundColor: `red` }}
+      onPress={onPress}
+      onLayout={onLayout}
+    >
       <Text>Test Children</Text>
     </Hitbox>
   );
@@ -72,13 +90,20 @@ test(`executes the press callback once when hitboxes are enabled`, () => {
   }
 
   expect(onPress).toBeCalledTimes(1);
+  expect(onLayout).not.toHaveBeenCalled();
 });
 
 test(`executes the press callback once when hitboxes are disabled`, () => {
   const onPress = jest.fn();
+  const onLayout = jest.fn();
 
   const rendered = (
-    <Hitbox disabled style={{ backgroundColor: `red` }} onPress={onPress}>
+    <Hitbox
+      disabled
+      style={{ backgroundColor: `red` }}
+      onPress={onPress}
+      onLayout={onLayout}
+    >
       <Text>Test Children</Text>
     </Hitbox>
   );
@@ -93,4 +118,5 @@ test(`executes the press callback once when hitboxes are disabled`, () => {
   }
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onLayout).not.toHaveBeenCalled();
 });

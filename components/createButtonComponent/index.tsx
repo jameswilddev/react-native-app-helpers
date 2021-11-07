@@ -4,10 +4,10 @@ import {
   StyleSheet,
   Text,
   TextStyle,
-  TouchableOpacity,
   ViewStyle,
 } from "react-native";
 import type { ButtonStyle } from "../../types/ButtonStyle";
+import { Hitbox } from "../Hitbox";
 
 /**
  * Creates a new React component which renders a button.
@@ -42,17 +42,17 @@ export const createButtonComponent = (
    */
   readonly disabled: boolean;
 }> => {
-  const TouchableOpacityBase: ViewStyle = {
+  const HitboxBase: ViewStyle = {
     justifyContent: `center`,
     alignItems: `center`,
   };
 
   if (buttonStyle.horizontalPadding) {
-    TouchableOpacityBase.paddingHorizontal = buttonStyle.horizontalPadding;
+    HitboxBase.paddingHorizontal = buttonStyle.horizontalPadding;
   }
 
   if (buttonStyle.verticalPadding) {
-    TouchableOpacityBase.paddingVertical = buttonStyle.verticalPadding;
+    HitboxBase.paddingVertical = buttonStyle.verticalPadding;
   }
 
   const textBase: TextStyle = {
@@ -61,34 +61,34 @@ export const createButtonComponent = (
     lineHeight: buttonStyle.fontSize * 1.4,
   };
 
-  const defaultTouchableOpacity: ViewStyle = {
-    ...TouchableOpacityBase,
+  const defaultHitbox: ViewStyle = {
+    ...HitboxBase,
     backgroundColor: buttonStyle.default.backgroundColor,
   };
 
   if (buttonStyle.default.radius !== 0) {
-    defaultTouchableOpacity.borderRadius = buttonStyle.default.radius;
+    defaultHitbox.borderRadius = buttonStyle.default.radius;
   }
 
   if (buttonStyle.default.border !== null) {
-    defaultTouchableOpacity.borderWidth = buttonStyle.default.border.width;
+    defaultHitbox.borderWidth = buttonStyle.default.border.width;
 
-    defaultTouchableOpacity.borderColor = buttonStyle.default.border.color;
+    defaultHitbox.borderColor = buttonStyle.default.border.color;
   }
 
-  const disabledTouchableOpacity: ViewStyle = {
-    ...TouchableOpacityBase,
+  const disabledHitbox: ViewStyle = {
+    ...HitboxBase,
     backgroundColor: buttonStyle.disabled.backgroundColor,
   };
 
   if (buttonStyle.disabled.radius !== 0) {
-    disabledTouchableOpacity.borderRadius = buttonStyle.disabled.radius;
+    disabledHitbox.borderRadius = buttonStyle.disabled.radius;
   }
 
   if (buttonStyle.disabled.border !== null) {
-    disabledTouchableOpacity.borderWidth = buttonStyle.disabled.border.width;
+    disabledHitbox.borderWidth = buttonStyle.disabled.border.width;
 
-    disabledTouchableOpacity.borderColor = buttonStyle.disabled.border.color;
+    disabledHitbox.borderColor = buttonStyle.disabled.border.color;
   }
 
   const defaultBorderWidth =
@@ -100,7 +100,7 @@ export const createButtonComponent = (
       : buttonStyle.disabled.border.width;
 
   if (defaultBorderWidth !== disabledBorderWidth) {
-    disabledTouchableOpacity.margin = defaultBorderWidth - disabledBorderWidth;
+    disabledHitbox.margin = defaultBorderWidth - disabledBorderWidth;
   }
 
   const leftIconBase: TextStyle = {};
@@ -122,7 +122,7 @@ export const createButtonComponent = (
   }
 
   const styles = StyleSheet.create({
-    defaultTouchableOpacity,
+    defaultHitbox,
     defaultText: {
       ...textBase,
       color: buttonStyle.default.color,
@@ -142,7 +142,7 @@ export const createButtonComponent = (
       color: buttonStyle.default.color,
       ...leftAndRightIconsBase,
     },
-    disabledTouchableOpacity,
+    disabledHitbox,
     disabledText: {
       ...textBase,
       color: buttonStyle.disabled.color,
@@ -175,30 +175,22 @@ export const createButtonComponent = (
     if (leftIconElement === null) {
       if (rightIconElement === null) {
         return (
-          <TouchableOpacity
+          <Hitbox
             onPress={onPress}
             disabled={disabled}
-            style={
-              disabled
-                ? styles.disabledTouchableOpacity
-                : styles.defaultTouchableOpacity
-            }
+            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
           >
             <Text style={disabled ? styles.disabledText : styles.defaultText}>
               {children}
             </Text>
-          </TouchableOpacity>
+          </Hitbox>
         );
       } else {
         return (
-          <TouchableOpacity
+          <Hitbox
             onPress={onPress}
             disabled={disabled}
-            style={
-              disabled
-                ? styles.disabledTouchableOpacity
-                : styles.defaultTouchableOpacity
-            }
+            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
           >
             <Text
               style={
@@ -210,20 +202,16 @@ export const createButtonComponent = (
               {children}
             </Text>
             {rightIconElement}
-          </TouchableOpacity>
+          </Hitbox>
         );
       }
     } else {
       if (rightIconElement === null) {
         return (
-          <TouchableOpacity
+          <Hitbox
             onPress={onPress}
             disabled={disabled}
-            style={
-              disabled
-                ? styles.disabledTouchableOpacity
-                : styles.defaultTouchableOpacity
-            }
+            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
           >
             {leftIconElement}
             <Text
@@ -235,18 +223,14 @@ export const createButtonComponent = (
             >
               {children}
             </Text>
-          </TouchableOpacity>
+          </Hitbox>
         );
       } else {
         return (
-          <TouchableOpacity
+          <Hitbox
             onPress={onPress}
             disabled={disabled}
-            style={
-              disabled
-                ? styles.disabledTouchableOpacity
-                : styles.defaultTouchableOpacity
-            }
+            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
           >
             {leftIconElement}
             <Text
@@ -259,7 +243,7 @@ export const createButtonComponent = (
               {children}
             </Text>
             {rightIconElement}
-          </TouchableOpacity>
+          </Hitbox>
         );
       }
     }
