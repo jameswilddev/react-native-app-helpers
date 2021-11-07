@@ -962,13 +962,25 @@ test(`renders as expected when not disabled after layout when too close to the b
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              expect.objectContaining({
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderTopLeftRadius: 3,
+                borderTopRightRadius: 3,
+                borderBottomWidth: 0,
+                margin: -1,
+                marginBottom: 0,
+              }),
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -1134,13 +1146,25 @@ test(`renders as expected when not disabled after layout when not too close to t
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -1306,13 +1330,25 @@ test(`renders as expected when not disabled after press after layout when too cl
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderTopLeftRadius: 3,
+                borderTopRightRadius: 3,
+                borderBottomWidth: 0,
+                margin: -1,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -1478,13 +1514,25 @@ test(`renders as expected when not disabled after press after layout when not to
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -1660,13 +1708,25 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 10,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 10,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -1842,13 +1902,25 @@ test(`correctly handles layout changes which only change width`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 190,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 190,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -2024,13 +2096,25 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 320,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 320,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -2206,13 +2290,25 @@ test(`correctly handles layout changes which only change height`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 325,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 325,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -2388,13 +2484,25 @@ test(`correctly handles layout changes which have no effect`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -2570,13 +2678,25 @@ test(`correctly handles layout changes which swap from being above to below`, ()
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -2752,13 +2872,25 @@ test(`correctly handles layout changes which swap from being below to above`, ()
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 80,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderTopLeftRadius: 3,
+                borderTopRightRadius: 3,
+                borderBottomWidth: 0,
+                margin: -1,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 80,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -2935,13 +3067,25 @@ test(`correctly handles window dimension changes which swap from being above to 
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 350,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 350,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -3123,13 +3267,25 @@ test(`correctly handles window dimension changes which swap from being below to 
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderTopLeftRadius: 3,
+                borderTopRightRadius: 3,
+                borderBottomWidth: 0,
+                margin: -1,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -3818,13 +3974,25 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -4270,13 +4438,25 @@ test(`renders as expected without a label when open above`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderTopLeftRadius: 3,
+                borderTopRightRadius: 3,
+                borderBottomWidth: 0,
+                margin: -1,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -4442,13 +4622,25 @@ test(`renders as expected without a label when open below`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -4869,13 +5061,25 @@ test(`renders as expected when invalid and open above`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderWidth: 12,
+                borderColor: `#98ADAA`,
+                borderTopLeftRadius: 47,
+                borderTopRightRadius: 47,
+                borderBottomWidth: 0,
+                margin: -8,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -5041,13 +5245,25 @@ test(`renders as expected when invalid and open below`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderWidth: 12,
+                borderColor: `#98ADAA`,
+                borderBottomLeftRadius: 47,
+                borderBottomRightRadius: 47,
+                borderTopWidth: 0,
+                margin: -8,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -5473,13 +5689,25 @@ test(`renders as expected without a label when open above and invalid`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderWidth: 12,
+                borderColor: `#98ADAA`,
+                borderTopLeftRadius: 47,
+                borderTopRightRadius: 47,
+                borderBottomWidth: 0,
+                margin: -8,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -5645,13 +5873,25 @@ test(`renders as expected without a label when open below and invalid`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderWidth: 12,
+                borderColor: `#98ADAA`,
+                borderBottomLeftRadius: 47,
+                borderBottomRightRadius: 47,
+                borderTopWidth: 0,
+                margin: -8,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -5924,13 +6164,20 @@ test(`renders as expected when open above without borders`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderTopLeftRadius: 3,
+                borderTopRightRadius: 3,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -6073,13 +6320,20 @@ test(`renders as expected when open below without borders`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderBottomLeftRadius: 3,
+                borderBottomRightRadius: 3,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -6222,13 +6476,20 @@ test(`renders as expected when invalid and open above without borders`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderTopLeftRadius: 47,
+                borderTopRightRadius: 47,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -6371,13 +6632,20 @@ test(`renders as expected when invalid open below without borders`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderBottomLeftRadius: 47,
+                borderBottomRightRadius: 47,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -6541,13 +6809,23 @@ test(`renders as expected when open above without radius`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderBottomWidth: 0,
+                margin: -1,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -6711,13 +6989,23 @@ test(`renders as expected when open below without radius`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#CABA99`,
+                borderWidth: 5,
+                borderColor: `#646464`,
+                borderTopWidth: 0,
+                margin: -1,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -6881,13 +7169,23 @@ test(`renders as expected when invalid and open above without radius`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              bottom: 160,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderWidth: 12,
+                borderColor: `#98ADAA`,
+                borderBottomWidth: 0,
+                margin: -8,
+                marginBottom: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                bottom: 160,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {
@@ -7051,13 +7349,23 @@ test(`renders as expected when invalid open below without radius`, () => {
         children: expect.objectContaining({
           type: View,
           props: {
-            style: {
-              position: `absolute`,
-              maxHeight: 150,
-              left: 70,
-              width: 220,
-              top: 330,
-            },
+            style: [
+              {
+                position: `absolute`,
+                maxHeight: 150,
+                backgroundColor: `#32AA88`,
+                borderWidth: 12,
+                borderColor: `#98ADAA`,
+                borderTopWidth: 0,
+                margin: -8,
+                marginTop: 0,
+              },
+              {
+                left: 70,
+                width: 220,
+                top: 330,
+              },
+            ],
             children: expect.objectContaining({
               type: Text,
               props: {

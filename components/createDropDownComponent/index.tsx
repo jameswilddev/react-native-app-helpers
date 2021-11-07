@@ -15,6 +15,7 @@ import {
   createControlStateStyleInstance,
   createControlStyleInstance,
   createControlTextStyleInstance,
+  createDropDownStateStyleInstance,
   withoutBottomBorder,
   withoutTopBorder,
 } from "../helpers";
@@ -60,7 +61,6 @@ export const createDropDownComponent = (
       controlStyle,
       controlStyle.blurredInvalid
     ),
-    // todo wrong way around
     upperValidHitbox: withoutTopBorder(
       createControlStateStyleInstance(controlStyle, controlStyle.focusedValid)
     ),
@@ -129,6 +129,34 @@ export const createDropDownComponent = (
       controlStyle,
       controlStyle.focusedInvalid
     ),
+    upperValidView: withoutBottomBorder(
+      createDropDownStateStyleInstance(
+        controlStyle,
+        controlStyle.focusedValid,
+        maximumHeight
+      )
+    ),
+    upperInvalidView: withoutBottomBorder(
+      createDropDownStateStyleInstance(
+        controlStyle,
+        controlStyle.focusedInvalid,
+        maximumHeight
+      )
+    ),
+    lowerValidView: withoutTopBorder(
+      createDropDownStateStyleInstance(
+        controlStyle,
+        controlStyle.focusedValid,
+        maximumHeight
+      )
+    ),
+    lowerInvalidView: withoutTopBorder(
+      createDropDownStateStyleInstance(
+        controlStyle,
+        controlStyle.focusedInvalid,
+        maximumHeight
+      )
+    ),
   });
 
   return ({ label, placeholder, disabled, valid, children }) => {
@@ -163,8 +191,6 @@ export const createDropDownComponent = (
       position = `closed`;
     } else {
       additionalModalViewStyle = {
-        position: `absolute`,
-        maxHeight: maximumHeight,
         left: state.current.layout.x,
         width: state.current.layout.width,
       };
@@ -280,7 +306,20 @@ export const createDropDownComponent = (
               refresh();
             }}
           >
-            <View style={additionalModalViewStyle}>{children}</View>
+            <View
+              style={[
+                valid
+                  ? position === `upper`
+                    ? styles.upperValidView
+                    : styles.lowerValidView
+                  : position === `upper`
+                    ? styles.upperInvalidView
+                    : styles.lowerInvalidView,
+                additionalModalViewStyle,
+              ]}
+            >
+              {children}
+            </View>
           </SimpleModal>
         </React.Fragment>
       );
