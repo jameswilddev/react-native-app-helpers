@@ -98,28 +98,23 @@ export function createInputComponent<T>(
     ),
     blurredInvalidView: createControlStateStyleInstance(
       controlStyle,
-      controlStyle.blurredInvalid,
-      controlStyle.blurredValid
+      controlStyle.blurredInvalid
     ),
     focusedValidView: createControlStateStyleInstance(
       controlStyle,
-      controlStyle.focusedValid,
-      controlStyle.blurredValid
+      controlStyle.focusedValid
     ),
     focusedInvalidView: createControlStateStyleInstance(
       controlStyle,
-      controlStyle.focusedInvalid,
-      controlStyle.blurredValid
+      controlStyle.focusedInvalid
     ),
     disabledValidView: createControlStateStyleInstance(
       controlStyle,
-      controlStyle.disabledValid,
-      controlStyle.blurredValid
+      controlStyle.disabledValid
     ),
     disabledInvalidView: createControlStateStyleInstance(
       controlStyle,
-      controlStyle.disabledInvalid,
-      controlStyle.blurredValid
+      controlStyle.disabledInvalid
     ),
     disabledValidTextInput: createControlTextStyleInstance(
       controlStyle,

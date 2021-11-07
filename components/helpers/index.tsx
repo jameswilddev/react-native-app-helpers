@@ -30,15 +30,16 @@ export const createControlStyleInstance = (
 
 export const createControlStateStyleInstance = (
   controlStyle: ControlStyle,
-  controlStateStyle: ControlStateStyle,
-  relativeTo: ControlStateStyle
+  controlStateStyle: ControlStateStyle
 ): ViewStyle => {
   const output = createControlStyleInstance(controlStyle, controlStateStyle);
 
   const effectiveBorderWidth =
     controlStateStyle.border === null ? 0 : controlStateStyle.border.width;
   const effectiveRelativeToBorderWidth =
-    relativeTo.border === null ? 0 : relativeTo.border.width;
+    controlStyle.blurredValid.border === null
+      ? 0
+      : controlStyle.blurredValid.border.width;
 
   if (effectiveBorderWidth !== effectiveRelativeToBorderWidth) {
     output.margin = effectiveRelativeToBorderWidth - effectiveBorderWidth;
