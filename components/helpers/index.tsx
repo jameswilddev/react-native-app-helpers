@@ -66,3 +66,57 @@ export const createControlTextStyleInstance = (
 
   return output;
 };
+
+export const createControlPlaceholderTextStyleInstance = (
+  controlStyle: ControlStyle,
+  controlStateStyle: ControlStateStyle
+): TextStyle => {
+  const output: TextStyle = createControlTextStyleInstance(
+    controlStyle,
+    controlStateStyle
+  );
+
+  output.color = controlStateStyle.placeholderColor;
+
+  return output;
+};
+
+export const withoutTopBorder = (input: ViewStyle): ViewStyle => {
+  const output = { ...input };
+
+  if (output.borderWidth) {
+    output.borderTopWidth = 0;
+  }
+
+  if (output.borderRadius) {
+    output.borderBottomLeftRadius = output.borderRadius;
+    output.borderBottomRightRadius = output.borderRadius;
+    delete output.borderRadius;
+  }
+
+  if (output.margin) {
+    output.marginTop = 0;
+  }
+
+  return output;
+};
+
+export const withoutBottomBorder = (input: ViewStyle): ViewStyle => {
+  const output = { ...input };
+
+  if (output.borderWidth) {
+    output.borderBottomWidth = 0;
+  }
+
+  if (output.borderRadius) {
+    output.borderTopLeftRadius = output.borderRadius;
+    output.borderTopRightRadius = output.borderRadius;
+    delete output.borderRadius;
+  }
+
+  if (output.margin) {
+    output.marginBottom = 0;
+  }
+
+  return output;
+};
