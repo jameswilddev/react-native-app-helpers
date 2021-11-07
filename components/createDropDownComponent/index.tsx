@@ -3,7 +3,9 @@ import {
   TouchableWithoutFeedback,
   View,
   useWindowDimensions,
+  ViewStyle,
 } from "react-native";
+import { useRefresh } from "../..";
 import { SimpleModal } from "../SimpleModal";
 
 /**
@@ -31,79 +33,28 @@ export const createDropDownComponent = (
   readonly disabled: boolean;
 }> => {
   return ({ button, body, disabled }) => {
-    const [open, setOpen] = React.useState(false);
+    const refresh = useRefresh();
+
+    const state = React.useRef<{
+      open: boolean;
+      layout: null | {
+        readonly x: number;
+        readonly y: number;
+        readonly width: number;
+        readonly height: number;
+      };
+    }>({
+      open: false,
+      layout: null,
+    });
 
     // Ensure that the drop-down does not re-open itself if it is disabled while
     // open, then re-enabled.
-    React.useEffect(() => {
-      if (disabled && open) {
-        setOpen(false);
-      }
-    }, [disabled, open]);
-
-    const [additionalModalViewStyle, setAdditionalModalViewStyle] =
-      React.useState<null | {
-        readonly position: `absolute`;
-        readonly maxHeight: number;
-        readonly left: number;
-        readonly width: number;
-        readonly top?: number;
-        readonly bottom?: number;
-      }>(null);
-
-    const [mostRecentLayout, setMostRecentLayout] = React.useState<null | {
-      readonly x: number;
-      readonly y: number;
-      readonly width: number;
-      readonly height: number;
-    }>(null);
+    if (disabled) {
+      state.current.open = false;
+    }
 
     const windowDimensions = useWindowDimensions();
-
-    React.useEffect(() => {
-      if (mostRecentLayout !== null) {
-        const distanceToBottom =
-          windowDimensions.height -
-          mostRecentLayout.y -
-          mostRecentLayout.height;
-
-        let next: {
-          readonly position: `absolute`;
-          readonly maxHeight: number;
-          readonly left: number;
-          readonly width: number;
-          readonly top?: number;
-          readonly bottom?: number;
-        };
-
-        if (distanceToBottom < maximumHeight) {
-          next = {
-            position: `absolute`,
-            maxHeight: maximumHeight,
-            left: mostRecentLayout.x,
-            width: mostRecentLayout.width,
-            bottom: windowDimensions.height - mostRecentLayout.y,
-          };
-        } else {
-          next = {
-            position: `absolute`,
-            maxHeight: maximumHeight,
-            left: mostRecentLayout.x,
-            width: mostRecentLayout.width,
-            top: mostRecentLayout.y + mostRecentLayout.height,
-          };
-        }
-        if (
-          additionalModalViewStyle === null ||
-          additionalModalViewStyle.left !== next.left ||
-          additionalModalViewStyle.width !== next.width ||
-          additionalModalViewStyle.top !== next.top ||
-          additionalModalViewStyle.bottom !== next.bottom
-        ) {
-          setAdditionalModalViewStyle(next);
-        }
-      }
-    }, [windowDimensions.height, mostRecentLayout]);
 
     const inline = (
       <TouchableWithoutFeedback
@@ -112,15 +63,27 @@ export const createDropDownComponent = (
             layout: { x, y, width, height },
           },
         }) => {
-          setMostRecentLayout({
-            x,
-            y,
-            width,
-            height,
-          });
+          if (
+            state.current.layout === null ||
+            x !== state.current.layout.x ||
+            y !== state.current.layout.y ||
+            width !== state.current.layout.width ||
+            height !== state.current.layout.height
+          ) {
+            state.current.layout = {
+              x,
+              y,
+              width,
+              height,
+            };
+
+            refresh();
+          }
         }}
         onPress={() => {
-          setOpen(true);
+          state.current.open = true;
+
+          refresh();
         }}
         disabled={disabled}
       >
@@ -128,8 +91,28 @@ export const createDropDownComponent = (
       </TouchableWithoutFeedback>
     );
 
-    if (disabled || !open || additionalModalViewStyle === null) {
+    if (disabled || !state.current.open || state.current.layout === null) {
       return inline;
+    }
+
+    const additionalModalViewStyle: ViewStyle = {
+      position: `absolute`,
+      maxHeight: maximumHeight,
+      left: state.current.layout.x,
+      width: state.current.layout.width,
+    };
+
+    const distanceToBottom =
+      windowDimensions.height -
+      state.current.layout.y -
+      state.current.layout.height;
+
+    if (distanceToBottom < maximumHeight) {
+      additionalModalViewStyle.bottom =
+        windowDimensions.height - state.current.layout.y;
+    } else {
+      additionalModalViewStyle.top =
+        state.current.layout.y + state.current.layout.height;
     }
 
     return (
@@ -137,7 +120,9 @@ export const createDropDownComponent = (
         {inline}
         <SimpleModal
           onClose={() => {
-            setOpen(false);
+            state.current.open = false;
+
+            refresh();
           }}
         >
           <View style={additionalModalViewStyle}>
