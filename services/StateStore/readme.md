@@ -1,6 +1,6 @@
 # `react-native-app-helpers/StateStore`
 
-A wrapper around AsyncStorage which adds:
+A wrapper around `expo-file-system` which adds:
 
 - Concurrency control.
 - JSON parsing and serialization.

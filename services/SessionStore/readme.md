@@ -1,6 +1,6 @@
 # `react-native-app-helpers/SessionStore`
 
-A wrapper around EncryptedStorage which adds:
+A wrapper around `expo-secure-store` which adds:
 
 - Concurrency control.
 - JSON parsing and serialization.
@@ -8,8 +8,6 @@ A wrapper around EncryptedStorage which adds:
 - A synchronous read/write API (with asynchronous write-back).
 
 ## Usage
-
-TODO
 
 ```tsx
 import type { SessionStore } from "react-native-app-helpers";
