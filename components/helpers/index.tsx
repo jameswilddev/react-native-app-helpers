@@ -57,6 +57,7 @@ export const createDropDownStateStyleInstance = (
     position: `absolute`,
     maxHeight,
     backgroundColor: controlStateStyle.backgroundColor,
+    overflow: `hidden`,
   };
 
   if (controlStateStyle.radius !== 0) {

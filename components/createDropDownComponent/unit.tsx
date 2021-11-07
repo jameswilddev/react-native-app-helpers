@@ -966,6 +966,7 @@ test(`renders as expected when not disabled after layout when too close to the b
               expect.objectContaining({
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -1150,6 +1151,7 @@ test(`renders as expected when not disabled after layout when not too close to t
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -1334,6 +1336,7 @@ test(`renders as expected when not disabled after press after layout when too cl
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -1518,6 +1521,7 @@ test(`renders as expected when not disabled after press after layout when not to
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -1712,6 +1716,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -1906,6 +1911,7 @@ test(`correctly handles layout changes which only change width`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -2100,6 +2106,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -2294,6 +2301,7 @@ test(`correctly handles layout changes which only change height`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -2488,6 +2496,7 @@ test(`correctly handles layout changes which have no effect`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -2682,6 +2691,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -2876,6 +2886,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -3071,6 +3082,7 @@ test(`correctly handles window dimension changes which swap from being above to 
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -3271,6 +3283,7 @@ test(`correctly handles window dimension changes which swap from being below to 
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -3978,6 +3991,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -4442,6 +4456,7 @@ test(`renders as expected without a label when open above`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -4626,6 +4641,7 @@ test(`renders as expected without a label when open below`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -5065,6 +5081,7 @@ test(`renders as expected when invalid and open above`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
@@ -5249,6 +5266,7 @@ test(`renders as expected when invalid and open below`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
@@ -5693,6 +5711,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
@@ -5877,6 +5896,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
@@ -6168,6 +6188,7 @@ test(`renders as expected when open above without borders`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderTopLeftRadius: 3,
                 borderTopRightRadius: 3,
@@ -6324,6 +6345,7 @@ test(`renders as expected when open below without borders`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
@@ -6480,6 +6502,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderTopLeftRadius: 47,
                 borderTopRightRadius: 47,
@@ -6636,6 +6659,7 @@ test(`renders as expected when invalid open below without borders`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderBottomLeftRadius: 47,
                 borderBottomRightRadius: 47,
@@ -6813,6 +6837,7 @@ test(`renders as expected when open above without radius`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -6993,6 +7018,7 @@ test(`renders as expected when open below without radius`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#CABA99`,
                 borderWidth: 5,
                 borderColor: `#646464`,
@@ -7173,6 +7199,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
@@ -7353,6 +7380,7 @@ test(`renders as expected when invalid open below without radius`, () => {
               {
                 position: `absolute`,
                 maxHeight: 150,
+                overflow: `hidden`,
                 backgroundColor: `#32AA88`,
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
