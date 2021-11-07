@@ -1,78 +1,12 @@
 import * as React from "react";
-import {
-  StyleSheet,
-  TextInput,
-  TextStyle,
-  View,
-  ViewStyle,
-} from "react-native";
+import { StyleSheet, TextInput, TextStyle, View } from "react-native";
 import { useRefresh } from "../../hooks/useRefresh";
-import type { ControlStateStyle } from "../../types/ControlStateStyle";
 import type { ControlStyle } from "../../types/ControlStyle";
-
-const createViewStyle = (
-  controlStyle: ControlStyle,
-  controlStateStyle: ControlStateStyle
-): ViewStyle => {
-  const output: ViewStyle = {
-    backgroundColor: controlStateStyle.backgroundColor,
-    flexDirection: `row`,
-    alignItems: "center",
-  };
-
-  if (controlStyle.paddingHorizontal) {
-    output.paddingHorizontal = controlStyle.paddingHorizontal;
-  }
-
-  if (controlStateStyle.radius) {
-    output.borderRadius = controlStateStyle.radius;
-  }
-
-  if (controlStateStyle.border !== null) {
-    output.borderWidth = controlStateStyle.border.width;
-    output.borderColor = controlStateStyle.border.color;
-  }
-
-  return output;
-};
-
-const createRelativeViewStyle = (
-  controlStyle: ControlStyle,
-  controlStateStyle: ControlStateStyle,
-  relativeTo: ControlStateStyle
-): ViewStyle => {
-  const output = createViewStyle(controlStyle, controlStateStyle);
-
-  const effectiveBorderWidth =
-    controlStateStyle.border === null ? 0 : controlStateStyle.border.width;
-  const effectiveRelativeToBorderWidth =
-    relativeTo.border === null ? 0 : relativeTo.border.width;
-
-  if (effectiveBorderWidth !== effectiveRelativeToBorderWidth) {
-    output.margin = effectiveRelativeToBorderWidth - effectiveBorderWidth;
-  }
-
-  return output;
-};
-
-const createTextInputStyle = (
-  controlStyle: ControlStyle,
-  controlStateStyle: ControlStateStyle
-): TextStyle => {
-  const output: TextStyle = {
-    flexGrow: 1,
-    color: controlStateStyle.textColor,
-    fontFamily: controlStyle.fontFamily,
-    fontSize: controlStyle.fontSize,
-    lineHeight: controlStyle.fontSize * 1.4,
-  };
-
-  if (controlStyle.paddingVertical) {
-    output.paddingVertical = controlStyle.paddingVertical;
-  }
-
-  return output;
-};
+import {
+  createControlStateStyleInstance,
+  createControlStyleInstance,
+  createControlTextStyleInstance,
+} from "../helpers";
 
 /**
  * Creates a React component which allows for the editing of text.
@@ -158,126 +92,183 @@ export function createInputComponent<T>(
     : {};
 
   const styles = StyleSheet.create({
-    blurredValidView: createViewStyle(controlStyle, controlStyle.blurredValid),
-    blurredInvalidView: createRelativeViewStyle(
+    blurredValidView: createControlStyleInstance(
+      controlStyle,
+      controlStyle.blurredValid
+    ),
+    blurredInvalidView: createControlStateStyleInstance(
       controlStyle,
       controlStyle.blurredInvalid,
       controlStyle.blurredValid
     ),
-    focusedValidView: createRelativeViewStyle(
+    focusedValidView: createControlStateStyleInstance(
       controlStyle,
       controlStyle.focusedValid,
       controlStyle.blurredValid
     ),
-    focusedInvalidView: createRelativeViewStyle(
+    focusedInvalidView: createControlStateStyleInstance(
       controlStyle,
       controlStyle.focusedInvalid,
       controlStyle.blurredValid
     ),
-    disabledValidView: createRelativeViewStyle(
+    disabledValidView: createControlStateStyleInstance(
       controlStyle,
       controlStyle.disabledValid,
       controlStyle.blurredValid
     ),
-    disabledInvalidView: createRelativeViewStyle(
+    disabledInvalidView: createControlStateStyleInstance(
       controlStyle,
       controlStyle.disabledInvalid,
       controlStyle.blurredValid
     ),
-    disabledValidTextInput: createTextInputStyle(
+    disabledValidTextInput: createControlTextStyleInstance(
       controlStyle,
       controlStyle.disabledValid
     ),
-    disabledInvalidTextInput: createTextInputStyle(
+    disabledInvalidTextInput: createControlTextStyleInstance(
       controlStyle,
       controlStyle.disabledInvalid
     ),
-    blurredValidTextInput: createTextInputStyle(
+    blurredValidTextInput: createControlTextStyleInstance(
       controlStyle,
       controlStyle.blurredValid
     ),
-    blurredInvalidTextInput: createTextInputStyle(
+    blurredInvalidTextInput: createControlTextStyleInstance(
       controlStyle,
       controlStyle.blurredInvalid
     ),
-    focusedValidTextInput: createTextInputStyle(
+    focusedValidTextInput: createControlTextStyleInstance(
       controlStyle,
       controlStyle.focusedValid
     ),
-    focusedInvalidTextInput: createTextInputStyle(
+    focusedInvalidTextInput: createControlTextStyleInstance(
       controlStyle,
       controlStyle.focusedInvalid
     ),
     disabledValidTextInputWithLeftIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.disabledValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.disabledValid
+      ),
       ...withLeftIcon,
     },
     disabledInvalidTextInputWithLeftIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.disabledInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.disabledInvalid
+      ),
       ...withLeftIcon,
     },
     blurredValidTextInputWithLeftIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.blurredValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.blurredValid
+      ),
       ...withLeftIcon,
     },
     blurredInvalidTextInputWithLeftIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.blurredInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.blurredInvalid
+      ),
       ...withLeftIcon,
     },
     focusedValidTextInputWithLeftIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.focusedValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.focusedValid
+      ),
       ...withLeftIcon,
     },
     focusedInvalidTextInputWithLeftIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.focusedInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.focusedInvalid
+      ),
       ...withLeftIcon,
     },
     disabledValidTextInputWithRightIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.disabledValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.disabledValid
+      ),
       ...withRightIcon,
     },
     disabledInvalidTextInputWithRightIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.disabledInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.disabledInvalid
+      ),
       ...withRightIcon,
     },
     blurredValidTextInputWithRightIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.blurredValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.blurredValid
+      ),
       ...withRightIcon,
     },
     blurredInvalidTextInputWithRightIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.blurredInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.blurredInvalid
+      ),
       ...withRightIcon,
     },
     focusedValidTextInputWithRightIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.focusedValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.focusedValid
+      ),
       ...withRightIcon,
     },
     focusedInvalidTextInputWithRightIcon: {
-      ...createTextInputStyle(controlStyle, controlStyle.focusedInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.focusedInvalid
+      ),
       ...withRightIcon,
     },
     disabledValidTextInputWithLeftAndRightIcons: {
-      ...createTextInputStyle(controlStyle, controlStyle.disabledValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.disabledValid
+      ),
       ...withLeftAndRightIcons,
     },
     disabledInvalidTextInputWithLeftAndRightIcons: {
-      ...createTextInputStyle(controlStyle, controlStyle.disabledInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.disabledInvalid
+      ),
       ...withLeftAndRightIcons,
     },
     blurredValidTextInputWithLeftAndRightIcons: {
-      ...createTextInputStyle(controlStyle, controlStyle.blurredValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.blurredValid
+      ),
       ...withLeftAndRightIcons,
     },
     blurredInvalidTextInputWithLeftAndRightIcons: {
-      ...createTextInputStyle(controlStyle, controlStyle.blurredInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.blurredInvalid
+      ),
       ...withLeftAndRightIcons,
     },
     focusedValidTextInputWithLeftAndRightIcons: {
-      ...createTextInputStyle(controlStyle, controlStyle.focusedValid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.focusedValid
+      ),
       ...withLeftAndRightIcons,
     },
     focusedInvalidTextInputWithLeftAndRightIcons: {
-      ...createTextInputStyle(controlStyle, controlStyle.focusedInvalid),
+      ...createControlTextStyleInstance(
+        controlStyle,
+        controlStyle.focusedInvalid
+      ),
       ...withLeftAndRightIcons,
     },
   });
