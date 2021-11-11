@@ -165,8 +165,8 @@ export const createDropDownComponent = (
     const state = React.useRef<{
       open: boolean;
       layout: null | {
-        readonly x: number;
-        readonly y: number;
+        readonly pageX: number;
+        readonly pageY: number;
         readonly width: number;
         readonly height: number;
       };
@@ -191,23 +191,23 @@ export const createDropDownComponent = (
       position = `closed`;
     } else {
       additionalModalViewStyle = {
-        left: state.current.layout.x,
+        left: state.current.layout.pageX,
         width: state.current.layout.width,
       };
 
       const distanceToBottom =
         windowDimensions.height -
-        state.current.layout.y -
+        state.current.layout.pageY -
         state.current.layout.height;
 
       if (distanceToBottom < maximumHeight) {
         additionalModalViewStyle.bottom =
-          windowDimensions.height - state.current.layout.y;
+          windowDimensions.height - state.current.layout.pageY;
 
         position = `upper`;
       } else {
         additionalModalViewStyle.top =
-          state.current.layout.y + state.current.layout.height;
+          state.current.layout.pageY + state.current.layout.height;
 
         position = `lower`;
       }
@@ -232,21 +232,20 @@ export const createDropDownComponent = (
                   ? styles.lowerValidHitbox
                   : styles.lowerInvalidHitbox
         }
-        onLayout={({
-          nativeEvent: {
-            layout: { x, y, width, height },
-          },
-        }) => {
+        onMeasure={(x, y, width, height, pageX, pageY) => {
+          x;
+          y;
+
           if (
             state.current.layout === null ||
-            x !== state.current.layout.x ||
-            y !== state.current.layout.y ||
+            pageX !== state.current.layout.pageX ||
+            pageY !== state.current.layout.pageY ||
             width !== state.current.layout.width ||
             height !== state.current.layout.height
           ) {
             state.current.layout = {
-              x,
-              y,
+              pageX,
+              pageY,
               width,
               height,
             };

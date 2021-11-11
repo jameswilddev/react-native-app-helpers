@@ -23,6 +23,9 @@ const ExampleScreen = () => {
         onPress={() => {
           Alert.alert(`The button has been pressed.`);
         }}
+        onMeasure={(x, y, width, height, pageX, pageY) => {
+          // Called when the dimensions are known or change.
+        }}
       />
       <Button
         title={Hitbox.enabled ? `Disable this hitbox` : `Enable this hitbox`}

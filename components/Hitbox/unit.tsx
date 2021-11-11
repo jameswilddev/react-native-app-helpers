@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Text, TouchableOpacity } from "react-native";
-import { unwrapRenderedFunctionComponent } from "../..";
+import { MeasureOnSuccessCallback, Text } from "react-native";
+import * as TestRenderer from "react-test-renderer";
 import { Hitbox } from "../..";
 
 test(`hitboxes are enabled by default`, () => {
@@ -9,72 +9,136 @@ test(`hitboxes are enabled by default`, () => {
 
 test(`renders as expected when enabled`, () => {
   const onPress = jest.fn();
-  const onLayout = jest.fn();
+  const onMeasure = jest.fn();
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Hitbox
       disabled={false}
       style={{ backgroundColor: `red` }}
       onPress={onPress}
-      onLayout={onLayout}
+      onMeasure={onMeasure}
     >
       <Text>Test Children</Text>
     </Hitbox>
   );
 
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableOpacity
-      disabled={false}
-      style={{ backgroundColor: `red` }}
-      onPress={expect.any(Function)}
-      onLayout={onLayout}
-    >
-      <Text>Test Children</Text>
-    </TouchableOpacity>
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      props: expect.objectContaining({
+        disabled: false,
+        style: { backgroundColor: `red` },
+        hostRef: expect.any(Function),
+        onLayout: expect.any(Function),
+        onPress: expect.any(Function),
+        children: expect.objectContaining({
+          type: Text,
+          props: {
+            children: `Test Children`,
+          },
+        }),
+      }),
+    })
   );
+  expect(
+    (
+      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+        .type as unknown as () => void
+    ).name
+  ).toEqual(`TouchableOpacity`);
+
   expect(onPress).not.toHaveBeenCalled();
-  expect(onLayout).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled`, () => {
   const onPress = jest.fn();
-  const onLayout = jest.fn();
+  const onMeasure = jest.fn();
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Hitbox
       disabled
       style={{ backgroundColor: `red` }}
       onPress={onPress}
-      onLayout={onLayout}
+      onMeasure={onMeasure}
     >
       <Text>Test Children</Text>
     </Hitbox>
   );
 
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <TouchableOpacity
-      disabled
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      props: expect.objectContaining({
+        disabled: true,
+        style: { backgroundColor: `red` },
+        hostRef: expect.any(Function),
+        onLayout: expect.any(Function),
+        onPress: expect.any(Function),
+        children: expect.objectContaining({
+          type: Text,
+          props: {
+            children: `Test Children`,
+          },
+        }),
+      }),
+    })
+  );
+  expect(
+    (
+      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+        .type as unknown as () => void
+    ).name
+  ).toEqual(`TouchableOpacity`);
+
+  expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
+});
+
+test(`calls through to useMeasure`, () => {
+  const onPress = jest.fn();
+  const onMeasure = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Hitbox
+      disabled={false}
       style={{ backgroundColor: `red` }}
-      onPress={expect.any(Function)}
-      onLayout={onLayout}
+      onPress={onPress}
+      onMeasure={onMeasure}
     >
       <Text>Test Children</Text>
-    </TouchableOpacity>
+    </Hitbox>
   );
+
+  (
+    (renderer.toTree() as TestRenderer.ReactTestRendererTree)
+      .rendered as TestRenderer.ReactTestRendererTree
+  ).props[`hostRef`]({
+    measure(callback: MeasureOnSuccessCallback) {
+      callback(123, 403, 29, 583, 37, 96);
+    },
+  });
+
+  (
+    (renderer.toTree() as TestRenderer.ReactTestRendererTree)
+      .rendered as TestRenderer.ReactTestRendererTree
+  ).props[`onLayout`]();
+
   expect(onPress).not.toHaveBeenCalled();
-  expect(onLayout).not.toHaveBeenCalled();
+  expect(onMeasure).toBeCalledTimes(1);
+  expect(onMeasure).toHaveBeenCalledWith(123, 403, 29, 583, 37, 96);
 });
 
 test(`executes the press callback once when hitboxes are enabled`, () => {
   const onPress = jest.fn();
-  const onLayout = jest.fn();
+  const onMeasure = jest.fn();
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Hitbox
-      disabled
+      disabled={false}
       style={{ backgroundColor: `red` }}
       onPress={onPress}
-      onLayout={onLayout}
+      onMeasure={onMeasure}
     >
       <Text>Test Children</Text>
     </Hitbox>
@@ -84,25 +148,28 @@ test(`executes the press callback once when hitboxes are enabled`, () => {
 
   try {
     Hitbox.enabled = true;
-    unwrapRenderedFunctionComponent(rendered).props[`onPress`]();
+    (
+      (renderer.toTree() as TestRenderer.ReactTestRendererTree)
+        .rendered as TestRenderer.ReactTestRendererTree
+    ).props[`onPress`]();
   } finally {
     Hitbox.enabled = hitboxesPreviouslyEnabled;
   }
 
   expect(onPress).toBeCalledTimes(1);
-  expect(onLayout).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`executes the press callback once when hitboxes are disabled`, () => {
   const onPress = jest.fn();
-  const onLayout = jest.fn();
+  const onMeasure = jest.fn();
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Hitbox
-      disabled
+      disabled={false}
       style={{ backgroundColor: `red` }}
       onPress={onPress}
-      onLayout={onLayout}
+      onMeasure={onMeasure}
     >
       <Text>Test Children</Text>
     </Hitbox>
@@ -112,11 +179,14 @@ test(`executes the press callback once when hitboxes are disabled`, () => {
 
   try {
     Hitbox.enabled = false;
-    unwrapRenderedFunctionComponent(rendered).props[`onPress`]();
+    (
+      (renderer.toTree() as TestRenderer.ReactTestRendererTree)
+        .rendered as TestRenderer.ReactTestRendererTree
+    ).props[`onPress`]();
   } finally {
     Hitbox.enabled = hitboxesPreviouslyEnabled;
   }
 
   expect(onPress).not.toHaveBeenCalled();
-  expect(onLayout).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });

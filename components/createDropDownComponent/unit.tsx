@@ -99,7 +99,7 @@ test(`renders as expected when not disabled`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -228,7 +228,7 @@ test(`renders as expected when disabled`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
         style: {
@@ -355,10 +355,8 @@ test(`renders as expected when not disabled after layout when too close to the b
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -366,7 +364,7 @@ test(`renders as expected when not disabled after layout when too close to the b
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -492,10 +490,8 @@ test(`renders as expected when disabled after layout when too close to the botto
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -503,7 +499,7 @@ test(`renders as expected when disabled after layout when too close to the botto
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
         style: {
@@ -630,10 +626,8 @@ test(`renders as expected when not disabled after layout when not too close to t
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -641,7 +635,7 @@ test(`renders as expected when not disabled after layout when not too close to t
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -767,10 +761,8 @@ test(`renders as expected when disabled after layout when not too close to the b
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -778,7 +770,7 @@ test(`renders as expected when disabled after layout when not too close to the b
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
         style: {
@@ -905,10 +897,8 @@ test(`renders as expected when not disabled after layout when too close to the b
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -922,7 +912,7 @@ test(`renders as expected when not disabled after layout when too close to the b
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -1090,10 +1080,8 @@ test(`renders as expected when not disabled after layout when not too close to t
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -1107,7 +1095,7 @@ test(`renders as expected when not disabled after layout when not too close to t
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -1281,10 +1269,8 @@ test(`renders as expected when not disabled after press after layout when too cl
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -1292,7 +1278,7 @@ test(`renders as expected when not disabled after press after layout when too cl
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -1466,10 +1452,8 @@ test(`renders as expected when not disabled after press after layout when not to
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -1477,7 +1461,7 @@ test(`renders as expected when not disabled after press after layout when not to
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -1645,10 +1629,8 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -1662,9 +1644,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onLayout`]({
-      nativeEvent: { layout: { x: 10, width: 220, y: 310, height: 20 } },
-    });
+    ).props[`onMeasure`](123, 456, 220, 20, 10, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -1672,7 +1652,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -1840,10 +1820,8 @@ test(`correctly handles layout changes which only change width`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -1857,9 +1835,7 @@ test(`correctly handles layout changes which only change width`, () => {
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onLayout`]({
-      nativeEvent: { layout: { x: 70, width: 190, y: 310, height: 20 } },
-    });
+    ).props[`onMeasure`](123, 456, 190, 20, 70, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -1867,7 +1843,7 @@ test(`correctly handles layout changes which only change width`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -2035,10 +2011,8 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -2052,9 +2026,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onLayout`]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 300, height: 20 } },
-    });
+    ).props[`onMeasure`](123, 456, 220, 20, 70, 300);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -2062,7 +2034,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -2230,10 +2202,8 @@ test(`correctly handles layout changes which only change height`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 45, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -2247,9 +2217,7 @@ test(`correctly handles layout changes which only change height`, () => {
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onLayout`]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 15 } },
-    });
+    ).props[`onMeasure`](123, 456, 220, 15, 70, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -2257,7 +2225,7 @@ test(`correctly handles layout changes which only change height`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -2425,10 +2393,8 @@ test(`correctly handles layout changes which have no effect`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -2442,9 +2408,7 @@ test(`correctly handles layout changes which have no effect`, () => {
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onLayout`]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+    ).props[`onMeasure`](123, 456, 220, 20, 70, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -2452,7 +2416,7 @@ test(`correctly handles layout changes which have no effect`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -2620,10 +2584,8 @@ test(`correctly handles layout changes which swap from being above to below`, ()
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 400, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 400);
   });
 
   TestRenderer.act(() => {
@@ -2637,9 +2599,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onLayout`]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+    ).props[`onMeasure`](123, 456, 220, 20, 70, 310);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -2647,7 +2607,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -2815,10 +2775,8 @@ test(`correctly handles layout changes which swap from being below to above`, ()
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -2832,9 +2790,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onLayout`]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 400, height: 20 } },
-    });
+    ).props[`onMeasure`](123, 456, 220, 20, 70, 400);
   });
 
   expect(renderer.toTree()?.rendered).toEqual([
@@ -2842,7 +2798,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -3010,10 +2966,8 @@ test(`correctly handles window dimension changes which swap from being above to 
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 330, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 330);
   });
 
   TestRenderer.act(() => {
@@ -3038,7 +2992,7 @@ test(`correctly handles window dimension changes which swap from being above to 
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -3211,10 +3165,8 @@ test(`correctly handles window dimension changes which swap from being below to 
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -3239,7 +3191,7 @@ test(`correctly handles window dimension changes which swap from being below to 
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -3412,10 +3364,8 @@ test(`can be enabled after being created disabled`, async () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -3451,7 +3401,7 @@ test(`can be enabled after being created disabled`, async () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -3582,10 +3532,8 @@ test(`closes if disabled while open`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -3610,7 +3558,7 @@ test(`closes if disabled while open`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
         style: {
@@ -3737,10 +3685,8 @@ test(`does not re-open if enabled after disabled while open`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -3776,7 +3722,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -3902,10 +3848,8 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -3947,7 +3891,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -4115,10 +4059,8 @@ test(`closes when the modal is dismissed`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -4140,7 +4082,7 @@ test(`closes when the modal is dismissed`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -4269,7 +4211,7 @@ test(`renders as expected without a label`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -4395,10 +4337,8 @@ test(`renders as expected without a label when open above`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -4412,7 +4352,7 @@ test(`renders as expected without a label when open above`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -4580,10 +4520,8 @@ test(`renders as expected without a label when open below`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -4597,7 +4535,7 @@ test(`renders as expected without a label when open below`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -4763,7 +4701,7 @@ test(`renders as expected without a label when disabled`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
         style: {
@@ -4893,7 +4831,7 @@ test(`renders as expected when invalid`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -5020,10 +4958,8 @@ test(`renders as expected when invalid and open above`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -5037,7 +4973,7 @@ test(`renders as expected when invalid and open above`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -5205,10 +5141,8 @@ test(`renders as expected when invalid and open below`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -5222,7 +5156,7 @@ test(`renders as expected when invalid and open below`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -5393,7 +5327,7 @@ test(`renders as expected when invalid and disabled`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
         style: {
@@ -5523,7 +5457,7 @@ test(`renders as expected when invalid without a label`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -5650,10 +5584,8 @@ test(`renders as expected without a label when open above and invalid`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -5667,7 +5599,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -5835,10 +5767,8 @@ test(`renders as expected without a label when open below and invalid`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -5852,7 +5782,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -6023,7 +5953,7 @@ test(`renders as expected without a label when disabled and invalid`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
         style: {
@@ -6132,10 +6062,8 @@ test(`renders as expected when open above without borders`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -6149,7 +6077,7 @@ test(`renders as expected when open above without borders`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -6289,10 +6217,8 @@ test(`renders as expected when open below without borders`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -6306,7 +6232,7 @@ test(`renders as expected when open below without borders`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -6446,10 +6372,8 @@ test(`renders as expected when invalid and open above without borders`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -6463,7 +6387,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -6603,10 +6527,8 @@ test(`renders as expected when invalid open below without borders`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -6620,7 +6542,7 @@ test(`renders as expected when invalid open below without borders`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -6778,10 +6700,8 @@ test(`renders as expected when open above without radius`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 45, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -6795,7 +6715,7 @@ test(`renders as expected when open above without radius`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -6959,10 +6879,8 @@ test(`renders as expected when open below without radius`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -6976,7 +6894,7 @@ test(`renders as expected when open below without radius`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -7140,10 +7058,8 @@ test(`renders as expected when invalid and open above without radius`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 320, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 320);
   });
 
   TestRenderer.act(() => {
@@ -7157,7 +7073,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {
@@ -7321,10 +7237,8 @@ test(`renders as expected when invalid open below without radius`, () => {
 
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onLayout`
-    ]({
-      nativeEvent: { layout: { x: 70, width: 220, y: 310, height: 20 } },
-    });
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
   });
 
   TestRenderer.act(() => {
@@ -7338,7 +7252,7 @@ test(`renders as expected when invalid open below without radius`, () => {
       nodeType: `component`,
       type: Hitbox,
       props: {
-        onLayout: expect.any(Function),
+        onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
         style: {

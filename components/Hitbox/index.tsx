@@ -1,5 +1,10 @@
 import * as React from "react";
-import { LayoutChangeEvent, TouchableOpacity, ViewStyle } from "react-native";
+import {
+  MeasureOnSuccessCallback,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
+import { useMeasure } from "../..";
 
 type Component = React.FunctionComponent<{
   /**
@@ -15,9 +20,9 @@ type Component = React.FunctionComponent<{
   readonly style?: ViewStyle;
 
   /**
-   * Passed down to TouchableOpacity.
+   * Passed to useMeasure.
    */
-  readonly onLayout?: (event: LayoutChangeEvent) => void;
+  readonly onMeasure?: MeasureOnSuccessCallback;
 
   /**
    * Similar to TouchableOpacity's onPress, but remote-controlled using the
@@ -38,20 +43,25 @@ export const Hitbox: Component & {
    * prevent accidental concurrency where the user rapidly taps buttons.
    */
   enabled: boolean;
-} = (({ disabled, style, onLayout, onPress, children }) => (
-  <TouchableOpacity
-    disabled={disabled}
-    style={style}
-    onLayout={onLayout}
-    onPress={() => {
-      if (Hitbox.enabled) {
-        onPress();
-      }
-    }}
-  >
-    {children}
-  </TouchableOpacity>
-)) as Component as unknown as Component & {
+} = (({ disabled, style, onMeasure, onPress, children }) => {
+  const [ref, onLayout] = useMeasure(onMeasure);
+
+  return (
+    <TouchableOpacity
+      disabled={disabled}
+      style={style}
+      ref={ref}
+      onLayout={onLayout}
+      onPress={() => {
+        if (Hitbox.enabled) {
+          onPress();
+        }
+      }}
+    >
+      {children}
+    </TouchableOpacity>
+  );
+}) as Component as unknown as Component & {
   enabled: boolean;
 };
 
