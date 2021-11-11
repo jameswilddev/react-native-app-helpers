@@ -130,29 +130,19 @@ export const createDropDownComponent = (
       controlStyle.focusedInvalid
     ),
     upperValidView: withoutBottomBorder(
-      createDropDownStateStyleInstance(
-        controlStyle,
-        controlStyle.focusedValid,
-        maximumHeight
-      )
+      createDropDownStateStyleInstance(controlStyle.focusedValid, maximumHeight)
     ),
     upperInvalidView: withoutBottomBorder(
       createDropDownStateStyleInstance(
-        controlStyle,
         controlStyle.focusedInvalid,
         maximumHeight
       )
     ),
     lowerValidView: withoutTopBorder(
-      createDropDownStateStyleInstance(
-        controlStyle,
-        controlStyle.focusedValid,
-        maximumHeight
-      )
+      createDropDownStateStyleInstance(controlStyle.focusedValid, maximumHeight)
     ),
     lowerInvalidView: withoutTopBorder(
       createDropDownStateStyleInstance(
-        controlStyle,
         controlStyle.focusedInvalid,
         maximumHeight
       )

@@ -963,8 +963,6 @@ test(`renders as expected when not disabled after layout when too close to the b
                 borderTopLeftRadius: 3,
                 borderTopRightRadius: 3,
                 borderBottomWidth: 0,
-                margin: -1,
-                marginBottom: 0,
               }),
               {
                 left: 70,
@@ -1146,8 +1144,6 @@ test(`renders as expected when not disabled after layout when not too close to t
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -1329,8 +1325,6 @@ test(`renders as expected when not disabled after press after layout when too cl
                 borderTopLeftRadius: 3,
                 borderTopRightRadius: 3,
                 borderBottomWidth: 0,
-                margin: -1,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -1512,8 +1506,6 @@ test(`renders as expected when not disabled after press after layout when not to
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -1703,8 +1695,6 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 10,
@@ -1894,8 +1884,6 @@ test(`correctly handles layout changes which only change width`, () => {
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -2085,8 +2073,6 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -2276,8 +2262,6 @@ test(`correctly handles layout changes which only change height`, () => {
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -2467,8 +2451,6 @@ test(`correctly handles layout changes which have no effect`, () => {
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -2658,8 +2640,6 @@ test(`correctly handles layout changes which swap from being above to below`, ()
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -2849,8 +2829,6 @@ test(`correctly handles layout changes which swap from being below to above`, ()
                 borderTopLeftRadius: 3,
                 borderTopRightRadius: 3,
                 borderBottomWidth: 0,
-                margin: -1,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -3043,8 +3021,6 @@ test(`correctly handles window dimension changes which swap from being above to 
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -3242,8 +3218,6 @@ test(`correctly handles window dimension changes which swap from being below to 
                 borderTopLeftRadius: 3,
                 borderTopRightRadius: 3,
                 borderBottomWidth: 0,
-                margin: -1,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -3942,8 +3916,6 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -4403,8 +4375,6 @@ test(`renders as expected without a label when open above`, () => {
                 borderTopLeftRadius: 3,
                 borderTopRightRadius: 3,
                 borderBottomWidth: 0,
-                margin: -1,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -4586,8 +4556,6 @@ test(`renders as expected without a label when open below`, () => {
                 borderBottomLeftRadius: 3,
                 borderBottomRightRadius: 3,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -5024,8 +4992,6 @@ test(`renders as expected when invalid and open above`, () => {
                 borderTopLeftRadius: 47,
                 borderTopRightRadius: 47,
                 borderBottomWidth: 0,
-                margin: -8,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -5207,8 +5173,6 @@ test(`renders as expected when invalid and open below`, () => {
                 borderBottomLeftRadius: 47,
                 borderBottomRightRadius: 47,
                 borderTopWidth: 0,
-                margin: -8,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -5650,8 +5614,6 @@ test(`renders as expected without a label when open above and invalid`, () => {
                 borderTopLeftRadius: 47,
                 borderTopRightRadius: 47,
                 borderBottomWidth: 0,
-                margin: -8,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -5833,8 +5795,6 @@ test(`renders as expected without a label when open below and invalid`, () => {
                 borderBottomLeftRadius: 47,
                 borderBottomRightRadius: 47,
                 borderTopWidth: 0,
-                margin: -8,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -6762,8 +6722,6 @@ test(`renders as expected when open above without radius`, () => {
                 borderWidth: 5,
                 borderColor: `#646464`,
                 borderBottomWidth: 0,
-                margin: -1,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -6941,8 +6899,6 @@ test(`renders as expected when open below without radius`, () => {
                 borderWidth: 5,
                 borderColor: `#646464`,
                 borderTopWidth: 0,
-                margin: -1,
-                marginTop: 0,
               },
               {
                 left: 70,
@@ -7120,8 +7076,6 @@ test(`renders as expected when invalid and open above without radius`, () => {
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
                 borderBottomWidth: 0,
-                margin: -8,
-                marginBottom: 0,
               },
               {
                 left: 70,
@@ -7299,8 +7253,6 @@ test(`renders as expected when invalid open below without radius`, () => {
                 borderWidth: 12,
                 borderColor: `#98ADAA`,
                 borderTopWidth: 0,
-                margin: -8,
-                marginTop: 0,
               },
               {
                 left: 70,

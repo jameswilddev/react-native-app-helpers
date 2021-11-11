@@ -49,7 +49,6 @@ export const createControlStateStyleInstance = (
 };
 
 export const createDropDownStateStyleInstance = (
-  controlStyle: ControlStyle,
   controlStateStyle: ControlStateStyle,
   maxHeight: number
 ): ViewStyle => {
@@ -67,17 +66,6 @@ export const createDropDownStateStyleInstance = (
   if (controlStateStyle.border !== null) {
     output.borderWidth = controlStateStyle.border.width;
     output.borderColor = controlStateStyle.border.color;
-  }
-
-  const effectiveBorderWidth =
-    controlStateStyle.border === null ? 0 : controlStateStyle.border.width;
-  const effectiveRelativeToBorderWidth =
-    controlStyle.blurredValid.border === null
-      ? 0
-      : controlStyle.blurredValid.border.width;
-
-  if (effectiveBorderWidth !== effectiveRelativeToBorderWidth) {
-    output.margin = effectiveRelativeToBorderWidth - effectiveBorderWidth;
   }
 
   return output;
