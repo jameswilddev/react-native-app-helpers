@@ -57,7 +57,7 @@
   "sideEffects": false,
   "dependencies": {
     "events": "3.3.0",
-    "expo": "43.0.2",
+    "expo": "43.0.3",
     "expo-file-system": "13.0.3",
     "expo-secure-store": "11.0.3"
   }
