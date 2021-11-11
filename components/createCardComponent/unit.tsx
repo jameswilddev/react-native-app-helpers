@@ -168,7 +168,7 @@ test(`without border radius with shadow radius width fits content height fits co
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
       }}
     >
@@ -192,7 +192,7 @@ test(`without border radius with shadow radius width fills container height fits
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
         width: `100%`,
       }}
@@ -217,7 +217,7 @@ test(`without border radius with shadow radius width fits content height fills c
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
         height: `100%`,
       }}
@@ -242,7 +242,7 @@ test(`without border radius with shadow radius width fills container height fill
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
         width: `100%`,
         height: `100%`,
@@ -269,7 +269,7 @@ test(`with border radius with shadow radius width fits content height fits conte
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
       }}
     >
@@ -296,7 +296,7 @@ test(`with border radius with shadow radius width fills container height fits co
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
         width: `100%`,
       }}
@@ -324,7 +324,7 @@ test(`with border radius with shadow radius width fits content height fills cont
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
         height: `100%`,
       }}
@@ -352,7 +352,7 @@ test(`with border radius with shadow radius width fills container height fills c
         elevation: 16,
         shadowColor: `black`,
         shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4666666666666667,
+        shadowOpacity: 0.3,
         shadowRadius: 10.666666666666666,
         width: `100%`,
         height: `100%`,

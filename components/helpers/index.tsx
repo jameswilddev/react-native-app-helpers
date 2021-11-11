@@ -158,6 +158,6 @@ export const shadow = (radius: number): ViewStyle => {
     shadowColor: `black`,
     shadowOffset: { width: 0, height: radius / 2 },
     shadowRadius: (radius * 2) / 3,
-    shadowOpacity: 0.2 + (radius * 0.4) / 24,
+    shadowOpacity: 0.3,
   };
 };
