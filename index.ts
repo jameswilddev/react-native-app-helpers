@@ -3,6 +3,7 @@ export { ContainerFillingScrollView } from "./components/ContainerFillingScrollV
 export { createButtonComponent } from "./components/createButtonComponent";
 export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFiniteStateMachineRoutingComponent } from "./components/createFiniteStateMachineRoutingComponent";
+export { createFixedWidthComponent } from "./components/createFixedWidthComponent";
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";
 export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFooterComponent";
 export { createImageBackgroundComponent } from "./components/createImageBackgroundComponent";
