@@ -143,3 +143,21 @@ export const withoutBottomBorder = (input: ViewStyle): ViewStyle => {
 
   return output;
 };
+
+export const shadow = (radius: number): ViewStyle => {
+  if (radius < 0) {
+    throw new Error(`Shadow radius cannot be less than 0.`);
+  }
+
+  if (radius > 24) {
+    throw new Error(`Shadow radius cannot be greater than 24.`);
+  }
+
+  return {
+    elevation: radius,
+    shadowColor: `black`,
+    shadowOffset: { width: 0, height: radius / 2 },
+    shadowRadius: (radius * 2) / 3,
+    shadowOpacity: 0.2 + (radius * 0.4) / 24,
+  };
+};

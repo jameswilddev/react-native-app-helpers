@@ -19,6 +19,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Aligned](./components/Aligned/readme.md)
 - [ContainerFillingScrollView](./components/ContainerFillingScrollView/readme.md)
 - [createButtonComponent](./components/createButtonComponent/readme.md)
+- [createCardComponent](./components/createCardComponent/readme.md)
 - [createDropDownComponent](./components/createDropDownComponent/readme.md)
 - [createFiniteStateMachineRoutingComponent](./components/createFiniteStateMachineRoutingComponent/readme.md)
 - [createFixedWidthComponent](./components/createFixedWidthComponent/readme.md)

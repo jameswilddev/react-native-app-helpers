@@ -1,6 +1,7 @@
 export { Aligned } from "./components/Aligned";
 export { ContainerFillingScrollView } from "./components/ContainerFillingScrollView";
 export { createButtonComponent } from "./components/createButtonComponent";
+export { createCardComponent } from "./components/createCardComponent";
 export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFiniteStateMachineRoutingComponent } from "./components/createFiniteStateMachineRoutingComponent";
 export { createFixedWidthComponent } from "./components/createFixedWidthComponent";
