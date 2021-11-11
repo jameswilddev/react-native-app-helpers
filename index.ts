@@ -18,6 +18,7 @@ export { Hitbox } from "./components/Hitbox";
 export { Row } from "./components/Row";
 export { SimpleModal } from "./components/SimpleModal";
 export { useEventRefresh } from "./hooks/useEventRefresh";
+export { useMeasure } from "./hooks/useMeasure";
 export { useRefresh } from "./hooks/useRefresh";
 export { SessionStore } from "./services/SessionStore";
 export { StateStore } from "./services/StateStore";

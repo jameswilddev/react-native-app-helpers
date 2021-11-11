@@ -38,7 +38,8 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ### Hooks
 
-- [useEffectRefresh](./hooks/useEffectRefresh/readme.md)
+- [useEventRefresh](./hooks/useEventRefresh/readme.md)
+- [useMeasure](./hooks/useMeasure/readme.md)
 - [useRefresh](./hooks/useRefresh/readme.md)
 
 ### Services
