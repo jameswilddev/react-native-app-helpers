@@ -29,6 +29,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createInputComponent](./components/createInputComponent/readme.md)
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
 - [createSessionStoreManagerComponent](./components/createSessionStoreManagerComponent/readme.md)
+- [createSidebarComponent](./components/createSidebarComponent/readme.md)
 - [createStackComponent](./components/createStackComponent/readme.md)
 - [createStackRoutingComponent](./components/createStackRoutingComponent/readme.md)
 - [createStateStoreManagerComponent](./components/createStateStoreManagerComponent/readme.md)

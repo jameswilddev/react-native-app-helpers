@@ -11,6 +11,7 @@ export { createImageBackgroundComponent } from "./components/createImageBackgrou
 export { createInputComponent } from "./components/createInputComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createSessionStoreManagerComponent } from "./components/createSessionStoreManagerComponent";
+export { createSidebarComponent } from "./components/createSidebarComponent";
 export { createStackComponent } from "./components/createStackComponent";
 export { createStackRoutingComponent } from "./components/createStackRoutingComponent";
 export { createStateStoreManagerComponent } from "./components/createStateStoreManagerComponent";
