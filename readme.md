@@ -39,6 +39,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Hitbox](./components/Hitbox/readme.md)
 - [Row](./components/Row/readme.md)
 - [SimpleModal](./components/SimpleModal/readme.md)
+- [SizedSafeAreaView](./components/SizedSafeAreaView/readme.md)
 
 ### Hooks
 

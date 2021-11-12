@@ -59,6 +59,7 @@
     "events": "3.3.0",
     "expo": "43.0.3",
     "expo-file-system": "13.0.3",
-    "expo-secure-store": "11.0.3"
+    "expo-secure-store": "11.0.3",
+    "react-native-safe-area-context": "3.3.2"
   }
 }
