@@ -1,4 +1,5 @@
 export { Aligned } from "./components/Aligned";
+export { ContainerFillingKeyboardAvoidingView } from "./components/ContainerFillingKeyboardAvoidingView";
 export { ContainerFillingScrollView } from "./components/ContainerFillingScrollView";
 export { createButtonComponent } from "./components/createButtonComponent";
 export { createCardComponent } from "./components/createCardComponent";
