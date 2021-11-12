@@ -7,6 +7,7 @@ export { createFiniteStateMachineRoutingComponent } from "./components/createFin
 export { createFixedWidthComponent } from "./components/createFixedWidthComponent";
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";
 export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFooterComponent";
+export { createHrComponent } from "./components/createHrComponent";
 export { createImageBackgroundComponent } from "./components/createImageBackgroundComponent";
 export { createInputComponent } from "./components/createInputComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
