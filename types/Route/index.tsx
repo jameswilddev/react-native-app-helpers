@@ -9,11 +9,11 @@ import type { Json } from "../Json";
 export type Route<
   TRouteParameters extends Json,
   TOtherProps extends { readonly [key: string]: any }
-  > = React.FunctionComponent<
-    {
-      readonly routeState: {
-        readonly key: string;
-        readonly parameters: TRouteParameters;
-      };
-    } & TOtherProps
-  >;
+> = React.FunctionComponent<
+  {
+    readonly routeState: {
+      readonly key: string;
+      readonly parameters: TRouteParameters;
+    };
+  } & TOtherProps
+>;

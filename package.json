@@ -43,8 +43,8 @@
   },
   "scripts": {
     "buildClean": "del-cli \"**/*.js\" \"**/*.d.ts\" \"!**/node_modules/**/*\"",
-    "buildLint": "eslint \"**/*.ts\"",
-    "buildLintFix": "eslint --fix \"**/*.ts\"",
+    "buildLint": "eslint \"**/*.ts\" \"**/*.tsx\"",
+    "buildLintFix": "eslint --fix \"**/*.ts\" \"**/*.tsx\"",
     "buildTypeScript": "tsc",
     "buildJest": "jest",
     "test": "npm-run-all buildClean buildLintFix buildTypeScript buildJest"

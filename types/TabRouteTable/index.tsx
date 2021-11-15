@@ -8,6 +8,6 @@ import type { TabRoute } from "../TabRoute";
 export type TabRouteTable<
   TRoute extends string,
   TOtherProps extends { readonly [key: string]: any }
-  > = {
-    readonly [TRouteKey in TRoute]: TabRoute<TOtherProps>;
-  };
+> = {
+  readonly [TRouteKey in TRoute]: TabRoute<TOtherProps>;
+};

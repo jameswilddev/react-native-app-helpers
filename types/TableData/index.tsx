@@ -9,11 +9,11 @@ import type { TableRow } from "../TableRow";
 export type TableData<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string
-  > = {
-    /**
-     * The rows to be shown in the table.
-     */
-    readonly rows: ReadonlyArray<
-      TableRow<TKeyableColumnKey, TNonKeyableColumnKey>
-    >;
-  };
+> = {
+  /**
+   * The rows to be shown in the table.
+   */
+  readonly rows: ReadonlyArray<
+    TableRow<TKeyableColumnKey, TNonKeyableColumnKey>
+  >;
+};

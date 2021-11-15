@@ -11,8 +11,8 @@ import {
 test(`can render one item`, () => {
   type ParametersA = {
     readonly testRouteAParameterKey:
-    | `Test Route A Parameter Value A`
-    | `Test Route A Parameter Value B`;
+      | `Test Route A Parameter Value A`
+      | `Test Route A Parameter Value B`;
   };
 
   type ParametersB = {
@@ -115,8 +115,8 @@ test(`can render one item`, () => {
 test(`can render two items`, () => {
   type ParametersA = {
     readonly testRouteAParameterKey:
-    | `Test Route A Parameter Value A`
-    | `Test Route A Parameter Value B`;
+      | `Test Route A Parameter Value A`
+      | `Test Route A Parameter Value B`;
   };
 
   type ParametersB = {
@@ -234,8 +234,8 @@ test(`can render two items`, () => {
 test(`can render three items`, () => {
   type ParametersA = {
     readonly testRouteAParameterKey:
-    | `Test Route A Parameter Value A`
-    | `Test Route A Parameter Value B`;
+      | `Test Route A Parameter Value A`
+      | `Test Route A Parameter Value B`;
   };
 
   type ParametersB = {

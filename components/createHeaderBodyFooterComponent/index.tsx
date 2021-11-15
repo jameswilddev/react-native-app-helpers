@@ -101,16 +101,16 @@ export const createHeaderBodyFooterComponent = (
           !header && !footer && !body
             ? globalStyles.emptyWrappingView
             : header && footer && !body
-              ? globalStyles.wrappingViewWithoutBody
-              : footer && !body && !header
-                ? globalStyles.wrappingViewWithOnlyFooter
-                : globalStyles.wrappingView
+            ? globalStyles.wrappingViewWithoutBody
+            : footer && !body && !header
+            ? globalStyles.wrappingViewWithOnlyFooter
+            : globalStyles.wrappingView
         }
         {...(children.length === 0
           ? {}
           : children.length === 1
-            ? { children: children[0] }
-            : { children })}
+          ? { children: children[0] }
+          : { children })}
       />
     );
   };

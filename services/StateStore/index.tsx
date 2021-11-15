@@ -22,7 +22,7 @@ export class StateStore<T extends Json> {
    * @param initial The value to use when no such record exists
    *                in expo-file-system.
    */
-  constructor(private readonly initial: T) { }
+  constructor(private readonly initial: T) {}
 
   /**
    * Adds a listener for events to this state store.

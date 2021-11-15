@@ -10,11 +10,11 @@ const styles: { [key: string]: ViewStyle } = {};
 export const Row: React.FunctionComponent<{
   readonly height: `fitsContent` | `fillsContainer`;
   readonly horizontalDistribution:
-  | `left`
-  | `centered`
-  | `right`
-  | `spaced`
-  | `spacedTouchingEnds`;
+    | `left`
+    | `centered`
+    | `right`
+    | `spaced`
+    | `spacedTouchingEnds`;
   readonly verticalAlignment: `top` | `centered` | `bottom` | `stretched`;
 }> = ({ height, horizontalDistribution, verticalAlignment, children }) => {
   const styleKey = `${height}-${horizontalDistribution}-${verticalAlignment}`;

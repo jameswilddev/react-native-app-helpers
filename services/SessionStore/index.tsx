@@ -27,7 +27,7 @@ export class SessionStore<T extends Json> {
   constructor(
     private readonly initial: T,
     private readonly secureStorageKey: string
-  ) { }
+  ) {}
 
   /**
    * Adds a listener for events to this session store.

@@ -307,12 +307,12 @@ export function createInputComponent<T>(
               ? styles.disabledValidView
               : styles.disabledInvalidView
             : focused.current
-              ? valid
-                ? styles.focusedValidView
-                : styles.focusedInvalidView
-              : valid
-                ? styles.blurredValidView
-                : styles.blurredInvalidView
+            ? valid
+              ? styles.focusedValidView
+              : styles.focusedInvalidView
+            : valid
+            ? styles.blurredValidView
+            : styles.blurredInvalidView
         }
       >
         {leftIcon}
@@ -325,46 +325,46 @@ export function createInputComponent<T>(
                     ? styles.disabledValidTextInput
                     : styles.disabledValidTextInputWithRightIcon
                   : rightIcon === null
-                    ? styles.disabledValidTextInputWithLeftIcon
-                    : styles.disabledValidTextInputWithLeftAndRightIcons
+                  ? styles.disabledValidTextInputWithLeftIcon
+                  : styles.disabledValidTextInputWithLeftAndRightIcons
                 : leftIcon === null
-                  ? rightIcon === null
-                    ? styles.disabledInvalidTextInput
-                    : styles.disabledInvalidTextInputWithRightIcon
-                  : rightIcon === null
-                    ? styles.disabledInvalidTextInputWithLeftIcon
-                    : styles.disabledInvalidTextInputWithLeftAndRightIcons
+                ? rightIcon === null
+                  ? styles.disabledInvalidTextInput
+                  : styles.disabledInvalidTextInputWithRightIcon
+                : rightIcon === null
+                ? styles.disabledInvalidTextInputWithLeftIcon
+                : styles.disabledInvalidTextInputWithLeftAndRightIcons
               : focused.current
-                ? valid
-                  ? leftIcon === null
-                    ? rightIcon === null
-                      ? styles.focusedValidTextInput
-                      : styles.focusedValidTextInputWithRightIcon
-                    : rightIcon === null
-                      ? styles.focusedValidTextInputWithLeftIcon
-                      : styles.focusedValidTextInputWithLeftAndRightIcons
-                  : leftIcon === null
-                    ? rightIcon === null
-                      ? styles.focusedInvalidTextInput
-                      : styles.focusedInvalidTextInputWithRightIcon
-                    : rightIcon === null
-                      ? styles.focusedInvalidTextInputWithLeftIcon
-                      : styles.focusedInvalidTextInputWithLeftAndRightIcons
-                : valid
-                  ? leftIcon === null
-                    ? rightIcon === null
-                      ? styles.blurredValidTextInput
-                      : styles.blurredValidTextInputWithRightIcon
-                    : rightIcon === null
-                      ? styles.blurredValidTextInputWithLeftIcon
-                      : styles.blurredValidTextInputWithLeftAndRightIcons
-                  : leftIcon === null
-                    ? rightIcon === null
-                      ? styles.blurredInvalidTextInput
-                      : styles.blurredInvalidTextInputWithRightIcon
-                    : rightIcon === null
-                      ? styles.blurredInvalidTextInputWithLeftIcon
-                      : styles.blurredInvalidTextInputWithLeftAndRightIcons
+              ? valid
+                ? leftIcon === null
+                  ? rightIcon === null
+                    ? styles.focusedValidTextInput
+                    : styles.focusedValidTextInputWithRightIcon
+                  : rightIcon === null
+                  ? styles.focusedValidTextInputWithLeftIcon
+                  : styles.focusedValidTextInputWithLeftAndRightIcons
+                : leftIcon === null
+                ? rightIcon === null
+                  ? styles.focusedInvalidTextInput
+                  : styles.focusedInvalidTextInputWithRightIcon
+                : rightIcon === null
+                ? styles.focusedInvalidTextInputWithLeftIcon
+                : styles.focusedInvalidTextInputWithLeftAndRightIcons
+              : valid
+              ? leftIcon === null
+                ? rightIcon === null
+                  ? styles.blurredValidTextInput
+                  : styles.blurredValidTextInputWithRightIcon
+                : rightIcon === null
+                ? styles.blurredValidTextInputWithLeftIcon
+                : styles.blurredValidTextInputWithLeftAndRightIcons
+              : leftIcon === null
+              ? rightIcon === null
+                ? styles.blurredInvalidTextInput
+                : styles.blurredInvalidTextInputWithRightIcon
+              : rightIcon === null
+              ? styles.blurredInvalidTextInputWithLeftIcon
+              : styles.blurredInvalidTextInputWithLeftAndRightIcons
           }
           value={editing.current}
           multiline={multiLine}
@@ -380,12 +380,12 @@ export function createInputComponent<T>(
                 ? controlStyle.disabledValid.placeholderColor
                 : controlStyle.disabledInvalid.placeholderColor
               : focused.current
-                ? valid
-                  ? controlStyle.focusedValid.placeholderColor
-                  : controlStyle.focusedInvalid.placeholderColor
-                : valid
-                  ? controlStyle.blurredValid.placeholderColor
-                  : controlStyle.blurredInvalid.placeholderColor
+              ? valid
+                ? controlStyle.focusedValid.placeholderColor
+                : controlStyle.focusedInvalid.placeholderColor
+              : valid
+              ? controlStyle.blurredValid.placeholderColor
+              : controlStyle.blurredInvalid.placeholderColor
           }
           onChangeText={(to) => {
             editing.current = to;

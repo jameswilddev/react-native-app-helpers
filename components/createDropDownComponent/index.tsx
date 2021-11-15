@@ -211,16 +211,16 @@ export const createDropDownComponent = (
               ? styles.disabledValidHitbox
               : styles.disabledInvalidHitbox
             : position === `closed`
-              ? valid
-                ? styles.blurredValidHitbox
-                : styles.blurredInvalidHitbox
-              : position === `upper`
-                ? valid
-                  ? styles.upperValidHitbox
-                  : styles.upperInvalidHitbox
-                : valid
-                  ? styles.lowerValidHitbox
-                  : styles.lowerInvalidHitbox
+            ? valid
+              ? styles.blurredValidHitbox
+              : styles.blurredInvalidHitbox
+            : position === `upper`
+            ? valid
+              ? styles.upperValidHitbox
+              : styles.upperInvalidHitbox
+            : valid
+            ? styles.lowerValidHitbox
+            : styles.lowerInvalidHitbox
         }
         onMeasure={(x, y, width, height, pageX, pageY) => {
           x;
@@ -258,23 +258,23 @@ export const createDropDownComponent = (
                   ? styles.disabledValidPlaceholderText
                   : styles.disabledValidText
                 : label === null
-                  ? styles.disabledInvalidPlaceholderText
-                  : styles.disabledInvalidText
+                ? styles.disabledInvalidPlaceholderText
+                : styles.disabledInvalidText
               : position === `closed`
-                ? valid
-                  ? label === null
-                    ? styles.blurredValidPlaceholderText
-                    : styles.blurredValidText
-                  : label === null
-                    ? styles.blurredInvalidPlaceholderText
-                    : styles.blurredInvalidText
-                : valid
-                  ? label === null
-                    ? styles.focusedValidPlaceholderText
-                    : styles.focusedValidText
-                  : label === null
-                    ? styles.focusedInvalidPlaceholderText
-                    : styles.focusedInvalidText
+              ? valid
+                ? label === null
+                  ? styles.blurredValidPlaceholderText
+                  : styles.blurredValidText
+                : label === null
+                ? styles.blurredInvalidPlaceholderText
+                : styles.blurredInvalidText
+              : valid
+              ? label === null
+                ? styles.focusedValidPlaceholderText
+                : styles.focusedValidText
+              : label === null
+              ? styles.focusedInvalidPlaceholderText
+              : styles.focusedInvalidText
           }
         >
           {label ?? placeholder}
@@ -302,8 +302,8 @@ export const createDropDownComponent = (
                     ? styles.upperValidView
                     : styles.lowerValidView
                   : position === `upper`
-                    ? styles.upperInvalidView
-                    : styles.lowerInvalidView,
+                  ? styles.upperInvalidView
+                  : styles.lowerInvalidView,
                 additionalModalViewStyle,
               ]}
             >

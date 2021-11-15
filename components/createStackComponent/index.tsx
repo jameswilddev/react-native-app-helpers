@@ -29,8 +29,8 @@ export const createStackComponent = (
       spacingView:
         direction === `vertical`
           ? {
-            height: spacing,
-          }
+              height: spacing,
+            }
           : { width: spacing },
     });
 
@@ -47,8 +47,8 @@ export const createStackComponent = (
           {...(childArray.length === 0
             ? {}
             : childArray.length === 1
-              ? { children: childArray[0] }
-              : { children: childArray })}
+            ? { children: childArray[0] }
+            : { children: childArray })}
         />
       );
     };

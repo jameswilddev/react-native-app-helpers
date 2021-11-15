@@ -113,16 +113,16 @@ export const createSidebarComponent = (
           !left && !right && !body
             ? globalStyles.emptyWrappingView
             : left && right && !body
-              ? globalStyles.wrappingViewWithoutBody
-              : right && !body && !left
-                ? globalStyles.wrappingViewWithOnlyright
-                : globalStyles.wrappingView
+            ? globalStyles.wrappingViewWithoutBody
+            : right && !body && !left
+            ? globalStyles.wrappingViewWithOnlyright
+            : globalStyles.wrappingView
         }
         {...(children.length === 0
           ? {}
           : children.length === 1
-            ? { children: children[0] }
-            : { children })}
+          ? { children: children[0] }
+          : { children })}
       />
     );
   };
