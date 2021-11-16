@@ -49,6 +49,8 @@ test(`renders as expected when enabled`, () => {
 
   expect(onPress).not.toHaveBeenCalled();
   expect(onMeasure).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`renders as expected when disabled`, () => {
@@ -93,9 +95,11 @@ test(`renders as expected when disabled`, () => {
 
   expect(onPress).not.toHaveBeenCalled();
   expect(onMeasure).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
-test(`calls through to useMeasure`, () => {
+test(`calls through to useMeasure when a callback is given`, () => {
   const onPress = jest.fn();
   const onMeasure = jest.fn();
 
@@ -127,6 +131,26 @@ test(`calls through to useMeasure`, () => {
   expect(onPress).not.toHaveBeenCalled();
   expect(onMeasure).toBeCalledTimes(1);
   expect(onMeasure).toHaveBeenCalledWith(123, 403, 29, 583, 37, 96);
+
+  renderer.unmount();
+});
+
+test(`does not call through to useMeasure when no callback is given`, () => {
+  const onPress = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Hitbox
+      disabled={false}
+      style={{ backgroundColor: `red` }}
+      onPress={onPress}
+    >
+      <Text>Test Children</Text>
+    </Hitbox>
+  );
+
+  expect(onPress).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`executes the press callback once when hitboxes are enabled`, () => {
@@ -158,6 +182,8 @@ test(`executes the press callback once when hitboxes are enabled`, () => {
 
   expect(onPress).toBeCalledTimes(1);
   expect(onMeasure).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`executes the press callback once when hitboxes are disabled`, () => {
@@ -189,4 +215,6 @@ test(`executes the press callback once when hitboxes are disabled`, () => {
 
   expect(onPress).not.toHaveBeenCalled();
   expect(onMeasure).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });

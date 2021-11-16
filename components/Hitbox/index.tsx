@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  LayoutChangeEvent,
   MeasureOnSuccessCallback,
   TouchableOpacity,
   ViewStyle,
@@ -44,7 +45,15 @@ export const Hitbox: Component & {
    */
   enabled: boolean;
 } = (({ disabled, style, onMeasure, onPress, children }) => {
-  const [ref, onLayout] = useMeasure(onMeasure);
+  let ref: undefined | React.RefCallback<TouchableOpacity>;
+  let onLayout: undefined | ((event: LayoutChangeEvent) => void);
+
+  if (onMeasure === undefined) {
+    ref = undefined;
+    onLayout = undefined;
+  } else {
+    [ref, onLayout] = useMeasure(onMeasure);
+  }
 
   return (
     <TouchableOpacity
