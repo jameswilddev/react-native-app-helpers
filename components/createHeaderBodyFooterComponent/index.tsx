@@ -58,60 +58,114 @@ export const createHeaderBodyFooterComponent = (
   });
 
   return ({ header, body, footer }) => {
-    const children = [];
-
     if (header) {
-      children.push(
-        <View
-          pointerEvents="box-none"
-          {...(body && headerBodySpacing
-            ? { style: localStyles.headerView }
-            : {})}
-        >
-          {header}
-        </View>
-      );
-    }
-
-    if (body) {
-      children.push(
-        <View style={globalStyles.bodyView} pointerEvents="box-none">
-          {body}
-        </View>
-      );
-    }
-
-    if (footer) {
-      children.push(
-        <View
-          pointerEvents="box-none"
-          {...(body && bodyFooterSpacing
-            ? { style: localStyles.footerView }
-            : {})}
-        >
-          {footer}
-        </View>
-      );
-    }
-
-    return (
-      <View
-        pointerEvents="box-none"
-        style={
-          !header && !footer && !body
-            ? globalStyles.emptyWrappingView
-            : header && footer && !body
-              ? globalStyles.wrappingViewWithoutBody
-              : footer && !body && !header
-                ? globalStyles.wrappingViewWithOnlyFooter
-                : globalStyles.wrappingView
+      if (body) {
+        if (footer) {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View
+                pointerEvents="box-none"
+                {...(headerBodySpacing
+                  ? { style: localStyles.headerView }
+                  : {})}
+              >
+                {header}
+              </View>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+              <View
+                pointerEvents="box-none"
+                {...(bodyFooterSpacing
+                  ? { style: localStyles.footerView }
+                  : {})}
+              >
+                {footer}
+              </View>
+            </View>
+          );
+        } else {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View
+                pointerEvents="box-none"
+                {...(headerBodySpacing
+                  ? { style: localStyles.headerView }
+                  : {})}
+              >
+                {header}
+              </View>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+            </View>
+          );
         }
-        {...(children.length === 0
-          ? {}
-          : children.length === 1
-            ? { children: children[0] }
-            : { children })}
-      />
-    );
+      } else {
+        if (footer) {
+          return (
+            <View
+              pointerEvents="box-none"
+              style={globalStyles.wrappingViewWithoutBody}
+            >
+              <View pointerEvents="box-none">{header}</View>
+              <View pointerEvents="box-none">{footer}</View>
+            </View>
+          );
+        } else {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View pointerEvents="box-none">{header}</View>
+            </View>
+          );
+        }
+      }
+    } else {
+      if (body) {
+        if (footer) {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+              <View
+                pointerEvents="box-none"
+                {...(bodyFooterSpacing
+                  ? { style: localStyles.footerView }
+                  : {})}
+              >
+                {footer}
+              </View>
+            </View>
+          );
+        } else {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+            </View>
+          );
+        }
+      } else {
+        if (footer) {
+          return (
+            <View
+              pointerEvents="box-none"
+              style={globalStyles.wrappingViewWithOnlyFooter}
+            >
+              <View pointerEvents="box-none">{footer}</View>
+            </View>
+          );
+        } else {
+          return (
+            <View
+              pointerEvents="box-none"
+              style={globalStyles.emptyWrappingView}
+            />
+          );
+        }
+      }
+    }
   };
 };
