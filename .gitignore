@@ -4,3 +4,4 @@ node_modules
 *.d.ts
 .~*#
 coverage
+.DS_Store
