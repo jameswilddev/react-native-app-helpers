@@ -14,7 +14,7 @@ import type {
  *                  monitored element.
  */
 export function useMeasure<T extends NativeMethods>(
-  onMeasure: undefined | MeasureOnSuccessCallback
+  onMeasure: MeasureOnSuccessCallback
 ): readonly [React.RefCallback<T>, (event: LayoutChangeEvent) => void] {
   const element = React.useRef<null | T>(null);
   const queuedLayout = React.useRef(false);
@@ -23,7 +23,7 @@ export function useMeasure<T extends NativeMethods>(
     (_element) => {
       element.current = _element;
 
-      if (queuedLayout.current && onMeasure !== undefined) {
+      if (queuedLayout.current) {
         queuedLayout.current = false;
 
         _element?.measure(onMeasure);
@@ -32,7 +32,7 @@ export function useMeasure<T extends NativeMethods>(
     () => {
       if (element.current === null) {
         queuedLayout.current = true;
-      } else if (onMeasure !== undefined) {
+      } else {
         element.current.measure(onMeasure);
       }
     },

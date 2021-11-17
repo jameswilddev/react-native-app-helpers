@@ -21,7 +21,7 @@ const globalStyles = StyleSheet.create({
     flexDirection: `row`,
     justifyContent: `space-between`,
   },
-  wrappingViewWithOnlyright: {
+  wrappingViewWithOnlyRight: {
     ...wrappingViewBase,
     flex: 1,
     flexDirection: `row`,
@@ -72,58 +72,106 @@ export const createSidebarComponent = (
   });
 
   return ({ left, body, right }) => {
-    const children = [];
-
     if (left) {
-      children.push(
-        <View
-          pointerEvents="box-none"
-          {...(body && leftBodySpacing ? { style: localStyles.leftView } : {})}
-        >
-          {left}
-        </View>
-      );
-    }
-
-    if (body) {
-      children.push(
-        <View style={globalStyles.bodyView} pointerEvents="box-none">
-          {body}
-        </View>
-      );
-    }
-
-    if (right) {
-      children.push(
-        <View
-          pointerEvents="box-none"
-          {...(body && bodyRightSpacing
-            ? { style: localStyles.rightView }
-            : {})}
-        >
-          {right}
-        </View>
-      );
-    }
-
-    return (
-      <View
-        pointerEvents="box-none"
-        style={
-          !left && !right && !body
-            ? globalStyles.emptyWrappingView
-            : left && right && !body
-            ? globalStyles.wrappingViewWithoutBody
-            : right && !body && !left
-            ? globalStyles.wrappingViewWithOnlyright
-            : globalStyles.wrappingView
+      if (body) {
+        if (right) {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View
+                pointerEvents="box-none"
+                {...(leftBodySpacing ? { style: localStyles.leftView } : {})}
+              >
+                {left}
+              </View>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+              <View
+                pointerEvents="box-none"
+                {...(bodyRightSpacing ? { style: localStyles.rightView } : {})}
+              >
+                {right}
+              </View>
+            </View>
+          );
+        } else {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View
+                pointerEvents="box-none"
+                {...(leftBodySpacing ? { style: localStyles.leftView } : {})}
+              >
+                {left}
+              </View>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+            </View>
+          );
         }
-        {...(children.length === 0
-          ? {}
-          : children.length === 1
-          ? { children: children[0] }
-          : { children })}
-      />
-    );
+      } else {
+        if (right) {
+          return (
+            <View
+              pointerEvents="box-none"
+              style={globalStyles.wrappingViewWithoutBody}
+            >
+              <View pointerEvents="box-none">{left}</View>
+              <View pointerEvents="box-none">{right}</View>
+            </View>
+          );
+        } else {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View pointerEvents="box-none">{left}</View>
+            </View>
+          );
+        }
+      }
+    } else {
+      if (body) {
+        if (right) {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+              <View
+                pointerEvents="box-none"
+                {...(bodyRightSpacing ? { style: localStyles.rightView } : {})}
+              >
+                {right}
+              </View>
+            </View>
+          );
+        } else {
+          return (
+            <View pointerEvents="box-none" style={globalStyles.wrappingView}>
+              <View style={globalStyles.bodyView} pointerEvents="box-none">
+                {body}
+              </View>
+            </View>
+          );
+        }
+      } else {
+        if (right) {
+          return (
+            <View
+              pointerEvents="box-none"
+              style={globalStyles.wrappingViewWithOnlyRight}
+            >
+              <View pointerEvents="box-none">{right}</View>
+            </View>
+          );
+        } else {
+          return (
+            <View
+              pointerEvents="box-none"
+              style={globalStyles.emptyWrappingView}
+            />
+          );
+        }
+      }
+    }
   };
 };

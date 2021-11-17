@@ -7,6 +7,7 @@ export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFiniteStateMachineRoutingComponent } from "./components/createFiniteStateMachineRoutingComponent";
 export { createFixedWidthComponent } from "./components/createFixedWidthComponent";
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";
+export { createFullHeightPopoverComponent } from "./components/createFullHeightPopoverComponent";
 export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFooterComponent";
 export { createHrComponent } from "./components/createHrComponent";
 export { createImageBackgroundComponent } from "./components/createImageBackgroundComponent";

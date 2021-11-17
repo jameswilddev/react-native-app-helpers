@@ -104,6 +104,25 @@ export const createControlPlaceholderTextStyleInstance = (
   return output;
 };
 
+export const createFullHeightPopoverStateStyleInstance = (
+  controlStateStyle: ControlStateStyle
+): ViewStyle => {
+  const output: ViewStyle = {
+    position: `absolute`,
+    top: 0,
+    height: `100%`,
+    backgroundColor: controlStateStyle.backgroundColor,
+  };
+
+  if (controlStateStyle.border !== null) {
+    output.borderLeftWidth = controlStateStyle.border.width;
+    output.borderRightWidth = controlStateStyle.border.width;
+    output.borderColor = controlStateStyle.border.color;
+  }
+
+  return output;
+};
+
 export const withoutTopBorder = (input: ViewStyle): ViewStyle => {
   const output = { ...input };
 
