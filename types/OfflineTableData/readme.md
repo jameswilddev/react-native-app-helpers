@@ -1,13 +1,13 @@
-# `react-native-app-helpers/TableData`
+# `react-native-app-helpers/OfflineTableData`
 
-Data to be passed to a table.
+Offline data to be passed to a table.
 
 ## Usage
 
 ```tsx
-import type { TableData } from "react-native-app-helpers";
+import type { OfflineTableData } from "react-native-app-helpers";
 
-const example: TableData<
+const example: OfflineTableData<
   `exampleKeyA` | `exampleKeyB`,
   `exampleKeyC` | `exampleKeyD`
 > = {

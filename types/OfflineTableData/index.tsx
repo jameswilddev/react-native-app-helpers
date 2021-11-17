@@ -1,12 +1,12 @@
 import type { TableRow } from "../TableRow";
 
 /**
- * Data to be passed to a table.
+ * Offline data to be passed to a table.
  * @template TKeyableColumnKey    The keys of keyable columns within the table.
  * @template TNonKeyableColumnKey The keys of non-keyable columns within the
  *                                table.
  */
-export type TableData<
+export type OfflineTableData<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string
 > = {

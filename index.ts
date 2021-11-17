@@ -37,13 +37,13 @@ export { FiniteStateMachineRouterState } from "./types/FiniteStateMachineRouterS
 export { Json } from "./types/Json";
 export { KeyableTableCell } from "./types/KeyableTableCell";
 export { NonKeyableTableCell } from "./types/NonKeyableTableCell";
+export { OfflineTableData } from "./types/OfflineTableData";
 export { Route } from "./types/Route";
 export { RouteParameters } from "./types/RouteParameters";
 export { RouteTable } from "./types/RouteTable";
 export { SortDirection } from "./types/SortDirection";
 export { StackRouterState } from "./types/StackRouterState";
 export { TableColumn } from "./types/TableColumn";
-export { TableData } from "./types/TableData";
 export { TableRow } from "./types/TableRow";
 export { TableRowStyle } from "./types/TableRowStyle";
 export { TableSchema } from "./types/TableSchema";
