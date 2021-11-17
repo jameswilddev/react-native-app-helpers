@@ -25,6 +25,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createFiniteStateMachineRoutingComponent](./components/createFiniteStateMachineRoutingComponent/readme.md)
 - [createFixedWidthComponent](./components/createFixedWidthComponent/readme.md)
 - [createFlatColorBackgroundComponent](./components/createFlatColorBackgroundComponent/readme.md)
+- [createFullHeightPopoverComponent](./components/createFullHeightPopoverComponent/readme.md)
 - [createHeaderBodyFooterComponent](./components/createHeaderBodyFooterComponent/readme.md)
 - [createHrComponent](./components/createHrComponent/readme.md)
 - [createImageBackgroundComponent](./components/createImageBackgroundComponent/readme.md)
