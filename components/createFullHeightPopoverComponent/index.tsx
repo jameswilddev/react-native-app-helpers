@@ -162,12 +162,12 @@ export const createFullHeightPopoverComponent = (
               ? styles.disabledValidHitbox
               : styles.disabledInvalidHitbox
             : additionalModalViewStyle === null
-              ? valid
-                ? styles.blurredValidHitbox
-                : styles.blurredInvalidHitbox
-              : valid
-                ? styles.focusedValidHitbox
-                : styles.focusedInvalidHitbox
+            ? valid
+              ? styles.blurredValidHitbox
+              : styles.blurredInvalidHitbox
+            : valid
+            ? styles.focusedValidHitbox
+            : styles.focusedInvalidHitbox
         }
         onMeasure={(x, y, width, height, pageX, pageY) => {
           x;
@@ -203,23 +203,23 @@ export const createFullHeightPopoverComponent = (
                   ? styles.disabledValidPlaceholderText
                   : styles.disabledValidText
                 : label === null
-                  ? styles.disabledInvalidPlaceholderText
-                  : styles.disabledInvalidText
+                ? styles.disabledInvalidPlaceholderText
+                : styles.disabledInvalidText
               : additionalModalViewStyle === null
-                ? valid
-                  ? label === null
-                    ? styles.blurredValidPlaceholderText
-                    : styles.blurredValidText
-                  : label === null
-                    ? styles.blurredInvalidPlaceholderText
-                    : styles.blurredInvalidText
-                : valid
-                  ? label === null
-                    ? styles.focusedValidPlaceholderText
-                    : styles.focusedValidText
-                  : label === null
-                    ? styles.focusedInvalidPlaceholderText
-                    : styles.focusedInvalidText
+              ? valid
+                ? label === null
+                  ? styles.blurredValidPlaceholderText
+                  : styles.blurredValidText
+                : label === null
+                ? styles.blurredInvalidPlaceholderText
+                : styles.blurredInvalidText
+              : valid
+              ? label === null
+                ? styles.focusedValidPlaceholderText
+                : styles.focusedValidText
+              : label === null
+              ? styles.focusedInvalidPlaceholderText
+              : styles.focusedInvalidText
           }
         >
           {label ?? placeholder}
