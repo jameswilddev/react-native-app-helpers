@@ -3,6 +3,7 @@ export { ContainerFillingKeyboardAvoidingView } from "./components/ContainerFill
 export { ContainerFillingScrollView } from "./components/ContainerFillingScrollView";
 export { createButtonComponent } from "./components/createButtonComponent";
 export { createCardComponent } from "./components/createCardComponent";
+export { createCheckboxComponent } from "./components/createCheckboxComponent";
 export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFiniteStateMachineRoutingComponent } from "./components/createFiniteStateMachineRoutingComponent";
 export { createFixedWidthComponent } from "./components/createFixedWidthComponent";
