@@ -34,6 +34,8 @@ export { BasicTableColumn } from "./types/BasicTableColumn";
 export { BorderStyle } from "./types/BorderStyle";
 export { ButtonStateStyle } from "./types/ButtonStateStyle";
 export { ButtonStyle } from "./types/ButtonStyle";
+export { CheckboxStateStyle } from "./types/CheckboxStateStyle";
+export { CheckboxStyle } from "./types/CheckboxStyle";
 export { ControlStateStyle } from "./types/ControlStateStyle";
 export { ControlStyle } from "./types/ControlStyle";
 export { CustomTableColumn } from "./types/CustomTableColumn";

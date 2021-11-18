@@ -61,6 +61,8 @@ import { createTextComponent } from "react-native-app-helpers";
 - [BorderStyle](./types/BorderStyle/readme.md)
 - [ButtonStateStyle](./types/ButtonStateStyle/readme.md)
 - [ButtonStyle](./types/ButtonStyle/readme.md)
+- [CheckboxStateStyle](./types/CheckboxStateStyle/readme.md)
+- [CheckboxStyle](./types/CheckboxStyle/readme.md)
 - [ControlStateStyle](./types/ControlStateStyle/readme.md)
 - [ControlStyle](./types/ControlStyle/readme.md)
 - [CustomTableColumn](./types/CustomTableColumn/readme.md)
