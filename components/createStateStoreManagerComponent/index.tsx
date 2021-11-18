@@ -20,13 +20,10 @@ export const createStateStoreManagerComponent = <T extends Json>(
   stateStore: StateStore<T>
 ): React.FunctionComponent<{
   readonly stateKey: null | string;
-  readonly unloaded: React.ReactElement<any, any> | null;
-  readonly loading: React.ReactElement<any, any> | null;
-  readonly ready: (
-    state: T,
-    setState: (to: T) => void
-  ) => React.ReactElement<any, any> | null;
-  readonly unloading: React.ReactElement<any, any> | null;
+  readonly unloaded: null | JSX.Element;
+  readonly loading: null | JSX.Element;
+  readonly ready: (state: T, setState: (to: T) => void) => null | JSX.Element;
+  readonly unloading: null | JSX.Element;
 }> => {
   return ({ stateKey, unloaded, loading, ready, unloading }) => {
     const state = React.useRef<

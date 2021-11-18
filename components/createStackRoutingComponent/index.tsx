@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
  */
 export const createStackRoutingComponent = <
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: any }
+  TOtherProps extends { readonly [key: string]: unknown }
 >(
   routeTable: RouteTable<TRouteParameters, TOtherProps>
 ): FunctionComponent<

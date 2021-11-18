@@ -14,7 +14,7 @@ import type { FiniteStateMachineRouterState } from "../../types/FiniteStateMachi
  */
 export const createFiniteStateMachineRoutingComponent = <
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: any }
+  TOtherProps extends { readonly [key: string]: unknown }
 >(
   routeTable: RouteTable<TRouteParameters, TOtherProps>
 ): FunctionComponent<

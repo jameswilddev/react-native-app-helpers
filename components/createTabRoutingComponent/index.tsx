@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
  */
 export const createTabRoutingComponent = <
   TRoute extends string,
-  TOtherProps extends { readonly [key: string]: any }
+  TOtherProps extends { readonly [key: string]: unknown }
 >(
   routeTable: TabRouteTable<TRoute, TOtherProps>
 ): FunctionComponent<

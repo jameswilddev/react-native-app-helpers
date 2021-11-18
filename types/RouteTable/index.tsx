@@ -8,7 +8,7 @@ import type { RouteParameters } from "../RouteParameters";
  */
 export type RouteTable<
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: any }
+  TOtherProps extends { readonly [key: string]: unknown }
 > = {
   readonly [TKey in keyof TRouteParameters]: Route<
     TRouteParameters[TKey],
