@@ -35,6 +35,12 @@ const createViewStyle = (
     output.margin = relativeBorderWidth;
   }
 
+  if (checkboxStyle.fontSize * 1.4 > checkboxStyle.boxSize) {
+    output.marginTop =
+      relativeBorderWidth +
+      (checkboxStyle.fontSize * 1.4 - checkboxStyle.boxSize) / 2;
+  }
+
   return output;
 };
 
@@ -51,6 +57,11 @@ const createTextStyle = (
 
   if (checkboxStyle.boxLabelSpacing !== 0) {
     output.paddingLeft = checkboxStyle.boxLabelSpacing;
+  }
+
+  if (checkboxStyle.boxSize > checkboxStyle.fontSize * 1.4) {
+    output.paddingTop =
+      (checkboxStyle.boxSize - checkboxStyle.fontSize * 1.4) / 2;
   }
 
   return output;
