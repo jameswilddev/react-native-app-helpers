@@ -89,9 +89,8 @@ test(`renders as expected when not disabled`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -215,9 +214,8 @@ test(`renders as expected when disabled`, () => {
       placeholder="Example Placeholder"
       valid
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -342,9 +340,8 @@ test(`renders as expected when not disabled after layout`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -474,9 +471,8 @@ test(`renders as expected when disabled after layout`, () => {
       placeholder="Example Placeholder"
       valid
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -607,9 +603,8 @@ test(`renders as expected when not disabled after layout after press`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -778,9 +773,8 @@ test(`renders as expected when not disabled after press after layout`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -949,9 +943,8 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -1128,9 +1121,8 @@ test(`correctly handles layout changes which only change width`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -1307,9 +1299,8 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -1486,9 +1477,8 @@ test(`correctly handles layout changes which only change height`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -1665,9 +1655,8 @@ test(`correctly handles layout changes which have no effect`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -1844,9 +1833,8 @@ test(`can be enabled after being created disabled`, async () => {
       placeholder="Example Placeholder"
       valid
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -1878,9 +1866,8 @@ test(`can be enabled after being created disabled`, async () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2009,9 +1996,8 @@ test(`closes if disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -2032,9 +2018,8 @@ test(`closes if disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2159,9 +2144,8 @@ test(`does not re-open if enabled after disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -2182,9 +2166,8 @@ test(`does not re-open if enabled after disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   renderer.update(
@@ -2193,9 +2176,8 @@ test(`does not re-open if enabled after disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2319,9 +2301,8 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -2342,9 +2323,8 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   renderer.update(
@@ -2353,9 +2333,8 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -2518,9 +2497,8 @@ test(`closes when the modal is dismissed`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -2541,6 +2519,149 @@ test(`closes when the modal is dismissed`, () => {
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
       )[1] as TestRenderer.ReactTestRendererTree
     ).props[`onClose`]();
+  });
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: Hitbox,
+      props: {
+        onMeasure: expect.any(Function),
+        onPress: expect.any(Function),
+        disabled: false,
+        style: {
+          backgroundColor: `#32AE12`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
+        },
+        children: expect.objectContaining({
+          type: Text,
+          props: {
+            style: {
+              flexGrow: 1,
+              color: `#FFEE00`,
+              paddingVertical: 12,
+              fontFamily: `Example Font Family`,
+              fontSize: 37,
+              lineHeight: 51.8,
+            },
+            children: `Example Button Content`,
+          },
+        }),
+      },
+    })
+  );
+
+  renderer.unmount();
+});
+
+test(`closes when the close callback is invoked`, () => {
+  Dimensions.set({
+    window: {
+      width: 640,
+      height: 480,
+      scale: 2.42,
+      fontScale: 3.51,
+    },
+  });
+
+  const Component = createFullHeightPopoverComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 37,
+    paddingVertical: 12,
+    paddingHorizontal: 29,
+    blurredValid: {
+      textColor: `#FFEE00`,
+      placeholderColor: `#E7AA32`,
+      backgroundColor: `#32AE12`,
+      radius: 5,
+      border: {
+        width: 4,
+        color: `#FF00FF`,
+      },
+    },
+    blurredInvalid: {
+      textColor: `#99FE88`,
+      placeholderColor: `#CACA3A`,
+      backgroundColor: `#259284`,
+      radius: 10,
+      border: {
+        width: 6,
+        color: `#9A9A8E`,
+      },
+    },
+    focusedValid: {
+      textColor: `#55EA13`,
+      placeholderColor: `#273346`,
+      backgroundColor: `#CABA99`,
+      radius: 3,
+      border: {
+        width: 5,
+        color: `#646464`,
+      },
+    },
+    focusedInvalid: {
+      textColor: `#ABAADE`,
+      placeholderColor: `#47ADAD`,
+      backgroundColor: `#32AA88`,
+      radius: 47,
+      border: {
+        width: 12,
+        color: `#98ADAA`,
+      },
+    },
+    disabledValid: {
+      textColor: `#AE2195`,
+      placeholderColor: `#FFAAEE`,
+      backgroundColor: `#772728`,
+      radius: 100,
+      border: {
+        width: 14,
+        color: `#5E5E5E`,
+      },
+    },
+    disabledInvalid: {
+      textColor: `#340297`,
+      placeholderColor: `#233832`,
+      backgroundColor: `#938837`,
+      radius: 2,
+      border: {
+        width: 19,
+        color: `#573829`,
+      },
+    },
+  });
+  const children = jest.fn(() => <Text>Example Pop Over Content</Text>);
+
+  const renderer = TestRenderer.create(
+    <Component
+      label="Example Button Content"
+      placeholder="Example Placeholder"
+      valid
+      disabled={false}
+      children={children}
+    />
+  );
+
+  TestRenderer.act(() => {
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
+      `onMeasure`
+    ](123, 456, 220, 20, 70, 310);
+  });
+
+  TestRenderer.act(() => {
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
+      `onPress`
+    ]();
+  });
+
+  TestRenderer.act(() => {
+    expect(children).toHaveBeenCalledTimes(1);
+    (children.mock.calls[0] as ReadonlyArray<() => void>)[0]?.();
   });
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2664,9 +2785,8 @@ test(`renders as expected without a label`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2790,9 +2910,8 @@ test(`renders as expected without a label when open`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -2956,9 +3075,13 @@ test(`renders as expected without a label when disabled`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component label={null} placeholder="Example Placeholder" valid disabled>
-      <Text>Example Pop Over Content</Text>
-    </Component>
+    <Component
+      label={null}
+      placeholder="Example Placeholder"
+      valid
+      disabled
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3083,9 +3206,8 @@ test(`renders as expected when invalid`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3210,9 +3332,8 @@ test(`renders as expected when invalid when open`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -3382,9 +3503,8 @@ test(`renders as expected when invalid and disabled`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3509,9 +3629,8 @@ test(`renders as expected when invalid without a label`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3636,9 +3755,8 @@ test(`renders as expected without a label when invalid`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -3808,9 +3926,8 @@ test(`renders as expected without a label when disabled and invalid`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3917,9 +4034,8 @@ test(`renders as expected without borders`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -4065,9 +4181,8 @@ test(`renders as expected when invalid without borders`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -4231,9 +4346,8 @@ test(`renders as expected without radius`, () => {
       placeholder="Example Placeholder"
       valid
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {
@@ -4401,9 +4515,8 @@ test(`renders as expected when invalid without radius`, () => {
       placeholder="Example Placeholder"
       valid={false}
       disabled={false}
-    >
-      <Text>Example Pop Over Content</Text>
-    </Component>
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
   );
 
   TestRenderer.act(() => {

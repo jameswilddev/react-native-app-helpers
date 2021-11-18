@@ -41,6 +41,13 @@ export const createFullHeightPopoverComponent = (
    * styles as though it is invalid.
    */
   readonly valid: boolean;
+
+  /**
+   * Describes the contents of the pop-over.
+   * @param close Invoke to close the pop-over.
+   * @returns     The contents of the pop-over.
+   */
+  children(close: () => void): null | JSX.Element;
 }> => {
   const styles = StyleSheet.create({
     validHitbox: createControlStyleInstance(
@@ -194,23 +201,23 @@ export const createFullHeightPopoverComponent = (
     if (additionalModalViewStyle === null) {
       return inline;
     } else {
+      const onClose = () => {
+        state.current.open = false;
+
+        refresh();
+      };
+
       return (
         <React.Fragment>
           {inline}
-          <SimpleModal
-            onClose={() => {
-              state.current.open = false;
-
-              refresh();
-            }}
-          >
+          <SimpleModal onClose={onClose}>
             <View
               style={[
                 valid ? styles.validView : styles.invalidView,
                 additionalModalViewStyle,
               ]}
             >
-              {children}
+              {children(onClose)}
             </View>
           </SimpleModal>
         </React.Fragment>
