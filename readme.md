@@ -30,6 +30,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createHrComponent](./components/createHrComponent/readme.md)
 - [createImageBackgroundComponent](./components/createImageBackgroundComponent/readme.md)
 - [createInputComponent](./components/createInputComponent/readme.md)
+- [createOfflineTableComponent](./components/createOfflineTableComponent/readme.md)
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
 - [createSessionStoreManagerComponent](./components/createSessionStoreManagerComponent/readme.md)
 - [createSidebarComponent](./components/createSidebarComponent/readme.md)
@@ -56,11 +57,13 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ### Types
 
+- [BasicTableColumn](./types/BasicTableColumn/readme.md)
 - [BorderStyle](./types/BorderStyle/readme.md)
 - [ButtonStateStyle](./types/ButtonStateStyle/readme.md)
 - [ButtonStyle](./types/ButtonStyle/readme.md)
 - [ControlStateStyle](./types/ControlStateStyle/readme.md)
 - [ControlStyle](./types/ControlStyle/readme.md)
+- [CustomTableColumn](./types/CustomTableColumn/readme.md)
 - [FiniteStateMachineRouterState](./types/FiniteStateMachineRouterState/readme.md)
 - [Json](./types/Json/readme.md)
 - [KeyableTableCell](./types/KeyableTableCell/readme.md)

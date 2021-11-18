@@ -7,9 +7,17 @@ Offline data to be passed to a table.
 ```tsx
 import type { OfflineTableData } from "react-native-app-helpers";
 
+type TableRow = {
+  readonly columnA: null | string;
+  readonly columnB: null | number;
+  readonly columnC: 0 | 1 | 2 | 3;
+  readonly columnD: null | boolean;
+};
+
 const example: OfflineTableData<
   `exampleKeyA` | `exampleKeyB`,
-  `exampleKeyC` | `exampleKeyD`
+  `exampleKeyC` | `exampleKeyD`,
+  TableRow
 > = {
   rows: [
     {

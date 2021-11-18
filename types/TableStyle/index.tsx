@@ -71,6 +71,26 @@ export type TableStyle = {
      * Styling to apply on even rows.
      */
     readonly even: TableRowStyle;
+
+    /**
+     * Elements to use for primitive values in basic columns.
+     */
+    readonly primitiveElements: {
+      /**
+       * The element to use where a cell for a basic column contains null.
+       */
+      readonly null: null | React.ReactNode | JSX.Element;
+
+      /**
+       * The element to use where a cell for a basic column contains false.
+       */
+      readonly false: null | React.ReactNode | JSX.Element;
+
+      /**
+       * The element to use where a cell for a basic column contains true.
+       */
+      readonly true: null | React.ReactNode | JSX.Element;
+    };
   };
 
   /**

@@ -11,5 +11,7 @@ export type TableRow<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string
 > = { readonly [TKey in TKeyableColumnKey]: KeyableTableCell } & {
-  readonly [TKey in TNonKeyableColumnKey]: NonKeyableTableCell;
+  readonly [TKey in TNonKeyableColumnKey]:
+    | KeyableTableCell
+    | NonKeyableTableCell;
 };

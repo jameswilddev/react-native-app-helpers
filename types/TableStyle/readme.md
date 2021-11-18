@@ -35,6 +35,11 @@ const example: TableStyle = {
       color: `gray`,
       background: `blue`,
     },
+    primitiveElements: {
+      null: <Text>Example Null</Text>,
+      false: <Text>Example False</Text>,
+      true: <Text>Example True</Text>,
+    },
   },
 
   // Nullable.
