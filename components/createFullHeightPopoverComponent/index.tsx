@@ -43,21 +43,13 @@ export const createFullHeightPopoverComponent = (
   readonly valid: boolean;
 }> => {
   const styles = StyleSheet.create({
-    blurredValidHitbox: createControlStyleInstance(
+    validHitbox: createControlStyleInstance(
       controlStyle,
       controlStyle.blurredValid
     ),
-    blurredInvalidHitbox: createControlStateStyleInstance(
+    invalidHitbox: createControlStateStyleInstance(
       controlStyle,
       controlStyle.blurredInvalid
-    ),
-    focusedValidHitbox: createControlStateStyleInstance(
-      controlStyle,
-      controlStyle.focusedValid
-    ),
-    focusedInvalidHitbox: createControlStateStyleInstance(
-      controlStyle,
-      controlStyle.focusedInvalid
     ),
     disabledValidHitbox: createControlStateStyleInstance(
       controlStyle,
@@ -75,21 +67,13 @@ export const createFullHeightPopoverComponent = (
       controlStyle,
       controlStyle.disabledInvalid
     ),
-    blurredValidText: createControlTextStyleInstance(
+    validText: createControlTextStyleInstance(
       controlStyle,
       controlStyle.blurredValid
     ),
-    blurredInvalidText: createControlTextStyleInstance(
+    invalidText: createControlTextStyleInstance(
       controlStyle,
       controlStyle.blurredInvalid
-    ),
-    focusedValidText: createControlTextStyleInstance(
-      controlStyle,
-      controlStyle.focusedValid
-    ),
-    focusedInvalidText: createControlTextStyleInstance(
-      controlStyle,
-      controlStyle.focusedInvalid
     ),
     disabledValidPlaceholderText: createControlPlaceholderTextStyleInstance(
       controlStyle,
@@ -99,21 +83,13 @@ export const createFullHeightPopoverComponent = (
       controlStyle,
       controlStyle.disabledInvalid
     ),
-    blurredValidPlaceholderText: createControlPlaceholderTextStyleInstance(
+    validPlaceholderText: createControlPlaceholderTextStyleInstance(
       controlStyle,
       controlStyle.blurredValid
     ),
-    blurredInvalidPlaceholderText: createControlPlaceholderTextStyleInstance(
+    invalidPlaceholderText: createControlPlaceholderTextStyleInstance(
       controlStyle,
       controlStyle.blurredInvalid
-    ),
-    focusedValidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.focusedValid
-    ),
-    focusedInvalidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.focusedInvalid
     ),
     validView: createFullHeightPopoverStateStyleInstance(
       controlStyle.focusedValid
@@ -161,13 +137,9 @@ export const createFullHeightPopoverComponent = (
             ? valid
               ? styles.disabledValidHitbox
               : styles.disabledInvalidHitbox
-            : additionalModalViewStyle === null
-            ? valid
-              ? styles.blurredValidHitbox
-              : styles.blurredInvalidHitbox
             : valid
-            ? styles.focusedValidHitbox
-            : styles.focusedInvalidHitbox
+            ? styles.validHitbox
+            : styles.invalidHitbox
         }
         onMeasure={(x, y, width, height, pageX, pageY) => {
           x;
@@ -205,21 +177,13 @@ export const createFullHeightPopoverComponent = (
                 : label === null
                 ? styles.disabledInvalidPlaceholderText
                 : styles.disabledInvalidText
-              : additionalModalViewStyle === null
-              ? valid
-                ? label === null
-                  ? styles.blurredValidPlaceholderText
-                  : styles.blurredValidText
-                : label === null
-                ? styles.blurredInvalidPlaceholderText
-                : styles.blurredInvalidText
               : valid
               ? label === null
-                ? styles.focusedValidPlaceholderText
-                : styles.focusedValidText
+                ? styles.validPlaceholderText
+                : styles.validText
               : label === null
-              ? styles.focusedInvalidPlaceholderText
-              : styles.focusedInvalidText
+              ? styles.invalidPlaceholderText
+              : styles.invalidText
           }
         >
           {label ?? placeholder}

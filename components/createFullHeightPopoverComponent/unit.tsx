@@ -3,6 +3,9 @@ import { Dimensions, Text, View } from "react-native";
 import * as TestRenderer from "react-test-renderer";
 import { createFullHeightPopoverComponent, Hitbox, SimpleModal } from "../..";
 
+View;
+SimpleModal;
+
 test(`renders as expected when not disabled`, () => {
   Dimensions.set({
     window: {
@@ -630,21 +633,20 @@ test(`renders as expected when not disabled after layout after press`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -802,21 +804,20 @@ test(`renders as expected when not disabled after press after layout`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -982,21 +983,20 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -1162,21 +1162,20 @@ test(`correctly handles layout changes which only change width`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -1342,21 +1341,20 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -1522,21 +1520,20 @@ test(`correctly handles layout changes which only change height`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -1702,21 +1699,20 @@ test(`correctly handles layout changes which have no effect`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -2377,21 +2373,20 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -2821,21 +2816,20 @@ test(`renders as expected without a label when open`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#273346`,
+              color: `#E7AA32`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -3242,21 +3236,21 @@ test(`renders as expected when invalid when open`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#32AA88`,
+          backgroundColor: `#259284`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 12,
-          borderColor: `#98ADAA`,
-          borderRadius: 47,
-          margin: -8,
+          borderWidth: 6,
+          borderColor: `#9A9A8E`,
+          margin: -2,
+          borderRadius: 10,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#47ADAD`,
+              color: `#CACA3A`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -3668,21 +3662,21 @@ test(`renders as expected without a label when invalid`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#32AA88`,
+          backgroundColor: `#259284`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 12,
-          borderColor: `#98ADAA`,
-          borderRadius: 47,
-          margin: -8,
+          borderWidth: 6,
+          borderColor: `#9A9A8E`,
+          margin: -2,
+          borderRadius: 10,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#47ADAD`,
+              color: `#CACA3A`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -3949,18 +3943,18 @@ test(`renders as expected without borders`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderRadius: 3,
+          borderRadius: 5,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -4097,18 +4091,18 @@ test(`renders as expected when invalid without borders`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#32AA88`,
+          backgroundColor: `#259284`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderRadius: 47,
+          borderRadius: 10,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#ABAADE`,
+              color: `#99FE88`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -4263,20 +4257,19 @@ test(`renders as expected without radius`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#55EA13`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
@@ -4434,20 +4427,20 @@ test(`renders as expected when invalid without radius`, () => {
         onPress: expect.any(Function),
         disabled: false,
         style: {
-          backgroundColor: `#32AA88`,
+          backgroundColor: `#259284`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 12,
-          borderColor: `#98ADAA`,
-          margin: -8,
+          borderWidth: 6,
+          borderColor: `#9A9A8E`,
+          margin: -2,
         },
         children: expect.objectContaining({
           type: Text,
           props: {
             style: {
               flexGrow: 1,
-              color: `#ABAADE`,
+              color: `#99FE88`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
