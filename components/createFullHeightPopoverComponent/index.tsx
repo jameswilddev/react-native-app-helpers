@@ -14,15 +14,7 @@ import {
 import { ContainerFillingKeyboardAvoidingView } from "../ContainerFillingKeyboardAvoidingView";
 import { SizedSafeAreaView } from "../SizedSafeAreaView";
 
-/**
- * Creates a new React component which displays a button which can be pressed to
- * show an element in a pop-over which fills the display vertically.
- * @param controlStyle  The styling to use.
- * @returns             The created React component.
- */
-export const createFullHeightPopoverComponent = (
-  controlStyle: ControlStyle
-): React.FunctionComponent<{
+type Instance = React.FunctionComponent<{
   /**
    * The text shown in the button.  When null, the placeholder is shown instead.
    */
@@ -50,7 +42,28 @@ export const createFullHeightPopoverComponent = (
    * @returns     The contents of the pop-over.
    */
   children(close: () => void): null | JSX.Element;
-}> => {
+}>;
+
+/**
+ * The arguments used to create a full-height pop-over component; for testing
+ * higher-order components.
+ */
+type Introspection = {
+  /**
+   * The styling to use.
+   */
+  readonly controlStyle: ControlStyle;
+};
+
+/**
+ * Creates a new React component which displays a button which can be pressed to
+ * show an element in a pop-over which fills the display vertically.
+ * @param controlStyle  The styling to use.
+ * @returns             The created React component.
+ */
+export const createFullHeightPopoverComponent = (
+  controlStyle: ControlStyle
+): Instance & { readonly fullHeightPopover: Introspection } => {
   const styles = StyleSheet.create({
     validHitbox: createControlStyleInstance(
       controlStyle,
@@ -108,7 +121,13 @@ export const createFullHeightPopoverComponent = (
     ),
   });
 
-  return ({ label, placeholder, disabled, valid, children }) => {
+  const FullHeightPopOver: Instance & { fullHeightPopover?: Introspection } = ({
+    label,
+    placeholder,
+    disabled,
+    valid,
+    children,
+  }) => {
     const refresh = useRefresh();
 
     const state = React.useRef<{
@@ -232,5 +251,11 @@ export const createFullHeightPopoverComponent = (
         </React.Fragment>
       );
     }
+  };
+
+  FullHeightPopOver.fullHeightPopover = { controlStyle };
+
+  return FullHeightPopOver as Instance & {
+    readonly fullHeightPopover: Introspection;
   };
 };
