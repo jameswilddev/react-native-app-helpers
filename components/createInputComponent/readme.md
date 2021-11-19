@@ -81,7 +81,8 @@ const ExampleInput = createInputComponent<number>(
     },
     false,
     `email`,
-    `numeric`
+    `numeric`,
+    true
 );
 
 const ExampleScreen = () => {

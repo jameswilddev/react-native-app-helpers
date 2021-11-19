@@ -95,6 +95,12 @@ type Introspection<T> = {
    * The type of keyboard to show.
    */
   readonly keyboardType: `default` | `email-address` | `numeric`;
+
+  /**
+   * When true, the text input will steal focus on mount.  It will otherwise
+   * wait for the user to interact with it.
+   */
+  readonly autoFocus: boolean;
 };
 
 /**
@@ -110,6 +116,8 @@ type Introspection<T> = {
  *                     will otherwise scroll one line horizontally.
  * @param autoComplete The type of auto-complete suggestions to provide.
  * @param keyboardType The type of keyboard to show.
+ * @param autoFocus    When true, the text input will steal focus on mount.  It
+ *                     will otherwise wait for the user to interact with it.
  * @returns            A React component which allows for the editing of text.
  */
 export function createInputComponent<T>(
@@ -118,7 +126,8 @@ export function createInputComponent<T>(
   controlStyle: ControlStyle,
   multiLine: boolean,
   autoComplete: `off` | `email` | `password`,
-  keyboardType: `default` | `email-address` | `numeric`
+  keyboardType: `default` | `email-address` | `numeric`,
+  autoFocus: boolean
 ): Instance<T> & {
   /**
    * The arguments used to create this input component; for testing higher-order
@@ -346,6 +355,9 @@ export function createInputComponent<T>(
 
     const valid = tryParse(editing.current) !== undefined;
 
+    const ref = React.useRef<null | TextInput>(null);
+    const firstLayout = React.useRef(true);
+
     return (
       <View
         style={
@@ -364,6 +376,19 @@ export function createInputComponent<T>(
       >
         {leftIcon}
         <TextInput
+          {...(autoFocus
+            ? {
+                ref,
+                onLayout() {
+                  //console.log(ref.current);
+                  if (firstLayout.current) {
+                    firstLayout.current = false;
+                    //console.log(ref.current?.focus);
+                    ref.current?.focus();
+                  }
+                },
+              }
+            : {})}
           style={
             disabled
               ? valid
@@ -487,6 +512,7 @@ export function createInputComponent<T>(
     multiLine,
     autoComplete,
     keyboardType,
+    autoFocus,
   };
 
   return Input as Instance<T> & { readonly inputComponent: Introspection<T> };
