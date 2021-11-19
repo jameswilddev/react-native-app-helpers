@@ -380,10 +380,8 @@ export function createInputComponent<T>(
             ? {
                 ref,
                 onLayout() {
-                  //console.log(ref.current);
                   if (firstLayout.current) {
                     firstLayout.current = false;
-                    //console.log(ref.current?.focus);
                     ref.current?.focus();
                   }
                 },
