@@ -135,3 +135,41 @@ jest.mock(`expo-secure-store`, () => {
     },
   };
 });
+
+expect.extend({
+  toBeAFunctionWithTheStaticProperties(received, expected) {
+    if (
+      received instanceof Function &&
+      Object.prototype.hasOwnProperty.call(received, `arguments`)
+    ) {
+      const asObject: Record<string, unknown> = {};
+
+      for (const key in received) {
+        asObject[key] = received[key];
+      }
+
+      expect(asObject).toMatchObject(expected);
+
+      return {
+        pass: true,
+        message: () =>
+          `Expected ${received} to be a Function with properties ${expected}`,
+      };
+    } else {
+      return {
+        pass: false,
+        message: () =>
+          `Expected ${received} to be a Function with properties ${expected}`,
+      };
+    }
+  },
+});
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+declare namespace jest {
+  interface Matchers<R> {
+    toBeAFunctionWithTheStaticProperties(
+      properties: Record<string, unknown>
+    ): R;
+  }
+}

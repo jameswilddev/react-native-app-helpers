@@ -8,30 +8,7 @@ import {
   createControlTextStyleInstance,
 } from "../helpers";
 
-/**
- * Creates a React component which allows for the editing of text.
- * @template T         The type of value which results from the editing of
- *                     text.
- * @param stringify    A function which takes the value passed into the
- *                     component and transforms it into raw text for editing.
- * @param tryParse     A function which attempts to convert raw text back into
- *                     a value to output, returning undefined if this is not
- *                     possible.
- * @param controlStyle The styling to use.
- * @param multiLine    When true, the text may wrap onto multiple lines.  It
- *                     will otherwise scroll one line horizontally.
- * @param autoComplete The type of auto-complete suggestions to provide.
- * @param keyboardType The type of keyboard to show.
- * @returns            A React component which allows for the editing of text.
- */
-export function createInputComponent<T>(
-  stringify: (value: T) => string,
-  tryParse: (value: string) => undefined | T,
-  controlStyle: ControlStyle,
-  multiLine: boolean,
-  autoComplete: `off` | `email` | `password`,
-  keyboardType: `default` | `email-address` | `numeric`
-): React.FunctionComponent<{
+type Instance<T> = React.FunctionComponent<{
   /**
    * The icon to show on the left side, if any, else, null.
    */
@@ -78,7 +55,77 @@ export function createInputComponent<T>(
    * @param parsed The parsed value.
    */
   onSubmit(parsed: T): void;
-}> {
+}>;
+
+/**
+ * The arguments used to create an input component; for testing higher-order
+ * components.
+ * @template T The type of value which results from the editing of text.
+ */
+type Introspection<T> = {
+  /**
+   * A function which takes the value passed into the component and transforms
+   * it into raw text for editing.
+   */
+  stringify: (value: T) => string;
+
+  /**
+   * A function which attempts to convert raw text back into a value to output,
+   * returning undefined if this is not possible.
+   */
+  tryParse: (value: string) => undefined | T;
+
+  /**
+   * The styling to use.
+   */
+  readonly controlStyle: ControlStyle;
+
+  /**
+   * When true, the text may wrap onto multiple lines.  It will otherwise scroll
+   * one line horizontally.
+   */
+  readonly multiLine: boolean;
+
+  /**
+   * The type of auto-complete suggestions to provide.
+   */
+  readonly autoComplete: `off` | `email` | `password`;
+
+  /**
+   * The type of keyboard to show.
+   */
+  readonly keyboardType: `default` | `email-address` | `numeric`;
+};
+
+/**
+ * Creates a React component which allows for the editing of text.
+ * @template T         The type of value which results from the editing of text.
+ * @param stringify    A function which takes the value passed into the
+ *                     component and transforms it into raw text for editing.
+ * @param tryParse     A function which attempts to convert raw text back into
+ *                     a value to output, returning undefined if this is not
+ *                     possible.
+ * @param controlStyle The styling to use.
+ * @param multiLine    When true, the text may wrap onto multiple lines.  It
+ *                     will otherwise scroll one line horizontally.
+ * @param autoComplete The type of auto-complete suggestions to provide.
+ * @param keyboardType The type of keyboard to show.
+ * @returns            A React component which allows for the editing of text.
+ */
+export function createInputComponent<T>(
+  stringify: (value: T) => string,
+  tryParse: (value: string) => undefined | T,
+  controlStyle: ControlStyle,
+  multiLine: boolean,
+  autoComplete: `off` | `email` | `password`,
+  keyboardType: `default` | `email-address` | `numeric`
+): Instance<T> & {
+  /**
+   * The arguments used to create this input component; for testing higher-order
+   * components.
+   */
+  readonly inputComponent: Introspection<T>;
+} {
   const withLeftIcon: TextStyle = controlStyle.paddingHorizontal
     ? { paddingLeft: controlStyle.paddingHorizontal }
     : {};
@@ -268,7 +315,7 @@ export function createInputComponent<T>(
     },
   });
 
-  return ({
+  const Input: Instance<T> & { inputComponent?: Introspection<T> } = ({
     leftIcon,
     rightIcon,
     value,
@@ -432,4 +479,15 @@ export function createInputComponent<T>(
       </View>
     );
   };
+
+  Input.inputComponent = {
+    stringify,
+    tryParse,
+    controlStyle,
+    multiLine,
+    autoComplete,
+    keyboardType,
+  };
+
+  return Input as Instance<T> & { readonly inputComponent: Introspection<T> };
 }

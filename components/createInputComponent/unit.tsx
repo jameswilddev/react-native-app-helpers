@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text, TextInput, View } from "react-native";
 import * as TestRenderer from "react-test-renderer";
-import { createInputComponent } from "../..";
+import { createInputComponent, unwrapRenderedFunctionComponent } from "../..";
 
 test(`renders as expected with a value`, () => {
   const Component = createInputComponent<number>(
@@ -7304,4 +7304,112 @@ test(`renders as expected when disabled with left and right icons without a valu
 
   expect(onChange).not.toHaveBeenCalled();
   expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`allows introspection when used in a higher-order component`, () => {
+  const stringify = jest.fn();
+  const tryParse = jest.fn();
+  const controlStyle = {
+    fontFamily: `Example Font Family`,
+    fontSize: 37,
+    paddingVertical: 12,
+    paddingHorizontal: 29,
+    blurredValid: {
+      textColor: `#FFEE00`,
+      placeholderColor: `#E7AA32`,
+      backgroundColor: `#32AE12`,
+      radius: 5,
+      border: {
+        width: 4,
+        color: `#FF00FF`,
+      },
+    },
+    blurredInvalid: {
+      textColor: `#99FE88`,
+      placeholderColor: `#CACA3A`,
+      backgroundColor: `#259284`,
+      radius: 10,
+      border: {
+        width: 6,
+        color: `#9A9A8E`,
+      },
+    },
+    focusedValid: {
+      textColor: `#55EA13`,
+      placeholderColor: `#273346`,
+      backgroundColor: `#CABA99`,
+      radius: 3,
+      border: {
+        width: 5,
+        color: `#646464`,
+      },
+    },
+    focusedInvalid: {
+      textColor: `#ABAADE`,
+      placeholderColor: `#47ADAD`,
+      backgroundColor: `#32AA88`,
+      radius: 47,
+      border: {
+        width: 12,
+        color: `#98ADAA`,
+      },
+    },
+    disabledValid: {
+      textColor: `#AE2195`,
+      placeholderColor: `#FFAAEE`,
+      backgroundColor: `#772728`,
+      radius: 100,
+      border: {
+        width: 14,
+        color: `#5E5E5E`,
+      },
+    },
+    disabledInvalid: {
+      textColor: `#340297`,
+      placeholderColor: `#233832`,
+      backgroundColor: `#938837`,
+      radius: 2,
+      border: {
+        width: 19,
+        color: `#573829`,
+      },
+    },
+  };
+  const InputComponent = createInputComponent<number>(
+    stringify,
+    tryParse,
+    controlStyle,
+    false,
+    `email`,
+    `numeric`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+  const ParentComponent = () => (
+    <InputComponent
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+    />
+  );
+
+  const rendered = <ParentComponent />;
+
+  expect(
+    unwrapRenderedFunctionComponent(rendered).type
+  ).toBeAFunctionWithTheStaticProperties({
+    inputComponent: {
+      stringify,
+      tryParse,
+      controlStyle,
+      multiLine: false,
+      autoComplete: `email`,
+      keyboardType: `numeric`,
+    },
+  });
 });
