@@ -11,6 +11,8 @@ import {
   createControlTextStyleInstance,
   createFullHeightPopoverStateStyleInstance,
 } from "../helpers";
+import { ContainerFillingKeyboardAvoidingView } from "../ContainerFillingKeyboardAvoidingView";
+import { SizedSafeAreaView } from "../SizedSafeAreaView";
 
 /**
  * Creates a new React component which displays a button which can be pressed to
@@ -217,7 +219,14 @@ export const createFullHeightPopoverComponent = (
                 additionalModalViewStyle,
               ]}
             >
-              {children(onClose)}
+              <ContainerFillingKeyboardAvoidingView>
+                <SizedSafeAreaView
+                  width="fillsContainer"
+                  height="fillsContainer"
+                >
+                  {children(onClose)}
+                </SizedSafeAreaView>
+              </ContainerFillingKeyboardAvoidingView>
             </View>
           </SimpleModal>
         </React.Fragment>
