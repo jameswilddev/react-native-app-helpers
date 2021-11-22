@@ -4,6 +4,7 @@ export { ContainerFillingScrollView } from "./components/ContainerFillingScrollV
 export { createButtonComponent } from "./components/createButtonComponent";
 export { createCardComponent } from "./components/createCardComponent";
 export { createCheckboxComponent } from "./components/createCheckboxComponent";
+export { createCreatableSelectComponent } from "./components/createCreatableSelectComponent";
 export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFiniteStateMachineRoutingComponent } from "./components/createFiniteStateMachineRoutingComponent";
 export { createFixedWidthComponent } from "./components/createFixedWidthComponent";
