@@ -16,7 +16,7 @@
   "private": false,
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "27.0.2",
+    "@types/jest": "27.0.3",
     "@types/react": "17.0.36",
     "@types/react-native": "0.66.4",
     "@types/react-test-renderer": "17.0.1",
