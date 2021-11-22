@@ -158,6 +158,8 @@ test(`renders as expected`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -248,8 +250,6 @@ test(`renders as expected`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -608,6 +608,8 @@ test(`renders as expected with only one string column`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -639,8 +641,6 @@ test(`renders as expected with only one string column`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -876,6 +876,8 @@ test(`renders as expected without rows`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -1108,6 +1110,8 @@ test(`renders as expected without rows without vertical padding`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -1339,6 +1343,8 @@ test(`renders as expected without rows without horizontal padding`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -1427,6 +1433,235 @@ test(`renders as expected without rows without horizontal padding`, () => {
       <Text
         style={{
           width: `100%`,
+          paddingVertical: 85,
+          backgroundColor: `#989874`,
+          color: `#298272`,
+          fontFamily: `Example Empty Font Family`,
+          fontSize: 63,
+          lineHeight: 88.19999999999999,
+          textAlign: `center`,
+        }}
+      >
+        Example When Empty
+      </Text>
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected without a header/first row separator`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: 0 | 1 | 2 | 3;
+    readonly columnD: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnD`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: null,
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `basic`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+        },
+        {
+          type: `basic`,
+          label: `Example Column B Label`,
+          width: 22,
+          key: `columnB`,
+        },
+        {
+          type: `custom`,
+          label: `Example Column C Label`,
+          width: 11,
+          render(row) {
+            switch (row.columnC) {
+              case 0:
+                return <Text>Example Column C Value A</Text>;
+
+              case 1:
+                return <Text>Example Column C Value B</Text>;
+
+              case 2:
+                return <Text>Example Column C Value C</Text>;
+
+              case 3:
+                return <Text>Example Column C Value D</Text>;
+            }
+          },
+          containsSearchTerm(row, filter) {
+            return filter === `example filter text` && row.columnC === 3;
+          },
+        },
+        {
+          type: `basic`,
+          label: `Example Column D Label`,
+          width: 33,
+          key: `columnD`,
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ▲
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 22,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Text
+            key={2}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 11,
+              color: `#EA0498`,
+              fontFamily: `Example Header Font Family`,
+              fontSize: 31,
+              lineHeight: 43.4,
+            }}
+          >
+            Example Column C Label
+          </Text>,
+          <Hitbox
+            key={3}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 33,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column D Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      <Text
+        style={{
+          width: `100%`,
+          paddingHorizontal: 74,
           paddingVertical: 85,
           backgroundColor: `#989874`,
           color: `#298272`,
@@ -1595,6 +1830,8 @@ test(`renders as expected when filtering by a string column`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -1685,8 +1922,6 @@ test(`renders as expected when filtering by a string column`, () => {
           key={`   \n  \n \t \r    Example \t \t  \n Column    \r \r A \t \t \r  Value  \n \n \t \r    A  \n \n \t   \r   `}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -1902,6 +2137,8 @@ test(`renders as expected when filtering by a numeric column`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -1992,8 +2229,6 @@ test(`renders as expected when filtering by a numeric column`, () => {
           key="Example Column A Value C"
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -2213,6 +2448,8 @@ test(`renders as expected when filtering by a custom column`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -2303,8 +2540,6 @@ test(`renders as expected when filtering by a custom column`, () => {
           key="Example Column A Value C"
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -2524,6 +2759,8 @@ test(`renders as expected when everything is filtered out`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -2781,6 +3018,8 @@ test(`renders as expected when sorting by a string column, descending`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -2871,8 +3110,6 @@ test(`renders as expected when sorting by a string column, descending`, () => {
           key="Example Column A Value C"
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -3285,6 +3522,8 @@ test(`renders as expected when sorting by a boolean column`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -3375,8 +3614,6 @@ test(`renders as expected when sorting by a boolean column`, () => {
           key="Example Column A Value B"
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -3789,6 +4026,8 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -3879,8 +4118,6 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
           key="Example Column A Value C"
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -4293,6 +4530,8 @@ test(`renders as expected when sorting by a numeric column`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -4383,8 +4622,6 @@ test(`renders as expected when sorting by a numeric column`, () => {
           key="Example Column A Value A"
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -4797,6 +5034,8 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -4887,8 +5126,6 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
           key="Example Column A Value C"
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -5301,6 +5538,8 @@ test(`renders as expected without horizontal padding`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -5385,8 +5624,6 @@ test(`renders as expected without horizontal padding`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -5775,6 +6012,8 @@ test(`renders as expected without vertical padding on the header`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -5861,8 +6100,6 @@ test(`renders as expected without vertical padding on the header`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -6275,6 +6512,8 @@ test(`renders as expected without vertical padding on cells`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -6365,8 +6604,6 @@ test(`renders as expected without vertical padding on cells`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -7259,6 +7496,8 @@ test(`renders as expected without row separators`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -7349,8 +7588,6 @@ test(`renders as expected without row separators`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -8250,6 +8487,8 @@ test(`styles correctly when the first and last columns are custom`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -8328,8 +8567,6 @@ test(`styles correctly when the first and last columns are custom`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -8730,6 +8967,8 @@ test(`styles correctly when the first column is a boolean`, () => {
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -8820,8 +9059,6 @@ test(`styles correctly when the first column is a boolean`, () => {
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}
@@ -9234,6 +9471,8 @@ test(`styles correctly when the last column is not custom and does not contain a
           width: `100%`,
           flexDirection: `row`,
           backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
         }}
       >
         {[
@@ -9324,8 +9563,6 @@ test(`styles correctly when the last column is not custom and does not contain a
           key={null}
           style={{
             backgroundColor: `#7A7ACE`,
-            borderTopColor: `#323098`,
-            borderTopWidth: 12,
             flexDirection: `row`,
             width: `100%`,
           }}

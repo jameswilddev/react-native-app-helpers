@@ -98,11 +98,6 @@ export const createOfflineTableComponent = <
     backgroundColor: style.body.odd.background,
   };
 
-  if (style.headerFirstRowSeparator !== null) {
-    firstRowView.borderTopColor = style.headerFirstRowSeparator.color;
-    firstRowView.borderTopWidth = style.headerFirstRowSeparator.width;
-  }
-
   const emptyText: TextStyle = {
     fontFamily: style.empty.fontFamily,
     fontSize: style.empty.fontSize,
@@ -121,20 +116,27 @@ export const createOfflineTableComponent = <
     emptyText.paddingVertical = style.empty.verticalPadding;
   }
 
+  const headerView: ViewStyle = {
+    width: `100%`,
+    flexDirection: `row`,
+    backgroundColor: style.header.background,
+  };
+
+  if (style.headerFirstRowSeparator !== null) {
+    headerView.borderBottomColor = style.headerFirstRowSeparator.color;
+    headerView.borderBottomWidth = style.headerFirstRowSeparator.width;
+  }
+
   const styles = StyleSheet.create({
     wrapperView: {
       width: `100%`,
     },
+    headerView,
     headerText: {
       fontFamily: style.header.fontFamily,
       fontSize: style.header.fontSize,
       lineHeight: style.header.fontSize * 1.4,
       color: style.header.color,
-    },
-    headerView: {
-      width: `100%`,
-      flexDirection: `row`,
-      backgroundColor: style.header.background,
     },
     firstRowView,
     oddRowView: {
