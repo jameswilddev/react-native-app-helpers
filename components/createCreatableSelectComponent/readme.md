@@ -1,14 +1,14 @@
-# `react-native-app-helpers/createSearchableSelectComponent`
+# `react-native-app-helpers/createCreatableSelectComponent`
 
-Creates a new React component which provides a searchable list of options on
+Creates a new React component which provides a creatable list of options on
 pressing a button.
 
 ## Usage
 
 ```tsx
-import { createSearchableSelectComponent } from "react-native-app-helpers";
+import { createCreatableSelectComponent } from "react-native-app-helpers";
 
-const ExampleSelectComponent = createSearchableSelectComponent<number>(
+const ExampleSelectComponent = createCreatableSelectComponent<number>(
   {
     fontFamily: `Example Font Family`,
     fontSize: 37,
