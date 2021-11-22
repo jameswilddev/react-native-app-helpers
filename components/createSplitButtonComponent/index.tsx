@@ -443,32 +443,32 @@ export const createSplitButtonComponent = <
 
     return (
       <View style={styles.view}>
-        {childrenArray.map((element, i) => {
-          if (element === null) {
-            return null;
-          } else if (typeof element === `object` && `type` in element) {
-            for (const typeKey in segments) {
-              if (segments[typeKey] === element.type) {
-                return buttonFactories[typeKey](
-                  value,
-                  onChange,
-                  childrenArray.length === 1
-                    ? `single`
-                    : i === 0
-                    ? `left`
-                    : i === childrenArray.length - 1
-                    ? `right`
-                    : `middle`,
-                  element.props[`value`],
-                  element.props[`children`],
-                  element.props[`disabled`]
-                );
+        {childrenArray
+          .filter((element): element is JSX.Element => element !== null)
+          .map((element, i) => {
+            if (typeof element === `object` && `type` in element) {
+              for (const typeKey in segments) {
+                if (segments[typeKey] === element.type) {
+                  return buttonFactories[typeKey](
+                    value,
+                    onChange,
+                    childrenArray.length === 1
+                      ? `single`
+                      : i === 0
+                      ? `left`
+                      : i === childrenArray.length - 1
+                      ? `right`
+                      : `middle`,
+                    element.props[`value`],
+                    element.props[`children`],
+                    element.props[`disabled`]
+                  );
+                }
               }
             }
-          }
 
-          throw new Error(`Unexpected child in split button.`);
-        })}
+            throw new Error(`Unexpected child in split button.`);
+          })}
       </View>
     );
   };

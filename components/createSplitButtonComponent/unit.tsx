@@ -24023,3 +24023,990 @@ test(`raises the change event when the third of three buttons is pressed`, () =>
   expect(onChange).toHaveBeenCalledTimes(1);
   expect(onChange).toHaveBeenCalledWith(`Example Value B`);
 });
+
+test(`excludes null`, () => {
+  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+  type ExampleValue =
+    | `Example Value A`
+    | `Example Value B`
+    | `Example Value C`
+    | `Example Value D`;
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: `Example Font Family`,
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: `red`,
+          color: `blue`,
+          radius: 10,
+          border: {
+            width: 12,
+            color: `orange`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `oldlace`,
+          color: `mediumorchid`,
+          radius: 52,
+          border: {
+            width: 76,
+            color: `olivedrab`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `wheat`,
+          color: `lightgreen`,
+          radius: 34,
+          border: {
+            width: 2,
+            color: `magenta`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `mintcream`,
+          color: `rebeccapurple`,
+          radius: 9,
+          border: {
+            width: 48,
+            color: `peachpuff`,
+          },
+        },
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: `crimson`,
+          color: `darkgoldenrod`,
+          radius: 15,
+          border: {
+            width: 8,
+            color: `darkgrey`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `darkmagenta`,
+          color: `darkolivegreen`,
+          radius: 23,
+          border: {
+            width: 4,
+            color: `darkorange`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `darkorchid`,
+          color: `darkred`,
+          radius: 19,
+          border: {
+            width: 22,
+            color: `darksalmon`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `darkseagreen`,
+          color: `darkslateblue`,
+          radius: 44,
+          border: {
+            width: 77,
+            color: `darkslategrey`,
+          },
+        },
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: `turquoise`,
+          color: `whitesmoke`,
+          radius: 47,
+          border: {
+            width: 29,
+            color: `yellowgreen`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `seashell`,
+          color: `seagreen`,
+          radius: 33,
+          border: {
+            width: 43,
+            color: `saddlebrown`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `rosybrown`,
+          color: `sienna`,
+          radius: 72,
+          border: {
+            width: 1,
+            color: `slategray`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `thistle`,
+          color: `teal`,
+          radius: 7,
+          border: {
+            width: 9,
+            color: `tan`,
+          },
+        },
+      },
+    },
+  });
+  const onChange = jest.fn();
+  const SegmentA = Component.segments[`exampleTypeA`];
+  const SegmentB = Component.segments[`exampleTypeB`];
+  const SegmentC = Component.segments[`exampleTypeC`];
+
+  const rendered = (
+    <Component value="Example Value D" onChange={onChange}>
+      <SegmentA value="Example Value A" disabled={false}>
+        Example Label A
+      </SegmentA>
+      {null}
+      <SegmentC value="Example Value C" disabled={false}>
+        Example Label C
+      </SegmentC>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{
+        alignItems: `stretch`,
+        flexDirection: `row`,
+      }}
+    >
+      {[
+        <Hitbox
+          key="Example Value A"
+          style={{
+            backgroundColor: `red`,
+            borderTopLeftRadius: 10,
+            borderBottomLeftRadius: 10,
+            borderWidth: 12,
+            borderRightWidth: 0,
+            borderColor: `orange`,
+            margin: -5,
+            marginRight: 0,
+            paddingHorizontal: 54,
+            paddingVertical: 32,
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: `Example Font Family`,
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: `blue`,
+            }}
+            numberOfLines={1}
+          >
+            Example Label A
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value C"
+          style={{
+            backgroundColor: `turquoise`,
+            borderTopWidth: 29,
+            borderBottomWidth: 29,
+            borderColor: `yellowgreen`,
+            marginVertical: -22,
+            paddingHorizontal: 54,
+            paddingVertical: 32,
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: `Example Font Family`,
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: `whitesmoke`,
+            }}
+            numberOfLines={1}
+          >
+            Example Label C
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value B"
+          style={{
+            backgroundColor: `crimson`,
+            borderWidth: 8,
+            borderLeftWidth: 0,
+            borderTopRightRadius: 15,
+            borderBottomRightRadius: 15,
+            borderColor: `darkgrey`,
+            margin: -1,
+            marginLeft: 0,
+            paddingHorizontal: 54,
+            paddingVertical: 32,
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: `Example Font Family`,
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: `darkgoldenrod`,
+            }}
+            numberOfLines={1}
+          >
+            Example Label B
+          </Text>
+        </Hitbox>,
+      ]}
+    </View>
+  );
+
+  expect(onChange).not.toHaveBeenCalled();
+});
+
+test(`throws the expected error when a non-element is present`, () => {
+  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+  type ExampleValue =
+    | `Example Value A`
+    | `Example Value B`
+    | `Example Value C`
+    | `Example Value D`;
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: `Example Font Family`,
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: `red`,
+          color: `blue`,
+          radius: 10,
+          border: {
+            width: 12,
+            color: `orange`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `oldlace`,
+          color: `mediumorchid`,
+          radius: 52,
+          border: {
+            width: 76,
+            color: `olivedrab`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `wheat`,
+          color: `lightgreen`,
+          radius: 34,
+          border: {
+            width: 2,
+            color: `magenta`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `mintcream`,
+          color: `rebeccapurple`,
+          radius: 9,
+          border: {
+            width: 48,
+            color: `peachpuff`,
+          },
+        },
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: `crimson`,
+          color: `darkgoldenrod`,
+          radius: 15,
+          border: {
+            width: 8,
+            color: `darkgrey`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `darkmagenta`,
+          color: `darkolivegreen`,
+          radius: 23,
+          border: {
+            width: 4,
+            color: `darkorange`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `darkorchid`,
+          color: `darkred`,
+          radius: 19,
+          border: {
+            width: 22,
+            color: `darksalmon`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `darkseagreen`,
+          color: `darkslateblue`,
+          radius: 44,
+          border: {
+            width: 77,
+            color: `darkslategrey`,
+          },
+        },
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: `turquoise`,
+          color: `whitesmoke`,
+          radius: 47,
+          border: {
+            width: 29,
+            color: `yellowgreen`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `seashell`,
+          color: `seagreen`,
+          radius: 33,
+          border: {
+            width: 43,
+            color: `saddlebrown`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `rosybrown`,
+          color: `sienna`,
+          radius: 72,
+          border: {
+            width: 1,
+            color: `slategray`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `thistle`,
+          color: `teal`,
+          radius: 7,
+          border: {
+            width: 9,
+            color: `tan`,
+          },
+        },
+      },
+    },
+  });
+  const onChange = jest.fn();
+  const SegmentA = Component.segments[`exampleTypeA`];
+  const SegmentB = Component.segments[`exampleTypeB`];
+  const SegmentC = Component.segments[`exampleTypeC`];
+
+  const rendered = (
+    <Component value="Example Value D" onChange={onChange}>
+      <SegmentA value="Example Value A" disabled={false}>
+        Example Label A
+      </SegmentA>
+      Example Non-Element
+      <SegmentC value="Example Value C" disabled={false}>
+        Example Label C
+      </SegmentC>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+    </Component>
+  );
+
+  expect(() => {
+    unwrapRenderedFunctionComponent(rendered);
+  }).toThrowError(`Unexpected child in split button.`);
+
+  expect(onChange).not.toHaveBeenCalled();
+});
+
+test(`throws the expected error when an unexpected element is present`, () => {
+  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+  type ExampleValue =
+    | `Example Value A`
+    | `Example Value B`
+    | `Example Value C`
+    | `Example Value D`;
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: `Example Font Family`,
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: `red`,
+          color: `blue`,
+          radius: 10,
+          border: {
+            width: 12,
+            color: `orange`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `oldlace`,
+          color: `mediumorchid`,
+          radius: 52,
+          border: {
+            width: 76,
+            color: `olivedrab`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `wheat`,
+          color: `lightgreen`,
+          radius: 34,
+          border: {
+            width: 2,
+            color: `magenta`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `mintcream`,
+          color: `rebeccapurple`,
+          radius: 9,
+          border: {
+            width: 48,
+            color: `peachpuff`,
+          },
+        },
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: `crimson`,
+          color: `darkgoldenrod`,
+          radius: 15,
+          border: {
+            width: 8,
+            color: `darkgrey`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `darkmagenta`,
+          color: `darkolivegreen`,
+          radius: 23,
+          border: {
+            width: 4,
+            color: `darkorange`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `darkorchid`,
+          color: `darkred`,
+          radius: 19,
+          border: {
+            width: 22,
+            color: `darksalmon`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `darkseagreen`,
+          color: `darkslateblue`,
+          radius: 44,
+          border: {
+            width: 77,
+            color: `darkslategrey`,
+          },
+        },
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: `turquoise`,
+          color: `whitesmoke`,
+          radius: 47,
+          border: {
+            width: 29,
+            color: `yellowgreen`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `seashell`,
+          color: `seagreen`,
+          radius: 33,
+          border: {
+            width: 43,
+            color: `saddlebrown`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `rosybrown`,
+          color: `sienna`,
+          radius: 72,
+          border: {
+            width: 1,
+            color: `slategray`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `thistle`,
+          color: `teal`,
+          radius: 7,
+          border: {
+            width: 9,
+            color: `tan`,
+          },
+        },
+      },
+    },
+  });
+  const onChange = jest.fn();
+  const SegmentA = Component.segments[`exampleTypeA`];
+  const SegmentB = Component.segments[`exampleTypeB`];
+  const SegmentC = Component.segments[`exampleTypeC`];
+
+  const rendered = (
+    <Component value="Example Value D" onChange={onChange}>
+      <SegmentA value="Example Value A" disabled={false}>
+        Example Label A
+      </SegmentA>
+      <Text>Example Unexpected Element</Text>
+      <SegmentC value="Example Value C" disabled={false}>
+        Example Label C
+      </SegmentC>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+    </Component>
+  );
+
+  expect(() => {
+    unwrapRenderedFunctionComponent(rendered);
+  }).toThrowError(`Unexpected child in split button.`);
+
+  expect(onChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with one inactive button which does not require margin`, () => {
+  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+  type ExampleValue =
+    | `Example Value A`
+    | `Example Value B`
+    | `Example Value C`
+    | `Example Value D`;
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: `Example Font Family`,
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: `red`,
+          color: `blue`,
+          radius: 10,
+          border: {
+            width: 12,
+            color: `orange`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `oldlace`,
+          color: `mediumorchid`,
+          radius: 52,
+          border: {
+            width: 76,
+            color: `olivedrab`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `wheat`,
+          color: `lightgreen`,
+          radius: 34,
+          border: {
+            width: 2,
+            color: `magenta`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `mintcream`,
+          color: `rebeccapurple`,
+          radius: 9,
+          border: {
+            width: 48,
+            color: `peachpuff`,
+          },
+        },
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: `crimson`,
+          color: `darkgoldenrod`,
+          radius: 15,
+          border: {
+            width: 7,
+            color: `darkgrey`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `darkmagenta`,
+          color: `darkolivegreen`,
+          radius: 23,
+          border: {
+            width: 4,
+            color: `darkorange`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `darkorchid`,
+          color: `darkred`,
+          radius: 19,
+          border: {
+            width: 22,
+            color: `darksalmon`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `darkseagreen`,
+          color: `darkslateblue`,
+          radius: 44,
+          border: {
+            width: 77,
+            color: `darkslategrey`,
+          },
+        },
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: `turquoise`,
+          color: `whitesmoke`,
+          radius: 47,
+          border: {
+            width: 29,
+            color: `yellowgreen`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `seashell`,
+          color: `seagreen`,
+          radius: 33,
+          border: {
+            width: 43,
+            color: `saddlebrown`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `rosybrown`,
+          color: `sienna`,
+          radius: 72,
+          border: {
+            width: 1,
+            color: `slategray`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `thistle`,
+          color: `teal`,
+          radius: 7,
+          border: {
+            width: 9,
+            color: `tan`,
+          },
+        },
+      },
+    },
+  });
+  const onChange = jest.fn();
+  const SegmentB = Component.segments[`exampleTypeB`];
+
+  const rendered = (
+    <Component value="Example Value D" onChange={onChange}>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{
+        alignItems: `stretch`,
+        flexDirection: `row`,
+      }}
+    >
+      {[
+        <Hitbox
+          key="Example Value B"
+          style={{
+            backgroundColor: `crimson`,
+            borderWidth: 7,
+            borderRadius: 15,
+            borderColor: `darkgrey`,
+            paddingHorizontal: 54,
+            paddingVertical: 32,
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: `Example Font Family`,
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: `darkgoldenrod`,
+            }}
+            numberOfLines={1}
+          >
+            Example Label B
+          </Text>
+        </Hitbox>,
+      ]}
+    </View>
+  );
+
+  expect(onChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with three inactive buttons which do not require margin`, () => {
+  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+  type ExampleValue =
+    | `Example Value A`
+    | `Example Value B`
+    | `Example Value C`
+    | `Example Value D`;
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: `Example Font Family`,
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: `red`,
+          color: `blue`,
+          radius: 10,
+          border: {
+            width: 7,
+            color: `orange`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `oldlace`,
+          color: `mediumorchid`,
+          radius: 52,
+          border: {
+            width: 76,
+            color: `olivedrab`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `wheat`,
+          color: `lightgreen`,
+          radius: 34,
+          border: {
+            width: 2,
+            color: `magenta`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `mintcream`,
+          color: `rebeccapurple`,
+          radius: 9,
+          border: {
+            width: 48,
+            color: `peachpuff`,
+          },
+        },
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: `crimson`,
+          color: `darkgoldenrod`,
+          radius: 15,
+          border: {
+            width: 7,
+            color: `darkgrey`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `darkmagenta`,
+          color: `darkolivegreen`,
+          radius: 23,
+          border: {
+            width: 4,
+            color: `darkorange`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `darkorchid`,
+          color: `darkred`,
+          radius: 19,
+          border: {
+            width: 22,
+            color: `darksalmon`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `darkseagreen`,
+          color: `darkslateblue`,
+          radius: 44,
+          border: {
+            width: 77,
+            color: `darkslategrey`,
+          },
+        },
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: `turquoise`,
+          color: `whitesmoke`,
+          radius: 47,
+          border: {
+            width: 7,
+            color: `yellowgreen`,
+          },
+        },
+        activeEnabled: {
+          backgroundColor: `seashell`,
+          color: `seagreen`,
+          radius: 33,
+          border: {
+            width: 43,
+            color: `saddlebrown`,
+          },
+        },
+        inactiveDisabled: {
+          backgroundColor: `rosybrown`,
+          color: `sienna`,
+          radius: 72,
+          border: {
+            width: 1,
+            color: `slategray`,
+          },
+        },
+        activeDisabled: {
+          backgroundColor: `thistle`,
+          color: `teal`,
+          radius: 7,
+          border: {
+            width: 9,
+            color: `tan`,
+          },
+        },
+      },
+    },
+  });
+  const onChange = jest.fn();
+  const SegmentA = Component.segments[`exampleTypeA`];
+  const SegmentB = Component.segments[`exampleTypeB`];
+  const SegmentC = Component.segments[`exampleTypeC`];
+
+  const rendered = (
+    <Component value="Example Value D" onChange={onChange}>
+      <SegmentA value="Example Value A" disabled={false}>
+        Example Label A
+      </SegmentA>
+      <SegmentC value="Example Value C" disabled={false}>
+        Example Label C
+      </SegmentC>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{
+        alignItems: `stretch`,
+        flexDirection: `row`,
+      }}
+    >
+      {[
+        <Hitbox
+          key="Example Value A"
+          style={{
+            backgroundColor: `red`,
+            borderTopLeftRadius: 10,
+            borderBottomLeftRadius: 10,
+            borderWidth: 7,
+            borderRightWidth: 0,
+            borderColor: `orange`,
+            paddingHorizontal: 54,
+            paddingVertical: 32,
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: `Example Font Family`,
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: `blue`,
+            }}
+            numberOfLines={1}
+          >
+            Example Label A
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value C"
+          style={{
+            backgroundColor: `turquoise`,
+            borderTopWidth: 7,
+            borderBottomWidth: 7,
+            borderColor: `yellowgreen`,
+            paddingHorizontal: 54,
+            paddingVertical: 32,
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: `Example Font Family`,
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: `whitesmoke`,
+            }}
+            numberOfLines={1}
+          >
+            Example Label C
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value B"
+          style={{
+            backgroundColor: `crimson`,
+            borderWidth: 7,
+            borderLeftWidth: 0,
+            borderTopRightRadius: 15,
+            borderBottomRightRadius: 15,
+            borderColor: `darkgrey`,
+            paddingHorizontal: 54,
+            paddingVertical: 32,
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: `Example Font Family`,
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: `darkgoldenrod`,
+            }}
+            numberOfLines={1}
+          >
+            Example Label B
+          </Text>
+        </Hitbox>,
+      ]}
+    </View>
+  );
+
+  expect(onChange).not.toHaveBeenCalled();
+});
