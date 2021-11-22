@@ -294,6 +294,7 @@ export const createSplitButtonComponent = <
       ),
     });
 
+    /* istanbul ignore next */
     partialSegments[typeKey] = () => null;
 
     partialButtonFactories[typeKey] = (
