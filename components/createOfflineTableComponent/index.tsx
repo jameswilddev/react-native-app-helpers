@@ -389,7 +389,7 @@ export const createOfflineTableComponent = <
                     <Text style={styles.headerText}>
                       {sortBy === column.key
                         ? `${column.label} ${
-                            sortDirection === `ascending` ? `▲` : `▼`
+                            sortDirection === `ascending` ? `↓` : `↑`
                           }`
                         : column.label}
                     </Text>

@@ -182,7 +182,7 @@ test(`renders as expected`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -631,7 +631,7 @@ test(`renders as expected with only one string column`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
         ]}
@@ -900,7 +900,7 @@ test(`renders as expected without rows`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -1134,7 +1134,7 @@ test(`renders as expected without rows without vertical padding`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -1367,7 +1367,7 @@ test(`renders as expected without rows without horizontal padding`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -1595,7 +1595,7 @@ test(`renders as expected without a header/first row separator`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -1854,7 +1854,7 @@ test(`renders as expected when filtering by a string column`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -2161,7 +2161,7 @@ test(`renders as expected when filtering by a numeric column`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -2472,7 +2472,7 @@ test(`renders as expected when filtering by a custom column`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -2783,7 +2783,7 @@ test(`renders as expected when everything is filtered out`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -3042,7 +3042,7 @@ test(`renders as expected when sorting by a string column, descending`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▼
+              Example Column A Label ↑
             </Text>
           </Hitbox>,
           <Hitbox
@@ -3604,7 +3604,7 @@ test(`renders as expected when sorting by a boolean column`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column D Label ▲
+              Example Column D Label ↓
             </Text>
           </Hitbox>,
         ]}
@@ -4108,7 +4108,7 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column D Label ▼
+              Example Column D Label ↑
             </Text>
           </Hitbox>,
         ]}
@@ -4575,7 +4575,7 @@ test(`renders as expected when sorting by a numeric column`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column B Label ▲
+              Example Column B Label ↓
             </Text>
           </Hitbox>,
           <Text
@@ -5079,7 +5079,7 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column B Label ▼
+              Example Column B Label ↑
             </Text>
           </Hitbox>,
           <Text
@@ -5560,7 +5560,7 @@ test(`renders as expected without horizontal padding`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -6035,7 +6035,7 @@ test(`renders as expected without vertical padding on the header`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -6536,7 +6536,7 @@ test(`renders as expected without vertical padding on cells`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -7019,7 +7019,7 @@ test(`renders as expected without header/row separators`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -7520,7 +7520,7 @@ test(`renders as expected without row separators`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -9012,7 +9012,7 @@ test(`styles correctly when the first column is a boolean`, () => {
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
           <Hitbox
@@ -9553,7 +9553,7 @@ test(`styles correctly when the last column is not custom and does not contain a
                 lineHeight: 43.4,
               }}
             >
-              Example Column A Label ▲
+              Example Column A Label ↓
             </Text>
           </Hitbox>,
         ]}
