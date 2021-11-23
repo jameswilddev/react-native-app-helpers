@@ -32,6 +32,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createHrComponent](./components/createHrComponent/readme.md)
 - [createImageBackgroundComponent](./components/createImageBackgroundComponent/readme.md)
 - [createInputComponent](./components/createInputComponent/readme.md)
+- [createNullableFloatInputComponent](./components/createNullableFloatInputComponent/readme.md)
 - [createOfflineTableComponent](./components/createOfflineTableComponent/readme.md)
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
 - [createProportionalRowComponent](./components/createProportionalRowComponent/readme.md)
