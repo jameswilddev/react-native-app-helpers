@@ -41,7 +41,7 @@ export const createSearchableSelectChildrenComponent = <
 >(
   controlStyle: ControlStyle
 ): Instance<T> & { readonly searchableSelectChildren: Introspection } => {
-  const InputComponent = createInputComponent<string>(
+  const InputComponent = createInputComponent<string, null>(
     (value) => value,
     (value) => value.trim() || undefined,
     {
@@ -196,6 +196,7 @@ export const createSearchableSelectChildrenComponent = <
               close();
             }
           }}
+          context={null}
         />
       </View>
     );

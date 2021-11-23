@@ -8,72 +8,85 @@ import {
   createControlTextStyleInstance,
 } from "../helpers";
 
-type Instance<T> = React.FunctionComponent<{
+type Instance<TValue, TContext> = React.FunctionComponent<{
   /**
    * The icon to show on the left side, if any, else, null.
    */
-  leftIcon: null | React.ReactNode | JSX.Element;
+  readonly leftIcon: null | React.ReactNode | JSX.Element;
 
   /**
    * The icon to show on the right side, if any, else, null.
    */
-  rightIcon: null | React.ReactNode | JSX.Element;
+  readonly rightIcon: null | React.ReactNode | JSX.Element;
 
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
    * string.
    */
-  value: undefined | T;
+  readonly value: undefined | TValue;
 
   /**
    * Invoked when the user edits the text in the box.
    * @param parsed   The value parsed, or undefined should it not be parseable.
    * @param complete True when the user has finished editing, otherwise, false.
    */
-  onChange(parsed: undefined | T, complete: boolean): void;
+  onChange(parsed: undefined | TValue, complete: boolean): void;
 
   /**
    * When true, the text value is starred out rather than being rendered (for
    * password fields).
    */
-  secureTextEntry: boolean;
+  readonly secureTextEntry: boolean;
 
   /**
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  disabled: boolean;
+  readonly disabled: boolean;
 
   /**
    * Text to be shown when no value has been entered.
    */
-  placeholder: string;
+  readonly placeholder: string;
 
   /**
    * Invoked when the content of the text box is valid and the enter key is
    * pressed.
    * @param parsed The parsed value.
    */
-  onSubmit(parsed: T): void;
+  onSubmit(parsed: TValue): void;
+
+  /**
+   * The context under which validation is performed.
+   */
+  readonly context: TContext;
 }>;
 
 /**
  * The arguments used to create an input component; for testing higher-order
  * components.
- * @template T The type of value which results from the editing of text.
+ * @template TValue   The type of value which results from the editing of text.
+ * @template TContext The type of any contextual data used to validate the
+ *                    input's value.
  */
-type Introspection<T> = {
+type Introspection<TValue, TContext> = {
   /**
    * A function which takes the value passed into the component and transforms
    * it into raw text for editing.
+   * @param value   The value to stringify.
+   * @param context The context of the value being stringified.
+   * @returns       The stringified value.
    */
-  stringify: (value: T) => string;
+  stringify: (value: TValue, context: TContext) => string;
 
   /**
    * A function which attempts to convert raw text back into a value to output,
    * returning undefined if this is not possible.
+   * @param value   The value to try to parse.
+   * @param context The context of the value which is being parsed.
+   * @returns       The parsed value, or, undefined should it not be parsable.
    */
-  tryParse: (value: string) => undefined | T;
+  tryParse: (value: string, context: TContext) => undefined | TValue;
 
   /**
    * The styling to use.
@@ -111,8 +124,10 @@ type Introspection<T> = {
 
 /**
  * Creates a React component which allows for the editing of text.
- * @template T              The type of value which results from the editing of
+ * @template TValue         The type of value which results from the editing of
  *                          text.
+ * @template TContext       The type of any contextual data used to validate
+ *                          the input's value.
  * @param stringify         A function which takes the value passed into the
  *                          component and transforms it into raw text for
  *                          editing.
@@ -132,21 +147,21 @@ type Introspection<T> = {
  * @returns                 A React component which allows for the editing of
  *                          text.
  */
-export function createInputComponent<T>(
-  stringify: (value: T) => string,
-  tryParse: (value: string) => undefined | T,
+export function createInputComponent<TValue, TContext>(
+  stringify: (value: TValue, context: TContext) => string,
+  tryParse: (value: string, context: TContext) => undefined | TValue,
   controlStyle: ControlStyle,
   multiLine: boolean,
   autoComplete: `off` | `email` | `password`,
   keyboardType: `default` | `email-address` | `numeric`,
   autoFocus: boolean,
   keepFocusOnSubmit: boolean
-): Instance<T> & {
+): Instance<TValue, TContext> & {
   /**
    * The arguments used to create this input component; for testing higher-order
    * components.
    */
-  readonly inputComponent: Introspection<T>;
+  readonly inputComponent: Introspection<TValue, TContext>;
 } {
   const withLeftIcon: TextStyle = controlStyle.paddingHorizontal
     ? { paddingLeft: controlStyle.paddingHorizontal }
@@ -337,7 +352,9 @@ export function createInputComponent<T>(
     },
   });
 
-  const Input: Instance<T> & { inputComponent?: Introspection<T> } = ({
+  const Input: Instance<TValue, TContext> & {
+    inputComponent?: Introspection<TValue, TContext>;
+  } = ({
     leftIcon,
     rightIcon,
     value,
@@ -346,10 +363,12 @@ export function createInputComponent<T>(
     disabled,
     placeholder,
     onSubmit,
+    context,
   }) => {
     const refresh = useRefresh();
 
-    const stringifiedValue = value === undefined ? `` : stringify(value);
+    const stringifiedValue =
+      value === undefined ? `` : stringify(value, context);
 
     const editing = React.useRef(stringifiedValue);
 
@@ -366,7 +385,7 @@ export function createInputComponent<T>(
       focused.current = false;
     }
 
-    const valid = tryParse(editing.current) !== undefined;
+    const valid = tryParse(editing.current, context) !== undefined;
 
     const ref = React.useRef<null | TextInput>(null);
     const firstLayout = React.useRef(true);
@@ -474,15 +493,15 @@ export function createInputComponent<T>(
             editing.current = to;
             refresh();
 
-            onChange(tryParse(to), false);
+            onChange(tryParse(to, context), false);
           }}
           onEndEditing={(e) => {
-            const parsed = tryParse(e.nativeEvent.text);
+            const parsed = tryParse(e.nativeEvent.text, context);
 
             if (parsed === undefined) {
               editing.current = e.nativeEvent.text;
             } else {
-              editing.current = stringify(parsed);
+              editing.current = stringify(parsed, context);
             }
 
             refresh();
@@ -499,13 +518,13 @@ export function createInputComponent<T>(
           }}
           blurOnSubmit={valid && !keepFocusOnSubmit}
           onSubmitEditing={(e) => {
-            const parsed = tryParse(e.nativeEvent.text);
+            const parsed = tryParse(e.nativeEvent.text, context);
 
             if (parsed === undefined) {
               editing.current = e.nativeEvent.text;
               refresh();
             } else {
-              editing.current = stringify(parsed);
+              editing.current = stringify(parsed, context);
               refresh();
               onSubmit(parsed);
             }
@@ -527,5 +546,7 @@ export function createInputComponent<T>(
     keepFocusOnSubmit,
   };
 
-  return Input as Instance<T> & { readonly inputComponent: Introspection<T> };
+  return Input as Instance<TValue, TContext> & {
+    readonly inputComponent: Introspection<TValue, TContext>;
+  };
 }

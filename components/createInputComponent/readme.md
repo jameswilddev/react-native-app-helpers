@@ -10,9 +10,9 @@ import { createDropDownComponent } from "react-native-app-helpers";
 // This example allows any text containing only the letter "G".
 // The value is the length of the text.
 
-const ExampleInput = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) => /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+const ExampleInput = createInputComponent<number, null>(
+    (value, context) => `G`.repeat(value),
+    (value, context) => /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -115,6 +115,7 @@ const ExampleScreen = () => {
         placeholder="Shown when no text has been entered"
         leftIcon={<Text>Shown to the left</Text>}
         rightIcon={<Text>Shown to the right</Text>}
+        context={null}
       />
       <Text>Incomplete: {incompleteValue}</Text>
       <Text>Complete: {completeValue}</Text>

@@ -43,7 +43,7 @@ export const createCreatableSelectChildrenComponent = <
 >(
   controlStyle: ControlStyle
 ): Instance<T> & { readonly creatableSelectChildren: Introspection } => {
-  const InputComponent = createInputComponent<string>(
+  const InputComponent = createInputComponent<string, null>(
     (value) => value,
     (value) => value.trim() || undefined,
     {
@@ -220,6 +220,7 @@ export const createCreatableSelectChildrenComponent = <
               close();
             }
           }}
+          context={null}
         />
       </View>
     );

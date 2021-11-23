@@ -4,10 +4,16 @@ import * as TestRenderer from "react-test-renderer";
 import { createInputComponent, unwrapRenderedFunctionComponent } from "../..";
 
 test(`renders as expected with a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -93,6 +99,10 @@ test(`renders as expected with a value`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -154,10 +164,16 @@ test(`renders as expected with a value`, () => {
 });
 
 test(`renders as expected without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -243,6 +259,10 @@ test(`renders as expected without a value`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -305,10 +325,16 @@ test(`renders as expected without a value`, () => {
 });
 
 test(`renders as expected when disabled with a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -394,6 +420,10 @@ test(`renders as expected when disabled with a value`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -456,10 +486,16 @@ test(`renders as expected when disabled with a value`, () => {
 });
 
 test(`renders as expected when disabled without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -545,6 +581,10 @@ test(`renders as expected when disabled without a value`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -607,10 +647,16 @@ test(`renders as expected when disabled without a value`, () => {
 });
 
 test(`can be focused when valid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -696,6 +742,10 @@ test(`can be focused when valid`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -769,10 +819,16 @@ test(`can be focused when valid`, () => {
 });
 
 test(`can be focused when invalid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -858,6 +914,10 @@ test(`can be focused when invalid`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -931,10 +991,16 @@ test(`can be focused when invalid`, () => {
 });
 
 test(`can be blurred`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -1020,6 +1086,10 @@ test(`can be blurred`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1103,10 +1173,16 @@ test(`can be blurred`, () => {
 });
 
 test(`can be disabled during edit`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -1192,6 +1268,10 @@ test(`can be disabled during edit`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1227,6 +1307,10 @@ test(`can be disabled during edit`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1290,10 +1374,16 @@ test(`can be disabled during edit`, () => {
 });
 
 test(`can be re-enabled following edit`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -1379,6 +1469,10 @@ test(`can be re-enabled following edit`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1414,6 +1508,10 @@ test(`can be re-enabled following edit`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1427,6 +1525,10 @@ test(`can be re-enabled following edit`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1489,10 +1591,16 @@ test(`can be re-enabled following edit`, () => {
 });
 
 test(`does not lose pending changes on update`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -1578,6 +1686,10 @@ test(`does not lose pending changes on update`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1613,6 +1725,10 @@ test(`does not lose pending changes on update`, () => {
       placeholder="Test Updated Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1676,10 +1792,16 @@ test(`does not lose pending changes on update`, () => {
 });
 
 test(`resets the value on external changes`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -1765,6 +1887,10 @@ test(`resets the value on external changes`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1800,6 +1926,10 @@ test(`resets the value on external changes`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -1863,10 +1993,16 @@ test(`resets the value on external changes`, () => {
 });
 
 test(`allows valid incomplete edits`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -1952,6 +2088,10 @@ test(`allows valid incomplete edits`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -2037,10 +2177,16 @@ test(`allows valid incomplete edits`, () => {
 });
 
 test(`allows valid incomplete edits`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -2126,6 +2272,10 @@ test(`allows valid incomplete edits`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -2215,10 +2365,16 @@ test(`allows valid incomplete edits`, () => {
 });
 
 test(`allows valid incomplete edits`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -2304,6 +2460,10 @@ test(`allows valid incomplete edits`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -2393,10 +2553,16 @@ test(`allows valid incomplete edits`, () => {
 });
 
 test(`allows invalid incomplete edits`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -2482,6 +2648,10 @@ test(`allows invalid incomplete edits`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -2567,10 +2737,16 @@ test(`allows invalid incomplete edits`, () => {
 });
 
 test(`allows invalid incomplete edits`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -2656,6 +2832,10 @@ test(`allows invalid incomplete edits`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -2745,10 +2925,16 @@ test(`allows invalid incomplete edits`, () => {
 });
 
 test(`allows invalid incomplete edits`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -2834,6 +3020,10 @@ test(`allows invalid incomplete edits`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -2922,10 +3112,16 @@ test(`allows invalid incomplete edits`, () => {
 });
 
 test(`renders as expected when the border width does not change`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -3011,6 +3207,10 @@ test(`renders as expected when the border width does not change`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -3072,10 +3272,16 @@ test(`renders as expected when the border width does not change`, () => {
 });
 
 test(`passes down secureTextEntry`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -3161,6 +3367,10 @@ test(`passes down secureTextEntry`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -3222,10 +3432,16 @@ test(`passes down secureTextEntry`, () => {
 });
 
 test(`renders with a left icon`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -3311,6 +3527,10 @@ test(`renders with a left icon`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -3380,10 +3600,16 @@ test(`renders with a left icon`, () => {
 });
 
 test(`renders with a right icon`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -3469,6 +3695,10 @@ test(`renders with a right icon`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -3538,10 +3768,16 @@ test(`renders with a right icon`, () => {
 });
 
 test(`renders with left and right icons`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -3627,6 +3863,10 @@ test(`renders with left and right icons`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -3703,10 +3943,16 @@ test(`renders with left and right icons`, () => {
 });
 
 test(`renders as expected with a left icon without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -3792,6 +4038,10 @@ test(`renders as expected with a left icon without a value`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -3862,10 +4112,16 @@ test(`renders as expected with a left icon without a value`, () => {
 });
 
 test(`renders as expected with a left icon without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -3951,6 +4207,10 @@ test(`renders as expected with a left icon without a value`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -4021,10 +4281,16 @@ test(`renders as expected with a left icon without a value`, () => {
 });
 
 test(`renders as expected with left and right icons without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -4110,6 +4376,10 @@ test(`renders as expected with left and right icons without a value`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -4187,10 +4457,16 @@ test(`renders as expected with left and right icons without a value`, () => {
 });
 
 test(`renders as expected with a left icon when focused and valid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -4276,6 +4552,10 @@ test(`renders as expected with a left icon when focused and valid`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -4357,10 +4637,16 @@ test(`renders as expected with a left icon when focused and valid`, () => {
 });
 
 test(`renders as expected with a right icon when focused and valid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -4446,6 +4732,10 @@ test(`renders as expected with a right icon when focused and valid`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -4527,10 +4817,16 @@ test(`renders as expected with a right icon when focused and valid`, () => {
 });
 
 test(`renders as expected with a right icon when focused and valid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -4616,6 +4912,10 @@ test(`renders as expected with a right icon when focused and valid`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -4704,10 +5004,16 @@ test(`renders as expected with a right icon when focused and valid`, () => {
 });
 
 test(`renders as expected with a left icon when focused and invalid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -4793,6 +5099,10 @@ test(`renders as expected with a left icon when focused and invalid`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -4874,10 +5184,16 @@ test(`renders as expected with a left icon when focused and invalid`, () => {
 });
 
 test(`renders as expected with a right icon when focused and invalid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -4963,6 +5279,10 @@ test(`renders as expected with a right icon when focused and invalid`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -5044,10 +5364,16 @@ test(`renders as expected with a right icon when focused and invalid`, () => {
 });
 
 test(`renders as expected with left and right icons when focused and invalid`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -5133,6 +5459,10 @@ test(`renders as expected with left and right icons when focused and invalid`, (
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -5221,10 +5551,16 @@ test(`renders as expected with left and right icons when focused and invalid`, (
 });
 
 test(`renders without horizontal padding`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -5310,6 +5646,10 @@ test(`renders without horizontal padding`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -5370,10 +5710,16 @@ test(`renders without horizontal padding`, () => {
 });
 
 test(`renders with a left icon without horizontal padding`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -5459,6 +5805,10 @@ test(`renders with a left icon without horizontal padding`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -5526,10 +5876,16 @@ test(`renders with a left icon without horizontal padding`, () => {
 });
 
 test(`renders with a right icon without horizontal padding`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -5615,6 +5971,10 @@ test(`renders with a right icon without horizontal padding`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -5682,10 +6042,16 @@ test(`renders with a right icon without horizontal padding`, () => {
 });
 
 test(`renders with left and right icons without horizontal padding`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -5771,6 +6137,10 @@ test(`renders with left and right icons without horizontal padding`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -5845,10 +6215,16 @@ test(`renders with left and right icons without horizontal padding`, () => {
 });
 
 test(`renders as expected without vertical padding`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -5934,6 +6310,10 @@ test(`renders as expected without vertical padding`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -5994,10 +6374,16 @@ test(`renders as expected without vertical padding`, () => {
 });
 
 test(`renders as expected without borders`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -6071,6 +6457,10 @@ test(`renders as expected without borders`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -6130,10 +6520,16 @@ test(`renders as expected without borders`, () => {
 });
 
 test(`renders as expected when a state does not alter border thickness`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -6219,6 +6615,10 @@ test(`renders as expected when a state does not alter border thickness`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -6280,10 +6680,16 @@ test(`renders as expected when a state does not alter border thickness`, () => {
 });
 
 test(`renders as expected without a radius`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -6369,6 +6775,10 @@ test(`renders as expected without a radius`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -6429,10 +6839,16 @@ test(`renders as expected without a radius`, () => {
 });
 
 test(`renders when disabled with a left icon`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -6518,6 +6934,10 @@ test(`renders when disabled with a left icon`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -6588,10 +7008,16 @@ test(`renders when disabled with a left icon`, () => {
 });
 
 test(`renders when disabled with a right icon`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -6677,6 +7103,10 @@ test(`renders when disabled with a right icon`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -6747,10 +7177,16 @@ test(`renders when disabled with a right icon`, () => {
 });
 
 test(`renders when disabled with left and right icons`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -6836,6 +7272,10 @@ test(`renders when disabled with left and right icons`, () => {
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -6913,10 +7353,16 @@ test(`renders when disabled with left and right icons`, () => {
 });
 
 test(`renders as expected when disabled with a left icon without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -7002,6 +7448,10 @@ test(`renders as expected when disabled with a left icon without a value`, () =>
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -7072,10 +7522,16 @@ test(`renders as expected when disabled with a left icon without a value`, () =>
 });
 
 test(`renders as expected when disabled with a right icon without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -7161,6 +7617,10 @@ test(`renders as expected when disabled with a right icon without a value`, () =
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -7231,10 +7691,16 @@ test(`renders as expected when disabled with a right icon without a value`, () =
 });
 
 test(`renders as expected when disabled with left and right icons without a value`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -7320,6 +7786,10 @@ test(`renders as expected when disabled with left and right icons without a valu
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -7465,7 +7935,11 @@ test(`allows introspection when used in a higher-order component`, () => {
       },
     },
   };
-  const InputComponent = createInputComponent<number>(
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const InputComponent = createInputComponent<number, ExampleContext>(
     stringify,
     tryParse,
     controlStyle,
@@ -7487,6 +7961,10 @@ test(`allows introspection when used in a higher-order component`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -7509,10 +7987,16 @@ test(`allows introspection when used in a higher-order component`, () => {
 });
 
 test(`does nothing when auto-focus is enabled`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -7598,6 +8082,10 @@ test(`does nothing when auto-focus is enabled`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -7660,10 +8148,16 @@ test(`does nothing when auto-focus is enabled`, () => {
 });
 
 test(`focuses the text input on layout when the ref is ready`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -7749,6 +8243,10 @@ test(`focuses the text input on layout when the ref is ready`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -7775,10 +8273,16 @@ test(`focuses the text input on layout when the ref is ready`, () => {
 });
 
 test(`does not focus the text input a second time`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -7864,6 +8368,10 @@ test(`does not focus the text input a second time`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -7897,10 +8405,16 @@ test(`does not focus the text input a second time`, () => {
 });
 
 test(`renders as expected with a value when focus is to be retained`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -7986,6 +8500,10 @@ test(`renders as expected with a value when focus is to be retained`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
@@ -8047,10 +8565,16 @@ test(`renders as expected with a value when focus is to be retained`, () => {
 });
 
 test(`renders as expected without a value when focus is to be retained`, () => {
-  const Component = createInputComponent<number>(
-    (value) => `G`.repeat(value),
-    (value) =>
-      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
     {
       fontFamily: `Example Font Family`,
       fontSize: 37,
@@ -8136,6 +8660,10 @@ test(`renders as expected without a value when focus is to be retained`, () => {
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
     />
   );
 
