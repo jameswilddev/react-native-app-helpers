@@ -34,6 +34,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createInputComponent](./components/createInputComponent/readme.md)
 - [createOfflineTableComponent](./components/createOfflineTableComponent/readme.md)
 - [createPaddingComponent](./components/createPaddingComponent/readme.md)
+- [createProportionalRowComponent](./components/createProportionalRowComponent/readme.md)
 - [createSearchableMultiSelectComponent](./components/createSearchableMultiSelectComponent/readme.md)
 - [createSearchableSelectComponent](./components/createSearchableSelectComponent/readme.md)
 - [createSessionStoreManagerComponent](./components/createSessionStoreManagerComponent/readme.md)

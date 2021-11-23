@@ -16,6 +16,7 @@ export { createImageBackgroundComponent } from "./components/createImageBackgrou
 export { createInputComponent } from "./components/createInputComponent";
 export { createOfflineTableComponent } from "./components/createOfflineTableComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
+export { createProportionalRowComponent } from "./components/createProportionalRowComponent";
 export { createSearchableMultiSelectComponent } from "./components/createSearchableMultiSelectComponent";
 export { createSearchableSelectComponent } from "./components/createSearchableSelectComponent";
 export { createSessionStoreManagerComponent } from "./components/createSessionStoreManagerComponent";
