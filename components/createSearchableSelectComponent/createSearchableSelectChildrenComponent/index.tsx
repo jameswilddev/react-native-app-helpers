@@ -68,7 +68,8 @@ export const createSearchableSelectChildrenComponent = <
     false,
     `off`,
     `default`,
-    true
+    true,
+    false
   );
 
   let flatList: null | ViewStyle = null;

@@ -77,6 +77,7 @@ test(`renders as expected with a value`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -226,6 +227,7 @@ test(`renders as expected without a value`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -376,6 +378,7 @@ test(`renders as expected when disabled with a value`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -526,6 +529,7 @@ test(`renders as expected when disabled without a value`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -676,6 +680,7 @@ test(`can be focused when valid`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -837,6 +842,7 @@ test(`can be focused when invalid`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -998,6 +1004,7 @@ test(`can be blurred`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -1169,6 +1176,7 @@ test(`can be disabled during edit`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -1355,6 +1363,7 @@ test(`can be re-enabled following edit`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -1553,6 +1562,7 @@ test(`does not lose pending changes on update`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -1739,6 +1749,7 @@ test(`resets the value on external changes`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -1925,6 +1936,7 @@ test(`allows valid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -2098,6 +2110,7 @@ test(`allows valid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -2275,6 +2288,7 @@ test(`allows valid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -2452,6 +2466,7 @@ test(`allows invalid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -2625,6 +2640,7 @@ test(`allows invalid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -2802,6 +2818,7 @@ test(`allows invalid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -2978,6 +2995,7 @@ test(`renders as expected when the border width does not change`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -3127,6 +3145,7 @@ test(`passes down secureTextEntry`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -3276,6 +3295,7 @@ test(`renders with a left icon`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -3433,6 +3453,7 @@ test(`renders with a right icon`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -3590,6 +3611,7 @@ test(`renders with left and right icons`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -3754,6 +3776,7 @@ test(`renders as expected with a left icon without a value`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -3912,6 +3935,7 @@ test(`renders as expected with a left icon without a value`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -4070,6 +4094,7 @@ test(`renders as expected with left and right icons without a value`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -4235,6 +4260,7 @@ test(`renders as expected with a left icon when focused and valid`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -4404,6 +4430,7 @@ test(`renders as expected with a right icon when focused and valid`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -4573,6 +4600,7 @@ test(`renders as expected with a right icon when focused and valid`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -4749,6 +4777,7 @@ test(`renders as expected with a left icon when focused and invalid`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -4918,6 +4947,7 @@ test(`renders as expected with a right icon when focused and invalid`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -5087,6 +5117,7 @@ test(`renders as expected with left and right icons when focused and invalid`, (
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -5263,6 +5294,7 @@ test(`renders without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -5411,6 +5443,7 @@ test(`renders with a left icon without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -5566,6 +5599,7 @@ test(`renders with a right icon without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -5721,6 +5755,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -5883,6 +5918,7 @@ test(`renders as expected without vertical padding`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -6019,6 +6055,7 @@ test(`renders as expected without borders`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -6166,6 +6203,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -6315,6 +6353,7 @@ test(`renders as expected without a radius`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -6463,6 +6502,7 @@ test(`renders when disabled with a left icon`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -6621,6 +6661,7 @@ test(`renders when disabled with a right icon`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -6779,6 +6820,7 @@ test(`renders when disabled with left and right icons`, () => {
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -6944,6 +6986,7 @@ test(`renders as expected when disabled with a left icon without a value`, () =>
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -7102,6 +7145,7 @@ test(`renders as expected when disabled with a right icon without a value`, () =
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -7260,6 +7304,7 @@ test(`renders as expected when disabled with left and right icons without a valu
     false,
     `email`,
     `numeric`,
+    false,
     false
   );
   const onChange = jest.fn();
@@ -7427,6 +7472,7 @@ test(`allows introspection when used in a higher-order component`, () => {
     false,
     `email`,
     `numeric`,
+    true,
     false
   );
   const onChange = jest.fn();
@@ -7456,6 +7502,8 @@ test(`allows introspection when used in a higher-order component`, () => {
       multiLine: false,
       autoComplete: `email`,
       keyboardType: `numeric`,
+      autoFocus: true,
+      keepFocusOnSubmit: false,
     },
   });
 });
@@ -7534,7 +7582,8 @@ test(`does nothing when auto-focus is enabled`, () => {
     false,
     `email`,
     `numeric`,
-    true
+    true,
+    false
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7684,7 +7733,8 @@ test(`focuses the text input on layout when the ref is ready`, () => {
     false,
     `email`,
     `numeric`,
-    true
+    true,
+    false
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7798,7 +7848,8 @@ test(`does not focus the text input a second time`, () => {
     false,
     `email`,
     `numeric`,
-    true
+    true,
+    false
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7838,6 +7889,307 @@ test(`does not focus the text input a second time`, () => {
       ).rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
     )[0]?.instance.focus
   ).toHaveBeenCalledTimes(1);
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with a value when focus is to be retained`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`,
+    false,
+    true
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#32AE12`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#FFEE00`,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: `GGGGGG`,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: true,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#E7AA32`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: false,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders as expected without a value when focus is to be retained`, () => {
+  const Component = createInputComponent<number>(
+    (value) => `G`.repeat(value),
+    (value) =>
+      /[^G]/.test(value) || !value ? undefined : value.split(`G`).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`,
+    false,
+    true
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={undefined}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#259284`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 6,
+          borderColor: `#9A9A8E`,
+          borderRadius: 10,
+          margin: -2,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#99FE88`,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: ``,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: true,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#CACA3A`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: false,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
 
   renderer.unmount();
 

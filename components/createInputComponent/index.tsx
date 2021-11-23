@@ -101,24 +101,36 @@ type Introspection<T> = {
    * wait for the user to interact with it.
    */
   readonly autoFocus: boolean;
+
+  /**
+   * When true, the text input will keep focus on submit.  It will otherwise
+   * blur.
+   */
+  readonly keepFocusOnSubmit: boolean;
 };
 
 /**
  * Creates a React component which allows for the editing of text.
- * @template T         The type of value which results from the editing of text.
- * @param stringify    A function which takes the value passed into the
- *                     component and transforms it into raw text for editing.
- * @param tryParse     A function which attempts to convert raw text back into
- *                     a value to output, returning undefined if this is not
- *                     possible.
- * @param controlStyle The styling to use.
- * @param multiLine    When true, the text may wrap onto multiple lines.  It
- *                     will otherwise scroll one line horizontally.
- * @param autoComplete The type of auto-complete suggestions to provide.
- * @param keyboardType The type of keyboard to show.
- * @param autoFocus    When true, the text input will steal focus on mount.  It
- *                     will otherwise wait for the user to interact with it.
- * @returns            A React component which allows for the editing of text.
+ * @template T              The type of value which results from the editing of
+ *                          text.
+ * @param stringify         A function which takes the value passed into the
+ *                          component and transforms it into raw text for
+ *                          editing.
+ * @param tryParse          A function which attempts to convert raw text back
+ *                          into a value to output, returning undefined if this
+ *                          is not possible.
+ * @param controlStyle      The styling to use.
+ * @param multiLine         When true, the text may wrap onto multiple lines.
+ *                          It will otherwise scroll one line horizontally.
+ * @param autoComplete      The type of auto-complete suggestions to provide.
+ * @param keyboardType      The type of keyboard to show.
+ * @param autoFocus         When true, the text input will steal focus on mount.
+ *                          It will otherwise wait for the user to interact with
+ *                          it.
+ * @param keepFocusOnSubmit When true, the text input will keep focus on submit.
+ *                          It will otherwise blur.
+ * @returns                 A React component which allows for the editing of
+ *                          text.
  */
 export function createInputComponent<T>(
   stringify: (value: T) => string,
@@ -127,7 +139,8 @@ export function createInputComponent<T>(
   multiLine: boolean,
   autoComplete: `off` | `email` | `password`,
   keyboardType: `default` | `email-address` | `numeric`,
-  autoFocus: boolean
+  autoFocus: boolean,
+  keepFocusOnSubmit: boolean
 ): Instance<T> & {
   /**
    * The arguments used to create this input component; for testing higher-order
@@ -484,7 +497,7 @@ export function createInputComponent<T>(
             focused.current = false;
             refresh();
           }}
-          blurOnSubmit={valid}
+          blurOnSubmit={valid && !keepFocusOnSubmit}
           onSubmitEditing={(e) => {
             const parsed = tryParse(e.nativeEvent.text);
 
@@ -511,6 +524,7 @@ export function createInputComponent<T>(
     autoComplete,
     keyboardType,
     autoFocus,
+    keepFocusOnSubmit,
   };
 
   return Input as Instance<T> & { readonly inputComponent: Introspection<T> };
