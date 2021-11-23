@@ -79,7 +79,7 @@ test(`renders as expected`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -822,7 +822,7 @@ test(`renders as expected without rows`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -1056,7 +1056,7 @@ test(`renders as expected without rows without vertical padding`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -1289,7 +1289,7 @@ test(`renders as expected without rows without horizontal padding`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -1519,7 +1519,7 @@ test(`renders as expected without a header/first row separator`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -1751,7 +1751,7 @@ test(`renders as expected when filtering by a string column`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -2058,7 +2058,7 @@ test(`renders as expected when filtering by a numeric column`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -2369,7 +2369,7 @@ test(`renders as expected when filtering by a custom column`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -2680,7 +2680,7 @@ test(`renders as expected when everything is filtered out`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -2939,7 +2939,7 @@ test(`renders as expected when sorting by a string column, descending`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -3443,7 +3443,7 @@ test(`renders as expected when sorting by a boolean column`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -3947,7 +3947,7 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -4451,7 +4451,7 @@ test(`renders as expected when sorting by a numeric column`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -4955,7 +4955,7 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -5459,7 +5459,7 @@ test(`renders as expected without horizontal padding`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -5933,7 +5933,7 @@ test(`renders as expected without vertical padding on the header`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -6433,7 +6433,7 @@ test(`renders as expected without vertical padding on cells`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -6918,7 +6918,7 @@ test(`renders as expected without header/row separators`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -7417,7 +7417,7 @@ test(`renders as expected without row separators`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -7915,7 +7915,7 @@ test(`executes the expected callback on clicking on a column header which is not
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -8068,7 +8068,7 @@ test(`executes the expected callback on clicking on a column header which is sor
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -8221,7 +8221,7 @@ test(`executes the expected callback on clicking on a column header which is sor
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -8362,7 +8362,7 @@ test(`styles correctly when the first and last columns are custom`, () => {
       key: `columnA`,
       columns: [
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column A Label`,
           width: 44,
           render(row) {
@@ -8391,7 +8391,7 @@ test(`styles correctly when the first and last columns are custom`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -8414,7 +8414,7 @@ test(`styles correctly when the first and last columns are custom`, () => {
           },
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column D Label`,
           width: 33,
           render(row) {
@@ -8894,7 +8894,7 @@ test(`styles correctly when the first column is a boolean`, () => {
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -9386,7 +9386,7 @@ test(`styles correctly when the last column is not custom and does not contain a
           key: `columnB`,
         },
         {
-          type: `custom`,
+          type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
           render(row) {
@@ -9814,6 +9814,5726 @@ test(`styles correctly when the last column is not custom and does not contain a
               }}
             >
               Example Column A Value C
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with only one custom text column`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+  };
+
+  const Component = createOfflineTableComponent<`columnA`, never, TableRow>(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return `\n   \r  \t  Example \t \r \n Strawberry \t \n \r Column \r \t \n  `;
+
+              case `Example Column A Value A`:
+                return `\n   \r  \t  Example \t \r \n Orange \t \n \r Column \r \t \n  `;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return `\n   \r  \t  Example \t \r \n Raspberry \t \n \r Column \r \t \n  `;
+            }
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+          },
+          {
+            columnA: null,
+          },
+          {
+            columnA: `Example Column A Value A`,
+          },
+          {
+            columnA: `Example Column A Value B`,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingHorizontal: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <Text
+              key={0}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 44,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {`\n   \r  \t  Example \t \r \n Strawberry \t \n \r Column \r \t \n  `}
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <Text
+              key={0}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 44,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {`\n   \r  \t  Example \t \r \n Orange \t \n \r Column \r \t \n  `}
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <Text
+              key={0}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 44,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {`\n   \r  \t  Example \t \r \n Raspberry \t \n \r Column \r \t \n  `}
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with only one custom number column`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+  };
+
+  const Component = createOfflineTableComponent<`columnA`, never, TableRow>(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return 249483;
+
+              case `Example Column A Value A`:
+                return 139874;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return 23435;
+            }
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+          },
+          {
+            columnA: null,
+          },
+          {
+            columnA: `Example Column A Value A`,
+          },
+          {
+            columnA: `Example Column A Value B`,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingHorizontal: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <Text
+              key={0}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 44,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {249483}
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <Text
+              key={0}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 44,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {139874}
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <Text
+              key={0}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 44,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {23435}
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with only one custom boolean column`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+  };
+
+  const Component = createOfflineTableComponent<`columnA`, never, TableRow>(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+          },
+          {
+            columnA: null,
+          },
+          {
+            columnA: `Example Column A Value A`,
+          },
+          {
+            columnA: `Example Column A Value B`,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingHorizontal: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingHorizontal: 56,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with multiple custom text columns`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`can sort by a custom text column descending`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="descending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↑
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#AEAEFA`,
+            flexDirection: `row`,
+            width: `100%`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`can sort by a custom text column ascending when it backs onto a boolean`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnC"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label ↓
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#AEAEFA`,
+            flexDirection: `row`,
+            width: `100%`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`can sort by a custom text column descending when it backs onto a boolean`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnC"
+      sortDirection="descending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label ↑
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`can sort by a custom text column ascending when it backs onto a number`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnB"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label ↓
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+
+      {[
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`can sort by a custom text column descending when it backs onto a number`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnB"
+      sortDirection="descending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label ↑
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#AEAEFA`,
+            flexDirection: `row`,
+            width: `100%`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`sorts descending on pressing a custom column header which is currently sorted ascending`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnB"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  unwrapRenderedFunctionComponent(rendered).props[
+    `children`
+  ][0].props.children[1].props.onPress();
+
+  expect(onSortChange).toHaveBeenCalledTimes(1);
+  expect(onSortChange).toHaveBeenCalledWith(`columnB`, `descending`);
+});
+
+test(`sorts ascending on pressing a custom column header which is currently sorted descending`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnB"
+      sortDirection="descending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  unwrapRenderedFunctionComponent(rendered).props[
+    `children`
+  ][0].props.children[1].props.onPress();
+
+  expect(onSortChange).toHaveBeenCalledTimes(1);
+  expect(onSortChange).toHaveBeenCalledWith(`columnB`, `ascending`);
+});
+
+test(`sorts ascending on pressing a custom column header which is currently unsorted`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnC"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  unwrapRenderedFunctionComponent(rendered).props[
+    `children`
+  ][0].props.children[1].props.onPress();
+
+  expect(onSortChange).toHaveBeenCalledTimes(1);
+  expect(onSortChange).toHaveBeenCalledWith(`columnB`, `ascending`);
+});
+
+test(`renders as expected with custom text columns without horizontal padding`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 0,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with custom text columns without vertical padding`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 0,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`renders as expected with custom text columns without horizontal padding in the header`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 0,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix false Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value A"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example False</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {133}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value B"
+          style={{
+            backgroundColor: `#7A7ACE`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example Null</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {170}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix null Suffix
+            </Text>,
+          ]}
+        </View>,
+        <View
+          key="Example Column A Value C"
+          style={{
+            backgroundColor: `#AEAEFA`,
+            borderTopColor: `#AB3928`,
+            borderTopWidth: 19,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {120}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#348472`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              Prefix true Suffix
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`can filter a custom text column rendered as a string`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix \n \r \t ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    FIX \n \t \r faL \n \n \r \t  `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {`Prefix \n \r \t false Suffix`}
+            </Text>,
+          ]}
+        </View>,
+      ]}
+    </View>
+  );
+  expect(onSortChange).not.toHaveBeenCalled();
+});
+
+test(`can filter a custom text column rendered as a number`, () => {
+  type TableRow = {
+    readonly columnA: null | string;
+    readonly columnB: null | number;
+    readonly columnC: null | boolean;
+  };
+
+  const Component = createOfflineTableComponent<
+    `columnA` | `columnB`,
+    `columnC`,
+    TableRow
+  >(
+    {
+      header: {
+        fontFamily: `Example Header Font Family`,
+        fontSize: 31,
+        background: `#213EA5`,
+        color: `#EA0498`,
+        verticalPadding: 7,
+      },
+      headerFirstRowSeparator: {
+        color: `#323098`,
+        width: 12,
+      },
+      body: {
+        fontFamily: `Example Body Font Family`,
+        fontSize: 27,
+        horizontalPadding: 56,
+        verticalPadding: 3,
+        odd: {
+          color: `#92EAEA`,
+          background: `#7A7ACE`,
+        },
+        even: {
+          color: `#348472`,
+          background: `#AEAEFA`,
+        },
+        primitiveElements: {
+          null: <Text>Example Null</Text>,
+          false: <Text>Example False</Text>,
+          true: <Text>Example True</Text>,
+        },
+      },
+      rowSeparator: {
+        color: `#AB3928`,
+        width: 19,
+      },
+      empty: {
+        fontFamily: `Example Empty Font Family`,
+        fontSize: 63,
+        horizontalPadding: 74,
+        verticalPadding: 85,
+        background: `#989874`,
+        color: `#298272`,
+      },
+    },
+    {
+      key: `columnA`,
+      columns: [
+        {
+          type: `customText`,
+          label: `Example Column A Label`,
+          width: 44,
+          key: `columnA`,
+          render(value) {
+            switch (value) {
+              case null:
+                return true;
+
+              case `Example Column A Value A`:
+                return false;
+
+              case `Example Column A Value B`:
+                return null;
+
+              default:
+                return true;
+            }
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column B Label`,
+          width: 27,
+          key: `columnB`,
+          render(value) {
+            return (value ?? 33) + 100;
+          },
+        },
+        {
+          type: `customText`,
+          label: `Example Column C Label`,
+          width: 64,
+          key: `columnC`,
+          render(value) {
+            return `Prefix \n \r \t ${value} Suffix`;
+          },
+        },
+      ],
+    }
+  );
+
+  const onSortChange = jest.fn();
+
+  const rendered = (
+    <Component
+      data={{
+        rows: [
+          {
+            columnA: `Example Column A Value C`,
+            columnB: 20,
+            columnC: true,
+          },
+          {
+            columnA: null,
+            columnB: 50,
+            columnC: false,
+          },
+          {
+            columnA: `Example Column A Value A`,
+            columnB: null,
+            columnC: true,
+          },
+          {
+            columnA: `Example Column A Value B`,
+            columnB: 70,
+            columnC: null,
+          },
+        ],
+      }}
+      sortBy="columnA"
+      sortDirection="ascending"
+      onSortChange={onSortChange}
+      filter={`   \n   \r    \t    15 \n \n \r \t  `}
+      whenEmpty="Example When Empty"
+    />
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View style={{ width: `100%` }}>
+      <View
+        style={{
+          width: `100%`,
+          flexDirection: `row`,
+          backgroundColor: `#213EA5`,
+          borderBottomWidth: 12,
+          borderBottomColor: `#323098`,
+        }}
+      >
+        {[
+          <Hitbox
+            key={0}
+            style={{
+              paddingLeft: 56,
+              paddingRight: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 44,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column A Label ↓
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={1}
+            style={{
+              paddingHorizontal: 28,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 27,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column B Label
+            </Text>
+          </Hitbox>,
+          <Hitbox
+            key={2}
+            style={{
+              paddingLeft: 28,
+              paddingRight: 56,
+              paddingVertical: 7,
+              flexBasis: 0,
+              flexGrow: 64,
+            }}
+            onPress={expect.any(Function)}
+          >
+            <Text
+              style={{
+                color: `#EA0498`,
+                fontFamily: `Example Header Font Family`,
+                fontSize: 31,
+                lineHeight: 43.4,
+              }}
+            >
+              Example Column C Label
+            </Text>
+          </Hitbox>,
+        ]}
+      </View>
+      {[
+        <View
+          key={null}
+          style={{
+            backgroundColor: `#7A7ACE`,
+            flexDirection: `row`,
+            width: `100%`,
+          }}
+        >
+          {[
+            <View
+              key={0}
+              style={{
+                flexBasis: 0,
+                flexGrow: 44,
+                paddingLeft: 56,
+                paddingRight: 28,
+                paddingVertical: 3,
+              }}
+            >
+              <Text>Example True</Text>
+            </View>,
+            <Text
+              key={1}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 27,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingHorizontal: 28,
+                paddingVertical: 3,
+              }}
+            >
+              {150}
+            </Text>,
+            <Text
+              key={2}
+              style={{
+                color: `#92EAEA`,
+                flexBasis: 0,
+                flexGrow: 64,
+                fontFamily: `Example Body Font Family`,
+                fontSize: 27,
+                lineHeight: 37.8,
+                paddingLeft: 28,
+                paddingRight: 56,
+                paddingVertical: 3,
+              }}
+            >
+              {`Prefix \n \r \t false Suffix`}
             </Text>,
           ]}
         </View>,

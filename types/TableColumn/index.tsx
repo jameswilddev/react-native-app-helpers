@@ -1,5 +1,6 @@
 import type { BasicTableColumn } from "../BasicTableColumn";
-import type { CustomTableColumn } from "../CustomTableColumn";
+import type { CustomElementTableColumn } from "../CustomElementTableColumn";
+import type { CustomTextTableColumn } from "../CustomTextTableColumn";
 import type { TableRow } from "../TableRow";
 
 /**
@@ -16,4 +17,9 @@ export type TableColumn<
   TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>
 > =
   | BasicTableColumn<TKeyableColumnKey, TNonKeyableColumnKey>
-  | CustomTableColumn<TKeyableColumnKey, TNonKeyableColumnKey, TRow>;
+  | CustomElementTableColumn<TKeyableColumnKey, TNonKeyableColumnKey, TRow>
+  | {
+      readonly [TKey in
+        | TKeyableColumnKey
+        | TNonKeyableColumnKey]: CustomTextTableColumn<TKey, TRow>;
+    }[TKeyableColumnKey | TNonKeyableColumnKey];

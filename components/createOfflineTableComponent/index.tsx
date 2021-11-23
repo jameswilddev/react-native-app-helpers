@@ -321,7 +321,17 @@ export const createOfflineTableComponent = <
               }
               break;
 
-            case `custom`:
+            case `customText`:
+              {
+                const value = column.render(row[column.key] as never);
+
+                if (normalize(value).includes(filter)) {
+                  return true;
+                }
+              }
+              break;
+
+            case `customElement`:
               if (column.containsSearchTerm(row, filter)) {
                 return true;
               }
@@ -373,6 +383,7 @@ export const createOfflineTableComponent = <
           {schema.columns.map((column, index) => {
             switch (column.type) {
               case `basic`:
+              case `customText`:
                 return (
                   <Hitbox
                     key={String(index)}
@@ -396,7 +407,7 @@ export const createOfflineTableComponent = <
                   </Hitbox>
                 );
 
-              case `custom`:
+              case `customElement`:
                 return (
                   <Text key={String(index)} style={customHeaderStyles[index]}>
                     {column.label}
@@ -472,7 +483,58 @@ export const createOfflineTableComponent = <
                     }
                   }
 
-                  case `custom`:
+                  case `customText`: {
+                    const value = column.render(row[column.key] as never);
+
+                    // TODO: why does TypeScript think this cannot be null, false or true?
+                    switch (value as unknown) {
+                      case null:
+                        return (
+                          <View
+                            key={String(columnIndex)}
+                            style={customCellStyles[columnIndex]}
+                          >
+                            {style.body.primitiveElements.null}
+                          </View>
+                        );
+
+                      case false:
+                        return (
+                          <View
+                            key={String(columnIndex)}
+                            style={customCellStyles[columnIndex]}
+                          >
+                            {style.body.primitiveElements.false}
+                          </View>
+                        );
+
+                      case true:
+                        return (
+                          <View
+                            key={String(columnIndex)}
+                            style={customCellStyles[columnIndex]}
+                          >
+                            {style.body.primitiveElements.true}
+                          </View>
+                        );
+
+                      default:
+                        return (
+                          <Text
+                            key={String(columnIndex)}
+                            style={
+                              index % 2 === 0
+                                ? oddRowCellStyles[columnIndex]
+                                : evenRowCellStyles[columnIndex]
+                            }
+                          >
+                            {value}
+                          </Text>
+                        );
+                    }
+                  }
+
+                  case `customElement`:
                     return (
                       <View
                         key={String(columnIndex)}

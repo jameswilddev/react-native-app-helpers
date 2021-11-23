@@ -30,7 +30,7 @@ const exampleB: TableColumn<
   `exampleKeyC` | `exampleKeyD`,
   TableRow
 > = {
-  type: `custom`,
+  type: `customElement`,
   label: `Example Label B`,
   width: 5,
   render(tableRow) {
@@ -42,6 +42,20 @@ const exampleB: TableColumn<
     const value = tableRow.exampleKeyA;
 
     return typeof value === `string` && value.includes(filter);
+  },
+};
+
+const exampleC: TableColumn<
+  `exampleKeyA` | `exampleKeyB`,
+  `exampleKeyC` | `exampleKeyD`,
+  TableRow
+> = {
+  type: `customText`,
+  key: `exampleKeyA`,
+  label: `Example Label B`,
+  width: 5,
+  render(value) {
+    return `Prefixed ${value}`;
   },
 };
 ```

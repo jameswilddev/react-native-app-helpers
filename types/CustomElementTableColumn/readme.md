@@ -1,11 +1,11 @@
-# `react-native-app-helpers/CustomerTableColumn`
+# `react-native-app-helpers/CustomElementTableColumn`
 
 Describes the schema of a column in a table which has a custom renderer.
 
 ## Usage
 
 ```tsx
-import type { CustomTableColumn } from "react-native-app-helpers";
+import type { CustomElementTableColumn } from "react-native-app-helpers";
 
 type TableRow = {
   readonly columnA: null | string;
@@ -14,12 +14,11 @@ type TableRow = {
   readonly columnD: null | boolean;
 };
 
-const example: CustomTableColumn<
-  `exampleKeyA` | `exampleKeyB`,
-  `exampleKeyC` | `exampleKeyD`,
+const example: CustomElementTableColumn<
+  `exampleKeyA` | `exampleKeyB` | `exampleKeyC` | `exampleKeyD`,
   TableRow
 > = {
-  type: `custom`,
+  type: `customElement`,
   label: `Example Label B`,
   width: 5,
   render(tableRow) {

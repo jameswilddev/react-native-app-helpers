@@ -8,7 +8,7 @@ import type { TableRow } from "../TableRow";
  * @template TRow                 The type of a row of data provided to the
  *                                table.
  */
-export type CustomTableColumn<
+export type CustomElementTableColumn<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string,
   TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>
@@ -16,7 +16,7 @@ export type CustomTableColumn<
   /**
    * Describes the type of column.
    */
-  readonly type: `custom`;
+  readonly type: `customElement`;
 
   /**
    * The label shown on the column's header.
