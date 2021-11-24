@@ -5,6 +5,7 @@ const globalStyles = StyleSheet.create({
   containerFillingView: {
     width: `100%`,
     height: `100%`,
+    flex: 1,
   },
 });
 
@@ -80,6 +81,7 @@ export const createPaddingComponent = (
       contentFittingView,
       containerFillingView: {
         ...contentFittingView,
+        flex: 1,
         width: `100%`,
         height: `100%`,
       },

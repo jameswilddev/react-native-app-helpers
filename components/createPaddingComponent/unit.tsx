@@ -216,7 +216,10 @@ test(`renders container-filling with one zero`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none">
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
@@ -233,7 +236,7 @@ test(`renders container-filling with one non-zero`, () => {
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, padding: 30 }}
+      style={{ width: `100%`, height: `100%`, flex: 1, padding: 30 }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
@@ -251,7 +254,10 @@ test(`renders container-filling with two zeroes`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none">
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
@@ -268,7 +274,7 @@ test(`renders container-filling with one non-zero and one zero`, () => {
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, paddingVertical: 30 }}
+      style={{ width: `100%`, height: `100%`, flex: 1, paddingVertical: 30 }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
@@ -287,7 +293,7 @@ test(`renders container-filling with one zero and one non-zero`, () => {
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, paddingHorizontal: 30 }}
+      style={{ width: `100%`, height: `100%`, flex: 1, paddingHorizontal: 30 }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
@@ -309,6 +315,7 @@ test(`renders container-filling with two non-zeroes`, () => {
       style={{
         width: `100%`,
         height: `100%`,
+        flex: 1,
         paddingVertical: 30,
         paddingHorizontal: 50,
       }}
@@ -329,7 +336,10 @@ test(`renders container-filling with four zeroes`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none">
+    <View
+      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
@@ -346,7 +356,7 @@ test(`renders container-filling with non-zero top`, () => {
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, paddingTop: 30 }}
+      style={{ width: `100%`, height: `100%`, flex: 1, paddingTop: 30 }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
@@ -365,7 +375,7 @@ test(`renders container-filling with non-zero right`, () => {
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, paddingRight: 30 }}
+      style={{ width: `100%`, height: `100%`, flex: 1, paddingRight: 30 }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
@@ -384,7 +394,7 @@ test(`renders container-filling with non-zero bottom`, () => {
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, paddingBottom: 30 }}
+      style={{ width: `100%`, height: `100%`, flex: 1, paddingBottom: 30 }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
@@ -403,7 +413,7 @@ test(`renders container-filling with non-zero left`, () => {
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, paddingLeft: 30 }}
+      style={{ width: `100%`, height: `100%`, flex: 1, paddingLeft: 30 }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
@@ -425,6 +435,7 @@ test(`renders container-filling with four non-zeroes`, () => {
       style={{
         width: `100%`,
         height: `100%`,
+        flex: 1,
         paddingTop: 30,
         paddingRight: 50,
         paddingBottom: 27,
