@@ -19,6 +19,8 @@ export { createNullableIntegerInputComponent } from "./components/createNullable
 export { createOfflineTableComponent } from "./components/createOfflineTableComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createProportionalRowComponent } from "./components/createProportionalRowComponent";
+export { createRequiredFloatInputComponent } from "./components/createRequiredFloatInputComponent";
+export { createRequiredIntegerInputComponent } from "./components/createRequiredIntegerInputComponent";
 export { createSearchableMultiSelectComponent } from "./components/createSearchableMultiSelectComponent";
 export { createSearchableSelectComponent } from "./components/createSearchableSelectComponent";
 export { createSessionStoreManagerComponent } from "./components/createSessionStoreManagerComponent";
