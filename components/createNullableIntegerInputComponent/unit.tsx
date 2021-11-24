@@ -143,6 +143,9 @@ test(`renders as expected without bounds`, () => {
   expect(rendered.type.inputComponent.tryParse(`1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`+1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`-1234`)).toEqual(-1234);
+  expect(rendered.type.inputComponent.tryParse(`1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`+1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`-1234.`)).toEqual(-1234);
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   .1234 \t   \n \r  `
@@ -184,6 +187,21 @@ test(`renders as expected without bounds`, () => {
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   -1234 \t   \n \r  `
+    )
+  ).toEqual(-1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   +1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   -1234. \t   \n \r  `
     )
   ).toEqual(-1234);
 
@@ -330,6 +348,9 @@ test(`renders as expected with an inclusive lower bound`, () => {
   expect(rendered.type.inputComponent.tryParse(`1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`+1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`-1234`)).toEqual(-1234);
+  expect(rendered.type.inputComponent.tryParse(`1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`+1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`-1234.`)).toEqual(-1234);
   expect(rendered.type.inputComponent.tryParse(`-4096`)).toEqual(-4096);
   expect(
     rendered.type.inputComponent.tryParse(
@@ -372,6 +393,21 @@ test(`renders as expected with an inclusive lower bound`, () => {
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   -1234 \t   \n \r  `
+    )
+  ).toEqual(-1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   +1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   -1234. \t   \n \r  `
     )
   ).toEqual(-1234);
 
@@ -519,6 +555,9 @@ test(`renders as expected with an exclusive lower bound`, () => {
   expect(rendered.type.inputComponent.tryParse(`1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`+1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`-1234`)).toEqual(-1234);
+  expect(rendered.type.inputComponent.tryParse(`1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`+1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`-1234.`)).toEqual(-1234);
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   .1234 \t   \n \r  `
@@ -560,6 +599,21 @@ test(`renders as expected with an exclusive lower bound`, () => {
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   -1234 \t   \n \r  `
+    )
+  ).toEqual(-1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   +1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   -1234. \t   \n \r  `
     )
   ).toEqual(-1234);
 
@@ -706,6 +760,9 @@ test(`renders as expected with an inclusive upper bound`, () => {
   expect(rendered.type.inputComponent.tryParse(`1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`+1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`-1234`)).toEqual(-1234);
+  expect(rendered.type.inputComponent.tryParse(`1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`+1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`-1234.`)).toEqual(-1234);
   expect(rendered.type.inputComponent.tryParse(`4096`)).toEqual(4096);
   expect(
     rendered.type.inputComponent.tryParse(
@@ -748,6 +805,21 @@ test(`renders as expected with an inclusive upper bound`, () => {
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   -1234 \t   \n \r  `
+    )
+  ).toEqual(-1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   +1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   -1234. \t   \n \r  `
     )
   ).toEqual(-1234);
 
@@ -895,6 +967,9 @@ test(`renders as expected with an exclusive upper bound`, () => {
   expect(rendered.type.inputComponent.tryParse(`1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`+1234`)).toEqual(1234);
   expect(rendered.type.inputComponent.tryParse(`-1234`)).toEqual(-1234);
+  expect(rendered.type.inputComponent.tryParse(`1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`+1234.`)).toEqual(1234);
+  expect(rendered.type.inputComponent.tryParse(`-1234.`)).toEqual(-1234);
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   .1234 \t   \n \r  `
@@ -936,6 +1011,21 @@ test(`renders as expected with an exclusive upper bound`, () => {
   expect(
     rendered.type.inputComponent.tryParse(
       `   \n   \r   \t   -1234 \t   \n \r  `
+    )
+  ).toEqual(-1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   +1234. \t   \n \r  `
+    )
+  ).toEqual(1234);
+  expect(
+    rendered.type.inputComponent.tryParse(
+      `   \n   \r   \t   -1234. \t   \n \r  `
     )
   ).toEqual(-1234);
 
