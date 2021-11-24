@@ -15,6 +15,7 @@ export { createHrComponent } from "./components/createHrComponent";
 export { createImageBackgroundComponent } from "./components/createImageBackgroundComponent";
 export { createInputComponent } from "./components/createInputComponent";
 export { createNullableFloatInputComponent } from "./components/createNullableFloatInputComponent";
+export { createNullableIntegerInputComponent } from "./components/createNullableIntegerInputComponent";
 export { createOfflineTableComponent } from "./components/createOfflineTableComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createProportionalRowComponent } from "./components/createProportionalRowComponent";
