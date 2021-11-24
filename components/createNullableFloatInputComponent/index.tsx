@@ -58,7 +58,7 @@ export const createNullableFloatInputComponent = (
       if (unparsed.trim() === ``) {
         return null;
       } else if (
-        /^\s*[+-]?\d+\s*$|^\s*[+-]?\d+\.\d+\s*$|^\s*[+-]?\.\d+\s*$/.test(
+        /^\s*[+-]?\d+\s*$|^\s*[+-]?\d+\.\d+\s*$|^\s*[+-]?\.\d+\s*$|^\s*[+-]?\d+\.\s*$/.test(
           unparsed
         )
       ) {
