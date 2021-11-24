@@ -13,6 +13,7 @@ const ExampleDropDown = createButtonComponent({
   fontSize: 16,
   horizontalPadding: 10,
   verticalPadding: 2,
+  iconSpacing: 5,
   default: {
     backgroundColor: `yellow`,
     color: `blue`,

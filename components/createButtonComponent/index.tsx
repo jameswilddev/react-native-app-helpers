@@ -104,20 +104,20 @@ export const createButtonComponent = (
 
   const leftIconBase: TextStyle = {};
 
-  if (buttonStyle.horizontalPadding) {
-    leftIconBase.paddingLeft = buttonStyle.horizontalPadding;
+  if (buttonStyle.iconSpacing) {
+    leftIconBase.paddingLeft = buttonStyle.iconSpacing;
   }
 
   const rightIconBase: TextStyle = {};
 
-  if (buttonStyle.horizontalPadding) {
-    rightIconBase.paddingRight = buttonStyle.horizontalPadding;
+  if (buttonStyle.iconSpacing) {
+    rightIconBase.paddingRight = buttonStyle.iconSpacing;
   }
 
   const leftAndRightIconsBase: TextStyle = {};
 
-  if (buttonStyle.horizontalPadding) {
-    leftAndRightIconsBase.paddingHorizontal = buttonStyle.horizontalPadding;
+  if (buttonStyle.iconSpacing) {
+    leftAndRightIconsBase.paddingHorizontal = buttonStyle.iconSpacing;
   }
 
   const styles = StyleSheet.create({

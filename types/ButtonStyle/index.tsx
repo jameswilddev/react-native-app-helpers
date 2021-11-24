@@ -25,6 +25,11 @@ export type ButtonStyle = {
   readonly verticalPadding: number;
 
   /**
+   * The amount of spacing between icons and text.
+   */
+  readonly iconSpacing: number;
+
+  /**
    * The style to apply when the button is not disabled.
    */
   readonly default: ButtonStateStyle;
