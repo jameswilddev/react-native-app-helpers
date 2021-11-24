@@ -17,13 +17,14 @@ type TableRow = {
 const example: CustomTextTableColumn<
   `exampleKeyA` | `exampleKeyB`,
   `exampleKeyC` | `exampleKeyD`,
-  TableRow
+  TableRow,
+  `Example Context`
 > = {
   type: `customText`,
   key: `exampleKeyA`,
   label: `Example Label B`,
   width: 5,
-  render(value) {
+  render(value, context) {
     return `Prefixed ${value}`;
   },
 };

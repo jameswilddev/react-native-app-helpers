@@ -31,6 +31,8 @@ const normalize = (cell: KeyableTableCell | NonKeyableTableCell): string => {
  *                                table.
  * @template TRow                 The type of a row of data provided to the
  *                                table.
+ * @template TContext             The type of the context in which the table is
+ *                                being rendered.
  * @param style  The style to apply to the table.
  * @param schema The schema of the table to show.
  * @returns      The created React component.
@@ -38,10 +40,11 @@ const normalize = (cell: KeyableTableCell | NonKeyableTableCell): string => {
 export const createOfflineTableComponent = <
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string,
-  TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>
+  TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>,
+  TContext
 >(
   style: TableStyle,
-  schema: TableSchema<TKeyableColumnKey, TNonKeyableColumnKey, TRow>
+  schema: TableSchema<TKeyableColumnKey, TNonKeyableColumnKey, TRow, TContext>
 ): React.FunctionComponent<{
   /**
    * The data to show in the table.
@@ -81,6 +84,11 @@ export const createOfflineTableComponent = <
    * Shown when there are no rows to display.
    */
   readonly whenEmpty: string;
+
+  /**
+   * The context in which the table is being rendered.
+   */
+  readonly context: TContext;
 }> => {
   const rowViewBase: ViewStyle = {
     width: `100%`,
@@ -302,7 +310,15 @@ export const createOfflineTableComponent = <
   const oddRowCellStyles = StyleSheet.create(oddRowCellInput);
   const evenRowCellStyles = StyleSheet.create(evenRowCellInput);
 
-  return ({ data, whenEmpty, filter, sortBy, sortDirection, onSortChange }) => {
+  return ({
+    data,
+    whenEmpty,
+    filter,
+    sortBy,
+    sortDirection,
+    onSortChange,
+    context,
+  }) => {
     let rows = [...data.rows];
 
     filter = normalize(filter);
@@ -323,7 +339,7 @@ export const createOfflineTableComponent = <
 
             case `customText`:
               {
-                const value = column.render(row[column.key] as never);
+                const value = column.render(row[column.key] as never, context);
 
                 if (normalize(value).includes(filter)) {
                   return true;
@@ -332,7 +348,7 @@ export const createOfflineTableComponent = <
               break;
 
             case `customElement`:
-              if (column.containsSearchTerm(row, filter)) {
+              if (column.containsSearchTerm(row, filter, context)) {
                 return true;
               }
 
@@ -484,7 +500,10 @@ export const createOfflineTableComponent = <
                   }
 
                   case `customText`: {
-                    const value = column.render(row[column.key] as never);
+                    const value = column.render(
+                      row[column.key] as never,
+                      context
+                    );
 
                     // TODO: why does TypeScript think this cannot be null, false or true?
                     switch (value as unknown) {
@@ -540,7 +559,7 @@ export const createOfflineTableComponent = <
                         key={String(columnIndex)}
                         style={customCellStyles[columnIndex]}
                       >
-                        {column.render(row)}
+                        {column.render(row, context)}
                       </View>
                     );
                 }

@@ -17,7 +17,8 @@ type TableRow = {
 const exampleA: TableColumn<
   `exampleKeyA` | `exampleKeyB`,
   `exampleKeyC` | `exampleKeyD`,
-  TableRow
+  TableRow,
+  `Example Context`
 > = {
   type: `basic`,
   label: `Example Label B`,
@@ -28,17 +29,18 @@ const exampleA: TableColumn<
 const exampleB: TableColumn<
   `exampleKeyA` | `exampleKeyB`,
   `exampleKeyC` | `exampleKeyD`,
-  TableRow
+  TableRow,
+  `Example Context`
 > = {
   type: `customElement`,
   label: `Example Label B`,
   width: 5,
-  render(tableRow) {
+  render(tableRow, context) {
     return (
       <Text>{tableRow.exampleKeyA}</Text>
     );
   },
-  containsSearchTerm(tableRow, filter) {
+  containsSearchTerm(tableRow, filter, context) {
     const value = tableRow.exampleKeyA;
 
     return typeof value === `string` && value.includes(filter);
@@ -48,13 +50,14 @@ const exampleB: TableColumn<
 const exampleC: TableColumn<
   `exampleKeyA` | `exampleKeyB`,
   `exampleKeyC` | `exampleKeyD`,
-  TableRow
+  TableRow,
+  `Example Context`
 > = {
   type: `customText`,
   key: `exampleKeyA`,
   label: `Example Label B`,
   width: 5,
-  render(value) {
+  render(value, context) {
     return `Prefixed ${value}`;
   },
 };

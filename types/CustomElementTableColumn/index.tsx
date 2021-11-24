@@ -7,11 +7,14 @@ import type { TableRow } from "../TableRow";
  *                                table.
  * @template TRow                 The type of a row of data provided to the
  *                                table.
+ * @template TContext             The type of the context in which the table is
+ *                                being rendered.
  */
 export type CustomElementTableColumn<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string,
-  TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>
+  TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>,
+  TContext
 > = {
   /**
    * Describes the type of column.
@@ -31,9 +34,13 @@ export type CustomElementTableColumn<
   /**
    * Renders the content of the column for a specified row.
    * @param tableRow The table row for which to render a column's content.
+   * @param context  The context in which the table is being rendered.
    * @returns        The rendered column content.
    */
-  render(tableRow: TRow): null | React.ReactNode | JSX.Element;
+  render(
+    tableRow: TRow,
+    context: TContext
+  ): null | React.ReactNode | JSX.Element;
 
   /**
    * Determines whether a search string occurs within this column on a given
@@ -42,8 +49,13 @@ export type CustomElementTableColumn<
    * @param filter   The search string to check for, in lower case, with leading
    *                 and trailing white space trimmed and internal whitespace
    *                 collapsed to single spaces.
+   * @param context  The context in which the table is being rendered.
    * @returns        True when the given search string occurs within this
    *                 column on the given table row, otherwise, false.
    */
-  containsSearchTerm(tableRow: TRow, filter: string): boolean;
+  containsSearchTerm(
+    tableRow: TRow,
+    filter: string,
+    context: TContext
+  ): boolean;
 };

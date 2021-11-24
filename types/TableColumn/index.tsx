@@ -10,16 +10,24 @@ import type { TableRow } from "../TableRow";
  *                                table.
  * @template TRow                 The type of a row of data provided to the
  *                                table.
+ * @template TContext             The type of the context in which the table is
+ *                                being rendered.
  */
 export type TableColumn<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string,
-  TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>
+  TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>,
+  TContext
 > =
   | BasicTableColumn<TKeyableColumnKey, TNonKeyableColumnKey>
-  | CustomElementTableColumn<TKeyableColumnKey, TNonKeyableColumnKey, TRow>
+  | CustomElementTableColumn<
+      TKeyableColumnKey,
+      TNonKeyableColumnKey,
+      TRow,
+      TContext
+    >
   | {
       readonly [TKey in
         | TKeyableColumnKey
-        | TNonKeyableColumnKey]: CustomTextTableColumn<TKey, TRow>;
+        | TNonKeyableColumnKey]: CustomTextTableColumn<TKey, TRow, TContext>;
     }[TKeyableColumnKey | TNonKeyableColumnKey];

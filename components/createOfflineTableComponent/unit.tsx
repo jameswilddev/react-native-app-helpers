@@ -17,7 +17,8 @@ test(`renders as expected`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -82,23 +83,31 @@ test(`renders as expected`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -148,6 +157,7 @@ test(`renders as expected`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -515,7 +525,12 @@ test(`renders as expected with only one string column`, () => {
     readonly columnA: null | string;
   };
 
-  const Component = createOfflineTableComponent<`columnA`, never, TableRow>(
+  const Component = createOfflineTableComponent<
+    `columnA`,
+    never,
+    TableRow,
+    `Example Context`
+  >(
     {
       header: {
         fontFamily: `Example Header Font Family`,
@@ -598,6 +613,7 @@ test(`renders as expected with only one string column`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -760,7 +776,8 @@ test(`renders as expected without rows`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -825,23 +842,31 @@ test(`renders as expected without rows`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -866,6 +891,7 @@ test(`renders as expected without rows`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -994,7 +1020,8 @@ test(`renders as expected without rows without vertical padding`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -1059,23 +1086,31 @@ test(`renders as expected without rows without vertical padding`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -1100,6 +1135,7 @@ test(`renders as expected without rows without vertical padding`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -1227,7 +1263,8 @@ test(`renders as expected without rows without horizontal padding`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -1292,23 +1329,31 @@ test(`renders as expected without rows without horizontal padding`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -1333,6 +1378,7 @@ test(`renders as expected without rows without horizontal padding`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -1460,7 +1506,8 @@ test(`renders as expected without a header/first row separator`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -1522,23 +1569,31 @@ test(`renders as expected without a header/first row separator`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -1563,6 +1618,7 @@ test(`renders as expected without a header/first row separator`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -1689,7 +1745,8 @@ test(`renders as expected when filtering by a string column`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -1754,23 +1811,31 @@ test(`renders as expected when filtering by a string column`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -1820,6 +1885,7 @@ test(`renders as expected when filtering by a string column`, () => {
       onSortChange={onSortChange}
       filter={` \n \n \t \r  LUe  \r \r \t \t \n   a    \t \t \r \n  `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -1996,7 +2062,8 @@ test(`renders as expected when filtering by a numeric column`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -2061,23 +2128,31 @@ test(`renders as expected when filtering by a numeric column`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -2127,6 +2202,7 @@ test(`renders as expected when filtering by a numeric column`, () => {
       onSortChange={onSortChange}
       filter={` \n \n \t \r  348  \r \r \t \t \n  `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -2307,7 +2383,8 @@ test(`renders as expected when filtering by a custom column`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -2372,23 +2449,31 @@ test(`renders as expected when filtering by a custom column`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -2438,6 +2523,7 @@ test(`renders as expected when filtering by a custom column`, () => {
       onSortChange={onSortChange}
       filter={` \n \n \t \r  Example    \r \r \t  Filter \n \n \n \t Text  \r \r \t \t \n  `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -2618,7 +2704,8 @@ test(`renders as expected when everything is filtered out`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -2683,23 +2770,31 @@ test(`renders as expected when everything is filtered out`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -2749,6 +2844,7 @@ test(`renders as expected when everything is filtered out`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t   Example \n Total  \t   Mismatch \r   \n \r \t   `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -2877,7 +2973,8 @@ test(`renders as expected when sorting by a string column, descending`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -2942,23 +3039,31 @@ test(`renders as expected when sorting by a string column, descending`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -3008,6 +3113,7 @@ test(`renders as expected when sorting by a string column, descending`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -3381,7 +3487,8 @@ test(`renders as expected when sorting by a boolean column`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -3446,23 +3553,31 @@ test(`renders as expected when sorting by a boolean column`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -3512,6 +3627,7 @@ test(`renders as expected when sorting by a boolean column`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -3885,7 +4001,8 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -3950,23 +4067,31 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -4016,6 +4141,7 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -4389,7 +4515,8 @@ test(`renders as expected when sorting by a numeric column`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -4454,23 +4581,31 @@ test(`renders as expected when sorting by a numeric column`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -4520,6 +4655,7 @@ test(`renders as expected when sorting by a numeric column`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -4893,7 +5029,8 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -4958,23 +5095,31 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -5024,6 +5169,7 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -5397,7 +5543,8 @@ test(`renders as expected without horizontal padding`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -5462,23 +5609,31 @@ test(`renders as expected without horizontal padding`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -5528,6 +5683,7 @@ test(`renders as expected without horizontal padding`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -5871,7 +6027,8 @@ test(`renders as expected without vertical padding on the header`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -5936,23 +6093,31 @@ test(`renders as expected without vertical padding on the header`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -6002,6 +6167,7 @@ test(`renders as expected without vertical padding on the header`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -6371,7 +6537,8 @@ test(`renders as expected without vertical padding on cells`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -6436,23 +6603,31 @@ test(`renders as expected without vertical padding on cells`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -6502,6 +6677,7 @@ test(`renders as expected without vertical padding on cells`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -6859,7 +7035,8 @@ test(`renders as expected without header/row separators`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -6921,23 +7098,31 @@ test(`renders as expected without header/row separators`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -6987,6 +7172,7 @@ test(`renders as expected without header/row separators`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -7358,7 +7544,8 @@ test(`renders as expected without row separators`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -7420,23 +7607,31 @@ test(`renders as expected without row separators`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -7486,6 +7681,7 @@ test(`renders as expected without row separators`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -7853,7 +8049,8 @@ test(`executes the expected callback on clicking on a column header which is not
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -7918,23 +8115,31 @@ test(`executes the expected callback on clicking on a column header which is not
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -7984,6 +8189,7 @@ test(`executes the expected callback on clicking on a column header which is not
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -8006,7 +8212,8 @@ test(`executes the expected callback on clicking on a column header which is sor
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -8071,23 +8278,31 @@ test(`executes the expected callback on clicking on a column header which is sor
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -8137,6 +8352,7 @@ test(`executes the expected callback on clicking on a column header which is sor
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -8159,7 +8375,8 @@ test(`executes the expected callback on clicking on a column header which is sor
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -8224,23 +8441,31 @@ test(`executes the expected callback on clicking on a column header which is sor
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -8290,6 +8515,7 @@ test(`executes the expected callback on clicking on a column header which is sor
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -8312,7 +8538,8 @@ test(`styles correctly when the first and last columns are custom`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -8365,23 +8592,31 @@ test(`styles correctly when the first and last columns are custom`, () => {
           type: `customElement`,
           label: `Example Column A Label`,
           width: 44,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column A Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column A Value A</Text>;
 
-              case 1:
-                return <Text>Example Column A Value B</Text>;
+                case 1:
+                  return <Text>Example Column A Value B</Text>;
 
-              case 2:
-                return <Text>Example Column A Value C</Text>;
+                case 2:
+                  return <Text>Example Column A Value C</Text>;
 
-              case 3:
-                return <Text>Example Column A Value D</Text>;
+                case 3:
+                  return <Text>Example Column A Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -8394,46 +8629,62 @@ test(`styles correctly when the first and last columns are custom`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
           type: `customElement`,
           label: `Example Column D Label`,
           width: 33,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column D Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column D Value A</Text>;
 
-              case 1:
-                return <Text>Example Column D Value B</Text>;
+                case 1:
+                  return <Text>Example Column D Value B</Text>;
 
-              case 2:
-                return <Text>Example Column D Value C</Text>;
+                case 2:
+                  return <Text>Example Column D Value C</Text>;
 
-              case 3:
-                return <Text>Example Column D Value D</Text>;
+                case 3:
+                  return <Text>Example Column D Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
       ],
@@ -8477,6 +8728,7 @@ test(`styles correctly when the first and last columns are custom`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -8826,7 +9078,8 @@ test(`styles correctly when the first column is a boolean`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -8897,23 +9150,31 @@ test(`styles correctly when the first column is a boolean`, () => {
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
       ],
@@ -8957,6 +9218,7 @@ test(`styles correctly when the first column is a boolean`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -9330,7 +9592,8 @@ test(`styles correctly when the last column is not custom and does not contain a
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnD`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -9389,23 +9652,31 @@ test(`styles correctly when the last column is not custom and does not contain a
           type: `customElement`,
           label: `Example Column C Label`,
           width: 11,
-          render(row) {
-            switch (row.columnC) {
-              case 0:
-                return <Text>Example Column C Value A</Text>;
+          render(row, context) {
+            if (context !== `Example Context`) {
+              return <Text>Invalid Context</Text>;
+            } else {
+              switch (row.columnC) {
+                case 0:
+                  return <Text>Example Column C Value A</Text>;
 
-              case 1:
-                return <Text>Example Column C Value B</Text>;
+                case 1:
+                  return <Text>Example Column C Value B</Text>;
 
-              case 2:
-                return <Text>Example Column C Value C</Text>;
+                case 2:
+                  return <Text>Example Column C Value C</Text>;
 
-              case 3:
-                return <Text>Example Column C Value D</Text>;
+                case 3:
+                  return <Text>Example Column C Value D</Text>;
+              }
             }
           },
-          containsSearchTerm(row, filter) {
-            return filter === `example filter text` && row.columnC === 3;
+          containsSearchTerm(row, filter, context) {
+            return (
+              context === `Example Context` &&
+              filter === `example filter text` &&
+              row.columnC === 3
+            );
           },
         },
         {
@@ -9461,6 +9732,7 @@ test(`styles correctly when the last column is not custom and does not contain a
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -9828,7 +10100,12 @@ test(`renders as expected with only one custom text column`, () => {
     readonly columnA: null | string;
   };
 
-  const Component = createOfflineTableComponent<`columnA`, never, TableRow>(
+  const Component = createOfflineTableComponent<
+    `columnA`,
+    never,
+    TableRow,
+    `Example Context`
+  >(
     {
       header: {
         fontFamily: `Example Header Font Family`,
@@ -9881,19 +10158,23 @@ test(`renders as expected with only one custom text column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return `\n   \r  \t  Example \t \r \n Strawberry \t \n \r Column \r \t \n  `;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return `\n   \r  \t  Example \t \r \n Strawberry \t \n \r Column \r \t \n  `;
 
-              case `Example Column A Value A`:
-                return `\n   \r  \t  Example \t \r \n Orange \t \n \r Column \r \t \n  `;
+                case `Example Column A Value A`:
+                  return `\n   \r  \t  Example \t \r \n Orange \t \n \r Column \r \t \n  `;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return `\n   \r  \t  Example \t \r \n Raspberry \t \n \r Column \r \t \n  `;
+                default:
+                  return `\n   \r  \t  Example \t \r \n Raspberry \t \n \r Column \r \t \n  `;
+              }
             }
           },
         },
@@ -9926,6 +10207,7 @@ test(`renders as expected with only one custom text column`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -10082,7 +10364,12 @@ test(`renders as expected with only one custom number column`, () => {
     readonly columnA: null | string;
   };
 
-  const Component = createOfflineTableComponent<`columnA`, never, TableRow>(
+  const Component = createOfflineTableComponent<
+    `columnA`,
+    never,
+    TableRow,
+    `Example Context`
+  >(
     {
       header: {
         fontFamily: `Example Header Font Family`,
@@ -10135,19 +10422,23 @@ test(`renders as expected with only one custom number column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return 249483;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return 1234;
+            } else {
+              switch (value) {
+                case null:
+                  return 249483;
 
-              case `Example Column A Value A`:
-                return 139874;
+                case `Example Column A Value A`:
+                  return 139874;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return 23435;
+                default:
+                  return 23435;
+              }
             }
           },
         },
@@ -10180,6 +10471,7 @@ test(`renders as expected with only one custom number column`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -10336,7 +10628,12 @@ test(`renders as expected with only one custom boolean column`, () => {
     readonly columnA: null | string;
   };
 
-  const Component = createOfflineTableComponent<`columnA`, never, TableRow>(
+  const Component = createOfflineTableComponent<
+    `columnA`,
+    never,
+    TableRow,
+    `Example Context`
+  >(
     {
       header: {
         fontFamily: `Example Header Font Family`,
@@ -10389,19 +10686,23 @@ test(`renders as expected with only one custom boolean column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -10434,6 +10735,7 @@ test(`renders as expected with only one custom boolean column`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -10583,7 +10885,8 @@ test(`renders as expected with multiple custom text columns`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -10637,19 +10940,23 @@ test(`renders as expected with multiple custom text columns`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -10658,8 +10965,12 @@ test(`renders as expected with multiple custom text columns`, () => {
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -10667,8 +10978,12 @@ test(`renders as expected with multiple custom text columns`, () => {
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -10708,6 +11023,7 @@ test(`renders as expected with multiple custom text columns`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -11029,7 +11345,8 @@ test(`can sort by a custom text column descending`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -11083,19 +11400,23 @@ test(`can sort by a custom text column descending`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -11104,8 +11425,12 @@ test(`can sort by a custom text column descending`, () => {
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -11113,8 +11438,12 @@ test(`can sort by a custom text column descending`, () => {
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -11154,6 +11483,7 @@ test(`can sort by a custom text column descending`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -11475,7 +11805,8 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -11529,19 +11860,23 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -11550,8 +11885,12 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -11559,8 +11898,12 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -11600,6 +11943,7 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -11921,7 +12265,8 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -11975,19 +12320,23 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -11996,8 +12345,12 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -12005,8 +12358,12 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -12046,6 +12403,7 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -12367,7 +12725,8 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -12421,19 +12780,23 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -12442,8 +12805,12 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -12451,8 +12818,12 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -12492,6 +12863,7 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -12814,7 +13186,8 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -12868,19 +13241,23 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -12889,8 +13266,12 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -12898,8 +13279,12 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -12939,6 +13324,7 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -13261,7 +13647,8 @@ test(`sorts descending on pressing a custom column header which is currently sor
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -13315,19 +13702,23 @@ test(`sorts descending on pressing a custom column header which is currently sor
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -13336,8 +13727,12 @@ test(`sorts descending on pressing a custom column header which is currently sor
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -13345,8 +13740,12 @@ test(`sorts descending on pressing a custom column header which is currently sor
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -13386,6 +13785,7 @@ test(`sorts descending on pressing a custom column header which is currently sor
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -13407,7 +13807,8 @@ test(`sorts ascending on pressing a custom column header which is currently sort
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -13461,19 +13862,23 @@ test(`sorts ascending on pressing a custom column header which is currently sort
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -13482,8 +13887,12 @@ test(`sorts ascending on pressing a custom column header which is currently sort
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -13491,8 +13900,12 @@ test(`sorts ascending on pressing a custom column header which is currently sort
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -13532,6 +13945,7 @@ test(`sorts ascending on pressing a custom column header which is currently sort
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -13553,7 +13967,8 @@ test(`sorts ascending on pressing a custom column header which is currently unso
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -13607,19 +14022,23 @@ test(`sorts ascending on pressing a custom column header which is currently unso
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -13628,8 +14047,12 @@ test(`sorts ascending on pressing a custom column header which is currently unso
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -13637,8 +14060,12 @@ test(`sorts ascending on pressing a custom column header which is currently unso
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -13678,6 +14105,7 @@ test(`sorts ascending on pressing a custom column header which is currently unso
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -13699,7 +14127,8 @@ test(`renders as expected with custom text columns without horizontal padding`, 
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -13753,19 +14182,23 @@ test(`renders as expected with custom text columns without horizontal padding`, 
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -13774,8 +14207,12 @@ test(`renders as expected with custom text columns without horizontal padding`, 
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -13783,8 +14220,12 @@ test(`renders as expected with custom text columns without horizontal padding`, 
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -13824,6 +14265,7 @@ test(`renders as expected with custom text columns without horizontal padding`, 
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -14120,7 +14562,8 @@ test(`renders as expected with custom text columns without vertical padding`, ()
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -14174,19 +14617,23 @@ test(`renders as expected with custom text columns without vertical padding`, ()
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -14195,8 +14642,12 @@ test(`renders as expected with custom text columns without vertical padding`, ()
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -14204,8 +14655,12 @@ test(`renders as expected with custom text columns without vertical padding`, ()
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -14245,6 +14700,7 @@ test(`renders as expected with custom text columns without vertical padding`, ()
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -14554,7 +15010,8 @@ test(`renders as expected with custom text columns without horizontal padding in
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -14608,19 +15065,23 @@ test(`renders as expected with custom text columns without horizontal padding in
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -14629,8 +15090,12 @@ test(`renders as expected with custom text columns without horizontal padding in
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -14638,8 +15103,12 @@ test(`renders as expected with custom text columns without horizontal padding in
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix ${value} Suffix`;
+            }
           },
         },
       ],
@@ -14679,6 +15148,7 @@ test(`renders as expected with custom text columns without horizontal padding in
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -14997,7 +15467,8 @@ test(`can filter a custom text column rendered as a string`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -15051,19 +15522,23 @@ test(`can filter a custom text column rendered as a string`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -15072,8 +15547,12 @@ test(`can filter a custom text column rendered as a string`, () => {
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -15081,8 +15560,12 @@ test(`can filter a custom text column rendered as a string`, () => {
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix \n \r \t ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix \n \r \t ${value} Suffix`;
+            }
           },
         },
       ],
@@ -15122,6 +15605,7 @@ test(`can filter a custom text column rendered as a string`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    FIX \n \t \r faL \n \n \r \t  `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 
@@ -15275,7 +15759,8 @@ test(`can filter a custom text column rendered as a number`, () => {
   const Component = createOfflineTableComponent<
     `columnA` | `columnB`,
     `columnC`,
-    TableRow
+    TableRow,
+    `Example Context`
   >(
     {
       header: {
@@ -15329,19 +15814,23 @@ test(`can filter a custom text column rendered as a number`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
-          render(value) {
-            switch (value) {
-              case null:
-                return true;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              switch (value) {
+                case null:
+                  return true;
 
-              case `Example Column A Value A`:
-                return false;
+                case `Example Column A Value A`:
+                  return false;
 
-              case `Example Column A Value B`:
-                return null;
+                case `Example Column A Value B`:
+                  return null;
 
-              default:
-                return true;
+                default:
+                  return true;
+              }
             }
           },
         },
@@ -15350,8 +15839,12 @@ test(`can filter a custom text column rendered as a number`, () => {
           label: `Example Column B Label`,
           width: 27,
           key: `columnB`,
-          render(value) {
-            return (value ?? 33) + 100;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return (value ?? 33) + 100;
+            }
           },
         },
         {
@@ -15359,8 +15852,12 @@ test(`can filter a custom text column rendered as a number`, () => {
           label: `Example Column C Label`,
           width: 64,
           key: `columnC`,
-          render(value) {
-            return `Prefix \n \r \t ${value} Suffix`;
+          render(value, context) {
+            if (context !== `Example Context`) {
+              return `Invalid Context`;
+            } else {
+              return `Prefix \n \r \t ${value} Suffix`;
+            }
           },
         },
       ],
@@ -15400,6 +15897,7 @@ test(`can filter a custom text column rendered as a number`, () => {
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    15 \n \n \r \t  `}
       whenEmpty="Example When Empty"
+      context="Example Context"
     />
   );
 

@@ -17,7 +17,8 @@ type TableRow = {
 const example: TableSchema<
   `exampleKeyA` | `exampleKeyB`,
   `exampleKeyC` | `exampleKeyD`,
-  TableColumn
+  TableColumn,
+  `Example Context`
 > = {
   key: `exampleKeyA`,
   columns: [
