@@ -55,7 +55,6 @@ test(`renders when enabled`, () => {
         paddingVertical: 2,
         borderWidth: 5,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -123,7 +122,6 @@ test(`renders when disabled`, () => {
         paddingVertical: 2,
         borderWidth: 2,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
       }}
@@ -184,7 +182,6 @@ test(`renders without borders when enabled`, () => {
         borderRadius: 25,
         paddingHorizontal: 10,
         paddingVertical: 2,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -244,7 +241,6 @@ test(`renders without borders when disabled`, () => {
         borderRadius: 7,
         paddingHorizontal: 10,
         paddingVertical: 2,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -312,7 +308,6 @@ test(`renders when enabled with identically sized borders`, () => {
         paddingVertical: 2,
         borderWidth: 5,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -380,7 +375,6 @@ test(`renders when disabled with identically sized borders`, () => {
         paddingVertical: 2,
         borderWidth: 5,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -450,6 +444,7 @@ test(`renders when enabled with a left icon`, () => {
         borderColor: `aquamarine`,
         justifyContent: `center`,
         alignItems: `center`,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -525,6 +520,7 @@ test(`renders when disabled with a left icon`, () => {
         justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -599,6 +595,7 @@ test(`renders when enabled with a right icon`, () => {
         borderColor: `aquamarine`,
         justifyContent: `center`,
         alignItems: `center`,
+        flexDirection: `row`,
       }}
     >
       <Text
@@ -674,6 +671,7 @@ test(`renders when disabled with a right icon`, () => {
         justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
+        flexDirection: `row`,
       }}
     >
       <Text
@@ -748,6 +746,7 @@ test(`renders when enabled with left and right icons`, () => {
         borderColor: `aquamarine`,
         justifyContent: `center`,
         alignItems: `center`,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -828,6 +827,7 @@ test(`renders when disabled with left and right icons`, () => {
         justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -904,7 +904,6 @@ test(`renders when enabled without vertical padding`, () => {
         paddingHorizontal: 10,
         borderWidth: 5,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -971,7 +970,6 @@ test(`renders when disabled without vertical padding`, () => {
         paddingHorizontal: 10,
         borderWidth: 2,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
       }}
@@ -1039,7 +1037,6 @@ test(`renders when enabled without horizontal padding`, () => {
         paddingVertical: 2,
         borderWidth: 5,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -1106,7 +1103,6 @@ test(`renders when disabled without horizontal padding`, () => {
         paddingVertical: 2,
         borderWidth: 2,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
       }}
@@ -1176,6 +1172,7 @@ test(`renders when enabled without horizontal padding with a left icon`, () => {
         borderColor: `aquamarine`,
         justifyContent: `center`,
         alignItems: `center`,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -1249,6 +1246,7 @@ test(`renders when disabled without horizontal padding with a left icon`, () => 
         justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -1321,6 +1319,7 @@ test(`renders when enabled without horizontal padding with a right icon`, () => 
         borderColor: `aquamarine`,
         justifyContent: `center`,
         alignItems: `center`,
+        flexDirection: `row`,
       }}
     >
       <Text
@@ -1391,9 +1390,10 @@ test(`renders when disabled without horizontal padding with a right icon`, () =>
         paddingVertical: 2,
         borderWidth: 2,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
+        flexDirection: `row`,
+        justifyContent: `center`,
       }}
     >
       <Text
@@ -1466,6 +1466,7 @@ test(`renders when enabled without horizontal padding with left and right icons`
         borderColor: `aquamarine`,
         justifyContent: `center`,
         alignItems: `center`,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -1544,6 +1545,7 @@ test(`renders when disabled without horizontal padding with left and right icons
         justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
+        flexDirection: `row`,
       }}
     >
       <Text>
@@ -1619,7 +1621,6 @@ test(`renders when enabled without radius`, () => {
         paddingVertical: 2,
         borderWidth: 5,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
       }}
     >
@@ -1686,7 +1687,6 @@ test(`renders when disabled without radius`, () => {
         paddingVertical: 2,
         borderWidth: 2,
         borderColor: `aquamarine`,
-        justifyContent: `center`,
         alignItems: `center`,
         margin: 3,
       }}

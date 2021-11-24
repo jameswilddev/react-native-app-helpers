@@ -42,17 +42,16 @@ export const createButtonComponent = (
    */
   readonly disabled: boolean;
 }> => {
-  const HitboxBase: ViewStyle = {
-    justifyContent: `center`,
+  const hitboxBase: ViewStyle = {
     alignItems: `center`,
   };
 
   if (buttonStyle.horizontalPadding) {
-    HitboxBase.paddingHorizontal = buttonStyle.horizontalPadding;
+    hitboxBase.paddingHorizontal = buttonStyle.horizontalPadding;
   }
 
   if (buttonStyle.verticalPadding) {
-    HitboxBase.paddingVertical = buttonStyle.verticalPadding;
+    hitboxBase.paddingVertical = buttonStyle.verticalPadding;
   }
 
   const textBase: TextStyle = {
@@ -62,7 +61,7 @@ export const createButtonComponent = (
   };
 
   const defaultHitbox: ViewStyle = {
-    ...HitboxBase,
+    ...hitboxBase,
     backgroundColor: buttonStyle.default.backgroundColor,
   };
 
@@ -77,7 +76,7 @@ export const createButtonComponent = (
   }
 
   const disabledHitbox: ViewStyle = {
-    ...HitboxBase,
+    ...hitboxBase,
     backgroundColor: buttonStyle.disabled.backgroundColor,
   };
 
@@ -123,6 +122,11 @@ export const createButtonComponent = (
 
   const styles = StyleSheet.create({
     defaultHitbox,
+    defaultHitboxWithIcons: {
+      ...defaultHitbox,
+      justifyContent: `center`,
+      flexDirection: `row`,
+    },
     defaultText: {
       ...textBase,
       color: buttonStyle.default.color,
@@ -143,6 +147,11 @@ export const createButtonComponent = (
       ...leftAndRightIconsBase,
     },
     disabledHitbox,
+    disabledHitboxWithIcons: {
+      ...disabledHitbox,
+      justifyContent: `center`,
+      flexDirection: `row`,
+    },
     disabledText: {
       ...textBase,
       color: buttonStyle.disabled.color,
@@ -190,7 +199,11 @@ export const createButtonComponent = (
           <Hitbox
             onPress={onPress}
             disabled={disabled}
-            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
+            style={
+              disabled
+                ? styles.disabledHitboxWithIcons
+                : styles.defaultHitboxWithIcons
+            }
           >
             <Text
               style={
@@ -211,7 +224,11 @@ export const createButtonComponent = (
           <Hitbox
             onPress={onPress}
             disabled={disabled}
-            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
+            style={
+              disabled
+                ? styles.disabledHitboxWithIcons
+                : styles.defaultHitboxWithIcons
+            }
           >
             {leftIconElement}
             <Text
@@ -230,7 +247,11 @@ export const createButtonComponent = (
           <Hitbox
             onPress={onPress}
             disabled={disabled}
-            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
+            style={
+              disabled
+                ? styles.disabledHitboxWithIcons
+                : styles.defaultHitboxWithIcons
+            }
           >
             {leftIconElement}
             <Text
