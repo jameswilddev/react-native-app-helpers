@@ -11,12 +11,13 @@ const styles = StyleSheet.create({
 /**
  * A ScrollView which is styled to fill its container.
  */
-export const ContainerFillingScrollView: React.FunctionComponent<ScrollViewProps> =
-  (props) => (
-    <ScrollView
-      pointerEvents="box-none"
-      style={styles.scrollView}
-      keyboardShouldPersistTaps="handled"
-      {...props}
-    />
-  );
+export const ContainerFillingScrollView: React.FunctionComponent<
+  ScrollViewProps
+> = (props) => (
+  <ScrollView
+    pointerEvents="box-none"
+    style={styles.scrollView}
+    keyboardShouldPersistTaps="handled"
+    {...props}
+  />
+);
