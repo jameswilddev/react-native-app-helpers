@@ -292,6 +292,7 @@ test(`renders as expected without a filter`, () => {
             expect.objectContaining({
               type: Text,
               props: {
+                style: { color: `#55EA13` },
                 children: `✓`,
               },
             }),
@@ -1496,6 +1497,7 @@ test(`renders as expected without horizontal padding`, () => {
             expect.objectContaining({
               type: Text,
               props: {
+                style: { color: `#55EA13` },
                 children: `✓`,
               },
             }),
@@ -1867,6 +1869,7 @@ test(`renders as expected without vertical padding`, () => {
             expect.objectContaining({
               type: Text,
               props: {
+                style: { color: `#55EA13` },
                 children: `✓`,
               },
             }),

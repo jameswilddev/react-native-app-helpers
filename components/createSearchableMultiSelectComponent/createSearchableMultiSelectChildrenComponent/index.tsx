@@ -108,6 +108,9 @@ export const createSearchableMultiSelectChildrenComponent = <
       ...optionTextBase,
       color: controlStyle.focusedValid.textColor,
     },
+    focusedCheckText: {
+      color: controlStyle.focusedValid.textColor,
+    },
     blurredOptionText: {
       ...optionTextBase,
       color: controlStyle.blurredValid.textColor,
@@ -168,9 +171,11 @@ export const createSearchableMultiSelectChildrenComponent = <
                   }
                 >
                   <Text
-                    {...(index === -1
-                      ? { style: globalStyles.transparentText }
-                      : {})}
+                    style={
+                      index === -1
+                        ? globalStyles.transparentText
+                        : localStyles.focusedCheckText
+                    }
                   >
                     ✓
                   </Text>{" "}
