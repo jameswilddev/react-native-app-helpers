@@ -130,9 +130,8 @@ export const createSearchableMultiSelectChildrenComponent = <
     let filteredOptions;
 
     if (normalizedFilter) {
-      filteredOptions = sortedOptions.filter(
-        ({ label, value }) =>
-          !values.includes(value) && normalize(label).includes(normalizedFilter)
+      filteredOptions = sortedOptions.filter(({ label }) =>
+        normalize(label).includes(normalizedFilter)
       );
     } else {
       filteredOptions = sortedOptions;

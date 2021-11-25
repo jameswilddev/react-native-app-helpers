@@ -388,7 +388,7 @@ test(`renders as expected without a filter`, () => {
   expect(stub).not.toHaveBeenCalled();
 });
 
-test(`filters the list down to only those unselected and matching the user's input`, () => {
+test(`filters the list down to only those matching the user's input`, () => {
   const Component = createSearchableMultiSelectChildrenComponent<TestValue>({
     fontFamily: `Example Font Family`,
     fontSize: 37,
