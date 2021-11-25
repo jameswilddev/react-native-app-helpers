@@ -971,7 +971,7 @@ test(`closes the select when submitting without any input`, () => {
   expect(stub).not.toHaveBeenCalled();
 });
 
-test(`selects the first matching deselected item on submitting`, () => {
+test(`selects the first matching item on submitting`, () => {
   const Component = createSearchableMultiSelectChildrenComponent<TestValue>({
     fontFamily: `Example Font Family`,
     fontSize: 37,
@@ -1096,7 +1096,132 @@ test(`selects the first matching deselected item on submitting`, () => {
   expect(stub).not.toHaveBeenCalled();
 });
 
-test(`closes the select when submitting without deselected matches`, () => {
+test(`deselects the first matching item on submitting`, () => {
+  const Component = createSearchableMultiSelectChildrenComponent<TestValue>({
+    fontFamily: `Example Font Family`,
+    fontSize: 37,
+    paddingVertical: 12,
+    paddingHorizontal: 29,
+    blurredValid: {
+      textColor: `#FFEE00`,
+      placeholderColor: `#E7AA32`,
+      backgroundColor: `#32AE12`,
+      radius: 5,
+      border: {
+        width: 4,
+        color: `#FF00FF`,
+      },
+    },
+    blurredInvalid: {
+      textColor: `#99FE88`,
+      placeholderColor: `#CACA3A`,
+      backgroundColor: `#259284`,
+      radius: 10,
+      border: {
+        width: 6,
+        color: `#9A9A8E`,
+      },
+    },
+    focusedValid: {
+      textColor: `#55EA13`,
+      placeholderColor: `#273346`,
+      backgroundColor: `#CABA99`,
+      radius: 3,
+      border: {
+        width: 5,
+        color: `#646464`,
+      },
+    },
+    focusedInvalid: {
+      textColor: `#ABAADE`,
+      placeholderColor: `#47ADAD`,
+      backgroundColor: `#32AA88`,
+      radius: 47,
+      border: {
+        width: 12,
+        color: `#98ADAA`,
+      },
+    },
+    disabledValid: {
+      textColor: `#AE2195`,
+      placeholderColor: `#FFAAEE`,
+      backgroundColor: `#772728`,
+      radius: 100,
+      border: {
+        width: 14,
+        color: `#5E5E5E`,
+      },
+    },
+    disabledInvalid: {
+      textColor: `#340297`,
+      placeholderColor: `#233832`,
+      backgroundColor: `#938837`,
+      radius: 2,
+      border: {
+        width: 19,
+        color: `#573829`,
+      },
+    },
+  });
+  const onChange = jest.fn();
+  const close = jest.fn();
+  const stub = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      options={[
+        {
+          value: 10,
+          label: `Example Option A Label`,
+        },
+        {
+          value: 20,
+          label: `Example Option D Label`,
+        },
+        {
+          value: 40,
+          label: `Example Option F Label`,
+        },
+        {
+          value: 110,
+          label: `Example Option H Label`,
+        },
+        {
+          value: 90,
+          label: `Example Option G \t RED \r apple \n Label`,
+        },
+        {
+          value: 60,
+          label: `Example Option B  \n \n \r red \t \r APPLE \n \r \t Label`,
+        },
+        {
+          value: 30,
+          label: `Example Option C Label`,
+        },
+      ]}
+      values={[50, 20, 60, 30]}
+      placeholder="Example Placeholder"
+      onChange={onChange}
+      close={close}
+      noMatchesText="Example No Matches Text"
+    />
+  );
+
+  (
+    (renderer.toTree() as TestRenderer.ReactTestRendererTree)
+      .rendered as TestRenderer.ReactTestRendererTree
+  ).props[`children`][1].props.onSubmit(
+    `  \n  \t \r  ReD    \n \n \r \t  APPle \t \n \r`
+  );
+
+  renderer.unmount();
+  expect(onChange).toHaveBeenCalledTimes(1);
+  expect(onChange).toHaveBeenCalledWith([50, 20, 30]);
+  expect(close).toHaveBeenCalledTimes(1);
+  expect(stub).not.toHaveBeenCalled();
+});
+
+test(`closes the select when submitting without matches`, () => {
   const Component = createSearchableMultiSelectChildrenComponent<TestValue>({
     fontFamily: `Example Font Family`,
     fontSize: 37,

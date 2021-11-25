@@ -208,14 +208,25 @@ export const createSearchableMultiSelectChildrenComponent = <
             const normalizedParsed = normalize(parsed);
 
             if (normalizedParsed !== ``) {
-              const filteredOptions = sortedOptions.filter(
-                ({ label, value }) =>
-                  !values.includes(value) &&
-                  normalize(label).includes(normalizedParsed)
+              const filteredOptions = sortedOptions.filter(({ label }) =>
+                normalize(label).includes(normalizedParsed)
               );
 
               if (filteredOptions.length > 0) {
-                onChange([...values, filteredOptions[0]?.value as T]);
+                const firstMatchingOption = filteredOptions[0] as {
+                  readonly value: T;
+                };
+
+                const index = values.indexOf(firstMatchingOption.value);
+
+                if (index === -1) {
+                  onChange([...values, firstMatchingOption.value]);
+                } else {
+                  const valuesCopy = [...values];
+                  valuesCopy.splice(index, 1);
+
+                  onChange(valuesCopy);
+                }
               }
             }
 
