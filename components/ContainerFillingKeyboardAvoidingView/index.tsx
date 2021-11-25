@@ -17,29 +17,30 @@ const styles = StyleSheet.create({
  * A KeyboardAvoidingView which is styled to fill its container (and uses
  * platform-appropriate behavior by default).
  */
-export const ContainerFillingKeyboardAvoidingView: React.FunctionComponent<KeyboardAvoidingViewProps> =
-  (props) => {
-    switch (Platform.OS) {
-      case `ios`:
-        return (
-          <KeyboardAvoidingView
-            pointerEvents="box-none"
-            style={styles.keyboardAvoidingView}
-            behavior="padding"
-            {...props}
-          />
-        );
+export const ContainerFillingKeyboardAvoidingView: React.FunctionComponent<
+  KeyboardAvoidingViewProps
+> = (props) => {
+  switch (Platform.OS) {
+    case `ios`:
+      return (
+        <KeyboardAvoidingView
+          pointerEvents="box-none"
+          style={styles.keyboardAvoidingView}
+          behavior="padding"
+          {...props}
+        />
+      );
 
-      case `android`:
-      case `macos`:
-      case `windows`:
-      case `web`:
-        return (
-          <KeyboardAvoidingView
-            pointerEvents="box-none"
-            style={styles.keyboardAvoidingView}
-            {...props}
-          />
-        );
-    }
-  };
+    case `android`:
+    case `macos`:
+    case `windows`:
+    case `web`:
+      return (
+        <KeyboardAvoidingView
+          pointerEvents="box-none"
+          style={styles.keyboardAvoidingView}
+          {...props}
+        />
+      );
+  }
+};
