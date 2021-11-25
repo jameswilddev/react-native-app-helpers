@@ -58,6 +58,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ### Hooks
 
+- [useBackButton](./hooks/useBackButton/readme.md)
 - [useEventRefresh](./hooks/useEventRefresh/readme.md)
 - [useMeasure](./hooks/useMeasure/readme.md)
 - [useRefresh](./hooks/useRefresh/readme.md)

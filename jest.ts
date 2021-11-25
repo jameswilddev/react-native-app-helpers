@@ -1,5 +1,9 @@
 (global as unknown as { __DEV__: boolean }).__DEV__ = false;
 
+jest.mock(`react-native/Libraries/Utilities/BackHandler`, () =>
+  jest.requireActual(`react-native/Libraries/Utilities/__mocks__/BackHandler`)
+);
+
 jest.mock(`expo-file-system`, () => {
   const uuid = jest.requireActual(`uuid`);
   const fs = jest.requireActual(`fs`);

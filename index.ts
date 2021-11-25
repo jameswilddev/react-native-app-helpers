@@ -37,6 +37,7 @@ export { Hitbox } from "./components/Hitbox";
 export { Row } from "./components/Row";
 export { SimpleModal } from "./components/SimpleModal";
 export { SizedSafeAreaView } from "./components/SizedSafeAreaView";
+export { useBackButton } from "./hooks/useBackButton";
 export { useEventRefresh } from "./hooks/useEventRefresh";
 export { useMeasure } from "./hooks/useMeasure";
 export { useRefresh } from "./hooks/useRefresh";
