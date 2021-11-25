@@ -1373,6 +1373,207 @@ test(`can be disabled during edit`, () => {
   expect(onSubmit).not.toHaveBeenCalled();
 });
 
+test(`can be disabled during edit when starting invalid`, () => {
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`,
+    false,
+    false
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={undefined}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
+    />
+  );
+
+  TestRenderer.act(() => {
+    (
+      (
+        (
+          (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+            .rendered as TestRenderer.ReactTestRendererTree
+        ).rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).props[`onFocus`]();
+  });
+
+  TestRenderer.act(() => {
+    (
+      (
+        (
+          (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+            .rendered as TestRenderer.ReactTestRendererTree
+        ).rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).props[`onChangeText`](`qze`);
+  });
+
+  renderer.update(
+    <Component
+      value={undefined}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#938837`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 19,
+          borderColor: `#573829`,
+          borderRadius: 2,
+          margin: -15,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#340297`,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: ``,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: false,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#233832`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: false,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).toHaveBeenCalledTimes(1);
+  expect(onChange).toHaveBeenCalledWith(undefined, false);
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
 test(`can be re-enabled following edit`, () => {
   type ExampleContext = {
     readonly character: string;
@@ -1964,6 +2165,207 @@ test(`resets the value on external changes`, () => {
                 lineHeight: 51.8,
               },
               value: `GGGG`,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              editable: true,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#273346`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: true,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).toHaveBeenCalledTimes(1);
+  expect(onChange).toHaveBeenCalledWith(3, false);
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`ignores external changes of the value to undefined`, () => {
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+      },
+    },
+    false,
+    `email`,
+    `numeric`,
+    false,
+    false
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
+    />
+  );
+
+  TestRenderer.act(() => {
+    (
+      (
+        (
+          (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+            .rendered as TestRenderer.ReactTestRendererTree
+        ).rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).props[`onFocus`]();
+  });
+
+  TestRenderer.act(() => {
+    (
+      (
+        (
+          (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+            .rendered as TestRenderer.ReactTestRendererTree
+        ).rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).props[`onChangeText`](`GGG`);
+  });
+
+  renderer.update(
+    <Component
+      value={undefined}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#CABA99`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 5,
+          borderColor: `#646464`,
+          borderRadius: 3,
+          margin: -1,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#55EA13`,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                lineHeight: 51.8,
+              },
+              value: `GGG`,
               multiline: false,
               scrollEnabled: false,
               autoComplete: `email`,

@@ -374,7 +374,11 @@ export function createInputComponent<TValue, TContext>(
 
     const previousStringifiedValue = React.useRef(stringifiedValue);
 
-    if (stringifiedValue !== previousStringifiedValue.current || disabled) {
+    if (
+      (stringifiedValue !== previousStringifiedValue.current &&
+        value !== undefined) ||
+      disabled
+    ) {
       editing.current = stringifiedValue;
       previousStringifiedValue.current = stringifiedValue;
     }
