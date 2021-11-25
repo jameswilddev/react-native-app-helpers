@@ -373,9 +373,9 @@ test(`renders as expected without a filter`, () => {
     `Example Text`
   );
 
-  expect(inputType.inputComponent.tryParse(``)).toEqual(undefined);
+  expect(inputType.inputComponent.tryParse(``)).toEqual(``);
   expect(inputType.inputComponent.tryParse(`   \n     \r     \t    `)).toEqual(
-    undefined
+    ``
   );
   expect(
     inputType.inputComponent.tryParse(
@@ -1577,9 +1577,9 @@ test(`renders as expected without horizontal padding`, () => {
     `Example Text`
   );
 
-  expect(inputType.inputComponent.tryParse(``)).toEqual(undefined);
+  expect(inputType.inputComponent.tryParse(``)).toEqual(``);
   expect(inputType.inputComponent.tryParse(`   \n     \r     \t    `)).toEqual(
-    undefined
+    ``
   );
   expect(
     inputType.inputComponent.tryParse(
@@ -1949,9 +1949,9 @@ test(`renders as expected without vertical padding`, () => {
     `Example Text`
   );
 
-  expect(inputType.inputComponent.tryParse(``)).toEqual(undefined);
+  expect(inputType.inputComponent.tryParse(``)).toEqual(``);
   expect(inputType.inputComponent.tryParse(`   \n     \r     \t    `)).toEqual(
-    undefined
+    ``
   );
   expect(
     inputType.inputComponent.tryParse(

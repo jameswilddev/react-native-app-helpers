@@ -46,7 +46,7 @@ export const createSearchableMultiSelectChildrenComponent = <
 ): Instance<T> & { readonly searchableMultiSelectChildren: Introspection } => {
   const InputComponent = createInputComponent<string, null>(
     (value) => value,
-    (value) => value.trim() || undefined,
+    (value) => value.trim(),
     {
       ...controlStyle,
       blurredInvalid: {
