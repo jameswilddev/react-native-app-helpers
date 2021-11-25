@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions, Text, View, TextInput } from "react-native";
 import * as TestRenderer from "react-test-renderer";
 import { createDropDownComponent, SimpleModal, Hitbox } from "../..";
 
@@ -112,7 +112,7 @@ test(`renders as expected when not disabled`, () => {
           borderRadius: 5,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -120,9 +120,12 @@ test(`renders as expected when not disabled`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
           },
         }),
       },
@@ -242,7 +245,7 @@ test(`renders as expected when disabled`, () => {
           margin: -10,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -250,9 +253,12 @@ test(`renders as expected when disabled`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#FFAAEE`,
           },
         }),
       },
@@ -377,7 +383,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           borderRadius: 5,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -385,9 +391,12 @@ test(`renders as expected when not disabled after layout when too close to the b
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
           },
         }),
       },
@@ -513,7 +522,7 @@ test(`renders as expected when disabled after layout when too close to the botto
           margin: -10,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -521,9 +530,12 @@ test(`renders as expected when disabled after layout when too close to the botto
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#FFAAEE`,
           },
         }),
       },
@@ -648,7 +660,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           borderRadius: 5,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -656,9 +668,12 @@ test(`renders as expected when not disabled after layout when not too close to t
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
           },
         }),
       },
@@ -784,7 +799,7 @@ test(`renders as expected when disabled after layout when not too close to the b
           margin: -10,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -792,9 +807,12 @@ test(`renders as expected when disabled after layout when not too close to the b
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#FFAAEE`,
           },
         }),
       },
@@ -929,7 +947,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -937,9 +955,12 @@ test(`renders as expected when not disabled after layout when too close to the b
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -1110,7 +1131,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -1118,9 +1139,12 @@ test(`renders as expected when not disabled after layout when not too close to t
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -1291,7 +1315,7 @@ test(`renders as expected when not disabled after press after layout when too cl
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -1299,9 +1323,12 @@ test(`renders as expected when not disabled after press after layout when too cl
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -1472,7 +1499,7 @@ test(`renders as expected when not disabled after press after layout when not to
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -1480,9 +1507,12 @@ test(`renders as expected when not disabled after press after layout when not to
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -1661,7 +1691,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -1669,9 +1699,12 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -1850,7 +1883,7 @@ test(`correctly handles layout changes which only change width`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -1858,9 +1891,12 @@ test(`correctly handles layout changes which only change width`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -2039,7 +2075,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -2047,9 +2083,12 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -2228,7 +2267,7 @@ test(`correctly handles layout changes which only change height`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -2236,9 +2275,12 @@ test(`correctly handles layout changes which only change height`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -2417,7 +2459,7 @@ test(`correctly handles layout changes which have no effect`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -2425,9 +2467,12 @@ test(`correctly handles layout changes which have no effect`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -2606,7 +2651,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -2614,9 +2659,12 @@ test(`correctly handles layout changes which swap from being above to below`, ()
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -2795,7 +2843,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -2803,9 +2851,12 @@ test(`correctly handles layout changes which swap from being below to above`, ()
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -2987,7 +3038,7 @@ test(`correctly handles window dimension changes which swap from being above to 
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -2995,9 +3046,12 @@ test(`correctly handles window dimension changes which swap from being above to 
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -3184,7 +3238,7 @@ test(`correctly handles window dimension changes which swap from being below to 
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -3192,9 +3246,12 @@ test(`correctly handles window dimension changes which swap from being below to 
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -3388,7 +3445,7 @@ test(`can be enabled after being created disabled`, async () => {
           borderRadius: 5,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -3396,9 +3453,12 @@ test(`can be enabled after being created disabled`, async () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
           },
         }),
       },
@@ -3546,7 +3606,7 @@ test(`closes if disabled while open`, () => {
           margin: -10,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -3554,9 +3614,12 @@ test(`closes if disabled while open`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#FFAAEE`,
           },
         }),
       },
@@ -3709,7 +3772,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
           borderRadius: 5,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -3717,9 +3780,12 @@ test(`does not re-open if enabled after disabled while open`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
           },
         }),
       },
@@ -3882,7 +3948,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -3890,9 +3956,12 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -4067,7 +4136,7 @@ test(`closes when the modal is dismissed`, () => {
           borderRadius: 5,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -4075,9 +4144,12 @@ test(`closes when the modal is dismissed`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
           },
         }),
       },
@@ -4196,17 +4268,20 @@ test(`renders as expected without a label`, () => {
           borderRadius: 5,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#E7AA32`,
+              color: `#FFEE00`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
           },
         }),
       },
@@ -4341,17 +4416,20 @@ test(`renders as expected without a label when open above`, () => {
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#273346`,
+              color: `#55EA13`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -4522,17 +4600,20 @@ test(`renders as expected without a label when open below`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#273346`,
+              color: `#55EA13`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -4683,17 +4764,20 @@ test(`renders as expected without a label when disabled`, () => {
           margin: -10,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#FFAAEE`,
+              color: `#AE2195`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#FFAAEE`,
           },
         }),
       },
@@ -4813,7 +4897,7 @@ test(`renders as expected when invalid`, () => {
           margin: -2,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -4821,9 +4905,12 @@ test(`renders as expected when invalid`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#CACA3A`,
           },
         }),
       },
@@ -4958,17 +5045,20 @@ test(`renders as expected when invalid and open above`, () => {
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#47ADAD`,
+              color: `#ABAADE`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },
@@ -5139,7 +5229,7 @@ test(`renders as expected when invalid and open below`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -5147,9 +5237,12 @@ test(`renders as expected when invalid and open below`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },
@@ -5305,7 +5398,7 @@ test(`renders as expected when invalid and disabled`, () => {
           margin: -15,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -5313,9 +5406,12 @@ test(`renders as expected when invalid and disabled`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#233832`,
           },
         }),
       },
@@ -5435,17 +5531,20 @@ test(`renders as expected when invalid without a label`, () => {
           margin: -2,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#CACA3A`,
+              color: `#99FE88`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#CACA3A`,
           },
         }),
       },
@@ -5580,17 +5679,20 @@ test(`renders as expected without a label when open above and invalid`, () => {
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#47ADAD`,
+              color: `#ABAADE`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },
@@ -5761,17 +5863,20 @@ test(`renders as expected without a label when open below and invalid`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#47ADAD`,
+              color: `#ABAADE`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },
@@ -5927,17 +6032,20 @@ test(`renders as expected without a label when disabled and invalid`, () => {
           margin: -15,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
-              color: `#233832`,
+              color: `#340297`,
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Placeholder`,
+            editable: false,
+            pointerEvents: `none`,
+            value: undefined,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#233832`,
           },
         }),
       },
@@ -6049,7 +6157,7 @@ test(`renders as expected when open above without borders`, () => {
           borderBottomRightRadius: 3,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -6057,9 +6165,12 @@ test(`renders as expected when open above without borders`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -6204,7 +6315,7 @@ test(`renders as expected when open below without borders`, () => {
           borderTopRightRadius: 3,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -6212,9 +6323,12 @@ test(`renders as expected when open below without borders`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -6359,7 +6473,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
           borderBottomRightRadius: 47,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -6367,9 +6481,12 @@ test(`renders as expected when invalid and open above without borders`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },
@@ -6514,7 +6631,7 @@ test(`renders as expected when invalid open below without borders`, () => {
           borderTopRightRadius: 47,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -6522,9 +6639,12 @@ test(`renders as expected when invalid open below without borders`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },
@@ -6690,7 +6810,7 @@ test(`renders as expected when open above without radius`, () => {
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -6698,9 +6818,12 @@ test(`renders as expected when open above without radius`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -6867,7 +6990,7 @@ test(`renders as expected when open below without radius`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -6875,9 +6998,12 @@ test(`renders as expected when open below without radius`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#273346`,
           },
         }),
       },
@@ -7044,7 +7170,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
           marginTop: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -7052,9 +7178,12 @@ test(`renders as expected when invalid and open above without radius`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },
@@ -7221,7 +7350,7 @@ test(`renders as expected when invalid open below without radius`, () => {
           marginBottom: 0,
         },
         children: expect.objectContaining({
-          type: Text,
+          type: TextInput,
           props: {
             style: {
               flexGrow: 1,
@@ -7229,9 +7358,12 @@ test(`renders as expected when invalid open below without radius`, () => {
               paddingVertical: 12,
               fontFamily: `Example Font Family`,
               fontSize: 37,
-              lineHeight: 51.8,
             },
-            children: `Example Button Content`,
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#47ADAD`,
           },
         }),
       },

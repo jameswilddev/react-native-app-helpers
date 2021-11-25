@@ -80,26 +80,11 @@ export const createControlTextStyleInstance = (
     color: controlStateStyle.textColor,
     fontFamily: controlStyle.fontFamily,
     fontSize: controlStyle.fontSize,
-    lineHeight: controlStyle.fontSize * 1.4,
   };
 
   if (controlStyle.paddingVertical) {
     output.paddingVertical = controlStyle.paddingVertical;
   }
-
-  return output;
-};
-
-export const createControlPlaceholderTextStyleInstance = (
-  controlStyle: ControlStyle,
-  controlStateStyle: ControlStateStyle
-): TextStyle => {
-  const output: TextStyle = createControlTextStyleInstance(
-    controlStyle,
-    controlStateStyle
-  );
-
-  output.color = controlStateStyle.placeholderColor;
 
   return output;
 };

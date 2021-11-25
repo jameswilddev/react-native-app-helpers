@@ -1,11 +1,10 @@
 import * as React from "react";
-import { View, ViewStyle, Text, StyleSheet } from "react-native";
+import { View, ViewStyle, StyleSheet, TextInput } from "react-native";
 import type { ControlStyle } from "../../types/ControlStyle";
 import { useRefresh } from "../../hooks/useRefresh";
 import { Hitbox } from "../Hitbox";
 import { SimpleModal } from "../SimpleModal";
 import {
-  createControlPlaceholderTextStyleInstance,
   createControlStateStyleInstance,
   createControlStyleInstance,
   createControlTextStyleInstance,
@@ -97,22 +96,6 @@ export const createFullHeightPopoverComponent = (
       controlStyle,
       controlStyle.blurredInvalid
     ),
-    disabledValidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.disabledValid
-    ),
-    disabledInvalidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.disabledInvalid
-    ),
-    validPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.blurredValid
-    ),
-    invalidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.blurredInvalid
-    ),
     validView: createFullHeightPopoverStateStyleInstance(
       controlStyle.focusedValid
     ),
@@ -195,27 +178,30 @@ export const createFullHeightPopoverComponent = (
         }}
         disabled={disabled}
       >
-        <Text
+        <TextInput
           style={
             disabled
               ? valid
-                ? label === null
-                  ? styles.disabledValidPlaceholderText
-                  : styles.disabledValidText
-                : label === null
-                ? styles.disabledInvalidPlaceholderText
+                ? styles.disabledValidText
                 : styles.disabledInvalidText
               : valid
-              ? label === null
-                ? styles.validPlaceholderText
-                : styles.validText
-              : label === null
-              ? styles.invalidPlaceholderText
+              ? styles.validText
               : styles.invalidText
           }
-        >
-          {label ?? placeholder}
-        </Text>
+          pointerEvents="none"
+          editable={false}
+          value={label ?? undefined}
+          placeholder={placeholder}
+          placeholderTextColor={
+            disabled
+              ? valid
+                ? controlStyle.disabledValid.placeholderColor
+                : controlStyle.disabledInvalid.placeholderColor
+              : valid
+              ? controlStyle.blurredValid.placeholderColor
+              : controlStyle.blurredInvalid.placeholderColor
+          }
+        />
       </Hitbox>
     );
 

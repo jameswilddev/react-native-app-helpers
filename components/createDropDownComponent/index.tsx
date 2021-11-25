@@ -3,15 +3,14 @@ import {
   View,
   useWindowDimensions,
   ViewStyle,
-  Text,
   StyleSheet,
+  TextInput,
 } from "react-native";
 import type { ControlStyle } from "../../types/ControlStyle";
 import { useRefresh } from "../../hooks/useRefresh";
 import { Hitbox } from "../Hitbox";
 import { SimpleModal } from "../SimpleModal";
 import {
-  createControlPlaceholderTextStyleInstance,
   createControlStateStyleInstance,
   createControlStyleInstance,
   createControlTextStyleInstance,
@@ -102,30 +101,6 @@ export const createDropDownComponent = (
       controlStyle.focusedValid
     ),
     focusedInvalidText: createControlTextStyleInstance(
-      controlStyle,
-      controlStyle.focusedInvalid
-    ),
-    disabledValidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.disabledValid
-    ),
-    disabledInvalidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.disabledInvalid
-    ),
-    blurredValidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.blurredValid
-    ),
-    blurredInvalidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.blurredInvalid
-    ),
-    focusedValidPlaceholderText: createControlPlaceholderTextStyleInstance(
-      controlStyle,
-      controlStyle.focusedValid
-    ),
-    focusedInvalidPlaceholderText: createControlPlaceholderTextStyleInstance(
       controlStyle,
       controlStyle.focusedInvalid
     ),
@@ -250,35 +225,38 @@ export const createDropDownComponent = (
         }}
         disabled={disabled}
       >
-        <Text
+        <TextInput
           style={
             disabled
               ? valid
-                ? label === null
-                  ? styles.disabledValidPlaceholderText
-                  : styles.disabledValidText
-                : label === null
-                ? styles.disabledInvalidPlaceholderText
+                ? styles.disabledValidText
                 : styles.disabledInvalidText
               : position === `closed`
               ? valid
-                ? label === null
-                  ? styles.blurredValidPlaceholderText
-                  : styles.blurredValidText
-                : label === null
-                ? styles.blurredInvalidPlaceholderText
+                ? styles.blurredValidText
                 : styles.blurredInvalidText
               : valid
-              ? label === null
-                ? styles.focusedValidPlaceholderText
-                : styles.focusedValidText
-              : label === null
-              ? styles.focusedInvalidPlaceholderText
+              ? styles.focusedValidText
               : styles.focusedInvalidText
           }
-        >
-          {label ?? placeholder}
-        </Text>
+          pointerEvents="none"
+          editable={false}
+          value={label ?? undefined}
+          placeholder={placeholder}
+          placeholderTextColor={
+            disabled
+              ? valid
+                ? controlStyle.disabledValid.placeholderColor
+                : controlStyle.disabledInvalid.placeholderColor
+              : position === `closed`
+              ? valid
+                ? controlStyle.blurredValid.placeholderColor
+                : controlStyle.blurredInvalid.placeholderColor
+              : valid
+              ? controlStyle.focusedValid.placeholderColor
+              : controlStyle.focusedInvalid.placeholderColor
+          }
+        />
       </Hitbox>
     );
 
