@@ -8,6 +8,7 @@ export { createCreatableSelectComponent } from "./components/createCreatableSele
 export { createDropDownComponent } from "./components/createDropDownComponent";
 export { createFiniteStateMachineRoutingComponent } from "./components/createFiniteStateMachineRoutingComponent";
 export { createFixedWidthComponent } from "./components/createFixedWidthComponent";
+export { createFlashMessageComponent } from "./components/createFlashMessageComponent";
 export { createFlatColorBackgroundComponent } from "./components/createFlatColorBackgroundComponent";
 export { createFullHeightPopoverComponent } from "./components/createFullHeightPopoverComponent";
 export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFooterComponent";
@@ -54,6 +55,8 @@ export { ControlStyle } from "./types/ControlStyle";
 export { CustomElementTableColumn } from "./types/CustomElementTableColumn";
 export { CustomTextTableColumn } from "./types/CustomTextTableColumn";
 export { FiniteStateMachineRouterState } from "./types/FiniteStateMachineRouterState";
+export { FlashMessageState } from "./types/FlashMessageState";
+export { FlashMessageStyle } from "./types/FlashMessageStyle";
 export { Json } from "./types/Json";
 export { KeyableTableCell } from "./types/KeyableTableCell";
 export { NonKeyableTableCell } from "./types/NonKeyableTableCell";
