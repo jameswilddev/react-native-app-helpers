@@ -22,9 +22,15 @@ export const flattenRenderedToArray = (
       `type` in child &&
       child.type === React.Fragment
     ) {
-      return child.props.children
-        ? child.props.children.flatMap(recurseChildren)
-        : [];
+      if (child.props.children) {
+        if (Array.isArray(child.props.children)) {
+          return child.props.children.flatMap(recurseChildren);
+        } else {
+          return recurseChildren(child.props.children);
+        }
+      } else {
+        return [];
+      }
     } else {
       return [child];
     }

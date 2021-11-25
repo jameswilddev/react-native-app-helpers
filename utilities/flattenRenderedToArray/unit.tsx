@@ -41,6 +41,9 @@ test(`flattens elements`, () => {
           <Text key="z">Example Content O</Text>,
         ]}
       </div>
+      <React.Fragment>
+        <Text>Example Content P</Text>
+      </React.Fragment>
     </React.Fragment>
   );
 
@@ -75,5 +78,6 @@ test(`flattens elements`, () => {
         <Text key="z">Example Content O</Text>,
       ]}
     </div>,
+    <Text key="12">Example Content P</Text>,
   ]);
 });
