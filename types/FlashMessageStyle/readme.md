@@ -13,6 +13,7 @@ const flashMessageStyle: FlashMessageStyle<`exampleTypeA` | `exampleTypeB` | `ex
   radius: 12,
   horizontalPadding: 41,
   verticalPadding: 57,
+  bottomMargin: 31,
   types: {
     exampleTypeA: {
       backgroundColor: `red`,

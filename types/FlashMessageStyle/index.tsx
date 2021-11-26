@@ -32,6 +32,11 @@ export type FlashMessageStyle<T extends string> = {
   readonly verticalPadding: number;
 
   /**
+   * The external margin to include below.
+   */
+  readonly bottomMargin: number;
+
+  /**
    * Details specific to flash message types.
    */
   readonly types: {

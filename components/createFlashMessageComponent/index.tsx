@@ -48,6 +48,10 @@ export function createFlashMessageComponent<T extends string>(
       hitboxStyle.borderRadius = flashMessageStyle.radius;
     }
 
+    if (flashMessageStyle.bottomMargin !== 0) {
+      hitboxStyle.marginBottom = flashMessageStyle.bottomMargin;
+    }
+
     hitboxStylesInput[typeKey] = hitboxStyle;
 
     const textStyle: TextStyle = {

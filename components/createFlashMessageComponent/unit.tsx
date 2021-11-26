@@ -11,6 +11,7 @@ test(`can initially be hidden`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -55,6 +56,7 @@ test(`can initially be shown`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -106,6 +108,7 @@ test(`can initially be shown`, () => {
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -132,6 +135,7 @@ test(`can change from hidden to visible`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -185,6 +189,7 @@ test(`can change from hidden to visible`, () => {
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -211,6 +216,7 @@ test(`can change to another message when initially shown`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -271,6 +277,7 @@ test(`can change to another message when initially shown`, () => {
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -297,6 +304,7 @@ test(`can change to another type when initially shown`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -357,6 +365,7 @@ test(`can change to another type when initially shown`, () => {
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -383,6 +392,7 @@ test(`remains open if unchanged`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -443,6 +453,7 @@ test(`remains open if unchanged`, () => {
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -469,6 +480,7 @@ test(`closes when pressed`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -528,6 +540,7 @@ test(`remains closed when the state does not change`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -594,6 +607,7 @@ test(`shows again when the message changes`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -660,6 +674,7 @@ test(`shows again when the message changes`, () => {
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -686,6 +701,7 @@ test(`shows again when the type changes`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -752,6 +768,7 @@ test(`shows again when the type changes`, () => {
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -778,6 +795,7 @@ test(`closes when withdrawn`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -831,6 +849,7 @@ test(`renders as expected without border radius`, () => {
     radius: 0,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -881,6 +900,7 @@ test(`renders as expected without border radius`, () => {
         borderColor: `orange`,
         paddingHorizontal: 41,
         paddingVertical: 57,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -907,6 +927,7 @@ test(`renders as expected without horizontal padding`, () => {
     radius: 12,
     horizontalPadding: 0,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -957,6 +978,7 @@ test(`renders as expected without horizontal padding`, () => {
         borderColor: `orange`,
         paddingVertical: 57,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -983,6 +1005,7 @@ test(`renders as expected without vertical padding`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 0,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -1033,6 +1056,7 @@ test(`renders as expected without vertical padding`, () => {
         borderColor: `orange`,
         paddingHorizontal: 41,
         borderRadius: 12,
+        marginBottom: 31,
       },
       children: expect.objectContaining({
         type: Text,
@@ -1059,6 +1083,7 @@ test(`renders as expected without borders`, () => {
     radius: 12,
     horizontalPadding: 41,
     verticalPadding: 57,
+    bottomMargin: 31,
     types: {
       exampleTypeA: {
         backgroundColor: `red`,
@@ -1102,6 +1127,85 @@ test(`renders as expected without borders`, () => {
       disabled: false,
       style: {
         backgroundColor: `blue`,
+        paddingHorizontal: 41,
+        paddingVertical: 57,
+        borderRadius: 12,
+        marginBottom: 31,
+      },
+      children: expect.objectContaining({
+        type: Text,
+        props: {
+          style: {
+            fontFamily: `Example Font Family`,
+            fontSize: 25,
+            lineHeight: 35,
+            color: `yellow`,
+          },
+          children: `Example Message`,
+        },
+      }),
+    },
+  });
+
+  renderer.unmount();
+});
+
+test(`renders as expected without bottom margin`, () => {
+  const Component = createFlashMessageComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 25,
+    radius: 12,
+    horizontalPadding: 41,
+    verticalPadding: 57,
+    bottomMargin: 0,
+    types: {
+      exampleTypeA: {
+        backgroundColor: `red`,
+        color: `green`,
+        border: null,
+      },
+      exampleTypeB: {
+        backgroundColor: `blue`,
+        color: `yellow`,
+        border: {
+          width: 15,
+          color: `orange`,
+        },
+      },
+      exampleTypeC: {
+        backgroundColor: `purple`,
+        color: `cyan`,
+        border: null,
+      },
+      exampleTypeD: {
+        backgroundColor: `magenta`,
+        color: `black`,
+        border: {
+          width: 24,
+          color: `white`,
+        },
+      },
+    },
+  });
+
+  const renderer = TestRenderer.create(
+    <Component
+      state={{
+        type: `exampleTypeB`,
+        message: `Example Message`,
+      }}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toMatchObject({
+    type: Hitbox,
+    props: {
+      onPress: expect.any(Function),
+      disabled: false,
+      style: {
+        backgroundColor: `blue`,
+        borderWidth: 15,
+        borderColor: `orange`,
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
