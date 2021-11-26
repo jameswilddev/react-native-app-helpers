@@ -94,7 +94,6 @@ export function createFlashMessageComponent<T extends string>(
         <Hitbox
           disabled={false}
           onPress={() => {
-            console.log("let us go!");
             internalState.current.open = false;
             refresh();
           }}
