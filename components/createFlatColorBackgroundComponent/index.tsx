@@ -21,5 +21,9 @@ export const createFlatColorBackgroundComponent = (
     },
   });
 
-  return ({ size, children }) => <View style={styles[size]}>{children}</View>;
+  return ({ size, children }) => (
+    <View style={styles[size]} pointerEvents="box-none">
+      {children}
+    </View>
+  );
 };

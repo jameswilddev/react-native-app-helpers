@@ -13,9 +13,9 @@ test(`renders as expected when fitting the content`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View>
-      <Image
-        source={{ uri: `Example Uri` }}
+    <View pointerEvents="box-none">
+      <View
+        pointerEvents="none"
         style={{
           position: `absolute`,
           left: 0,
@@ -23,8 +23,13 @@ test(`renders as expected when fitting the content`, () => {
           width: `100%`,
           height: `100%`,
         }}
-        resizeMode="cover"
-      />
+      >
+        <Image
+          source={{ uri: `Example Uri` }}
+          style={{ width: `100%`, height: `100%` }}
+          resizeMode="cover"
+        />
+      </View>
       <Text>Test Content</Text>
     </View>
   );
@@ -40,9 +45,8 @@ test(`renders as expected when filling the container`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ flexGrow: 1 }}>
-      <Image
-        source={{ uri: `Example Uri` }}
+    <View style={{ flexGrow: 1 }} pointerEvents="box-none">
+      <View
         style={{
           position: `absolute`,
           left: 0,
@@ -50,8 +54,17 @@ test(`renders as expected when filling the container`, () => {
           width: `100%`,
           height: `100%`,
         }}
-        resizeMode="cover"
-      />
+        pointerEvents="none"
+      >
+        <Image
+          source={{ uri: `Example Uri` }}
+          style={{
+            width: `100%`,
+            height: `100%`,
+          }}
+          resizeMode="cover"
+        />
+      </View>
       <Text>Test Content</Text>
     </View>
   );

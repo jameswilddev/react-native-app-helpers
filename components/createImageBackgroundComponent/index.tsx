@@ -3,6 +3,10 @@ import { Image, ImageSourcePropType, StyleSheet, View } from "react-native";
 
 const styles = StyleSheet.create({
   image: {
+    width: `100%`,
+    height: `100%`,
+  },
+  imageWrapper: {
     position: `absolute`,
     left: 0,
     top: 0,
@@ -29,8 +33,11 @@ export const createImageBackgroundComponent = (
       {...(size === `fillsContainer`
         ? { style: styles.containerFillingView }
         : {})}
+      pointerEvents="box-none"
     >
-      <Image source={source} style={styles.image} resizeMode="cover" />
+      <View style={styles.imageWrapper} pointerEvents="none">
+        <Image source={source} style={styles.image} resizeMode="cover" />
+      </View>
       {children}
     </View>
   );

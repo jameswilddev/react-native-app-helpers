@@ -13,7 +13,7 @@ test(`renders as expected when fitting the content`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ backgroundColor: `red` }}>
+    <View style={{ backgroundColor: `red` }} pointerEvents="box-none">
       <Text>Test Content</Text>
     </View>
   );
@@ -29,7 +29,10 @@ test(`renders as expected when filling the container`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ backgroundColor: `red`, flexGrow: 1 }}>
+    <View
+      style={{ backgroundColor: `red`, flexGrow: 1 }}
+      pointerEvents="box-none"
+    >
       <Text>Test Content</Text>
     </View>
   );
