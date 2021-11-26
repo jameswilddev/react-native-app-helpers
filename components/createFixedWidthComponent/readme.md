@@ -1,7 +1,6 @@
 # `react-native-app-helpers/createFixedWidthComponent`
 
-Creates a React component which has a fixed width (and fills its container
-vertically).
+Creates a React component which has a fixed width.
 
 ## Usage
 
@@ -11,8 +10,20 @@ import { createFixedWidthComponent } from "react-native-app-helpers";
 const ExampleComponent = createFixedWidthComponent(243);
 
 const ExampleScreen = () => (
-  <ExampleComponent>
-    <Text>This is 243 wide and fills its container.</Text>
+  <ExampleComponent height="fillsContainer">
+    <Text>This is 243 wide and fills its container vertically.</Text>
+  </ExampleComponent>
+);
+```
+
+```tsx
+import { createFixedWidthComponent } from "react-native-app-helpers";
+
+const ExampleComponent = createFixedWidthComponent(243);
+
+const ExampleScreen = () => (
+  <ExampleComponent height="fitsContent">
+    <Text>This is 243 wide and fits its content vertically.</Text>
   </ExampleComponent>
 );
 ```
