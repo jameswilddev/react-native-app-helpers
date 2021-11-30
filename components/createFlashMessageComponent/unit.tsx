@@ -520,13 +520,11 @@ test(`closes when pressed`, () => {
     />
   );
 
-  console.log("before press");
   TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       `onPress`
     ]();
   });
-  console.log("after press");
 
   expect(renderer.toTree()?.rendered).toBeNull();
 
