@@ -100,7 +100,7 @@ test(`renders as expected without bounds`, () => {
       autoComplete: `off`,
       keyboardType: `default`,
       autoFocus: false,
-      keepFocusOnSubmit: false,
+      keepFocusOnSubmit: true,
     },
   });
 
@@ -308,7 +308,7 @@ test(`renders as expected with a minimum length`, () => {
       autoComplete: `off`,
       keyboardType: `default`,
       autoFocus: false,
-      keepFocusOnSubmit: false,
+      keepFocusOnSubmit: true,
     },
   });
 
@@ -462,7 +462,7 @@ test(`renders as expected with a maximum length`, () => {
       autoComplete: `off`,
       keyboardType: `default`,
       autoFocus: false,
-      keepFocusOnSubmit: false,
+      keepFocusOnSubmit: true,
     },
   });
 

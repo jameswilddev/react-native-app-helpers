@@ -77,7 +77,7 @@ export const createRequiredTextAreaComponent = (
     `off`,
     `default`,
     false,
-    false
+    true
   );
 
   return ({ value, onChange, disabled, placeholder }) => (

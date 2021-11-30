@@ -79,7 +79,7 @@ export const createNullableTextAreaComponent = (
     `off`,
     `default`,
     false,
-    false
+    true
   );
 
   return ({ value, onChange, disabled, placeholder }) => (
