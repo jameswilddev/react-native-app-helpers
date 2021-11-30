@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
+  View,
   ViewStyle,
 } from "react-native";
 import type { ButtonStyle } from "../../types/ButtonStyle";
@@ -41,6 +42,14 @@ export const createButtonComponent = (
    * When false, the button is not disabled and accepts input.
    */
   readonly disabled: boolean;
+
+  /**
+   * The contents of the button.  This can be null (indicating no content), a
+   * string, or a function which returns a custom element to display.
+   */
+  readonly children:
+    | string
+    | ((color: ColorValue) => null | React.ReactNode | JSX.Element);
 }> => {
   const hitboxBase: ViewStyle = {
     alignItems: `center`,
@@ -171,6 +180,15 @@ export const createButtonComponent = (
       color: buttonStyle.disabled.color,
       ...leftAndRightIconsBase,
     },
+    elementWrapperViewWithLeftIcon: {
+      ...leftIconBase,
+    },
+    elementWrapperViewWithRightIcon: {
+      ...rightIconBase,
+    },
+    elementWrapperViewWithLeftAndRightIcons: {
+      ...leftAndRightIconsBase,
+    },
   });
 
   return ({ leftIcon, rightIcon, onPress, disabled, children }) => {
@@ -181,91 +199,213 @@ export const createButtonComponent = (
     const leftIconElement = leftIcon(color);
     const rightIconElement = rightIcon(color);
 
-    if (leftIconElement === null) {
-      if (rightIconElement === null) {
-        return (
-          <Hitbox
-            onPress={onPress}
-            disabled={disabled}
-            style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
-          >
-            <Text style={disabled ? styles.disabledText : styles.defaultText}>
-              {children}
-            </Text>
-          </Hitbox>
-        );
-      } else {
-        return (
-          <Hitbox
-            onPress={onPress}
-            disabled={disabled}
-            style={
-              disabled
-                ? styles.disabledHitboxWithIcons
-                : styles.defaultHitboxWithIcons
-            }
-          >
-            <Text
-              style={
-                disabled
-                  ? styles.disabledTextWithRightIcon
-                  : styles.defaultTextWithRightIcon
-              }
+    if (typeof children === `function`) {
+      if (leftIconElement === null) {
+        if (rightIconElement === null) {
+          return (
+            <Hitbox
+              onPress={onPress}
+              disabled={disabled}
+              style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
             >
-              {children}
-            </Text>
-            {rightIconElement}
-          </Hitbox>
-        );
+              {children(color)}
+            </Hitbox>
+          );
+        } else {
+          if (buttonStyle.iconSpacing === 0) {
+            return (
+              <Hitbox
+                onPress={onPress}
+                disabled={disabled}
+                style={
+                  disabled
+                    ? styles.disabledHitboxWithIcons
+                    : styles.defaultHitboxWithIcons
+                }
+              >
+                {children(color)}
+                {rightIconElement}
+              </Hitbox>
+            );
+          } else {
+            return (
+              <Hitbox
+                onPress={onPress}
+                disabled={disabled}
+                style={
+                  disabled
+                    ? styles.disabledHitboxWithIcons
+                    : styles.defaultHitboxWithIcons
+                }
+              >
+                <View style={styles.elementWrapperViewWithRightIcon}>
+                  {children(color)}
+                </View>
+                {rightIconElement}
+              </Hitbox>
+            );
+          }
+        }
+      } else {
+        if (rightIconElement === null) {
+          if (buttonStyle.iconSpacing === 0) {
+            return (
+              <Hitbox
+                onPress={onPress}
+                disabled={disabled}
+                style={
+                  disabled
+                    ? styles.disabledHitboxWithIcons
+                    : styles.defaultHitboxWithIcons
+                }
+              >
+                {leftIconElement}
+                {children(color)}
+              </Hitbox>
+            );
+          } else {
+            return (
+              <Hitbox
+                onPress={onPress}
+                disabled={disabled}
+                style={
+                  disabled
+                    ? styles.disabledHitboxWithIcons
+                    : styles.defaultHitboxWithIcons
+                }
+              >
+                {leftIconElement}
+                <View style={styles.elementWrapperViewWithLeftIcon}>
+                  {children(color)}
+                </View>
+              </Hitbox>
+            );
+          }
+        } else {
+          if (buttonStyle.iconSpacing === 0) {
+            return (
+              <Hitbox
+                onPress={onPress}
+                disabled={disabled}
+                style={
+                  disabled
+                    ? styles.disabledHitboxWithIcons
+                    : styles.defaultHitboxWithIcons
+                }
+              >
+                {leftIconElement}
+                {children(color)}
+                {rightIconElement}
+              </Hitbox>
+            );
+          } else {
+            return (
+              <Hitbox
+                onPress={onPress}
+                disabled={disabled}
+                style={
+                  disabled
+                    ? styles.disabledHitboxWithIcons
+                    : styles.defaultHitboxWithIcons
+                }
+              >
+                {leftIconElement}
+                <View style={styles.elementWrapperViewWithLeftAndRightIcons}>
+                  {children(color)}
+                </View>
+                {rightIconElement}
+              </Hitbox>
+            );
+          }
+        }
       }
     } else {
-      if (rightIconElement === null) {
-        return (
-          <Hitbox
-            onPress={onPress}
-            disabled={disabled}
-            style={
-              disabled
-                ? styles.disabledHitboxWithIcons
-                : styles.defaultHitboxWithIcons
-            }
-          >
-            {leftIconElement}
-            <Text
+      if (leftIconElement === null) {
+        if (rightIconElement === null) {
+          return (
+            <Hitbox
+              onPress={onPress}
+              disabled={disabled}
+              style={disabled ? styles.disabledHitbox : styles.defaultHitbox}
+            >
+              <Text style={disabled ? styles.disabledText : styles.defaultText}>
+                {children}
+              </Text>
+            </Hitbox>
+          );
+        } else {
+          return (
+            <Hitbox
+              onPress={onPress}
+              disabled={disabled}
               style={
                 disabled
-                  ? styles.disabledTextWithLeftIcon
-                  : styles.defaultTextWithLeftIcon
+                  ? styles.disabledHitboxWithIcons
+                  : styles.defaultHitboxWithIcons
               }
             >
-              {children}
-            </Text>
-          </Hitbox>
-        );
+              <Text
+                style={
+                  disabled
+                    ? styles.disabledTextWithRightIcon
+                    : styles.defaultTextWithRightIcon
+                }
+              >
+                {children}
+              </Text>
+              {rightIconElement}
+            </Hitbox>
+          );
+        }
       } else {
-        return (
-          <Hitbox
-            onPress={onPress}
-            disabled={disabled}
-            style={
-              disabled
-                ? styles.disabledHitboxWithIcons
-                : styles.defaultHitboxWithIcons
-            }
-          >
-            {leftIconElement}
-            <Text
+        if (rightIconElement === null) {
+          return (
+            <Hitbox
+              onPress={onPress}
+              disabled={disabled}
               style={
                 disabled
-                  ? styles.disabledTextWithLeftAndRightIcons
-                  : styles.defaultTextWithLeftAndRightIcons
+                  ? styles.disabledHitboxWithIcons
+                  : styles.defaultHitboxWithIcons
               }
             >
-              {children}
-            </Text>
-            {rightIconElement}
-          </Hitbox>
-        );
+              {leftIconElement}
+              <Text
+                style={
+                  disabled
+                    ? styles.disabledTextWithLeftIcon
+                    : styles.defaultTextWithLeftIcon
+                }
+              >
+                {children}
+              </Text>
+            </Hitbox>
+          );
+        } else {
+          return (
+            <Hitbox
+              onPress={onPress}
+              disabled={disabled}
+              style={
+                disabled
+                  ? styles.disabledHitboxWithIcons
+                  : styles.defaultHitboxWithIcons
+              }
+            >
+              {leftIconElement}
+              <Text
+                style={
+                  disabled
+                    ? styles.disabledTextWithLeftAndRightIcons
+                    : styles.defaultTextWithLeftAndRightIcons
+                }
+              >
+                {children}
+              </Text>
+              {rightIconElement}
+            </Hitbox>
+          );
+        }
       }
     }
   };

@@ -32,15 +32,26 @@ const ExampleDropDown = createButtonComponent({
 });
 
 const ExampleScreen = () => (
-  <ExampleButton
-    leftIcon={(color) => <Text style={{ color }}>This is shown on the left.</Text>}
-    rightIcon={(color) => <Text style={{ color }>This is shown on the right.</Text>}
-    onPress={() => {
-      alert(`The button has been pressed.`);
-    }}
-    disabled={false}
-  >
-    This is shown in the center.
-  </ExampleButton>
+  <React.Fragment>
+    <ExampleButton
+      leftIcon={(color) => <Text style={{ color }}>This is shown on the left.</Text>}
+      rightIcon={(color) => <Text style={{ color }>This is shown on the right.</Text>}
+      onPress={() => {
+        alert(`The button has been pressed.`);
+      }}
+      disabled={false}
+    >
+      This is shown in the center.
+    </ExampleButton>
+    <ExampleButton
+      leftIcon={(color) => <Text style={{ color }}>This is shown on the left.</Text>}
+      rightIcon={(color) => <Text style={{ color }>This is shown on the right.</Text>}
+      onPress={() => {
+        alert(`The button has been pressed.`);
+      }}
+      disabled={false}
+      children={(color) => <Text style={{ color }}>This is shown in the center.</Text>}
+    />
+  </React.Fragment>
 );
 ```
