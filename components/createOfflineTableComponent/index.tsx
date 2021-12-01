@@ -382,7 +382,9 @@ export const createOfflineTableComponent = <
         } else if ((fromB as unknown as boolean) === false) {
           comparisonResult = 1;
         } else {
-          comparisonResult = String(fromA).localeCompare(String(fromB));
+          comparisonResult = String(fromA).localeCompare(String(fromB), [], {
+            numeric: true,
+          });
         }
       }
 

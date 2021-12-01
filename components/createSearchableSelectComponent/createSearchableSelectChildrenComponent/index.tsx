@@ -128,7 +128,7 @@ export const createSearchableSelectChildrenComponent = <
     const normalizedFilter = normalize(filter);
 
     const sortedOptions = [...options].sort(({ label: a }, { label: b }) =>
-      a.localeCompare(b)
+      a.localeCompare(b, [], { numeric: true })
     );
 
     let filteredOptions;
