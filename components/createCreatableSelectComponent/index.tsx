@@ -95,7 +95,7 @@ export function createCreatableSelectComponent<
 
     return (
       <FullHeightPopover
-        disabled={disabled || options.length === 0}
+        disabled={disabled}
         valid={!required || selectedOption !== null}
         label={selectedOption === null ? null : selectedOption.label}
         placeholder={placeholder}

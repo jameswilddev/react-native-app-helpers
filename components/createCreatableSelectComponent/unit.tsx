@@ -739,7 +739,7 @@ test(`renders as expected without any options`, () => {
 
   expect(rendered).toMatchObject({
     props: {
-      disabled: true,
+      disabled: false,
       valid: true,
       label: null,
       placeholder: `Example Placeholder`,
@@ -796,7 +796,7 @@ test(`renders as expected when required without any options`, () => {
 
   expect(rendered).toMatchObject({
     props: {
-      disabled: true,
+      disabled: false,
       valid: false,
       label: null,
       placeholder: `Example Placeholder`,
