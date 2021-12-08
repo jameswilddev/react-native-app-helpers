@@ -15,6 +15,7 @@ export { createHeaderBodyFooterComponent } from "./components/createHeaderBodyFo
 export { createHrComponent } from "./components/createHrComponent";
 export { createImageBackgroundComponent } from "./components/createImageBackgroundComponent";
 export { createInputComponent } from "./components/createInputComponent";
+export { createNullableEmailInputComponent } from "./components/createNullableEmailInputComponent";
 export { createNullableFloatInputComponent } from "./components/createNullableFloatInputComponent";
 export { createNullableIntegerInputComponent } from "./components/createNullableIntegerInputComponent";
 export { createNullableTextAreaComponent } from "./components/createNullableTextAreaComponent";
@@ -22,6 +23,7 @@ export { createNullableTextInputComponent } from "./components/createNullableTex
 export { createOfflineTableComponent } from "./components/createOfflineTableComponent";
 export { createPaddingComponent } from "./components/createPaddingComponent";
 export { createProportionalRowComponent } from "./components/createProportionalRowComponent";
+export { createRequiredEmailInputComponent } from "./components/createRequiredEmailInputComponent";
 export { createRequiredFloatInputComponent } from "./components/createRequiredFloatInputComponent";
 export { createRequiredIntegerInputComponent } from "./components/createRequiredIntegerInputComponent";
 export { createRequiredTextAreaComponent } from "./components/createRequiredTextAreaComponent";
