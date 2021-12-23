@@ -1,5 +1,4 @@
 import type * as React from "react";
-import type { Json } from "../Json";
 
 /**
  * A React component which can be used to render a route.
@@ -7,7 +6,7 @@ import type { Json } from "../Json";
  * @template TOtherProps      Any other props the route accepts.
  */
 export type Route<
-  TRouteParameters extends Json,
+  TRouteParameters,
   TOtherProps extends { readonly [key: string]: unknown }
 > = React.FunctionComponent<
   {
