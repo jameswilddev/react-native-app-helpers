@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     width: `100%`,
     height: `100%`,
   },
+  scrollViewContentContainer: {
+    flexGrow: 1,
+  },
 });
 
 /**
@@ -17,6 +20,7 @@ export const ContainerFillingScrollView: React.FunctionComponent<
   <ScrollView
     pointerEvents="box-none"
     style={styles.scrollView}
+    contentContainerStyle={styles.scrollViewContentContainer}
     keyboardShouldPersistTaps="handled"
     {...props}
   />

@@ -15,6 +15,7 @@ test(`renders as expected`, () => {
       horizontal
       decelerationRate="fast"
       style={{ width: `100%`, height: `100%` }}
+      contentContainerStyle={{ flexGrow: 1 }}
       pointerEvents="box-none"
       keyboardShouldPersistTaps="handled"
     >
