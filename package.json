@@ -57,7 +57,7 @@
   "sideEffects": false,
   "dependencies": {
     "events": "3.3.0",
-    "expo": "43.0.3",
+    "expo": "44.0.1",
     "expo-file-system": "13.0.3",
     "expo-secure-store": "11.0.3",
     "filter-validate-email": "1.1.3",
