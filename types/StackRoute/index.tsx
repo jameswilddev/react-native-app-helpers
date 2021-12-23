@@ -41,5 +41,7 @@ export type StackRoute<
     readonly parameters: TRouteParameters[TRouteKey];
     readonly routeState: StackRouterState<TRouteParameters>;
     readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void;
+    readonly width: `fillsContainer` | `fitsContent`;
+    readonly height: `fillsContainer` | `fitsContent`;
   } & TOtherProps
 >;

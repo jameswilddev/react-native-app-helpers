@@ -2,23 +2,67 @@ import * as React from "react";
 import type { FunctionComponent } from "react";
 import type { RouteParameters } from "../../types/RouteParameters";
 import type { StackRouterState } from "../../types/StackRouterState";
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { StyleSheet, View } from "react-native";
 import type { StackRouteTable } from "../../types/StackRouteTable";
 
-const viewBase: ViewStyle = {
-  width: `100%`,
-  height: `100%`,
-};
-
 const styles = StyleSheet.create({
-  activeView: {
-    ...viewBase,
+  activeViewFillsContainerVerticallyFitsContentHorizontally: {
+    height: `100%`,
   },
-  inactiveView: {
-    ...viewBase,
+  activeViewFitsContentVerticallyFillsContainerHorizontally: {
+    width: `100%`,
+  },
+  activeViewFillsContainerVerticallyFillsContainerHorizontally: {
+    height: `100%`,
+    width: `100%`,
+  },
+  inactiveViewFitsContentVerticallyFitsContentHorizontally: {
     display: `none`,
   },
+  inactiveViewFillsContainerVerticallyFitsContentHorizontally: {
+    display: `none`,
+    height: `100%`,
+  },
+  inactiveViewFitsContentVerticallyFillsContainerHorizontally: {
+    display: `none`,
+    width: `100%`,
+  },
+  inactiveViewFillsContainerVerticallyFillsContainerHorizontally: {
+    display: `none`,
+    height: `100%`,
+    width: `100%`,
+  },
 });
+
+const hierarchy = {
+  active: {
+    fitsContent: {
+      fitsContent: null,
+      fillsContainer:
+        styles.activeViewFitsContentVerticallyFillsContainerHorizontally,
+    },
+    fillsContainer: {
+      fitsContent:
+        styles.activeViewFillsContainerVerticallyFitsContentHorizontally,
+      fillsContainer:
+        styles.activeViewFillsContainerVerticallyFillsContainerHorizontally,
+    },
+  },
+  inactive: {
+    fitsContent: {
+      fitsContent:
+        styles.inactiveViewFitsContentVerticallyFitsContentHorizontally,
+      fillsContainer:
+        styles.inactiveViewFitsContentVerticallyFillsContainerHorizontally,
+    },
+    fillsContainer: {
+      fitsContent:
+        styles.inactiveViewFillsContainerVerticallyFitsContentHorizontally,
+      fillsContainer:
+        styles.inactiveViewFillsContainerVerticallyFillsContainerHorizontally,
+    },
+  },
+};
 
 /**
  * Creates a React component which displays the top of a stack of routes (though
@@ -38,51 +82,53 @@ export const createStackRoutingComponent = <
   {
     readonly routeState: StackRouterState<TRouteParameters>;
     readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void;
+    readonly width: `fillsContainer` | `fitsContent`;
+    readonly height: `fillsContainer` | `fitsContent`;
   } & TOtherProps
 > => {
   return (props) => (
     <React.Fragment>
-      {props.routeState.map((item, index) => (
-        <View
-          key={index}
-          style={
-            index === props.routeState.length - 1
-              ? styles.activeView
-              : styles.inactiveView
-          }
-        >
-          {React.createElement(routeTable[item.key], {
-            parameters: item.parameters,
-            push: (...itemsToAdd) => {
-              props.setRouteState([...props.routeState, ...itemsToAdd]);
-            },
-            pop: (numberOfItemsToRemove) => {
-              const popped = [...props.routeState];
+      {props.routeState.map((item, index) => {
+        const style =
+          hierarchy[
+            index === props.routeState.length - 1 ? `active` : `inactive`
+          ][props.height][props.width];
 
-              for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
-                popped.pop();
-              }
+        return (
+          <View key={index} {...(style ? { style } : {})}>
+            {React.createElement(routeTable[item.key], {
+              parameters: item.parameters,
+              push: (...itemsToAdd) => {
+                props.setRouteState([...props.routeState, ...itemsToAdd]);
+              },
+              pop: (numberOfItemsToRemove) => {
+                const popped = [...props.routeState];
 
-              props.setRouteState(popped);
-            },
-            replace: (numberOfItemsToRemove, ...itemsToAdd) => {
-              const popped = [...props.routeState];
+                for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
+                  popped.pop();
+                }
 
-              for (let i = 0; i < numberOfItemsToRemove; i++) {
-                popped.pop();
-              }
+                props.setRouteState(popped);
+              },
+              replace: (numberOfItemsToRemove, ...itemsToAdd) => {
+                const popped = [...props.routeState];
 
-              popped.push(...itemsToAdd);
+                for (let i = 0; i < numberOfItemsToRemove; i++) {
+                  popped.pop();
+                }
 
-              props.setRouteState(popped);
-            },
-            reset: (...replacementItems) => {
-              props.setRouteState(replacementItems);
-            },
-            ...props,
-          })}
-        </View>
-      ))}
+                popped.push(...itemsToAdd);
+
+                props.setRouteState(popped);
+              },
+              reset: (...replacementItems) => {
+                props.setRouteState(replacementItems);
+              },
+              ...props,
+            })}
+          </View>
+        );
+      })}
     </React.Fragment>
   );
 };

@@ -244,6 +244,8 @@ export default () => {
         pop={() => {
           setRouteState(routeState.slice(0, routeState.length - 1));
         }}
+        width="fillsContainer"
+        height="fillsContainer"
       />
     </SafeAreaView>
   );
