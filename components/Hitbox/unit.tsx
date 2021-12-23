@@ -277,7 +277,7 @@ test(`executes the press callback once when hitboxes are enabled`, () => {
   renderer.unmount();
 });
 
-test(`executes the press callback once when hitboxes are disabled`, () => {
+test(`does not execute the press callback when hitboxes are disabled`, () => {
   const onPress = jest.fn();
   const onMeasure = jest.fn();
 
