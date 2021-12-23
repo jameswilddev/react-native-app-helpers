@@ -78,6 +78,7 @@ export const createNullableTextAreaComponent = (
     true,
     `off`,
     `default`,
+    `sentences`,
     false,
     true
   );

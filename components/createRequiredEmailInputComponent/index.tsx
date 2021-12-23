@@ -84,6 +84,7 @@ export const createRequiredEmailInputComponent = (
     false,
     `off`,
     `default`,
+    `none`,
     false,
     false
   );

@@ -79,7 +79,8 @@ test(`renders as expected without bounds`, () => {
     <Text>Example Left Icon</Text>,
     <Text>Example Right Icon</Text>,
     null,
-    null
+    null,
+    `sentences`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -102,6 +103,7 @@ test(`renders as expected without bounds`, () => {
       keyboardType: `default`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      autoCapitalize: `sentences`,
     },
   });
 
@@ -243,7 +245,8 @@ test(`renders as expected with a minimum length`, () => {
     <Text>Example Left Icon</Text>,
     <Text>Example Right Icon</Text>,
     14,
-    null
+    null,
+    `sentences`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -266,6 +269,7 @@ test(`renders as expected with a minimum length`, () => {
       keyboardType: `default`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      autoCapitalize: `sentences`,
     },
   });
 
@@ -441,7 +445,8 @@ test(`renders as expected with a maximum length`, () => {
     <Text>Example Left Icon</Text>,
     <Text>Example Right Icon</Text>,
     null,
-    14
+    14,
+    `sentences`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -464,6 +469,7 @@ test(`renders as expected with a maximum length`, () => {
       keyboardType: `default`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      autoCapitalize: `sentences`,
     },
   });
 
@@ -639,7 +645,8 @@ test(`passes down an empty array when unique is undefined`, () => {
     <Text>Example Left Icon</Text>,
     <Text>Example Right Icon</Text>,
     null,
-    null
+    null,
+    `sentences`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -740,7 +747,8 @@ test(`passes down an empty array when unique is not given`, () => {
     <Text>Example Left Icon</Text>,
     <Text>Example Right Icon</Text>,
     null,
-    null
+    null,
+    `sentences`
   );
 
   const rendered = unwrapRenderedFunctionComponent(

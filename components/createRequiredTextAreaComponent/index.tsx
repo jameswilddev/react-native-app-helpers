@@ -76,6 +76,7 @@ export const createRequiredTextAreaComponent = (
     true,
     `off`,
     `default`,
+    `sentences`,
     false,
     true
   );

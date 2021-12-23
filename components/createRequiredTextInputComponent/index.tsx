@@ -4,21 +4,23 @@ import { createInputComponent } from "../createInputComponent";
 
 /**
  * Creates a new input component pre-configured as a required text input.
- * @param controlStyle  The style of the component to create.
- * @param leftIcon      The icon to show on the left side, if any, else, null.
- * @param rightIcon     The icon to show on the right side, if any, else, null.
- * @param minimumLength When non-null, entered values must be greater for
- *                      validation to succeed.
- * @param maximumLength When non-null, entered values must be greater or equal
- *                      for validation to succeed.
- * @returns             The created component.
+ * @param controlStyle   The style of the component to create.
+ * @param leftIcon       The icon to show on the left side, if any, else, null.
+ * @param rightIcon      The icon to show on the right side, if any, else, null.
+ * @param minimumLength  When non-null, entered values must be greater for
+ *                       validation to succeed.
+ * @param maximumLength  When non-null, entered values must be greater or equal
+ *                       for validation to succeed.
+ * @param autoCapitalize The capitalization behavior to use.
+ * @returns              The created component.
  */
 export const createRequiredTextInputComponent = (
   controlStyle: ControlStyle,
   leftIcon: null | React.ReactNode | JSX.Element,
   rightIcon: null | React.ReactNode | JSX.Element,
   minimumLength: null | number,
-  maximumLength: null | number
+  maximumLength: null | number,
+  autoCapitalize: `none` | `sentences` | `words` | `characters`
 ): React.FunctionComponent<{
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
@@ -81,6 +83,7 @@ export const createRequiredTextInputComponent = (
     false,
     `off`,
     `default`,
+    autoCapitalize,
     false,
     false
   );

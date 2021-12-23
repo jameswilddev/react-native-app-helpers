@@ -81,6 +81,7 @@ export const createNullableTextInputComponent = (
     false,
     `off`,
     `default`,
+    `sentences`,
     false,
     false
   );

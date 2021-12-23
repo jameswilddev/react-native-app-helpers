@@ -80,6 +80,7 @@ export const createRequiredIntegerInputComponent = (
     false,
     `off`,
     `numeric`,
+    `none`,
     false,
     false
   );

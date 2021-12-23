@@ -110,6 +110,11 @@ type Introspection<TValue, TContext> = {
   readonly keyboardType: `default` | `email-address` | `numeric`;
 
   /**
+   * The capitalization behavior to use.
+   */
+  readonly autoCapitalize: `none` | `sentences` | `words` | `characters`;
+
+  /**
    * When true, the text input will steal focus on mount.  It will otherwise
    * wait for the user to interact with it.
    */
@@ -139,6 +144,7 @@ type Introspection<TValue, TContext> = {
  *                          It will otherwise scroll one line horizontally.
  * @param autoComplete      The type of auto-complete suggestions to provide.
  * @param keyboardType      The type of keyboard to show.
+ * @param autoCapitalize    The capitalization behavior to use.
  * @param autoFocus         When true, the text input will steal focus on mount.
  *                          It will otherwise wait for the user to interact with
  *                          it.
@@ -154,6 +160,7 @@ export function createInputComponent<TValue, TContext>(
   multiLine: boolean,
   autoComplete: `off` | `email` | `password`,
   keyboardType: `default` | `email-address` | `numeric`,
+  autoCapitalize: `none` | `sentences` | `words` | `characters`,
   autoFocus: boolean,
   keepFocusOnSubmit: boolean
 ): Instance<TValue, TContext> & {
@@ -480,6 +487,7 @@ export function createInputComponent<TValue, TContext>(
           autoComplete={autoComplete}
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType}
+          autoCapitalize={autoCapitalize}
           editable={!disabled}
           placeholder={placeholder}
           placeholderTextColor={
@@ -548,6 +556,7 @@ export function createInputComponent<TValue, TContext>(
     multiLine,
     autoComplete,
     keyboardType,
+    autoCapitalize,
     autoFocus,
     keepFocusOnSubmit,
   };

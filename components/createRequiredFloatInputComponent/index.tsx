@@ -84,6 +84,7 @@ export const createRequiredFloatInputComponent = (
     false,
     `off`,
     `numeric`,
+    `none`,
     false,
     false
   );

@@ -85,6 +85,7 @@ export const createNullableIntegerInputComponent = (
     false,
     `off`,
     `numeric`,
+    `none`,
     false,
     false
   );

@@ -71,6 +71,7 @@ export const createSearchableMultiSelectChildrenComponent = <
     false,
     `off`,
     `default`,
+    `sentences`,
     true,
     true
   );

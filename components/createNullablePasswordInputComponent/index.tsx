@@ -71,6 +71,7 @@ export const createNullablePasswordInputComponent = (
     false,
     `off`,
     `default`,
+    `sentences`,
     false,
     false
   );

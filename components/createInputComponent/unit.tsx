@@ -83,6 +83,7 @@ test(`renders as expected with a value`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -140,6 +141,7 @@ test(`renders as expected with a value`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -242,6 +244,7 @@ test(`renders as expected without a value`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -300,6 +303,7 @@ test(`renders as expected without a value`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#CACA3A`,
@@ -402,6 +406,7 @@ test(`renders as expected when disabled with a value`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -460,6 +465,7 @@ test(`renders as expected when disabled with a value`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#FFAAEE`,
@@ -562,6 +568,7 @@ test(`renders as expected when disabled without a value`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -620,6 +627,7 @@ test(`renders as expected when disabled without a value`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#233832`,
@@ -722,6 +730,7 @@ test(`can be focused when valid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -791,6 +800,7 @@ test(`can be focused when valid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -893,6 +903,7 @@ test(`can be focused when invalid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -962,6 +973,7 @@ test(`can be focused when invalid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#47ADAD`,
@@ -1064,6 +1076,7 @@ test(`can be blurred`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -1143,6 +1156,7 @@ test(`can be blurred`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -1245,6 +1259,7 @@ test(`can be disabled during edit`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -1342,6 +1357,7 @@ test(`can be disabled during edit`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#FFAAEE`,
@@ -1445,6 +1461,7 @@ test(`can be disabled during edit when starting invalid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -1542,6 +1559,7 @@ test(`can be disabled during edit when starting invalid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#233832`,
@@ -1645,6 +1663,7 @@ test(`can be re-enabled following edit`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -1758,6 +1777,7 @@ test(`can be re-enabled following edit`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -1861,6 +1881,7 @@ test(`does not lose pending changes on update`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -1958,6 +1979,7 @@ test(`does not lose pending changes on update`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Updated Placeholder`,
               placeholderTextColor: `#273346`,
@@ -2061,6 +2083,7 @@ test(`resets the value on external changes`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -2135,6 +2158,7 @@ test(`resets the value on external changes`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -2237,6 +2261,7 @@ test(`ignores external changes to the value when an edit is in progress`, () => 
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -2334,6 +2359,7 @@ test(`ignores external changes to the value when an edit is in progress`, () => 
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -2437,6 +2463,7 @@ test(`allows valid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -2517,6 +2544,7 @@ test(`allows valid incomplete edits`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -2620,6 +2648,7 @@ test(`allows valid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -2704,6 +2733,7 @@ test(`allows valid incomplete edits`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -2807,6 +2837,7 @@ test(`allows valid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -2891,6 +2922,7 @@ test(`allows valid incomplete edits`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -2994,6 +3026,7 @@ test(`allows invalid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -3074,6 +3107,7 @@ test(`allows invalid incomplete edits`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#47ADAD`,
@@ -3177,6 +3211,7 @@ test(`allows invalid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -3261,6 +3296,7 @@ test(`allows invalid incomplete edits`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#47ADAD`,
@@ -3364,6 +3400,7 @@ test(`allows invalid incomplete edits`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -3448,6 +3485,7 @@ test(`allows invalid incomplete edits`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#47ADAD`,
@@ -3550,6 +3588,7 @@ test(`renders as expected when the border width does not change`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -3607,6 +3646,7 @@ test(`renders as expected when the border width does not change`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#CACA3A`,
@@ -3709,6 +3749,7 @@ test(`passes down secureTextEntry`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -3766,6 +3807,7 @@ test(`passes down secureTextEntry`, () => {
               autoComplete: `email`,
               secureTextEntry: true,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -3868,6 +3910,7 @@ test(`renders with a left icon`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -3933,6 +3976,7 @@ test(`renders with a left icon`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -4035,6 +4079,7 @@ test(`renders with a right icon`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -4093,6 +4138,7 @@ test(`renders with a right icon`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -4202,6 +4248,7 @@ test(`renders with left and right icons`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -4267,6 +4314,7 @@ test(`renders with left and right icons`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -4376,6 +4424,7 @@ test(`renders as expected with a left icon without a value`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -4442,6 +4491,7 @@ test(`renders as expected with a left icon without a value`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#CACA3A`,
@@ -4544,6 +4594,7 @@ test(`renders as expected with a left icon without a value`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -4603,6 +4654,7 @@ test(`renders as expected with a left icon without a value`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#CACA3A`,
@@ -4712,6 +4764,7 @@ test(`renders as expected with left and right icons without a value`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -4778,6 +4831,7 @@ test(`renders as expected with left and right icons without a value`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#CACA3A`,
@@ -4887,6 +4941,7 @@ test(`renders as expected with a left icon when focused and valid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -4964,6 +5019,7 @@ test(`renders as expected with a left icon when focused and valid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -5066,6 +5122,7 @@ test(`renders as expected with a right icon when focused and valid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -5136,6 +5193,7 @@ test(`renders as expected with a right icon when focused and valid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -5245,6 +5303,7 @@ test(`renders as expected with a right icon when focused and valid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -5322,6 +5381,7 @@ test(`renders as expected with a right icon when focused and valid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#273346`,
@@ -5431,6 +5491,7 @@ test(`renders as expected with a left icon when focused and invalid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -5508,6 +5569,7 @@ test(`renders as expected with a left icon when focused and invalid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#47ADAD`,
@@ -5610,6 +5672,7 @@ test(`renders as expected with a right icon when focused and invalid`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -5680,6 +5743,7 @@ test(`renders as expected with a right icon when focused and invalid`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#47ADAD`,
@@ -5789,6 +5853,7 @@ test(`renders as expected with left and right icons when focused and invalid`, (
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -5866,6 +5931,7 @@ test(`renders as expected with left and right icons when focused and invalid`, (
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#47ADAD`,
@@ -5975,6 +6041,7 @@ test(`renders without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -6031,6 +6098,7 @@ test(`renders without horizontal padding`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -6133,6 +6201,7 @@ test(`renders with a left icon without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -6196,6 +6265,7 @@ test(`renders with a left icon without horizontal padding`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -6298,6 +6368,7 @@ test(`renders with a right icon without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -6354,6 +6425,7 @@ test(`renders with a right icon without horizontal padding`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -6463,6 +6535,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -6526,6 +6599,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -6635,6 +6709,7 @@ test(`renders as expected without vertical padding`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -6691,6 +6766,7 @@ test(`renders as expected without vertical padding`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -6781,6 +6857,7 @@ test(`renders as expected without borders`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -6836,6 +6913,7 @@ test(`renders as expected without borders`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -6938,6 +7016,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -6995,6 +7074,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#CACA3A`,
@@ -7097,6 +7177,7 @@ test(`renders as expected without a radius`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -7153,6 +7234,7 @@ test(`renders as expected without a radius`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -7255,6 +7337,7 @@ test(`renders when disabled with a left icon`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -7321,6 +7404,7 @@ test(`renders when disabled with a left icon`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#FFAAEE`,
@@ -7423,6 +7507,7 @@ test(`renders when disabled with a right icon`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -7482,6 +7567,7 @@ test(`renders when disabled with a right icon`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#FFAAEE`,
@@ -7591,6 +7677,7 @@ test(`renders when disabled with left and right icons`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -7657,6 +7744,7 @@ test(`renders when disabled with left and right icons`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#FFAAEE`,
@@ -7766,6 +7854,7 @@ test(`renders as expected when disabled with a left icon without a value`, () =>
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -7832,6 +7921,7 @@ test(`renders as expected when disabled with a left icon without a value`, () =>
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#233832`,
@@ -7934,6 +8024,7 @@ test(`renders as expected when disabled with a right icon without a value`, () =
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -7993,6 +8084,7 @@ test(`renders as expected when disabled with a right icon without a value`, () =
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#233832`,
@@ -8102,6 +8194,7 @@ test(`renders as expected when disabled with left and right icons without a valu
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -8168,6 +8261,7 @@ test(`renders as expected when disabled with left and right icons without a valu
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: false,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#233832`,
@@ -8277,6 +8371,7 @@ test(`allows introspection when used in a higher-order component`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     true,
     false
   );
@@ -8311,6 +8406,7 @@ test(`allows introspection when used in a higher-order component`, () => {
       multiLine: false,
       autoComplete: `email`,
       keyboardType: `numeric`,
+      autoCapitalize: `sentences`,
       autoFocus: true,
       keepFocusOnSubmit: false,
     },
@@ -8397,6 +8493,7 @@ test(`does nothing when auto-focus is enabled`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     true,
     false
   );
@@ -8455,6 +8552,7 @@ test(`does nothing when auto-focus is enabled`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -8557,6 +8655,7 @@ test(`focuses the text input on layout when the ref is ready`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     true,
     false
   );
@@ -8682,6 +8781,7 @@ test(`does not focus the text input a second time`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     true,
     false
   );
@@ -8814,6 +8914,7 @@ test(`renders as expected with a value when focus is to be retained`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     true
   );
@@ -8871,6 +8972,7 @@ test(`renders as expected with a value when focus is to be retained`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,
@@ -8973,6 +9075,7 @@ test(`renders as expected without a value when focus is to be retained`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     true
   );
@@ -9031,6 +9134,7 @@ test(`renders as expected without a value when focus is to be retained`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#CACA3A`,
@@ -9133,6 +9237,7 @@ test(`treats disabled undefined as disabled false`, () => {
     false,
     `email`,
     `numeric`,
+    `sentences`,
     false,
     false
   );
@@ -9190,6 +9295,7 @@ test(`treats disabled undefined as disabled false`, () => {
               autoComplete: `email`,
               secureTextEntry: false,
               keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
               editable: true,
               placeholder: `Test Placeholder`,
               placeholderTextColor: `#E7AA32`,

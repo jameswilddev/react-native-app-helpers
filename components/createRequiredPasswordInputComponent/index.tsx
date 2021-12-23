@@ -71,6 +71,7 @@ export const createRequiredPasswordInputComponent = (
     false,
     `off`,
     `default`,
+    `sentences`,
     false,
     false
   );

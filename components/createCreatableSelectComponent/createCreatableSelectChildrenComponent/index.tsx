@@ -70,6 +70,7 @@ export const createCreatableSelectChildrenComponent = <
     false,
     `off`,
     `default`,
+    `sentences`,
     true,
     false
   );

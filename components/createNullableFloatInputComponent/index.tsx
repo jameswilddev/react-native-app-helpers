@@ -86,6 +86,7 @@ export const createNullableFloatInputComponent = (
     false,
     `off`,
     `numeric`,
+    `none`,
     false,
     false
   );
