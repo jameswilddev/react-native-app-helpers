@@ -374,19 +374,19 @@ export function createInputComponent<TValue, TContext>(
 
     const previousStringifiedValue = React.useRef(stringifiedValue);
 
-    if (
-      (stringifiedValue !== previousStringifiedValue.current &&
-        value !== undefined) ||
-      disabled
-    ) {
-      editing.current = stringifiedValue;
-      previousStringifiedValue.current = stringifiedValue;
-    }
-
     const focused = React.useRef(false);
 
     if (disabled) {
       focused.current = false;
+    }
+
+    if (
+      (stringifiedValue !== previousStringifiedValue.current &&
+        !focused.current) ||
+      disabled
+    ) {
+      editing.current = stringifiedValue;
+      previousStringifiedValue.current = stringifiedValue;
     }
 
     const valid = tryParse(editing.current, context) !== undefined;

@@ -2084,28 +2084,6 @@ test(`resets the value on external changes`, () => {
     />
   );
 
-  TestRenderer.act(() => {
-    (
-      (
-        (
-          (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-            .rendered as TestRenderer.ReactTestRendererTree
-        ).rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
-      )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onFocus`]();
-  });
-
-  TestRenderer.act(() => {
-    (
-      (
-        (
-          (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-            .rendered as TestRenderer.ReactTestRendererTree
-        ).rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
-      )[0] as TestRenderer.ReactTestRendererTree
-    ).props[`onChangeText`](`GGG`);
-  });
-
   renderer.update(
     <Component
       value={4}
@@ -2129,14 +2107,13 @@ test(`resets the value on external changes`, () => {
       type: View,
       props: expect.objectContaining({
         style: {
-          backgroundColor: `#CABA99`,
+          backgroundColor: `#32AE12`,
           flexDirection: `row`,
           alignItems: `center`,
           paddingHorizontal: 29,
-          borderWidth: 5,
-          borderColor: `#646464`,
-          borderRadius: 3,
-          margin: -1,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
         },
       }),
       rendered: expect.objectContaining({
@@ -2147,7 +2124,7 @@ test(`resets the value on external changes`, () => {
             props: {
               style: {
                 flexGrow: 1,
-                color: `#55EA13`,
+                color: `#FFEE00`,
                 paddingVertical: 12,
                 fontFamily: `Example Font Family`,
                 fontSize: 37,
@@ -2160,7 +2137,7 @@ test(`resets the value on external changes`, () => {
               keyboardType: `numeric`,
               editable: true,
               placeholder: `Test Placeholder`,
-              placeholderTextColor: `#273346`,
+              placeholderTextColor: `#E7AA32`,
               onChangeText: expect.any(Function),
               onEndEditing: expect.any(Function),
               onFocus: expect.any(Function),
@@ -2176,12 +2153,11 @@ test(`resets the value on external changes`, () => {
 
   renderer.unmount();
 
-  expect(onChange).toHaveBeenCalledTimes(1);
-  expect(onChange).toHaveBeenCalledWith(3, false);
+  expect(onChange).not.toHaveBeenCalled();
   expect(onSubmit).not.toHaveBeenCalled();
 });
 
-test(`ignores external changes of the value to undefined`, () => {
+test(`ignores external changes to the value when an edit is in progress`, () => {
   type ExampleContext = {
     readonly character: string;
     readonly regex: RegExp;
@@ -2308,7 +2284,7 @@ test(`ignores external changes of the value to undefined`, () => {
 
   renderer.update(
     <Component
-      value={undefined}
+      value={4}
       onChange={onChange}
       onSubmit={onSubmit}
       secureTextEntry={false}
