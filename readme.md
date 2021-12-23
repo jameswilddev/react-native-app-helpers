@@ -107,6 +107,8 @@ import { createTextComponent } from "react-native-app-helpers";
 - [TableSchema](./types/TableSchema/readme.md)
 - [TableStyle](./types/TableStyle/readme.md)
 - [StackRouterState](./types/StackRouterState/readme.md)
+- [StackRoute](./types/StackRoute/readme.md)
+- [StackRouteTable](./types/StackRouteTable/readme.md)
 - [TabRoute](./types/TabRoute/readme.md)
 - [TabRouteTable](./types/TabRouteTable/readme.md)
 

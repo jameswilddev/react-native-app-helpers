@@ -75,6 +75,8 @@ export { SplitButtonStateStyle } from "./types/SplitButtonStateStyle";
 export { SplitButtonStyle } from "./types/SplitButtonStyle";
 export { SplitButtonTypeStyle } from "./types/SplitButtonTypeStyle";
 export { StackRouterState } from "./types/StackRouterState";
+export { StackRoute } from "./types/StackRoute";
+export { StackRouteTable } from "./types/StackRouteTable";
 export { TableColumn } from "./types/TableColumn";
 export { TableRow } from "./types/TableRow";
 export { TableRowStyle } from "./types/TableRowStyle";

@@ -1,9 +1,9 @@
 import * as React from "react";
 import type { FunctionComponent } from "react";
 import type { RouteParameters } from "../../types/RouteParameters";
-import type { RouteTable } from "../../types/RouteTable";
 import type { StackRouterState } from "../../types/StackRouterState";
 import { StyleSheet, View, ViewStyle } from "react-native";
+import type { StackRouteTable } from "../../types/StackRouteTable";
 
 const viewBase: ViewStyle = {
   width: `100%`,
@@ -33,10 +33,11 @@ export const createStackRoutingComponent = <
   TRouteParameters extends RouteParameters,
   TOtherProps extends { readonly [key: string]: unknown }
 >(
-  routeTable: RouteTable<TRouteParameters, TOtherProps>
+  routeTable: StackRouteTable<TRouteParameters, TOtherProps>
 ): FunctionComponent<
   {
     readonly routeState: StackRouterState<TRouteParameters>;
+    readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void;
   } & TOtherProps
 > => {
   return (props) => (
@@ -51,8 +52,34 @@ export const createStackRoutingComponent = <
           }
         >
           {React.createElement(routeTable[item.key], {
+            parameters: item.parameters,
+            push: (...itemsToAdd) => {
+              props.setRouteState([...props.routeState, ...itemsToAdd]);
+            },
+            pop: (numberOfItemsToRemove) => {
+              const popped = [...props.routeState];
+
+              for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
+                popped.pop();
+              }
+
+              props.setRouteState(popped);
+            },
+            replace: (numberOfItemsToRemove, ...itemsToAdd) => {
+              const popped = [...props.routeState];
+
+              for (let i = 0; i < numberOfItemsToRemove; i++) {
+                popped.pop();
+              }
+
+              popped.push(...itemsToAdd);
+
+              props.setRouteState(popped);
+            },
+            reset: (...replacementItems) => {
+              props.setRouteState(replacementItems);
+            },
             ...props,
-            routeState: item,
           })}
         </View>
       ))}
