@@ -74,6 +74,137 @@ test(`renders when enabled`, () => {
   expect(onPress).not.toHaveBeenCalled();
 });
 
+test(`renders when enabled by not disabling`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component leftIcon={() => null} rightIcon={() => null} onPress={onPress}>
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        alignItems: `center`,
+      }}
+    >
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+        }}
+      >
+        Example Content
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+test(`renders when enabled by disabled being undefined`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component
+      leftIcon={() => null}
+      rightIcon={() => null}
+      onPress={onPress}
+      disabled={undefined}
+    >
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        alignItems: `center`,
+      }}
+    >
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+        }}
+      >
+        Example Content
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
+
 test(`renders when disabled`, () => {
   const Component = createButtonComponent({
     fontFamily: `Example Font Family`,
@@ -3445,6 +3576,308 @@ test(`renders when disabled with a custom element with left and right icons with
       <Text>
         {`Example Right Icon (`}
         {`purple`}
+        {`)`}
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+test(`renders with a left icon when the right icon is missing`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component
+      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      onPress={onPress}
+      disabled={false}
+    >
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        justifyContent: `center`,
+        alignItems: `center`,
+        flexDirection: `row`,
+      }}
+    >
+      <Text>
+        {`Example Left Icon (`}
+        {`blue`}
+        {`)`}
+      </Text>
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+          paddingLeft: 7,
+        }}
+      >
+        Example Content
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+test(`renders with a left icon when the right icon is undefined`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component
+      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      rightIcon={undefined}
+      onPress={onPress}
+      disabled={false}
+    >
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        justifyContent: `center`,
+        alignItems: `center`,
+        flexDirection: `row`,
+      }}
+    >
+      <Text>
+        {`Example Left Icon (`}
+        {`blue`}
+        {`)`}
+      </Text>
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+          paddingLeft: 7,
+        }}
+      >
+        Example Content
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+test(`renders with a right icon when the left icon is missing`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component
+      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      onPress={onPress}
+      disabled={false}
+    >
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        justifyContent: `center`,
+        alignItems: `center`,
+        flexDirection: `row`,
+      }}
+    >
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+          paddingRight: 7,
+        }}
+      >
+        Example Content
+      </Text>
+      <Text>
+        {`Example Right Icon (`}
+        {`blue`}
+        {`)`}
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+test(`renders with a right icon when the left icon is undefined`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component
+      leftIcon={undefined}
+      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      onPress={onPress}
+      disabled={false}
+    >
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        justifyContent: `center`,
+        alignItems: `center`,
+        flexDirection: `row`,
+      }}
+    >
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+          paddingRight: 7,
+        }}
+      >
+        Example Content
+      </Text>
+      <Text>
+        {`Example Right Icon (`}
+        {`blue`}
         {`)`}
       </Text>
     </Hitbox>

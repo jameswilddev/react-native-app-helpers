@@ -23,14 +23,14 @@ export const createButtonComponent = (
    * @param color The color of the icon.
    * @returns The icon to show, or null if no icon is to be shown.
    */
-  leftIcon(color: ColorValue): null | React.ReactNode | JSX.Element;
+  leftIcon?(color: ColorValue): null | React.ReactNode | JSX.Element;
 
   /**
    * Renders the button's right icon.
    * @param color The color of the icon.
    * @returns The icon to show, or null if no icon is to be shown.
    */
-  rightIcon(color: ColorValue): null | React.ReactNode | JSX.Element;
+  rightIcon?(color: ColorValue): null | React.ReactNode | JSX.Element;
 
   /**
    * Executed when the button is pressed.
@@ -41,7 +41,7 @@ export const createButtonComponent = (
    * When true, the button is disabled and does not accept input.
    * When false, the button is not disabled and accepts input.
    */
-  readonly disabled: boolean;
+  readonly disabled?: undefined | boolean;
 
   /**
    * The contents of the button.  This can be null (indicating no content), a
@@ -192,12 +192,14 @@ export const createButtonComponent = (
   });
 
   return ({ leftIcon, rightIcon, onPress, disabled, children }) => {
+    disabled = disabled ?? false;
+
     const color = disabled
       ? buttonStyle.disabled.color
       : buttonStyle.default.color;
 
-    const leftIconElement = leftIcon(color);
-    const rightIconElement = rightIcon(color);
+    const leftIconElement = leftIcon ? leftIcon(color) : null;
+    const rightIconElement = rightIcon ? rightIcon(color) : null;
 
     if (typeof children === `function`) {
       if (leftIconElement === null) {
