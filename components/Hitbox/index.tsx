@@ -13,7 +13,7 @@ type Component = React.FunctionComponent<{
    * This will, of course, not apply until the next render.  To synchronously
    * disable all Hitboxes, use the "enabled" static property.
    */
-  readonly disabled?: boolean;
+  readonly disabled?: undefined | boolean;
 
   /**
    * Passed down to TouchableOpacity.
@@ -57,7 +57,7 @@ export const Hitbox: Component & {
 
   return (
     <TouchableOpacity
-      disabled={disabled}
+      disabled={disabled ?? false}
       style={style}
       ref={ref}
       onLayout={onLayout}
