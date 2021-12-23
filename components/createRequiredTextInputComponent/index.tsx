@@ -47,7 +47,7 @@ export const createRequiredTextInputComponent = (
   /**
    * The value entered must not appear in this list.
    */
-  readonly unique: ReadonlyArray<string>;
+  readonly unique?: undefined | ReadonlyArray<string>;
 }> => {
   const RequiredTextInputComponent = createInputComponent<
     string,
@@ -93,7 +93,7 @@ export const createRequiredTextInputComponent = (
       onChange={onChange}
       disabled={disabled}
       placeholder={placeholder}
-      context={unique}
+      context={unique ?? []}
       secureTextEntry={false}
       onSubmit={() => {
         /* No-op. */
