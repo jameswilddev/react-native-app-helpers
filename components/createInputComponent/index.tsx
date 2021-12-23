@@ -42,7 +42,7 @@ type Instance<TValue, TContext> = React.FunctionComponent<{
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled: boolean;
+  readonly disabled: undefined | boolean;
 
   /**
    * Text to be shown when no value has been entered.
@@ -365,6 +365,8 @@ export function createInputComponent<TValue, TContext>(
     onSubmit,
     context,
   }) => {
+    disabled = disabled ?? false;
+
     const refresh = useRefresh();
 
     const stringifiedValue =

@@ -37,7 +37,7 @@ export const createNullableTextAreaComponent = (
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled: boolean;
+  readonly disabled?: undefined | boolean;
 
   /**
    * Text to be shown when no value has been entered.
