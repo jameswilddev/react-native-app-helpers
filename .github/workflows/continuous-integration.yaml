@@ -26,11 +26,10 @@ jobs:
     - run: npm run-script buildJest
     - uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php }}
+        php-version: 8.0
         coverage: xdebug
     - run: composer install
     - run: vendor/bin/psalm
-      if: hashFiles('vendor/bin/psalm') != ''
     - run: mkdir -p test_results
     - run: vendor/bin/phpunit --coverage-text | tee test_results/unit
     - run: grep -E "^\s*Lines:\s*100\.00%\s*\([0-9]+\/[0-9]+\)\s*$" test_results/unit
