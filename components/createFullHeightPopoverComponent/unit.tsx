@@ -4969,3 +4969,131 @@ test(`allows introspection when used in a higher-order component`, () => {
     fullHeightPopover: { controlStyle },
   });
 });
+
+test(`treats disabled undefined as disabled false`, () => {
+  Dimensions.set({
+    window: {
+      width: 640,
+      height: 480,
+      scale: 2.42,
+      fontScale: 3.51,
+    },
+  });
+
+  const Component = createFullHeightPopoverComponent({
+    fontFamily: `Example Font Family`,
+    fontSize: 37,
+    paddingVertical: 12,
+    paddingHorizontal: 29,
+    blurredValid: {
+      textColor: `#FFEE00`,
+      placeholderColor: `#E7AA32`,
+      backgroundColor: `#32AE12`,
+      radius: 5,
+      border: {
+        width: 4,
+        color: `#FF00FF`,
+      },
+    },
+    blurredInvalid: {
+      textColor: `#99FE88`,
+      placeholderColor: `#CACA3A`,
+      backgroundColor: `#259284`,
+      radius: 10,
+      border: {
+        width: 6,
+        color: `#9A9A8E`,
+      },
+    },
+    focusedValid: {
+      textColor: `#55EA13`,
+      placeholderColor: `#273346`,
+      backgroundColor: `#CABA99`,
+      radius: 3,
+      border: {
+        width: 5,
+        color: `#646464`,
+      },
+    },
+    focusedInvalid: {
+      textColor: `#ABAADE`,
+      placeholderColor: `#47ADAD`,
+      backgroundColor: `#32AA88`,
+      radius: 47,
+      border: {
+        width: 12,
+        color: `#98ADAA`,
+      },
+    },
+    disabledValid: {
+      textColor: `#AE2195`,
+      placeholderColor: `#FFAAEE`,
+      backgroundColor: `#772728`,
+      radius: 100,
+      border: {
+        width: 14,
+        color: `#5E5E5E`,
+      },
+    },
+    disabledInvalid: {
+      textColor: `#340297`,
+      placeholderColor: `#233832`,
+      backgroundColor: `#938837`,
+      radius: 2,
+      border: {
+        width: 19,
+        color: `#573829`,
+      },
+    },
+  });
+
+  const renderer = TestRenderer.create(
+    <Component
+      label="Example Button Content"
+      placeholder="Example Placeholder"
+      valid
+      disabled={undefined}
+      children={() => <Text>Example Pop Over Content</Text>}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: Hitbox,
+      props: {
+        onMeasure: expect.any(Function),
+        onPress: expect.any(Function),
+        disabled: false,
+        style: {
+          backgroundColor: `#32AE12`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
+        },
+        children: expect.objectContaining({
+          type: TextInput,
+          props: {
+            style: {
+              flexGrow: 1,
+              color: `#FFEE00`,
+              paddingVertical: 12,
+              fontFamily: `Example Font Family`,
+              fontSize: 37,
+            },
+            editable: false,
+            pointerEvents: `none`,
+            value: `Example Button Content`,
+            placeholder: `Example Placeholder`,
+            placeholderTextColor: `#E7AA32`,
+          },
+        }),
+      },
+    })
+  );
+
+  renderer.unmount();
+});

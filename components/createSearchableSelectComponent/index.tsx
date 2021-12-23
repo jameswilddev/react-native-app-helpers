@@ -19,7 +19,7 @@ export function createSearchableSelectComponent<
    * When true, it will not be possible to select an option.  It will otherwise
    * be possible to do so.
    */
-  readonly disabled: boolean;
+  readonly disabled?: undefined | boolean;
 
   /**
    * Text to be shown on the button when no value has been selected.

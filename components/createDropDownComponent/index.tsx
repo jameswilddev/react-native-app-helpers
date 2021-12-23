@@ -43,7 +43,7 @@ export const createDropDownComponent = (
   /**
    * When true, the button cannot be pressed and the body is not shown.
    */
-  readonly disabled: boolean;
+  readonly disabled: undefined | boolean;
 
   /**
    * When true, the control is styled as though it is valid.  It is otherwise
@@ -125,6 +125,8 @@ export const createDropDownComponent = (
   });
 
   return ({ label, placeholder, disabled, valid, children }) => {
+    disabled = disabled ?? false;
+
     const refresh = useRefresh();
 
     const state = React.useRef<{
