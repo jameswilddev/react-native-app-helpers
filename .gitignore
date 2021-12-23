@@ -5,3 +5,6 @@ node_modules
 .~*#
 coverage
 .DS_Store
+vendor
+test_results
+.phpunit.cache

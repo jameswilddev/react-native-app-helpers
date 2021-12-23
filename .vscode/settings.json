@@ -23,7 +23,10 @@
     "**/*.js": true,
     "**/*.d.ts": true,
     ".nyc_output": true,
-    "coverage": true
+    "coverage": true,
+    "vendor": true,
+    "test_results": true,
+    ".phpunit.cache": true
   },
   "typescript.tsdk": "./node_modules/typescript.lib"
 }
