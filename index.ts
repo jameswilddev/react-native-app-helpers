@@ -18,6 +18,7 @@ export { createInputComponent } from "./components/createInputComponent";
 export { createNullableEmailInputComponent } from "./components/createNullableEmailInputComponent";
 export { createNullableFloatInputComponent } from "./components/createNullableFloatInputComponent";
 export { createNullableIntegerInputComponent } from "./components/createNullableIntegerInputComponent";
+export { createNullablePasswordInputComponent } from "./components/createNullablePasswordInputComponent";
 export { createNullableTextAreaComponent } from "./components/createNullableTextAreaComponent";
 export { createNullableTextInputComponent } from "./components/createNullableTextInputComponent";
 export { createOfflineTableComponent } from "./components/createOfflineTableComponent";
@@ -26,6 +27,7 @@ export { createProportionalRowComponent } from "./components/createProportionalR
 export { createRequiredEmailInputComponent } from "./components/createRequiredEmailInputComponent";
 export { createRequiredFloatInputComponent } from "./components/createRequiredFloatInputComponent";
 export { createRequiredIntegerInputComponent } from "./components/createRequiredIntegerInputComponent";
+export { createRequiredPasswordInputComponent } from "./components/createRequiredPasswordInputComponent";
 export { createRequiredTextAreaComponent } from "./components/createRequiredTextAreaComponent";
 export { createRequiredTextInputComponent } from "./components/createRequiredTextInputComponent";
 export { createSearchableMultiSelectComponent } from "./components/createSearchableMultiSelectComponent";
