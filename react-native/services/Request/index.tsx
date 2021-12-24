@@ -113,9 +113,10 @@ export class Request {
   private checkStatusCode(
     method: string,
     url: string,
-    statusCode: number
+    statusCode: number,
+    expectedStatusCodes: ReadonlyArray<string>
   ): void {
-    if (statusCode < 200 || statusCode >= 300) {
+    if (!expectedStatusCodes.includes(String(statusCode))) {
       throw new Error(
         `Unexpected status code ${statusCode} during ${method} of ${url}.`
       );
@@ -164,21 +165,31 @@ export class Request {
 
   /**
    * Performs a request which does not return any data.
-   * @param method          The HTTP method to use.
-   * @param route           The URL path relative to the base URL.
-   * @param requestBody     The request body to send.
-   * @param queryParameters The query parameters to include in the URL.
-   * @param abortSignal     When non-null, an AbortController's signal which may
-   *                        be used to remotely cancel the request.
+   * @template T                The expected response status code(s).
+   * @param method              The HTTP method to use.
+   * @param route               The URL path relative to the base URL.
+   * @param requestBody         The request body to send.
+   * @param queryParameters     The query parameters to include in the URL.
+   * @param abortSignal         When non-null, an AbortController's signal which
+   *                            may be used to remotely cancel the request.
+   * @param expectedStatusCodes The status codes expected to be returned.
+   * @returns                   The returned status code.
+   * @throws                    When the request fails.
+   * @throws                    When the response's status code is not in the
+   *                            list of expected values.
+   * @throws                    When the abort signal is raised.
+   * @throws                    When the timeout elapses without a successful
+   *                            response.
    */
-  async withoutResponse(
+  async withoutResponse<T extends string>(
     method: string,
     route: string,
     requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody,
     queryParameters: QueryParameters,
-    abortSignal: null | AbortSignal
-  ): Promise<void> {
-    await this.withTimeout(abortSignal, async (signal) => {
+    abortSignal: null | AbortSignal,
+    expectedStatusCodes: ReadonlyArray<T>
+  ): Promise<T> {
+    return await this.withTimeout(abortSignal, async (signal) => {
       const url = this.constructUrl(route, queryParameters);
 
       let response: { readonly status: number };
@@ -227,29 +238,51 @@ export class Request {
         }
       }
 
-      this.checkStatusCode(method, url, response.status);
+      this.checkStatusCode(method, url, response.status, expectedStatusCodes);
+
+      return String(response.status) as T;
     });
   }
 
   /**
    * Performs a request which returns JSON.
-   * @template T            The shape of the returned JSON.  Be aware that
-   *                        TypeScript does not generate any runtime type checks
-   *                        for this!
-   * @param method          The HTTP method to use.
-   * @param route           The URL path relative to the base URL.
-   * @param requestBody     The request body to send.
-   * @param queryParameters The query parameters to include in the URL.
-   * @param abortSignal     When non-null, an AbortController's signal which may
-   *                        be used to remotely cancel the request.
+   * @template T                The shape of the returned JSON, by status code.
+   *                            Be aware that TypeScript does not generate any
+   *                            runtime type checks for this!
+   * @param method              The HTTP method to use.
+   * @param route               The URL path relative to the base URL.
+   * @param requestBody         The request body to send.
+   * @param queryParameters     The query parameters to include in the URL.
+   * @param abortSignal         When non-null, an AbortController's signal which
+   *                            may be used to remotely cancel the request.
+   * @param expectedStatusCodes The status codes expected to be returned.
+   * @returns                   The returned status code and JSON.
+   * @throws                    When the request fails.
+   * @throws                    When the response's status code is not in the
+   *                            list of expected values.
+   * @throws                    When the abort signal is raised.
+   * @throws                    When the timeout elapses without a successful
+   *                            response.
    */
-  async returningJson<T extends Json>(
+  async returningJson<
+    T extends {
+      readonly [statusCode: string]: Json;
+    }
+  >(
     method: string,
     route: string,
     requestBody: EmptyRequestBody | JsonRequestBody,
     queryParameters: QueryParameters,
-    abortSignal: null | AbortSignal
-  ): Promise<T> {
+    abortSignal: null | AbortSignal,
+    expectedStatusCodes: ReadonlyArray<keyof T>
+  ): Promise<
+    {
+      readonly [TStatusCode in keyof T]: {
+        readonly statusCode: TStatusCode;
+        readonly value: T[TStatusCode];
+      };
+    }[keyof T]
+  > {
     return await this.withTimeout(abortSignal, async (signal) => {
       const url = this.constructUrl(route, queryParameters);
 
@@ -264,32 +297,39 @@ export class Request {
         body: this.requestBodyBody(requestBody),
       });
 
-      this.checkStatusCode(method, url, response.status);
+      this.checkStatusCode(method, url, response.status, expectedStatusCodes);
 
-      return await response.json();
+      return {
+        statusCode: String(response.status) as keyof T,
+        value: await response.json(),
+      };
     });
   }
 
   /**
    * Performs a request which returns a file.  NOTE: timeouts are not yet
    * available for this method.
-   * @param method          The HTTP method to use.
-   * @param route           The URL path relative to the base URL.
-   * @param requestBody     The request body to send.
-   * @param queryParameters The query parameters to include in the URL.
-   * @param abortSignal     When non-null, an AbortController's signal which may
-   *                        be used to remotely cancel the request.
-   * @param fileUri         The URI to which the returned file is to be
-   *                        downloaded.
+   * @template T                The expected response status code(s).
+   * @param method              The HTTP method to use.
+   * @param route               The URL path relative to the base URL.
+   * @param requestBody         The request body to send.
+   * @param queryParameters     The query parameters to include in the URL.
+   * @param abortSignal         When non-null, an AbortController's signal which
+   *                            may be used to remotely cancel the request.
+   * @param fileUri             The URI to which the returned file is to be
+   *                            downloaded.
+   * @param expectedStatusCodes The status codes expected to be returned.
+   * @returns                   The returned status code.
    */
-  async returningFile(
+  async returningFile<T extends string>(
     method: `GET`,
     route: string,
     requestBody: EmptyRequestBody,
     queryParameters: QueryParameters,
     abortSignal: null,
-    fileUri: string
-  ): Promise<void> {
+    fileUri: string,
+    expectedStatusCodes: ReadonlyArray<T>
+  ): Promise<T> {
     // Not yet possible with FileSystem.downloadAsync.
     abortSignal;
 
@@ -303,7 +343,9 @@ export class Request {
         },
       });
 
-      this.checkStatusCode(method, url, response.status);
+      this.checkStatusCode(method, url, response.status, expectedStatusCodes);
+
+      return String(response.status) as T;
     } catch (e) {
       // It has been observed that FileSystem.downloadAsync will still create
       // files for non-2xx status codes.  It's possible that the application

@@ -11,6 +11,7 @@ const request = new Request(
   `https://your-base-url.com/with/optional/paths`,
   30000,
   () => `BEARER your-authorization-header`,
+  ["200"],
 );
 
 await request.withoutResponse(
@@ -19,6 +20,7 @@ await request.withoutResponse(
   { type: `empty` },
   { queryParameterKey: `Query Parameter Value` },
   null,
+  ["200"],
 );
 
 await request.withoutResponse(
@@ -27,6 +29,7 @@ await request.withoutResponse(
   { type: `json`, value: `Example Content` },
   { queryParameterKey: `Query Parameter Value` },
   null,
+  ["200"],
 );
 
 await request.withoutResponse(
@@ -35,14 +38,21 @@ await request.withoutResponse(
   { type: `file`, fileUri: `your/file/path` },
   { queryParameterKey: `Query Parameter Value` },
   null,
+  ["200"],
 );
 
-const value: T = await request.returningJson<T>(
+const value: {
+  readonly statusCode: `200`;
+  readonly value: T;
+} = await request.returningJson<{
+  readonly "200": T;
+}>(
   `PUT`,
   `your/sub/path`,
   { type: `empty` },
   { queryParameterKey: `Query Parameter Value` },
   null,
+  ["200"],
 );
 
 const value: T = await request.returningJson<T>(
@@ -51,6 +61,7 @@ const value: T = await request.returningJson<T>(
   { type: `json`, value: `Example Content` },
   { queryParameterKey: `Query Parameter Value` },
   null,
+  ["200"],
 );
 
 await request.returningFile(
@@ -59,6 +70,7 @@ await request.returningFile(
   { type: `empty` },
   { queryParameterKey: `Query Parameter Value` },
   null,
-  `your-file-path
+  `your-file-path`,
+  ["200"],
 );
 ```
