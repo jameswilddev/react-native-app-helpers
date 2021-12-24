@@ -150,7 +150,7 @@ export class SessionStore<T extends Json> {
     if (this.resolveOnUnload !== null) {
       throw new Error(`The session store is already unloading.`);
     } else if (this.unloaded) {
-      throw new Error(`The session store is not loaded2.`);
+      throw new Error(`The session store is not loaded.`);
     } else if (this.value === undefined) {
       throw new Error(`The session store is currently loading.`);
     } else if (this.writeQueueLength > 0) {
