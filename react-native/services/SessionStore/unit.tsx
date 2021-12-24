@@ -411,7 +411,7 @@ test(`throws an error when unloading an unloading store`, async () => {
   const promise = store.unload();
 
   await expect(promise).rejects.toEqual(
-    new Error(`The session store is currently unloading.`)
+    new Error(`The session store is already unloading.`)
   );
   expect(onSet).toBeCalledTimes(1);
   expect(onSet).toHaveReturnedWith({ testKey: `Test Value B` });
