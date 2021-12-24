@@ -72,6 +72,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 ### Services
 
+- [Request](./services/Request/readme.md)
 - [SessionStore](./services/SessionStore/readme.md)
 - [StateStore](./services/StateStore/readme.md)
 

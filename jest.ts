@@ -1,5 +1,51 @@
 (global as unknown as { __DEV__: boolean }).__DEV__ = false;
 
+class AbortSignalMock {
+  private readonly callbacks: (() => void)[] = [];
+
+  addEventListener(type: string, listener: () => void): void {
+    if (type !== `abort`) {
+      throw new Error(`Invalid type "${type}".`);
+    } else if (this.callbacks.includes(listener)) {
+      throw new Error(`Duplicate event listener.`);
+    } else {
+      this.callbacks.push(listener);
+    }
+  }
+
+  removeEventListener(type: string, listener: () => void): void {
+    if (type !== `abort`) {
+      throw new Error(`Invalid type "${type}".`);
+    } else {
+      const index = this.callbacks.indexOf(listener);
+
+      if (index === -1) {
+        throw new Error(`Missing event listener.`);
+      } else {
+        this.callbacks.splice(index, 1);
+      }
+    }
+  }
+
+  raise() {
+    for (const callback of [...this.callbacks]) {
+      callback();
+    }
+  }
+}
+
+(
+  global as unknown as { AbortController: unknown }
+).AbortController = class AbortController {
+  readonly signal = new AbortSignalMock();
+
+  abort() {
+    this.signal.raise();
+  }
+};
+
+(global as unknown as { AbortSignal: unknown }).AbortSignal = AbortSignalMock;
+
 jest.mock(`react-native/Libraries/Utilities/BackHandler`, () =>
   jest.requireActual(`react-native/Libraries/Utilities/__mocks__/BackHandler`)
 );
@@ -105,6 +151,12 @@ jest.mock(`expo-file-system`, () => {
           `expo-file-system.readAsStringAsync's mock does not support options.`
         );
       }
+    },
+    createUploadTask: jest.fn(),
+    downloadAsync: jest.fn(),
+    deleteAsync: jest.fn(),
+    FileSystemUploadType: {
+      BINARY_CONTENT: `Test Binary Content`,
     },
   };
 });
