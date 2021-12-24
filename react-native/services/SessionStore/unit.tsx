@@ -35,7 +35,7 @@ test(`throws an error when setting a value in an unloaded store`, () => {
   expect(onSet).not.toHaveBeenCalled();
 });
 
-test(`throws an error when unloading an unloaded store`, () => {
+test(`throws an error when unloading an unloaded store`, async () => {
   const store = new SessionStore<TestSession>(
     { testKey: `Test Value A` },
     uuid.v4()
@@ -45,7 +45,7 @@ test(`throws an error when unloading an unloaded store`, () => {
 
   const promise = store.unload();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The session store is not loaded.`)
   );
   expect(onSet).not.toHaveBeenCalled();
@@ -267,7 +267,7 @@ test(`throws an error when loading a loading store`, async () => {
   store.load();
   const promise = store.load();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The session store is already loading.`)
   );
   expect(onSet).not.toHaveBeenCalled();
@@ -316,7 +316,7 @@ test(`throws an error when unloading a loading store`, async () => {
   store.load();
   const promise = store.unload();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The session store is currently loading.`)
   );
   expect(onSet).not.toHaveBeenCalled();
@@ -333,7 +333,7 @@ test(`throws an error when loading a loaded store`, async () => {
   await store.load();
   const promise = store.load();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The session store is already loaded.`)
   );
   expect(onSet).not.toHaveBeenCalled();
@@ -352,7 +352,7 @@ test(`throws an error when loading an unloading store`, async () => {
   store.unload();
   const promise = store.load();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The session store is currently unloading.`)
   );
   expect(onSet).toBeCalledTimes(1);
@@ -410,7 +410,7 @@ test(`throws an error when unloading an unloading store`, async () => {
   store.unload();
   const promise = store.unload();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The session store is currently unloading.`)
   );
   expect(onSet).toBeCalledTimes(1);

@@ -29,14 +29,16 @@ test(`throws an error when setting a value in an unloaded store`, () => {
   expect(onSet).not.toHaveBeenCalled();
 });
 
-test(`throws an error when unloading an unloaded store`, () => {
+test(`throws an error when unloading an unloaded store`, async () => {
   const store = new StateStore<TestState>({ testKey: `Test Value A` });
   const onSet = jest.fn();
   store.addListener(`set`, onSet);
 
   const promise = store.unload();
 
-  expect(promise).rejects.toEqual(new Error(`The state store is not loaded.`));
+  await expect(promise).rejects.toEqual(
+    new Error(`The state store is not loaded.`)
+  );
   expect(onSet).not.toHaveBeenCalled();
 });
 
@@ -243,7 +245,7 @@ test(`throws an error when loading a loading store`, async () => {
   store.load(uuid.v4());
   const promise = store.load(uuid.v4());
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The state store is already loading.`)
   );
   expect(onSet).not.toHaveBeenCalled();
@@ -283,7 +285,7 @@ test(`throws an error when unloading a loading store`, async () => {
   store.load(uuid.v4());
   const promise = store.unload();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The state store is currently loading.`)
   );
   expect(onSet).not.toHaveBeenCalled();
@@ -297,7 +299,7 @@ test(`throws an error when loading a loaded store`, async () => {
   await store.load(uuid.v4());
   const promise = store.load(uuid.v4());
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The state store is already loaded.`)
   );
   expect(onSet).not.toHaveBeenCalled();
@@ -313,7 +315,7 @@ test(`throws an error when loading an unloading store`, async () => {
   store.unload();
   const promise = store.load(uuid.v4());
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The state store is currently unloading.`)
   );
   expect(onSet).toBeCalledTimes(1);
@@ -362,7 +364,7 @@ test(`throws an error when unloading an unloading store`, async () => {
   store.unload();
   const promise = store.unload();
 
-  expect(promise).rejects.toEqual(
+  await expect(promise).rejects.toEqual(
     new Error(`The state store is currently unloading.`)
   );
   expect(onSet).toBeCalledTimes(1);
