@@ -24,6 +24,7 @@ export { createFlashMessageComponent } from "./react-native/components/createFla
 export { createFlatColorBackgroundComponent } from "./react-native/components/createFlatColorBackgroundComponent";
 export { createFullHeightPopoverComponent } from "./react-native/components/createFullHeightPopoverComponent";
 export { createHeaderBodyFooterComponent } from "./react-native/components/createHeaderBodyFooterComponent";
+export { createHeaderComponent } from "./react-native/components/createHeaderComponent";
 export { createHrComponent } from "./react-native/components/createHrComponent";
 export { createImageBackgroundComponent } from "./react-native/components/createImageBackgroundComponent";
 export { createInputComponent } from "./react-native/components/createInputComponent";
@@ -59,6 +60,8 @@ export { FileRequestBody } from "./react-native/types/FileRequestBody";
 export { FiniteStateMachineRouterState } from "./react-native/types/FiniteStateMachineRouterState";
 export { FlashMessageState } from "./react-native/types/FlashMessageState";
 export { FlashMessageStyle } from "./react-native/types/FlashMessageStyle";
+export { HeaderIcon } from "./react-native/types/HeaderIcon";
+export { HeaderStyle } from "./react-native/types/HeaderStyle";
 export { flattenRenderedToArray } from "./react-native/utilities/flattenRenderedToArray";
 export { Hitbox } from "./react-native/components/Hitbox";
 export { HorizontallySymmetricalSafeAreaView } from "./react-native/components/HorizontallySymmetricalSafeAreaView";
