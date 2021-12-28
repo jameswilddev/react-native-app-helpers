@@ -1,89 +1,82 @@
 import * as React from "react";
 import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { SizedSafeAreaView } from "../../..";
+import {
+  SizedHorizontallySymmetricalSafeAreaView,
+  HorizontallySymmetricalSafeAreaView,
+} from "../../..";
 import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
 
 test(`renders as expected when width fills container and height fills container`, () => {
   const rendered = (
-    <SizedSafeAreaView
+    <SizedHorizontallySymmetricalSafeAreaView
       width="fillsContainer"
       height="fillsContainer"
-      edges={[`left`]}
+      left
     >
       <Text>Test Content</Text>
-    </SizedSafeAreaView>
+    </SizedHorizontallySymmetricalSafeAreaView>
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <SafeAreaView
-      edges={[`left`]}
+    <HorizontallySymmetricalSafeAreaView
+      left
       style={{ width: `100%`, height: `100%` }}
-      pointerEvents="box-none"
     >
       <Text>Test Content</Text>
-    </SafeAreaView>
+    </HorizontallySymmetricalSafeAreaView>
   );
 });
 
 test(`renders as expected when width fills container and height fits content`, () => {
   const rendered = (
-    <SizedSafeAreaView
+    <SizedHorizontallySymmetricalSafeAreaView
       width="fillsContainer"
       height="fitsContent"
-      edges={[`left`]}
+      left
     >
       <Text>Test Content</Text>
-    </SizedSafeAreaView>
+    </SizedHorizontallySymmetricalSafeAreaView>
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <SafeAreaView
-      edges={[`left`]}
-      style={{ width: `100%` }}
-      pointerEvents="box-none"
-    >
+    <HorizontallySymmetricalSafeAreaView left style={{ width: `100%` }}>
       <Text>Test Content</Text>
-    </SafeAreaView>
+    </HorizontallySymmetricalSafeAreaView>
   );
 });
 
 test(`renders as expected when width fits content and height fills container`, () => {
   const rendered = (
-    <SizedSafeAreaView
+    <SizedHorizontallySymmetricalSafeAreaView
       width="fitsContent"
       height="fillsContainer"
-      edges={[`left`]}
+      left
     >
       <Text>Test Content</Text>
-    </SizedSafeAreaView>
+    </SizedHorizontallySymmetricalSafeAreaView>
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <SafeAreaView
-      edges={[`left`]}
-      style={{ height: `100%` }}
-      pointerEvents="box-none"
-    >
+    <HorizontallySymmetricalSafeAreaView left style={{ height: `100%` }}>
       <Text>Test Content</Text>
-    </SafeAreaView>
+    </HorizontallySymmetricalSafeAreaView>
   );
 });
 
 test(`renders as expected when width fits content and height fits content`, () => {
   const rendered = (
-    <SizedSafeAreaView
+    <SizedHorizontallySymmetricalSafeAreaView
       width="fitsContent"
       height="fitsContent"
-      edges={[`left`]}
+      left
     >
       <Text>Test Content</Text>
-    </SizedSafeAreaView>
+    </SizedHorizontallySymmetricalSafeAreaView>
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <SafeAreaView edges={[`left`]} pointerEvents="box-none">
+    <HorizontallySymmetricalSafeAreaView left>
       <Text>Test Content</Text>
-    </SafeAreaView>
+    </HorizontallySymmetricalSafeAreaView>
   );
 });

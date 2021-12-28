@@ -62,7 +62,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [HorizontallySymmetricalSafeAreaView](./react-native/components/HorizontallySymmetricalSafeAreaView/readme.md)
 - [Row](./react-native/components/Row/readme.md)
 - [SimpleModal](./react-native/components/SimpleModal/readme.md)
-- [SizedSafeAreaView](./react-native/components/SizedSafeAreaView/readme.md)
+- [SizedHorizontallySymmetricalSafeAreaView](./react-native/components/SizedHorizontallySymmetricalSafeAreaView/readme.md)
 
 ### Hooks
 

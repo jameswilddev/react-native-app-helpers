@@ -22,6 +22,6 @@ const ExampleScreen = () => (
       This is inside a SafeAreaView-like element, where the left and right
       paddings are identical.
     </Text>
-  </SizedSafeAreaView>
+  </HorizontallySymmetricalSafeAreaView>
 );
 ```

@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Dimensions, Text, View, TextInput } from "react-native";
+import { SafeAreaInsetsContext } from "react-native-safe-area-context";
 import * as TestRenderer from "react-test-renderer";
 import {
   createFullHeightPopoverComponent,
   Hitbox,
   SimpleModal,
   ContainerFillingKeyboardAvoidingView,
-  SizedSafeAreaView,
+  SizedHorizontallySymmetricalSafeAreaView,
   ControlStyle,
   unwrapRenderedFunctionComponent,
 } from "../../..";
@@ -92,13 +93,17 @@ test(`renders as expected when not disabled`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -220,13 +225,17 @@ test(`renders as expected when disabled`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -349,13 +358,17 @@ test(`renders as expected when not disabled after layout`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -483,13 +496,17 @@ test(`renders as expected when disabled after layout`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -618,13 +635,17 @@ test(`renders as expected when not disabled after layout after press`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -702,8 +723,12 @@ test(`renders as expected when not disabled after layout after press`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -803,13 +828,17 @@ test(`renders as expected when not disabled after press after layout`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -887,8 +916,12 @@ test(`renders as expected when not disabled after press after layout`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -988,13 +1021,17 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -1080,8 +1117,12 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -1181,13 +1222,17 @@ test(`correctly handles layout changes which only change width`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -1273,8 +1318,12 @@ test(`correctly handles layout changes which only change width`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -1374,13 +1423,17 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -1466,8 +1519,12 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -1567,13 +1624,17 @@ test(`correctly handles layout changes which only change height`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -1659,8 +1720,12 @@ test(`correctly handles layout changes which only change height`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -1760,13 +1825,17 @@ test(`correctly handles layout changes which have no effect`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -1852,8 +1921,12 @@ test(`correctly handles layout changes which have no effect`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -1953,13 +2026,17 @@ test(`can be enabled after being created disabled`, async () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -1986,13 +2063,17 @@ test(`can be enabled after being created disabled`, async () => {
   });
 
   renderer.update(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2119,13 +2200,17 @@ test(`closes if disabled while open`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -2141,13 +2226,17 @@ test(`closes if disabled while open`, () => {
   });
 
   renderer.update(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2270,13 +2359,17 @@ test(`does not re-open if enabled after disabled while open`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -2292,23 +2385,31 @@ test(`does not re-open if enabled after disabled while open`, () => {
   });
 
   renderer.update(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   renderer.update(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -2430,13 +2531,17 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -2452,23 +2557,31 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
   });
 
   renderer.update(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   renderer.update(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -2540,8 +2653,12 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -2641,13 +2758,17 @@ test(`closes when the modal is dismissed`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -2790,13 +2911,17 @@ test(`closes when the close callback is invoked`, () => {
   const children = jest.fn(() => <Text>Example Pop Over Content</Text>);
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={children}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={children}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -2935,13 +3060,17 @@ test(`renders as expected without a label`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label={null}
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label={null}
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3063,13 +3192,17 @@ test(`renders as expected without a label when open`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label={null}
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label={null}
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -3147,8 +3280,12 @@ test(`renders as expected without a label when open`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -3248,13 +3385,17 @@ test(`renders as expected without a label when disabled`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label={null}
-      placeholder="Example Placeholder"
-      valid
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label={null}
+        placeholder="Example Placeholder"
+        valid
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3377,13 +3518,17 @@ test(`renders as expected when invalid`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3506,13 +3651,17 @@ test(`renders as expected when invalid when open`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label={null}
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label={null}
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -3591,8 +3740,12 @@ test(`renders as expected when invalid when open`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -3692,13 +3845,17 @@ test(`renders as expected when invalid and disabled`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3821,13 +3978,17 @@ test(`renders as expected when invalid without a label`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label={null}
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label={null}
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -3950,13 +4111,17 @@ test(`renders as expected without a label when invalid`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label={null}
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label={null}
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -4035,8 +4200,12 @@ test(`renders as expected without a label when invalid`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -4136,13 +4305,17 @@ test(`renders as expected without a label when disabled and invalid`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label={null}
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label={null}
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -4247,13 +4420,17 @@ test(`renders as expected without borders`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -4326,8 +4503,12 @@ test(`renders as expected without borders`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -4409,13 +4590,17 @@ test(`renders as expected when invalid without borders`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -4488,8 +4673,12 @@ test(`renders as expected when invalid without borders`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -4589,13 +4778,17 @@ test(`renders as expected without radius`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -4672,8 +4865,12 @@ test(`renders as expected without radius`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -4773,13 +4970,17 @@ test(`renders as expected when invalid without radius`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid={false}
-      disabled={false}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid={false}
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   TestRenderer.act(() => {
@@ -4857,8 +5058,12 @@ test(`renders as expected when invalid without radius`, () => {
               type: ContainerFillingKeyboardAvoidingView,
               props: {
                 children: expect.objectContaining({
-                  type: SizedSafeAreaView,
+                  type: SizedHorizontallySymmetricalSafeAreaView,
                   props: {
+                    top: true,
+                    bottom: true,
+                    left: true,
+                    right: true,
                     width: `fillsContainer`,
                     height: `fillsContainer`,
                     children: expect.objectContaining({
@@ -5048,13 +5253,17 @@ test(`treats disabled undefined as disabled false`, () => {
   });
 
   const renderer = TestRenderer.create(
-    <Component
-      label="Example Button Content"
-      placeholder="Example Placeholder"
-      valid
-      disabled={undefined}
-      children={() => <Text>Example Pop Over Content</Text>}
-    />
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={undefined}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
   );
 
   expect(renderer.toTree()?.rendered).toEqual(

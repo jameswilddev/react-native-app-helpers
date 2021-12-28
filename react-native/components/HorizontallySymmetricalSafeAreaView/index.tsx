@@ -34,14 +34,14 @@ export const HorizontallySymmetricalSafeAreaView: React.FunctionComponent<
     readonly bottom?: boolean;
 
     /**
-     * When true, the widest of the safe area at the left and right of the
+     * When true, the widest of the safe areas at the left and right of the
      * screen will be added to any left padding within the style.  It will
      * otherwise use the style's left padding.
      */
     readonly left?: boolean;
 
     /**
-     * When true, the widest of the safe area at the left and right of the
+     * When true, the widest of the safe areas at the left and right of the
      * screen will be added to any right padding within the style.  It will
      * otherwise use the style's right padding.
      */

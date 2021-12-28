@@ -11,7 +11,7 @@ import {
   createFullHeightPopoverStateStyleInstance,
 } from "../helpers";
 import { ContainerFillingKeyboardAvoidingView } from "../ContainerFillingKeyboardAvoidingView";
-import { SizedSafeAreaView } from "../SizedSafeAreaView";
+import { SizedHorizontallySymmetricalSafeAreaView } from "../SizedHorizontallySymmetricalSafeAreaView";
 
 type Instance = React.FunctionComponent<{
   /**
@@ -227,12 +227,16 @@ export const createFullHeightPopoverComponent = (
               ]}
             >
               <ContainerFillingKeyboardAvoidingView>
-                <SizedSafeAreaView
+                <SizedHorizontallySymmetricalSafeAreaView
+                  top
+                  bottom
+                  left
+                  right
                   width="fillsContainer"
                   height="fillsContainer"
                 >
                   {children(onClose)}
-                </SizedSafeAreaView>
+                </SizedHorizontallySymmetricalSafeAreaView>
               </ContainerFillingKeyboardAvoidingView>
             </View>
           </SimpleModal>
