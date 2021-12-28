@@ -59,6 +59,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createTabRoutingComponent](./components/createTabRoutingComponent/readme.md)
 - [createTextComponent](./components/createTextComponent/readme.md)
 - [Hitbox](./components/Hitbox/readme.md)
+- [HorizontallySymmetricalSafeAreaView](./react-native/components/HorizontallySymmetricalSafeAreaView/readme.md)
 - [Row](./components/Row/readme.md)
 - [SimpleModal](./components/SimpleModal/readme.md)
 - [SizedSafeAreaView](./components/SizedSafeAreaView/readme.md)

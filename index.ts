@@ -57,6 +57,7 @@ export { FlashMessageState } from "./react-native/types/FlashMessageState";
 export { FlashMessageStyle } from "./react-native/types/FlashMessageStyle";
 export { flattenRenderedToArray } from "./react-native/utilities/flattenRenderedToArray";
 export { Hitbox } from "./react-native/components/Hitbox";
+export { HorizontallySymmetricalSafeAreaView } from "./react-native/components/HorizontallySymmetricalSafeAreaView";
 export { intercalateRendered } from "./react-native/utilities/intercalateRendered";
 export { Json } from "./react-native/types/Json";
 export { JsonRequestBody } from "./react-native/types/JsonRequestBody";
