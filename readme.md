@@ -19,6 +19,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Aligned](./react-native/components/Aligned/readme.md)
 - [ContainerFillingKeyboardAvoidingView](./react-native/components/ContainerFillingKeyboardAvoidingView/readme.md)
 - [ContainerFillingScrollView](./react-native/components/ContainerFillingScrollView/readme.md)
+export { createBottomTabBarComponent } from "./react-native/components/createBottomTabBarComponent";
 - [createButtonComponent](./react-native/components/createButtonComponent/readme.md)
 - [createCardComponent](./react-native/components/createCardComponent/readme.md)
 - [createCheckboxComponent](./react-native/components/createCheckboxComponent/readme.md)
@@ -81,6 +82,9 @@ import { createTextComponent } from "react-native-app-helpers";
 
 - [BasicTableColumn](./react-native/types/BasicTableColumn/readme.md)
 - [BorderStyle](./react-native/types/BorderStyle/readme.md)
+export { BottomTab } from "./react-native/types/BottomTab";
+export { BottomTabBarStyle } from "./react-native/types/BottomTabBarStyle";
+export { BottomTabBarStyleState } from "./react-native/types/BottomTabBarStateStyle";
 - [ButtonStateStyle](./react-native/types/ButtonStateStyle/readme.md)
 - [ButtonStyle](./react-native/types/ButtonStyle/readme.md)
 - [CheckboxStateStyle](./react-native/types/CheckboxStateStyle/readme.md)
@@ -108,14 +112,15 @@ import { createTextComponent } from "react-native-app-helpers";
 - [SplitButtonStateStyle](./react-native/types/SplitButtonStateStyle/readme.md)
 - [SplitButtonStyle](./react-native/types/SplitButtonStyle/readme.md)
 - [SplitButtonTypeStyle](./react-native/types/SplitButtonTypeStyle/readme.md)
+- [StackRouterState](./react-native/types/StackRouterState/readme.md)
+- [StackRoute](./react-native/types/StackRoute/readme.md)
+- [StackRouteTable](./react-native/types/StackRouteTable/readme.md)
+- [SvgIcon](./react-native/types/SvgIcon/readme.md)
 - [TableColumn](./react-native/types/TableColumn/readme.md)
 - [TableRow](./react-native/types/TableRow/readme.md)
 - [TableRowStyle](./react-native/types/TableRowStyle/readme.md)
 - [TableSchema](./react-native/types/TableSchema/readme.md)
 - [TableStyle](./react-native/types/TableStyle/readme.md)
-- [StackRouterState](./react-native/types/StackRouterState/readme.md)
-- [StackRoute](./react-native/types/StackRoute/readme.md)
-- [StackRouteTable](./react-native/types/StackRouteTable/readme.md)
 - [TabRoute](./react-native/types/TabRoute/readme.md)
 - [TabRouteTable](./react-native/types/TabRouteTable/readme.md)
 

@@ -1,6 +1,9 @@
 export { Aligned } from "./react-native/components/Aligned";
 export { BasicTableColumn } from "./react-native/types/BasicTableColumn";
 export { BorderStyle } from "./react-native/types/BorderStyle";
+export { BottomTab } from "./react-native/types/BottomTab";
+export { BottomTabBarStyle } from "./react-native/types/BottomTabBarStyle";
+export { BottomTabBarStyleState } from "./react-native/types/BottomTabBarStateStyle";
 export { ButtonStateStyle } from "./react-native/types/ButtonStateStyle";
 export { ButtonStyle } from "./react-native/types/ButtonStyle";
 export { CheckboxStateStyle } from "./react-native/types/CheckboxStateStyle";
@@ -9,6 +12,7 @@ export { ContainerFillingKeyboardAvoidingView } from "./react-native/components/
 export { ContainerFillingScrollView } from "./react-native/components/ContainerFillingScrollView";
 export { ControlStateStyle } from "./react-native/types/ControlStateStyle";
 export { ControlStyle } from "./react-native/types/ControlStyle";
+export { createBottomTabBarComponent } from "./react-native/components/createBottomTabBarComponent";
 export { createButtonComponent } from "./react-native/components/createButtonComponent";
 export { createCardComponent } from "./react-native/components/createCardComponent";
 export { createCheckboxComponent } from "./react-native/components/createCheckboxComponent";
@@ -83,6 +87,7 @@ export { StackRoute } from "./react-native/types/StackRoute";
 export { StackRouterState } from "./react-native/types/StackRouterState";
 export { StackRouteTable } from "./react-native/types/StackRouteTable";
 export { StateStore } from "./react-native/services/StateStore";
+export { SvgIcon } from "./react-native/types/SvgIcon";
 export { TableColumn } from "./react-native/types/TableColumn";
 export { TableRow } from "./react-native/types/TableRow";
 export { TableRowStyle } from "./react-native/types/TableRowStyle";
