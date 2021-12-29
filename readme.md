@@ -58,6 +58,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [createStackComponent](./react-native/components/createStackComponent/readme.md)
 - [createStackRoutingComponent](./react-native/components/createStackRoutingComponent/readme.md)
 - [createStateStoreManagerComponent](./react-native/components/createStateStoreManagerComponent/readme.md)
+- [createStatusFillComponent](./react-native/components/createStatusFillComponent/readme.md)
 - [createTabRoutingComponent](./react-native/components/createTabRoutingComponent/readme.md)
 - [createTextComponent](./react-native/components/createTextComponent/readme.md)
 - [Hitbox](./react-native/components/Hitbox/readme.md)
@@ -83,9 +84,9 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 
 - [BasicTableColumn](./react-native/types/BasicTableColumn/readme.md)
 - [BorderStyle](./react-native/types/BorderStyle/readme.md)
-export { BottomTab } from "./react-native/types/BottomTab";
-export { BottomTabBarStyle } from "./react-native/types/BottomTabBarStyle";
-export { BottomTabBarStyleState } from "./react-native/types/BottomTabBarStateStyle";
+- [BottomTab](./react-native/types/BottomTab/readme.md)
+- [BottomTabBarStyle](./react-native/types/BottomTabBarStyle/readme.md)
+- [BottomTabBarStyleState](./react-native/types/BottomTabBarStateStyle/readme.md)
 - [ButtonStateStyle](./react-native/types/ButtonStateStyle/readme.md)
 - [ButtonStyle](./react-native/types/ButtonStyle/readme.md)
 - [CheckboxStateStyle](./react-native/types/CheckboxStateStyle/readme.md)
@@ -118,6 +119,8 @@ export { BottomTabBarStyleState } from "./react-native/types/BottomTabBarStateSt
 - [StackRouterState](./react-native/types/StackRouterState/readme.md)
 - [StackRoute](./react-native/types/StackRoute/readme.md)
 - [StackRouteTable](./react-native/types/StackRouteTable/readme.md)
+- [StatusPillStyle](./react-native/types/StatusPillStyle/readme.md)
+- [StatusPillStyleStatus](./react-native/types/StatusPillStyleStatus/readme.md)
 - [SvgIcon](./react-native/types/SvgIcon/readme.md)
 - [TableColumn](./react-native/types/TableColumn/readme.md)
 - [TableRow](./react-native/types/TableRow/readme.md)
