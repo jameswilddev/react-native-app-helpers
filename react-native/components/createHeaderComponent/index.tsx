@@ -38,7 +38,9 @@ export const createHeaderComponent = (
     justifyContent: `flex-end`,
   };
 
-  const hitbox: ViewStyle = {};
+  const hitbox: ViewStyle = {
+    justifyContent: `center`,
+  };
 
   const viewMargin =
     headerStyle.outerHorizontalPadding - headerStyle.innerHorizontalPadding / 2;
@@ -60,7 +62,6 @@ export const createHeaderComponent = (
   };
 
   if (headerStyle.verticalPadding !== 0) {
-    hitbox.paddingVertical = headerStyle.verticalPadding;
     text.paddingVertical = headerStyle.verticalPadding;
   }
 
@@ -88,10 +89,7 @@ export const createHeaderComponent = (
           <Hitbox
             key={String(index)}
             onPress={icon.onPress}
-            {...(headerStyle.verticalPadding === 0 &&
-            headerStyle.innerHorizontalPadding === 0
-              ? {}
-              : { style: styles.hitbox })}
+            style={styles.hitbox}
           >
             {React.createElement(icon.icon, { fill: headerStyle.textColor })}
           </Hitbox>
@@ -105,10 +103,7 @@ export const createHeaderComponent = (
           <Hitbox
             key={String(index)}
             onPress={icon.onPress}
-            {...(headerStyle.verticalPadding === 0 &&
-            headerStyle.innerHorizontalPadding === 0
-              ? {}
-              : { style: styles.hitbox })}
+            style={styles.hitbox}
           >
             {React.createElement(icon.icon, { fill: headerStyle.textColor })}
           </Hitbox>

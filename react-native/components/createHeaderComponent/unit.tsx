@@ -95,7 +95,7 @@ test(`renders as expected`, () => {
           key="0"
           style={{
             paddingHorizontal: 7,
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -105,7 +105,7 @@ test(`renders as expected`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -115,7 +115,7 @@ test(`renders as expected`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -125,7 +125,7 @@ test(`renders as expected`, () => {
           key="3"
           style={{
             paddingHorizontal: 7,
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -157,7 +157,7 @@ test(`renders as expected`, () => {
           key="0"
           style={{
             paddingHorizontal: 7,
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -167,7 +167,7 @@ test(`renders as expected`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -177,7 +177,7 @@ test(`renders as expected`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -282,6 +282,7 @@ test(`renders as expected without vertical padding`, () => {
           key="0"
           style={{
             paddingHorizontal: 7,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -291,6 +292,7 @@ test(`renders as expected without vertical padding`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -300,6 +302,7 @@ test(`renders as expected without vertical padding`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -309,6 +312,7 @@ test(`renders as expected without vertical padding`, () => {
           key="3"
           style={{
             paddingHorizontal: 7,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -339,6 +343,7 @@ test(`renders as expected without vertical padding`, () => {
           key="0"
           style={{
             paddingHorizontal: 7,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -348,6 +353,7 @@ test(`renders as expected without vertical padding`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -357,6 +363,7 @@ test(`renders as expected without vertical padding`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -460,7 +467,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="0"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -469,7 +476,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -478,7 +485,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -487,7 +494,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="3"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -518,7 +525,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="0"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -527,7 +534,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -536,7 +543,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -639,7 +646,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="0"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -648,7 +655,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -657,7 +664,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -666,7 +673,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="3"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -696,7 +703,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="0"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -705,7 +712,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -714,7 +721,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            paddingVertical: 3,
+            justifyContent: `center`,
           }}
           onPress={expect.any(Function)}
         >
@@ -815,16 +822,40 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
           marginLeft: 50,
         }}
       >
-        <Hitbox key="0" onPress={expect.any(Function)}>
+        <Hitbox
+          key="0"
+          onPress={expect.any(Function)}
+          style={{
+            justifyContent: `center`,
+          }}
+        >
           <ExampleLeftIconAIcon fill="red" />
         </Hitbox>
-        <Hitbox key="1" onPress={expect.any(Function)}>
+        <Hitbox
+          key="1"
+          onPress={expect.any(Function)}
+          style={{
+            justifyContent: `center`,
+          }}
+        >
           <ExampleLeftIconBIcon fill="red" />
         </Hitbox>
-        <Hitbox key="2" onPress={expect.any(Function)}>
+        <Hitbox
+          key="2"
+          onPress={expect.any(Function)}
+          style={{
+            justifyContent: `center`,
+          }}
+        >
           <ExampleLeftIconCIcon fill="red" />
         </Hitbox>
-        <Hitbox key="3" onPress={expect.any(Function)}>
+        <Hitbox
+          key="3"
+          onPress={expect.any(Function)}
+          style={{
+            justifyContent: `center`,
+          }}
+        >
           <ExampleLeftIconDIcon fill="red" />
         </Hitbox>
       </View>
@@ -848,13 +879,31 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
           marginRight: 50,
         }}
       >
-        <Hitbox key="0" onPress={expect.any(Function)}>
+        <Hitbox
+          key="0"
+          onPress={expect.any(Function)}
+          style={{
+            justifyContent: `center`,
+          }}
+        >
           <ExampleRightIconAIcon fill="red" />
         </Hitbox>
-        <Hitbox key="1" onPress={expect.any(Function)}>
+        <Hitbox
+          key="1"
+          onPress={expect.any(Function)}
+          style={{
+            justifyContent: `center`,
+          }}
+        >
           <ExampleRightIconBIcon fill="red" />
         </Hitbox>
-        <Hitbox key="2" onPress={expect.any(Function)}>
+        <Hitbox
+          key="2"
+          onPress={expect.any(Function)}
+          style={{
+            justifyContent: `center`,
+          }}
+        >
           <ExampleRightIconCIcon fill="red" />
         </Hitbox>
       </View>
