@@ -54,6 +54,7 @@ export { createStateStoreManagerComponent } from "./react-native/components/crea
 export { createStatusPillComponent } from "./react-native/components/createStatusPillComponent";
 export { createTabRoutingComponent } from "./react-native/components/createTabRoutingComponent";
 export { createTextComponent } from "./react-native/components/createTextComponent";
+export { createUnderlinedTopTabBarComponent } from "./react-native/components/createUnderlinedTopTabBarComponent";
 export { CustomElementTableColumn } from "./react-native/types/CustomElementTableColumn";
 export { CustomTextTableColumn } from "./react-native/types/CustomTextTableColumn";
 export { EmptyRequestBody } from "./react-native/types/EmptyRequestBody";
@@ -101,6 +102,9 @@ export { TableSchema } from "./react-native/types/TableSchema";
 export { TableStyle } from "./react-native/types/TableStyle";
 export { TabRoute } from "./react-native/types/TabRoute";
 export { TabRouteTable } from "./react-native/types/TabRouteTable";
+export { UnderlinedTopTab } from "./react-native/types/UnderlinedTopTab";
+export { UnderlinedTopTabBarStyle } from "./react-native/types/UnderlinedTopTabBarStyle";
+export { UnderlinedTopTabBarStyleState } from "./react-native/types/UnderlinedTopTabBarStyleState";
 export { unwrapRenderedFunctionComponent } from "./react-native/utilities/unwrapRenderedFunctionComponent";
 export { useBackButton } from "./react-native/hooks/useBackButton";
 export { useEventRefresh } from "./react-native/hooks/useEventRefresh";

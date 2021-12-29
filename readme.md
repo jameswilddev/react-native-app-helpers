@@ -61,6 +61,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [createStatusFillComponent](./react-native/components/createStatusFillComponent/readme.md)
 - [createTabRoutingComponent](./react-native/components/createTabRoutingComponent/readme.md)
 - [createTextComponent](./react-native/components/createTextComponent/readme.md)
+- [createUnderlinedTopTabBarComponent](./react-native/components/createUnderlinedTopTabBarComponent/readme.md)
 - [Hitbox](./react-native/components/Hitbox/readme.md)
 - [HorizontallySymmetricalSafeAreaView](./react-native/components/HorizontallySymmetricalSafeAreaView/readme.md)
 - [Row](./react-native/components/Row/readme.md)
@@ -129,6 +130,9 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [TableStyle](./react-native/types/TableStyle/readme.md)
 - [TabRoute](./react-native/types/TabRoute/readme.md)
 - [TabRouteTable](./react-native/types/TabRouteTable/readme.md)
+- [UnderlinedTopTab](./react-native/types/UnderlinedTopTab/readme.md)
+- [UnderlinedTopTabBarStyle](./react-native/types/UnderlinedTopTabBarStyle/readme.md)
+- [UnderlinedTopTabBarStyleState](./react-native/types/UnderlinedTopTabBarStyleState/readme.md)
 
 ### Utilities
 
