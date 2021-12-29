@@ -1,61 +1,131 @@
 import * as React from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
+import type { BorderStyle } from "../../types/BorderStyle";
 import { shadow } from "../helpers";
+
+const globalStyles = StyleSheet.create({
+  fillsContainerFillsContainer: {
+    width: `100%`,
+    height: `100%`,
+  },
+  fillsContainerFitsContent: {
+    width: `100%`,
+  },
+  fitsContentFillsContainer: {
+    height: `100%`,
+  },
+});
 
 /**
  * Creates a new React component which wraps other elements with optional
  * rounded corners and shadows.
  * @param borderRadius The border radius to use.
  * @param shadowRadius The shadow radius to use.
+ * @param border       The border to use (or null when no border is to be used).
  * @returns The created React component.
  */
 export const createCardComponent = (
   borderRadius: number,
-  shadowRadius: number
+  shadowRadius: number,
+  border: null | BorderStyle
 ): React.FunctionComponent<{
   readonly width: `fillsContainer` | `fitsContent`;
   readonly height: `fillsContainer` | `fitsContent`;
 }> => {
   if (borderRadius === 0) {
     if (shadowRadius === 0) {
-      const styles = StyleSheet.create({
-        fillsContainerFillsContainer: {
-          width: `100%`,
-          height: `100%`,
-        },
-        fillsContainerFitsContent: {
-          width: `100%`,
-        },
-        fitsContentFillsContainer: {
-          height: `100%`,
-        },
-      });
+      if (border === null) {
+        return ({ width, height, children }) => {
+          if (width === `fillsContainer`) {
+            if (height === `fillsContainer`) {
+              return (
+                <View style={globalStyles.fillsContainerFillsContainer}>
+                  {children}
+                </View>
+              );
+            } else {
+              return (
+                <View style={globalStyles.fillsContainerFitsContent}>
+                  {children}
+                </View>
+              );
+            }
+          } else {
+            if (height === `fillsContainer`) {
+              return (
+                <View style={globalStyles.fitsContentFillsContainer}>
+                  {children}
+                </View>
+              );
+            } else {
+              return <View>{children}</View>;
+            }
+          }
+        };
+      } else {
+        const base: ViewStyle = {
+          borderWidth: border.width,
+          borderColor: border.color,
+        };
 
-      return ({ width, height, children }) => {
-        if (width === `fillsContainer`) {
-          if (height === `fillsContainer`) {
-            return (
-              <View style={styles.fillsContainerFillsContainer}>
-                {children}
-              </View>
-            );
+        const globalStyles = StyleSheet.create({
+          fitsContentFitsContent: {
+            ...base,
+          },
+          fillsContainerFillsContainer: {
+            ...base,
+            width: `100%`,
+            height: `100%`,
+          },
+          fillsContainerFitsContent: {
+            ...base,
+            width: `100%`,
+          },
+          fitsContentFillsContainer: {
+            ...base,
+            height: `100%`,
+          },
+        });
+
+        return ({ width, height, children }) => {
+          if (width === `fillsContainer`) {
+            if (height === `fillsContainer`) {
+              return (
+                <View style={globalStyles.fillsContainerFillsContainer}>
+                  {children}
+                </View>
+              );
+            } else {
+              return (
+                <View style={globalStyles.fillsContainerFitsContent}>
+                  {children}
+                </View>
+              );
+            }
           } else {
-            return (
-              <View style={styles.fillsContainerFitsContent}>{children}</View>
-            );
+            if (height === `fillsContainer`) {
+              return (
+                <View style={globalStyles.fitsContentFillsContainer}>
+                  {children}
+                </View>
+              );
+            } else {
+              return (
+                <View style={globalStyles.fitsContentFitsContent}>
+                  {children}
+                </View>
+              );
+            }
           }
-        } else {
-          if (height === `fillsContainer`) {
-            return (
-              <View style={styles.fitsContentFillsContainer}>{children}</View>
-            );
-          } else {
-            return <View>{children}</View>;
-          }
-        }
-      };
+        };
+      }
     } else {
       const base: ViewStyle = shadow(shadowRadius);
+
+      if (border !== null) {
+        base.borderWidth = border.width;
+        base.borderColor = border.color;
+      }
 
       const styles = StyleSheet.create({
         fillsContainerFillsContainer: {
@@ -105,6 +175,11 @@ export const createCardComponent = (
   } else {
     if (shadowRadius === 0) {
       const base: ViewStyle = { borderRadius, overflow: `hidden` };
+
+      if (border !== null) {
+        base.borderWidth = border.width;
+        base.borderColor = border.color;
+      }
 
       const styles = StyleSheet.create({
         fillsContainerFillsContainer: {
@@ -160,6 +235,11 @@ export const createCardComponent = (
         borderRadius,
         overflow: `hidden`,
       };
+
+      if (border !== null) {
+        innerBase.borderWidth = border.width;
+        innerBase.borderColor = border.color;
+      }
 
       const styles = StyleSheet.create({
         outerFillsContainerFillsContainer: {

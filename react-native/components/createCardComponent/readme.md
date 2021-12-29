@@ -12,8 +12,9 @@ Shadow styles are generated in a similar manner to
 import { createCardComponent } from "react-native-app-helpers";
 
 const ExampleCard = createCardComponent({
-  10, // Border radius.
-  12, // Shadow radius.
+  10,   // Border radius.
+  12,   // Shadow radius.
+  null, // Border.
 });
 
 const ExampleScreen = () => (
@@ -27,8 +28,9 @@ const ExampleScreen = () => (
 import { createCardComponent } from "react-native-app-helpers";
 
 const ExampleCard = createCardComponent({
-  10, // Border radius.
-  12, // Shadow radius.
+  10,   // Border radius.
+  12,   // Shadow radius.
+  null, // Border.
 });
 
 const ExampleScreen = () => (
@@ -42,12 +44,29 @@ const ExampleScreen = () => (
 import { createCardComponent } from "react-native-app-helpers";
 
 const ExampleCard = createCardComponent({
-  10, // Border radius.
-  12, // Shadow radius.
+  10,   // Border radius.
+  12,   // Shadow radius.
+  null, // Border.
 });
 
 const ExampleScreen = () => (
   <ExampleCard width="fitsContent" height="fillsContent">
+    <Text>This is shown in the card.</Text>
+  </ExampleCard>
+);
+```
+
+```tsx
+import { createCardComponent } from "react-native-app-helpers";
+
+const ExampleCard = createCardComponent({
+  10,                            // Border radius.
+  12,                            // Shadow radius.
+  { width: 7, color: `purple` }, // Border.
+});
+
+const ExampleScreen = () => (
+  <ExampleCard width="fitsContent" height="fitsContent">
     <Text>This is shown in the card.</Text>
   </ExampleCard>
 );
