@@ -93,6 +93,7 @@ export { StackRoute } from "./react-native/types/StackRoute";
 export { StackRouterState } from "./react-native/types/StackRouterState";
 export { StackRouteTable } from "./react-native/types/StackRouteTable";
 export { StateStore } from "./react-native/services/StateStore";
+export { StateStoreInterface } from "./react-native/types/StateStoreInterface";
 export { StatusPillStyle } from "./react-native/types/StatusPillStyle";
 export { StatusPillStyleStatus } from "./react-native/types/StatusPillStyleStatus";
 export { SvgIcon } from "./react-native/types/SvgIcon";

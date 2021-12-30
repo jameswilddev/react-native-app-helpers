@@ -121,6 +121,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [StackRouterState](./react-native/types/StackRouterState/readme.md)
 - [StackRoute](./react-native/types/StackRoute/readme.md)
 - [StackRouteTable](./react-native/types/StackRouteTable/readme.md)
+- [StateStoreInterface](./react-native/types/StateStoreInterface/readme.md)
 - [StatusPillStyle](./react-native/types/StatusPillStyle/readme.md)
 - [StatusPillStyleStatus](./react-native/types/StatusPillStyleStatus/readme.md)
 - [SvgIcon](./react-native/types/SvgIcon/readme.md)

@@ -1,6 +1,7 @@
 import * as FileSystem from "expo-file-system";
 import { EventEmitter } from "events";
 import type { Json } from "../../types/Json";
+import type { StateStoreInterface } from "../../types/StateStoreInterface";
 
 /**
  * A wrapper around expo-file-system which adds:
@@ -10,7 +11,7 @@ import type { Json } from "../../types/Json";
  * - A synchronous read/write API (with asynchronous write-back).
  * @template T The type of JSON stored.
  */
-export class StateStore<T extends Json> {
+export class StateStore<T extends Json> implements StateStoreInterface<T> {
   private fileUri: null | string = null;
   private value: undefined | T = undefined;
   private writeQueueLength: 0 | 1 | 2 = 0;
