@@ -78,6 +78,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 ### Services
 
 - [logger](./react-native/services/logger/readme.md)
+- [FileStore](./react-native/services/FileStore/readme.md)
 - [Request](./react-native/services/Request/readme.md)
 - [SessionStore](./react-native/services/SessionStore/readme.md)
 - [StateStore](./react-native/services/StateStore/readme.md)
@@ -99,6 +100,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [CustomTextTableColumn](./react-native/types/CustomTextTableColumn/readme.md)
 - [EmptyRequestBody](./react-native/types/EmptyRequestBody/readme.md)
 - [FileRequestBody](./react-native/types/FileRequestBody/readme.md)
+- FileStoreInterface
 - [FiniteStateMachineRouterState](./react-native/types/FiniteStateMachineRouterState/readme.md)
 - [FlashMessageState](./react-native/types/FlashMessageState/readme.md)
 - [FlashMessageStyle](./react-native/types/FlashMessageStyle/readme.md)

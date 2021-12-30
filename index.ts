@@ -59,6 +59,8 @@ export { CustomElementTableColumn } from "./react-native/types/CustomElementTabl
 export { CustomTextTableColumn } from "./react-native/types/CustomTextTableColumn";
 export { EmptyRequestBody } from "./react-native/types/EmptyRequestBody";
 export { FileRequestBody } from "./react-native/types/FileRequestBody";
+export { FileStore } from "./react-native/services/FileStore";
+export { FileStoreInterface } from "./react-native/types/FileStoreInterface";
 export { FiniteStateMachineRouterState } from "./react-native/types/FiniteStateMachineRouterState";
 export { FlashMessageState } from "./react-native/types/FlashMessageState";
 export { FlashMessageStyle } from "./react-native/types/FlashMessageStyle";
