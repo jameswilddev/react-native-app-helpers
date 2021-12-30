@@ -74,3 +74,8 @@ await request.returningFile(
   ["200"],
 );
 ```
+
+## Interface
+
+This package also exports a `RequestInterface` type which can be used to
+substitute other types in place of this class (for unit tests, for example).

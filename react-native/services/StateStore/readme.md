@@ -45,3 +45,8 @@ console.log(store.get());
 
 await store.unload();
 ```
+
+## Interface
+
+This package also exports a `StateStoreInterface` type which can be used to
+substitute other types in place of this class (for unit tests, for example).
