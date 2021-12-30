@@ -110,6 +110,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
+- [RequestInterface](./react-native/types/RequestInterface/readme.md)
 - [Route](./react-native/types/Route/readme.md)
 - [RouteParameters](./react-native/types/RouteParameters/readme.md)
 - [RouteTable](./react-native/types/RouteTable/readme.md)

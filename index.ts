@@ -76,6 +76,7 @@ export { OfflineTableData } from "./react-native/types/OfflineTableData";
 export { QueryParameter } from "./react-native/types/QueryParameter";
 export { QueryParameters } from "./react-native/types/QueryParameters";
 export { Request } from "./react-native/services/Request";
+export { RequestInterface } from "./react-native/types/RequestInterface";
 export { Route } from "./react-native/types/Route";
 export { RouteParameters } from "./react-native/types/RouteParameters";
 export { RouteTable } from "./react-native/types/RouteTable";
