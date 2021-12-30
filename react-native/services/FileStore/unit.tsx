@@ -16,13 +16,6 @@ test(`creates a directory on load`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
 
   const promise = fileStore.load(`Example Subdirectory Name`);
 
@@ -48,9 +41,6 @@ test(`creates a directory on load`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`resolves load when creating the directory succeeds`, async () => {
@@ -69,13 +59,6 @@ test(`resolves load when creating the directory succeeds`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
 
   await fileStore.load(`Example Subdirectory Name`);
 
@@ -86,9 +69,6 @@ test(`resolves load when creating the directory succeeds`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`throws when loading while loading`, async () => {
@@ -109,13 +89,6 @@ test(`throws when loading while loading`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   const firstPromise = fileStore.load(`Example First Subdirectory Name`);
 
   const secondPromise = fileStore.load(`Example Second Subdirectory Name`);
@@ -145,9 +118,6 @@ test(`throws when loading while loading`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when loading while loaded`, async () => {
@@ -166,13 +136,6 @@ test(`throws when loading while loaded`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example First Subdirectory Name`);
 
   const promise = fileStore.load(`Example Second Subdirectory Name`);
@@ -187,9 +150,6 @@ test(`throws when loading while loaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`throws when generating a path when not loaded`, () => {
@@ -206,22 +166,12 @@ test(`throws when generating a path when not loaded`, () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
 
   expect(() => {
     fileStore.generatePath(`5d515bcf-f201-463f-923f-7c6ab54e8ebf`);
   }).toThrowError(`The file store is not loaded.`);
 
   expect(makeDirectoryAsync).not.toBeCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when generating a path while loading`, () => {
@@ -242,13 +192,6 @@ test(`throws when generating a path while loading`, () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   fileStore.load(`Example Subdirectory Name`);
 
   expect(() => {
@@ -262,9 +205,6 @@ test(`throws when generating a path while loading`, () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when generating a path once unloaded`, async () => {
@@ -283,13 +223,6 @@ test(`throws when generating a path once unloaded`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   fileStore.unload();
 
@@ -304,9 +237,6 @@ test(`throws when generating a path once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`can generate paths`, async () => {
@@ -325,13 +255,6 @@ test(`can generate paths`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
 
   const actual = fileStore.generatePath(`5d515bcf-f201-463f-923f-7c6ab54e8ebf`);
@@ -346,9 +269,6 @@ test(`can generate paths`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`throws when listing when not loaded`, async () => {
@@ -365,13 +285,6 @@ test(`throws when listing when not loaded`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
 
   const promise = fileStore.list();
 
@@ -379,9 +292,6 @@ test(`throws when listing when not loaded`, async () => {
     new Error(`The file store is not loaded.`)
   );
   expect(makeDirectoryAsync).not.toBeCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when listing while loading`, async () => {
@@ -402,13 +312,6 @@ test(`throws when listing while loading`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   fileStore.load(`Example Subdirectory Name`);
 
   const promise = fileStore.list();
@@ -423,9 +326,6 @@ test(`throws when listing while loading`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when listing once unloaded`, async () => {
@@ -444,13 +344,6 @@ test(`throws when listing once unloaded`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   fileStore.unload();
 
@@ -466,9 +359,6 @@ test(`throws when listing once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`can list files`, async () => {
@@ -493,13 +383,6 @@ test(`can list files`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
 
   const files = await fileStore.list();
@@ -519,9 +402,6 @@ test(`can list files`, async () => {
     `Example Document Directory/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`throws when deleting when not loaded`, async () => {
@@ -538,13 +418,6 @@ test(`throws when deleting when not loaded`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
 
   const promise = fileStore.delete(`1527b17e-08e7-49b5-9bff-09a1945f25f2`);
 
@@ -552,9 +425,6 @@ test(`throws when deleting when not loaded`, async () => {
     new Error(`The file store is not loaded.`)
   );
   expect(makeDirectoryAsync).not.toBeCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when deleting while loading`, async () => {
@@ -575,13 +445,6 @@ test(`throws when deleting while loading`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   fileStore.load(`Example Subdirectory Name`);
 
   const promise = fileStore.delete(`1527b17e-08e7-49b5-9bff-09a1945f25f2`);
@@ -596,9 +459,6 @@ test(`throws when deleting while loading`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when deleting once unloaded`, async () => {
@@ -617,13 +477,6 @@ test(`throws when deleting once unloaded`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   fileStore.unload();
 
@@ -639,9 +492,6 @@ test(`throws when deleting once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`does not resolve the promise returned by deleting until deletion succeeds`, async () => {
@@ -664,13 +514,6 @@ test(`does not resolve the promise returned by deleting until deletion succeeds`
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
 
   const promise = fileStore.delete(`1527b17e-08e7-49b5-9bff-09a1945f25f2`);
@@ -700,9 +543,6 @@ test(`does not resolve the promise returned by deleting until deletion succeeds`
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`can delete files`, async () => {
@@ -723,13 +563,6 @@ test(`can delete files`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
 
   await fileStore.delete(`1527b17e-08e7-49b5-9bff-09a1945f25f2`);
@@ -744,9 +577,6 @@ test(`can delete files`, async () => {
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`throws when unloading when not loaded`, () => {
@@ -763,22 +593,12 @@ test(`throws when unloading when not loaded`, () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
 
   expect(() => {
     fileStore.unload();
   }).toThrowError(`The file store is not loaded.`);
 
   expect(makeDirectoryAsync).not.toBeCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when unloading while loading`, () => {
@@ -799,13 +619,6 @@ test(`throws when unloading while loading`, () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   fileStore.load(`Example Subdirectory Name`);
 
   expect(() => {
@@ -819,9 +632,6 @@ test(`throws when unloading while loading`, () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).not.toBeCalled();
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).not.toBeCalled();
 });
 
 test(`throws when unloading once unloaded`, async () => {
@@ -840,13 +650,6 @@ test(`throws when unloading once unloaded`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   fileStore.unload();
 
@@ -861,9 +664,6 @@ test(`throws when unloading once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`throws when unloading while listing files`, async () => {
@@ -886,13 +686,6 @@ test(`throws when unloading while listing files`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   fileStore.list();
 
@@ -912,10 +705,6 @@ test(`throws when unloading while listing files`, async () => {
     `Example Document Directory/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
-
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`throws when unloading while deleting files`, async () => {
@@ -938,13 +727,6 @@ test(`throws when unloading while deleting files`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   fileStore.delete(`1527b17e-08e7-49b5-9bff-09a1945f25f2`);
 
@@ -964,9 +746,6 @@ test(`throws when unloading while deleting files`, async () => {
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`can unload before any file store operations occur`, async () => {
@@ -985,13 +764,6 @@ test(`can unload before any file store operations occur`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
 
   fileStore.unload();
@@ -1003,9 +775,6 @@ test(`can unload before any file store operations occur`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`can unload once listing files completes`, async () => {
@@ -1030,13 +799,6 @@ test(`can unload once listing files completes`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   await fileStore.list();
 
@@ -1052,9 +814,6 @@ test(`can unload once listing files completes`, async () => {
     `Example Document Directory/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });
 
 test(`can unload once deleting files completes`, async () => {
@@ -1075,13 +834,6 @@ test(`can unload once deleting files completes`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
   const fileStore = new FileStore();
-  const eventHandlerA = jest.fn();
-  const eventHandlerB = jest.fn();
-  const eventHandlerC = jest.fn();
-  fileStore.addListener(`load`, eventHandlerA);
-  fileStore.addListener(`load`, eventHandlerB);
-  fileStore.addListener(`load`, eventHandlerC);
-  fileStore.removeListener(`load`, eventHandlerB);
   await fileStore.load(`Example Subdirectory Name`);
   await fileStore.delete(`1527b17e-08e7-49b5-9bff-09a1945f25f2`);
 
@@ -1097,7 +849,4 @@ test(`can unload once deleting files completes`, async () => {
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
-  expect(eventHandlerA).toBeCalledTimes(1);
-  expect(eventHandlerB).not.toBeCalled();
-  expect(eventHandlerC).toBeCalledTimes(1);
 });

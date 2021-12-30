@@ -3,21 +3,6 @@
  */
 export interface FileStoreInterface {
   /**
-   * Adds a listener for events to this file store.
-   * @param eventType The type of the event to listen for.
-   * @param listener  The callback to execute when the event is emitted.
-   */
-  addListener(eventType: `load`, listener: () => void): void;
-
-  /**
-   * Removes a listener for events from this file store.
-   * @param eventType The type of the event to listen for.
-   * @param listener  The callback to no longer execute when the event is
-   *                  emitted.
-   */
-  removeListener(eventType: `load`, listener: () => void): void;
-
-  /**
    * Loads a subdirectory into the file store.  The subdirectory is guaranteed
    * to exist by the time the returned promise resolves.
    * @param subdirectoryName The name of the subdirectory to load into the file

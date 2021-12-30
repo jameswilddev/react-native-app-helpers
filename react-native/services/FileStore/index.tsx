@@ -1,5 +1,4 @@
 import * as FileSystem from "expo-file-system";
-import { EventEmitter } from "events";
 import type { FileStoreInterface } from "../../types/FileStoreInterface";
 
 /**
@@ -10,16 +9,6 @@ export class FileStore implements FileStoreInterface {
   private subdirectoryName: null | string = null;
   private loading = false;
   private operationsInProgress = 0;
-
-  private readonly eventEmitter = new EventEmitter();
-
-  addListener(eventType: `load`, listener: () => void): void {
-    this.eventEmitter.addListener(eventType, listener);
-  }
-
-  removeListener(eventType: `load`, listener: () => void): void {
-    this.eventEmitter.removeListener(eventType, listener);
-  }
 
   async load(subdirectoryName: string): Promise<void> {
     if (this.loading) {
@@ -34,8 +23,6 @@ export class FileStore implements FileStoreInterface {
         );
 
         this.subdirectoryName = subdirectoryName;
-
-        this.eventEmitter.emit(`load`);
       } finally {
         this.loading = false;
       }
