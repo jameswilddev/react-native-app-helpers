@@ -110,7 +110,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
-- [RequestInterface](./react-native/types/RequestInterface/readme.md)
+- RequestInterface
 - [Route](./react-native/types/Route/readme.md)
 - [RouteParameters](./react-native/types/RouteParameters/readme.md)
 - [RouteTable](./react-native/types/RouteTable/readme.md)
@@ -121,7 +121,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [StackRouterState](./react-native/types/StackRouterState/readme.md)
 - [StackRoute](./react-native/types/StackRoute/readme.md)
 - [StackRouteTable](./react-native/types/StackRouteTable/readme.md)
-- [StateStoreInterface](./react-native/types/StateStoreInterface/readme.md)
+- StateStoreInterface
 - [StatusPillStyle](./react-native/types/StatusPillStyle/readme.md)
 - [StatusPillStyleStatus](./react-native/types/StatusPillStyleStatus/readme.md)
 - [SvgIcon](./react-native/types/SvgIcon/readme.md)
