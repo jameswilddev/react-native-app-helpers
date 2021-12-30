@@ -77,6 +77,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 
 ### Services
 
+- [logger](./react-native/services/logger/readme.md)
 - [Request](./react-native/services/Request/readme.md)
 - [SessionStore](./react-native/services/SessionStore/readme.md)
 - [StateStore](./react-native/services/StateStore/readme.md)
@@ -106,6 +107,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [Json](./react-native/types/Json/readme.md)
 - [JsonRequestBody](./react-native/types/JsonRequestBody/readme.md)
 - [KeyableTableCell](./react-native/types/KeyableTableCell/readme.md)
+- LoggerInterface
 - [NonKeyableTableCell](./react-native/types/NonKeyableTableCell/readme.md)
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)

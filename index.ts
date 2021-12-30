@@ -71,6 +71,8 @@ export { intercalateRendered } from "./react-native/utilities/intercalateRendere
 export { Json } from "./react-native/types/Json";
 export { JsonRequestBody } from "./react-native/types/JsonRequestBody";
 export { KeyableTableCell } from "./react-native/types/KeyableTableCell";
+export { logger } from "./react-native/services/logger";
+export { LoggerInterface } from "./react-native/types/LoggerInterface";
 export { NonKeyableTableCell } from "./react-native/types/NonKeyableTableCell";
 export { OfflineTableData } from "./react-native/types/OfflineTableData";
 export { QueryParameter } from "./react-native/types/QueryParameter";
