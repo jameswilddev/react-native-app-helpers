@@ -14,4 +14,14 @@ export type SyncableState<T extends SyncableSchema> = {
       T[`collections`][TKey]
     >;
   };
+
+  /**
+   * The UUIDs of the files which are to be pushed during the next sync.
+   */
+  readonly addedFileUuids: ReadonlyArray<string>;
+
+  /**
+   * The routes of the files which are to be deleted during the next sync.
+   */
+  readonly deletedFileRoutes: ReadonlyArray<string>;
 };

@@ -42,5 +42,14 @@ const example: SyncableState<ExampleSchema> = {
       },
     },
   },
+  addedFileUuids: [
+    `870654f6-c2ed-4332-8dde-75dd2312f569`,
+    `ad493206-01a7-499a-ae0c-8d0f2fabd2f4`,
+  ],
+  deletedFileRoutes: [
+    `example/get/put/and/delete/route/a`,
+    `example/get/put/and/delete/route/b`,
+    `example/get/put/and/delete/route/c`,
+  ],
 };
 ```
