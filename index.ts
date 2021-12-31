@@ -109,6 +109,8 @@ export { SyncableSchema } from "./react-native/types/SyncableSchema";
 export { SyncableState } from "./react-native/types/SyncableState";
 export { SyncableStateCollection } from "./react-native/types/SyncableStateCollection";
 export { SyncableStateCollectionItem } from "./react-native/types/SyncableStateCollectionItem";
+export { SyncConfiguration } from "./react-native/types/SyncConfiguration";
+export { SyncConfigurationCollection } from "./react-native/types/SyncConfigurationCollection";
 export { TableColumn } from "./react-native/types/TableColumn";
 export { TableRow } from "./react-native/types/TableRow";
 export { TableRowStyle } from "./react-native/types/TableRowStyle";

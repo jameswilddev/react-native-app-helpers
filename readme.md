@@ -137,6 +137,8 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [SyncableState](./react-native/types/SyncableState/readme.md)
 - [SyncableStateCollection](./react-native/types/SyncableStateCollection/readme.md)
 - [SyncableStateCollectionItem](./react-native/types/SyncableStateCollectionItem/readme.md)
+- [SyncConfiguration](./react-native/types/SyncConfiguration/readme.md)
+- [SyncConfigurationCollection](./react-native/types/SyncConfigurationCollection/readme.md)
 - [TableColumn](./react-native/types/TableColumn/readme.md)
 - [TableRow](./react-native/types/TableRow/readme.md)
 - [TableRowStyle](./react-native/types/TableRowStyle/readme.md)
