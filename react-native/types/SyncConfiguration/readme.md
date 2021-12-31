@@ -26,9 +26,13 @@ type ExampleAdditionalCollectionData = {
 };
 
 const example: SyncConfiguration<ExampleSchema, ExampleAdditionalCollectionData> = {
-  collections: [
-    {
-      key: `exampleCollectionBKey`,
+  collectionOrder: [
+    `exampleCollectionBKey`,
+    `exampleCollectionCKey`,
+    `exampleCollectionAKey`,
+  ]
+  collections: {
+    exampleCollectionBKey: {
       listFiles(item) {
         return [
           {
@@ -39,8 +43,7 @@ const example: SyncConfiguration<ExampleSchema, ExampleAdditionalCollectionData>
       },
       exampleAdditionalCollectionKey: 1234,
     },
-    {
-      key: `exampleCollectionCKey`,
+    exampleCollectionCKey: {
       listFiles(item) {
         return [
           {
@@ -51,8 +54,7 @@ const example: SyncConfiguration<ExampleSchema, ExampleAdditionalCollectionData>
       },
       exampleAdditionalCollectionKey: 1234,
     },
-    {
-      key: `exampleCollectionAKey`,
+    exampleCollectionAKey: {
       listFiles(item) {
         return [
           {
@@ -63,6 +65,6 @@ const example: SyncConfiguration<ExampleSchema, ExampleAdditionalCollectionData>
       },
       exampleAdditionalCollectionKey: 1234,
     }
-  ],
+  },
 };
 ```

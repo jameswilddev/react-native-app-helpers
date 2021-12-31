@@ -112,6 +112,7 @@ export { SyncableSchema } from "./react-native/types/SyncableSchema";
 export { SyncableState } from "./react-native/types/SyncableState";
 export { SyncableStateCollection } from "./react-native/types/SyncableStateCollection";
 export { SyncableStateCollectionItem } from "./react-native/types/SyncableStateCollectionItem";
+export { SyncableStateHelper } from "./react-native/services/SyncableStateHelper";
 export { SyncConfiguration } from "./react-native/types/SyncConfiguration";
 export { SyncConfigurationCollection } from "./react-native/types/SyncConfigurationCollection";
 export { SyncPullResponse } from "./react-native/types/SyncPullResponse";

@@ -1,37 +1,30 @@
-import type { SyncableSchema } from "../SyncableSchema";
+import type { Json } from "../Json";
 
 /**
  * Describes implementation details of a collection during a sync process.
- * @template TSchema                   The schema which is being synced.
+ * @template TData                     The data within an item.
  * @template TAdditionalCollectionData Any additional information which should
  *                                     be held against a collection, e.g.
  *                                     strings for progress bars.
  */
 export type SyncConfigurationCollection<
-  TSchema extends SyncableSchema,
+  TData extends Json,
   TAdditionalCollectionData extends Record<string, unknown>
 > = {
-  readonly [TKey in keyof TSchema[`collections`]]: {
+  /**
+   * Lists the files referenced by an item.
+   * @param data The data of the item from which to list files.
+   * @returns    A description of the files referenced by this item.
+   */
+  listFiles(item: TData): ReadonlyArray<{
     /**
-     * The key of the collection described.
+     * The request route at which the file can be GET, PUT or DELETEd.
      */
-    readonly key: TKey;
+    readonly route: string;
 
     /**
-     * Lists the files referenced by an item.
-     * @param data The data of the item from which to list files.
-     * @returns    A description of the files referenced by this item.
+     * A unique identifier for the file.
      */
-    listFiles(item: TSchema[`collections`][TKey]): ReadonlyArray<{
-      /**
-       * The request route at which the file can be GET, PUT or DELETEd.
-       */
-      readonly route: string;
-
-      /**
-       * A unique identifier for the file.
-       */
-      readonly uuid: string;
-    }>;
-  } & TAdditionalCollectionData;
-}[keyof TSchema[`collections`]];
+    readonly uuid: string;
+  }>;
+} & TAdditionalCollectionData;
