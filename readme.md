@@ -19,7 +19,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Aligned](./react-native/components/Aligned/readme.md)
 - [ContainerFillingKeyboardAvoidingView](./react-native/components/ContainerFillingKeyboardAvoidingView/readme.md)
 - [ContainerFillingScrollView](./react-native/components/ContainerFillingScrollView/readme.md)
-export { createBottomTabBarComponent } from "./react-native/components/createBottomTabBarComponent";
+- [createBottomTabBarComponent](./react-native/components/createBottomTabBarComponent/readme.md)
 - [createButtonComponent](./react-native/components/createButtonComponent/readme.md)
 - [createCardComponent](./react-native/components/createCardComponent/readme.md)
 - [createCheckboxComponent](./react-native/components/createCheckboxComponent/readme.md)
