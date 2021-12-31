@@ -25,6 +25,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [createCheckboxComponent](./react-native/components/createCheckboxComponent/readme.md)
 - [createCreatableSelectComponent](./react-native/components/createCreatableSelectComponent/readme.md)
 - [createDropDownComponent](./react-native/components/createDropDownComponent/readme.md)
+- [createFileStoreManagerComponent](./react-native/components/createFileStoreManagerComponent/readme.md)
 - [createFiniteStateMachineRoutingComponent](./react-native/components/createFiniteStateMachineRoutingComponent/readme.md)
 - [createFixedWidthComponent](./react-native/components/createFixedWidthComponent/readme.md)
 - [createFlashMessageComponent](./react-native/components/createFlashMessageComponent/readme.md)
