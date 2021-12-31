@@ -8,7 +8,7 @@ Represents a collection which can be synced.
 import type { SyncableStateCollection } from "react-native-app-helpers";
 
 type ExampleSchema = {
-  exampleDataAKey: boolean;
+  readonly exampleDataAKey: boolean;
 };
 
 const example: SyncableStateCollection<ExampleData> = {

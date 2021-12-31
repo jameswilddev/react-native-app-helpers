@@ -8,15 +8,15 @@ Represents a local mirror of data which can be synced.
 import type { SyncableState } from "react-native-app-helpers";
 
 type ExampleSchema = {
-  collections: {
-    exampleCollectionAKey: {
-      exampleDataAKey: boolean;
+  readonly collections: {
+    readonly exampleCollectionAKey: {
+      readonly exampleDataAKey: boolean;
     };
-    exampleCollectionBKey: {
-      exampleDataBKey: number;
+    readonly exampleCollectionBKey: {
+      readonly exampleDataBKey: number;
     };
-    exampleCollectionCKey: {
-      exampleDataCKey: string;
+    readonly exampleCollectionCKey: {
+      readonly exampleDataCKey: string;
     };
   };
 };
