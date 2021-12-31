@@ -142,6 +142,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [SyncableStateCollectionItem](./react-native/types/SyncableStateCollectionItem/readme.md)
 - [SyncConfiguration](./react-native/types/SyncConfiguration/readme.md)
 - [SyncConfigurationCollection](./react-native/types/SyncConfigurationCollection/readme.md)
+- [SyncPullResponse](./react-native/types/SyncPullResponse/readme.md)
 - [TableColumn](./react-native/types/TableColumn/readme.md)
 - [TableRow](./react-native/types/TableRow/readme.md)
 - [TableRowStyle](./react-native/types/TableRowStyle/readme.md)
