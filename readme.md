@@ -85,6 +85,8 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 
 ### Types
 
+- [AwaitingPullSyncableStateCollectionItem](./react-native/types/AwaitingPullSyncableStateCollectionItem/readme.md)
+- [AwaitingPushSyncableStateCollectionItem](./react-native/types/AwaitingPushSyncableStateCollectionItem/readme.md)
 - [BasicTableColumn](./react-native/types/BasicTableColumn/readme.md)
 - [BorderStyle](./react-native/types/BorderStyle/readme.md)
 - [BottomTab](./react-native/types/BottomTab/readme.md)
@@ -112,6 +114,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - LoggerInterface
 - [NonKeyableTableCell](./react-native/types/NonKeyableTableCell/readme.md)
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
+- [PushingSyncableStateCollectionItem](./react-native/types/PushingSyncableStateCollectionItem/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
 - RequestInterface
@@ -129,6 +132,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [StatusPillStyle](./react-native/types/StatusPillStyle/readme.md)
 - [StatusPillStyleStatus](./react-native/types/StatusPillStyleStatus/readme.md)
 - [SvgIcon](./react-native/types/SvgIcon/readme.md)
+- [SyncableStateCollectionItem](./react-native/types/SyncableStateCollectionItem/readme.md)
 - [TableColumn](./react-native/types/TableColumn/readme.md)
 - [TableRow](./react-native/types/TableRow/readme.md)
 - [TableRowStyle](./react-native/types/TableRowStyle/readme.md)
@@ -139,6 +143,7 @@ export { createBottomTabBarComponent } from "./react-native/components/createBot
 - [UnderlinedTopTab](./react-native/types/UnderlinedTopTab/readme.md)
 - [UnderlinedTopTabBarStyle](./react-native/types/UnderlinedTopTabBarStyle/readme.md)
 - [UnderlinedTopTabBarStyleState](./react-native/types/UnderlinedTopTabBarStyleState/readme.md)
+- [UpToDateSyncableStateCollectionItem](./react-native/types/UpToDateSyncableStateCollectionItem/readme.md)
 
 ### Utilities
 
