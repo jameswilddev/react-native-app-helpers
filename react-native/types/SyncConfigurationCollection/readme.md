@@ -31,7 +31,7 @@ const example: SyncConfigurationCollection<ExampleSchema, ExampleAdditionalColle
     listFiles(item) {
       return [
         {
-          route: `example/get/and/put/route`,
+          route: `example/get/put/and/delete/route`,
           uuid: `52b92c59-880f-48e7-bed1-fbd8fec0241b`,
         },
       ];

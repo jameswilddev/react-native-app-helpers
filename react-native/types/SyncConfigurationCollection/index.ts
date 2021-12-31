@@ -24,7 +24,7 @@ export type SyncConfigurationCollection<
      */
     listFiles(item: TSchema[`collections`][TKey]): ReadonlyArray<{
       /**
-       * The request route at which the file can be GET or PUT.
+       * The request route at which the file can be GET, PUT or DELETEd.
        */
       readonly route: string;
 
