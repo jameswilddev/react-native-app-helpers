@@ -115,6 +115,9 @@ import { createTextComponent } from "react-native-app-helpers";
 - LoggerInterface
 - [NonKeyableTableCell](./react-native/types/NonKeyableTableCell/readme.md)
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
+- [PreflightResponse](./react-native/types/PreflightResponse/readme.md)
+- [PreflightResponseCollection](./react-native/types/PreflightResponseCollection/readme.md)
+- [PreflightResponseCollectionItem](./react-native/types/PreflightResponseCollectionItem/readme.md)
 - [PushingSyncableStateCollectionItem](./react-native/types/PushingSyncableStateCollectionItem/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
