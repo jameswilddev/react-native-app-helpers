@@ -1,3 +1,4 @@
+import type { Json } from "../Json";
 import type { PreflightResponseCollection } from "../PreflightResponseCollection";
 import type { SyncableSchema } from "../SyncableSchema";
 
@@ -11,7 +12,7 @@ import type { SyncableSchema } from "../SyncableSchema";
  */
 export type PreflightResponse<
   TSchema extends SyncableSchema,
-  TAdditionalCollectionItemData extends Record<string, unknown>
+  TAdditionalCollectionItemData extends Record<string, Json>
 > = {
   /**
    * The collections available to be synced.

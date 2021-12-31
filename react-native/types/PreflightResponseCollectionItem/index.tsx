@@ -1,3 +1,5 @@
+import type { Json } from "../Json";
+
 /**
  * The an item in a collection within a response to a successful preflight
  * request.
@@ -6,7 +8,7 @@
  *                                         item, e.g. strings for progress bars.
  */
 export type PreflightResponseCollectionItem<
-  TAdditionalCollectionItemData extends Record<string, unknown>
+  TAdditionalCollectionItemData extends Record<string, Json>
 > = {
   /**
    * The current version of the item.  If the record either does not exist

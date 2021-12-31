@@ -1,3 +1,4 @@
+import type { Json } from "../Json";
 import type { PreflightResponseCollectionItem } from "../PreflightResponseCollectionItem";
 
 /**
@@ -7,7 +8,7 @@ import type { PreflightResponseCollectionItem } from "../PreflightResponseCollec
  *                                         item, e.g. strings for progress bars.
  */
 export type PreflightResponseCollection<
-  TAdditionalCollectionItemData extends Record<string, unknown>
+  TAdditionalCollectionItemData extends Record<string, Json>
 > = {
   /**
    * The items within the collection.
