@@ -1,3 +1,10 @@
+// This is supposed to be defined but is not for unknown reason.
+(global as unknown as { fail: (text: string) => void }).fail = (
+  text: string
+) => {
+  expect(text).toBeNull();
+};
+
 (global as unknown as { __DEV__: boolean }).__DEV__ = false;
 
 class AbortSignalMock {
