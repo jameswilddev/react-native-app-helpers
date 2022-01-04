@@ -144,7 +144,7 @@ export type SyncState<
        * The collection which is currently being pulled.
        */
       readonly syncConfigurationCollection: SyncConfigurationCollection<
-        TSchema,
+        TSchema[`collections`][keyof TSchema[`collections`]],
         TAdditionalCollectionData
       >;
 
