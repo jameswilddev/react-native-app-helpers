@@ -510,6 +510,10 @@ export class Sync<
               uuid
             ] as PreflightResponseCollectionItem<TAdditionalCollectionItemData>;
 
+            this.logger.information(
+              `New "${collectionKey}" "${uuid}" will be pulled.`
+            );
+
             pulls.push({
               syncConfigurationCollection,
               preflightResponseCollectionItem,
