@@ -183,7 +183,7 @@ export class Sync<
             switch (item.status) {
               case `awaitingPull`:
                 this.logger.warning(
-                  `Evidence of previous interrupted sync of "${collectionKey}" "${uuid}" found; another pull attempt will be made following the push phase.`
+                  `Evidence of previously interrupted sync of "${collectionKey}" "${uuid}" found; another pull attempt will be made following the push phase.`
                 );
 
                 pushItem = false;
@@ -191,7 +191,7 @@ export class Sync<
 
               case `pushing`:
                 this.logger.warning(
-                  `Evidence of previous interrupted push of "${collectionKey}" "${uuid}" found; another attempt will be made.`
+                  `Evidence of previously interrupted push of "${collectionKey}" "${uuid}" found; another attempt will be made.`
                 );
 
                 pushItem = true;
