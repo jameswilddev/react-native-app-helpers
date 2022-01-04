@@ -336,7 +336,7 @@ export class Sync<
           pushesAndDeletions.push({
             type: `deletion`,
             beforeLogMessage: `Deleting file "${route}"...`,
-            afterLogMessage: `Successfully pushed deletion of file "${route}".`,
+            afterLogMessage: `Successfully deleted file "${route}".`,
             execute: async () => {
               await this.request.withoutResponse(
                 `DELETE`,
