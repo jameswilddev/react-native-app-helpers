@@ -135,6 +135,8 @@ export class Sync<
         const pushesAndDeletions: (
           | {
               type: `push`;
+              readonly beforeLogMessage: string;
+              readonly afterLogMessage: string;
               readonly syncConfigurationCollection: SyncConfigurationCollection<
                 TSchema[`collections`][keyof TSchema[`collections`]],
                 TAdditionalCollectionData
@@ -145,6 +147,8 @@ export class Sync<
             }
           | {
               type: `deletion`;
+              readonly beforeLogMessage: string;
+              readonly afterLogMessage: string;
               execute(): Promise<boolean>;
             }
         )[] = [];
@@ -221,14 +225,12 @@ export class Sync<
             if (pushItem) {
               pushesAndDeletions.push({
                 type: `push`,
+                beforeLogMessage: `Pushing change of "${collectionKey}" "${uuid}"...`,
+                afterLogMessage: `Successfully pushed change of "${collectionKey}" "${uuid}".`,
                 syncConfigurationCollection,
                 completedFiles: null,
                 totalFiles: filesToPush.length,
                 execute: async () => {
-                  this.logger.information(
-                    `Pushing change of "${collectionKey}" "${uuid}"...`
-                  );
-
                   await this.request.withoutResponse(
                     `PUT`,
                     `sync/${kebabCasedCollectionKey}/${uuid}`,
@@ -257,10 +259,6 @@ export class Sync<
 
                     this.stateStore.set(state);
 
-                    this.logger.information(
-                      `Successfully pushed change of "${collectionKey}" "${uuid}".`
-                    );
-
                     return true;
                   } else {
                     this.logger.warning(
@@ -288,14 +286,12 @@ export class Sync<
 
               pushesAndDeletions.push({
                 type: `push`,
+                beforeLogMessage: `Pushing file "${file.uuid}" of "${collectionKey}" "${uuid}"...`,
+                afterLogMessage: `Successfully pushed change of file "${file.uuid}" of "${collectionKey}" "${uuid}".`,
                 syncConfigurationCollection,
                 completedFiles,
                 totalFiles: filesToPush.length,
                 execute: async () => {
-                  this.logger.information(
-                    `Pushing file "${file.uuid}" of "${collectionKey}" "${uuid}"...`
-                  );
-
                   await this.request.withoutResponse(
                     `PUT`,
                     file.route,
@@ -320,10 +316,6 @@ export class Sync<
 
                     this.stateStore.set(state);
 
-                    this.logger.information(
-                      `Successfully pushed change of file "${file.uuid}" of "${collectionKey}" "${uuid}".`
-                    );
-
                     return true;
                   } else {
                     this.logger.warning(
@@ -343,9 +335,9 @@ export class Sync<
         for (const route of state.deletedFileRoutes) {
           pushesAndDeletions.push({
             type: `deletion`,
+            beforeLogMessage: `Deleting file "${route}"...`,
+            afterLogMessage: `Successfully pushed deletion of file "${route}".`,
             execute: async () => {
-              this.logger.information(`Deleting file "${route}"...`);
-
               await this.request.withoutResponse(
                 `DELETE`,
                 route,
@@ -367,10 +359,6 @@ export class Sync<
 
                 this.stateStore.set(state);
 
-                this.logger.information(
-                  `Successfully pushed deletion of file "${route}".`
-                );
-
                 return true;
               } else {
                 this.logger.warning(
@@ -386,6 +374,8 @@ export class Sync<
         let completedPushesAndDeletions = 0;
 
         for (const pushOrDeletion of pushesAndDeletions) {
+          this.logger.information(pushOrDeletion.beforeLogMessage);
+
           if (pushOrDeletion.type === `push`) {
             this.setState({
               type: `pushing`,
@@ -407,6 +397,8 @@ export class Sync<
           if (!(await pushOrDeletion.execute())) {
             return `needsToRunAgain`;
           } else {
+            this.logger.information(pushOrDeletion.afterLogMessage);
+
             completedPushesAndDeletions++;
           }
         }
@@ -438,6 +430,8 @@ export class Sync<
             TAdditionalCollectionData
           >;
           readonly preflightResponseCollectionItem: PreflightResponseCollectionItem<TAdditionalCollectionItemData>;
+          readonly beforeLogMessage: string;
+          readonly afterLogMessage: string;
           execute(): Promise<boolean>;
         }[] = [];
 
@@ -535,11 +529,9 @@ export class Sync<
             pulls.push({
               syncConfigurationCollection,
               preflightResponseCollectionItem,
+              beforeLogMessage: `Pulling new "${collectionKey}" "${uuid}"...`,
+              afterLogMessage: `Successfully pulled new "${collectionKey}" "${uuid}".`,
               execute: async () => {
-                this.logger.information(
-                  `Pulling new "${collectionKey}" "${uuid}"...`
-                );
-
                 const response = await this.request.returningJson<{
                   "200": SyncPullResponse<Json>;
                 }>(
@@ -578,10 +570,6 @@ export class Sync<
                         [collectionKey]: stateCollection,
                       },
                     };
-
-                    this.logger.information(
-                      `Successfully pulled new "${collectionKey}" "${uuid}".`
-                    );
 
                     return true;
                   } else {
@@ -618,6 +606,8 @@ export class Sync<
               uuid
             ] as PreflightResponseCollectionItem<TAdditionalCollectionItemData>;
 
+            let beforeLogMessage: string;
+
             switch (stateItem.status) {
               case `upToDate`:
                 if (
@@ -632,6 +622,8 @@ export class Sync<
                   this.logger.information(
                     `Pulling "${collectionKey}" "${uuid}" as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}")...`
                   );
+
+                  beforeLogMessage = `Pulling "${collectionKey}" "${uuid}" as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}")...`;
                   break;
                 }
 
@@ -639,27 +631,22 @@ export class Sync<
                 this.logger.information(
                   `Pulling previously pushed "${collectionKey}" "${uuid}"...`
                 );
+
+                beforeLogMessage = `Pulling previously pushed "${collectionKey}" "${uuid}"...`;
                 break;
             }
 
             pulls.push({
               syncConfigurationCollection,
               preflightResponseCollectionItem,
+
+              // This would only be undefined if the item's status were `pushing` or `awaitingPush`;
+              // neither of which is possible as we've completed the push phase and verified that
+              // the UI has not made any changes.
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              beforeLogMessage: beforeLogMessage!,
+              afterLogMessage: `Successfully pulled update of "${collectionKey}" "${uuid}".`,
               execute: async () => {
-                switch (stateItem.status) {
-                  case `upToDate`:
-                    this.logger.information(
-                      `Pulling "${collectionKey}" "${uuid}" as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}")...`
-                    );
-                    break;
-
-                  case `awaitingPull`:
-                    this.logger.information(
-                      `Pulling previously pushed "${collectionKey}" "${uuid}"...`
-                    );
-                    break;
-                }
-
                 const response = await this.request.returningJson<{
                   "200": SyncPullResponse<Json>;
                 }>(
@@ -699,10 +686,6 @@ export class Sync<
                       },
                     };
 
-                    this.logger.information(
-                      `Successfully pulled update of "${collectionKey}" "${uuid}".`
-                    );
-
                     return true;
                   } else {
                     this.logger.warning(
@@ -724,6 +707,8 @@ export class Sync<
         }
 
         for (const pull of pulls) {
+          this.logger.information(pull.beforeLogMessage);
+
           this.setState({
             type: `pulling`,
             completedSteps: completedPulls,
@@ -736,6 +721,8 @@ export class Sync<
           if (!(await pull.execute())) {
             return `needsToRunAgain`;
           } else {
+            this.logger.information(pull.afterLogMessage);
+
             completedPulls++;
           }
         }
