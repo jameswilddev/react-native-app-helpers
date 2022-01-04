@@ -282,7 +282,9 @@ export class Sync<
             let completedFiles = 0;
 
             for (const file of filesToPush) {
-              this.logger.debug(`File "${file.uuid}" will be pushed.`);
+              this.logger.debug(
+                `File "${file.uuid}" of "${collectionKey}" "${uuid}" will be pushed.`
+              );
 
               pushesAndDeletions.push({
                 type: `push`,
