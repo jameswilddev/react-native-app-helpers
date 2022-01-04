@@ -650,7 +650,7 @@ export class Sync<
                 const response = await this.request.returningJson<{
                   "200": SyncPullResponse<Json>;
                 }>(
-                  `PUT`,
+                  `GET`,
                   `sync/${kebabCasedCollectionKey}/${uuid}`,
                   { type: `empty` },
                   {},
