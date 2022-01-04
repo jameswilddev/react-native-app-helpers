@@ -613,7 +613,7 @@ export class Sync<
                     `Previously pulled "${collectionKey}" "${uuid}" will be pulled again as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}").`
                   );
 
-                  beforeLogMessage = `Pulling "${collectionKey}" "${uuid}" as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}")...`;
+                  beforeLogMessage = `Pulling updated "${collectionKey}" "${uuid}"...`;
                   break;
                 }
 
