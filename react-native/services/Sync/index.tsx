@@ -128,6 +128,34 @@ export class Sync<
       try {
         this.logger.information(`Sync is starting...`);
 
+        this.logger.debug(`Listing existing files...`);
+
+        const existingFileUuids = await this.fileStore.list();
+
+        const initialState = this.stateStore.get();
+        let state = initialState;
+
+        const nonexistentAddedFileUuids = state.addedFileUuids.filter(
+          (uuid) => !existingFileUuids.includes(uuid)
+        );
+
+        for (const nonexistentAddedFileUuid of nonexistentAddedFileUuids) {
+          this.logger.warning(
+            `The state store lists file UUID "${nonexistentAddedFileUuid}" as requiring push, but no such file exists on disk.  It is most likely that the application closed before state could be written back to disk after successfully pushing a deleted record, but this may indicate the presence of a bug.`
+          );
+        }
+
+        if (nonexistentAddedFileUuids.length > 0) {
+          state = {
+            ...state,
+            addedFileUuids: state.addedFileUuids.filter((addedFileUuid) =>
+              existingFileUuids.includes(addedFileUuid)
+            ),
+          };
+
+          this.stateStore.set(state);
+        }
+
         this.logger.debug(`Searching for changes to push...`);
 
         this.setState({ type: `checkingForChangesToPush` });
@@ -152,9 +180,6 @@ export class Sync<
               execute(): Promise<boolean>;
             }
         )[] = [];
-
-        const initialState = this.stateStore.get();
-        let state = initialState;
 
         for (const collectionKey of this.syncConfiguration.collectionOrder) {
           const syncConfigurationCollection = this.syncConfiguration
@@ -428,10 +453,6 @@ export class Sync<
         }[] = [];
 
         let completedPulls = 0;
-
-        this.logger.debug(`Listing existing files...`);
-
-        const existingFileUuids = await this.fileStore.list();
 
         this.logger.debug(`Searching for changes to pull...`);
 
