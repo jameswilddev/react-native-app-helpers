@@ -686,6 +686,8 @@ export class Sync<
                       },
                     };
 
+                    this.stateStore.set(state);
+
                     return true;
                   } else {
                     this.logger.warning(
