@@ -136,7 +136,7 @@ export class Sync<
           | {
               type: `push`;
               readonly syncConfigurationCollection: SyncConfigurationCollection<
-                TSchema,
+                TSchema[`collections`][keyof TSchema[`collections`]],
                 TAdditionalCollectionData
               >;
               readonly completedFiles: null | number;

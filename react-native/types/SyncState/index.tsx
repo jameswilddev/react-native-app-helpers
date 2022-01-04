@@ -54,7 +54,7 @@ export type SyncState<
        * The collection which is currently being pushed.
        */
       readonly syncConfigurationCollection: SyncConfigurationCollection<
-        TSchema,
+        TSchema[`collections`][keyof TSchema[`collections`]],
         TAdditionalCollectionData
       >;
     }
