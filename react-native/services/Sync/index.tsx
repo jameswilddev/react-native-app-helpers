@@ -287,7 +287,7 @@ export class Sync<
               pushesAndDeletions.push({
                 type: `push`,
                 beforeLogMessage: `Pushing file "${file.uuid}" of "${collectionKey}" "${uuid}"...`,
-                afterLogMessage: `Successfully pushed change of file "${file.uuid}" of "${collectionKey}" "${uuid}".`,
+                afterLogMessage: `Successfully pushed file "${file.uuid}" of "${collectionKey}" "${uuid}".`,
                 syncConfigurationCollection,
                 completedFiles,
                 totalFiles: filesToPush.length,
@@ -620,7 +620,7 @@ export class Sync<
                   continue;
                 } else {
                   this.logger.information(
-                    `Pulling "${collectionKey}" "${uuid}" as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}")...`
+                    `Previously pulled "${collectionKey}" "${uuid}" will be pulled again as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}").`
                   );
 
                   beforeLogMessage = `Pulling "${collectionKey}" "${uuid}" as versions do not match between preflight ("${preflightResponseCollectionItem.version}") and state store ("${stateItem.version}")...`;
@@ -629,7 +629,7 @@ export class Sync<
 
               case `awaitingPull`:
                 this.logger.information(
-                  `Pulling previously pushed "${collectionKey}" "${uuid}"...`
+                  `Previously pushed "${collectionKey}" "${uuid}" will be pulled.`
                 );
 
                 beforeLogMessage = `Pulling previously pushed "${collectionKey}" "${uuid}"...`;
