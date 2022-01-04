@@ -85,6 +85,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Request](./react-native/services/Request/readme.md)
 - [SessionStore](./react-native/services/SessionStore/readme.md)
 - [StateStore](./react-native/services/StateStore/readme.md)
+- [Sync](./react-native/services/Sync/readme.md)
 - [SyncableStateHelper](./react-native/services/SyncableStateHelper/readme.md)
 
 #### Types
@@ -146,6 +147,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [SyncConfiguration](./react-native/types/SyncConfiguration/readme.md)
 - [SyncConfigurationCollection](./react-native/types/SyncConfigurationCollection/readme.md)
 - [SyncPullResponse](./react-native/types/SyncPullResponse/readme.md)
+- SyncState
 - [TableColumn](./react-native/types/TableColumn/readme.md)
 - [TableRow](./react-native/types/TableRow/readme.md)
 - [TableRowStyle](./react-native/types/TableRowStyle/readme.md)

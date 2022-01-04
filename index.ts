@@ -108,6 +108,7 @@ export { StateStoreInterface } from "./react-native/types/StateStoreInterface";
 export { StatusPillStyle } from "./react-native/types/StatusPillStyle";
 export { StatusPillStyleStatus } from "./react-native/types/StatusPillStyleStatus";
 export { SvgIcon } from "./react-native/types/SvgIcon";
+export { Sync } from "./react-native/services/Sync";
 export { SyncableSchema } from "./react-native/types/SyncableSchema";
 export { SyncableState } from "./react-native/types/SyncableState";
 export { SyncableStateCollection } from "./react-native/types/SyncableStateCollection";
@@ -116,6 +117,7 @@ export { SyncableStateHelper } from "./react-native/services/SyncableStateHelper
 export { SyncConfiguration } from "./react-native/types/SyncConfiguration";
 export { SyncConfigurationCollection } from "./react-native/types/SyncConfigurationCollection";
 export { SyncPullResponse } from "./react-native/types/SyncPullResponse";
+export { SyncState } from "./react-native/types/SyncState";
 export { TableColumn } from "./react-native/types/TableColumn";
 export { TableRow } from "./react-native/types/TableRow";
 export { TableRowStyle } from "./react-native/types/TableRowStyle";

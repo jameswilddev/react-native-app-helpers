@@ -3,6 +3,16 @@ import type { PreflightResponseCollectionItem } from "../PreflightResponseCollec
 import type { SyncableSchema } from "../SyncableSchema";
 import type { SyncConfigurationCollection } from "../SyncConfigurationCollection";
 
+/**
+ * The state of a sync service.
+ * @template TSchema                       The schema of the synced StateStore.
+ * @template TAdditionalCollectionData     Any additional information which
+ *                                         should be held against a collection,
+ *                                         e.g. strings for progress bars.
+ * @template TAdditionalCollectionItemData Any additional information which
+ *                                         should be held against a collection
+ *                                         item, e.g. strings for progress bars.
+ */
 export type SyncState<
   TSchema extends SyncableSchema,
   TAdditionalCollectionData extends Record<string, unknown>,

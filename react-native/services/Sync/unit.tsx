@@ -1,12 +1,15 @@
-import { Sync } from ".";
-import type { RequestInterface, SyncConfigurationCollection } from "../../..";
-import type { FileStoreInterface } from "../../..";
-import type { FileRequestBody } from "../../..";
-import type { QueryParameters } from "../../..";
-import type { JsonRequestBody } from "../../..";
-import type { EmptyRequestBody } from "../../..";
-import type { StateStoreInterface } from "../../..";
-import type { Json } from "../../..";
+import {
+  Sync,
+  Json,
+  RequestInterface,
+  SyncConfigurationCollection,
+  FileStoreInterface,
+  FileRequestBody,
+  QueryParameters,
+  JsonRequestBody,
+  EmptyRequestBody,
+  StateStoreInterface,
+} from "../../..";
 import type { LoggerInterface } from "../../types/LoggerInterface";
 import type { SyncableState } from "../../types/SyncableState";
 import type { SyncState } from "../../types/SyncState";
