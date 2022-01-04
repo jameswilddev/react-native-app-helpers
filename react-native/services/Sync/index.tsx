@@ -416,14 +416,6 @@ export class Sync<
           `200`,
         ]);
 
-        if (this.stateStore.get() !== state) {
-          this.logger.warning(
-            `The state store changed while fetching preflight; sync has been interrupted and will need to run again.`
-          );
-
-          return `needsToRunAgain`;
-        }
-
         const pulls: {
           readonly syncConfigurationCollection: SyncConfigurationCollection<
             TSchema[`collections`][keyof TSchema[`collections`]],
@@ -440,14 +432,6 @@ export class Sync<
         this.logger.debug(`Listing existing files...`);
 
         const existingFileUuids = await this.fileStore.list();
-
-        if (this.stateStore.get() !== state) {
-          this.logger.warning(
-            `The state store changed while listing existing files; sync has been interrupted and will need to run again.`
-          );
-
-          return `needsToRunAgain`;
-        }
 
         this.logger.debug(`Searching for changes to pull...`);
 
