@@ -426,7 +426,7 @@ export class Sync<
 
         const pulls: {
           readonly syncConfigurationCollection: SyncConfigurationCollection<
-            TSchema,
+            TSchema[`collections`][keyof TSchema[`collections`]],
             TAdditionalCollectionData
           >;
           readonly preflightResponseCollectionItem: PreflightResponseCollectionItem<TAdditionalCollectionItemData>;
