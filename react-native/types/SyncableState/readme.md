@@ -25,19 +25,47 @@ const example: SyncableState<ExampleSchema> = {
   collections: {
     exampleCollectionAKey: {
       "5a82bfb8-35ef-4cd6-92d7-efcb532e5fd1": {
-        exampleDataAKey: true,
+        type: `upToDate`,
+        version: 1234,
+        data: {
+          exampleDataAKey: true,
+        },
       },
-      "459ef49b-59a2-4f1b-a055-3577b8f974dd: {
-        exampleDataAKey: false,
+      "459ef49b-59a2-4f1b-a055-3577b8f974dd": {
+        type: `upToDate`,
+        version: `Example Version`,
+        data: {
+          exampleDataAKey: false,
+        },
+      },
+      "052627d9-bd33-4475-ab19-880585a7cd71": {
+        type: `awaitingPush`,
+        data: {
+          exampleDataAKey: true,
+        }
+      },
+      "d6d37ba5-b5b8-4c4b-892b-27643b45aed6": {
+        type: `awaitingPush`,
+        data: {
+          exampleDataAKey: true,
+        }
+      },
+      "b41d82d5-1735-4906-bdc0-4dfca6d15375": {
+        type: `awaitingPull`,
+        data: {
+          exampleDataAKey: true,
+        }
       },
     },
     exampleCollectionBKey: {
       "604b2316-b9e5-44c8-811d-1a014fc3d3a5": {
+        type: `awaitingPush`,
         exampleDataBKey: 1234,
       },
     },
     exampleCollectionCKey: {
       "ecd32785-43e8-4c72-a613-d115de3e3371": {
+        type: `pushing`,
         exampleDataCKey: `Example String`,
       },
     },
