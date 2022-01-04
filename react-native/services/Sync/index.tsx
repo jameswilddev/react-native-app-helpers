@@ -17,7 +17,7 @@ import type { FileStoreInterface } from "../../types/FileStoreInterface";
 import type { SyncState } from "../../types/SyncState";
 
 const camelCaseToKebabCase = (camelCase: string): string =>
-  camelCase.replace(/[A-Z]/, `-\\1`).toLowerCase();
+  camelCase.replace(/([A-Z])/g, `-$1`).toLowerCase();
 
 /**
  * Synchronizes a local StateStore with a server.
