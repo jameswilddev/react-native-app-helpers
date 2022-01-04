@@ -280,7 +280,7 @@ export class Sync<
             let completedFiles = 0;
 
             for (const file of filesToPush) {
-              this.logger.debug(
+              this.logger.information(
                 `File "${file.uuid}" of "${collectionKey}" "${uuid}" will be pushed.`
               );
 
