@@ -761,6 +761,12 @@ export class Sync<
 
         if (state === preDeletionState) {
           this.logger.debug(`Nothing to delete.`);
+        } else if (state !== this.stateStore.get()) {
+          this.logger.warning(
+            `The state store changed before deletions could be applied; sync has been interrupted and will need to run again.`
+          );
+
+          return `needsToRunAgain`;
         } else {
           this.stateStore.set(state);
           this.logger.information(`Deletions applied.`);
