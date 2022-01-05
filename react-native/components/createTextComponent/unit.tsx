@@ -22,7 +22,6 @@ test(`renders single-line`, () => {
         lineHeight: 51.8,
         color: `#34AE17`,
         textAlign: `left`,
-        width: `100%`,
       }}
       numberOfLines={1}
     >
@@ -50,7 +49,6 @@ test(`renders multi-line`, () => {
         lineHeight: 51.8,
         color: `#34AE17`,
         textAlign: `left`,
-        width: `100%`,
       }}
       numberOfLines={0}
     >
@@ -78,7 +76,6 @@ test(`renders with onPress undefined`, () => {
         lineHeight: 51.8,
         color: `#34AE17`,
         textAlign: `left`,
-        width: `100%`,
       }}
       numberOfLines={1}
     >
@@ -107,7 +104,6 @@ test(`renders with onPress set`, () => {
         lineHeight: 51.8,
         color: `#34AE17`,
         textAlign: `left`,
-        width: `100%`,
       }}
       numberOfLines={1}
       onPress={expect.any(Function)}
