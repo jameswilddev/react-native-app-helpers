@@ -57,12 +57,12 @@ class SyncApiEnum implements SyncApiEnumInterface
 
   public function generateCamelCasedName(): string
   {
-    return Str::camel(Str::pluralStudly(class_basename($this->modelClass)));
+    return Str::camel(Str::pluralStudly(class_basename($this->enumClass)));
   }
 
   public function generateKebabCasedName(): string
   {
-    return Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
+    return Str::kebab(Str::pluralStudly(class_basename($this->enumClass)));
   }
 
   public function generateData(): array
