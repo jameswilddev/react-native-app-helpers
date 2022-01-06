@@ -56,7 +56,7 @@ class SyncApi implements SyncApiInterface
         $key = $enum->generateCamelCasedName();
 
         $data = $enum->generateData();
-        $version = $enum->hashData();
+        $version = $enum->hashData($data);
 
         $enums[$key] = compact('version');
       }
