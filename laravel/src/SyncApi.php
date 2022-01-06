@@ -47,13 +47,6 @@ class SyncApi implements SyncApiInterface
     return $syncApiCollection;
   }
 
-  /**
-   * Invoke this method in a routes file to generate routes for all singletons
-   * and collections as well as a "preflight" route which can be used to query
-   * for changes to sync.
-   *
-   * This must be called in a context in which the request would be authorized!
-   */
   public function generateRoutes(): void
   {
     Route::get('preflight', function () {

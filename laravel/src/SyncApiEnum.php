@@ -93,4 +93,9 @@ class SyncApiEnum implements SyncApiEnumInterface
       },
     );
   }
+
+  public function generateRoutes(): void
+  {
+    $this->syncApi->generateRoutes();
+  }
 }

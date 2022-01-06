@@ -154,4 +154,9 @@ class SyncApiCollection implements SyncApiCollectionInterface
       $syncApiCollectionMediaCollection->generateCollectionMediaCollectionRoutes();
     }
   }
+
+  public function generateRoutes(): void
+  {
+    $this->syncApi->generateRoutes();
+  }
 }
