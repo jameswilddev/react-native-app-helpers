@@ -123,7 +123,10 @@ class SyncApiCollection implements SyncApiCollectionInterface
             ->first();
 
           if ($model) {
-            return new $this->resourceClass($model);
+            return [
+              'version' => $model->getVersionForSync(),
+              'data' => new $this->resourceClass($model),
+            ];
           } else {
             throw new ModelNotFoundException();
           }
