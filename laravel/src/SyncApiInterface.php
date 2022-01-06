@@ -72,8 +72,8 @@ interface SyncApiInterface
   function withCollection(
     string $modelClass,
     string $scopeName,
-    string $resourceClass,
-    string $controllerClass,
+    ?string $resourceClass,
+    ?string $controllerClass,
   ): SyncApiCollection;
 
   /**

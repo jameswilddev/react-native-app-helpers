@@ -36,11 +36,21 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     );
   }
 
+  function withEnum(
+    string $enumClass,
+    string $resourceClass,
+  ): SyncApiEnum {
+    return $this->syncApiCollection->withEnum(
+      $enumClass,
+      $resourceClass
+    );
+  }
+
   public function withCollection(
     string $modelClass,
     string $scopeName,
-    string $resourceClass,
-    string $controllerClass,
+    ?string $resourceClass,
+    ?string $controllerClass,
   ): SyncApiCollection {
     return $this->syncApiCollection->withCollection(
       $modelClass,

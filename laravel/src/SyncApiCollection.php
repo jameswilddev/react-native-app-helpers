@@ -69,8 +69,8 @@ class SyncApiCollection implements SyncApiCollectionInterface
   public function withCollection(
     string $modelClass,
     string $scopeName,
-    string $resourceClass,
-    string $controllerClass,
+    ?string $resourceClass,
+    ?string $controllerClass,
   ): SyncApiCollection {
     return $this->syncApi->withCollection(
       $modelClass,
