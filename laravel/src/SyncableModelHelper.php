@@ -55,7 +55,7 @@ final class SyncableModelHelper
     string $uuid,
   ): ?SyncableModel {
     $model = $modelClass::withTrashed()
-      ->$scopeName
+      ->$scopeName()
       ->where('uuid', $uuid)
       ->first();
 
