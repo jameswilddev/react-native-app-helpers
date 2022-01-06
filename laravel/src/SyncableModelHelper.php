@@ -54,10 +54,8 @@ final class SyncableModelHelper
     string $scopeName,
     string $uuid,
   ): ?SyncableModel {
-    $scopeFunctionName = 'scope' . ucfirst($scopeName);
-
     $model = $modelClass::withTrashed()
-      ->$scopeFunctionName()
+      ->$scopeName
       ->where('uuid', $uuid)
       ->first();
 
