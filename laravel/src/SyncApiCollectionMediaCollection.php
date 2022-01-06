@@ -2,6 +2,8 @@
 
 namespace JamesWildDev\ReactNativeAppHelpers;
 
+use Illuminate\Support\Facades\Route;
+
 /**
  * Represents a media collection within a collection of a sync API.  Create
  * instances using SyncApiCollection::withMediaCollection().
