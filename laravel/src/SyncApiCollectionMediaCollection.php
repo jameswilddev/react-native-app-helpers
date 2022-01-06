@@ -48,7 +48,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     );
   }
 
-  public function generateRoutes(): void
+  public function generateCollectionMediaCollectionRoutes(): void
   {
     if ($this->syncCapabilities & SyncCapability::READ) {
       Route::get(
@@ -127,7 +127,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
               ->first();
 
             if ($media !== null) {
-              $media->delete()
+              $media->delete();
             }
           } else {
             throw new ModelNotFoundException();

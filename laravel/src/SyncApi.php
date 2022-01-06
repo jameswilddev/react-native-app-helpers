@@ -3,7 +3,6 @@
 namespace JamesWildDev\ReactNativeAppHelpers;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 
 /**
  * Represents a sync API as a whole.  Use this to configure your API once, then
@@ -11,7 +10,23 @@ use Illuminate\Support\Str;
  */
 class SyncApi implements SyncApiInterface
 {
+  private array $enums = [];
   private array $collections = [];
+
+  public function withEnum(
+    string $enumClass,
+    string $resourceClass,
+  ): SyncApiEnum {
+    $syncApiEnum = new SyncApiEnum(
+      $this,
+      $enumClass,
+      $resourceClass,
+    );
+
+    $this->enums[] = $syncApiEnum;
+
+    return $syncApiEnum;
+  }
 
   public function withCollection(
     string $modelClass,
@@ -24,7 +39,7 @@ class SyncApi implements SyncApiInterface
       $modelClass,
       $scopeName,
       $resourceClass,
-      $controllerClass
+      $controllerClass,
     );
 
     $this->collections[] = $syncApiCollection;
@@ -55,12 +70,12 @@ class SyncApi implements SyncApiInterface
       return compact('collections');
     });
 
-    // foreach ($this->collections as $collection) {
-    //   $modelClass = $collection['modelClass'];
-    //   $controllerClass = $collection['controllerClass'];
+    foreach ($this->enums as $enum) {
+      $enum->generateEnumRoutes();
+    }
 
-    //   Route::get(Str::kebab(Str::pluralStudly(class_basename($modelClass))) . '/{' . Str::camel(class_basename($modelClass)) . ':uuid}', [$controllerClass, 'show']);
-    //   Route::put(Str::kebab(Str::pluralStudly(class_basename($modelClass))) . '/{' . Str::camel(class_basename($modelClass)) . ':uuid}', [$controllerClass, 'update']);
-    // }
+    foreach ($this->collections as $collection) {
+      $collection->generateCollectionRoutes();
+    }
   }
 }

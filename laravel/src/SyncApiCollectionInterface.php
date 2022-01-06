@@ -16,5 +16,5 @@ interface SyncApiCollectionInterface extends SyncApiInterface
   function withMediaCollection(
     string $name,
     int $syncCapabilities,
-  ): self;
+  ): SyncApiCollectionMediaCollection;
 }

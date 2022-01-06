@@ -55,6 +55,16 @@ class SyncApiCollection implements SyncApiCollectionInterface
     );
   }
 
+  public function withEnum(
+    string $enumClass,
+    string $resourceClass,
+  ): SyncApiEnum {
+    return $this->syncApi->withEnum(
+      $enumClass,
+      $resourceClass,
+    );
+  }
+
   public function withCollection(
     string $modelClass,
     string $scopeName,
@@ -102,7 +112,7 @@ class SyncApiCollection implements SyncApiCollectionInterface
     }
   }
 
-  public function generateRoutes(): void
+  public function generateCollectionRoutes(): void
   {
     if ($this->resourceClass !== null) {
       Route::get(
@@ -141,7 +151,7 @@ class SyncApiCollection implements SyncApiCollectionInterface
     }
 
     foreach ($this->syncApiCollectionMediaCollections as $syncApiCollectionMediaCollection) {
-      $syncApiCollectionMediaCollection->generateRoutes();
+      $syncApiCollectionMediaCollection->generateCollectionMediaCollectionRoutes();
     }
   }
 }

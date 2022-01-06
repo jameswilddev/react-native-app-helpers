@@ -9,6 +9,17 @@ namespace JamesWildDev\ReactNativeAppHelpers;
 interface SyncApiInterface
 {
   /**
+   * Adds a new enum to this sync API.
+   * @param string $enumClass     The enum class to include in the sync API.
+   * @param string $resourceClass The Laravel JsonResource class used to
+   *                              generate JSON to return to the client on pull.
+   */
+  function withEnum(
+    string $enumClass,
+    string $resourceClass,
+  ): SyncApiEnum;
+
+  /**
    * Adds a new collection of Models to this sync API.
    * @param string $modelClass       The Laravel Model class of which this is a
    *                                 collection.
