@@ -101,8 +101,9 @@ class SyncApiCollection implements SyncApiCollectionInterface
         ->modelClass::$scopeName()
         ->get()
         ->mapWithKeys(fn (SyncableModel $item) => [
-          $item->uuid,
-          $item->getVersionForSync(),
+          $item->uuid => [
+            'version' => $item->getVersionForSync(),
+          ],
         ])
         ->all();
     }
