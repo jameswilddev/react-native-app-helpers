@@ -28,8 +28,8 @@ class SyncApiCollection implements SyncApiCollectionInterface
     SyncApi $syncApi,
     string $modelClass,
     string $scopeName,
-    string $resourceClass,
-    string $controllerClass,
+    ?string $resourceClass,
+    ?string $controllerClass,
   ) {
     $this->syncApi = $syncApi;
     $this->modelClass = $modelClass;
