@@ -53,7 +53,7 @@ final class SyncableModelHelper
     string $modelClass,
     string $scopeName,
     string $uuid,
-  ): void {
+  ): ?SyncableModel {
     $scopeFunctionName = 'scope' . ucfirst($scopeName);
 
     $model = $modelClass::withTrashed()
