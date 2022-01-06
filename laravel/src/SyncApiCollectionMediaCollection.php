@@ -56,10 +56,10 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
       Route::get(
         $this->generateKebabCasedName() . '/{modelUuid}/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
-          $scopeFunctionName = $this->generateScopeFunctionName();
+          $scopeName = $this->syncApiCollection->scopeName;
 
           $model = $this
-            ->modelClass::$scopeFunctionName()
+            ->modelClass::$scopeName()
             ->where('uuid', $modelUuid)
             ->first();
 
@@ -85,10 +85,10 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
       Route::put(
         $this->generateKebabCasedName() . '/{modelUuid}/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
-          $scopeFunctionName = $this->generateScopeFunctionName();
+          $scopeName = $this->syncApiCollection->scopeName;
 
           $model = $this
-            ->modelClass::$scopeFunctionName()
+            ->modelClass::$scopeName()
             ->where('uuid', $modelUuid)
             ->first();
 
@@ -115,10 +115,10 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
       Route::get(
         $this->generateKebabCasedName() . '/{modelUuid}/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
-          $scopeFunctionName = $this->generateScopeFunctionName();
+          $scopeName = $this->syncApiCollection->scopeName;
 
           $model = $this
-            ->modelClass::$scopeFunctionName()
+            ->modelClass::$scopeName()
             ->where('uuid', $modelUuid)
             ->first();
 

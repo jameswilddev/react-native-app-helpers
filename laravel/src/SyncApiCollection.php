@@ -16,7 +16,7 @@ class SyncApiCollection implements SyncApiCollectionInterface
 
   private string $modelClass;
 
-  private string $scopeName;
+  public string $scopeName;
 
   private ?string $resourceClass;
 
@@ -90,20 +90,15 @@ class SyncApiCollection implements SyncApiCollectionInterface
     return Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
   }
 
-  public function generateScopeFunctionName(): string
-  {
-    return 'scope' . ucfirst($this->scopeName);
-  }
-
   public function generatePreflightCollection(): ?array
   {
     if ($this->resourceClass === null) {
       return null;
     } else {
-      $scopeFunctionName = $this->generateScopeFunctionName();
+      $scopeName = $this->scopeName;
 
       return $this
-        ->modelClass::$scopeFunctionName()
+        ->modelClass::$scopeName()
         ->get()
         ->mapWithKeys(fn (SyncableModel $item) => [
           $item->uuid,
@@ -119,10 +114,10 @@ class SyncApiCollection implements SyncApiCollectionInterface
       Route::get(
         $this->generateKebabCasedName() . '/{uuid}',
         function (string $uuid) {
-          $scopeFunctionName = $this->generateScopeFunctionName();
+          $scopeName = $this->scopeName;
 
           $model = $this
-            ->modelClass::$scopeFunctionName()
+            ->modelClass::$scopeName()
             ->where('uuid', $uuid)
             ->first();
 
