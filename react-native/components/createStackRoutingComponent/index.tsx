@@ -2,67 +2,24 @@ import * as React from "react";
 import type { FunctionComponent } from "react";
 import type { RouteParameters } from "../../types/RouteParameters";
 import type { StackRouterState } from "../../types/StackRouterState";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ViewStyle } from "react-native";
 import type { StackRouteTable } from "../../types/StackRouteTable";
 
+const viewBase: ViewStyle = {
+  position: `absolute`,
+  height: `100%`,
+  width: `100%`,
+};
+
 const styles = StyleSheet.create({
-  activeViewFillsContainerVerticallyFitsContentHorizontally: {
-    height: `100%`,
+  activeView: {
+    ...viewBase,
   },
-  activeViewFitsContentVerticallyFillsContainerHorizontally: {
-    width: `100%`,
-  },
-  activeViewFillsContainerVerticallyFillsContainerHorizontally: {
-    height: `100%`,
-    width: `100%`,
-  },
-  inactiveViewFitsContentVerticallyFitsContentHorizontally: {
+  inactiveView: {
+    ...viewBase,
     display: `none`,
-  },
-  inactiveViewFillsContainerVerticallyFitsContentHorizontally: {
-    display: `none`,
-    height: `100%`,
-  },
-  inactiveViewFitsContentVerticallyFillsContainerHorizontally: {
-    display: `none`,
-    width: `100%`,
-  },
-  inactiveViewFillsContainerVerticallyFillsContainerHorizontally: {
-    display: `none`,
-    height: `100%`,
-    width: `100%`,
   },
 });
-
-const hierarchy = {
-  active: {
-    fitsContent: {
-      fitsContent: null,
-      fillsContainer:
-        styles.activeViewFitsContentVerticallyFillsContainerHorizontally,
-    },
-    fillsContainer: {
-      fitsContent:
-        styles.activeViewFillsContainerVerticallyFitsContentHorizontally,
-      fillsContainer:
-        styles.activeViewFillsContainerVerticallyFillsContainerHorizontally,
-    },
-  },
-  inactive: {
-    fitsContent: {
-      fitsContent:
-        styles.inactiveViewFitsContentVerticallyFitsContentHorizontally,
-      fillsContainer:
-        styles.inactiveViewFitsContentVerticallyFillsContainerHorizontally,
-    },
-    fillsContainer: {
-      fitsContent:
-        styles.inactiveViewFillsContainerVerticallyFitsContentHorizontally,
-      fillsContainer:
-        styles.inactiveViewFillsContainerVerticallyFillsContainerHorizontally,
-    },
-  },
-};
 
 /**
  * Creates a React component which displays the top of a stack of routes (though
@@ -82,20 +39,20 @@ export const createStackRoutingComponent = <
   {
     readonly routeState: StackRouterState<TRouteParameters>;
     readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void;
-    readonly width: `fillsContainer` | `fitsContent`;
-    readonly height: `fillsContainer` | `fitsContent`;
   } & TOtherProps
 > => {
   return (props) => (
     <React.Fragment>
       {props.routeState.map((item, index) => {
-        const style =
-          hierarchy[
-            index === props.routeState.length - 1 ? `active` : `inactive`
-          ][props.height][props.width];
-
         return (
-          <View key={index} {...(style ? { style } : {})}>
+          <View
+            key={item.uuid}
+            style={
+              index === props.routeState.length - 1
+                ? styles.activeView
+                : styles.inactiveView
+            }
+          >
             {React.createElement(routeTable[item.key], {
               parameters: item.parameters,
               push: (...itemsToAdd) => {

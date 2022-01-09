@@ -8,6 +8,11 @@ import type { StackRouterState } from "../StackRouterState";
 type Item<T extends RouteParameters> = {
   readonly [TKey in keyof T]: {
     /**
+     * Uniquely identifies this card within the stack.
+     */
+    readonly uuid: string;
+
+    /**
      * The key of the route.
      */
     readonly key: TKey;
