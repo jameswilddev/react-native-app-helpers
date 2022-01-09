@@ -1,14 +1,14 @@
 import * as React from "react";
+import * as TestRenderer from "react-test-renderer";
 import { Text, View } from "react-native";
 import {
-  unwrapRenderedFunctionComponent,
   createStackRoutingComponent,
   StackRouterState,
   StackRouteTable,
   StackRoute,
 } from "../../..";
 
-test(`can render one item width`, () => {
+test(`can render one item`, () => {
   type ParametersA = {
     readonly testRouteAParameterKey:
       | `Test Route A Parameter Value A`
@@ -83,7 +83,7 @@ test(`can render one item width`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -91,34 +91,38 @@ test(`can render one item width`, () => {
     />
   );
 
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <React.Fragment>
-      {[
-        <View
-          key="ec055b0f-0659-4e9a-a889-06a7586bb61a"
-          style={{ position: `absolute`, width: `100%`, height: `100%` }}
-        >
-          <RouteB
-            push={expect.any(Function)}
-            pop={expect.any(Function)}
-            replace={expect.any(Function)}
-            reset={expect.any(Function)}
-            parameters={{
-              testRouteBParameterKey: `Test Route B Parameter Value`,
-            }}
-            routeState={routeState}
-            setRouteState={setRouteState}
-            exampleOtherPropKey="Example Other Prop Value"
-          />
-        </View>,
-      ]}
-    </React.Fragment>
-  );
+  expect(renderer.toTree()?.rendered).toMatchObject({
+    type: View,
+    props: {
+      style: {
+        position: `absolute`,
+        width: `100%`,
+        height: `100%`,
+      },
+      children: expect.objectContaining({
+        type: RouteB,
+        props: {
+          push: expect.any(Function),
+          pop: expect.any(Function),
+          replace: expect.any(Function),
+          reset: expect.any(Function),
+          parameters: {
+            testRouteBParameterKey: `Test Route B Parameter Value`,
+          },
+          routeState: routeState,
+          setRouteState: setRouteState,
+          exampleOtherPropKey: `Example Other Prop Value`,
+        },
+      }),
+    },
+  });
 
   expect(setRouteState).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
-test(`can render two items width`, () => {
+test(`can render two items`, () => {
   type ParametersA = {
     readonly testRouteAParameterKey:
       | `Test Route A Parameter Value A`
@@ -200,7 +204,7 @@ test(`can render two items width`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -208,51 +212,63 @@ test(`can render two items width`, () => {
     />
   );
 
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <React.Fragment>
-      <View
-        key="ec055b0f-0659-4e9a-a889-06a7586bb61a"
-        style={{
+  expect(renderer.toTree()?.rendered).toEqual([
+    expect.objectContaining({
+      type: View,
+      props: expect.objectContaining({
+        style: {
           position: `absolute`,
           width: `100%`,
           height: `100%`,
           display: `none`,
-        }}
-      >
-        <RouteB
-          push={expect.any(Function)}
-          pop={expect.any(Function)}
-          replace={expect.any(Function)}
-          reset={expect.any(Function)}
-          parameters={{
-            testRouteBParameterKey: `Test Route B Parameter Value`,
-          }}
-          routeState={routeState}
-          setRouteState={setRouteState}
-          exampleOtherPropKey="Example Other Prop Value"
-        />
-      </View>
-      <View
-        key="f36ce5e7-d37e-443a-8635-718118c27128"
-        style={{ width: `100%`, height: `100%`, position: `absolute` }}
-      >
-        <RouteA
-          push={expect.any(Function)}
-          pop={expect.any(Function)}
-          replace={expect.any(Function)}
-          reset={expect.any(Function)}
-          parameters={{
-            testRouteAParameterKey: `Test Route A Parameter Value A`,
-          }}
-          routeState={routeState}
-          setRouteState={setRouteState}
-          exampleOtherPropKey="Example Other Prop Value"
-        />
-      </View>
-    </React.Fragment>
-  );
+        },
+        children: expect.objectContaining({
+          type: RouteB,
+          props: {
+            push: expect.any(Function),
+            pop: expect.any(Function),
+            replace: expect.any(Function),
+            reset: expect.any(Function),
+            parameters: {
+              testRouteBParameterKey: `Test Route B Parameter Value`,
+            },
+            routeState: routeState,
+            setRouteState: setRouteState,
+            exampleOtherPropKey: `Example Other Prop Value`,
+          },
+        }),
+      }),
+    }),
+    expect.objectContaining({
+      type: View,
+      props: {
+        style: {
+          position: `absolute`,
+          width: `100%`,
+          height: `100%`,
+        },
+        children: expect.objectContaining({
+          type: RouteA,
+          props: {
+            push: expect.any(Function),
+            pop: expect.any(Function),
+            replace: expect.any(Function),
+            reset: expect.any(Function),
+            parameters: {
+              testRouteAParameterKey: `Test Route A Parameter Value A`,
+            },
+            routeState: routeState,
+            setRouteState: setRouteState,
+            exampleOtherPropKey: `Example Other Prop Value`,
+          },
+        }),
+      },
+    }),
+  ]);
 
   expect(setRouteState).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`can render three items`, () => {
@@ -344,7 +360,7 @@ test(`can render three items`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -352,73 +368,89 @@ test(`can render three items`, () => {
     />
   );
 
-  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <React.Fragment>
-      <View
-        key="ec055b0f-0659-4e9a-a889-06a7586bb61a"
-        style={{
+  expect(renderer.toTree()?.rendered).toEqual([
+    expect.objectContaining({
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          position: `absolute`,
           width: `100%`,
           height: `100%`,
           display: `none`,
+        },
+        children: expect.objectContaining({
+          type: RouteB,
+          props: {
+            push: expect.any(Function),
+            pop: expect.any(Function),
+            replace: expect.any(Function),
+            reset: expect.any(Function),
+            parameters: {
+              testRouteBParameterKey: `Test Route B Parameter Value`,
+            },
+            routeState: routeState,
+            setRouteState: setRouteState,
+            exampleOtherPropKey: `Example Other Prop Value`,
+          },
+        }),
+      }),
+    }),
+    expect.objectContaining({
+      type: View,
+      props: {
+        style: {
           position: `absolute`,
-        }}
-      >
-        <RouteB
-          push={expect.any(Function)}
-          pop={expect.any(Function)}
-          replace={expect.any(Function)}
-          reset={expect.any(Function)}
-          parameters={{
-            testRouteBParameterKey: `Test Route B Parameter Value`,
-          }}
-          routeState={routeState}
-          setRouteState={setRouteState}
-          exampleOtherPropKey="Example Other Prop Value"
-        />
-      </View>
-      <View
-        key="f36ce5e7-d37e-443a-8635-718118c27128"
-        style={{
           width: `100%`,
           height: `100%`,
           display: `none`,
+        },
+        children: expect.objectContaining({
+          type: RouteA,
+          props: {
+            push: expect.any(Function),
+            pop: expect.any(Function),
+            replace: expect.any(Function),
+            reset: expect.any(Function),
+            parameters: {
+              testRouteAParameterKey: `Test Route A Parameter Value A`,
+            },
+            routeState: routeState,
+            setRouteState: setRouteState,
+            exampleOtherPropKey: `Example Other Prop Value`,
+          },
+        }),
+      },
+    }),
+    expect.objectContaining({
+      type: View,
+      props: {
+        style: {
           position: `absolute`,
-        }}
-      >
-        <RouteA
-          push={expect.any(Function)}
-          pop={expect.any(Function)}
-          replace={expect.any(Function)}
-          reset={expect.any(Function)}
-          parameters={{
-            testRouteAParameterKey: `Test Route A Parameter Value A`,
-          }}
-          routeState={routeState}
-          setRouteState={setRouteState}
-          exampleOtherPropKey="Example Other Prop Value"
-        />
-      </View>
-      <View
-        key="345d1eff-3d1d-4d93-8136-e0c3ff0f7f7c"
-        style={{ width: `100%`, height: `100%`, position: `absolute` }}
-      >
-        <RouteA
-          push={expect.any(Function)}
-          pop={expect.any(Function)}
-          replace={expect.any(Function)}
-          reset={expect.any(Function)}
-          parameters={{
-            testRouteAParameterKey: `Test Route A Parameter Value B`,
-          }}
-          routeState={routeState}
-          setRouteState={setRouteState}
-          exampleOtherPropKey="Example Other Prop Value"
-        />
-      </View>
-    </React.Fragment>
-  );
+          width: `100%`,
+          height: `100%`,
+        },
+        children: expect.objectContaining({
+          type: RouteA,
+          props: {
+            push: expect.any(Function),
+            pop: expect.any(Function),
+            replace: expect.any(Function),
+            reset: expect.any(Function),
+            parameters: {
+              testRouteAParameterKey: `Test Route A Parameter Value B`,
+            },
+            routeState: routeState,
+            setRouteState: setRouteState,
+            exampleOtherPropKey: `Example Other Prop Value`,
+          },
+        }),
+      },
+    }),
+  ]);
 
   expect(setRouteState).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 describe(`push`, () => {
@@ -514,7 +546,7 @@ describe(`push`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -522,9 +554,10 @@ describe(`push`, () => {
     />
   );
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][1].props.children.props.push(
+  (
+    renderer.toTree()
+      ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+  )[1]?.props[`children`].props.push(
     {
       uuid: `441aff37-ab3c-4d4f-a623-46aa36a42c14`,
       key: `testRouteCKey`,
@@ -579,6 +612,8 @@ describe(`push`, () => {
       },
     },
   ]);
+
+  renderer.unmount();
 });
 
 describe(`pop`, () => {
@@ -674,7 +709,7 @@ describe(`pop`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -682,9 +717,10 @@ describe(`pop`, () => {
     />
   );
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][1].props.children.props.pop(2);
+  (
+    renderer.toTree()
+      ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+  )[1]?.props[`children`].props.pop(2);
 
   expect(setRouteState).toBeCalledTimes(1);
   expect(setRouteState).toHaveBeenCalledWith([
@@ -696,6 +732,8 @@ describe(`pop`, () => {
       },
     },
   ]);
+
+  renderer.unmount();
 });
 
 describe(`pop default`, () => {
@@ -791,7 +829,7 @@ describe(`pop default`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -799,9 +837,10 @@ describe(`pop default`, () => {
     />
   );
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][1].props.children.props.pop();
+  (
+    renderer.toTree()
+      ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+  )[1]?.props[`children`].props.pop();
 
   expect(setRouteState).toBeCalledTimes(1);
   expect(setRouteState).toHaveBeenCalledWith([
@@ -820,6 +859,8 @@ describe(`pop default`, () => {
       },
     },
   ]);
+
+  renderer.unmount();
 });
 
 describe(`replace`, () => {
@@ -915,7 +956,7 @@ describe(`replace`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -923,9 +964,10 @@ describe(`replace`, () => {
     />
   );
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][1].props.children.props.replace(
+  (
+    renderer.toTree()
+      ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+  )[1]?.props[`children`].props.replace(
     2,
     {
       uuid: `e54ad406-9fcd-4ff5-a61c-d323946b92e6`,
@@ -981,6 +1023,8 @@ describe(`replace`, () => {
       },
     },
   ]);
+
+  renderer.unmount();
 });
 
 describe(`reset`, () => {
@@ -1076,7 +1120,7 @@ describe(`reset`, () => {
 
   const Component = createStackRoutingComponent(routeTable);
 
-  const rendered = (
+  const renderer = TestRenderer.create(
     <Component
       routeState={routeState}
       setRouteState={setRouteState}
@@ -1084,9 +1128,10 @@ describe(`reset`, () => {
     />
   );
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][1].props.children.props.reset(
+  (
+    renderer.toTree()
+      ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+  )[1]?.props[`children`].props.reset(
     {
       uuid: `441aff37-ab3c-4d4f-a623-46aa36a42c14`,
       key: `testRouteCKey`,
@@ -1120,4 +1165,6 @@ describe(`reset`, () => {
       },
     },
   ]);
+
+  renderer.unmount();
 });
