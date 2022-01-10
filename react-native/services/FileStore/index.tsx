@@ -1,3 +1,4 @@
+import * as uuid from "uuid";
 import * as FileSystem from "expo-file-system";
 import type { FileStoreInterface } from "../../types/FileStoreInterface";
 
@@ -86,6 +87,29 @@ export class FileStore implements FileStoreInterface {
       );
     } else {
       this.subdirectoryName = null;
+    }
+  }
+
+  async import(fileUri: string): Promise<string> {
+    if (this.loading) {
+      throw new Error(`The file store is currently loading.`);
+    } else if (this.subdirectoryName === null) {
+      throw new Error(`The file store is not loaded.`);
+    } else {
+      try {
+        this.operationsInProgress++;
+
+        const output = uuid.v4();
+
+        await FileSystem.moveAsync({
+          from: fileUri,
+          to: this.generatePath(output),
+        });
+
+        return output;
+      } finally {
+        this.operationsInProgress--;
+      }
     }
   }
 }

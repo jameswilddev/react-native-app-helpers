@@ -59,6 +59,7 @@ test(`resolves load when creating the directory succeeds`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -91,6 +92,7 @@ test(`throws when loading while loading`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -140,6 +142,7 @@ test(`throws when loading while loaded`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -172,6 +175,7 @@ test(`throws when generating a path when not loaded`, () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -202,6 +206,7 @@ test(`throws when generating a path while loading`, () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -235,6 +240,7 @@ test(`throws when generating a path once unloaded`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -269,6 +275,7 @@ test(`can generate paths`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -301,6 +308,7 @@ test(`throws when listing when not loaded`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -332,6 +340,7 @@ test(`throws when listing while loading`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -366,6 +375,7 @@ test(`throws when listing once unloaded`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -407,6 +417,7 @@ test(`can list files`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -444,6 +455,7 @@ test(`throws when deleting when not loaded`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -475,6 +487,7 @@ test(`throws when deleting while loading`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -509,6 +522,7 @@ test(`throws when deleting once unloaded`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -548,6 +562,7 @@ test(`does not resolve the promise returned by deleting until deletion succeeds`
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -599,6 +614,7 @@ test(`can delete files`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -620,6 +636,202 @@ test(`can delete files`, async () => {
   expect(moveAsync).not.toHaveBeenCalled();
 });
 
+test(`throws when importing when not loaded`, async () => {
+  const makeDirectoryAsync = jest.fn();
+  const readDirectoryAsync = jest.fn();
+  const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
+  jest.resetModules();
+  jest.setMock(`expo-file-system`, {
+    documentDirectory: `Example Document Directory`,
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    moveAsync,
+  });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require(`../../..`);
+  const fileStore = new FileStore();
+
+  const promise = fileStore.import(`Example File Uri`);
+
+  await expect(promise).rejects.toEqual(
+    new Error(`The file store is not loaded.`)
+  );
+  expect(makeDirectoryAsync).not.toBeCalled();
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
+});
+
+test(`throws when importing while loading`, async () => {
+  const makeDirectoryAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  );
+  const readDirectoryAsync = jest.fn();
+  const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
+  jest.resetModules();
+  jest.setMock(`expo-file-system`, {
+    documentDirectory: `Example Document Directory`,
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    moveAsync,
+  });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require(`../../..`);
+  const fileStore = new FileStore();
+  fileStore.load(`Example Subdirectory Name`);
+
+  const promise = fileStore.import(`Example File Uri`);
+
+  await expect(promise).rejects.toEqual(
+    new Error(`The file store is currently loading.`)
+  );
+  expect(makeDirectoryAsync).toBeCalledTimes(1);
+  expect(makeDirectoryAsync).toBeCalledWith(
+    `Example Document Directory/Example Subdirectory Name`,
+    { intermediates: true }
+  );
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
+});
+
+test(`throws when importing once unloaded`, async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  });
+  const readDirectoryAsync = jest.fn();
+  const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
+  jest.resetModules();
+  jest.setMock(`expo-file-system`, {
+    documentDirectory: `Example Document Directory`,
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    moveAsync,
+  });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require(`../../..`);
+  const fileStore = new FileStore();
+  await fileStore.load(`Example Subdirectory Name`);
+  fileStore.unload();
+
+  const promise = fileStore.import(`Example File Uri`);
+
+  await expect(promise).rejects.toEqual(
+    new Error(`The file store is not loaded.`)
+  );
+  expect(makeDirectoryAsync).toBeCalledTimes(1);
+  expect(makeDirectoryAsync).toBeCalledWith(
+    `Example Document Directory/Example Subdirectory Name`,
+    { intermediates: true }
+  );
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
+});
+
+test(`does not resolve the promise returned by importing until moving succeeds`, async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  });
+  const readDirectoryAsync = jest.fn();
+  const deleteAsync = jest.fn();
+  const moveAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  );
+  jest.resetModules();
+  jest.setMock(`expo-file-system`, {
+    documentDirectory: `Example Document Directory`,
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    moveAsync,
+  });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require(`../../..`);
+  const fileStore = new FileStore();
+  await fileStore.load(`Example Subdirectory Name`);
+
+  const promise = fileStore.import(`Example File Uri`);
+
+  let resolved = false;
+  let rejected = false;
+  promise.then(
+    () => {
+      resolved = true;
+    },
+    () => {
+      rejected = true;
+    }
+  );
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 100);
+  });
+  expect(resolved).toBeFalsy();
+  expect(rejected).toBeFalsy();
+  expect(makeDirectoryAsync).toBeCalledTimes(1);
+  expect(makeDirectoryAsync).toBeCalledWith(
+    `Example Document Directory/Example Subdirectory Name`,
+    { intermediates: true }
+  );
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).toBeCalledTimes(1);
+  expect(moveAsync).toHaveBeenCalledWith({
+    from: `Example File Uri`,
+    to: expect.stringMatching(
+      /^Example Document Directory\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+    ),
+  });
+});
+
+test(`can import files`, async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  });
+  const readDirectoryAsync = jest.fn();
+  const deleteAsync = jest.fn();
+  const moveAsync = jest.fn(async () => {
+    // Empty.
+  });
+  jest.resetModules();
+  jest.setMock(`expo-file-system`, {
+    documentDirectory: `Example Document Directory`,
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    moveAsync,
+  });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require(`../../..`);
+  const fileStore = new FileStore();
+  await fileStore.load(`Example Subdirectory Name`);
+
+  const uuid = await fileStore.import(`Example File Uri`);
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1);
+  expect(makeDirectoryAsync).toBeCalledWith(
+    `Example Document Directory/Example Subdirectory Name`,
+    { intermediates: true }
+  );
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).toBeCalledTimes(1);
+  expect(moveAsync).toHaveBeenCalledWith({
+    from: `Example File Uri`,
+    to: `Example Document Directory/Example Subdirectory Name/${uuid}`,
+  });
+});
+
 test(`throws when unloading when not loaded`, () => {
   const makeDirectoryAsync = jest.fn();
   const readDirectoryAsync = jest.fn();
@@ -631,6 +843,7 @@ test(`throws when unloading when not loaded`, () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -661,6 +874,7 @@ test(`throws when unloading while loading`, () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -694,6 +908,7 @@ test(`throws when unloading once unloaded`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -732,6 +947,7 @@ test(`throws when unloading while listing files`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -775,6 +991,7 @@ test(`throws when unloading while deleting files`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -801,19 +1018,67 @@ test(`throws when unloading while deleting files`, async () => {
   expect(moveAsync).not.toHaveBeenCalled();
 });
 
-test(`can unload before any file store operations occur`, async () => {
+test(`throws when unloading while importing files`, async () => {
   const makeDirectoryAsync = jest.fn(async () => {
     // Empty.
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
-  const moveAsync = jest.fn();
+  const moveAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  );
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
+  });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require(`../../..`);
+  const fileStore = new FileStore();
+  await fileStore.load(`Example Subdirectory Name`);
+  fileStore.import(`Example File Uri`);
+
+  expect(() => {
+    fileStore.unload();
+  }).toThrowError(
+    `One or more file store operations are currently in progress.`
+  );
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1);
+  expect(makeDirectoryAsync).toBeCalledWith(
+    `Example Document Directory/Example Subdirectory Name`,
+    { intermediates: true }
+  );
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).toBeCalledTimes(1);
+  expect(moveAsync).toHaveBeenCalledWith({
+    from: `Example File Uri`,
+    to: expect.stringMatching(
+      /^Example Document Directory\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+    ),
+  });
+});
+
+test(`can unload before any file store operations occur`, async () => {
+  const makeDirectoryAsync = jest.fn();
+  const readDirectoryAsync = jest.fn();
+  const deleteAsync = jest.fn();
+  const moveAsync = jest.fn(async () => {
+    // Empty.
+  });
+  jest.resetModules();
+  jest.setMock(`expo-file-system`, {
+    documentDirectory: `Example Document Directory`,
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -851,6 +1116,7 @@ test(`can unload once listing files completes`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -888,6 +1154,7 @@ test(`can unload once deleting files completes`, async () => {
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -908,4 +1175,43 @@ test(`can unload once deleting files completes`, async () => {
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
   expect(moveAsync).not.toHaveBeenCalled();
+});
+
+test(`can unload once importing files completes`, async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  });
+  const readDirectoryAsync = jest.fn();
+  const deleteAsync = jest.fn();
+  const moveAsync = jest.fn(async () => {
+    // Empty.
+  });
+  jest.resetModules();
+  jest.setMock(`expo-file-system`, {
+    documentDirectory: `Example Document Directory`,
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    moveAsync,
+  });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require(`../../..`);
+  const fileStore = new FileStore();
+  await fileStore.load(`Example Subdirectory Name`);
+  const uuid = await fileStore.import(`Example File Uri`);
+
+  fileStore.unload();
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1);
+  expect(makeDirectoryAsync).toBeCalledWith(
+    `Example Document Directory/Example Subdirectory Name`,
+    { intermediates: true }
+  );
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).toBeCalledTimes(1);
+  expect(moveAsync).toHaveBeenCalledWith({
+    from: `Example File Uri`,
+    to: `Example Document Directory/Example Subdirectory Name/${uuid}`,
+  });
 });
