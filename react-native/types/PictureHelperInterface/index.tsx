@@ -43,7 +43,7 @@ export interface PictureHelperInterface {
   selectOnePictureFromMediaLibrary(
     onPermissionDenied: (showSettingsScreen: () => void) => Promise<void>,
     onCancel: () => Promise<void>,
-    onSuccess: (uuids: ReadonlyArray<string>) => Promise<void>
+    onSuccess: (uuid: string) => Promise<void>
   ): Promise<void>;
 
   /**

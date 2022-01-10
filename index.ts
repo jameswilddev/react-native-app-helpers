@@ -83,6 +83,7 @@ export { NonKeyableTableCell } from "./react-native/types/NonKeyableTableCell";
 export { OfflineTableData } from "./react-native/types/OfflineTableData";
 export { PermissionHelper } from "./react-native/services/PermissionHelper";
 export { PermissionHelperInterface } from "./react-native/types/PermissionHelperInterface";
+export { PictureHelper } from "./react-native/services/PictureHelper";
 export { PictureHelperInterface } from "./react-native/types/PictureHelperInterface";
 export { PreflightResponse } from "./react-native/types/PreflightResponse";
 export { PreflightResponseCollection } from "./react-native/types/PreflightResponseCollection";

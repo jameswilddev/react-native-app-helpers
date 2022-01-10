@@ -64,6 +64,8 @@ jest.mock(`react-native/Libraries/Linking/Linking`, () => ({
 jest.mock(`expo-permissions`, () => {
   return {
     askAsync: jest.fn(),
+    MEDIA_LIBRARY: `Example Media Library`,
+    CAMERA: `Example Camera`,
   };
 });
 
@@ -82,11 +84,19 @@ jest.mock(`expo-constants`, () => {
 });
 
 jest.mock(`expo-media-library`, () => {
-  return {};
+  return {
+    saveToLibraryAsync: jest.fn(),
+  };
 });
 
 jest.mock(`expo-image-picker`, () => {
-  return {};
+  return {
+    launchCameraAsync: jest.fn(),
+    launchImageLibraryAsync: jest.fn(),
+    MediaTypeOptions: {
+      Images: `Example Images`,
+    },
+  };
 });
 
 jest.mock(`expo-file-system`, () => {
