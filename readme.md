@@ -78,6 +78,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [useMeasure](./react-native/hooks/useMeasure/readme.md)
 - [useRefresh](./react-native/hooks/useRefresh/readme.md)
 - [useSyncFileCleanUpBlocker](./react-native/hooks/useSyncFileCleanUpBlocker/readme.md)
+- [useSyncInProgress](./react-native/hooks/useSyncInProgress/readme.md)
 
 #### Services
 
