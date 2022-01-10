@@ -121,6 +121,8 @@ import { createTextComponent } from "react-native-app-helpers";
 - LoggerInterface
 - [NonKeyableTableCell](./react-native/types/NonKeyableTableCell/readme.md)
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
+- [PermissionHelperInterface](./react-native/types/PermissionHelperInterface/readme.md)
+- [PictureHelperInterface](./react-native/types/PictureHelperInterface/readme.md)
 - [PreflightResponse](./react-native/types/PreflightResponse/readme.md)
 - [PreflightResponseCollection](./react-native/types/PreflightResponseCollection/readme.md)
 - [PreflightResponseCollectionItem](./react-native/types/PreflightResponseCollectionItem/readme.md)

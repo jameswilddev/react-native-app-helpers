@@ -81,6 +81,8 @@ export { logger } from "./react-native/services/logger";
 export { LoggerInterface } from "./react-native/types/LoggerInterface";
 export { NonKeyableTableCell } from "./react-native/types/NonKeyableTableCell";
 export { OfflineTableData } from "./react-native/types/OfflineTableData";
+export { PermissionHelperInterface } from "./react-native/types/PermissionHelperInterface";
+export { PictureHelperInterface } from "./react-native/types/PictureHelperInterface";
 export { PreflightResponse } from "./react-native/types/PreflightResponse";
 export { PreflightResponseCollection } from "./react-native/types/PreflightResponseCollection";
 export { PreflightResponseCollectionItem } from "./react-native/types/PreflightResponseCollectionItem";
