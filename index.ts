@@ -135,3 +135,4 @@ export { useBackButton } from "./react-native/hooks/useBackButton";
 export { useEventRefresh } from "./react-native/hooks/useEventRefresh";
 export { useMeasure } from "./react-native/hooks/useMeasure";
 export { useRefresh } from "./react-native/hooks/useRefresh";
+export { useSyncFileCleanUpBlocker } from "./react-native/hooks/useSyncFileCleanUpBlocker";
