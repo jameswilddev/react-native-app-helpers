@@ -62,7 +62,9 @@ jest.mock(`react-native/Libraries/Linking/Linking`, () => ({
 }));
 
 jest.mock(`expo-permissions`, () => {
-  return {};
+  return {
+    askAsync: jest.fn(),
+  };
 });
 
 jest.mock(`expo-intent-launcher`, () => {
