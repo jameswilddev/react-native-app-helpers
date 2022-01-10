@@ -68,6 +68,7 @@ export { FiniteStateMachineRouterState } from "./react-native/types/FiniteStateM
 export { FlashMessageState } from "./react-native/types/FlashMessageState";
 export { FlashMessageStyle } from "./react-native/types/FlashMessageStyle";
 export { flattenRenderedToArray } from "./react-native/utilities/flattenRenderedToArray";
+export { getRenderedKey } from "./react-native/utilities/getRenderedKey";
 export { HeaderIcon } from "./react-native/types/HeaderIcon";
 export { HeaderStyle } from "./react-native/types/HeaderStyle";
 export { Hitbox } from "./react-native/components/Hitbox";
