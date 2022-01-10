@@ -458,6 +458,7 @@ function scenario(
         }
       },
       unload: jest.fn(),
+      import: jest.fn(),
     };
 
     const abortSignal = new AbortController().signal;
@@ -525,6 +526,7 @@ function scenario(
 
     expect(fileStore.load).not.toHaveBeenCalled();
     expect(fileStore.unload).not.toHaveBeenCalled();
+    expect(fileStore.import).not.toHaveBeenCalled();
 
     expect(sync.getState()).toEqual({ type: `notRunning` });
 
@@ -12411,6 +12413,7 @@ test(`throws an error when already running`, async () => {
     delete: jest.fn(),
     list: jest.fn(),
     unload: jest.fn(),
+    import: jest.fn(),
   };
 
   const abortSignal = new AbortController().signal;
@@ -12484,6 +12487,7 @@ test(`throws an error when already running`, async () => {
   expect(fileStore.delete).not.toHaveBeenCalled();
   expect(fileStore.list).toBeCalledTimes(1);
   expect(fileStore.unload).not.toHaveBeenCalled();
+  expect(fileStore.import).not.toHaveBeenCalled();
 });
 
 test(`can run multiple times`, async () => {
@@ -12532,6 +12536,7 @@ test(`can run multiple times`, async () => {
     delete: jest.fn(),
     list: jest.fn().mockResolvedValue([]),
     unload: jest.fn(),
+    import: jest.fn(),
   };
 
   const abortSignal = new AbortController().signal;
@@ -12595,6 +12600,7 @@ test(`can run multiple times`, async () => {
   expect(fileStore.delete).not.toHaveBeenCalled();
   expect(fileStore.list).toBeCalledTimes(2);
   expect(fileStore.unload).not.toHaveBeenCalled();
+  expect(fileStore.import).not.toHaveBeenCalled();
 });
 
 scenario(
