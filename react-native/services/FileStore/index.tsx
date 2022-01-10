@@ -75,12 +75,6 @@ export class FileStore implements FileStoreInterface {
     }
   }
 
-  /**
-   * Unloads the currently loaded subdirectory.
-   * @throws When the file store is not loaded.
-   * @throws When the file store is loading.
-   * @throws When one or more operations are in progress.
-   */
   unload(): void {
     if (this.loading) {
       throw new Error(`The file store is currently loading.`);
