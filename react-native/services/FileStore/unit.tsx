@@ -6,12 +6,14 @@ test(`creates a directory on load`, async () => {
   );
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
+    moveAsync,
   });
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require(`../../..`);
@@ -41,6 +43,7 @@ test(`creates a directory on load`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`resolves load when creating the directory succeeds`, async () => {
@@ -49,6 +52,7 @@ test(`resolves load when creating the directory succeeds`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -69,6 +73,7 @@ test(`resolves load when creating the directory succeeds`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when loading while loading`, async () => {
@@ -79,6 +84,7 @@ test(`throws when loading while loading`, async () => {
   );
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -118,6 +124,7 @@ test(`throws when loading while loading`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when loading while loaded`, async () => {
@@ -126,6 +133,7 @@ test(`throws when loading while loaded`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -150,12 +158,14 @@ test(`throws when loading while loaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when generating a path when not loaded`, () => {
   const makeDirectoryAsync = jest.fn();
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -172,6 +182,9 @@ test(`throws when generating a path when not loaded`, () => {
   }).toThrowError(`The file store is not loaded.`);
 
   expect(makeDirectoryAsync).not.toBeCalled();
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when generating a path while loading`, () => {
@@ -182,6 +195,7 @@ test(`throws when generating a path while loading`, () => {
   );
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -205,6 +219,7 @@ test(`throws when generating a path while loading`, () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when generating a path once unloaded`, async () => {
@@ -213,6 +228,7 @@ test(`throws when generating a path once unloaded`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -237,6 +253,7 @@ test(`throws when generating a path once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`can generate paths`, async () => {
@@ -245,6 +262,7 @@ test(`can generate paths`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -269,12 +287,14 @@ test(`can generate paths`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when listing when not loaded`, async () => {
   const makeDirectoryAsync = jest.fn();
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -292,6 +312,9 @@ test(`throws when listing when not loaded`, async () => {
     new Error(`The file store is not loaded.`)
   );
   expect(makeDirectoryAsync).not.toBeCalled();
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when listing while loading`, async () => {
@@ -302,6 +325,7 @@ test(`throws when listing while loading`, async () => {
   );
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -326,6 +350,7 @@ test(`throws when listing while loading`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when listing once unloaded`, async () => {
@@ -334,6 +359,7 @@ test(`throws when listing once unloaded`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -359,6 +385,7 @@ test(`throws when listing once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`can list files`, async () => {
@@ -373,6 +400,7 @@ test(`can list files`, async () => {
       `5e64ed2a-aa72-46e9-867c-8dd45ae867cc`,
     ]);
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -402,12 +430,14 @@ test(`can list files`, async () => {
     `Example Document Directory/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when deleting when not loaded`, async () => {
   const makeDirectoryAsync = jest.fn();
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -425,6 +455,9 @@ test(`throws when deleting when not loaded`, async () => {
     new Error(`The file store is not loaded.`)
   );
   expect(makeDirectoryAsync).not.toBeCalled();
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when deleting while loading`, async () => {
@@ -435,6 +468,7 @@ test(`throws when deleting while loading`, async () => {
   );
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -459,6 +493,7 @@ test(`throws when deleting while loading`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when deleting once unloaded`, async () => {
@@ -467,6 +502,7 @@ test(`throws when deleting once unloaded`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -492,6 +528,7 @@ test(`throws when deleting once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`does not resolve the promise returned by deleting until deletion succeeds`, async () => {
@@ -504,6 +541,7 @@ test(`does not resolve the promise returned by deleting until deletion succeeds`
       // Empty.
     })
   );
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -543,6 +581,7 @@ test(`does not resolve the promise returned by deleting until deletion succeeds`
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`can delete files`, async () => {
@@ -553,6 +592,7 @@ test(`can delete files`, async () => {
   const deleteAsync = jest.fn(async () => {
     // Empty.
   });
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -577,12 +617,14 @@ test(`can delete files`, async () => {
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when unloading when not loaded`, () => {
   const makeDirectoryAsync = jest.fn();
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -599,6 +641,9 @@ test(`throws when unloading when not loaded`, () => {
   }).toThrowError(`The file store is not loaded.`);
 
   expect(makeDirectoryAsync).not.toBeCalled();
+  expect(readDirectoryAsync).not.toHaveBeenCalled();
+  expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when unloading while loading`, () => {
@@ -609,6 +654,7 @@ test(`throws when unloading while loading`, () => {
   );
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -632,6 +678,7 @@ test(`throws when unloading while loading`, () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when unloading once unloaded`, async () => {
@@ -640,6 +687,7 @@ test(`throws when unloading once unloaded`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -664,6 +712,7 @@ test(`throws when unloading once unloaded`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when unloading while listing files`, async () => {
@@ -676,6 +725,7 @@ test(`throws when unloading while listing files`, async () => {
     })
   );
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -705,6 +755,7 @@ test(`throws when unloading while listing files`, async () => {
     `Example Document Directory/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`throws when unloading while deleting files`, async () => {
@@ -717,6 +768,7 @@ test(`throws when unloading while deleting files`, async () => {
       // Empty.
     })
   );
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -746,6 +798,7 @@ test(`throws when unloading while deleting files`, async () => {
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`can unload before any file store operations occur`, async () => {
@@ -754,6 +807,7 @@ test(`can unload before any file store operations occur`, async () => {
   });
   const readDirectoryAsync = jest.fn();
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -775,6 +829,7 @@ test(`can unload before any file store operations occur`, async () => {
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`can unload once listing files completes`, async () => {
@@ -789,6 +844,7 @@ test(`can unload once listing files completes`, async () => {
       `5e64ed2a-aa72-46e9-867c-8dd45ae867cc`,
     ]);
   const deleteAsync = jest.fn();
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -814,6 +870,7 @@ test(`can unload once listing files completes`, async () => {
     `Example Document Directory/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
+  expect(moveAsync).not.toHaveBeenCalled();
 });
 
 test(`can unload once deleting files completes`, async () => {
@@ -824,6 +881,7 @@ test(`can unload once deleting files completes`, async () => {
   const deleteAsync = jest.fn(async () => {
     // Empty.
   });
+  const moveAsync = jest.fn();
   jest.resetModules();
   jest.setMock(`expo-file-system`, {
     documentDirectory: `Example Document Directory`,
@@ -849,4 +907,5 @@ test(`can unload once deleting files completes`, async () => {
   expect(deleteAsync).toHaveBeenCalledWith(
     `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
+  expect(moveAsync).not.toHaveBeenCalled();
 });
