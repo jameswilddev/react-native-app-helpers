@@ -95,6 +95,7 @@ export { RouteTable } from "./react-native/types/RouteTable";
 export { Row } from "./react-native/components/Row";
 export { SessionStore } from "./react-native/services/SessionStore";
 export { setRenderedKey } from "./react-native/utilities/setRenderedKey";
+export { showSettingsScreen } from "./react-native/utilities/showSettingsScreen";
 export { SimpleModal } from "./react-native/components/SimpleModal";
 export { SizedHorizontallySymmetricalSafeAreaView } from "./react-native/components/SizedHorizontallySymmetricalSafeAreaView";
 export { SortDirection } from "./react-native/types/SortDirection";

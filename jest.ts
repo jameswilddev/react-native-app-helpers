@@ -57,6 +57,36 @@ jest.mock(`react-native/Libraries/Utilities/BackHandler`, () =>
   jest.requireActual(`react-native/Libraries/Utilities/__mocks__/BackHandler`)
 );
 
+jest.mock(`react-native/Libraries/Linking/Linking`, () => ({
+  openURL: jest.fn(),
+}));
+
+jest.mock(`expo-permissions`, () => {
+  return {};
+});
+
+jest.mock(`expo-intent-launcher`, () => {
+  return {
+    startActivityAsync: jest.fn(),
+    ActivityAction: {
+      APPLICATION_DETAILS_SETTINGS: `Example Application Details Settings`,
+      APPLICATION_SETTINGS: `Example Application Settings`,
+    },
+  };
+});
+
+jest.mock(`expo-constants`, () => {
+  return {};
+});
+
+jest.mock(`expo-media-library`, () => {
+  return {};
+});
+
+jest.mock(`expo-image-picker`, () => {
+  return {};
+});
+
 jest.mock(`expo-file-system`, () => {
   const uuid = jest.requireActual(`uuid`);
   const fs = jest.requireActual(`fs`);

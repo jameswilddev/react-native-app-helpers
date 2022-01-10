@@ -169,6 +169,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [getRenderedKey](./react-native/utilities/getRenderedKey/readme.md)
 - [intercalateRendered](./react-native/utilities/intercalateRendered/readme.md)
 - [setRenderedKey](./react-native/utilities/setRenderedKey/readme.md)
+- [showSettingsScreen](./react-native/utilities/showSettingsScreen/readme.md)
 - [unwrapRenderedFunctionComponent](./react-native/utilities/unwrapRenderedFunctionComponent/readme.md)
 
 ### Concepts
