@@ -13,12 +13,14 @@ test(`displays the loading screen`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -50,6 +52,7 @@ test(`displays the loading screen`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -62,12 +65,14 @@ test(`shows the ready screen once given time to load`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -97,6 +102,7 @@ test(`shows the ready screen once given time to load`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -107,12 +113,14 @@ test(`does not try to load without a key`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -141,6 +149,9 @@ test(`does not try to load without a key`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`does nothing when the subdirectory name changes to null during loading`, async () => {
@@ -153,12 +164,14 @@ test(`does nothing when the subdirectory name changes to null during loading`, a
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -202,6 +215,7 @@ test(`does nothing when the subdirectory name changes to null during loading`, a
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -218,12 +232,14 @@ test(`unloads when the subdirectory name changes to null and loading completes`,
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -274,6 +290,7 @@ test(`unloads when the subdirectory name changes to null and loading completes`,
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).toBeCalledTimes(1);
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -286,12 +303,14 @@ test(`unloads when loading completes and the subdirectory name changes to null`,
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -335,6 +354,7 @@ test(`unloads when loading completes and the subdirectory name changes to null`,
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).toBeCalledTimes(1);
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -349,12 +369,14 @@ test(`does nothing when the subdirectory name changes during loading`, async () 
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -402,6 +424,7 @@ test(`does nothing when the subdirectory name changes during loading`, async () 
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -418,12 +441,14 @@ test(`unloads and starts loading again when the subdirectory name changes and lo
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -479,6 +504,7 @@ test(`unloads and starts loading again when the subdirectory name changes and lo
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).toBeCalledTimes(1);
+  expect(_import).not.toHaveBeenCalled();
 
   // TODO: call order load -> unload -> load
 
@@ -497,12 +523,14 @@ test(`unloads and starts loading again when loading completes and the subdirecto
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -558,6 +586,7 @@ test(`unloads and starts loading again when loading completes and the subdirecto
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).toBeCalledTimes(1);
+  expect(_import).not.toHaveBeenCalled();
 
   // TODO: call order load -> unload -> load
 
@@ -574,12 +603,14 @@ test(`displays the loading screen from null`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -623,6 +654,7 @@ test(`displays the loading screen from null`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -635,12 +667,14 @@ test(`shows the ready screen once given time to load from null`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -684,6 +718,7 @@ test(`shows the ready screen once given time to load from null`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
 
   renderer.unmount();
 });
@@ -694,12 +729,14 @@ test(`does nothing when the component unmounts when unloaded`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -724,6 +761,9 @@ test(`does nothing when the component unmounts when unloaded`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`does nothing when the component unmounts during loading`, async () => {
@@ -736,12 +776,14 @@ test(`does nothing when the component unmounts during loading`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -767,6 +809,9 @@ test(`does nothing when the component unmounts during loading`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).not.toHaveBeenCalled();
+  expect(_import).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`unloads when the component finishes loading following unmount`, async () => {
@@ -781,12 +826,14 @@ test(`unloads when the component finishes loading following unmount`, async () =
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -817,6 +864,9 @@ test(`unloads when the component finishes loading following unmount`, async () =
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).toBeCalledTimes(1);
+  expect(_import).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`unloads when the component finishes loading following subdirectory name change and unmount`, async () => {
@@ -831,12 +881,14 @@ test(`unloads when the component finishes loading following subdirectory name ch
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -879,6 +931,9 @@ test(`unloads when the component finishes loading following subdirectory name ch
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).toBeCalledTimes(1);
+  expect(_import).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
 
 test(`unloads when the component unmounts when ready`, async () => {
@@ -889,12 +944,14 @@ test(`unloads when the component unmounts when ready`, async () => {
   const list = jest.fn();
   const generatePath = jest.fn();
   const unload = jest.fn();
+  const _import = jest.fn();
   const fileStore: FileStoreInterface = {
     load,
     delete: _delete,
     list,
     generatePath,
     unload,
+    import: _import,
   };
   const FileStoreManager = createFileStoreManagerComponent(fileStore);
 
@@ -920,4 +977,7 @@ test(`unloads when the component unmounts when ready`, async () => {
   expect(list).not.toHaveBeenCalled();
   expect(generatePath).not.toHaveBeenCalled();
   expect(unload).toBeCalledTimes(1);
+  expect(_import).not.toHaveBeenCalled();
+
+  renderer.unmount();
 });
