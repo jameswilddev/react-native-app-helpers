@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 export { Aligned } from "./react-native/components/Aligned";
 export { AwaitingPullSyncableStateCollectionItem } from "./react-native/types/AwaitingPullSyncableStateCollectionItem";
 export { AwaitingPushSyncableStateCollectionItem } from "./react-native/types/AwaitingPushSyncableStateCollectionItem";
