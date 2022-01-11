@@ -80,6 +80,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
           $scopeName = $this->syncApiCollection->scopeName;
 
           $model = $this
+            ->syncApiCollection
             ->modelClass::$scopeName()
             ->where('uuid', $modelUuid)
             ->first();
@@ -109,6 +110,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
           $scopeName = $this->syncApiCollection->scopeName;
 
           $model = $this
+            ->syncApiCollection
             ->modelClass::$scopeName()
             ->where('uuid', $modelUuid)
             ->first();
@@ -139,6 +141,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
           $scopeName = $this->syncApiCollection->scopeName;
 
           $model = $this
+            ->syncApiCollection
             ->modelClass::$scopeName()
             ->where('uuid', $modelUuid)
             ->first();
