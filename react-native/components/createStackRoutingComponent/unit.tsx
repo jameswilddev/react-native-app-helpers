@@ -105,6 +105,7 @@ test(`can render one item`, async () => {
         width: `100%`,
         height: `100%`,
       },
+      pointerEvents: `auto`,
       children: expect.objectContaining({
         type: RouteB,
         props: {
@@ -342,8 +343,8 @@ test(`can render two items`, async () => {
           position: `absolute`,
           width: `100%`,
           height: `100%`,
-          display: `none`,
         },
+        pointerEvents: `none`,
         children: expect.objectContaining({
           type: RouteB,
           props: {
@@ -372,6 +373,7 @@ test(`can render two items`, async () => {
           width: `100%`,
           height: `100%`,
         },
+        pointerEvents: `auto`,
         children: expect.objectContaining({
           type: RouteA,
           props: {
@@ -627,6 +629,7 @@ test(`can render three items`, async () => {
           height: `100%`,
           display: `none`,
         },
+        pointerEvents: `none`,
         children: expect.objectContaining({
           type: RouteB,
           props: {
@@ -654,8 +657,8 @@ test(`can render three items`, async () => {
           position: `absolute`,
           width: `100%`,
           height: `100%`,
-          display: `none`,
         },
+        pointerEvents: `none`,
         children: expect.objectContaining({
           type: RouteA,
           props: {
@@ -684,6 +687,7 @@ test(`can render three items`, async () => {
           width: `100%`,
           height: `100%`,
         },
+        pointerEvents: `auto`,
         children: expect.objectContaining({
           type: RouteA,
           props: {

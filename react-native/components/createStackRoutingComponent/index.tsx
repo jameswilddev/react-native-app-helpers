@@ -80,9 +80,12 @@ export const createStackRoutingComponent = <
             <View
               key={item.uuid}
               style={
-                index === props.routeState.length - 1
+                index >= props.routeState.length - 2
                   ? styles.activeView
                   : styles.inactiveView
+              }
+              pointerEvents={
+                index === props.routeState.length - 1 ? `auto` : `none`
               }
             >
               {React.createElement(routeTable[item.key], {
