@@ -63,7 +63,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
   public function generateKebabCasedModelClassName(): string
   {
-    return Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
+    return Str::kebab(Str::pluralStudly(class_basename($this->syncApiCollection->modelClass)));
   }
 
   public function generateKebabCasedMediaCollectionName(): string
