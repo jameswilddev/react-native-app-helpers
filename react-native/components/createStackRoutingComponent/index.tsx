@@ -4,6 +4,7 @@ import type { RouteParameters } from "../../types/RouteParameters";
 import type { StackRouterState } from "../../types/StackRouterState";
 import { StyleSheet, View, ViewStyle } from "react-native";
 import type { StackRouteTable } from "../../types/StackRouteTable";
+import { useBackButton } from "../../hooks/useBackButton";
 
 const viewBase: ViewStyle = {
   position: `absolute`,
@@ -39,53 +40,85 @@ export const createStackRoutingComponent = <
   {
     readonly routeState: StackRouterState<TRouteParameters>;
     readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void;
+
+    /**
+     * Called when the user makes a gesture to go back, e.g. swiping from the
+     * left or pressing the hardware "back" button.
+     * @param pop    Call to proceed, popping the current card from the top of
+     *               the stack.
+     * @param cancel Call to cancel; for a swipe gesture, this will unswipe the
+     *               top card.
+     */
+    onBack(pop: () => void, cancel: () => void): void;
   } & TOtherProps
 > => {
-  return (props) => (
-    <React.Fragment>
-      {props.routeState.map((item, index) => {
-        return (
-          <View
-            key={item.uuid}
-            style={
-              index === props.routeState.length - 1
-                ? styles.activeView
-                : styles.inactiveView
-            }
-          >
-            {React.createElement(routeTable[item.key], {
-              parameters: item.parameters,
-              push: (...itemsToAdd) => {
-                props.setRouteState([...props.routeState, ...itemsToAdd]);
-              },
-              pop: (numberOfItemsToRemove) => {
-                const popped = [...props.routeState];
+  return (props) => {
+    useBackButton(() => {
+      if (props.routeState.length > 1) {
+        props.onBack(
+          () => {
+            const popped = [...props.routeState];
+            popped.pop();
 
-                for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
-                  popped.pop();
-                }
-
-                props.setRouteState(popped);
-              },
-              replace: (numberOfItemsToRemove, ...itemsToAdd) => {
-                const popped = [...props.routeState];
-
-                for (let i = 0; i < numberOfItemsToRemove; i++) {
-                  popped.pop();
-                }
-
-                popped.push(...itemsToAdd);
-
-                props.setRouteState(popped);
-              },
-              reset: (...replacementItems) => {
-                props.setRouteState(replacementItems);
-              },
-              ...props,
-            })}
-          </View>
+            props.setRouteState(popped);
+          },
+          () => {
+            // No swipe to cancel.
+          }
         );
-      })}
-    </React.Fragment>
-  );
+
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return (
+      <React.Fragment>
+        {props.routeState.map((item, index) => {
+          return (
+            <View
+              key={item.uuid}
+              style={
+                index === props.routeState.length - 1
+                  ? styles.activeView
+                  : styles.inactiveView
+              }
+            >
+              {React.createElement(routeTable[item.key], {
+                parameters: item.parameters,
+                push: (...itemsToAdd) => {
+                  props.setRouteState([...props.routeState, ...itemsToAdd]);
+                },
+                pop: (numberOfItemsToRemove) => {
+                  const popped = [...props.routeState];
+
+                  for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
+                    popped.pop();
+                  }
+
+                  props.setRouteState(popped);
+                },
+                replace: (numberOfItemsToRemove, ...itemsToAdd) => {
+                  const popped = [...props.routeState];
+
+                  for (let i = 0; i < numberOfItemsToRemove; i++) {
+                    popped.pop();
+                  }
+
+                  popped.push(...itemsToAdd);
+
+                  props.setRouteState(popped);
+                },
+                reset: (...replacementItems) => {
+                  props.setRouteState(replacementItems);
+                },
+                ...props,
+              })}
+            </View>
+          );
+        })}
+      </React.Fragment>
+    );
+  };
 };
