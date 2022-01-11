@@ -3,6 +3,7 @@
 namespace JamesWildDev\ReactNativeAppHelpers;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /**
  * Represents a media collection within a collection of a sync API.  Create
@@ -60,11 +61,21 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     );
   }
 
+  public function generateKebabCasedModelClassName(): string
+  {
+    return Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
+  }
+
+  public function generateKebabCasedMediaCollectionName(): string
+  {
+    return Str::kebab(Str::pluralStudly($this->name));
+  }
+
   public function generateCollectionMediaCollectionRoutes(): void
   {
     if ($this->syncCapabilities & SyncCapability::READ) {
       Route::get(
-        $this->generateKebabCasedName() . '/{modelUuid}/{mediaUuid}',
+        $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
           $scopeName = $this->syncApiCollection->scopeName;
 
@@ -93,7 +104,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
     if ($this->syncCapabilities & SyncCapability::UPSERT) {
       Route::put(
-        $this->generateKebabCasedName() . '/{modelUuid}/{mediaUuid}',
+        $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
           $scopeName = $this->syncApiCollection->scopeName;
 
@@ -123,7 +134,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
     if ($this->syncCapabilities & SyncCapability::DELETE) {
       Route::get(
-        $this->generateKebabCasedName() . '/{modelUuid}/{mediaUuid}',
+        $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
           $scopeName = $this->syncApiCollection->scopeName;
 
