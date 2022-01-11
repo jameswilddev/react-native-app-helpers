@@ -14,7 +14,7 @@ class SyncApiCollection implements SyncApiCollectionInterface
 {
   private SyncApi $syncApi;
 
-  private string $modelClass;
+  public string $modelClass;
 
   public string $scopeName;
 
