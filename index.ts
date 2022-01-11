@@ -58,6 +58,7 @@ export { createStateStoreManagerComponent } from "./react-native/components/crea
 export { createStatusPillComponent } from "./react-native/components/createStatusPillComponent";
 export { createTabRoutingComponent } from "./react-native/components/createTabRoutingComponent";
 export { createTextComponent } from "./react-native/components/createTextComponent";
+export { createTiledComponent } from "./react-native/components/createTiledComponent";
 export { createUnderlinedTopTabBarComponent } from "./react-native/components/createUnderlinedTopTabBarComponent";
 export { CustomElementTableColumn } from "./react-native/types/CustomElementTableColumn";
 export { CustomTextTableColumn } from "./react-native/types/CustomTextTableColumn";
