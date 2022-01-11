@@ -49,11 +49,15 @@ class SyncApiCollection implements SyncApiCollectionInterface
     string $name,
     int $syncCapabilities,
   ): SyncApiCollectionMediaCollection {
-    return new SyncApiCollectionMediaCollection(
+    $syncApiCollectionMediaCollection = new SyncApiCollectionMediaCollection(
       $this,
       $name,
       $syncCapabilities,
     );
+
+    $this->syncApiCollectionMediaCollections[] = $syncApiCollectionMediaCollection;
+
+    return $syncApiCollectionMediaCollection;
   }
 
   public function withEnum(
