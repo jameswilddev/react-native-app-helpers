@@ -85,6 +85,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [logger](./react-native/services/logger/readme.md)
 - [FileStore](./react-native/services/FileStore/readme.md)
 - [PermissionHelper](./react-native/services/PermissionHelper/readme.md)
+- [PictureHelper](./react-native/services/PictureHelper/readme.md)
 - [Request](./react-native/services/Request/readme.md)
 - [SessionStore](./react-native/services/SessionStore/readme.md)
 - [StateStore](./react-native/services/StateStore/readme.md)
