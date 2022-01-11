@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as TestRenderer from "react-test-renderer";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
 import { Card } from ".";
 
@@ -65,6 +65,12 @@ test(`renders as expected when allowing swiping`, () => {
       },
     }),
   });
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
+      `renderLeftActions`
+    ]()
+  ).toEqual(<View style={{ width: `100%` }} />);
 
   expect(pop).not.toHaveBeenCalled();
   expect(onBack).not.toHaveBeenCalled();
