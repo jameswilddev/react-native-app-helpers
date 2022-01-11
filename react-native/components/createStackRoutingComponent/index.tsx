@@ -113,6 +113,8 @@ export const createStackRoutingComponent = <
                 reset: (...replacementItems) => {
                   props.setRouteState(replacementItems);
                 },
+                bottom: index === 0,
+                top: index === props.routeState.length - 1,
                 ...props,
               })}
             </View>

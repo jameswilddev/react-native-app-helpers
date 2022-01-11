@@ -112,6 +112,8 @@ test(`can render one item`, async () => {
           pop: expect.any(Function),
           replace: expect.any(Function),
           reset: expect.any(Function),
+          bottom: true,
+          top: true,
           parameters: {
             testRouteBParameterKey: `Test Route B Parameter Value`,
           },
@@ -349,6 +351,8 @@ test(`can render two items`, async () => {
             pop: expect.any(Function),
             replace: expect.any(Function),
             reset: expect.any(Function),
+            bottom: true,
+            top: false,
             parameters: {
               testRouteBParameterKey: `Test Route B Parameter Value`,
             },
@@ -375,6 +379,8 @@ test(`can render two items`, async () => {
             pop: expect.any(Function),
             replace: expect.any(Function),
             reset: expect.any(Function),
+            bottom: false,
+            top: true,
             parameters: {
               testRouteAParameterKey: `Test Route A Parameter Value A`,
             },
@@ -628,6 +634,8 @@ test(`can render three items`, async () => {
             pop: expect.any(Function),
             replace: expect.any(Function),
             reset: expect.any(Function),
+            bottom: true,
+            top: false,
             parameters: {
               testRouteBParameterKey: `Test Route B Parameter Value`,
             },
@@ -655,6 +663,8 @@ test(`can render three items`, async () => {
             pop: expect.any(Function),
             replace: expect.any(Function),
             reset: expect.any(Function),
+            bottom: false,
+            top: false,
             parameters: {
               testRouteAParameterKey: `Test Route A Parameter Value A`,
             },
@@ -681,6 +691,8 @@ test(`can render three items`, async () => {
             pop: expect.any(Function),
             replace: expect.any(Function),
             reset: expect.any(Function),
+            bottom: false,
+            top: true,
             parameters: {
               testRouteAParameterKey: `Test Route A Parameter Value B`,
             },

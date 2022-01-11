@@ -81,5 +81,31 @@ export type StackRoute<
      * @param to The new state to set.
      */
     setRouteState(to: StackRouterState<TRouteParameters>): void;
+
+    /**
+     * This function should not be used by your routes and is included here as
+     * an implementation oversight.  Called when the user makes a gesture to go
+     * back, e.g. swiping from the left or pressing the hardware "back" button.
+     * @param pop    Call to proceed, popping the current card from the top of
+     *               the stack.
+     * @param cancel Call to cancel; for a swipe gesture, this will unswipe the
+     *               top card.
+     */
+    onBack(pop: () => void, cancel: () => void): void;
+
+    /**
+     * When true, the card is at the top of the stack and is visible (unless
+     * something else like a parent tab router is hiding the stack itself).  It
+     * is otherwise underneath another card.  Note that swiping to go back may
+     * reveal a card which is not top!
+     */
+    readonly top: boolean;
+
+    /**
+     * When true, the card is at the bottom of the stack and it is not possible
+     * to pop it (as there would be no card underneath to reveal).  When false,
+     * at least one card is beneath this one to which it is possible to pop.
+     */
+    readonly bottom: boolean;
   } & TOtherProps
 >;
