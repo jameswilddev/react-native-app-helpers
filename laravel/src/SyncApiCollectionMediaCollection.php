@@ -136,7 +136,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     }
 
     if ($this->syncCapabilities & SyncCapability::DELETE) {
-      Route::get(
+      Route::delete(
         $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
           $scopeName = $this->syncApiCollection->scopeName;
