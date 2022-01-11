@@ -92,6 +92,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
               ->first();
 
             if ($media === null) {
+              // TODO why isn't this propagating
               throw new ModelNotFoundException();
             } else {
               return redirect()->to($media->getTemporaryUrl(now()->addHour()));
