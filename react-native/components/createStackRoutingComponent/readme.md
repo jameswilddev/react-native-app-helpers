@@ -245,6 +245,9 @@ export default () => {
         pop={() => {
           setRouteState(routeState.slice(0, routeState.length - 1));
         }}
+        onBack={(pop, cancel) => {
+          pop();
+        }}
       />
     </SafeAreaView>
   );

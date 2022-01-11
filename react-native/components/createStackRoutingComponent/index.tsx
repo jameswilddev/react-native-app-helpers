@@ -5,6 +5,7 @@ import type { StackRouterState } from "../../types/StackRouterState";
 import { StyleSheet, View, ViewStyle } from "react-native";
 import type { StackRouteTable } from "../../types/StackRouteTable";
 import { useBackButton } from "../../hooks/useBackButton";
+import { Card } from "./Card";
 
 const viewBase: ViewStyle = {
   position: `absolute`,
@@ -88,38 +89,51 @@ export const createStackRoutingComponent = <
                 index === props.routeState.length - 1 ? `auto` : `none`
               }
             >
-              {React.createElement(routeTable[item.key], {
-                parameters: item.parameters,
-                push: (...itemsToAdd) => {
-                  props.setRouteState([...props.routeState, ...itemsToAdd]);
-                },
-                pop: (numberOfItemsToRemove) => {
+              <Card
+                pop={() => {
                   const popped = [...props.routeState];
-
-                  for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
-                    popped.pop();
-                  }
+                  popped.pop();
 
                   props.setRouteState(popped);
-                },
-                replace: (numberOfItemsToRemove, ...itemsToAdd) => {
-                  const popped = [...props.routeState];
+                }}
+                onBack={props.onBack}
+                allowsSwiping={
+                  index > 0 && index === props.routeState.length - 1
+                }
+              >
+                {React.createElement(routeTable[item.key], {
+                  parameters: item.parameters,
+                  push: (...itemsToAdd) => {
+                    props.setRouteState([...props.routeState, ...itemsToAdd]);
+                  },
+                  pop: (numberOfItemsToRemove) => {
+                    const popped = [...props.routeState];
 
-                  for (let i = 0; i < numberOfItemsToRemove; i++) {
-                    popped.pop();
-                  }
+                    for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
+                      popped.pop();
+                    }
 
-                  popped.push(...itemsToAdd);
+                    props.setRouteState(popped);
+                  },
+                  replace: (numberOfItemsToRemove, ...itemsToAdd) => {
+                    const popped = [...props.routeState];
 
-                  props.setRouteState(popped);
-                },
-                reset: (...replacementItems) => {
-                  props.setRouteState(replacementItems);
-                },
-                bottom: index === 0,
-                top: index === props.routeState.length - 1,
-                ...props,
-              })}
+                    for (let i = 0; i < numberOfItemsToRemove; i++) {
+                      popped.pop();
+                    }
+
+                    popped.push(...itemsToAdd);
+
+                    props.setRouteState(popped);
+                  },
+                  reset: (...replacementItems) => {
+                    props.setRouteState(replacementItems);
+                  },
+                  bottom: index === 0,
+                  top: index === props.routeState.length - 1,
+                  ...props,
+                })}
+              </Card>
             </View>
           );
         })}

@@ -7,6 +7,7 @@ import {
   StackRouteTable,
   StackRoute,
 } from "../../..";
+import { Card } from "./Card";
 
 test(`can render one item`, async () => {
   type ParametersA = {
@@ -107,21 +108,29 @@ test(`can render one item`, async () => {
       },
       pointerEvents: `auto`,
       children: expect.objectContaining({
-        type: RouteB,
+        type: Card,
         props: {
-          push: expect.any(Function),
           pop: expect.any(Function),
-          replace: expect.any(Function),
-          reset: expect.any(Function),
-          bottom: true,
-          top: true,
-          parameters: {
-            testRouteBParameterKey: `Test Route B Parameter Value`,
-          },
-          routeState: routeState,
-          setRouteState: setRouteState,
-          exampleOtherPropKey: `Example Other Prop Value`,
           onBack,
+          allowsSwiping: false,
+          children: expect.objectContaining({
+            type: RouteB,
+            props: {
+              push: expect.any(Function),
+              pop: expect.any(Function),
+              replace: expect.any(Function),
+              reset: expect.any(Function),
+              bottom: true,
+              top: true,
+              parameters: {
+                testRouteBParameterKey: `Test Route B Parameter Value`,
+              },
+              routeState: routeState,
+              setRouteState: setRouteState,
+              exampleOtherPropKey: `Example Other Prop Value`,
+              onBack,
+            },
+          }),
         },
       }),
     },
@@ -346,21 +355,29 @@ test(`can render two items`, async () => {
         },
         pointerEvents: `none`,
         children: expect.objectContaining({
-          type: RouteB,
+          type: Card,
           props: {
-            push: expect.any(Function),
             pop: expect.any(Function),
-            replace: expect.any(Function),
-            reset: expect.any(Function),
-            bottom: true,
-            top: false,
-            parameters: {
-              testRouteBParameterKey: `Test Route B Parameter Value`,
-            },
-            routeState: routeState,
-            setRouteState: setRouteState,
-            exampleOtherPropKey: `Example Other Prop Value`,
             onBack,
+            allowsSwiping: false,
+            children: expect.objectContaining({
+              type: RouteB,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                bottom: true,
+                top: false,
+                parameters: {
+                  testRouteBParameterKey: `Test Route B Parameter Value`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
           },
         }),
       }),
@@ -375,21 +392,29 @@ test(`can render two items`, async () => {
         },
         pointerEvents: `auto`,
         children: expect.objectContaining({
-          type: RouteA,
+          type: Card,
           props: {
-            push: expect.any(Function),
             pop: expect.any(Function),
-            replace: expect.any(Function),
-            reset: expect.any(Function),
-            bottom: false,
-            top: true,
-            parameters: {
-              testRouteAParameterKey: `Test Route A Parameter Value A`,
-            },
-            routeState: routeState,
-            setRouteState: setRouteState,
-            exampleOtherPropKey: `Example Other Prop Value`,
             onBack,
+            allowsSwiping: true,
+            children: expect.objectContaining({
+              type: RouteA,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                bottom: false,
+                top: true,
+                parameters: {
+                  testRouteAParameterKey: `Test Route A Parameter Value A`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
           },
         }),
       },
@@ -631,21 +656,29 @@ test(`can render three items`, async () => {
         },
         pointerEvents: `none`,
         children: expect.objectContaining({
-          type: RouteB,
+          type: Card,
           props: {
-            push: expect.any(Function),
             pop: expect.any(Function),
-            replace: expect.any(Function),
-            reset: expect.any(Function),
-            bottom: true,
-            top: false,
-            parameters: {
-              testRouteBParameterKey: `Test Route B Parameter Value`,
-            },
-            routeState: routeState,
-            setRouteState: setRouteState,
-            exampleOtherPropKey: `Example Other Prop Value`,
             onBack,
+            allowsSwiping: false,
+            children: expect.objectContaining({
+              type: RouteB,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                bottom: true,
+                top: false,
+                parameters: {
+                  testRouteBParameterKey: `Test Route B Parameter Value`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
           },
         }),
       }),
@@ -660,21 +693,29 @@ test(`can render three items`, async () => {
         },
         pointerEvents: `none`,
         children: expect.objectContaining({
-          type: RouteA,
+          type: Card,
           props: {
-            push: expect.any(Function),
             pop: expect.any(Function),
-            replace: expect.any(Function),
-            reset: expect.any(Function),
-            bottom: false,
-            top: false,
-            parameters: {
-              testRouteAParameterKey: `Test Route A Parameter Value A`,
-            },
-            routeState: routeState,
-            setRouteState: setRouteState,
-            exampleOtherPropKey: `Example Other Prop Value`,
             onBack,
+            allowsSwiping: false,
+            children: expect.objectContaining({
+              type: RouteA,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                bottom: false,
+                top: false,
+                parameters: {
+                  testRouteAParameterKey: `Test Route A Parameter Value A`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
           },
         }),
       },
@@ -689,21 +730,29 @@ test(`can render three items`, async () => {
         },
         pointerEvents: `auto`,
         children: expect.objectContaining({
-          type: RouteA,
+          type: Card,
           props: {
-            push: expect.any(Function),
             pop: expect.any(Function),
-            replace: expect.any(Function),
-            reset: expect.any(Function),
-            bottom: false,
-            top: true,
-            parameters: {
-              testRouteAParameterKey: `Test Route A Parameter Value B`,
-            },
-            routeState: routeState,
-            setRouteState: setRouteState,
-            exampleOtherPropKey: `Example Other Prop Value`,
             onBack,
+            allowsSwiping: true,
+            children: expect.objectContaining({
+              type: RouteA,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                bottom: false,
+                top: true,
+                parameters: {
+                  testRouteAParameterKey: `Test Route A Parameter Value B`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
           },
         }),
       },
@@ -1209,7 +1258,7 @@ test(`push`, async () => {
   (
     renderer.toTree()
       ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
-  )[1]?.props[`children`].props.push(
+  )[1]?.props[`children`].props.children.props.push(
     {
       uuid: `441aff37-ab3c-4d4f-a623-46aa36a42c14`,
       key: `testRouteCKey`,
@@ -1380,7 +1429,7 @@ test(`pop`, async () => {
   (
     renderer.toTree()
       ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
-  )[1]?.props[`children`].props.pop(2);
+  )[1]?.props[`children`].props.children.props.pop(2);
 
   expect(setRouteState).toBeCalledTimes(1);
   expect(setRouteState).toHaveBeenCalledWith([
@@ -1399,6 +1448,141 @@ test(`pop`, async () => {
 });
 
 test(`pop default`, async () => {
+  type ParametersA = {
+    readonly testRouteAParameterKey:
+      | `Test Route A Parameter Value A`
+      | `Test Route A Parameter Value B`;
+  };
+
+  type ParametersB = {
+    readonly testRouteBParameterKey:
+      | `Test Route B Parameter Value A`
+      | `Test Route B Parameter Value B`;
+  };
+
+  type ParametersC = {
+    readonly testRouteCParameterKey:
+      | `Test Route C Parameter Value A`
+      | `Test Route C Parameter Value B`;
+  };
+
+  type Parameters = {
+    testRouteAKey: ParametersA;
+    testRouteBKey: ParametersB;
+    testRouteCKey: ParametersC;
+  };
+
+  type OtherProps = {
+    exampleOtherPropKey: `Example Other Prop Value`;
+  };
+
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
+    parameters: { testRouteAParameterKey },
+    exampleOtherPropKey,
+  }) => (
+    <Text>
+      Example Route A with parameter {testRouteAParameterKey}{" "}
+      {exampleOtherPropKey}
+    </Text>
+  );
+
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
+    parameters: { testRouteBParameterKey },
+    exampleOtherPropKey,
+  }) => (
+    <Text>
+      Example Route B with parameter {testRouteBParameterKey}{" "}
+      {exampleOtherPropKey}
+    </Text>
+  );
+
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
+    parameters: { testRouteCParameterKey },
+    exampleOtherPropKey,
+  }) => (
+    <Text>
+      Example Route C with parameter {testRouteCParameterKey}{" "}
+      {exampleOtherPropKey}
+    </Text>
+  );
+
+  const routeTable: StackRouteTable<Parameters, OtherProps> = {
+    testRouteAKey: RouteA,
+    testRouteBKey: RouteB,
+    testRouteCKey: RouteC,
+  };
+
+  const routeState: StackRouterState<Parameters> = [
+    {
+      uuid: `ec055b0f-0659-4e9a-a889-06a7586bb61a`,
+      key: `testRouteBKey`,
+      parameters: {
+        testRouteBParameterKey: `Test Route B Parameter Value A`,
+      },
+    },
+    {
+      uuid: `f36ce5e7-d37e-443a-8635-718118c27128`,
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value A`,
+      },
+    },
+    {
+      uuid: "345d1eff-3d1d-4d93-8136-e0c3ff0f7f7c",
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value B`,
+      },
+    },
+  ];
+
+  const setRouteState = jest.fn();
+  const onBack = jest.fn();
+
+  const Component = createStackRoutingComponent(routeTable);
+
+  const renderer = TestRenderer.create(
+    <Component
+      routeState={routeState}
+      setRouteState={setRouteState}
+      exampleOtherPropKey="Example Other Prop Value"
+      onBack={onBack}
+    />
+  );
+
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 100);
+  });
+
+  (
+    renderer.toTree()
+      ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+  )[1]?.props[`children`].props.children.props.pop();
+
+  expect(setRouteState).toBeCalledTimes(1);
+  expect(setRouteState).toHaveBeenCalledWith([
+    {
+      uuid: `ec055b0f-0659-4e9a-a889-06a7586bb61a`,
+      key: `testRouteBKey`,
+      parameters: {
+        testRouteBParameterKey: `Test Route B Parameter Value A`,
+      },
+    },
+    {
+      uuid: `f36ce5e7-d37e-443a-8635-718118c27128`,
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value A`,
+      },
+    },
+  ]);
+
+  expect(onBack).not.toHaveBeenCalled();
+
+  renderer.unmount();
+});
+
+test(`card pop`, async () => {
   type ParametersA = {
     readonly testRouteAParameterKey:
       | `Test Route A Parameter Value A`
@@ -1643,7 +1827,7 @@ test(`replace`, async () => {
   (
     renderer.toTree()
       ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
-  )[1]?.props[`children`].props.replace(
+  )[1]?.props[`children`].props.children.props.replace(
     2,
     {
       uuid: `e54ad406-9fcd-4ff5-a61c-d323946b92e6`,
@@ -1815,7 +1999,7 @@ test(`reset`, async () => {
   (
     renderer.toTree()
       ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
-  )[1]?.props[`children`].props.reset(
+  )[1]?.props[`children`].props.children.props.reset(
     {
       uuid: `441aff37-ab3c-4d4f-a623-46aa36a42c14`,
       key: `testRouteCKey`,

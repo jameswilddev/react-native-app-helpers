@@ -69,6 +69,15 @@ jest.mock(`expo-permissions`, () => {
   };
 });
 
+jest.mock(`react-native-gesture-handler`, () => ({
+  Swipeable: class Swipeable extends jest.requireActual(`react`).Component {
+    close = jest.fn();
+    render() {
+      return null;
+    }
+  },
+}));
+
 jest.mock(`expo-intent-launcher`, () => {
   return {
     startActivityAsync: jest.fn(),
