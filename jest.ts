@@ -57,6 +57,57 @@ jest.mock(`react-native/Libraries/Utilities/BackHandler`, () =>
   jest.requireActual(`react-native/Libraries/Utilities/__mocks__/BackHandler`)
 );
 
+jest.mock(`react-native/Libraries/Linking/Linking`, () => ({
+  openURL: jest.fn(),
+}));
+
+jest.mock(`expo-permissions`, () => {
+  return {
+    askAsync: jest.fn(),
+    MEDIA_LIBRARY: `Example Media Library`,
+    CAMERA: `Example Camera`,
+  };
+});
+
+jest.mock(`react-native-gesture-handler`, () => ({
+  Swipeable: class Swipeable extends jest.requireActual(`react`).Component {
+    close = jest.fn();
+    render() {
+      return null;
+    }
+  },
+}));
+
+jest.mock(`expo-intent-launcher`, () => {
+  return {
+    startActivityAsync: jest.fn(),
+    ActivityAction: {
+      APPLICATION_DETAILS_SETTINGS: `Example Application Details Settings`,
+      APPLICATION_SETTINGS: `Example Application Settings`,
+    },
+  };
+});
+
+jest.mock(`expo-constants`, () => {
+  return {};
+});
+
+jest.mock(`expo-media-library`, () => {
+  return {
+    saveToLibraryAsync: jest.fn(),
+  };
+});
+
+jest.mock(`expo-image-picker`, () => {
+  return {
+    launchCameraAsync: jest.fn(),
+    launchImageLibraryAsync: jest.fn(),
+    MediaTypeOptions: {
+      Images: `Example Images`,
+    },
+  };
+});
+
 jest.mock(`expo-file-system`, () => {
   const uuid = jest.requireActual(`uuid`);
   const fs = jest.requireActual(`fs`);

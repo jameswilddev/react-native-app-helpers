@@ -2,67 +2,26 @@ import * as React from "react";
 import type { FunctionComponent } from "react";
 import type { RouteParameters } from "../../types/RouteParameters";
 import type { StackRouterState } from "../../types/StackRouterState";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ViewStyle } from "react-native";
 import type { StackRouteTable } from "../../types/StackRouteTable";
+import { useBackButton } from "../../hooks/useBackButton";
+import { Card } from "./Card";
+
+const viewBase: ViewStyle = {
+  position: `absolute`,
+  height: `100%`,
+  width: `100%`,
+};
 
 const styles = StyleSheet.create({
-  activeViewFillsContainerVerticallyFitsContentHorizontally: {
-    height: `100%`,
+  activeView: {
+    ...viewBase,
   },
-  activeViewFitsContentVerticallyFillsContainerHorizontally: {
-    width: `100%`,
-  },
-  activeViewFillsContainerVerticallyFillsContainerHorizontally: {
-    height: `100%`,
-    width: `100%`,
-  },
-  inactiveViewFitsContentVerticallyFitsContentHorizontally: {
+  inactiveView: {
+    ...viewBase,
     display: `none`,
-  },
-  inactiveViewFillsContainerVerticallyFitsContentHorizontally: {
-    display: `none`,
-    height: `100%`,
-  },
-  inactiveViewFitsContentVerticallyFillsContainerHorizontally: {
-    display: `none`,
-    width: `100%`,
-  },
-  inactiveViewFillsContainerVerticallyFillsContainerHorizontally: {
-    display: `none`,
-    height: `100%`,
-    width: `100%`,
   },
 });
-
-const hierarchy = {
-  active: {
-    fitsContent: {
-      fitsContent: null,
-      fillsContainer:
-        styles.activeViewFitsContentVerticallyFillsContainerHorizontally,
-    },
-    fillsContainer: {
-      fitsContent:
-        styles.activeViewFillsContainerVerticallyFitsContentHorizontally,
-      fillsContainer:
-        styles.activeViewFillsContainerVerticallyFillsContainerHorizontally,
-    },
-  },
-  inactive: {
-    fitsContent: {
-      fitsContent:
-        styles.inactiveViewFitsContentVerticallyFitsContentHorizontally,
-      fillsContainer:
-        styles.inactiveViewFitsContentVerticallyFillsContainerHorizontally,
-    },
-    fillsContainer: {
-      fitsContent:
-        styles.inactiveViewFillsContainerVerticallyFitsContentHorizontally,
-      fillsContainer:
-        styles.inactiveViewFillsContainerVerticallyFillsContainerHorizontally,
-    },
-  },
-};
 
 /**
  * Creates a React component which displays the top of a stack of routes (though
@@ -82,53 +41,103 @@ export const createStackRoutingComponent = <
   {
     readonly routeState: StackRouterState<TRouteParameters>;
     readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void;
-    readonly width: `fillsContainer` | `fitsContent`;
-    readonly height: `fillsContainer` | `fitsContent`;
+
+    /**
+     * Called when the user makes a gesture to go back, e.g. swiping from the
+     * left or pressing the hardware "back" button.
+     * @param pop    Call to proceed, popping the current card from the top of
+     *               the stack.
+     * @param cancel Call to cancel; for a swipe gesture, this will unswipe the
+     *               top card.
+     */
+    onBack(pop: () => void, cancel: () => void): void;
   } & TOtherProps
 > => {
-  return (props) => (
-    <React.Fragment>
-      {props.routeState.map((item, index) => {
-        const style =
-          hierarchy[
-            index === props.routeState.length - 1 ? `active` : `inactive`
-          ][props.height][props.width];
+  return (props) => {
+    useBackButton(() => {
+      if (props.routeState.length > 1) {
+        props.onBack(
+          () => {
+            const popped = [...props.routeState];
+            popped.pop();
 
-        return (
-          <View key={index} {...(style ? { style } : {})}>
-            {React.createElement(routeTable[item.key], {
-              parameters: item.parameters,
-              push: (...itemsToAdd) => {
-                props.setRouteState([...props.routeState, ...itemsToAdd]);
-              },
-              pop: (numberOfItemsToRemove) => {
-                const popped = [...props.routeState];
-
-                for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
-                  popped.pop();
-                }
-
-                props.setRouteState(popped);
-              },
-              replace: (numberOfItemsToRemove, ...itemsToAdd) => {
-                const popped = [...props.routeState];
-
-                for (let i = 0; i < numberOfItemsToRemove; i++) {
-                  popped.pop();
-                }
-
-                popped.push(...itemsToAdd);
-
-                props.setRouteState(popped);
-              },
-              reset: (...replacementItems) => {
-                props.setRouteState(replacementItems);
-              },
-              ...props,
-            })}
-          </View>
+            props.setRouteState(popped);
+          },
+          () => {
+            // No swipe to cancel.
+          }
         );
-      })}
-    </React.Fragment>
-  );
+
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return (
+      <React.Fragment>
+        {props.routeState.map((item, index) => {
+          return (
+            <View
+              key={item.uuid}
+              style={
+                index >= props.routeState.length - 2
+                  ? styles.activeView
+                  : styles.inactiveView
+              }
+              pointerEvents={
+                index === props.routeState.length - 1 ? `auto` : `none`
+              }
+            >
+              <Card
+                pop={() => {
+                  const popped = [...props.routeState];
+                  popped.pop();
+
+                  props.setRouteState(popped);
+                }}
+                onBack={props.onBack}
+                allowsSwiping={
+                  index > 0 && index === props.routeState.length - 1
+                }
+              >
+                {React.createElement(routeTable[item.key], {
+                  parameters: item.parameters,
+                  push: (...itemsToAdd) => {
+                    props.setRouteState([...props.routeState, ...itemsToAdd]);
+                  },
+                  pop: (numberOfItemsToRemove) => {
+                    const popped = [...props.routeState];
+
+                    for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
+                      popped.pop();
+                    }
+
+                    props.setRouteState(popped);
+                  },
+                  replace: (numberOfItemsToRemove, ...itemsToAdd) => {
+                    const popped = [...props.routeState];
+
+                    for (let i = 0; i < numberOfItemsToRemove; i++) {
+                      popped.pop();
+                    }
+
+                    popped.push(...itemsToAdd);
+
+                    props.setRouteState(popped);
+                  },
+                  reset: (...replacementItems) => {
+                    props.setRouteState(replacementItems);
+                  },
+                  bottom: index === 0,
+                  top: index === props.routeState.length - 1,
+                  ...props,
+                })}
+              </Card>
+            </View>
+          );
+        })}
+      </React.Fragment>
+    );
+  };
 };

@@ -44,9 +44,9 @@ export const createHeaderBodyFooterComponent = (
   headerBodySpacing: number,
   bodyFooterSpacing: number
 ): React.FunctionComponent<{
-  readonly header?: JSX.Element;
-  readonly body?: JSX.Element;
-  readonly footer?: JSX.Element;
+  readonly header?: null | React.ReactNode | JSX.Element;
+  readonly body?: null | React.ReactNode | JSX.Element;
+  readonly footer?: null | React.ReactNode | JSX.Element;
 }> => {
   const localStyles = StyleSheet.create({
     headerView: {

@@ -51,7 +51,13 @@ const ExampleScreen = () => {
   const [tab, setTab] = React.useState<ExampleTab>(`A`);
 
   return (
-    <ExampleTabBar tab={tab} setTab={setTab} />
+    <ExampleTabBar
+      tab={tab}
+      setTab={setTab}
+      resetActiveTab={() => {
+        alert(`The active tab should now reset to its "home" route.`);
+      }}
+    />
   );
 };
 ```

@@ -15,6 +15,7 @@ import type { SyncConfiguration } from "../../types/SyncConfiguration";
 import type { SyncConfigurationCollection } from "../../types/SyncConfigurationCollection";
 import type { FileStoreInterface } from "../../types/FileStoreInterface";
 import type { SyncState } from "../../types/SyncState";
+import type { SyncInterface } from "../../types/SyncInterface";
 
 const camelCaseToKebabCase = (camelCase: string): string =>
   camelCase.replace(/([A-Z])/g, `-$1`).toLowerCase();
@@ -33,7 +34,13 @@ export class Sync<
   TSchema extends SyncableSchema,
   TAdditionalCollectionData extends Record<string, unknown>,
   TAdditionalCollectionItemData extends Record<string, Json>
-> {
+> implements
+    SyncInterface<
+      TSchema,
+      TAdditionalCollectionData,
+      TAdditionalCollectionItemData
+    >
+{
   /**
    * @param stateStore        The StateStore to sync.
    * @param request           The Request with which to sync.
@@ -51,32 +58,14 @@ export class Sync<
     private readonly fileStore: FileStoreInterface
   ) {}
 
-  /**
-   * When this value is greater than zero, file clean-up will not be performed.
-   * This is intended to be used to prevent files which have been added to a
-   * pending form being cleaned up; screens which may add or remove files in
-   * React state before their references are committed to the state store MUST
-   * increment this on mount and decrement it on unmount.
-   */
   fileCleanUpBlockers = 0;
 
   private readonly eventEmitter = new EventEmitter();
 
-  /**
-   * Adds a listener for events to this sync process.
-   * @param eventType The type of the event to listen for.
-   * @param listener  The callback to execute when the event is emitted.
-   */
   addListener(eventType: `stateChange`, listener: () => void): void {
     this.eventEmitter.addListener(eventType, listener);
   }
 
-  /**
-   * Removes a listener for events from this sync process.
-   * @param eventType The type of the event to listen for.
-   * @param listener  The callback to no longer execute when the event is
-   *                  emitted.
-   */
   removeListener(eventType: `stateChange`, listener: () => void): void {
     this.eventEmitter.removeListener(eventType, listener);
   }
@@ -89,10 +78,6 @@ export class Sync<
     type: `notRunning`,
   };
 
-  /**
-   * Retrieves the current status of this sync process.
-   * @returns The current status of this sync process.
-   */
   getState(): SyncState<
     TSchema,
     TAdditionalCollectionData,
@@ -113,12 +98,6 @@ export class Sync<
     this.eventEmitter.emit(`stateChange`);
   }
 
-  /**
-   * @param abortSignal An AbortSignal which can be used to cancel the sync.
-   * @returns           A description of the outcome of the synchronization
-   *                    process and any further action required by the caller.
-   * @throws            When sync is already in progress.
-   */
   async run(
     abortSignal: null | AbortSignal
   ): Promise<`noChangesMade` | `needsToRunAgain` | `atLeastOneChangeMade`> {

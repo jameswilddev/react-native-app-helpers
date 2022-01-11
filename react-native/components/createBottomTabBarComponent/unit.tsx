@@ -61,8 +61,15 @@ test(`renders as expected`, () => {
     ]
   );
   const setTab = jest.fn();
+  const resetActiveTab = jest.fn();
 
-  const rendered = <Component tab="Example Tab B" setTab={setTab} />;
+  const rendered = (
+    <Component
+      tab="Example Tab B"
+      setTab={setTab}
+      resetActiveTab={resetActiveTab}
+    />
+  );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -72,7 +79,6 @@ test(`renders as expected`, () => {
     >
       {[
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab A"
           style={{
@@ -101,7 +107,6 @@ test(`renders as expected`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled
           onPress={expect.any(Function)}
           key="Example Tab B"
           style={{
@@ -130,7 +135,6 @@ test(`renders as expected`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab C"
           style={{
@@ -159,7 +163,6 @@ test(`renders as expected`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab D"
           style={{
@@ -191,6 +194,7 @@ test(`renders as expected`, () => {
     </HorizontallySymmetricalSafeAreaView>
   );
   expect(setTab).not.toHaveBeenCalled();
+  expect(resetActiveTab).not.toBeCalled();
 });
 
 test(`renders as expected without top padding`, () => {
@@ -246,8 +250,15 @@ test(`renders as expected without top padding`, () => {
     ]
   );
   const setTab = jest.fn();
+  const resetActiveTab = jest.fn();
 
-  const rendered = <Component tab="Example Tab B" setTab={setTab} />;
+  const rendered = (
+    <Component
+      tab="Example Tab B"
+      setTab={setTab}
+      resetActiveTab={resetActiveTab}
+    />
+  );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -257,7 +268,6 @@ test(`renders as expected without top padding`, () => {
     >
       {[
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab A"
           style={{
@@ -286,7 +296,6 @@ test(`renders as expected without top padding`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled
           onPress={expect.any(Function)}
           key="Example Tab B"
           style={{
@@ -315,7 +324,6 @@ test(`renders as expected without top padding`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab C"
           style={{
@@ -344,7 +352,6 @@ test(`renders as expected without top padding`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab D"
           style={{
@@ -376,6 +383,7 @@ test(`renders as expected without top padding`, () => {
     </HorizontallySymmetricalSafeAreaView>
   );
   expect(setTab).not.toHaveBeenCalled();
+  expect(resetActiveTab).not.toBeCalled();
 });
 
 test(`renders as expected without bottom padding`, () => {
@@ -431,8 +439,15 @@ test(`renders as expected without bottom padding`, () => {
     ]
   );
   const setTab = jest.fn();
+  const resetActiveTab = jest.fn();
 
-  const rendered = <Component tab="Example Tab B" setTab={setTab} />;
+  const rendered = (
+    <Component
+      tab="Example Tab B"
+      setTab={setTab}
+      resetActiveTab={resetActiveTab}
+    />
+  );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -442,7 +457,6 @@ test(`renders as expected without bottom padding`, () => {
     >
       {[
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab A"
           style={{
@@ -471,7 +485,6 @@ test(`renders as expected without bottom padding`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled
           onPress={expect.any(Function)}
           key="Example Tab B"
           style={{
@@ -500,7 +513,6 @@ test(`renders as expected without bottom padding`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab C"
           style={{
@@ -529,7 +541,6 @@ test(`renders as expected without bottom padding`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab D"
           style={{
@@ -561,6 +572,7 @@ test(`renders as expected without bottom padding`, () => {
     </HorizontallySymmetricalSafeAreaView>
   );
   expect(setTab).not.toHaveBeenCalled();
+  expect(resetActiveTab).not.toBeCalled();
 });
 
 test(`renders as expected without icon-text spacing`, () => {
@@ -616,8 +628,15 @@ test(`renders as expected without icon-text spacing`, () => {
     ]
   );
   const setTab = jest.fn();
+  const resetActiveTab = jest.fn();
 
-  const rendered = <Component tab="Example Tab B" setTab={setTab} />;
+  const rendered = (
+    <Component
+      tab="Example Tab B"
+      setTab={setTab}
+      resetActiveTab={resetActiveTab}
+    />
+  );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -627,7 +646,6 @@ test(`renders as expected without icon-text spacing`, () => {
     >
       {[
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab A"
           style={{
@@ -655,7 +673,6 @@ test(`renders as expected without icon-text spacing`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled
           onPress={expect.any(Function)}
           key="Example Tab B"
           style={{
@@ -683,7 +700,6 @@ test(`renders as expected without icon-text spacing`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab C"
           style={{
@@ -711,7 +727,6 @@ test(`renders as expected without icon-text spacing`, () => {
           </HorizontallySymmetricalSafeAreaView>
         </Hitbox>,
         <Hitbox
-          disabled={false}
           onPress={expect.any(Function)}
           key="Example Tab D"
           style={{
@@ -742,6 +757,7 @@ test(`renders as expected without icon-text spacing`, () => {
     </HorizontallySymmetricalSafeAreaView>
   );
   expect(setTab).not.toHaveBeenCalled();
+  expect(resetActiveTab).not.toBeCalled();
 });
 
 test(`changes tab on pressing an inactive tab`, () => {
@@ -797,12 +813,90 @@ test(`changes tab on pressing an inactive tab`, () => {
     ]
   );
   const setTab = jest.fn();
+  const resetActiveTab = jest.fn();
 
-  const rendered = <Component tab="Example Tab B" setTab={setTab} />;
+  const rendered = (
+    <Component
+      tab="Example Tab B"
+      setTab={setTab}
+      resetActiveTab={resetActiveTab}
+    />
+  );
 
   unwrapRenderedFunctionComponent(rendered).props[
     `children`
   ][2].props.onPress();
   expect(setTab).toBeCalledTimes(1);
   expect(setTab).toBeCalledWith(`Example Tab C`);
+  expect(resetActiveTab).not.toBeCalled();
+});
+
+test(`resets the active tab on press`, () => {
+  type Tab =
+    | `Example Tab A`
+    | `Example Tab B`
+    | `Example Tab C`
+    | `Example Tab D`;
+  const ExampleTabAIcon: SvgIcon = () => null;
+  const ExampleTabBIcon: SvgIcon = () => null;
+  const ExampleTabCIcon: SvgIcon = () => null;
+  const ExampleTabDIcon: SvgIcon = () => null;
+  const Component = createBottomTabBarComponent<Tab>(
+    {
+      topPadding: 12,
+      iconTextSpacing: 4,
+      fontSize: 20,
+      bottomPadding: 5,
+      inactive: {
+        background: `yellow`,
+        iconFill: `green`,
+        color: `blue`,
+        fontFamily: `Example Inactive Font Family`,
+      },
+      active: {
+        background: `purple`,
+        iconFill: `red`,
+        color: `aquamarine`,
+        fontFamily: `Example Active Font Family`,
+      },
+    },
+    [
+      {
+        tab: `Example Tab A`,
+        icon: ExampleTabAIcon,
+        text: `Example Tab A Label`,
+      },
+      {
+        tab: `Example Tab B`,
+        icon: ExampleTabBIcon,
+        text: `Example Tab B Label`,
+      },
+      {
+        tab: `Example Tab C`,
+        icon: ExampleTabCIcon,
+        text: `Example Tab C Label`,
+      },
+      {
+        tab: `Example Tab D`,
+        icon: ExampleTabDIcon,
+        text: `Example Tab D Label`,
+      },
+    ]
+  );
+  const setTab = jest.fn();
+  const resetActiveTab = jest.fn();
+
+  const rendered = (
+    <Component
+      tab="Example Tab B"
+      setTab={setTab}
+      resetActiveTab={resetActiveTab}
+    />
+  );
+
+  unwrapRenderedFunctionComponent(rendered).props[
+    `children`
+  ][1].props.onPress();
+  expect(setTab).not.toBeCalled();
+  expect(resetActiveTab).toBeCalledTimes(1);
 });

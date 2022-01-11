@@ -24,7 +24,7 @@ type OtherProps = {
 };
 
 const route: StackRoute<RouteParameters, `routeBKey`, OtherProps> = ({
-  reset, push, pop, replace,
+  reset, push, pop, replace, bottom, top,
   parameters,
   otherPropKey,
 }) => <React.Fragment>

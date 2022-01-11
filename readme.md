@@ -64,6 +64,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createStatusFillComponent](./react-native/components/createStatusFillComponent/readme.md)
 - [createTabRoutingComponent](./react-native/components/createTabRoutingComponent/readme.md)
 - [createTextComponent](./react-native/components/createTextComponent/readme.md)
+- [createTiledComponent](./react-native/components/createTiledComponent/readme.md)
 - [createUnderlinedTopTabBarComponent](./react-native/components/createUnderlinedTopTabBarComponent/readme.md)
 - [Hitbox](./react-native/components/Hitbox/readme.md)
 - [HorizontallySymmetricalSafeAreaView](./react-native/components/HorizontallySymmetricalSafeAreaView/readme.md)
@@ -77,11 +78,15 @@ import { createTextComponent } from "react-native-app-helpers";
 - [useEventRefresh](./react-native/hooks/useEventRefresh/readme.md)
 - [useMeasure](./react-native/hooks/useMeasure/readme.md)
 - [useRefresh](./react-native/hooks/useRefresh/readme.md)
+- [useSyncFileCleanUpBlocker](./react-native/hooks/useSyncFileCleanUpBlocker/readme.md)
+- [useSyncInProgress](./react-native/hooks/useSyncInProgress/readme.md)
 
 #### Services
 
 - [logger](./react-native/services/logger/readme.md)
 - [FileStore](./react-native/services/FileStore/readme.md)
+- [PermissionHelper](./react-native/services/PermissionHelper/readme.md)
+- [PictureHelper](./react-native/services/PictureHelper/readme.md)
 - [Request](./react-native/services/Request/readme.md)
 - [SessionStore](./react-native/services/SessionStore/readme.md)
 - [StateStore](./react-native/services/StateStore/readme.md)
@@ -119,6 +124,8 @@ import { createTextComponent } from "react-native-app-helpers";
 - LoggerInterface
 - [NonKeyableTableCell](./react-native/types/NonKeyableTableCell/readme.md)
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
+- PermissionHelperInterface
+- PictureHelperInterface
 - [PreflightResponse](./react-native/types/PreflightResponse/readme.md)
 - [PreflightResponseCollection](./react-native/types/PreflightResponseCollection/readme.md)
 - [PreflightResponseCollectionItem](./react-native/types/PreflightResponseCollectionItem/readme.md)
@@ -146,6 +153,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [SyncableStateCollectionItem](./react-native/types/SyncableStateCollectionItem/readme.md)
 - [SyncConfiguration](./react-native/types/SyncConfiguration/readme.md)
 - [SyncConfigurationCollection](./react-native/types/SyncConfigurationCollection/readme.md)
+- SyncInterface
 - [SyncPullResponse](./react-native/types/SyncPullResponse/readme.md)
 - SyncState
 - [TableColumn](./react-native/types/TableColumn/readme.md)
@@ -163,8 +171,10 @@ import { createTextComponent } from "react-native-app-helpers";
 #### Utilities
 
 - [flattenRenderedToArray](./react-native/utilities/flattenRenderedToArray/readme.md)
+- [getRenderedKey](./react-native/utilities/getRenderedKey/readme.md)
 - [intercalateRendered](./react-native/utilities/intercalateRendered/readme.md)
 - [setRenderedKey](./react-native/utilities/setRenderedKey/readme.md)
+- [showSettingsScreen](./react-native/utilities/showSettingsScreen/readme.md)
 - [unwrapRenderedFunctionComponent](./react-native/utilities/unwrapRenderedFunctionComponent/readme.md)
 
 ### Concepts

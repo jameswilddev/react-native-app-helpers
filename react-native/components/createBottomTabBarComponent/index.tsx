@@ -28,6 +28,13 @@ export function createBottomTabBarComponent<
    * @param to The tab which the user pressed.
    */
   setTab(to: TTab): void;
+
+  /**
+   * Called when the user presses the active tab; this should return to the
+   * "home" route of the active tab, e.g. return to the list of records if
+   * currently viewing a particular record.
+   */
+  resetActiveTab(): void;
 }> {
   const textBase: TextStyle = {
     fontSize: bottomTabBarStyle.fontSize,
@@ -84,7 +91,7 @@ export function createBottomTabBarComponent<
     },
   });
 
-  return ({ tab, setTab }) => (
+  return ({ tab, setTab, resetActiveTab }) => (
     <HorizontallySymmetricalSafeAreaView
       left
       right
@@ -95,9 +102,12 @@ export function createBottomTabBarComponent<
 
         return (
           <Hitbox
-            disabled={isActive}
             onPress={() => {
-              setTab(bottomTab.tab);
+              if (isActive) {
+                resetActiveTab();
+              } else {
+                setTab(bottomTab.tab);
+              }
             }}
             key={bottomTab.tab}
             style={isActive ? styles.activeHitbox : styles.inactiveHitbox}

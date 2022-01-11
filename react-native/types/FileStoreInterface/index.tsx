@@ -45,4 +45,12 @@ export interface FileStoreInterface {
    * @throws When one or more operations are in progress.
    */
   unload(): void;
+
+  /**
+   * Moves a file from a temporary location to the file store and returns its
+   * UUID.
+   * @param fileUri The file to move.
+   * @returns       The UUID of the imported file.
+   */
+  import(fileUri: string): Promise<string>;
 }

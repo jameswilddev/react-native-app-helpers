@@ -21,6 +21,9 @@ await fileStore.delete(`9dd60263-682d-41b9-bf39-c3a1183da1b1`);
 // `example/path/to/document/directory/example-subdirectory-name/9dd60263-682d-41b9-bf39-c3a1183da1b1`.
 fileStore.generatePath(`9dd60263-682d-41b9-bf39-c3a1183da1b1`);
 
+// `9dd60263-682d-41b9-bf39-c3a1183da1b1`
+await fileStore.import(`example-file-uri`);
+
 fileStore.unload();
 ```
 
