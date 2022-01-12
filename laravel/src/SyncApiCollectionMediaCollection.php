@@ -105,34 +105,37 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     }
 
     if ($this->syncCapabilities & SyncCapability::UPSERT) {
-      Route::put(
-        $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
-        function (string $modelUuid, string $mediaUuid) {
-          $scopeName = $this->syncApiCollection->scopeName;
+      $route = $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}';
 
-          $model = $this
-            ->syncApiCollection
-            ->modelClass::$scopeName()
-            ->where('uuid', $modelUuid)
+      $implementation = function (string $modelUuid, string $mediaUuid) {
+        $scopeName = $this->syncApiCollection->scopeName;
+
+        $model = $this
+          ->syncApiCollection
+          ->modelClass::$scopeName()
+          ->where('uuid', $modelUuid)
+          ->first();
+
+        if ($model) {
+          $media = $model
+            ->getMedia($this->name)
+            ->where('name', $mediaUuid)
             ->first();
 
-          if ($model) {
-            $media = $model
-              ->getMedia($this->name)
-              ->where('name', $mediaUuid)
-              ->first();
-
-            if ($media === null) {
-              $model
-                ->addMediaFromString(request()->getContent())
-                ->usingName($mediaUuid)
-                ->toMediaCollection($this->name);
-            }
-          } else {
-            throw new ModelNotFoundException();
+          if ($media === null) {
+            $model
+              ->addMediaFromString(request()->getContent())
+              ->usingName($mediaUuid)
+              ->toMediaCollection($this->name);
           }
+        } else {
+          throw new ModelNotFoundException();
         }
-      );
+      };
+
+      // Include both POST and PUT as a workaround for https://github.com/expo/expo/issues/14881.
+      Route::put($route, $implementation);
+      Route::post($route, $implementation);
     }
 
     if ($this->syncCapabilities & SyncCapability::DELETE) {
