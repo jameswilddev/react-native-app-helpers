@@ -38,7 +38,7 @@ test(`creates a directory on load`, async () => {
   expect(rejected).toBeFalsy();
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -69,7 +69,7 @@ test(`resolves load when creating the directory succeeds`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -121,7 +121,7 @@ test(`throws when loading while loading`, async () => {
   expect(rejected).toBeFalsy();
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example First Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example First Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -156,7 +156,7 @@ test(`throws when loading while loaded`, async () => {
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example First Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example First Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -219,7 +219,7 @@ test(`throws when generating a path while loading`, () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -254,7 +254,7 @@ test(`throws when generating a path once unloaded`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -285,11 +285,11 @@ test(`can generate paths`, async () => {
   const actual = fileStore.generatePath(`5d515bcf-f201-463f-923f-7c6ab54e8ebf`);
 
   expect(actual).toEqual(
-    `Example Document Directory/Example Subdirectory Name/5d515bcf-f201-463f-923f-7c6ab54e8ebf`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/5d515bcf-f201-463f-923f-7c6ab54e8ebf`
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -354,7 +354,7 @@ test(`throws when listing while loading`, async () => {
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -390,7 +390,7 @@ test(`throws when listing once unloaded`, async () => {
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -433,12 +433,12 @@ test(`can list files`, async () => {
   ]);
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).toBeCalledTimes(1);
   expect(readDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
   expect(moveAsync).not.toHaveBeenCalled();
@@ -501,7 +501,7 @@ test(`throws when deleting while loading`, async () => {
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -537,7 +537,7 @@ test(`throws when deleting once unloaded`, async () => {
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -588,13 +588,13 @@ test(`does not resolve the promise returned by deleting until deletion succeeds`
   expect(rejected).toBeFalsy();
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).toBeCalledTimes(1);
   expect(deleteAsync).toHaveBeenCalledWith(
-    `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
   expect(moveAsync).not.toHaveBeenCalled();
 });
@@ -625,13 +625,13 @@ test(`can delete files`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).toBeCalledTimes(1);
   expect(deleteAsync).toHaveBeenCalledWith(
-    `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
   expect(moveAsync).not.toHaveBeenCalled();
 });
@@ -693,7 +693,7 @@ test(`throws when importing while loading`, async () => {
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -729,7 +729,7 @@ test(`throws when importing once unloaded`, async () => {
   );
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -780,7 +780,7 @@ test(`does not resolve the promise returned by importing until moving succeeds`,
   expect(rejected).toBeFalsy();
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -789,7 +789,7 @@ test(`does not resolve the promise returned by importing until moving succeeds`,
   expect(moveAsync).toHaveBeenCalledWith({
     from: `Example File Uri`,
     to: expect.stringMatching(
-      /^Example Document Directory\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+      /^Example Document Directory\/react-native-app-helpers\/file-store\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
     ),
   });
 });
@@ -820,7 +820,7 @@ test(`can import files`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -828,7 +828,7 @@ test(`can import files`, async () => {
   expect(moveAsync).toBeCalledTimes(1);
   expect(moveAsync).toHaveBeenCalledWith({
     from: `Example File Uri`,
-    to: `Example Document Directory/Example Subdirectory Name/${uuid}`,
+    to: `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/${uuid}`,
   });
 });
 
@@ -887,7 +887,7 @@ test(`throws when unloading while loading`, () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -922,7 +922,7 @@ test(`throws when unloading once unloaded`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -963,12 +963,12 @@ test(`throws when unloading while listing files`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).toBeCalledTimes(1);
   expect(readDirectoryAsync).toHaveBeenCalledWith(
-    `Example Document Directory/Example Subdirectory Name`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
   expect(moveAsync).not.toHaveBeenCalled();
@@ -1007,13 +1007,13 @@ test(`throws when unloading while deleting files`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).toBeCalledTimes(1);
   expect(deleteAsync).toHaveBeenCalledWith(
-    `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
   expect(moveAsync).not.toHaveBeenCalled();
 });
@@ -1051,7 +1051,7 @@ test(`throws when unloading while importing files`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -1060,7 +1060,7 @@ test(`throws when unloading while importing files`, async () => {
   expect(moveAsync).toHaveBeenCalledWith({
     from: `Example File Uri`,
     to: expect.stringMatching(
-      /^Example Document Directory\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+      /^Example Document Directory\/react-native-app-helpers\/file-store\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
     ),
   });
 });
@@ -1089,7 +1089,7 @@ test(`can unload before any file store operations occur`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -1128,12 +1128,12 @@ test(`can unload once listing files completes`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).toBeCalledTimes(1);
   expect(readDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`
   );
   expect(deleteAsync).not.toHaveBeenCalled();
   expect(moveAsync).not.toHaveBeenCalled();
@@ -1166,13 +1166,13 @@ test(`can unload once deleting files completes`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
   expect(deleteAsync).toBeCalledTimes(1);
   expect(deleteAsync).toHaveBeenCalledWith(
-    `Example Document Directory/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2`
   );
   expect(moveAsync).not.toHaveBeenCalled();
 });
@@ -1204,7 +1204,7 @@ test(`can unload once importing files completes`, async () => {
 
   expect(makeDirectoryAsync).toBeCalledTimes(1);
   expect(makeDirectoryAsync).toBeCalledWith(
-    `Example Document Directory/Example Subdirectory Name`,
+    `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name`,
     { intermediates: true }
   );
   expect(readDirectoryAsync).not.toHaveBeenCalled();
@@ -1212,6 +1212,6 @@ test(`can unload once importing files completes`, async () => {
   expect(moveAsync).toBeCalledTimes(1);
   expect(moveAsync).toHaveBeenCalledWith({
     from: `Example File Uri`,
-    to: `Example Document Directory/Example Subdirectory Name/${uuid}`,
+    to: `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/${uuid}`,
   });
 });
