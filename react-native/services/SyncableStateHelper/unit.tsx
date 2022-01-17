@@ -100,7 +100,10 @@ test(`upserts when new`, () => {
 
   expect(listFilesA).not.toHaveBeenCalled();
   expect(listFilesB).toBeCalledTimes(1);
-  expect(listFilesB).toBeCalledWith(`Example Collection B Data B`);
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data B`
+  );
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
@@ -162,7 +165,9 @@ test(`upserts when existing as up to date`, () => {
     readonly exampleAdditionalCollectionDataKey: string;
   };
   const listFilesA = jest.fn();
-  const listFilesB = jest.fn((data) => {
+  const listFilesB = jest.fn((uuid, data) => {
+    uuid;
+
     switch (data) {
       case `Example Collection B Data D`:
         return [
@@ -273,7 +278,14 @@ test(`upserts when existing as up to date`, () => {
 
   expect(listFilesA).not.toHaveBeenCalled();
   expect(listFilesB).toBeCalledTimes(2);
-  expect(listFilesB).toBeCalledWith(`Example Collection B Data B`);
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data B`
+  );
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data D`
+  );
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
@@ -335,7 +347,9 @@ test(`upserts when existing as awaiting push`, () => {
     readonly exampleAdditionalCollectionDataKey: string;
   };
   const listFilesA = jest.fn();
-  const listFilesB = jest.fn((data) => {
+  const listFilesB = jest.fn((uuid, data) => {
+    uuid;
+
     switch (data) {
       case `Example Collection B Data D`:
         return [
@@ -445,7 +459,14 @@ test(`upserts when existing as awaiting push`, () => {
 
   expect(listFilesA).not.toHaveBeenCalled();
   expect(listFilesB).toBeCalledTimes(2);
-  expect(listFilesB).toBeCalledWith(`Example Collection B Data B`);
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data B`
+  );
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data D`
+  );
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
@@ -507,7 +528,9 @@ test(`upserts when existing as pushing`, () => {
     readonly exampleAdditionalCollectionDataKey: string;
   };
   const listFilesA = jest.fn();
-  const listFilesB = jest.fn((data) => {
+  const listFilesB = jest.fn((uuid, data) => {
+    uuid;
+
     switch (data) {
       case `Example Collection B Data D`:
         return [
@@ -617,7 +640,14 @@ test(`upserts when existing as pushing`, () => {
 
   expect(listFilesA).not.toHaveBeenCalled();
   expect(listFilesB).toBeCalledTimes(2);
-  expect(listFilesB).toBeCalledWith(`Example Collection B Data B`);
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data B`
+  );
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data D`
+  );
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
@@ -679,7 +709,9 @@ test(`upserts when existing as awaiting pull`, () => {
     readonly exampleAdditionalCollectionDataKey: string;
   };
   const listFilesA = jest.fn();
-  const listFilesB = jest.fn((data) => {
+  const listFilesB = jest.fn((uuid, data) => {
+    uuid;
+
     switch (data) {
       case `Example Collection B Data D`:
         return [
@@ -789,7 +821,14 @@ test(`upserts when existing as awaiting pull`, () => {
 
   expect(listFilesA).not.toHaveBeenCalled();
   expect(listFilesB).toBeCalledTimes(2);
-  expect(listFilesB).toBeCalledWith(`Example Collection B Data B`);
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data B`
+  );
+  expect(listFilesB).toBeCalledWith(
+    `12d9197e-7803-49ca-83cb-1ce292ec6a35`,
+    `Example Collection B Data D`
+  );
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
