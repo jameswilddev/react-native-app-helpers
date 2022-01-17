@@ -2,6 +2,7 @@
 
 namespace JamesWildDev\ReactNativeAppHelpers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
