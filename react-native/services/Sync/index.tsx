@@ -236,8 +236,6 @@ export class Sync<
                 completedFiles: null,
                 totalFiles: filesToPush.length,
                 execute: async () => {
-                  // TODO: due to laravel 302ing if you don't accept JSON
-                  //       this needs to expect empty JSON in response.
                   await this.request.withoutResponse(
                     `PUT`,
                     `sync/${kebabCasedCollectionKey}/${uuid}`,

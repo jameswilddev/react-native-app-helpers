@@ -63,6 +63,7 @@ test(`get request empty response empty missing protocol`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -109,6 +110,7 @@ test(`get request empty response empty missing trailing slash`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -153,7 +155,9 @@ test(`get request empty response empty no authorization`, async () => {
     {
       signal: expect.any(AbortSignal),
       method: `PUT`,
-      headers: {},
+      headers: {
+        Accept: `application/json`,
+      },
       body: null,
     }
   );
@@ -198,6 +202,7 @@ test(`get request empty response empty no abort signal`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -239,6 +244,7 @@ test(`get request empty response empty no query parameters`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -285,6 +291,7 @@ test(`get request empty response empty no retained query parameters`, async () =
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -331,6 +338,7 @@ test(`get request empty response empty first query parameter dropped`, async () 
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -381,6 +389,7 @@ test(`get request empty response empty invalid status code`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -438,6 +447,7 @@ test(`get request empty response empty external abort`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -483,6 +493,7 @@ test(`get request empty response before timeout`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -548,6 +559,7 @@ test(`get request empty response empty timeout`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -593,6 +605,7 @@ test(`get request json response empty`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -651,6 +664,7 @@ test(`get request json response empty external abort`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -717,6 +731,7 @@ test(`get request json response empty timeout`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -768,6 +783,7 @@ test(`get request json response empty invalid status code`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -824,7 +840,10 @@ test(`get request file response empty`, async () => {
     `Example File Uri`,
     {
       uploadType: `Test Binary Content`,
-      headers: { Authorization: `Example Authorization Header` },
+      headers: {
+        Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
+      },
     }
   );
   expect(cancelAsync).not.toHaveBeenCalled();
@@ -885,7 +904,10 @@ test(`get request file response empty external abort`, async () => {
     `Example File Uri`,
     {
       uploadType: `Test Binary Content`,
-      headers: { Authorization: `Example Authorization Header` },
+      headers: {
+        Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
+      },
     }
   );
   expect(cancelAsync).toBeCalledTimes(1);

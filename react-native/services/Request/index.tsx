@@ -186,6 +186,7 @@ export class Request implements RequestInterface {
             headers: {
               ...this.commonHeaders(),
               ...this.requestBodyHeaders(requestBody),
+              Accept: `application/json`, // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
             },
             body: this.requestBodyBody(requestBody),
           });
@@ -197,6 +198,7 @@ export class Request implements RequestInterface {
             headers: {
               ...this.commonHeaders(),
               ...this.requestBodyHeaders(requestBody),
+              Accept: `application/json`, // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
             },
           });
 
