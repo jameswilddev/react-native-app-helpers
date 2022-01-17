@@ -16,7 +16,7 @@ type ExampleAdditionalCollectionData = {
 };
 
 const example: SyncConfigurationCollection<ExampleData, ExampleAdditionalCollectionData> = {
-  listFiles(item) {
+  listFiles(uuid, data) {
     return [
       {
         route: `example/get/put/and/delete/route`,

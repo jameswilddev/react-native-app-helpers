@@ -43,7 +43,7 @@ export class SyncableStateHelper<
     const syncConfigurationCollection =
       this.syncConfiguration.collections[collectionKey];
     const nextFileUuids = syncConfigurationCollection
-      .listFiles(data)
+      .listFiles(uuid, data)
       .map((file) => file.uuid);
 
     const collection = state.collections[collectionKey];
@@ -54,6 +54,7 @@ export class SyncableStateHelper<
       >;
 
       const previousFiles = syncConfigurationCollection.listFiles(
+        uuid,
         previousItem.data
       );
 

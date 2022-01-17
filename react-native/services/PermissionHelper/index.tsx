@@ -6,6 +6,8 @@ import { showSettingsScreen } from "../../utilities/showSettingsScreen";
  * Provides helpers for working with permissions.
  */
 export class PermissionHelper implements PermissionHelperInterface {
+  // TODO: this requires revision as expo-permissions is deprecated
+
   /**
    * Acquires one or more Expo permissions.
    * @param permissions The permission(s) to acquire.
