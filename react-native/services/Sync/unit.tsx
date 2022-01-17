@@ -129,10 +129,12 @@ const syncConfigurationCollectionA: SyncConfigurationCollection<
   TestAdditionalCollectionData
 > = {
   testAdditionalCollectionDataKey: `Test Collection A Additional Value`,
-  listFiles(item) {
-    switch (item) {
+  listFiles(uuid, data) {
+    switch (data) {
       case `Test Collection A Value A`:
       case `Test Collection A Value E`:
+        expect(uuid).toEqual(`499b4447-2f9a-49a7-b636-909ace319cd8`);
+
         return [
           {
             route: `Test Collection A Value A File A Route`,
@@ -141,12 +143,18 @@ const syncConfigurationCollectionA: SyncConfigurationCollection<
         ];
 
       case `Test Collection A Value B`:
+        expect(uuid).toEqual(`499b4447-2f9a-49a7-b636-909ace319cd8`);
+
         return [];
 
       case `Test Collection A Value C`:
+        expect(uuid).toEqual(`6ebca435-755c-45ef-a11c-1bcdda74c222`);
+
         return [];
 
       case `Test Collection A Value D`:
+        expect(uuid).toEqual(`e999e8d7-9e9c-42f9-a36a-9fe3a2464fe7`);
+
         return [];
     }
   },
@@ -157,12 +165,16 @@ const syncConfigurationCollectionB: SyncConfigurationCollection<
   TestAdditionalCollectionData
 > = {
   testAdditionalCollectionDataKey: `Test Collection B Additional Value`,
-  listFiles(item) {
-    switch (item) {
+  listFiles(uuid, data) {
+    switch (data) {
       case `Test Collection B Value A`:
+        expect(uuid).toEqual(`47fe4216-a7db-43e0-8039-fced83de97cc`);
+
         return [];
 
       case `Test Collection B Value B`:
+        expect(uuid).toEqual(`8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`);
+
         return [
           {
             route: `Test Collection B Value B File A Route`,
@@ -175,6 +187,8 @@ const syncConfigurationCollectionB: SyncConfigurationCollection<
         ];
 
       case `Test Collection B Value C`:
+        expect(uuid).toEqual(`8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`);
+
         return [
           {
             route: `Test Collection B Value C File A Route`,
@@ -187,9 +201,13 @@ const syncConfigurationCollectionB: SyncConfigurationCollection<
         ];
 
       case `Test Collection B Value D`:
+        expect(uuid).toEqual(`2b5de2bf-22a4-493f-a8f3-c03437b08851`);
+
         return [];
 
       case `Test Collection B Value E`:
+        expect(uuid).toEqual(`2b5de2bf-22a4-493f-a8f3-c03437b08851`);
+
         return [
           {
             route: `Test Collection B Value E File A Route`,
@@ -202,6 +220,8 @@ const syncConfigurationCollectionB: SyncConfigurationCollection<
         ];
 
       case `Test Collection B Value F`:
+        expect(uuid).toEqual(`8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`);
+
         return [
           {
             route: `Test Collection B Value F File A Route`,
@@ -222,6 +242,8 @@ const syncConfigurationCollectionB: SyncConfigurationCollection<
         ];
 
       case `Test Collection B Value G`:
+        expect(uuid).toEqual(`8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`);
+
         return [
           {
             route: `Test Collection B Value G File A Route`,
@@ -230,6 +252,8 @@ const syncConfigurationCollectionB: SyncConfigurationCollection<
         ];
 
       case `Test Collection B Value H`:
+        expect(uuid).toEqual(`8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`);
+
         return [
           {
             route: `Test Collection B Value H File A Route`,
@@ -242,15 +266,23 @@ const syncConfigurationCollectionB: SyncConfigurationCollection<
         ];
 
       case `Test Collection B Value I`:
+        expect(uuid).toEqual(`ce05f13c-6a36-42ac-bed4-63bbf098eeb8`);
+
         return [];
 
       case `Test Collection B Value J`:
+        expect(uuid).toEqual(`4c91279d-d35f-4063-afa2-a0c0ec0dcfd3`);
+
         return [];
 
       case `Test Collection B Value K`:
+        expect(uuid).toEqual(`94576d22-2cbc-451e-9a92-3c50866da564`);
+
         return [];
 
       case `Test Collection B Value L`:
+        expect(uuid).toEqual(`ce05f13c-6a36-42ac-bed4-63bbf098eeb8`);
+
         return [];
     }
   },
@@ -261,8 +293,14 @@ const syncConfigurationCollectionC: SyncConfigurationCollection<
   TestAdditionalCollectionData
 > = {
   testAdditionalCollectionDataKey: `Test Collection C Additional Value`,
-  listFiles(item) {
-    item;
+  listFiles(uuid, data) {
+    expect(uuid).toEqual(`c2bf5c63-85dc-4797-82db-6136081b1562`);
+
+    expect([
+      `Test Collection C Value A`,
+      `Test Collection C Value B`,
+    ]).toContain(data);
+
     return [];
   },
 };

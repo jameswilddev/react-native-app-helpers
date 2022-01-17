@@ -219,6 +219,7 @@ export class Sync<
             }
 
             const referencedFiles = syncConfigurationCollection.listFiles(
+              uuid,
               item.data
             );
 
@@ -464,7 +465,7 @@ export class Sync<
             data: Json
           ): Promise<void> => {
             const filesToPull = syncConfigurationCollection
-              .listFiles(data)
+              .listFiles(uuid, data)
               .filter((file) => !existingFileUuids.includes(file.uuid));
 
             let completedFiles = 0;
@@ -788,12 +789,13 @@ export class Sync<
           const syncConfigurationCollection =
             this.syncConfiguration.collections[collectionKey];
 
-          for (const syncableStateCollectionItem of Object.values(
+          for (const [uuid, syncableStateCollectionItem] of Object.entries(
             state.collections[collectionKey] as SyncableStateCollection<
               TSchema[`collections`]
             >
           )) {
             for (const file of syncConfigurationCollection.listFiles(
+              uuid,
               syncableStateCollectionItem.data
             )) {
               allReferencedFileUuids.push(file.uuid);
