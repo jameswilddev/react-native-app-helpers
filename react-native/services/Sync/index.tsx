@@ -143,7 +143,6 @@ export class Sync<
           | {
               type: `push`;
               readonly beforeLogMessage: string;
-              readonly afterLogMessage: string;
               readonly syncConfigurationCollection: SyncConfigurationCollection<
                 TSchema[`collections`][keyof TSchema[`collections`]],
                 TAdditionalCollectionData
@@ -151,12 +150,13 @@ export class Sync<
               readonly completedFiles: null | number;
               readonly totalFiles: number;
               execute(): Promise<boolean>;
+              skip(): boolean;
             }
           | {
               type: `deletion`;
               readonly beforeLogMessage: string;
-              readonly afterLogMessage: string;
               execute(): Promise<boolean>;
+              skip(): boolean;
             }
         )[] = [];
 
@@ -231,40 +231,76 @@ export class Sync<
               pushesAndDeletions.push({
                 type: `push`,
                 beforeLogMessage: `Pushing change of "${collectionKey}" "${uuid}"...`,
-                afterLogMessage: `Successfully pushed change of "${collectionKey}" "${uuid}".`,
                 syncConfigurationCollection,
                 completedFiles: null,
                 totalFiles: filesToPush.length,
                 execute: async () => {
-                  await this.request.withoutResponse(
+                  const statusCode = await this.request.withoutResponse(
                     `PUT`,
                     `sync/${kebabCasedCollectionKey}/${uuid}`,
                     { type: `json`, value: item.data },
                     {},
                     abortSignal,
-                    [`200`]
+                    [`200`, `404`, `403`]
                   );
 
                   if (this.stateStore.get() === state) {
-                    collection = {
-                      ...collection,
-                      [uuid]: {
-                        status: `awaitingPull`,
-                        data: item.data,
-                      },
-                    };
+                    if (statusCode === `200`) {
+                      collection = {
+                        ...collection,
+                        [uuid]: {
+                          status: `awaitingPull`,
+                          data: item.data,
+                        },
+                      };
 
-                    state = {
-                      ...state,
-                      collections: {
-                        ...state.collections,
-                        [collectionKey]: collection,
-                      },
-                    };
+                      state = {
+                        ...state,
+                        collections: {
+                          ...state.collections,
+                          [collectionKey]: collection,
+                        },
+                      };
 
-                    this.stateStore.set(state);
+                      this.stateStore.set(state);
 
-                    return true;
+                      this.logger.information(
+                        `Successfully pushed change of "${collectionKey}" "${uuid}".`
+                      );
+
+                      return true;
+                    } else {
+                      const collectionCopy = {
+                        ...collection,
+                      };
+
+                      delete collectionCopy[uuid];
+
+                      collection = collectionCopy;
+
+                      const affectedFileUuids = syncConfigurationCollection
+                        .listFiles(uuid, item.data)
+                        .map((file) => file.uuid);
+
+                      state = {
+                        ...state,
+                        collections: {
+                          ...state.collections,
+                          [collectionKey]: collection,
+                        },
+                        addedFileUuids: state.addedFileUuids.filter(
+                          (fileUuid) => !affectedFileUuids.includes(fileUuid)
+                        ),
+                      };
+
+                      this.stateStore.set(state);
+
+                      this.logger.warning(
+                        `The API returned status code "${statusCode}" during push of "${collectionKey}" "${uuid}", indicating that the user has lost access.  The local changes have been lost.`
+                      );
+
+                      return true;
+                    }
                   } else {
                     this.logger.warning(
                       `The state store changed during push of "${collectionKey}" "${uuid}"; sync has been interrupted and will need to run again.`
@@ -273,6 +309,7 @@ export class Sync<
                     return false;
                   }
                 },
+                skip: () => false,
               });
             } else {
               if (filesToPush.length > 0) {
@@ -292,12 +329,11 @@ export class Sync<
               pushesAndDeletions.push({
                 type: `push`,
                 beforeLogMessage: `Pushing file "${file.uuid}" of "${collectionKey}" "${uuid}"...`,
-                afterLogMessage: `Successfully pushed file "${file.uuid}" of "${collectionKey}" "${uuid}".`,
                 syncConfigurationCollection,
                 completedFiles,
                 totalFiles: filesToPush.length,
                 execute: async () => {
-                  await this.request.withoutResponse(
+                  const statusCode = await this.request.withoutResponse(
                     `PUT`,
                     file.route,
                     {
@@ -306,7 +342,7 @@ export class Sync<
                     },
                     {},
                     abortSignal,
-                    [`200`]
+                    [`200`, `404`, `403`]
                   );
 
                   if (this.stateStore.get() === state) {
@@ -321,7 +357,19 @@ export class Sync<
 
                     this.stateStore.set(state);
 
-                    return true;
+                    if (statusCode === `200`) {
+                      this.logger.information(
+                        `Successfully pushed file "${file.uuid}" of "${collectionKey}" "${uuid}".`
+                      );
+
+                      return true;
+                    } else {
+                      this.logger.warning(
+                        `The API returned status code "${statusCode}" during push of file "${file.uuid}" of "${collectionKey}" "${uuid}", indicating that the user has lost access.  The local changes will temporarily remain locally, but will most likely be lost during the pull phase.`
+                      );
+
+                      return true;
+                    }
                   } else {
                     this.logger.warning(
                       `The state store changed during push of file "${file.uuid}" of "${collectionKey}" "${uuid}"; sync has been interrupted and will need to run again.`
@@ -330,6 +378,11 @@ export class Sync<
                     return false;
                   }
                 },
+                skip: () =>
+                  !Object.prototype.hasOwnProperty.call(
+                    state.collections[collectionKey],
+                    uuid
+                  ),
               });
 
               completedFiles++;
@@ -341,15 +394,14 @@ export class Sync<
           pushesAndDeletions.push({
             type: `deletion`,
             beforeLogMessage: `Deleting file "${route}"...`,
-            afterLogMessage: `Successfully deleted file "${route}".`,
             execute: async () => {
-              await this.request.withoutResponse(
+              const statusCode = await this.request.withoutResponse(
                 `DELETE`,
                 route,
                 { type: `empty` },
                 {},
                 abortSignal,
-                [`200`]
+                [`200`, `404`, `403`]
               );
 
               if (this.stateStore.get() === state) {
@@ -364,7 +416,19 @@ export class Sync<
 
                 this.stateStore.set(state);
 
-                return true;
+                if (statusCode === `200`) {
+                  this.logger.information(
+                    `Successfully deleted file "${route}".`
+                  );
+
+                  return true;
+                } else {
+                  this.logger.warning(
+                    `The API returned status code "${statusCode}" during deletion of file "${route}", indicating that the user has lost access.  Another attempt will not be made.`
+                  );
+
+                  return true;
+                }
               } else {
                 this.logger.warning(
                   `The state store changed during deletion of file "${route}"; sync has been interrupted and will need to run again.`
@@ -373,38 +437,41 @@ export class Sync<
                 return false;
               }
             },
+            skip: () => false,
           });
         }
 
         let completedPushesAndDeletions = 0;
 
         for (const pushOrDeletion of pushesAndDeletions) {
-          this.logger.information(pushOrDeletion.beforeLogMessage);
-
-          if (pushOrDeletion.type === `push`) {
-            this.setState({
-              type: `pushing`,
-              completedSteps: completedPushesAndDeletions,
-              totalSteps: pushesAndDeletions.length,
-              completedFiles: pushOrDeletion.completedFiles,
-              totalFiles: pushOrDeletion.totalFiles,
-              syncConfigurationCollection:
-                pushOrDeletion.syncConfigurationCollection,
-            });
-          } else {
-            this.setState({
-              type: `deleting`,
-              completedSteps: completedPushesAndDeletions,
-              totalSteps: pushesAndDeletions.length,
-            });
-          }
-
-          if (!(await pushOrDeletion.execute())) {
-            return `needsToRunAgain`;
-          } else {
-            this.logger.information(pushOrDeletion.afterLogMessage);
-
+          if (pushOrDeletion.skip()) {
             completedPushesAndDeletions++;
+          } else {
+            this.logger.information(pushOrDeletion.beforeLogMessage);
+
+            if (pushOrDeletion.type === `push`) {
+              this.setState({
+                type: `pushing`,
+                completedSteps: completedPushesAndDeletions,
+                totalSteps: pushesAndDeletions.length,
+                completedFiles: pushOrDeletion.completedFiles,
+                totalFiles: pushOrDeletion.totalFiles,
+                syncConfigurationCollection:
+                  pushOrDeletion.syncConfigurationCollection,
+              });
+            } else {
+              this.setState({
+                type: `deleting`,
+                completedSteps: completedPushesAndDeletions,
+                totalSteps: pushesAndDeletions.length,
+              });
+            }
+
+            if (!(await pushOrDeletion.execute())) {
+              return `needsToRunAgain`;
+            } else {
+              completedPushesAndDeletions++;
+            }
           }
         }
 
@@ -428,7 +495,6 @@ export class Sync<
           >;
           readonly preflightResponseCollectionItem: PreflightResponseCollectionItem<TAdditionalCollectionItemData>;
           readonly beforeLogMessage: string;
-          readonly afterLogMessage: string;
           execute(): Promise<boolean>;
         }[] = [];
 
@@ -461,7 +527,7 @@ export class Sync<
             uuid: string,
             preflightResponseCollectionItem: PreflightResponseCollectionItem<TAdditionalCollectionItemData>,
             data: Json
-          ): Promise<void> => {
+          ): Promise<boolean> => {
             const filesToPull = syncConfigurationCollection
               .listFiles(uuid, data)
               .filter((file) => !existingFileUuids.includes(file.uuid));
@@ -483,22 +549,32 @@ export class Sync<
                 preflightResponseCollectionItem,
               });
 
-              await this.request.returningFile(
+              const statusCode = await this.request.returningFile(
                 `GET`,
                 file.route,
                 { type: `empty` },
                 {},
                 null,
                 this.fileStore.generatePath(file.uuid),
-                [`200`]
+                [`200`, `404`, `403`]
               );
 
-              this.logger.information(
-                `Successfully pulled file "${file.uuid}" of "${collectionKey}" "${uuid}".`
-              );
+              if (statusCode === `200`) {
+                this.logger.information(
+                  `Successfully pulled file "${file.uuid}" of "${collectionKey}" "${uuid}".`
+                );
 
-              completedFiles++;
+                completedFiles++;
+              } else {
+                this.logger.warning(
+                  `The API returned status code "${statusCode}" during the pull of file "${file.uuid}" of "${collectionKey}" "${uuid}", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`
+                );
+
+                return false;
+              }
             }
+
+            return true;
           };
 
           for (const uuid of Object.keys(preflightCollection)
@@ -519,60 +595,77 @@ export class Sync<
               syncConfigurationCollection,
               preflightResponseCollectionItem,
               beforeLogMessage: `Pulling new "${collectionKey}" "${uuid}"...`,
-              afterLogMessage: `Successfully pulled new "${collectionKey}" "${uuid}".`,
               execute: async () => {
                 const response = await this.request.returningJson<{
                   "200": SyncPullResponse<Json>;
+                  "404": Json;
+                  "403": Json;
                 }>(
                   `GET`,
                   `sync/${kebabCasedCollectionKey}/${uuid}`,
                   { type: `empty` },
                   {},
                   abortSignal,
-                  [`200`]
+                  [`200`, `404`, `403`]
                 );
 
-                if (
-                  response.value.version ===
-                  preflightResponseCollectionItem.version
-                ) {
-                  await pullFiles(
-                    uuid,
-                    preflightResponseCollectionItem,
-                    response.value.data
-                  );
+                if (response.statusCode === "200") {
+                  if (
+                    response.value.version ===
+                    preflightResponseCollectionItem.version
+                  ) {
+                    if (
+                      !(await pullFiles(
+                        uuid,
+                        preflightResponseCollectionItem,
+                        response.value.data
+                      ))
+                    ) {
+                      return false;
+                    }
 
-                  if (this.stateStore.get() === state) {
-                    stateCollection = {
-                      ...stateCollection,
-                      [uuid]: {
-                        status: `upToDate`,
-                        version: response.value.version,
-                        data: response.value.data,
-                      },
-                    };
+                    if (this.stateStore.get() === state) {
+                      stateCollection = {
+                        ...stateCollection,
+                        [uuid]: {
+                          status: `upToDate`,
+                          version: response.value.version,
+                          data: response.value.data,
+                        },
+                      };
 
-                    state = {
-                      ...state,
-                      collections: {
-                        ...state.collections,
-                        [collectionKey]: stateCollection,
-                      },
-                    };
+                      state = {
+                        ...state,
+                        collections: {
+                          ...state.collections,
+                          [collectionKey]: stateCollection,
+                        },
+                      };
 
-                    this.stateStore.set(state);
+                      this.stateStore.set(state);
 
-                    return true;
+                      this.logger.information(
+                        `Successfully pulled new "${collectionKey}" "${uuid}".`
+                      );
+
+                      return true;
+                    } else {
+                      this.logger.warning(
+                        `The state store changed during pull of "${collectionKey}" "${uuid}"; sync has been interrupted and will need to run again.`
+                      );
+
+                      return false;
+                    }
                   } else {
                     this.logger.warning(
-                      `The state store changed during pull of "${collectionKey}" "${uuid}"; sync has been interrupted and will need to run again.`
+                      `The version of "${collectionKey}" "${uuid}" changed from "${preflightResponseCollectionItem.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
                     );
 
                     return false;
                   }
                 } else {
                   this.logger.warning(
-                    `The version of "${collectionKey}" "${uuid}" changed from "${preflightResponseCollectionItem.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
+                    `The API returned status code "${response.statusCode}" during the pull of "${collectionKey}" "${uuid}", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`
                   );
 
                   return false;
@@ -636,60 +729,77 @@ export class Sync<
               // the UI has not made any changes.
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               beforeLogMessage: beforeLogMessage!,
-              afterLogMessage: `Successfully pulled update of "${collectionKey}" "${uuid}".`,
               execute: async () => {
                 const response = await this.request.returningJson<{
                   "200": SyncPullResponse<Json>;
+                  "404": Json;
+                  "403": Json;
                 }>(
                   `GET`,
                   `sync/${kebabCasedCollectionKey}/${uuid}`,
                   { type: `empty` },
                   {},
                   abortSignal,
-                  [`200`]
+                  [`200`, `404`, `403`]
                 );
 
-                if (
-                  response.value.version ===
-                  preflightResponseCollectionItem.version
-                ) {
-                  await pullFiles(
-                    uuid,
-                    preflightResponseCollectionItem,
-                    response.value.data
-                  );
+                if (response.statusCode === `200`) {
+                  if (
+                    response.value.version ===
+                    preflightResponseCollectionItem.version
+                  ) {
+                    if (
+                      !(await pullFiles(
+                        uuid,
+                        preflightResponseCollectionItem,
+                        response.value.data
+                      ))
+                    ) {
+                      return false;
+                    }
 
-                  if (this.stateStore.get() === state) {
-                    stateCollection = {
-                      ...stateCollection,
-                      [uuid]: {
-                        status: `upToDate`,
-                        version: response.value.version,
-                        data: response.value.data,
-                      },
-                    };
+                    if (this.stateStore.get() === state) {
+                      stateCollection = {
+                        ...stateCollection,
+                        [uuid]: {
+                          status: `upToDate`,
+                          version: response.value.version,
+                          data: response.value.data,
+                        },
+                      };
 
-                    state = {
-                      ...state,
-                      collections: {
-                        ...state.collections,
-                        [collectionKey]: stateCollection,
-                      },
-                    };
+                      state = {
+                        ...state,
+                        collections: {
+                          ...state.collections,
+                          [collectionKey]: stateCollection,
+                        },
+                      };
 
-                    this.stateStore.set(state);
+                      this.stateStore.set(state);
 
-                    return true;
+                      this.logger.information(
+                        `Successfully pulled update of "${collectionKey}" "${uuid}".`
+                      );
+
+                      return true;
+                    } else {
+                      this.logger.warning(
+                        `The state store changed during pull of "${collectionKey}" "${uuid}"; sync has been interrupted and will need to run again.`
+                      );
+
+                      return false;
+                    }
                   } else {
                     this.logger.warning(
-                      `The state store changed during pull of "${collectionKey}" "${uuid}"; sync has been interrupted and will need to run again.`
+                      `The version of "${collectionKey}" "${uuid}" changed from "${preflightResponseCollectionItem.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
                     );
 
                     return false;
                   }
                 } else {
                   this.logger.warning(
-                    `The version of "${collectionKey}" "${uuid}" changed from "${preflightResponseCollectionItem.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
+                    `The API returned status code "${response.statusCode}" during the pull of "${collectionKey}" "${uuid}", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`
                   );
 
                   return false;
@@ -714,8 +824,6 @@ export class Sync<
           if (!(await pull.execute())) {
             return `needsToRunAgain`;
           } else {
-            this.logger.information(pull.afterLogMessage);
-
             completedPulls++;
           }
         }
