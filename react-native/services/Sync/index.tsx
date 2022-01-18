@@ -556,7 +556,8 @@ export class Sync<
                 {},
                 null,
                 this.fileStore.generatePath(file.uuid),
-                [`200`, `404`, `403`]
+                [`200`],
+                [`404`, `403`]
               );
 
               if (statusCode === `200`) {

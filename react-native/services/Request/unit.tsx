@@ -1450,7 +1450,8 @@ test(`get request empty response file`, async () => {
     },
     null,
     `Example File Uri`,
-    [`244`, `123`, `89`]
+    [`244`, `123`, `89`],
+    [`800`, `222`, `347`, `844`]
   );
 
   expect(response).toEqual(`123`);
@@ -1467,6 +1468,58 @@ test(`get request empty response file`, async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled();
   expect(fetch).not.toHaveBeenCalled();
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled();
+});
+
+test(`get request empty response file failure status code`, async () => {
+  const fetch = jest.fn();
+  (global as unknown as { fetch: unknown }).fetch = fetch;
+  (
+    FileSystem.downloadAsync as unknown as {
+      mockResolvedValue(value: unknown): void;
+    }
+  ).mockResolvedValue({
+    status: 347,
+  });
+  const request = new Request(
+    `https://example-base-url.com/example/sub/path/`,
+    1000,
+    () => `Example Authorization Header`
+  );
+
+  const response = await request.returningFile(
+    `GET`,
+    `example/route`,
+    { type: `empty` },
+    {
+      "Example Query Parameter A Key": `Example Query Parameter A Value`,
+      "Example Query Parameter B Key": 12.34,
+      "Example Query Parameter C Key": false,
+      "Example Query Parameter D Key": true,
+    },
+    null,
+    `Example File Uri`,
+    [`244`, `123`, `89`],
+    [`800`, `222`, `347`, `844`]
+  );
+
+  expect(response).toEqual(`347`);
+
+  expect(FileSystem.downloadAsync).toBeCalledTimes(1);
+  expect(FileSystem.downloadAsync).toBeCalledWith(
+    `https://example-base-url.com/example/sub/path/example/route?Example%20Query%20Parameter%20A%20Key=Example%20Query%20Parameter%20A%20Value&Example%20Query%20Parameter%20B%20Key=12.34&Example%20Query%20Parameter%20D%20Key`,
+    `Example File Uri`,
+    {
+      headers: { Authorization: `Example Authorization Header` },
+    }
+  );
+
+  expect(FileSystem.deleteAsync).toBeCalledTimes(1);
+  expect(FileSystem.deleteAsync).toBeCalledWith(`Example File Uri`, {
+    idempotent: true,
+  });
+
+  expect(FileSystem.createUploadTask).not.toHaveBeenCalled();
+  expect(fetch).not.toHaveBeenCalled();
 });
 
 test(`get request empty response file invalid status code`, async () => {
@@ -1497,7 +1550,8 @@ test(`get request empty response file invalid status code`, async () => {
     },
     null,
     `Example File Uri`,
-    [`244`, `123`, `89`]
+    [`244`, `123`, `89`],
+    [`800`, `222`, `347`, `844`]
   );
 
   await expect(promise).rejects.toEqual(

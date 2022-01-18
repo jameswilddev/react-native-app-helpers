@@ -278,7 +278,8 @@ export class Request implements RequestInterface {
     queryParameters: QueryParameters,
     abortSignal: null,
     fileUri: string,
-    expectedStatusCodes: ReadonlyArray<T>
+    successfulStatusCodes: ReadonlyArray<T>,
+    unsuccessfulStatusCodes: ReadonlyArray<T>
   ): Promise<T> {
     // Not yet possible with FileSystem.downloadAsync.
     abortSignal;
@@ -293,7 +294,16 @@ export class Request implements RequestInterface {
         },
       });
 
-      this.checkStatusCode(method, url, response.status, expectedStatusCodes);
+      this.checkStatusCode(method, url, response.status, [
+        ...successfulStatusCodes,
+        ...unsuccessfulStatusCodes,
+      ]);
+
+      // It's possible that the application will close before we hit this line,
+      // but this is the best we can do unfortunately.
+      if (unsuccessfulStatusCodes.includes(String(response.status) as T)) {
+        await FileSystem.deleteAsync(fileUri, { idempotent: true });
+      }
 
       return String(response.status) as T;
     } catch (e) {
