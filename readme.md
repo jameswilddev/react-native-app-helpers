@@ -38,6 +38,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createHrComponent](./react-native/components/createHrComponent/readme.md)
 - [createImageBackgroundComponent](./react-native/components/createImageBackgroundComponent/readme.md)
 - [createInputComponent](./react-native/components/createInputComponent/readme.md)
+- [createLimitedWidthComponent](./react-native/components/createLimitedWidthComponent/readme.md)
 - [createNullableEmailInputComponent](./react-native/components/createNullableEmailInputComponent/readme.md)
 - [createNullableFloatInputComponent](./react-native/components/createNullableFloatInputComponent/readme.md)
 - [createNullableIntegerInputComponent](./react-native/components/createNullableIntegerInputComponent/readme.md)

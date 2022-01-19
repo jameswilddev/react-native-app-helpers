@@ -2,23 +2,23 @@ import * as React from "react";
 import { StyleSheet, View } from "react-native";
 
 /**
- * Creates a React component which has a fixed width.
- * @param width The width of the component
+ * Creates a React component which has a maximum width.
+ * @param maximumWidth The maximum width of the component
  * @returns     The created component.
  */
-export const createFixedWidthComponent = (
-  width: number
+export const createLimitedWidthComponent = (
+  maximumWidth: number
 ): React.FunctionComponent<{
   /** Determines how the column is to be sized vertically. */
   readonly height: `fillsContainer` | `fitsContent`;
 }> => {
   const styles = StyleSheet.create({
     fillsContainer: {
-      width,
+      maxWidth: maximumWidth,
       height: `100%`,
     },
     fitsContent: {
-      width,
+      maxWidth: maximumWidth,
     },
   });
 

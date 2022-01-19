@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 import {
-  createFixedWidthComponent,
+  createLimitedWidthComponent,
   unwrapRenderedFunctionComponent,
 } from "../../..";
 
 test(`renders as expected when filling its container vertically`, () => {
-  const Component = createFixedWidthComponent(243);
+  const Component = createLimitedWidthComponent(243);
 
   const rendered = (
     <Component height="fillsContainer">
@@ -15,14 +15,14 @@ test(`renders as expected when filling its container vertically`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: 243, height: `100%` }} pointerEvents="box-none">
+    <View style={{ maxWidth: 243, height: `100%` }} pointerEvents="box-none">
       <Text>Example Content</Text>
     </View>
   );
 });
 
 test(`renders as expected when fitting its content vertically`, () => {
-  const Component = createFixedWidthComponent(243);
+  const Component = createLimitedWidthComponent(243);
 
   const rendered = (
     <Component height="fitsContent">
@@ -31,7 +31,7 @@ test(`renders as expected when fitting its content vertically`, () => {
   );
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: 243 }} pointerEvents="box-none">
+    <View style={{ maxWidth: 243 }} pointerEvents="box-none">
       <Text>Example Content</Text>
     </View>
   );
