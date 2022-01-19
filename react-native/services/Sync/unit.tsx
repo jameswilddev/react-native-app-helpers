@@ -14,6 +14,28 @@ import type { LoggerInterface } from "../../types/LoggerInterface";
 import type { SyncableState } from "../../types/SyncableState";
 import type { SyncState } from "../../types/SyncState";
 
+type EnumAData =
+  | `Test Enum A Value A`
+  | `Test Enum A Value B`
+  | `Test Enum A Value C`
+  | `Test Enum A Value D`
+  | `Test Enum A Value E`;
+
+type EnumBData =
+  | `Test Enum B Value A`
+  | `Test Enum B Value B`
+  | `Test Enum B Value C`
+  | `Test Enum B Value D`
+  | `Test Enum B Value E`;
+
+type EnumCData =
+  | `Test Enum C Value A`
+  | `Test Enum C Value B`
+  | `Test Enum C Value C`
+  | `Test Enum C Value D`
+  | `Test Enum C Value E`
+  | `Test Enum C Value F`;
+
 type CollectionAData =
   | `Test Collection A Value A`
   | `Test Collection A Value B`
@@ -40,6 +62,11 @@ type CollectionCData =
   | `Test Collection C Value B`;
 
 type TestSchema = {
+  readonly enums: {
+    readonly testEnumAKey: EnumAData;
+    readonly testEnumBKey: EnumBData;
+    readonly testEnumCKey: EnumCData;
+  };
   readonly collections: {
     readonly testCollectionAKey: CollectionAData;
     readonly testCollectionBKey: CollectionBData;
@@ -528,10 +555,31 @@ function scenario(
       request,
       logger,
       {
-        collectionOrder: [
-          `testCollectionBKey`,
-          `testCollectionCKey`,
-          `testCollectionAKey`,
+        order: [
+          {
+            type: `collection`,
+            key: `testCollectionBKey`,
+          },
+          {
+            type: `enum`,
+            key: `testEnumCKey`,
+          },
+          {
+            type: `enum`,
+            key: `testEnumBKey`,
+          },
+          {
+            type: `collection`,
+            key: `testCollectionCKey`,
+          },
+          {
+            type: `enum`,
+            key: `testEnumAKey`,
+          },
+          {
+            type: `collection`,
+            key: `testCollectionAKey`,
+          },
         ],
         collections: {
           testCollectionAKey: syncConfigurationCollectionA,
@@ -593,6 +641,35 @@ function scenario(
 scenario(
   `without changes`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -717,6 +794,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -772,6 +860,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -783,6 +881,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -856,6 +959,35 @@ scenario(
 scenario(
   `with a change to push without files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -998,6 +1130,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1057,6 +1218,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1112,6 +1284,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -1123,6 +1305,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -1148,7 +1335,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1162,7 +1349,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1189,6 +1376,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1283,6 +1499,35 @@ scenario(
 scenario(
   `with a change to push with files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1430,6 +1675,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1511,6 +1785,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1570,6 +1873,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1625,6 +1939,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -1636,6 +1960,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -1661,7 +1990,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1675,7 +2004,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1702,6 +2031,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1796,6 +2154,35 @@ scenario(
 scenario(
   `with a previously interrupted push without files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1938,6 +2325,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1997,6 +2413,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2052,6 +2479,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -2063,6 +2500,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -2088,7 +2530,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2102,7 +2544,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2129,6 +2571,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2223,6 +2694,35 @@ scenario(
 scenario(
   `with a previously interrupted push with files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2370,6 +2870,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2451,6 +2980,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2510,6 +3068,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2565,6 +3134,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -2576,6 +3155,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -2601,7 +3185,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2615,7 +3199,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2642,6 +3226,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2736,6 +3349,35 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were not awaiting push and the interrupted record is then deleted`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2859,6 +3501,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2905,6 +3558,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -2916,6 +3579,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -2961,6 +3629,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3038,6 +3735,35 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were awaiting push and the interrupted record is then deleted`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3193,6 +3919,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3252,6 +4007,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3298,6 +4064,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -3309,6 +4085,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -3354,6 +4135,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3431,6 +4241,35 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were not awaiting push and the interrupted record is then updated`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3554,6 +4393,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3609,6 +4459,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -3620,6 +4480,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -3645,7 +4510,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -3659,7 +4524,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -3686,6 +4551,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3780,6 +4674,35 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were awaiting push and the interrupted record is then updated`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3935,6 +4858,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3994,6 +4946,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4049,6 +5012,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -4060,6 +5033,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -4085,7 +5063,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4099,7 +5077,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4126,6 +5104,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4220,6 +5227,35 @@ scenario(
 scenario(
   `with a new item to pull without files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4344,6 +5380,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4408,6 +5455,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -4419,6 +5476,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -4444,7 +5506,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4458,7 +5520,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4485,6 +5547,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4584,6 +5675,35 @@ scenario(
 scenario(
   `with a new item to pull with files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4708,6 +5828,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4772,6 +5903,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -4783,6 +5924,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -4808,7 +5954,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4822,7 +5968,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4955,6 +6101,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5054,6 +6229,35 @@ scenario(
 scenario(
   `with an updated item to pull without new files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5178,6 +6382,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5233,6 +6448,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -5244,6 +6469,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -5269,7 +6499,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5283,7 +6513,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5310,6 +6540,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5404,6 +6663,35 @@ scenario(
 scenario(
   `with an updated item to pull with new files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5528,6 +6816,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5583,6 +6882,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -5594,6 +6903,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -5619,7 +6933,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5633,7 +6947,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5766,6 +7080,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5860,6 +7203,35 @@ scenario(
 scenario(
   `with an updated item to pull with deleted files`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5984,6 +7356,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -6039,6 +7422,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -6050,6 +7443,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -6075,7 +7473,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -6089,7 +7487,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -6116,6 +7514,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -6214,6 +7641,28 @@ scenario(
 scenario(
   `with multiple items changing in the same sync`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `absent`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         // Updated.
@@ -6416,6 +7865,28 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6527,6 +7998,28 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6635,6 +8128,28 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6740,6 +8255,28 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6826,6 +8363,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version B`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6904,6 +8452,16 @@ scenario(
     },
     {
       type: `log`,
+      severity: `information`,
+      text: `New enum "testEnumCKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
       severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
@@ -6916,6 +8474,11 @@ scenario(
       type: `log`,
       severity: `information`,
       text: `Previously pushed "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled enum "testEnumAKey" will be pulled again as versions do not match between preflight ("Test Enum A Version B") and state store ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -6932,7 +8495,6 @@ scenario(
       severity: `information`,
       text: `Previously pulled "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" will be pulled again as versions do not match between preflight ("Test Collection A A Version B") and state store ("Test Collection A A Version A").`,
     },
-
     {
       type: `log`,
       severity: `information`,
@@ -6942,9 +8504,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B E Version A`,
@@ -6956,9 +8518,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B E Version A`,
@@ -6983,6 +8545,28 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7061,9 +8645,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B B Version C`,
@@ -7075,9 +8659,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B B Version C`,
@@ -7109,7 +8693,7 @@ scenario(
       to: {
         type: `pullingFile`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         completedFiles: 0,
         totalFiles: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -7125,7 +8709,7 @@ scenario(
       to: {
         type: `pullingFile`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         completedFiles: 0,
         totalFiles: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -7155,6 +8739,28 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7234,9 +8840,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 2,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B C Version B`,
@@ -7248,9 +8854,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 2,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B C Version B`,
@@ -7275,6 +8881,28 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7348,15 +8976,155 @@ scenario(
     {
       type: `log`,
       severity: `information`,
+      text: `Pulling enum "testEnumCKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 3,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 3,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-enum-c-key`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        version: `Test Enum C Version A`,
+        data: {
+          "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
+          "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
+        },
+      },
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
+              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
+            },
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            // Updated.
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+            // Deleted.
+            "6ebca435-755c-45ef-a11c-1bcdda74c222": {
+              status: `upToDate`,
+              version: `Test Collection A B Version A`,
+              data: `Test Collection A Value C`,
+            },
+            // Deleted.
+            "e999e8d7-9e9c-42f9-a36a-9fe3a2464fe7": {
+              status: `upToDate`,
+              version: `Test Collection A C Version A`,
+              data: `Test Collection A Value D`,
+            },
+          },
+          testCollectionBKey: {
+            // No interaction.
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            // Pushed.
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version C`,
+              data: `Test Collection B Value H`,
+            },
+            // Pulled.
+            "ce05f13c-6a36-42ac-bed4-63bbf098eeb8": {
+              status: `upToDate`,
+              version: `Test Collection B C Version B`,
+              data: `Test Collection B Value L`,
+            },
+            // Deleted.
+            "4c91279d-d35f-4063-afa2-a0c0ec0dcfd3": {
+              status: `upToDate`,
+              version: `Test Collection B D Version A`,
+              data: `Test Collection B Value J`,
+            },
+            // Added.
+            "94576d22-2cbc-451e-9a92-3c50866da564": {
+              status: `upToDate`,
+              version: `Test Collection B E Version A`,
+              data: `Test Collection B Value K`,
+            },
+          },
+          testCollectionCKey: {
+            // Pushed.
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `awaitingPull`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled new enum "testEnumCKey".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
       text: `Pulling previously pushed "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
-        completedSteps: 3,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 4,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionC,
         preflightResponseCollectionItem: {
           version: `Test Collection C A Version B`,
@@ -7368,9 +9136,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
-        completedSteps: 3,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 4,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionC,
         preflightResponseCollectionItem: {
           version: `Test Collection C A Version B`,
@@ -7395,6 +9163,33 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
+              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7470,15 +9265,155 @@ scenario(
     {
       type: `log`,
       severity: `information`,
+      text: `Pulling enum "testEnumAKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 5,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 5,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-enum-a-key`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        version: `Test Enum A Version B`,
+        data: {
+          "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
+          "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
+        },
+      },
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version B`,
+            values: {
+              "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
+              "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
+              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
+            },
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            // Updated.
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+            // Deleted.
+            "6ebca435-755c-45ef-a11c-1bcdda74c222": {
+              status: `upToDate`,
+              version: `Test Collection A B Version A`,
+              data: `Test Collection A Value C`,
+            },
+            // Deleted.
+            "e999e8d7-9e9c-42f9-a36a-9fe3a2464fe7": {
+              status: `upToDate`,
+              version: `Test Collection A C Version A`,
+              data: `Test Collection A Value D`,
+            },
+          },
+          testCollectionBKey: {
+            // No interaction.
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            // Pushed.
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version C`,
+              data: `Test Collection B Value H`,
+            },
+            // Pulled.
+            "ce05f13c-6a36-42ac-bed4-63bbf098eeb8": {
+              status: `upToDate`,
+              version: `Test Collection B C Version B`,
+              data: `Test Collection B Value L`,
+            },
+            // Deleted.
+            "4c91279d-d35f-4063-afa2-a0c0ec0dcfd3": {
+              status: `upToDate`,
+              version: `Test Collection B D Version A`,
+              data: `Test Collection B Value J`,
+            },
+            // Added.
+            "94576d22-2cbc-451e-9a92-3c50866da564": {
+              status: `upToDate`,
+              version: `Test Collection B E Version A`,
+              data: `Test Collection B Value K`,
+            },
+          },
+          testCollectionCKey: {
+            // Pushed.
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version B`,
+              data: `Test Collection C Value B`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled update of enum "testEnumAKey".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
       text: `Pulling updated "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
-        completedSteps: 4,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 6,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionA,
         preflightResponseCollectionItem: {
           version: `Test Collection A A Version B`,
@@ -7490,9 +9425,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
-        completedSteps: 4,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 6,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionA,
         preflightResponseCollectionItem: {
           version: `Test Collection A A Version B`,
@@ -7517,6 +9452,32 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version B`,
+            values: {
+              "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
+              "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
+              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7627,6 +9588,32 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version B`,
+            values: {
+              "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
+              "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
+              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7725,6 +9712,35 @@ scenario(
 scenario(
   `with a new item to pull but the state store changes during the update`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -7849,6 +9865,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -7913,6 +9940,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -7924,6 +9961,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -7949,7 +9991,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -7963,7 +10005,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -8008,6 +10050,35 @@ scenario(
 scenario(
   `with an updated item to pull but the state store changes during the update`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8132,6 +10203,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8187,6 +10269,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -8198,6 +10290,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -8223,7 +10320,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -8237,7 +10334,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -8282,6 +10379,35 @@ scenario(
 scenario(
   `awaiting push fails due to unexpected state change`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8448,6 +10574,35 @@ scenario(
 scenario(
   `awaiting push file fails due to unexpected state change`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8595,6 +10750,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8695,6 +10879,35 @@ scenario(
 scenario(
   `pushing fails due to unexpected state change`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8861,6 +11074,35 @@ scenario(
 scenario(
   `pushing file fails due to unexpected state change`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9008,6 +11250,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9108,6 +11379,35 @@ scenario(
 scenario(
   `awaiting pull file fails due to unexpected state change`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9282,6 +11582,35 @@ scenario(
 scenario(
   `files can be deleted`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9415,6 +11744,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9483,6 +11841,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9548,6 +11935,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9608,6 +12024,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9663,6 +12090,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -9674,6 +12111,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -9747,6 +12189,35 @@ scenario(
 scenario(
   `state store changes during file deletion`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9880,6 +12351,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9967,6 +12467,35 @@ scenario(
 scenario(
   `state store changes during pull of new`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10091,6 +12620,35 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10155,6 +12713,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -10166,6 +12734,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -10191,7 +12764,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10205,7 +12778,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10251,6 +12824,35 @@ scenario(
 scenario(
   `state store changes during pull of updated`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10375,6 +12977,35 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10430,6 +13061,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -10441,6 +13082,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -10466,7 +13112,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10480,7 +13126,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10526,6 +13172,35 @@ scenario(
 scenario(
   `state store changes during pull of awaiting push`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10668,6 +13343,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10727,6 +13431,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10782,6 +13497,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -10793,6 +13518,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -10818,7 +13548,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10832,7 +13562,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10878,6 +13608,35 @@ scenario(
 scenario(
   `state store changes during pull of pushing`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11020,6 +13779,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11079,6 +13867,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11134,6 +13933,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -11145,6 +13954,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -11170,7 +13984,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -11184,7 +13998,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -11230,6 +14044,35 @@ scenario(
 scenario(
   `state store changes during pull of awaiting pull`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11353,6 +14196,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11408,6 +14262,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -11419,6 +14283,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -11444,7 +14313,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -11458,7 +14327,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -11504,6 +14373,35 @@ scenario(
 scenario(
   `state store changes during deletion application for up to date`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11628,6 +14526,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11674,6 +14583,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -11685,6 +14604,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -11749,6 +14673,35 @@ scenario(
 scenario(
   `state store changes during deletion application for pushing`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11891,6 +14844,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11950,6 +14932,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11996,6 +14989,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -12007,6 +15010,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -12071,6 +15079,35 @@ scenario(
 scenario(
   `state store changes during deletion application for awaiting push`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12213,6 +15250,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12272,6 +15338,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12318,6 +15395,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -12329,6 +15416,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -12393,6 +15485,35 @@ scenario(
 scenario(
   `state store changes during deletion application for awaiting pull`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12516,6 +15637,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12562,6 +15694,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -12573,6 +15715,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -12689,10 +15836,31 @@ test(`throws an error when already running`, async () => {
     request,
     logger,
     {
-      collectionOrder: [
-        `testCollectionBKey`,
-        `testCollectionCKey`,
-        `testCollectionAKey`,
+      order: [
+        {
+          type: `collection`,
+          key: `testCollectionBKey`,
+        },
+        {
+          type: `enum`,
+          key: `testEnumCKey`,
+        },
+        {
+          type: `enum`,
+          key: `testEnumBKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionCKey`,
+        },
+        {
+          type: `enum`,
+          key: `testEnumAKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionAKey`,
+        },
       ],
       collections: {
         testCollectionAKey: syncConfigurationCollectionA,
@@ -12758,6 +15926,23 @@ test(`can run multiple times`, async () => {
     removeListener: jest.fn(),
     load: jest.fn(),
     get: jest.fn().mockReturnValue({
+      enums: {
+        testEnumAKey: {
+          type: `upToDate`,
+          version: 0,
+          values: {},
+        },
+        testEnumBKey: {
+          type: `upToDate`,
+          version: 0,
+          values: {},
+        },
+        testEnumCKey: {
+          type: `upToDate`,
+          version: 0,
+          values: {},
+        },
+      },
       collections: {
         testCollectionAKey: {},
         testCollectionBKey: {},
@@ -12775,6 +15960,17 @@ test(`can run multiple times`, async () => {
     returningJson: jest.fn().mockResolvedValue({
       statusCode: `200`,
       value: {
+        enums: {
+          testEnumAKey: {
+            version: 0,
+          },
+          testEnumBKey: {
+            version: 0,
+          },
+          testEnumCKey: {
+            version: 0,
+          },
+        },
         collections: {
           testCollectionAKey: {},
           testCollectionBKey: {},
@@ -12812,10 +16008,31 @@ test(`can run multiple times`, async () => {
     request,
     logger,
     {
-      collectionOrder: [
-        `testCollectionBKey`,
-        `testCollectionCKey`,
-        `testCollectionAKey`,
+      order: [
+        {
+          type: `collection`,
+          key: `testCollectionBKey`,
+        },
+        {
+          type: `enum`,
+          key: `testEnumCKey`,
+        },
+        {
+          type: `enum`,
+          key: `testEnumBKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionCKey`,
+        },
+        {
+          type: `enum`,
+          key: `testEnumAKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionAKey`,
+        },
       ],
       collections: {
         testCollectionAKey: syncConfigurationCollectionA,
@@ -12856,7 +16073,7 @@ test(`can run multiple times`, async () => {
   expect(logger.error).not.toHaveBeenCalled();
   expect(logger.warning).not.toHaveBeenCalled();
   expect(logger.information).toBeCalledTimes(4);
-  expect(logger.debug).toBeCalledTimes(40);
+  expect(logger.debug).toBeCalledTimes(46);
   expect(fileStore.load).not.toHaveBeenCalled();
   expect(fileStore.generatePath).not.toHaveBeenCalled();
   expect(fileStore.delete).not.toHaveBeenCalled();
@@ -12868,6 +16085,35 @@ test(`can run multiple times`, async () => {
 scenario(
   `deleted following push`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13010,6 +16256,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13069,6 +16344,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13115,6 +16401,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -13126,6 +16422,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -13171,6 +16472,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13248,6 +16578,35 @@ scenario(
 scenario(
   `deleted following an interrupted push`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13390,6 +16749,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13449,6 +16837,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13495,6 +16894,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -13506,6 +16915,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -13551,6 +16965,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13628,6 +17071,35 @@ scenario(
 scenario(
   `deleted without changes`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13752,6 +17224,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13798,6 +17281,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -13809,6 +17302,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -13854,6 +17352,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13931,6 +17458,35 @@ scenario(
 scenario(
   `files can be deleted`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14064,6 +17620,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14132,6 +17717,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14197,6 +17811,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14257,6 +17900,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14312,6 +17966,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -14323,6 +17987,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -14396,6 +18065,35 @@ scenario(
 scenario(
   `file clean-up temporarily blocked`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14522,6 +18220,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14577,6 +18286,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -14588,6 +18307,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -14662,6 +18386,35 @@ scenario(
 scenario(
   `files requiring push but not existing`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14729,6 +18482,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14857,6 +18639,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14938,6 +18749,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14997,6 +18837,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15052,6 +18903,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -15063,6 +18924,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -15088,7 +18954,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionA,
@@ -15102,7 +18968,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionA,
@@ -15129,6 +18995,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15223,6 +19118,35 @@ scenario(
 scenario(
   `handles a non-200 pull`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15347,6 +19271,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15411,6 +19346,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -15422,6 +19367,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -15447,7 +19397,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -15461,7 +19411,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -15503,6 +19453,35 @@ scenario(
 scenario(
   `handles a non-200 update`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15627,6 +19606,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15682,6 +19672,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -15693,6 +19693,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -15718,7 +19723,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -15732,7 +19737,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -15774,6 +19779,35 @@ scenario(
 scenario(
   `handles a non-200 file pull in a new item`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15898,6 +19932,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -15962,6 +20007,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -15973,6 +20028,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -15998,7 +20058,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -16012,7 +20072,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -16105,6 +20165,35 @@ scenario(
 scenario(
   `handles a non-200 file pull for an existing item`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -16229,6 +20318,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -16284,6 +20384,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -16295,6 +20405,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -16320,7 +20435,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -16334,7 +20449,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -16427,6 +20542,35 @@ scenario(
 scenario(
   `handles a non-200 push`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -16574,6 +20718,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -16629,6 +20802,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -16675,6 +20859,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -16686,6 +20880,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -16772,6 +20971,35 @@ scenario(
 scenario(
   `handles a non-200 file push`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -16919,6 +21147,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17000,6 +21257,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17059,6 +21345,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17114,6 +21411,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -17125,6 +21432,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -17150,7 +21462,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -17164,7 +21476,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -17191,6 +21503,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17285,6 +21626,35 @@ scenario(
 scenario(
   `handles a non-200 file deletion`,
   {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17418,6 +21788,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17486,6 +21885,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17551,6 +21979,35 @@ scenario(
     {
       type: `setState`,
       to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17611,6 +22068,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -17666,6 +22134,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -17677,6 +22155,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
     },
     {
       type: `log`,
@@ -17745,4 +22228,2149 @@ scenario(
     },
   ],
   `atLeastOneChangeMade`
+);
+
+scenario(
+  `enum pulled as new`,
+  {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `absent`,
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New enum "testEnumBKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling enum "testEnumBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-enum-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Enum B Version A`,
+        data: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: false,
+    },
+    {
+      type: `setState`,
+      to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version A`,
+            values: {
+              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version A`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled new enum "testEnumBKey".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to delete...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Nothing to delete.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for files to clean up...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No files to clean up.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync completed successfully; at least one change was made.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `atLeastOneChangeMade`
+);
+
+scenario(
+  `enum pulled as new state store change`,
+  {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `absent`,
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New enum "testEnumBKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling enum "testEnumBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-enum-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Enum B Version A`,
+        data: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: true,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The state store changed during pull of enum "testEnumBKey"; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `enum pulled as new version mismatch`,
+  {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `absent`,
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version A`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New enum "testEnumBKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling enum "testEnumBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-enum-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Enum B Version B`,
+        data: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The version of enum "testEnumBKey" changed from "Test Enum B Version A" at the time of preflight to "Test Enum B Version B" at the time of pull; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `enum pulled as updated`,
+  {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version B`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled enum "testEnumBKey" will be pulled again as versions do not match between preflight ("Test Enum B Version B") and state store ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling enum "testEnumBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-enum-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Enum B Version B`,
+        data: {
+          "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
+          "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
+          "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
+        },
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: false,
+    },
+    {
+      type: `setState`,
+      to: {
+        enums: {
+          testEnumAKey: {
+            type: `upToDate`,
+            version: `Test Enum A Version A`,
+            values: {
+              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+            },
+          },
+          testEnumBKey: {
+            type: `upToDate`,
+            version: `Test Enum B Version B`,
+            values: {
+              "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
+              "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
+              "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
+            },
+          },
+          testEnumCKey: {
+            type: `upToDate`,
+            version: `Test Enum C Version A`,
+            values: {
+              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+            },
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version A`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled update of enum "testEnumBKey".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to delete...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Nothing to delete.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for files to clean up...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No files to clean up.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync completed successfully; at least one change was made.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `atLeastOneChangeMade`
+);
+
+scenario(
+  `enum pulled as updated version mismatch`,
+  {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version B`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled enum "testEnumBKey" will be pulled again as versions do not match between preflight ("Test Enum B Version B") and state store ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling enum "testEnumBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-enum-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Enum B Version C`,
+        data: {
+          "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
+          "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
+          "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
+        },
+      },
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The version of enum "testEnumBKey" changed from "Test Enum B Version B" at the time of preflight to "Test Enum B Version C" at the time of pull; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `enum pulled as updated`,
+  {
+    enums: {
+      testEnumAKey: {
+        type: `upToDate`,
+        version: `Test Enum A Version A`,
+        values: {
+          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
+          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
+          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
+        },
+      },
+      testEnumBKey: {
+        type: `upToDate`,
+        version: `Test Enum B Version A`,
+        values: {
+          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
+          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
+        },
+      },
+      testEnumCKey: {
+        type: `upToDate`,
+        version: `Test Enum C Version A`,
+        values: {
+          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
+          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
+          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
+          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
+        },
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        enums: {
+          testEnumAKey: {
+            version: `Test Enum A Version A`,
+          },
+          testEnumBKey: {
+            version: `Test Enum B Version B`,
+          },
+          testEnumCKey: {
+            version: `Test Enum C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled enum "testEnumBKey" will be pulled again as versions do not match between preflight ("Test Enum B Version B") and state store ("Test Enum B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling enum "testEnumBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingEnum`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-enum-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Enum B Version B`,
+        data: {
+          "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
+          "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
+          "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
+        },
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: true,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The state store changed during pull of enum "testEnumBKey"; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
 );
