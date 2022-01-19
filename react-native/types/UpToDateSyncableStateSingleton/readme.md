@@ -1,21 +1,16 @@
-# `react-native-app-helpers/SyncableStateEnum`
+# `react-native-app-helpers/UpToDateSyncableStateSingleton`
 
-Represents an enum which can be synced.
+Represents a singleton which can be synced.
 
 ## Usage
 
 ```tsx
-import type { SyncableStateEnum } from "react-native-app-helpers";
+import type { UpToDateSyncableStateSingleton } from "react-native-app-helpers";
 
 type ExampleData = {
   readonly exampleDataAKey: boolean;
 };
-
-const absentExample: SyncableStateEnum<ExampleData> = {
-  type: `absent`,
-};
-
-const upToDateExample: SyncableStateEnum<ExampleData> = {
+const example: UpToDateSyncableStateSingleton<ExampleData> = {
   type: `upToDate`,
   version: `Example Version`,
   items: {

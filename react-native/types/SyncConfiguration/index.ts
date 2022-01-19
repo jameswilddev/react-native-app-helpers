@@ -13,14 +13,14 @@ export type SyncConfiguration<
   TAdditionalCollectionData extends Record<string, unknown>
 > = {
   /**
-   * The order in which enums and collections which are to be synced.  This
+   * The order in which singletons and collections which are to be synced.  This
    * order will be followed for additions and updates, then reversed for
    * deletions in a subsequent pass.
    */
   readonly order: ReadonlyArray<
     | {
-        readonly type: `enum`;
-        readonly key: keyof TSchema[`enums`];
+        readonly type: `singleton`;
+        readonly key: keyof TSchema[`singletons`];
       }
     | {
         readonly type: `collection`;

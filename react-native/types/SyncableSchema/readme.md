@@ -8,11 +8,11 @@ The schema of information which can be synced.
 import type { SyncableSchema } from "react-native-app-helpers";
 
 const example: SyncableSchema = {
-  readonly enums: {
-    readonly exampleEnumAKey: {
+  readonly singletons: {
+    readonly exampleSingletonAKey: {
       readonly exampleDataAKey: boolean;
     };
-    readonly exampleEnumBKey: {
+    readonly exampleSingletonBKey: {
       readonly exampleDataBKey: number;
     };
   };

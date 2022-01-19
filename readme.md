@@ -96,7 +96,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 #### Types
 
-- [AbsentSyncableStateEnum](./react-native/types/AbsentSyncableStateEnum/readme.md)
+- [AbsentSyncableStateSingleton](./react-native/types/AbsentSyncableStateConstnat/readme.md)
 - [AwaitingPullSyncableStateCollectionItem](./react-native/types/AwaitingPullSyncableStateCollectionItem/readme.md)
 - [AwaitingPushSyncableStateCollectionItem](./react-native/types/AwaitingPushSyncableStateCollectionItem/readme.md)
 - [BasicTableColumn](./react-native/types/BasicTableColumn/readme.md)
@@ -131,7 +131,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [PreflightResponse](./react-native/types/PreflightResponse/readme.md)
 - [PreflightResponseCollection](./react-native/types/PreflightResponseCollection/readme.md)
 - [PreflightResponseCollectionItem](./react-native/types/PreflightResponseCollectionItem/readme.md)
-- [PreflightResponseEnum](./react-native/types/PreflightResponseEnum/readme.md)
+- [PreflightResponseSingleton](./react-native/types/PreflightResponseSingleton/readme.md)
 - [PushingSyncableStateCollectionItem](./react-native/types/PushingSyncableStateCollectionItem/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
@@ -154,7 +154,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [SyncableState](./react-native/types/SyncableState/readme.md)
 - [SyncableStateCollection](./react-native/types/SyncableStateCollection/readme.md)
 - [SyncableStateCollectionItem](./react-native/types/SyncableStateCollectionItem/readme.md)
-- [SyncableStateEnum](./react-native/types/SyncableStateEnum/readme.md)
+- [SyncableStateSingleton](./react-native/types/SyncableStateSingleton/readme.md)
 - [SyncConfiguration](./react-native/types/SyncConfiguration/readme.md)
 - [SyncConfigurationCollection](./react-native/types/SyncConfigurationCollection/readme.md)
 - SyncInterface
@@ -171,7 +171,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [UnderlinedTopTabBarStyle](./react-native/types/UnderlinedTopTabBarStyle/readme.md)
 - [UnderlinedTopTabBarStyleState](./react-native/types/UnderlinedTopTabBarStyleState/readme.md)
 - [UpToDateSyncableStateCollectionItem](./react-native/types/UpToDateSyncableStateCollectionItem/readme.md)
-- [UpToDateSyncableStateEnum](./react-native/types/UpToDateSyncableStateEnum/readme.md)
+- [UpToDateSyncableStateSingleton](./react-native/types/UpToDateSyncableStateSingleton/readme.md)
 
 #### Utilities
 

@@ -14,27 +14,11 @@ import type { LoggerInterface } from "../../types/LoggerInterface";
 import type { SyncableState } from "../../types/SyncableState";
 import type { SyncState } from "../../types/SyncState";
 
-type EnumAData =
-  | `Test Enum A Value A`
-  | `Test Enum A Value B`
-  | `Test Enum A Value C`
-  | `Test Enum A Value D`
-  | `Test Enum A Value E`;
+type SingletonAData = `Test Singleton A Value A` | `Test Singleton A Value B`;
 
-type EnumBData =
-  | `Test Enum B Value A`
-  | `Test Enum B Value B`
-  | `Test Enum B Value C`
-  | `Test Enum B Value D`
-  | `Test Enum B Value E`;
+type SingletonBData = `Test Singleton B Value A` | `Test Singleton B Value B`;
 
-type EnumCData =
-  | `Test Enum C Value A`
-  | `Test Enum C Value B`
-  | `Test Enum C Value C`
-  | `Test Enum C Value D`
-  | `Test Enum C Value E`
-  | `Test Enum C Value F`;
+type SingletonCData = `Test Singleton C Value A` | `Test Singleton C Value B`;
 
 type CollectionAData =
   | `Test Collection A Value A`
@@ -62,10 +46,10 @@ type CollectionCData =
   | `Test Collection C Value B`;
 
 type TestSchema = {
-  readonly enums: {
-    readonly testEnumAKey: EnumAData;
-    readonly testEnumBKey: EnumBData;
-    readonly testEnumCKey: EnumCData;
+  readonly singletons: {
+    readonly testSingletonAKey: SingletonAData;
+    readonly testSingletonBKey: SingletonBData;
+    readonly testSingletonCKey: SingletonCData;
   };
   readonly collections: {
     readonly testCollectionAKey: CollectionAData;
@@ -561,20 +545,20 @@ function scenario(
             key: `testCollectionBKey`,
           },
           {
-            type: `enum`,
-            key: `testEnumCKey`,
+            type: `singleton`,
+            key: `testSingletonCKey`,
           },
           {
-            type: `enum`,
-            key: `testEnumBKey`,
+            type: `singleton`,
+            key: `testSingletonBKey`,
           },
           {
             type: `collection`,
             key: `testCollectionCKey`,
           },
           {
-            type: `enum`,
-            key: `testEnumAKey`,
+            type: `singleton`,
+            key: `testSingletonAKey`,
           },
           {
             type: `collection`,
@@ -641,33 +625,21 @@ function scenario(
 scenario(
   `without changes`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -794,15 +766,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -860,12 +832,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -885,7 +857,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -959,33 +931,21 @@ scenario(
 scenario(
   `with a change to push without files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -1130,33 +1090,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -1218,15 +1166,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -1284,12 +1232,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -1309,7 +1257,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -1376,33 +1324,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -1499,33 +1435,21 @@ scenario(
 scenario(
   `with a change to push with files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -1675,33 +1599,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -1785,33 +1697,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -1873,15 +1773,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -1939,12 +1839,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -1964,7 +1864,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -2031,33 +1931,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -2154,33 +2042,21 @@ scenario(
 scenario(
   `with a previously interrupted push without files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -2325,33 +2201,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -2413,15 +2277,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -2479,12 +2343,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -2504,7 +2368,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -2571,33 +2435,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -2694,33 +2546,21 @@ scenario(
 scenario(
   `with a previously interrupted push with files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -2870,33 +2710,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -2980,33 +2808,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -3068,15 +2884,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -3134,12 +2950,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -3159,7 +2975,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -3226,33 +3042,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -3349,33 +3153,21 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were not awaiting push and the interrupted record is then deleted`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -3501,15 +3293,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -3558,12 +3350,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -3583,7 +3375,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -3629,33 +3421,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -3735,33 +3515,21 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were awaiting push and the interrupted record is then deleted`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -3919,33 +3687,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -4007,15 +3763,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -4064,12 +3820,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -4089,7 +3845,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -4135,33 +3891,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -4241,33 +3985,21 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were not awaiting push and the interrupted record is then updated`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -4393,15 +4125,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -4459,12 +4191,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -4484,7 +4216,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -4551,33 +4283,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -4674,33 +4394,21 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were awaiting push and the interrupted record is then updated`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -4858,33 +4566,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -4946,15 +4642,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -5012,12 +4708,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -5037,7 +4733,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -5104,33 +4800,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -5227,33 +4911,21 @@ scenario(
 scenario(
   `with a new item to pull without files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -5380,15 +5052,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -5455,12 +5127,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -5480,7 +5152,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -5547,33 +5219,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -5675,33 +5335,21 @@ scenario(
 scenario(
   `with a new item to pull with files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -5828,15 +5476,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -5903,12 +5551,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -5928,7 +5576,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -6101,33 +5749,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -6229,33 +5865,21 @@ scenario(
 scenario(
   `with an updated item to pull without new files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -6382,15 +6006,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -6448,12 +6072,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -6473,7 +6097,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -6540,33 +6164,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -6663,33 +6275,21 @@ scenario(
 scenario(
   `with an updated item to pull with new files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -6816,15 +6416,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -6882,12 +6482,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -6907,7 +6507,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -7080,33 +6680,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -7203,33 +6791,21 @@ scenario(
 scenario(
   `with an updated item to pull with deleted files`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -7356,15 +6932,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -7422,12 +6998,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -7447,7 +7023,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -7514,33 +7090,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -7641,25 +7205,18 @@ scenario(
 scenario(
   `with multiple items changing in the same sync`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `absent`,
       },
     },
@@ -7865,25 +7422,18 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `absent`,
           },
         },
@@ -7998,25 +7548,18 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `absent`,
           },
         },
@@ -8128,25 +7671,18 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `absent`,
           },
         },
@@ -8255,25 +7791,18 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `absent`,
           },
         },
@@ -8363,15 +7892,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version B`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version B`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -8453,12 +7982,12 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `New enum "testEnumCKey" will be pulled.`,
+      text: `New singleton "testSingletonCKey" will be pulled.`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -8478,7 +8007,7 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Previously pulled enum "testEnumAKey" will be pulled again as versions do not match between preflight ("Test Enum A Version B") and state store ("Test Enum A Version A").`,
+      text: `Previously pulled singleton "testSingletonAKey" will be pulled again as versions do not match between preflight ("Test Singleton A Version B") and state store ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -8545,25 +8074,18 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `absent`,
           },
         },
@@ -8739,25 +8261,18 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `absent`,
           },
         },
@@ -8881,25 +8396,18 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `absent`,
           },
         },
@@ -8976,13 +8484,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumCKey"...`,
+      text: `Pulling singleton "testSingletonCKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 3,
         totalSteps: 7,
       },
@@ -8991,7 +8499,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 3,
         totalSteps: 7,
       },
@@ -8999,16 +8507,13 @@ scenario(
     {
       type: `pullJson`,
       method: `GET`,
-      route: `sync/test-enum-c-key`,
+      route: `sync/test-singleton-c-key`,
       requestBody: { type: `empty` },
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        version: `Test Enum C Version A`,
-        data: {
-          "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
-          "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
-        },
+        version: `Test Singleton C Version A`,
+        data: `Test Singleton C Value B`,
       },
       statusCode: `200`,
     },
@@ -9016,31 +8521,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
-              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
           },
         },
         collections: {
@@ -9111,7 +8606,7 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Successfully pulled new enum "testEnumCKey".`,
+      text: `Successfully pulled new singleton "testSingletonCKey".`,
     },
     {
       type: `log`,
@@ -9163,31 +8658,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
-              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
           },
         },
         collections: {
@@ -9265,13 +8750,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumAKey"...`,
+      text: `Pulling singleton "testSingletonAKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 5,
         totalSteps: 7,
       },
@@ -9280,7 +8765,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 5,
         totalSteps: 7,
       },
@@ -9288,16 +8773,13 @@ scenario(
     {
       type: `pullJson`,
       method: `GET`,
-      route: `sync/test-enum-a-key`,
+      route: `sync/test-singleton-a-key`,
       requestBody: { type: `empty` },
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        version: `Test Enum A Version B`,
-        data: {
-          "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
-          "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
-        },
+        version: `Test Singleton A Version B`,
+        data: `Test Singleton A Value B`,
       },
       statusCode: `200`,
     },
@@ -9305,30 +8787,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version B`,
-            values: {
-              "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
-              "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
-            },
+            version: `Test Singleton A Version B`,
+            value: `Test Singleton A Value B`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
-              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
           },
         },
         collections: {
@@ -9400,7 +8873,7 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Successfully pulled update of enum "testEnumAKey".`,
+      text: `Successfully pulled update of singleton "testSingletonAKey".`,
     },
     {
       type: `log`,
@@ -9452,30 +8925,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version B`,
-            values: {
-              "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
-              "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
-            },
+            version: `Test Singleton A Version B`,
+            value: `Test Singleton A Value B`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
-              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
           },
         },
         collections: {
@@ -9588,30 +9052,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version B`,
-            values: {
-              "946b8bc8-5a4b-4382-a55c-43df2c2ca4a6": `Test Enum A Value D`,
-              "76f2d330-c72c-4eb5-b220-72815a65cef1": `Test Enum A Value E`,
-            },
+            version: `Test Singleton A Version B`,
+            value: `Test Singleton A Value B`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "f2e827fb-5271-4775-8c92-1bea86ad4cc0": `Test Enum C Value E`,
-              "7d6efd2e-52d5-4cae-b35e-676536a880fc": `Test Enum C Value F`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
           },
         },
         collections: {
@@ -9712,33 +9167,21 @@ scenario(
 scenario(
   `with a new item to pull but the state store changes during the update`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -9865,15 +9308,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -9940,12 +9383,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -9965,7 +9408,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -10050,33 +9493,21 @@ scenario(
 scenario(
   `with an updated item to pull but the state store changes during the update`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -10203,15 +9634,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -10269,12 +9700,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -10294,7 +9725,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -10379,33 +9810,21 @@ scenario(
 scenario(
   `awaiting push fails due to unexpected state change`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -10574,33 +9993,21 @@ scenario(
 scenario(
   `awaiting push file fails due to unexpected state change`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -10750,33 +10157,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -10879,33 +10274,21 @@ scenario(
 scenario(
   `pushing fails due to unexpected state change`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -11074,33 +10457,21 @@ scenario(
 scenario(
   `pushing file fails due to unexpected state change`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -11250,33 +10621,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -11379,33 +10738,21 @@ scenario(
 scenario(
   `awaiting pull file fails due to unexpected state change`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -11582,33 +10929,21 @@ scenario(
 scenario(
   `files can be deleted`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -11744,33 +11079,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -11841,33 +11164,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -11935,33 +11246,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -12024,15 +11323,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -12090,12 +11389,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -12115,7 +11414,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -12189,33 +11488,21 @@ scenario(
 scenario(
   `state store changes during file deletion`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -12351,33 +11638,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -12467,33 +11742,21 @@ scenario(
 scenario(
   `state store changes during pull of new`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -12620,33 +11883,21 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -12713,12 +11964,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -12738,7 +11989,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -12824,33 +12075,21 @@ scenario(
 scenario(
   `state store changes during pull of updated`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -12977,33 +12216,21 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -13061,12 +12288,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -13086,7 +12313,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -13172,33 +12399,21 @@ scenario(
 scenario(
   `state store changes during pull of awaiting push`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -13343,33 +12558,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -13431,15 +12634,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -13497,12 +12700,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -13522,7 +12725,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -13608,33 +12811,21 @@ scenario(
 scenario(
   `state store changes during pull of pushing`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -13779,33 +12970,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -13867,15 +13046,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -13933,12 +13112,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -13958,7 +13137,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -14044,33 +13223,21 @@ scenario(
 scenario(
   `state store changes during pull of awaiting pull`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -14196,15 +13363,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -14262,12 +13429,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -14287,7 +13454,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -14373,33 +13540,21 @@ scenario(
 scenario(
   `state store changes during deletion application for up to date`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -14526,15 +13681,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -14583,12 +13738,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -14608,7 +13763,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -14673,33 +13828,21 @@ scenario(
 scenario(
   `state store changes during deletion application for pushing`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -14844,33 +13987,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -14932,15 +14063,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -14989,12 +14120,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -15014,7 +14145,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -15079,33 +14210,21 @@ scenario(
 scenario(
   `state store changes during deletion application for awaiting push`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -15250,33 +14369,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -15338,15 +14445,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -15395,12 +14502,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -15420,7 +14527,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -15485,33 +14592,21 @@ scenario(
 scenario(
   `state store changes during deletion application for awaiting pull`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -15637,15 +14732,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -15694,12 +14789,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -15719,7 +14814,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -15842,20 +14937,20 @@ test(`throws an error when already running`, async () => {
           key: `testCollectionBKey`,
         },
         {
-          type: `enum`,
-          key: `testEnumCKey`,
+          type: `singleton`,
+          key: `testSingletonCKey`,
         },
         {
-          type: `enum`,
-          key: `testEnumBKey`,
+          type: `singleton`,
+          key: `testSingletonBKey`,
         },
         {
           type: `collection`,
           key: `testCollectionCKey`,
         },
         {
-          type: `enum`,
-          key: `testEnumAKey`,
+          type: `singleton`,
+          key: `testSingletonAKey`,
         },
         {
           type: `collection`,
@@ -15926,21 +15021,21 @@ test(`can run multiple times`, async () => {
     removeListener: jest.fn(),
     load: jest.fn(),
     get: jest.fn().mockReturnValue({
-      enums: {
-        testEnumAKey: {
+      singletons: {
+        testSingletonAKey: {
           type: `upToDate`,
-          version: 0,
-          values: {},
+          version: `Test Singleton A Version A`,
+          value: `Test Singleton A Value A`,
         },
-        testEnumBKey: {
+        testSingletonBKey: {
           type: `upToDate`,
-          version: 0,
-          values: {},
+          version: `Test Singleton B Version A`,
+          value: `Test Singleton B Value A`,
         },
-        testEnumCKey: {
+        testSingletonCKey: {
           type: `upToDate`,
-          version: 0,
-          values: {},
+          version: `Test Singleton C Version A`,
+          value: `Test Singleton C Value A`,
         },
       },
       collections: {
@@ -15960,15 +15055,15 @@ test(`can run multiple times`, async () => {
     returningJson: jest.fn().mockResolvedValue({
       statusCode: `200`,
       value: {
-        enums: {
-          testEnumAKey: {
-            version: 0,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: 0,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: 0,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -16014,20 +15109,20 @@ test(`can run multiple times`, async () => {
           key: `testCollectionBKey`,
         },
         {
-          type: `enum`,
-          key: `testEnumCKey`,
+          type: `singleton`,
+          key: `testSingletonCKey`,
         },
         {
-          type: `enum`,
-          key: `testEnumBKey`,
+          type: `singleton`,
+          key: `testSingletonBKey`,
         },
         {
           type: `collection`,
           key: `testCollectionCKey`,
         },
         {
-          type: `enum`,
-          key: `testEnumAKey`,
+          type: `singleton`,
+          key: `testSingletonAKey`,
         },
         {
           type: `collection`,
@@ -16085,33 +15180,21 @@ test(`can run multiple times`, async () => {
 scenario(
   `deleted following push`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -16256,33 +15339,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -16344,15 +15415,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -16401,12 +15472,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -16426,7 +15497,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -16472,33 +15543,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -16578,33 +15637,21 @@ scenario(
 scenario(
   `deleted following an interrupted push`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -16749,33 +15796,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -16837,15 +15872,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -16894,12 +15929,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -16919,7 +15954,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -16965,33 +16000,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -17071,33 +16094,21 @@ scenario(
 scenario(
   `deleted without changes`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -17224,15 +16235,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -17281,12 +16292,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -17306,7 +16317,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -17352,33 +16363,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -17458,33 +16457,21 @@ scenario(
 scenario(
   `files can be deleted`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -17620,33 +16607,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -17717,33 +16692,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -17811,33 +16774,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -17900,15 +16851,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -17966,12 +16917,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -17991,7 +16942,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -18065,33 +17016,21 @@ scenario(
 scenario(
   `file clean-up temporarily blocked`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -18220,15 +17159,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -18286,12 +17225,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -18311,7 +17250,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -18386,33 +17325,21 @@ scenario(
 scenario(
   `files requiring push but not existing`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -18482,33 +17409,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -18639,33 +17554,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -18749,33 +17652,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -18837,15 +17728,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -18903,12 +17794,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -18928,7 +17819,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -18995,33 +17886,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -19118,33 +17997,21 @@ scenario(
 scenario(
   `handles a non-200 pull`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -19271,15 +18138,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -19346,12 +18213,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -19371,7 +18238,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -19453,33 +18320,21 @@ scenario(
 scenario(
   `handles a non-200 update`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -19606,15 +18461,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -19672,12 +18527,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -19697,7 +18552,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -19779,33 +18634,21 @@ scenario(
 scenario(
   `handles a non-200 file pull in a new item`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -19932,15 +18775,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -20007,12 +18850,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -20032,7 +18875,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -20165,33 +19008,21 @@ scenario(
 scenario(
   `handles a non-200 file pull for an existing item`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -20318,15 +19149,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -20384,12 +19215,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -20409,7 +19240,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -20542,33 +19373,21 @@ scenario(
 scenario(
   `handles a non-200 push`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -20718,33 +19537,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -20802,15 +19609,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -20859,12 +19666,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -20884,7 +19691,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -20971,33 +19778,21 @@ scenario(
 scenario(
   `handles a non-200 file push`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -21147,33 +19942,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -21257,33 +20040,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -21345,15 +20116,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -21411,12 +20182,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -21436,7 +20207,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -21503,33 +20274,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -21626,33 +20385,21 @@ scenario(
 scenario(
   `handles a non-200 file deletion`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -21788,33 +20535,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -21885,33 +20620,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -21979,33 +20702,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -22068,15 +20779,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -22134,12 +20845,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumBKey" as preflight and state store versions match ("Test Enum B Version A").`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -22159,7 +20870,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -22231,30 +20942,21 @@ scenario(
 );
 
 scenario(
-  `enum pulled as new`,
+  `singleton pulled as new`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -22381,15 +21083,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -22447,12 +21149,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `information`,
-      text: `New enum "testEnumBKey" will be pulled.`,
+      text: `New singleton "testSingletonBKey" will be pulled.`,
     },
     {
       type: `log`,
@@ -22472,7 +21174,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -22492,13 +21194,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumBKey"...`,
+      text: `Pulling singleton "testSingletonBKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
@@ -22507,25 +21209,22 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
     },
     {
       type: `pullJson`,
-      route: `sync/test-enum-b-key`,
+      route: `sync/test-singleton-b-key`,
       expectedStatusCodes: [`200`],
       method: `GET`,
       requestBody: { type: `empty` },
       queryParameters: {},
       statusCode: `200`,
       response: {
-        version: `Test Enum B Version A`,
-        data: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        data: `Test Singleton B Value A`,
       },
     },
     {
@@ -22535,33 +21234,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version A`,
-            values: {
-              "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-              "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-            },
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -22599,7 +21286,7 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Successfully pulled new enum "testEnumBKey".`,
+      text: `Successfully pulled new singleton "testSingletonBKey".`,
     },
     {
       type: `log`,
@@ -22656,30 +21343,21 @@ scenario(
 );
 
 scenario(
-  `enum pulled as new state store change`,
+  `singleton pulled as new state store change`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -22806,15 +21484,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -22872,12 +21550,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `information`,
-      text: `New enum "testEnumBKey" will be pulled.`,
+      text: `New singleton "testSingletonBKey" will be pulled.`,
     },
     {
       type: `log`,
@@ -22897,7 +21575,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -22917,13 +21595,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumBKey"...`,
+      text: `Pulling singleton "testSingletonBKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
@@ -22932,25 +21610,22 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
     },
     {
       type: `pullJson`,
-      route: `sync/test-enum-b-key`,
+      route: `sync/test-singleton-b-key`,
       expectedStatusCodes: [`200`],
       method: `GET`,
       requestBody: { type: `empty` },
       queryParameters: {},
       statusCode: `200`,
       response: {
-        version: `Test Enum B Version A`,
-        data: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        data: `Test Singleton B Value A`,
       },
     },
     {
@@ -22960,7 +21635,7 @@ scenario(
     {
       type: `log`,
       severity: `warning`,
-      text: `The state store changed during pull of enum "testEnumBKey"; sync has been interrupted and will need to run again.`,
+      text: `The state store changed during pull of singleton "testSingletonBKey"; sync has been interrupted and will need to run again.`,
     },
     {
       type: `stateChange`,
@@ -22977,30 +21652,21 @@ scenario(
 );
 
 scenario(
-  `enum pulled as new version mismatch`,
+  `singleton pulled as new version mismatch`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -23127,15 +21793,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version A`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -23193,12 +21859,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `information`,
-      text: `New enum "testEnumBKey" will be pulled.`,
+      text: `New singleton "testSingletonBKey" will be pulled.`,
     },
     {
       type: `log`,
@@ -23218,7 +21884,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -23238,13 +21904,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumBKey"...`,
+      text: `Pulling singleton "testSingletonBKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
@@ -23253,31 +21919,28 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
     },
     {
       type: `pullJson`,
-      route: `sync/test-enum-b-key`,
+      route: `sync/test-singleton-b-key`,
       expectedStatusCodes: [`200`],
       method: `GET`,
       requestBody: { type: `empty` },
       queryParameters: {},
       statusCode: `200`,
       response: {
-        version: `Test Enum B Version B`,
-        data: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version B`,
+        data: `Test Singleton B Value A`,
       },
     },
     {
       type: `log`,
       severity: `warning`,
-      text: `The version of enum "testEnumBKey" changed from "Test Enum B Version A" at the time of preflight to "Test Enum B Version B" at the time of pull; sync has been interrupted and will need to run again.`,
+      text: `The version of singleton "testSingletonBKey" changed from "Test Singleton B Version A" at the time of preflight to "Test Singleton B Version B" at the time of pull; sync has been interrupted and will need to run again.`,
     },
     {
       type: `stateChange`,
@@ -23294,35 +21957,23 @@ scenario(
 );
 
 scenario(
-  `enum pulled as updated`,
+  `singleton pulled as updated`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -23449,15 +22100,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version B`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version B`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -23515,12 +22166,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `information`,
-      text: `Previously pulled enum "testEnumBKey" will be pulled again as versions do not match between preflight ("Test Enum B Version B") and state store ("Test Enum B Version A").`,
+      text: `Previously pulled singleton "testSingletonBKey" will be pulled again as versions do not match between preflight ("Test Singleton B Version B") and state store ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -23540,7 +22191,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -23560,13 +22211,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumBKey"...`,
+      text: `Pulling singleton "testSingletonBKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
@@ -23575,26 +22226,22 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
     },
     {
       type: `pullJson`,
-      route: `sync/test-enum-b-key`,
+      route: `sync/test-singleton-b-key`,
       expectedStatusCodes: [`200`],
       method: `GET`,
       requestBody: { type: `empty` },
       queryParameters: {},
       statusCode: `200`,
       response: {
-        version: `Test Enum B Version B`,
-        data: {
-          "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
-          "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
-          "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
-        },
+        version: `Test Singleton B Version B`,
+        data: `Test Singleton B Value B`,
       },
     },
     {
@@ -23604,34 +22251,21 @@ scenario(
     {
       type: `setState`,
       to: {
-        enums: {
-          testEnumAKey: {
+        singletons: {
+          testSingletonAKey: {
             type: `upToDate`,
-            version: `Test Enum A Version A`,
-            values: {
-              "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-              "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-              "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-            },
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
           },
-          testEnumBKey: {
+          testSingletonBKey: {
             type: `upToDate`,
-            version: `Test Enum B Version B`,
-            values: {
-              "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
-              "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
-              "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
-            },
+            version: `Test Singleton B Version B`,
+            value: `Test Singleton B Value B`,
           },
-          testEnumCKey: {
+          testSingletonCKey: {
             type: `upToDate`,
-            version: `Test Enum C Version A`,
-            values: {
-              "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-              "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-              "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-              "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-            },
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
           },
         },
         collections: {
@@ -23669,7 +22303,7 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Successfully pulled update of enum "testEnumBKey".`,
+      text: `Successfully pulled update of singleton "testSingletonBKey".`,
     },
     {
       type: `log`,
@@ -23726,35 +22360,23 @@ scenario(
 );
 
 scenario(
-  `enum pulled as updated version mismatch`,
+  `singleton pulled as updated version mismatch`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -23881,15 +22503,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version B`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version B`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -23947,12 +22569,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `information`,
-      text: `Previously pulled enum "testEnumBKey" will be pulled again as versions do not match between preflight ("Test Enum B Version B") and state store ("Test Enum B Version A").`,
+      text: `Previously pulled singleton "testSingletonBKey" will be pulled again as versions do not match between preflight ("Test Singleton B Version B") and state store ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -23972,7 +22594,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -23992,13 +22614,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumBKey"...`,
+      text: `Pulling singleton "testSingletonBKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
@@ -24007,32 +22629,28 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
     },
     {
       type: `pullJson`,
-      route: `sync/test-enum-b-key`,
+      route: `sync/test-singleton-b-key`,
       expectedStatusCodes: [`200`],
       method: `GET`,
       requestBody: { type: `empty` },
       queryParameters: {},
       statusCode: `200`,
       response: {
-        version: `Test Enum B Version C`,
-        data: {
-          "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
-          "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
-          "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
-        },
+        version: `Test Singleton B Version C`,
+        data: `Test Singleton B Value B`,
       },
     },
     {
       type: `log`,
       severity: `warning`,
-      text: `The version of enum "testEnumBKey" changed from "Test Enum B Version B" at the time of preflight to "Test Enum B Version C" at the time of pull; sync has been interrupted and will need to run again.`,
+      text: `The version of singleton "testSingletonBKey" changed from "Test Singleton B Version B" at the time of preflight to "Test Singleton B Version C" at the time of pull; sync has been interrupted and will need to run again.`,
     },
     {
       type: `stateChange`,
@@ -24049,35 +22667,23 @@ scenario(
 );
 
 scenario(
-  `enum pulled as updated`,
+  `singleton pulled as updated`,
   {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `upToDate`,
-        version: `Test Enum B Version A`,
-        values: {
-          "5898cc60-3293-479f-b751-2005695cc7ff": `Test Enum B Value A`,
-          "560e6435-7891-465d-a2fe-1689088c3648": `Test Enum B Value B`,
-        },
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
       },
     },
     collections: {
@@ -24204,15 +22810,15 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
-        enums: {
-          testEnumAKey: {
-            version: `Test Enum A Version A`,
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
           },
-          testEnumBKey: {
-            version: `Test Enum B Version B`,
+          testSingletonBKey: {
+            version: `Test Singleton B Version B`,
           },
-          testEnumCKey: {
-            version: `Test Enum C Version A`,
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
           },
         },
         collections: {
@@ -24270,12 +22876,12 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumCKey" as preflight and state store versions match ("Test Enum C Version A").`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
     },
     {
       type: `log`,
       severity: `information`,
-      text: `Previously pulled enum "testEnumBKey" will be pulled again as versions do not match between preflight ("Test Enum B Version B") and state store ("Test Enum B Version A").`,
+      text: `Previously pulled singleton "testSingletonBKey" will be pulled again as versions do not match between preflight ("Test Singleton B Version B") and state store ("Test Singleton B Version A").`,
     },
     {
       type: `log`,
@@ -24295,7 +22901,7 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
-      text: `No pull required of enum "testEnumAKey" as preflight and state store versions match ("Test Enum A Version A").`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -24315,13 +22921,13 @@ scenario(
     {
       type: `log`,
       severity: `information`,
-      text: `Pulling enum "testEnumBKey"...`,
+      text: `Pulling singleton "testSingletonBKey"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
@@ -24330,26 +22936,22 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pullingEnum`,
+        type: `pullingSingleton`,
         completedSteps: 0,
         totalSteps: 1,
       },
     },
     {
       type: `pullJson`,
-      route: `sync/test-enum-b-key`,
+      route: `sync/test-singleton-b-key`,
       expectedStatusCodes: [`200`],
       method: `GET`,
       requestBody: { type: `empty` },
       queryParameters: {},
       statusCode: `200`,
       response: {
-        version: `Test Enum B Version B`,
-        data: {
-          "85aa8b0a-a7f8-433b-92b3-94e89cc08a30": `Test Enum B Value C`,
-          "cfd53b82-f37b-45ec-9eae-05a939dfcc23": `Test Enum B Value D`,
-          "a8737449-93dc-4901-b74d-5672f1e1005b": `Test Enum B Value E`,
-        },
+        version: `Test Singleton B Version B`,
+        data: `Test Singleton B Value B`,
       },
     },
     {
@@ -24359,7 +22961,7 @@ scenario(
     {
       type: `log`,
       severity: `warning`,
-      text: `The state store changed during pull of enum "testEnumBKey"; sync has been interrupted and will need to run again.`,
+      text: `The state store changed during pull of singleton "testSingletonBKey"; sync has been interrupted and will need to run again.`,
     },
     {
       type: `stateChange`,

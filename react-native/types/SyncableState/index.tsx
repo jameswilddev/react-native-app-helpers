@@ -1,6 +1,6 @@
 import type { SyncableSchema } from "../SyncableSchema";
 import type { SyncableStateCollection } from "../SyncableStateCollection";
-import type { SyncableStateEnum } from "../SyncableStateEnum";
+import type { SyncableStateSingleton } from "../SyncableStateSingleton";
 
 /**
  * Represents a local mirror of data which can be synced.
@@ -8,10 +8,12 @@ import type { SyncableStateEnum } from "../SyncableStateEnum";
  */
 export type SyncableState<T extends SyncableSchema> = {
   /**
-   * The enums within the syncable state.
+   * The singletons within the syncable state.
    */
-  readonly enums: {
-    readonly [TKey in keyof T[`enums`]]: SyncableStateEnum<T[`enums`][TKey]>;
+  readonly singletons: {
+    readonly [TKey in keyof T[`singletons`]]: SyncableStateSingleton<
+      T[`singletons`][TKey]
+    >;
   };
 
   /**

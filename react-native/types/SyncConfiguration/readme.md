@@ -8,11 +8,11 @@ Describes implementation details of a sync process.
 import type { SyncConfiguration } from "react-native-app-helpers";
 
 type ExampleSchema = {
-  readonly enums: {
-    readonly exampleEnumAKey: {
+  readonly singletons: {
+    readonly exampleSingletonAKey: {
       readonly exampleDataAKey: boolean;
     };
-    readonly exampleEnumBKey: {
+    readonly exampleSingletonBKey: {
       readonly exampleDataBKey: number;
     };
   };
@@ -40,16 +40,16 @@ const example: SyncConfiguration<ExampleSchema, ExampleAdditionalCollectionData>
       key: `exampleCollectionBKey`;
     },
     {
-      type: `enum`;
-      key: `exampleEnumAKey`;
+      type: `singleton`;
+      key: `exampleSingletonAKey`;
     },
     {
       type: `collection`;
       key: `exampleCollectionCKey`;
     },
     {
-      type: `enum`;
-      key: `exampleEnumBKey`;
+      type: `singleton`;
+      key: `exampleSingletonBKey`;
     },
     {
       type: `collection`;

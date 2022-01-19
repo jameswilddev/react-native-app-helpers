@@ -12,7 +12,7 @@ export type PreflightResponseCollectionItem<
 > = {
   /**
    * The current version of the item.  If the record either does not exist
-   * locally or has a different version number, it is to be pulled down.
+   * locally or has a different version, it is to be pulled down.
    */
   readonly version: string | number;
 } & TAdditionalCollectionItemData;

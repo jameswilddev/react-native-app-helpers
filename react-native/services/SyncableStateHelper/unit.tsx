@@ -3,17 +3,10 @@ import type { SyncableState, SyncConfiguration } from "../../..";
 
 test(`upserts when new`, () => {
   type ExampleSchema = {
-    readonly enums: {
-      readonly testEnumAKey:
-        | `Test Enum A Value A`
-        | `Test Enum A Value B`
-        | `Test Enum A Value C`;
-      readonly testEnumBKey: `Test Enum B Value A` | `Test Enum B Value B`;
-      readonly testEnumCKey:
-        | `Test Enum C Value A`
-        | `Test Enum C Value B`
-        | `Test Enum C Value C`
-        | `Test Enum C Value D`;
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
     };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
@@ -51,20 +44,20 @@ test(`upserts when new`, () => {
         key: `exampleCollectionCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumAKey`,
+        type: `singleton`,
+        key: `testSingletonAKey`,
       },
       {
         type: `collection`,
         key: `exampleCollectionBKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumCKey`,
+        type: `singleton`,
+        key: `testSingletonCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumBKey`,
+        type: `singleton`,
+        key: `testSingletonBKey`,
       },
       {
         type: `collection`,
@@ -89,28 +82,19 @@ test(`upserts when new`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -164,28 +148,19 @@ test(`upserts when new`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -231,17 +206,10 @@ test(`upserts when new`, () => {
 
 test(`upserts when existing as up to date`, () => {
   type ExampleSchema = {
-    readonly enums: {
-      readonly testEnumAKey:
-        | `Test Enum A Value A`
-        | `Test Enum A Value B`
-        | `Test Enum A Value C`;
-      readonly testEnumBKey: `Test Enum B Value A` | `Test Enum B Value B`;
-      readonly testEnumCKey:
-        | `Test Enum C Value A`
-        | `Test Enum C Value B`
-        | `Test Enum C Value C`
-        | `Test Enum C Value D`;
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
     };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
@@ -305,20 +273,20 @@ test(`upserts when existing as up to date`, () => {
         key: `exampleCollectionCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumAKey`,
+        type: `singleton`,
+        key: `testSingletonAKey`,
       },
       {
         type: `collection`,
         key: `exampleCollectionBKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumCKey`,
+        type: `singleton`,
+        key: `testSingletonCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumBKey`,
+        type: `singleton`,
+        key: `testSingletonBKey`,
       },
       {
         type: `collection`,
@@ -343,28 +311,19 @@ test(`upserts when existing as up to date`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -427,28 +386,19 @@ test(`upserts when existing as up to date`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -494,17 +444,10 @@ test(`upserts when existing as up to date`, () => {
 
 test(`upserts when existing as awaiting push`, () => {
   type ExampleSchema = {
-    readonly enums: {
-      readonly testEnumAKey:
-        | `Test Enum A Value A`
-        | `Test Enum A Value B`
-        | `Test Enum A Value C`;
-      readonly testEnumBKey: `Test Enum B Value A` | `Test Enum B Value B`;
-      readonly testEnumCKey:
-        | `Test Enum C Value A`
-        | `Test Enum C Value B`
-        | `Test Enum C Value C`
-        | `Test Enum C Value D`;
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
     };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
@@ -568,20 +511,20 @@ test(`upserts when existing as awaiting push`, () => {
         key: `exampleCollectionCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumAKey`,
+        type: `singleton`,
+        key: `testSingletonAKey`,
       },
       {
         type: `collection`,
         key: `exampleCollectionBKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumCKey`,
+        type: `singleton`,
+        key: `testSingletonCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumBKey`,
+        type: `singleton`,
+        key: `testSingletonBKey`,
       },
       {
         type: `collection`,
@@ -606,28 +549,19 @@ test(`upserts when existing as awaiting push`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -689,28 +623,19 @@ test(`upserts when existing as awaiting push`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -756,17 +681,10 @@ test(`upserts when existing as awaiting push`, () => {
 
 test(`upserts when existing as pushing`, () => {
   type ExampleSchema = {
-    readonly enums: {
-      readonly testEnumAKey:
-        | `Test Enum A Value A`
-        | `Test Enum A Value B`
-        | `Test Enum A Value C`;
-      readonly testEnumBKey: `Test Enum B Value A` | `Test Enum B Value B`;
-      readonly testEnumCKey:
-        | `Test Enum C Value A`
-        | `Test Enum C Value B`
-        | `Test Enum C Value C`
-        | `Test Enum C Value D`;
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
     };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
@@ -830,20 +748,20 @@ test(`upserts when existing as pushing`, () => {
         key: `exampleCollectionCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumAKey`,
+        type: `singleton`,
+        key: `testSingletonAKey`,
       },
       {
         type: `collection`,
         key: `exampleCollectionBKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumCKey`,
+        type: `singleton`,
+        key: `testSingletonCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumBKey`,
+        type: `singleton`,
+        key: `testSingletonBKey`,
       },
       {
         type: `collection`,
@@ -868,28 +786,19 @@ test(`upserts when existing as pushing`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -951,28 +860,19 @@ test(`upserts when existing as pushing`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -1018,17 +918,10 @@ test(`upserts when existing as pushing`, () => {
 
 test(`upserts when existing as awaiting pull`, () => {
   type ExampleSchema = {
-    readonly enums: {
-      readonly testEnumAKey:
-        | `Test Enum A Value A`
-        | `Test Enum A Value B`
-        | `Test Enum A Value C`;
-      readonly testEnumBKey: `Test Enum B Value A` | `Test Enum B Value B`;
-      readonly testEnumCKey:
-        | `Test Enum C Value A`
-        | `Test Enum C Value B`
-        | `Test Enum C Value C`
-        | `Test Enum C Value D`;
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
     };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
@@ -1092,20 +985,20 @@ test(`upserts when existing as awaiting pull`, () => {
         key: `exampleCollectionCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumAKey`,
+        type: `singleton`,
+        key: `testSingletonAKey`,
       },
       {
         type: `collection`,
         key: `exampleCollectionBKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumCKey`,
+        type: `singleton`,
+        key: `testSingletonCKey`,
       },
       {
-        type: `enum`,
-        key: `testEnumBKey`,
+        type: `singleton`,
+        key: `testSingletonBKey`,
       },
       {
         type: `collection`,
@@ -1130,28 +1023,19 @@ test(`upserts when existing as awaiting pull`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {
@@ -1213,28 +1097,19 @@ test(`upserts when existing as awaiting pull`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
-    enums: {
-      testEnumAKey: {
+    singletons: {
+      testSingletonAKey: {
         type: `upToDate`,
-        version: `Test Enum A Version A`,
-        values: {
-          "02c1ea8b-9332-4359-8094-db30da4a1a48": `Test Enum A Value A`,
-          "58c0c0e8-90cd-45b5-be6c-55ad1113db4a": `Test Enum A Value B`,
-          "4cdccf5d-b4fd-4ef9-97f7-d5d023d58f8a": `Test Enum A Value C`,
-        },
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
       },
-      testEnumBKey: {
+      testSingletonBKey: {
         type: `absent`,
       },
-      testEnumCKey: {
+      testSingletonCKey: {
         type: `upToDate`,
-        version: `Test Enum C Version A`,
-        values: {
-          "facfe4b1-cff2-43cd-8a70-bf1565ea57fe": `Test Enum C Value A`,
-          "2314dfdd-7c51-4ff2-a700-dfb162fd6fc0": `Test Enum C Value B`,
-          "ed2c8187-e4b8-4229-bdce-fd2bd111ffa6": `Test Enum C Value C`,
-          "1292dfab-f3ed-47ac-9464-b981a24ecb21": `Test Enum C Value D`,
-        },
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
       },
     },
     collections: {

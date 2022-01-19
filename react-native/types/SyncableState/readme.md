@@ -8,11 +8,11 @@ Represents a local mirror of data which can be synced.
 import type { SyncableState } from "react-native-app-helpers";
 
 type ExampleSchema = {
-  readonly enums: {
-    readonly exampleEnumAKey: {
+  readonly singletons: {
+    readonly exampleSingletonAKey: {
       readonly exampleDataAKey: boolean;
     };
-    readonly exampleEnumBKey: {
+    readonly exampleSingletonBKey: {
       readonly exampleDataBKey: number;
     };
   };
@@ -30,11 +30,11 @@ type ExampleSchema = {
 };
 
 const example: SyncableState<ExampleSchema> = {
-  enums: {
-    exampleEnumAKey: {
+  singletons: {
+    exampleSingletonAKey: {
       type: `absent`,
     },
-    exampleEnumBKey: {
+    exampleSingletonBKey: {
       type: `upToDate`,
       version: `Example Version`,
       items: {

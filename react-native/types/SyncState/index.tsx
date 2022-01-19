@@ -96,7 +96,7 @@ export type SyncState<
       /**
        * Indicates the type of sync status.
        */
-      readonly type: `pullingEnum`;
+      readonly type: `pullingSingleton`;
 
       /**
        * The number of items pulled so far (not including the item in progress).

@@ -16,7 +16,8 @@ import type { SyncConfigurationCollection } from "../../types/SyncConfigurationC
 import type { FileStoreInterface } from "../../types/FileStoreInterface";
 import type { SyncState } from "../../types/SyncState";
 import type { SyncInterface } from "../../types/SyncInterface";
-import type { PreflightResponseEnum, SyncableStateEnum } from "../../..";
+import type { SyncableStateSingleton } from "../../types/SyncableStateSingleton";
+import type { PreflightResponseSingleton } from "../../types/PreflightResponseSingleton";
 
 const camelCaseToKebabCase = (camelCase: string): string =>
   camelCase.replace(/([A-Z])/g, `-$1`).toLowerCase();
@@ -510,7 +511,7 @@ export class Sync<
               execute(): Promise<boolean>;
             }
           | {
-              readonly type: `enum`;
+              readonly type: `singleton`;
               readonly beforeLogMessage: string;
               execute(): Promise<boolean>;
             }
@@ -522,47 +523,49 @@ export class Sync<
 
         for (const step of this.syncConfiguration.order) {
           switch (step.type) {
-            case `enum`: {
-              const stateEnum = state.enums[
+            case `singleton`: {
+              const stateSingleton = state.singletons[
                 step.key
-              ] as SyncableStateEnum<Json>;
+              ] as SyncableStateSingleton<Json>;
 
-              const preflightEnum = preflightResponse.value.enums[
+              const preflightSingleton = preflightResponse.value.singletons[
                 step.key
-              ] as PreflightResponseEnum;
+              ] as PreflightResponseSingleton;
 
-              const kebabCasedEnumKey = camelCaseToKebabCase(step.key);
+              const kebabCasedSingletonKey = camelCaseToKebabCase(step.key);
 
-              switch (stateEnum.type) {
+              switch (stateSingleton.type) {
                 case `absent`:
                   this.logger.information(
-                    `New enum "${step.key}" will be pulled.`
+                    `New singleton "${step.key}" will be pulled.`
                   );
 
                   pulls.push({
-                    type: `enum`,
-                    beforeLogMessage: `Pulling enum "${step.key}"...`,
+                    type: `singleton`,
+                    beforeLogMessage: `Pulling singleton "${step.key}"...`,
                     execute: async () => {
                       const response = await this.request.returningJson<{
                         "200": SyncPullResponse<Json>;
                       }>(
                         `GET`,
-                        `sync/${kebabCasedEnumKey}`,
+                        `sync/${kebabCasedSingletonKey}`,
                         { type: `empty` },
                         {},
                         abortSignal,
                         [`200`]
                       );
-                      if (response.value.version === preflightEnum.version) {
+                      if (
+                        response.value.version === preflightSingleton.version
+                      ) {
                         if (this.stateStore.get() === state) {
                           state = {
                             ...state,
-                            enums: {
-                              ...state.enums,
+                            singletons: {
+                              ...state.singletons,
                               [step.key]: {
                                 type: `upToDate`,
-                                version: preflightEnum.version,
-                                values: response.value.data,
+                                version: preflightSingleton.version,
+                                value: response.value.data,
                               },
                             },
                           };
@@ -570,20 +573,20 @@ export class Sync<
                           this.stateStore.set(state);
 
                           this.logger.information(
-                            `Successfully pulled new enum "${step.key}".`
+                            `Successfully pulled new singleton "${step.key}".`
                           );
 
                           return true;
                         } else {
                           this.logger.warning(
-                            `The state store changed during pull of enum "${step.key}"; sync has been interrupted and will need to run again.`
+                            `The state store changed during pull of singleton "${step.key}"; sync has been interrupted and will need to run again.`
                           );
 
                           return false;
                         }
                       } else {
                         this.logger.warning(
-                          `The version of enum "${step.key}" changed from "${preflightEnum.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
+                          `The version of singleton "${step.key}" changed from "${preflightSingleton.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
                         );
 
                         return false;
@@ -593,39 +596,41 @@ export class Sync<
                   break;
 
                 case `upToDate`:
-                  if (preflightEnum.version === stateEnum.version) {
+                  if (preflightSingleton.version === stateSingleton.version) {
                     this.logger.debug(
-                      `No pull required of enum "${step.key}" as preflight and state store versions match ("${preflightEnum.version}").`
+                      `No pull required of singleton "${step.key}" as preflight and state store versions match ("${preflightSingleton.version}").`
                     );
                   } else {
                     this.logger.information(
-                      `Previously pulled enum "${step.key}" will be pulled again as versions do not match between preflight ("${preflightEnum.version}") and state store ("${stateEnum.version}").`
+                      `Previously pulled singleton "${step.key}" will be pulled again as versions do not match between preflight ("${preflightSingleton.version}") and state store ("${stateSingleton.version}").`
                     );
 
                     pulls.push({
-                      type: `enum`,
-                      beforeLogMessage: `Pulling enum "${step.key}"...`,
+                      type: `singleton`,
+                      beforeLogMessage: `Pulling singleton "${step.key}"...`,
                       execute: async () => {
                         const response = await this.request.returningJson<{
                           "200": SyncPullResponse<Json>;
                         }>(
                           `GET`,
-                          `sync/${kebabCasedEnumKey}`,
+                          `sync/${kebabCasedSingletonKey}`,
                           { type: `empty` },
                           {},
                           abortSignal,
                           [`200`]
                         );
-                        if (response.value.version === preflightEnum.version) {
+                        if (
+                          response.value.version === preflightSingleton.version
+                        ) {
                           if (this.stateStore.get() === state) {
                             state = {
                               ...state,
-                              enums: {
-                                ...state.enums,
+                              singletons: {
+                                ...state.singletons,
                                 [step.key]: {
                                   type: `upToDate`,
-                                  version: preflightEnum.version,
-                                  values: response.value.data,
+                                  version: preflightSingleton.version,
+                                  value: response.value.data,
                                 },
                               },
                             };
@@ -633,20 +638,20 @@ export class Sync<
                             this.stateStore.set(state);
 
                             this.logger.information(
-                              `Successfully pulled update of enum "${step.key}".`
+                              `Successfully pulled update of singleton "${step.key}".`
                             );
 
                             return true;
                           } else {
                             this.logger.warning(
-                              `The state store changed during pull of enum "${step.key}"; sync has been interrupted and will need to run again.`
+                              `The state store changed during pull of singleton "${step.key}"; sync has been interrupted and will need to run again.`
                             );
 
                             return false;
                           }
                         } else {
                           this.logger.warning(
-                            `The version of enum "${step.key}" changed from "${preflightEnum.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
+                            `The version of singleton "${step.key}" changed from "${preflightSingleton.version}" at the time of preflight to "${response.value.version}" at the time of pull; sync has been interrupted and will need to run again.`
                           );
 
                           return false;
@@ -983,9 +988,9 @@ export class Sync<
           this.logger.information(pull.beforeLogMessage);
 
           switch (pull.type) {
-            case `enum`:
+            case `singleton`:
               this.setState({
-                type: `pullingEnum`,
+                type: `pullingSingleton`,
                 completedSteps: completedPulls,
                 totalSteps: pulls.length,
               });

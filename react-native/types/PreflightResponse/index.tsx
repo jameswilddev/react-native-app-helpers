@@ -1,6 +1,6 @@
 import type { Json } from "../Json";
 import type { PreflightResponseCollection } from "../PreflightResponseCollection";
-import type { PreflightResponseEnum } from "../PreflightResponseEnum";
+import type { PreflightResponseSingleton } from "../PreflightResponseSingleton";
 import type { SyncableSchema } from "../SyncableSchema";
 
 /**
@@ -16,10 +16,10 @@ export type PreflightResponse<
   TAdditionalCollectionItemData extends Record<string, Json>
 > = {
   /**
-   * The enums available to be synced.
+   * The singletons available to be synced.
    */
-  readonly enums: {
-    readonly [TKey in keyof TSchema[`enums`]]: PreflightResponseEnum;
+  readonly singletons: {
+    readonly [TKey in keyof TSchema[`singletons`]]: PreflightResponseSingleton;
   };
 
   /**

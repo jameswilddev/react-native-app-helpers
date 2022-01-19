@@ -5,9 +5,9 @@ import type { Json } from "../Json";
  */
 export type SyncableSchema = {
   /**
-   * The enums which can be synced.
+   * The singletons which can be synced.
    */
-  readonly enums: {
+  readonly singletons: {
     readonly [key: string]: Json;
   };
 

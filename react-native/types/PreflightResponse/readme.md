@@ -8,11 +8,11 @@ The response to a successful preflight request.
 import type { PreflightResponseCollection } from "react-native-app-helpers";
 
 type ExampleSchema = {
-  readonly enums: {
-    readonly exampleEnumAKey: {
+  readonly singletons: {
+    readonly exampleSingletonAKey: {
       readonly exampleDataAKey: boolean;
     };
-    readonly exampleEnumBKey: {
+    readonly exampleSingletonBKey: {
       readonly exampleDataBKey: number;
     };
   };
@@ -34,11 +34,11 @@ type ExampleAdditionalCollectionItemData = {
 };
 
 const example: PreflightResponse<ExampleSchema, ExampleAdditionalCollectionItemData> = {
-  enums: {
-    exampleEnumAKey: {
+  singletons: {
+    exampleSingletonAKey: {
       version: 1234,
     },
-    exampleEnumBKey: {
+    exampleSingletonBKey: {
       version: `Example Version`,
     },
   },

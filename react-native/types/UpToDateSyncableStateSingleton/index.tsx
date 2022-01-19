@@ -1,12 +1,12 @@
 import type { Json } from "../Json";
 
 /**
- * Represents an enum which has been synced
+ * Represents a singleton which has been synced.
  * @template TData The data within an item.
  */
-export type UpToDateSyncableStateEnum<TData extends Json> = {
+export type UpToDateSyncableStateSingleton<TData extends Json> = {
   /**
-   * Indicates the state of the enum.
+   * Indicates the state of the singleton.
    */
   readonly type: `upToDate`;
 
@@ -17,9 +17,7 @@ export type UpToDateSyncableStateEnum<TData extends Json> = {
   readonly version: number | string;
 
   /**
-   * The values which have been synced.
+   * The value which has been synced.
    */
-  readonly values: {
-    readonly [uuid: string]: TData;
-  };
+  readonly value: TData;
 };
