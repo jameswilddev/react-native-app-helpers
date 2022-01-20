@@ -50,7 +50,7 @@ class SyncApi implements SyncApiInterface
   public function generateRoutes(): void
   {
     Route::get('preflight', function () {
-      $enums = [];
+      $singletons = [];
 
       foreach ($this->enums as $enum) {
         $key = $enum->generateCamelCasedName();
@@ -58,7 +58,7 @@ class SyncApi implements SyncApiInterface
         $data = $enum->generateData();
         $version = $enum->hashData($data);
 
-        $enums[$key] = compact('version');
+        $singletons[$key] = compact('version');
       }
 
       $collections = [];
@@ -71,7 +71,7 @@ class SyncApi implements SyncApiInterface
         }
       }
 
-      return compact('enums', 'collections');
+      return compact('singletons', 'collections');
     });
 
     foreach ($this->enums as $enum) {
