@@ -79,7 +79,7 @@ class SyncApiMe implements SyncApiMeInterface
 
   public function generateData(): array
   {
-    return new $this->resourceClass(auth()->user());
+    return (new $this->resourceClass(auth()->user()))->toArray(request());
   }
 
   public function hashData(array $data): string
