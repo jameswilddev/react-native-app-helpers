@@ -67,9 +67,12 @@ class SyncApiEnum implements SyncApiEnumInterface
 
   public function generateData(): array
   {
-    return array_map(
-      fn ($instance) => new $this->resourceClass($instance),
-      $this->enumClass::getInstances()
+    return array_combine(
+      $this->enumClass::getValues(),
+      array_map(
+        fn ($instance) => new $this->resourceClass($instance),
+        $this->enumClass::getInstances()
+      )
     );
   }
 
