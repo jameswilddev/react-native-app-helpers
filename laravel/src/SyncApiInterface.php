@@ -9,6 +9,18 @@ namespace JamesWildDev\ReactNativeAppHelpers;
 interface SyncApiInterface
 {
   /**
+   * Adds a new "about me" endpoint to this sync API.
+   * @param string $modelClass    The model class which represents the user
+   *                              which can be queried.
+   * @param string $resourceClass The Laravel JsonResource class used to
+   *                              generate JSON to return to the client on pull.
+   */
+  function withMe(
+    string $modelClass,
+    string $resourceClass,
+  ): SyncApiMe;
+
+  /**
    * Adds a new enum to this sync API.
    * @param string $enumClass     The enum class to include in the sync API.
    * @param string $resourceClass The Laravel JsonResource class used to

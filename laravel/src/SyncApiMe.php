@@ -6,24 +6,24 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 /**
- * Represents an enum within a sync API.  Create instances using
- * SyncApi::withEnum().
+ * Represents an "about me" endpoint within a sync API.  Create instances using
+ * SyncApi::withMe().
  */
-class SyncApiEnum implements SyncApiEnumInterface
+class SyncApiMe implements SyncApiMeInterface
 {
   private SyncApi $syncApi;
 
-  private string $enumClass;
+  private string $modelClass;
 
   private string $resourceClass;
 
   public function __construct(
     SyncApi $syncApi,
-    string $enumClass,
+    string $modelClass,
     string $resourceClass,
   ) {
     $this->syncApi = $syncApi;
-    $this->enumClass = $enumClass;
+    $this->modelClass = $modelClass;
     $this->resourceClass = $resourceClass;
   }
 
@@ -69,23 +69,17 @@ class SyncApiEnum implements SyncApiEnumInterface
 
   public function generateCamelCasedName(): string
   {
-    return Str::camel(Str::pluralStudly(class_basename($this->enumClass)));
+    return Str::camel(Str::pluralStudly(class_basename($this->modelClass)));
   }
 
   public function generateKebabCasedName(): string
   {
-    return Str::kebab(Str::pluralStudly(class_basename($this->enumClass)));
+    return Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
   }
 
   public function generateData(): array
   {
-    return array_combine(
-      $this->enumClass::getValues(),
-      array_map(
-        fn ($instance) => new $this->resourceClass($instance),
-        $this->enumClass::getInstances()
-      )
-    );
+    return new $this->resourceClass(auth()->user());
   }
 
   public function hashData(array $data): string
@@ -95,7 +89,7 @@ class SyncApiEnum implements SyncApiEnumInterface
     return hash('sha1', json_encode($data));
   }
 
-  public function generateEnumRoutes(): void
+  public function generateMeRoutes(): void
   {
     Route::get(
       $this->generateKebabCasedName(),

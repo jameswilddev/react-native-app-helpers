@@ -60,6 +60,18 @@ class SyncApiCollection implements SyncApiCollectionInterface
     return $syncApiCollectionMediaCollection;
   }
 
+  function withMe(
+    string $modelClass,
+    string $resourceClass,
+  ): SyncApiMe {
+    return $this
+      ->syncApi
+      ->withMe(
+        $modelClass,
+        $resourceClass,
+      );
+  }
+
   public function withEnum(
     string $enumClass,
     string $resourceClass,

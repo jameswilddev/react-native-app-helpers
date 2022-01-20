@@ -38,6 +38,18 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     );
   }
 
+  function withMe(
+    string $modelClass,
+    string $resourceClass,
+  ): SyncApiMe {
+    return $this
+      ->syncApiCollection
+      ->withMe(
+        $modelClass,
+        $resourceClass,
+      );
+  }
+
   function withEnum(
     string $enumClass,
     string $resourceClass,

@@ -10,8 +10,24 @@ use Illuminate\Support\Facades\Route;
  */
 class SyncApi implements SyncApiInterface
 {
+  private array $mes = [];
   private array $enums = [];
   private array $collections = [];
+
+  public function withMe(
+    string $modelClass,
+    string $resourceClass,
+  ): SyncApiMe {
+    $syncApiMe = new SyncApiMe(
+      $this,
+      $modelClass,
+      $resourceClass,
+    );
+
+    $this->mes[] = $syncApiMe;
+
+    return $syncApiMe;
+  }
 
   public function withEnum(
     string $enumClass,
@@ -51,6 +67,15 @@ class SyncApi implements SyncApiInterface
   {
     Route::get('preflight', function () {
       $singletons = [];
+
+      foreach ($this->mes as $me) {
+        $key = $me->generateCamelCasedName();
+
+        $data = $me->generateData();
+        $version = $me->hashData($data);
+
+        $singletons[$key] = compact('version');
+      }
 
       foreach ($this->enums as $enum) {
         $key = $enum->generateCamelCasedName();
