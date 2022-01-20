@@ -99,6 +99,10 @@ class SyncApi implements SyncApiInterface
       return compact('singletons', 'collections');
     });
 
+    foreach ($this->mes as $me) {
+      $me->generateMeRoutes();
+    }
+
     foreach ($this->enums as $enum) {
       $enum->generateEnumRoutes();
     }
