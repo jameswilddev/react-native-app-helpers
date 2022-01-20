@@ -6,6 +6,7 @@ A wrapper around `expo-file-system` which adds:
 - JSON parsing and serialization.
 - Change events.
 - A synchronous read/write API (with asynchronous write-back).
+- Versioning.
 
 ## Usage
 
@@ -14,7 +15,7 @@ import type { StateStore } from "react-native-app-helpers";
 
 type State = `State A` | `State B`;
 
-const store = new StateStore<State>(`State A`);
+const store = new StateStore<State>(`State A`, `Example Version A`);
 
 
 await store.load(`AsyncStorage Key A`);
@@ -30,7 +31,7 @@ console.log(store.get());
 await store.unload();
 
 
-await store.load(`AsyncStorage Key A`);
+await store.load(`AsyncStorage Key B`);
 
 // State A
 console.log(store.get());
@@ -41,6 +42,16 @@ await store.unload();
 await store.load(`AsyncStorage Key A`);
 
 // State B
+console.log(store.get());
+
+await store.unload();
+
+
+const updatedStore = new StateStore<State>(`State A`, `Example Version B`);
+
+await updatedStore.load(`AsyncStorage Key A`);
+
+// State A
 console.log(store.get());
 
 await store.unload();
