@@ -69,12 +69,12 @@ class SyncApiMe implements SyncApiMeInterface
 
   public function generateCamelCasedName(): string
   {
-    return Str::camel(Str::pluralStudly(class_basename($this->modelClass)));
+    return Str::camel(class_basename($this->modelClass));
   }
 
   public function generateKebabCasedName(): string
   {
-    return Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
+    return Str::kebab(class_basename($this->modelClass));
   }
 
   public function generateData(): array
