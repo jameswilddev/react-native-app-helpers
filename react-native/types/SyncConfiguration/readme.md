@@ -8,6 +8,14 @@ Describes implementation details of a sync process.
 import type { SyncConfiguration } from "react-native-app-helpers";
 
 type ExampleSchema = {
+  readonly singletons: {
+    readonly exampleSingletonAKey: {
+      readonly exampleDataAKey: boolean;
+    };
+    readonly exampleSingletonBKey: {
+      readonly exampleDataBKey: number;
+    };
+  };
   readonly collections: {
     readonly exampleCollectionAKey: {
       readonly exampleDataAKey: boolean;
@@ -26,10 +34,27 @@ type ExampleAdditionalCollectionData = {
 };
 
 const example: SyncConfiguration<ExampleSchema, ExampleAdditionalCollectionData> = {
-  collectionOrder: [
-    `exampleCollectionBKey`,
-    `exampleCollectionCKey`,
-    `exampleCollectionAKey`,
+  order: [
+    {
+      type: `collection`;
+      key: `exampleCollectionBKey`;
+    },
+    {
+      type: `singleton`;
+      key: `exampleSingletonAKey`;
+    },
+    {
+      type: `collection`;
+      key: `exampleCollectionCKey`;
+    },
+    {
+      type: `singleton`;
+      key: `exampleSingletonBKey`;
+    },
+    {
+      type: `collection`;
+      key: `exampleCollectionAKey`;
+    },
   ]
   collections: {
     exampleCollectionBKey: {

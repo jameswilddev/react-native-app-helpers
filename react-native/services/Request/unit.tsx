@@ -63,6 +63,7 @@ test(`get request empty response empty missing protocol`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -109,6 +110,7 @@ test(`get request empty response empty missing trailing slash`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -153,7 +155,9 @@ test(`get request empty response empty no authorization`, async () => {
     {
       signal: expect.any(AbortSignal),
       method: `PUT`,
-      headers: {},
+      headers: {
+        Accept: `application/json`,
+      },
       body: null,
     }
   );
@@ -198,6 +202,7 @@ test(`get request empty response empty no abort signal`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -239,6 +244,7 @@ test(`get request empty response empty no query parameters`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -285,6 +291,7 @@ test(`get request empty response empty no retained query parameters`, async () =
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -331,6 +338,7 @@ test(`get request empty response empty first query parameter dropped`, async () 
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -381,6 +389,7 @@ test(`get request empty response empty invalid status code`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -438,6 +447,7 @@ test(`get request empty response empty external abort`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -483,6 +493,7 @@ test(`get request empty response before timeout`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -548,6 +559,7 @@ test(`get request empty response empty timeout`, async () => {
       method: `PUT`,
       headers: {
         Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
       },
       body: null,
     }
@@ -593,6 +605,7 @@ test(`get request json response empty`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -651,6 +664,7 @@ test(`get request json response empty external abort`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -717,6 +731,7 @@ test(`get request json response empty timeout`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -768,6 +783,7 @@ test(`get request json response empty invalid status code`, async () => {
       headers: {
         Authorization: `Example Authorization Header`,
         "Content-Type": `application/json`,
+        Accept: `application/json`,
       },
       body: `{"example":["json","value"]}`,
     }
@@ -824,7 +840,10 @@ test(`get request file response empty`, async () => {
     `Example File Uri`,
     {
       uploadType: `Test Binary Content`,
-      headers: { Authorization: `Example Authorization Header` },
+      headers: {
+        Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
+      },
     }
   );
   expect(cancelAsync).not.toHaveBeenCalled();
@@ -885,7 +904,10 @@ test(`get request file response empty external abort`, async () => {
     `Example File Uri`,
     {
       uploadType: `Test Binary Content`,
-      headers: { Authorization: `Example Authorization Header` },
+      headers: {
+        Authorization: `Example Authorization Header`,
+        Accept: `application/json`,
+      },
     }
   );
   expect(cancelAsync).toBeCalledTimes(1);
@@ -1428,7 +1450,8 @@ test(`get request empty response file`, async () => {
     },
     null,
     `Example File Uri`,
-    [`244`, `123`, `89`]
+    [`244`, `123`, `89`],
+    [`800`, `222`, `347`, `844`]
   );
 
   expect(response).toEqual(`123`);
@@ -1445,6 +1468,58 @@ test(`get request empty response file`, async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled();
   expect(fetch).not.toHaveBeenCalled();
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled();
+});
+
+test(`get request empty response file failure status code`, async () => {
+  const fetch = jest.fn();
+  (global as unknown as { fetch: unknown }).fetch = fetch;
+  (
+    FileSystem.downloadAsync as unknown as {
+      mockResolvedValue(value: unknown): void;
+    }
+  ).mockResolvedValue({
+    status: 347,
+  });
+  const request = new Request(
+    `https://example-base-url.com/example/sub/path/`,
+    1000,
+    () => `Example Authorization Header`
+  );
+
+  const response = await request.returningFile(
+    `GET`,
+    `example/route`,
+    { type: `empty` },
+    {
+      "Example Query Parameter A Key": `Example Query Parameter A Value`,
+      "Example Query Parameter B Key": 12.34,
+      "Example Query Parameter C Key": false,
+      "Example Query Parameter D Key": true,
+    },
+    null,
+    `Example File Uri`,
+    [`244`, `123`, `89`],
+    [`800`, `222`, `347`, `844`]
+  );
+
+  expect(response).toEqual(`347`);
+
+  expect(FileSystem.downloadAsync).toBeCalledTimes(1);
+  expect(FileSystem.downloadAsync).toBeCalledWith(
+    `https://example-base-url.com/example/sub/path/example/route?Example%20Query%20Parameter%20A%20Key=Example%20Query%20Parameter%20A%20Value&Example%20Query%20Parameter%20B%20Key=12.34&Example%20Query%20Parameter%20D%20Key`,
+    `Example File Uri`,
+    {
+      headers: { Authorization: `Example Authorization Header` },
+    }
+  );
+
+  expect(FileSystem.deleteAsync).toBeCalledTimes(1);
+  expect(FileSystem.deleteAsync).toBeCalledWith(`Example File Uri`, {
+    idempotent: true,
+  });
+
+  expect(FileSystem.createUploadTask).not.toHaveBeenCalled();
+  expect(fetch).not.toHaveBeenCalled();
 });
 
 test(`get request empty response file invalid status code`, async () => {
@@ -1475,7 +1550,8 @@ test(`get request empty response file invalid status code`, async () => {
     },
     null,
     `Example File Uri`,
-    [`244`, `123`, `89`]
+    [`244`, `123`, `89`],
+    [`800`, `222`, `347`, `844`]
   );
 
   await expect(promise).rejects.toEqual(

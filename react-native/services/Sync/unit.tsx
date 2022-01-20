@@ -14,6 +14,12 @@ import type { LoggerInterface } from "../../types/LoggerInterface";
 import type { SyncableState } from "../../types/SyncableState";
 import type { SyncState } from "../../types/SyncState";
 
+type SingletonAData = `Test Singleton A Value A` | `Test Singleton A Value B`;
+
+type SingletonBData = `Test Singleton B Value A` | `Test Singleton B Value B`;
+
+type SingletonCData = `Test Singleton C Value A` | `Test Singleton C Value B`;
+
 type CollectionAData =
   | `Test Collection A Value A`
   | `Test Collection A Value B`
@@ -40,6 +46,11 @@ type CollectionCData =
   | `Test Collection C Value B`;
 
 type TestSchema = {
+  readonly singletons: {
+    readonly testSingletonAKey: SingletonAData;
+    readonly testSingletonBKey: SingletonBData;
+    readonly testSingletonCKey: SingletonCData;
+  };
   readonly collections: {
     readonly testCollectionAKey: CollectionAData;
     readonly testCollectionBKey: CollectionBData;
@@ -62,6 +73,7 @@ type PushStep = {
   readonly requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody;
   readonly queryParameters: QueryParameters;
   readonly expectedStatusCodes: ReadonlyArray<string>;
+  readonly statusCode: string;
 };
 
 type SetStateStep = {
@@ -77,6 +89,7 @@ type PullJsonStep = {
   readonly queryParameters: QueryParameters;
   readonly expectedStatusCodes: ReadonlyArray<string>;
   readonly response: Json;
+  readonly statusCode: string;
 };
 
 type PullFileStep = {
@@ -86,7 +99,9 @@ type PullFileStep = {
   readonly requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody;
   readonly queryParameters: QueryParameters;
   readonly fileUri: string;
-  readonly expectedStatusCodes: ReadonlyArray<string>;
+  readonly successfulStatusCodes: ReadonlyArray<string>;
+  readonly failureStatusCodes: ReadonlyArray<string>;
+  readonly statusCode: string;
 };
 
 type LogStep = {
@@ -357,6 +372,8 @@ function scenario(
           abortSignal,
           expectedStatusCodes
         ) => {
+          const expectedStep = expectedSteps[actualSteps.length];
+
           actualSteps.push({
             type: `push`,
             method,
@@ -364,11 +381,16 @@ function scenario(
             requestBody,
             queryParameters,
             expectedStatusCodes,
+            statusCode: expect.anything(),
           });
 
           expect(abortSignal).toBe(abortSignal);
 
-          return "200";
+          if (expectedStep === undefined || expectedStep.type !== `push`) {
+            fail(`Unexpected request.withoutResponse()`);
+          } else {
+            return expectedStep.statusCode;
+          }
         }
       ) as RequestInterface[`withoutResponse`],
       returningJson: jest.fn(
@@ -390,6 +412,7 @@ function scenario(
             queryParameters,
             expectedStatusCodes,
             response: expect.anything(),
+            statusCode: expect.anything(),
           });
 
           expect(abortSignal).toBe(abortSignal);
@@ -397,7 +420,10 @@ function scenario(
           if (expectedStep === undefined || expectedStep.type !== `pullJson`) {
             fail(`Unexpected request.returningJson()`);
           } else {
-            return { statusCode: `200`, value: expectedStep.response };
+            return {
+              statusCode: expectedStep.statusCode,
+              value: expectedStep.response,
+            };
           }
         }
       ) as RequestInterface[`returningJson`],
@@ -409,7 +435,8 @@ function scenario(
           queryParameters,
           abortSignal,
           fileUri,
-          expectedStatusCodes
+          successfulStatusCodes,
+          failureStatusCodes
         ) => {
           const expectedStep = expectedSteps[actualSteps.length];
 
@@ -420,7 +447,9 @@ function scenario(
             requestBody,
             queryParameters,
             fileUri,
-            expectedStatusCodes,
+            successfulStatusCodes,
+            failureStatusCodes,
+            statusCode: expect.anything(),
           });
 
           expect(abortSignal).toBe(abortSignal);
@@ -428,7 +457,7 @@ function scenario(
           if (expectedStep === undefined || expectedStep.type !== `pullFile`) {
             fail(`Unexpected request.returningFile()`);
           } else {
-            return `200`;
+            return expectedStep.statusCode;
           }
         }
       ) as RequestInterface[`returningFile`],
@@ -510,10 +539,31 @@ function scenario(
       request,
       logger,
       {
-        collectionOrder: [
-          `testCollectionBKey`,
-          `testCollectionCKey`,
-          `testCollectionAKey`,
+        order: [
+          {
+            type: `collection`,
+            key: `testCollectionBKey`,
+          },
+          {
+            type: `singleton`,
+            key: `testSingletonCKey`,
+          },
+          {
+            type: `singleton`,
+            key: `testSingletonBKey`,
+          },
+          {
+            type: `collection`,
+            key: `testCollectionCKey`,
+          },
+          {
+            type: `singleton`,
+            key: `testSingletonAKey`,
+          },
+          {
+            type: `collection`,
+            key: `testCollectionAKey`,
+          },
         ],
         collections: {
           testCollectionAKey: syncConfigurationCollectionA,
@@ -575,6 +625,23 @@ function scenario(
 scenario(
   `without changes`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -699,6 +766,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -724,6 +802,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -753,6 +832,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -764,6 +853,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -837,6 +931,23 @@ scenario(
 scenario(
   `with a change to push without files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -972,12 +1083,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1037,6 +1166,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1062,6 +1202,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -1091,6 +1232,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -1102,6 +1253,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -1127,7 +1283,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1141,7 +1297,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1157,16 +1313,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1261,6 +1435,23 @@ scenario(
 scenario(
   `with a change to push with files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1401,12 +1592,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1481,12 +1690,30 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1546,6 +1773,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1571,6 +1809,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -1600,6 +1839,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -1611,6 +1860,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -1636,7 +1890,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1650,7 +1904,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -1666,16 +1920,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1770,6 +2042,23 @@ scenario(
 scenario(
   `with a previously interrupted push without files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1905,12 +2194,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1970,6 +2277,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -1995,6 +2313,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -2024,6 +2343,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -2035,6 +2364,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -2060,7 +2394,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2074,7 +2408,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2090,16 +2424,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2194,6 +2546,23 @@ scenario(
 scenario(
   `with a previously interrupted push with files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2334,12 +2703,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2414,12 +2801,30 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2479,6 +2884,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2504,6 +2920,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -2533,6 +2950,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -2544,6 +2971,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -2569,7 +3001,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2583,7 +3015,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -2599,16 +3031,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2703,6 +3153,23 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were not awaiting push and the interrupted record is then deleted`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2826,6 +3293,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -2847,6 +3325,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -2871,6 +3350,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -2882,6 +3371,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -2927,6 +3421,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3004,6 +3515,23 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were awaiting push and the interrupted record is then deleted`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3152,12 +3680,30 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3217,6 +3763,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3238,6 +3795,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -3262,6 +3820,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -3273,6 +3841,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -3318,6 +3891,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3395,6 +3985,23 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were not awaiting push and the interrupted record is then updated`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3518,6 +4125,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3543,6 +4161,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -3572,6 +4191,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -3583,6 +4212,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -3608,7 +4242,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -3622,7 +4256,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -3638,16 +4272,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3742,6 +4394,23 @@ scenario(
 scenario(
   `with a previously interrupted pull where files were awaiting push and the interrupted record is then updated`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3890,12 +4559,30 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3955,6 +4642,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -3980,6 +4678,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -4009,6 +4708,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -4020,6 +4729,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -4045,7 +4759,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4059,7 +4773,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4075,16 +4789,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4179,6 +4911,23 @@ scenario(
 scenario(
   `with a new item to pull without files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4303,6 +5052,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4332,6 +5092,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -4366,6 +5127,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -4377,6 +5148,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -4402,7 +5178,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4416,7 +5192,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4432,16 +5208,34 @@ scenario(
       route: `sync/test-collection-b-key/2b5de2bf-22a4-493f-a8f3-c03437b08851`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B C Version A`,
         data: `Test Collection B Value D`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4541,6 +5335,23 @@ scenario(
 scenario(
   `with a new item to pull with files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4665,6 +5476,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -4694,6 +5516,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -4728,6 +5551,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -4739,6 +5572,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -4764,7 +5602,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4778,7 +5616,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -4794,11 +5632,12 @@ scenario(
       route: `sync/test-collection-b-key/2b5de2bf-22a4-493f-a8f3-c03437b08851`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B C Version A`,
         data: `Test Collection B Value E`,
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -4844,7 +5683,9 @@ scenario(
       requestBody: { type: `empty` },
       queryParameters: {},
       fileUri: `Example File Path For Uuid dab5ac6d-0ecc-4af9-9022-dda2414bf8b6 Generated By File Store`,
-      expectedStatusCodes: [`200`],
+      successfulStatusCodes: [`200`],
+      failureStatusCodes: [`404`, `403`],
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -4895,7 +5736,9 @@ scenario(
       requestBody: { type: `empty` },
       queryParameters: {},
       fileUri: `Example File Path For Uuid 286b57fd-1551-4899-9f90-07e8727e4823 Generated By File Store`,
-      expectedStatusCodes: [`200`],
+      successfulStatusCodes: [`200`],
+      failureStatusCodes: [`404`, `403`],
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -4906,6 +5749,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5005,6 +5865,23 @@ scenario(
 scenario(
   `with an updated item to pull without new files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5129,6 +6006,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5154,6 +6042,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -5183,6 +6072,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -5194,6 +6093,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -5219,7 +6123,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5233,7 +6137,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5249,16 +6153,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version B`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5353,6 +6275,23 @@ scenario(
 scenario(
   `with an updated item to pull with new files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5477,6 +6416,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5502,6 +6452,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -5531,6 +6482,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -5542,6 +6503,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -5567,7 +6533,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5581,7 +6547,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -5597,11 +6563,12 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version B`,
         data: `Test Collection B Value F`,
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -5647,7 +6614,9 @@ scenario(
       requestBody: { type: `empty` },
       queryParameters: {},
       fileUri: `Example File Path For Uuid 40d92d2c-631f-4a42-ba5e-a70a82bea897 Generated By File Store`,
-      expectedStatusCodes: [`200`],
+      successfulStatusCodes: [`200`],
+      failureStatusCodes: [`404`, `403`],
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -5698,7 +6667,9 @@ scenario(
       requestBody: { type: `empty` },
       queryParameters: {},
       fileUri: `Example File Path For Uuid c2df927b-74be-4d78-8705-7f0a664ba53b Generated By File Store`,
-      expectedStatusCodes: [`200`],
+      successfulStatusCodes: [`200`],
+      failureStatusCodes: [`404`, `403`],
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -5709,6 +6680,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5803,6 +6791,23 @@ scenario(
 scenario(
   `with an updated item to pull with deleted files`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5927,6 +6932,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -5952,6 +6968,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -5981,6 +6998,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -5992,6 +7019,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -6017,7 +7049,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -6031,7 +7063,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -6047,16 +7079,34 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version B`,
         data: `Test Collection B Value G`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -6155,6 +7205,21 @@ scenario(
 scenario(
   `with multiple items changing in the same sync`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `absent`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         // Updated.
@@ -6209,7 +7274,10 @@ scenario(
         },
       },
     },
-    addedFileUuids: [`f81d2428-9bde-4b1c-823c-86b349c99363`],
+    addedFileUuids: [
+      `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      `f81d2428-9bde-4b1c-823c-86b349c99363`,
+    ],
     deletedFileRoutes: [],
   },
   [
@@ -6270,6 +7338,11 @@ scenario(
     {
       type: `log`,
       severity: `information`,
+      text: `File "52219b25-ac88-4440-bf31-a47df684bdd7" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pushed.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
       text: `File "f81d2428-9bde-4b1c-823c-86b349c99363" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pushed.`,
     },
     {
@@ -6318,9 +7391,9 @@ scenario(
       to: {
         type: `pushing`,
         completedSteps: 0,
-        totalSteps: 3,
+        totalSteps: 4,
         completedFiles: null,
-        totalFiles: 1,
+        totalFiles: 2,
         syncConfigurationCollection: syncConfigurationCollectionB,
       },
     },
@@ -6330,9 +7403,9 @@ scenario(
       to: {
         type: `pushing`,
         completedSteps: 0,
-        totalSteps: 3,
+        totalSteps: 4,
         completedFiles: null,
-        totalFiles: 1,
+        totalFiles: 2,
         syncConfigurationCollection: syncConfigurationCollectionB,
       },
     },
@@ -6342,12 +7415,154 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `absent`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            // Updated.
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+            // Deleted.
+            "6ebca435-755c-45ef-a11c-1bcdda74c222": {
+              status: `upToDate`,
+              version: `Test Collection A B Version A`,
+              data: `Test Collection A Value C`,
+            },
+            // Deleted.
+            "e999e8d7-9e9c-42f9-a36a-9fe3a2464fe7": {
+              status: `upToDate`,
+              version: `Test Collection A C Version A`,
+              data: `Test Collection A Value D`,
+            },
+          },
+          testCollectionBKey: {
+            // No interaction.
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            // Pushed.
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `awaitingPull`,
+              data: `Test Collection B Value B`,
+            },
+            // Pulled.
+            "ce05f13c-6a36-42ac-bed4-63bbf098eeb8": {
+              status: `upToDate`,
+              version: `Test Collection B C Version A`,
+              data: `Test Collection B Value I`,
+            },
+            // Deleted.
+            "4c91279d-d35f-4063-afa2-a0c0ec0dcfd3": {
+              status: `upToDate`,
+              version: `Test Collection B D Version A`,
+              data: `Test Collection B Value J`,
+            },
+          },
+          testCollectionCKey: {
+            // Pushed.
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `awaitingPush`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [
+          `52219b25-ac88-4440-bf31-a47df684bdd7`,
+          `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        ],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pushed change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pushing file "52219b25-ac88-4440-bf31-a47df684bdd7" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pushing`,
+        completedSteps: 1,
+        totalSteps: 4,
+        completedFiles: 0,
+        totalFiles: 2,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pushing`,
+        completedSteps: 1,
+        totalSteps: 4,
+        completedFiles: 0,
+        totalFiles: 2,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `push`,
+      method: `PUT`,
+      route: `Test Collection B Value B File A Route`,
+      requestBody: {
+        type: `file`,
+        fileUri: `Example File Path For Uuid 52219b25-ac88-4440-bf31-a47df684bdd7 Generated By File Store`,
+      },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `403`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6408,8 +7623,8 @@ scenario(
     },
     {
       type: `log`,
-      severity: `information`,
-      text: `Successfully pushed change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+      severity: `warning`,
+      text: `The API returned status code "403" during push of file "52219b25-ac88-4440-bf31-a47df684bdd7" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6", indicating that the user has lost access.  The local changes will temporarily remain locally, but will most likely be lost during the pull phase.`,
     },
     {
       type: `log`,
@@ -6421,10 +7636,10 @@ scenario(
       eventHandler: `a`,
       to: {
         type: `pushing`,
-        completedSteps: 1,
-        totalSteps: 3,
-        completedFiles: 0,
-        totalFiles: 1,
+        completedSteps: 2,
+        totalSteps: 4,
+        completedFiles: 1,
+        totalFiles: 2,
         syncConfigurationCollection: syncConfigurationCollectionB,
       },
     },
@@ -6433,10 +7648,10 @@ scenario(
       eventHandler: `c`,
       to: {
         type: `pushing`,
-        completedSteps: 1,
-        totalSteps: 3,
-        completedFiles: 0,
-        totalFiles: 1,
+        completedSteps: 2,
+        totalSteps: 4,
+        completedFiles: 1,
+        totalFiles: 2,
         syncConfigurationCollection: syncConfigurationCollectionB,
       },
     },
@@ -6449,12 +7664,28 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6528,8 +7759,8 @@ scenario(
       eventHandler: `a`,
       to: {
         type: `pushing`,
-        completedSteps: 2,
-        totalSteps: 3,
+        completedSteps: 3,
+        totalSteps: 4,
         completedFiles: null,
         totalFiles: 0,
         syncConfigurationCollection: syncConfigurationCollectionC,
@@ -6540,8 +7771,8 @@ scenario(
       eventHandler: `c`,
       to: {
         type: `pushing`,
-        completedSteps: 2,
-        totalSteps: 3,
+        completedSteps: 3,
+        totalSteps: 4,
         completedFiles: null,
         totalFiles: 0,
         syncConfigurationCollection: syncConfigurationCollectionC,
@@ -6553,12 +7784,28 @@ scenario(
       route: `sync/test-collection-c-key/c2bf5c63-85dc-4797-82db-6136081b1562`,
       requestBody: { type: `json`, value: `Test Collection C Value A` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6645,6 +7892,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version B`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6684,6 +7942,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -6722,6 +7981,16 @@ scenario(
     },
     {
       type: `log`,
+      severity: `information`,
+      text: `New singleton "testSingletonCKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
       severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
@@ -6734,6 +8003,11 @@ scenario(
       type: `log`,
       severity: `information`,
       text: `Previously pushed "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled singleton "testSingletonAKey" will be pulled again as versions do not match between preflight ("Test Singleton A Version B") and state store ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -6750,7 +8024,6 @@ scenario(
       severity: `information`,
       text: `Previously pulled "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" will be pulled again as versions do not match between preflight ("Test Collection A A Version B") and state store ("Test Collection A A Version A").`,
     },
-
     {
       type: `log`,
       severity: `information`,
@@ -6760,9 +8033,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B E Version A`,
@@ -6774,9 +8047,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B E Version A`,
@@ -6790,16 +8063,32 @@ scenario(
       route: `sync/test-collection-b-key/94576d22-2cbc-451e-9a92-3c50866da564`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B E Version A`,
         data: `Test Collection B Value K`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -6878,9 +8167,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B B Version C`,
@@ -6892,9 +8181,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B B Version C`,
@@ -6908,11 +8197,12 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value H`,
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -6925,7 +8215,7 @@ scenario(
       to: {
         type: `pullingFile`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         completedFiles: 0,
         totalFiles: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -6941,7 +8231,7 @@ scenario(
       to: {
         type: `pullingFile`,
         completedSteps: 1,
-        totalSteps: 5,
+        totalSteps: 7,
         completedFiles: 0,
         totalFiles: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -6958,7 +8248,9 @@ scenario(
       requestBody: { type: `empty` },
       queryParameters: {},
       fileUri: `Example File Path For Uuid bdf19add-072c-4fd6-bca7-8468f8b80a76 Generated By File Store`,
-      expectedStatusCodes: [`200`],
+      successfulStatusCodes: [`200`],
+      failureStatusCodes: [`404`, `403`],
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -6969,6 +8261,21 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7048,9 +8355,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 2,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B C Version B`,
@@ -7062,9 +8369,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 2,
-        totalSteps: 5,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB,
         preflightResponseCollectionItem: {
           version: `Test Collection B C Version B`,
@@ -7078,16 +8385,32 @@ scenario(
       route: `sync/test-collection-b-key/ce05f13c-6a36-42ac-bed4-63bbf098eeb8`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B C Version B`,
         data: `Test Collection B Value L`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `absent`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7161,15 +8484,142 @@ scenario(
     {
       type: `log`,
       severity: `information`,
+      text: `Pulling singleton "testSingletonCKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 3,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 3,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-singleton-c-key`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        version: `Test Singleton C Version A`,
+        data: `Test Singleton C Value B`,
+      },
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            // Updated.
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+            // Deleted.
+            "6ebca435-755c-45ef-a11c-1bcdda74c222": {
+              status: `upToDate`,
+              version: `Test Collection A B Version A`,
+              data: `Test Collection A Value C`,
+            },
+            // Deleted.
+            "e999e8d7-9e9c-42f9-a36a-9fe3a2464fe7": {
+              status: `upToDate`,
+              version: `Test Collection A C Version A`,
+              data: `Test Collection A Value D`,
+            },
+          },
+          testCollectionBKey: {
+            // No interaction.
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            // Pushed.
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version C`,
+              data: `Test Collection B Value H`,
+            },
+            // Pulled.
+            "ce05f13c-6a36-42ac-bed4-63bbf098eeb8": {
+              status: `upToDate`,
+              version: `Test Collection B C Version B`,
+              data: `Test Collection B Value L`,
+            },
+            // Deleted.
+            "4c91279d-d35f-4063-afa2-a0c0ec0dcfd3": {
+              status: `upToDate`,
+              version: `Test Collection B D Version A`,
+              data: `Test Collection B Value J`,
+            },
+            // Added.
+            "94576d22-2cbc-451e-9a92-3c50866da564": {
+              status: `upToDate`,
+              version: `Test Collection B E Version A`,
+              data: `Test Collection B Value K`,
+            },
+          },
+          testCollectionCKey: {
+            // Pushed.
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `awaitingPull`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled new singleton "testSingletonCKey".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
       text: `Pulling previously pushed "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
-        completedSteps: 3,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 4,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionC,
         preflightResponseCollectionItem: {
           version: `Test Collection C A Version B`,
@@ -7181,9 +8631,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
-        completedSteps: 3,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 4,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionC,
         preflightResponseCollectionItem: {
           version: `Test Collection C A Version B`,
@@ -7197,16 +8647,34 @@ scenario(
       route: `sync/test-collection-c-key/c2bf5c63-85dc-4797-82db-6136081b1562`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection C A Version B`,
         data: `Test Collection C Value B`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7282,15 +8750,143 @@ scenario(
     {
       type: `log`,
       severity: `information`,
+      text: `Pulling singleton "testSingletonAKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 5,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 5,
+        totalSteps: 7,
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-singleton-a-key`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        version: `Test Singleton A Version B`,
+        data: `Test Singleton A Value B`,
+      },
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version B`,
+            value: `Test Singleton A Value B`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            // Updated.
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+            // Deleted.
+            "6ebca435-755c-45ef-a11c-1bcdda74c222": {
+              status: `upToDate`,
+              version: `Test Collection A B Version A`,
+              data: `Test Collection A Value C`,
+            },
+            // Deleted.
+            "e999e8d7-9e9c-42f9-a36a-9fe3a2464fe7": {
+              status: `upToDate`,
+              version: `Test Collection A C Version A`,
+              data: `Test Collection A Value D`,
+            },
+          },
+          testCollectionBKey: {
+            // No interaction.
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            // Pushed.
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version C`,
+              data: `Test Collection B Value H`,
+            },
+            // Pulled.
+            "ce05f13c-6a36-42ac-bed4-63bbf098eeb8": {
+              status: `upToDate`,
+              version: `Test Collection B C Version B`,
+              data: `Test Collection B Value L`,
+            },
+            // Deleted.
+            "4c91279d-d35f-4063-afa2-a0c0ec0dcfd3": {
+              status: `upToDate`,
+              version: `Test Collection B D Version A`,
+              data: `Test Collection B Value J`,
+            },
+            // Added.
+            "94576d22-2cbc-451e-9a92-3c50866da564": {
+              status: `upToDate`,
+              version: `Test Collection B E Version A`,
+              data: `Test Collection B Value K`,
+            },
+          },
+          testCollectionCKey: {
+            // Pushed.
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version B`,
+              data: `Test Collection C Value B`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled update of singleton "testSingletonAKey".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
       text: `Pulling updated "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8"...`,
     },
     {
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
-        completedSteps: 4,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 6,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionA,
         preflightResponseCollectionItem: {
           version: `Test Collection A A Version B`,
@@ -7302,9 +8898,9 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
-        completedSteps: 4,
-        totalSteps: 5,
+        type: `pullingCollectionItem`,
+        completedSteps: 6,
+        totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionA,
         preflightResponseCollectionItem: {
           version: `Test Collection A A Version B`,
@@ -7318,16 +8914,34 @@ scenario(
       route: `sync/test-collection-a-key/499b4447-2f9a-49a7-b636-909ace319cd8`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection A A Version B`,
         data: `Test Collection A Value B`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version B`,
+            value: `Test Singleton A Value B`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7438,6 +9052,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version B`,
+            value: `Test Singleton A Value B`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value B`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             // Updated.
@@ -7536,6 +9167,23 @@ scenario(
 scenario(
   `with a new item to pull but the state store changes during the update`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -7660,6 +9308,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -7689,6 +9348,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -7723,6 +9383,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -7734,6 +9404,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -7759,7 +9434,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -7773,7 +9448,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -7789,11 +9464,12 @@ scenario(
       route: `sync/test-collection-b-key/1901a3dc-980a-4c33-b8bd-ae854e3d7389`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B C Version B`,
         data: `Test Collection B Value F`,
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -7817,6 +9493,23 @@ scenario(
 scenario(
   `with an updated item to pull but the state store changes during the update`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -7941,6 +9634,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -7966,6 +9670,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -7995,6 +9700,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -8006,6 +9721,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -8031,7 +9751,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -8045,7 +9765,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -8061,11 +9781,12 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value F`,
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -8089,6 +9810,23 @@ scenario(
 scenario(
   `awaiting push fails due to unexpected state change`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8229,7 +9967,8 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -8254,6 +9993,23 @@ scenario(
 scenario(
   `awaiting push file fails due to unexpected state change`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8394,12 +10150,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8474,7 +10248,8 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -8499,6 +10274,23 @@ scenario(
 scenario(
   `pushing fails due to unexpected state change`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8639,7 +10431,8 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -8664,6 +10457,23 @@ scenario(
 scenario(
   `pushing file fails due to unexpected state change`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8804,12 +10614,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -8884,7 +10712,8 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -8909,6 +10738,23 @@ scenario(
 scenario(
   `awaiting pull file fails due to unexpected state change`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9057,7 +10903,8 @@ scenario(
         fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -9082,6 +10929,23 @@ scenario(
 scenario(
   `files can be deleted`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9208,12 +11072,30 @@ scenario(
       route: `Example Deletion Route A`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9275,12 +11157,30 @@ scenario(
       route: `Example Deletion Route B`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9339,12 +11239,30 @@ scenario(
       route: `Example Deletion Route C`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9405,6 +11323,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9430,6 +11359,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -9459,6 +11389,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -9470,6 +11410,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -9543,6 +11488,23 @@ scenario(
 scenario(
   `state store changes during file deletion`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9669,12 +11631,30 @@ scenario(
       route: `Example Deletion Route A`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9736,7 +11716,8 @@ scenario(
       route: `Example Deletion Route B`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -9761,6 +11742,23 @@ scenario(
 scenario(
   `state store changes during pull of new`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9885,6 +11883,23 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -9914,6 +11929,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -9948,6 +11964,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -9959,6 +11985,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -9984,7 +12015,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -9998,7 +12029,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10014,11 +12045,12 @@ scenario(
       route: `sync/test-collection-b-key/2b5de2bf-22a4-493f-a8f3-c03437b08851`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B C Version A`,
         data: `Test Collection B Value D`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -10043,6 +12075,23 @@ scenario(
 scenario(
   `state store changes during pull of updated`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10167,6 +12216,23 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10192,6 +12258,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -10221,6 +12288,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -10232,6 +12309,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -10257,7 +12339,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10271,7 +12353,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10287,11 +12369,12 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version B`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -10316,6 +12399,23 @@ scenario(
 scenario(
   `state store changes during pull of awaiting push`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10451,12 +12551,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10516,6 +12634,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10541,6 +12670,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -10570,6 +12700,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -10581,6 +12721,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -10606,7 +12751,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10620,7 +12765,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10636,11 +12781,12 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -10665,6 +12811,23 @@ scenario(
 scenario(
   `state store changes during pull of pushing`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10800,12 +12963,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10865,6 +13046,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -10890,6 +13082,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -10919,6 +13112,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -10930,6 +13133,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -10955,7 +13163,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10969,7 +13177,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -10985,11 +13193,12 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -11014,6 +13223,23 @@ scenario(
 scenario(
   `state store changes during pull of awaiting pull`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11137,6 +13363,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11162,6 +13399,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -11191,6 +13429,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -11202,6 +13450,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -11227,7 +13480,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -11241,7 +13494,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB,
@@ -11257,11 +13510,12 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection B B Version C`,
         data: `Test Collection B Value C`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: true },
     {
@@ -11286,6 +13540,23 @@ scenario(
 scenario(
   `state store changes during deletion application for up to date`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11410,6 +13681,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11431,6 +13713,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -11455,6 +13738,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -11466,6 +13759,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -11530,6 +13828,23 @@ scenario(
 scenario(
   `state store changes during deletion application for pushing`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11665,12 +13980,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11730,6 +14063,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11751,6 +14095,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -11775,6 +14120,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -11786,6 +14141,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -11850,6 +14210,23 @@ scenario(
 scenario(
   `state store changes during deletion application for awaiting push`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -11985,12 +14362,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12050,6 +14445,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12071,6 +14477,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -12095,6 +14502,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -12106,6 +14523,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -12170,6 +14592,23 @@ scenario(
 scenario(
   `state store changes during deletion application for awaiting pull`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12293,6 +14732,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12314,6 +14764,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -12338,6 +14789,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -12349,6 +14810,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -12465,10 +14931,31 @@ test(`throws an error when already running`, async () => {
     request,
     logger,
     {
-      collectionOrder: [
-        `testCollectionBKey`,
-        `testCollectionCKey`,
-        `testCollectionAKey`,
+      order: [
+        {
+          type: `collection`,
+          key: `testCollectionBKey`,
+        },
+        {
+          type: `singleton`,
+          key: `testSingletonCKey`,
+        },
+        {
+          type: `singleton`,
+          key: `testSingletonBKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionCKey`,
+        },
+        {
+          type: `singleton`,
+          key: `testSingletonAKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionAKey`,
+        },
       ],
       collections: {
         testCollectionAKey: syncConfigurationCollectionA,
@@ -12534,6 +15021,23 @@ test(`can run multiple times`, async () => {
     removeListener: jest.fn(),
     load: jest.fn(),
     get: jest.fn().mockReturnValue({
+      singletons: {
+        testSingletonAKey: {
+          type: `upToDate`,
+          version: `Test Singleton A Version A`,
+          value: `Test Singleton A Value A`,
+        },
+        testSingletonBKey: {
+          type: `upToDate`,
+          version: `Test Singleton B Version A`,
+          value: `Test Singleton B Value A`,
+        },
+        testSingletonCKey: {
+          type: `upToDate`,
+          version: `Test Singleton C Version A`,
+          value: `Test Singleton C Value A`,
+        },
+      },
       collections: {
         testCollectionAKey: {},
         testCollectionBKey: {},
@@ -12551,6 +15055,17 @@ test(`can run multiple times`, async () => {
     returningJson: jest.fn().mockResolvedValue({
       statusCode: `200`,
       value: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {},
           testCollectionBKey: {},
@@ -12588,10 +15103,31 @@ test(`can run multiple times`, async () => {
     request,
     logger,
     {
-      collectionOrder: [
-        `testCollectionBKey`,
-        `testCollectionCKey`,
-        `testCollectionAKey`,
+      order: [
+        {
+          type: `collection`,
+          key: `testCollectionBKey`,
+        },
+        {
+          type: `singleton`,
+          key: `testSingletonCKey`,
+        },
+        {
+          type: `singleton`,
+          key: `testSingletonBKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionCKey`,
+        },
+        {
+          type: `singleton`,
+          key: `testSingletonAKey`,
+        },
+        {
+          type: `collection`,
+          key: `testCollectionAKey`,
+        },
       ],
       collections: {
         testCollectionAKey: syncConfigurationCollectionA,
@@ -12632,7 +15168,7 @@ test(`can run multiple times`, async () => {
   expect(logger.error).not.toHaveBeenCalled();
   expect(logger.warning).not.toHaveBeenCalled();
   expect(logger.information).toBeCalledTimes(4);
-  expect(logger.debug).toBeCalledTimes(40);
+  expect(logger.debug).toBeCalledTimes(46);
   expect(fileStore.load).not.toHaveBeenCalled();
   expect(fileStore.generatePath).not.toHaveBeenCalled();
   expect(fileStore.delete).not.toHaveBeenCalled();
@@ -12644,6 +15180,23 @@ test(`can run multiple times`, async () => {
 scenario(
   `deleted following push`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12779,12 +15332,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12844,6 +15415,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -12865,6 +15447,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -12889,6 +15472,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -12900,6 +15493,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -12945,6 +15543,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13022,6 +15637,23 @@ scenario(
 scenario(
   `deleted following an interrupted push`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13157,12 +15789,30 @@ scenario(
       route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
       requestBody: { type: `json`, value: `Test Collection B Value B` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13222,6 +15872,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13243,6 +15904,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -13267,6 +15929,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -13278,6 +15950,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -13323,6 +16000,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13400,6 +16094,23 @@ scenario(
 scenario(
   `deleted without changes`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13524,6 +16235,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13545,6 +16267,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -13569,6 +16292,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -13580,6 +16313,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -13625,6 +16363,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13702,6 +16457,23 @@ scenario(
 scenario(
   `files can be deleted`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13828,12 +16600,30 @@ scenario(
       route: `Example Deletion Route A`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13895,12 +16685,30 @@ scenario(
       route: `Example Deletion Route B`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -13959,12 +16767,30 @@ scenario(
       route: `Example Deletion Route C`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14025,6 +16851,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14050,6 +16887,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -14079,6 +16917,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -14090,6 +16938,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -14163,6 +17016,23 @@ scenario(
 scenario(
   `file clean-up temporarily blocked`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14289,6 +17159,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14314,6 +17195,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -14343,6 +17225,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -14354,6 +17246,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -14428,6 +17325,23 @@ scenario(
 scenario(
   `files requiring push but not existing`,
   {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
     collections: {
       testCollectionAKey: {
         "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14495,6 +17409,23 @@ scenario(
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14616,12 +17547,30 @@ scenario(
       route: `sync/test-collection-a-key/499b4447-2f9a-49a7-b636-909ace319cd8`,
       requestBody: { type: `json`, value: `Test Collection A Value A` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14696,12 +17645,30 @@ scenario(
         fileUri: `Example File Path For Uuid a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2 Generated By File Store`,
       },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14761,6 +17728,17 @@ scenario(
       queryParameters: {},
       expectedStatusCodes: [`200`],
       response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14786,6 +17764,7 @@ scenario(
           },
         },
       },
+      statusCode: `200`,
     },
     {
       type: `log`,
@@ -14815,6 +17794,16 @@ scenario(
     {
       type: `log`,
       severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
       text: `Searching for new items to pull in collection "testCollectionCKey"...`,
     },
     {
@@ -14826,6 +17815,11 @@ scenario(
       type: `log`,
       severity: `debug`,
       text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
     },
     {
       type: `log`,
@@ -14851,7 +17845,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `a`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionA,
@@ -14865,7 +17859,7 @@ scenario(
       type: `stateChange`,
       eventHandler: `c`,
       to: {
-        type: `pulling`,
+        type: `pullingCollectionItem`,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionA,
@@ -14881,16 +17875,34 @@ scenario(
       route: `sync/test-collection-a-key/499b4447-2f9a-49a7-b636-909ace319cd8`,
       requestBody: { type: `empty` },
       queryParameters: {},
-      expectedStatusCodes: [`200`],
+      expectedStatusCodes: [`200`, `404`, `403`],
       response: {
         version: `Test Collection A A Version B`,
         data: `Test Collection A Value E`,
       },
+      statusCode: `200`,
     },
     { type: `getState`, changedExternally: false },
     {
       type: `setState`,
       to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
         collections: {
           testCollectionAKey: {
             "499b4447-2f9a-49a7-b636-909ace319cd8": {
@@ -14980,4 +17992,4987 @@ scenario(
     },
   ],
   `atLeastOneChangeMade`
+);
+
+scenario(
+  `handles a non-200 pull`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+            "1901a3dc-980a-4c33-b8bd-ae854e3d7389": {
+              version: `Test Collection B C Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New "testCollectionBKey" "1901a3dc-980a-4c33-b8bd-ae854e3d7389" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling new "testCollectionBKey" "1901a3dc-980a-4c33-b8bd-ae854e3d7389"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B C Version A`,
+          testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B C Version A`,
+          testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-collection-b-key/1901a3dc-980a-4c33-b8bd-ae854e3d7389`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      response: {},
+      statusCode: `403`,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The API returned status code "403" during the pull of "testCollectionBKey" "1901a3dc-980a-4c33-b8bd-ae854e3d7389", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `handles a non-200 update`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version B`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pulled again as versions do not match between preflight ("Test Collection B B Version B") and state store ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling updated "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version B`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version B`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      response: {},
+      statusCode: `403`,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The API returned status code "403" during the pull of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `handles a non-200 file pull in a new item`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+            "2b5de2bf-22a4-493f-a8f3-c03437b08851": {
+              version: `Test Collection B C Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New "testCollectionBKey" "2b5de2bf-22a4-493f-a8f3-c03437b08851" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling new "testCollectionBKey" "2b5de2bf-22a4-493f-a8f3-c03437b08851"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B C Version A`,
+          testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B C Version A`,
+          testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-collection-b-key/2b5de2bf-22a4-493f-a8f3-c03437b08851`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      response: {
+        version: `Test Collection B C Version A`,
+        data: `Test Collection B Value E`,
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling file "dab5ac6d-0ecc-4af9-9022-dda2414bf8b6" of "testCollectionBKey" "2b5de2bf-22a4-493f-a8f3-c03437b08851"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingFile`,
+        completedSteps: 0,
+        totalSteps: 1,
+        completedFiles: 0,
+        totalFiles: 2,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B C Version A`,
+          testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingFile`,
+        completedSteps: 0,
+        totalSteps: 1,
+        completedFiles: 0,
+        totalFiles: 2,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B C Version A`,
+          testAdditionalCollectionDataItemKey: `Test Collection B C Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `pullFile`,
+      method: `GET`,
+      route: `Test Collection B Value E File A Route`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      fileUri: `Example File Path For Uuid dab5ac6d-0ecc-4af9-9022-dda2414bf8b6 Generated By File Store`,
+      successfulStatusCodes: [`200`],
+      failureStatusCodes: [`404`, `403`],
+      statusCode: `403`,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The API returned status code "403" during the pull of file "dab5ac6d-0ecc-4af9-9022-dda2414bf8b6" of "testCollectionBKey" "2b5de2bf-22a4-493f-a8f3-c03437b08851", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `handles a non-200 file pull for an existing item`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version B`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pulled again as versions do not match between preflight ("Test Collection B B Version B") and state store ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling updated "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version B`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version B`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      response: {
+        version: `Test Collection B B Version B`,
+        data: `Test Collection B Value F`,
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling file "40d92d2c-631f-4a42-ba5e-a70a82bea897" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingFile`,
+        completedSteps: 0,
+        totalSteps: 1,
+        completedFiles: 0,
+        totalFiles: 2,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version B`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingFile`,
+        completedSteps: 0,
+        totalSteps: 1,
+        completedFiles: 0,
+        totalFiles: 2,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version B`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `pullFile`,
+      method: `GET`,
+      route: `Test Collection B Value F File B Route`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      fileUri: `Example File Path For Uuid 40d92d2c-631f-4a42-ba5e-a70a82bea897 Generated By File Store`,
+      successfulStatusCodes: [`200`],
+      failureStatusCodes: [`404`, `403`],
+      statusCode: `403`,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The API returned status code "403" during the pull of file "40d92d2c-631f-4a42-ba5e-a70a82bea897" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `handles a non-200 push`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `awaitingPush`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [`f81d2428-9bde-4b1c-823c-86b349c99363`],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pushed.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `File "f81d2428-9bde-4b1c-823c-86b349c99363" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pushed.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pushing change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pushing`,
+        completedSteps: 0,
+        totalSteps: 2,
+        completedFiles: null,
+        totalFiles: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pushing`,
+        completedSteps: 0,
+        totalSteps: 2,
+        completedFiles: null,
+        totalFiles: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `push`,
+      method: `PUT`,
+      route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
+      requestBody: { type: `json`, value: `Test Collection B Value B` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `403`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The API returned status code "403" during push of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6", indicating that the user has lost access.  The local changes have been lost.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to delete...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Nothing to delete.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for files to clean up...`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Deleting unreferenced existing file "f81d2428-9bde-4b1c-823c-86b349c99363"...`,
+    },
+    {
+      type: `deleteFile`,
+      uuid: `f81d2428-9bde-4b1c-823c-86b349c99363`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Deleting unreferenced existing file "52219b25-ac88-4440-bf31-a47df684bdd7"...`,
+    },
+    {
+      type: `deleteFile`,
+      uuid: `52219b25-ac88-4440-bf31-a47df684bdd7`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync completed successfully; at least one change was made.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `atLeastOneChangeMade`
+);
+
+scenario(
+  `handles a non-200 file push`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `awaitingPush`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [`f81d2428-9bde-4b1c-823c-86b349c99363`],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pushed.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `File "f81d2428-9bde-4b1c-823c-86b349c99363" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pushed.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pushing change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pushing`,
+        completedSteps: 0,
+        totalSteps: 2,
+        completedFiles: null,
+        totalFiles: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pushing`,
+        completedSteps: 0,
+        totalSteps: 2,
+        completedFiles: null,
+        totalFiles: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `push`,
+      method: `PUT`,
+      route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
+      requestBody: { type: `json`, value: `Test Collection B Value B` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `awaitingPull`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [`f81d2428-9bde-4b1c-823c-86b349c99363`],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pushed change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pushing file "f81d2428-9bde-4b1c-823c-86b349c99363" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pushing`,
+        completedSteps: 1,
+        totalSteps: 2,
+        completedFiles: 0,
+        totalFiles: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pushing`,
+        completedSteps: 1,
+        totalSteps: 2,
+        completedFiles: 0,
+        totalFiles: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+      },
+    },
+    {
+      type: `push`,
+      method: `PUT`,
+      route: `Test Collection B Value B File B Route`,
+      requestBody: {
+        type: `file`,
+        fileUri: `Example File Path For Uuid f81d2428-9bde-4b1c-823c-86b349c99363 Generated By File Store`,
+      },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `403`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `awaitingPull`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The API returned status code "403" during push of file "f81d2428-9bde-4b1c-823c-86b349c99363" of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6", indicating that the user has lost access.  The local changes will temporarily remain locally, but will most likely be lost during the pull phase.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version C`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pushed "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling previously pushed "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version C`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingCollectionItem`,
+        completedSteps: 0,
+        totalSteps: 1,
+        syncConfigurationCollection: syncConfigurationCollectionB,
+        preflightResponseCollectionItem: {
+          version: `Test Collection B B Version C`,
+          testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+        },
+      },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      response: {
+        version: `Test Collection B B Version C`,
+        data: `Test Collection B Value C`,
+      },
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version C`,
+              data: `Test Collection B Value C`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled update of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to delete...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Nothing to delete.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for files to clean up...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No files to clean up.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync completed successfully; at least one change was made.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `atLeastOneChangeMade`
+);
+
+scenario(
+  `handles a non-200 file deletion`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [
+      `Example Deletion Route A`,
+      `Example Deletion Route B`,
+      `Example Deletion Route C`,
+    ],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Deleting file "Example Deletion Route A"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `deleting`, completedSteps: 0, totalSteps: 3 },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `deleting`, completedSteps: 0, totalSteps: 3 },
+    },
+    {
+      type: `push`,
+      method: `DELETE`,
+      route: `Example Deletion Route A`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version A`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [
+          `Example Deletion Route B`,
+          `Example Deletion Route C`,
+        ],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully deleted file "Example Deletion Route A".`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Deleting file "Example Deletion Route B"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `deleting`, completedSteps: 1, totalSteps: 3 },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `deleting`, completedSteps: 1, totalSteps: 3 },
+    },
+    {
+      type: `push`,
+      method: `DELETE`,
+      route: `Example Deletion Route B`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `403`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version A`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [`Example Deletion Route C`],
+      },
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The API returned status code "403" during deletion of file "Example Deletion Route B", indicating that the user has lost access.  Another attempt will not be made.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Deleting file "Example Deletion Route C"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `deleting`, completedSteps: 2, totalSteps: 3 },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `deleting`, completedSteps: 2, totalSteps: 3 },
+    },
+    {
+      type: `push`,
+      method: `DELETE`,
+      route: `Example Deletion Route C`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`, `404`, `403`],
+      statusCode: `200`,
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version A`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully deleted file "Example Deletion Route C".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonBKey" as preflight and state store versions match ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to delete...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Nothing to delete.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for files to clean up...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No files to clean up.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync completed successfully; at least one change was made.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `atLeastOneChangeMade`
+);
+
+scenario(
+  `singleton pulled as new`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New singleton "testSingletonBKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling singleton "testSingletonBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-singleton-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Singleton B Version A`,
+        data: `Test Singleton B Value A`,
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: false,
+    },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version A`,
+            value: `Test Singleton B Value A`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version A`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled new singleton "testSingletonBKey".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to delete...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Nothing to delete.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for files to clean up...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No files to clean up.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync completed successfully; at least one change was made.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `atLeastOneChangeMade`
+);
+
+scenario(
+  `singleton pulled as new state store change`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New singleton "testSingletonBKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling singleton "testSingletonBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-singleton-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Singleton B Version A`,
+        data: `Test Singleton B Value A`,
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: true,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The state store changed during pull of singleton "testSingletonBKey"; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `singleton pulled as new version mismatch`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version A`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `New singleton "testSingletonBKey" will be pulled.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling singleton "testSingletonBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-singleton-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Singleton B Version B`,
+        data: `Test Singleton B Value A`,
+      },
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The version of singleton "testSingletonBKey" changed from "Test Singleton B Version A" at the time of preflight to "Test Singleton B Version B" at the time of pull; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `singleton pulled as updated`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version B`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled singleton "testSingletonBKey" will be pulled again as versions do not match between preflight ("Test Singleton B Version B") and state store ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling singleton "testSingletonBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-singleton-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Singleton B Version B`,
+        data: `Test Singleton B Value B`,
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: false,
+    },
+    {
+      type: `setState`,
+      to: {
+        singletons: {
+          testSingletonAKey: {
+            type: `upToDate`,
+            version: `Test Singleton A Version A`,
+            value: `Test Singleton A Value A`,
+          },
+          testSingletonBKey: {
+            type: `upToDate`,
+            version: `Test Singleton B Version B`,
+            value: `Test Singleton B Value B`,
+          },
+          testSingletonCKey: {
+            type: `upToDate`,
+            version: `Test Singleton C Version A`,
+            value: `Test Singleton C Value A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              status: `upToDate`,
+              version: `Test Collection A A Version A`,
+              data: `Test Collection A Value A`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              status: `upToDate`,
+              version: `Test Collection B A Version A`,
+              data: `Test Collection B Value A`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              status: `upToDate`,
+              version: `Test Collection B B Version A`,
+              data: `Test Collection B Value B`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              status: `upToDate`,
+              version: `Test Collection C A Version A`,
+              data: `Test Collection C Value A`,
+            },
+          },
+        },
+        addedFileUuids: [],
+        deletedFileRoutes: [],
+      },
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Successfully pulled update of singleton "testSingletonBKey".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to delete...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for items to delete from collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Nothing to delete.`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for files to clean up...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No files to clean up.`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync completed successfully; at least one change was made.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `atLeastOneChangeMade`
+);
+
+scenario(
+  `singleton pulled as updated version mismatch`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version B`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled singleton "testSingletonBKey" will be pulled again as versions do not match between preflight ("Test Singleton B Version B") and state store ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling singleton "testSingletonBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-singleton-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Singleton B Version C`,
+        data: `Test Singleton B Value B`,
+      },
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The version of singleton "testSingletonBKey" changed from "Test Singleton B Version B" at the time of preflight to "Test Singleton B Version C" at the time of pull; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
+);
+
+scenario(
+  `singleton pulled as updated`,
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value A`,
+      },
+      testSingletonBKey: {
+        type: `upToDate`,
+        version: `Test Singleton B Version A`,
+        value: `Test Singleton B Value A`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value A`,
+      },
+    },
+    collections: {
+      testCollectionAKey: {
+        "499b4447-2f9a-49a7-b636-909ace319cd8": {
+          status: `upToDate`,
+          version: `Test Collection A A Version A`,
+          data: `Test Collection A Value A`,
+        },
+      },
+      testCollectionBKey: {
+        "47fe4216-a7db-43e0-8039-fced83de97cc": {
+          status: `upToDate`,
+          version: `Test Collection B A Version A`,
+          data: `Test Collection B Value A`,
+        },
+        "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+          status: `upToDate`,
+          version: `Test Collection B B Version A`,
+          data: `Test Collection B Value B`,
+        },
+      },
+      testCollectionCKey: {
+        "c2bf5c63-85dc-4797-82db-6136081b1562": {
+          status: `upToDate`,
+          version: `Test Collection C A Version A`,
+          data: `Test Collection C Value A`,
+        },
+      },
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: [],
+  },
+  [
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Sync is starting...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Listing existing files...`,
+    },
+    {
+      type: `listFiles`,
+      uuids: [
+        `f81d2428-9bde-4b1c-823c-86b349c99363`,
+        `a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2`,
+        `52219b25-ac88-4440-bf31-a47df684bdd7`,
+      ],
+    },
+    { type: `getState`, changedExternally: false },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPush` },
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to push in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Fetching preflight...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `checkingForChangesToPull` },
+    },
+    {
+      type: `pullJson`,
+      method: `GET`,
+      route: `sync/preflight`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      expectedStatusCodes: [`200`],
+      response: {
+        singletons: {
+          testSingletonAKey: {
+            version: `Test Singleton A Version A`,
+          },
+          testSingletonBKey: {
+            version: `Test Singleton B Version B`,
+          },
+          testSingletonCKey: {
+            version: `Test Singleton C Version A`,
+          },
+        },
+        collections: {
+          testCollectionAKey: {
+            "499b4447-2f9a-49a7-b636-909ace319cd8": {
+              version: `Test Collection A A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection A A Additional Item Value`,
+            },
+          },
+          testCollectionBKey: {
+            "47fe4216-a7db-43e0-8039-fced83de97cc": {
+              version: `Test Collection B A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B A Additional Item Value`,
+            },
+            "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6": {
+              version: `Test Collection B B Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection B B Additional Item Value`,
+            },
+          },
+          testCollectionCKey: {
+            "c2bf5c63-85dc-4797-82db-6136081b1562": {
+              version: `Test Collection C A Version A`,
+              testAdditionalCollectionDataItemKey: `Test Collection C A Additional Item Value`,
+            },
+          },
+        },
+      },
+      statusCode: `200`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for changes to pull...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionBKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc" as preflight and state store versions match ("Test Collection B A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" as preflight and state store versions match ("Test Collection B B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonCKey" as preflight and state store versions match ("Test Singleton C Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Previously pulled singleton "testSingletonBKey" will be pulled again as versions do not match between preflight ("Test Singleton B Version B") and state store ("Test Singleton B Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionCKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562" as preflight and state store versions match ("Test Collection C A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of singleton "testSingletonAKey" as preflight and state store versions match ("Test Singleton A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for new items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `Searching for updated items to pull in collection "testCollectionAKey"...`,
+    },
+    {
+      type: `log`,
+      severity: `debug`,
+      text: `No pull required of "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8" as preflight and state store versions match ("Test Collection A A Version A").`,
+    },
+    {
+      type: `log`,
+      severity: `information`,
+      text: `Pulling singleton "testSingletonBKey"...`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: {
+        type: `pullingSingleton`,
+        completedSteps: 0,
+        totalSteps: 1,
+      },
+    },
+    {
+      type: `pullJson`,
+      route: `sync/test-singleton-b-key`,
+      expectedStatusCodes: [`200`],
+      method: `GET`,
+      requestBody: { type: `empty` },
+      queryParameters: {},
+      statusCode: `200`,
+      response: {
+        version: `Test Singleton B Version B`,
+        data: `Test Singleton B Value B`,
+      },
+    },
+    {
+      type: `getState`,
+      changedExternally: true,
+    },
+    {
+      type: `log`,
+      severity: `warning`,
+      text: `The state store changed during pull of singleton "testSingletonBKey"; sync has been interrupted and will need to run again.`,
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `a`,
+      to: { type: `notRunning` },
+    },
+    {
+      type: `stateChange`,
+      eventHandler: `c`,
+      to: { type: `notRunning` },
+    },
+  ],
+  `needsToRunAgain`
 );

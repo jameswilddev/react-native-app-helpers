@@ -3,6 +3,11 @@ import type { SyncableState, SyncConfiguration } from "../../..";
 
 test(`upserts when new`, () => {
   type ExampleSchema = {
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
+    };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
       readonly exampleCollectionBKey:
@@ -33,10 +38,31 @@ test(`upserts when new`, () => {
     ExampleSchema,
     ExampleAdditionalCollectionData
   > = {
-    collectionOrder: [
-      `exampleCollectionCKey`,
-      `exampleCollectionBKey`,
-      `exampleCollectionAKey`,
+    order: [
+      {
+        type: `collection`,
+        key: `exampleCollectionCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonAKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionBKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonBKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionAKey`,
+      },
     ],
     collections: {
       exampleCollectionAKey: {
@@ -56,6 +82,21 @@ test(`upserts when new`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -107,6 +148,21 @@ test(`upserts when new`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -150,6 +206,11 @@ test(`upserts when new`, () => {
 
 test(`upserts when existing as up to date`, () => {
   type ExampleSchema = {
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
+    };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
       readonly exampleCollectionBKey:
@@ -206,10 +267,31 @@ test(`upserts when existing as up to date`, () => {
     ExampleSchema,
     ExampleAdditionalCollectionData
   > = {
-    collectionOrder: [
-      `exampleCollectionCKey`,
-      `exampleCollectionBKey`,
-      `exampleCollectionAKey`,
+    order: [
+      {
+        type: `collection`,
+        key: `exampleCollectionCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonAKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionBKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonBKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionAKey`,
+      },
     ],
     collections: {
       exampleCollectionAKey: {
@@ -229,6 +311,21 @@ test(`upserts when existing as up to date`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -289,6 +386,21 @@ test(`upserts when existing as up to date`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -332,6 +444,11 @@ test(`upserts when existing as up to date`, () => {
 
 test(`upserts when existing as awaiting push`, () => {
   type ExampleSchema = {
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
+    };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
       readonly exampleCollectionBKey:
@@ -388,10 +505,31 @@ test(`upserts when existing as awaiting push`, () => {
     ExampleSchema,
     ExampleAdditionalCollectionData
   > = {
-    collectionOrder: [
-      `exampleCollectionCKey`,
-      `exampleCollectionBKey`,
-      `exampleCollectionAKey`,
+    order: [
+      {
+        type: `collection`,
+        key: `exampleCollectionCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonAKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionBKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonBKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionAKey`,
+      },
     ],
     collections: {
       exampleCollectionAKey: {
@@ -411,6 +549,21 @@ test(`upserts when existing as awaiting push`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -470,6 +623,21 @@ test(`upserts when existing as awaiting push`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -513,6 +681,11 @@ test(`upserts when existing as awaiting push`, () => {
 
 test(`upserts when existing as pushing`, () => {
   type ExampleSchema = {
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
+    };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
       readonly exampleCollectionBKey:
@@ -569,10 +742,31 @@ test(`upserts when existing as pushing`, () => {
     ExampleSchema,
     ExampleAdditionalCollectionData
   > = {
-    collectionOrder: [
-      `exampleCollectionCKey`,
-      `exampleCollectionBKey`,
-      `exampleCollectionAKey`,
+    order: [
+      {
+        type: `collection`,
+        key: `exampleCollectionCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonAKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionBKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonBKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionAKey`,
+      },
     ],
     collections: {
       exampleCollectionAKey: {
@@ -592,6 +786,21 @@ test(`upserts when existing as pushing`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -651,6 +860,21 @@ test(`upserts when existing as pushing`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -694,6 +918,11 @@ test(`upserts when existing as pushing`, () => {
 
 test(`upserts when existing as awaiting pull`, () => {
   type ExampleSchema = {
+    readonly singletons: {
+      readonly testSingletonAKey: `Test Singleton A Value`;
+      readonly testSingletonBKey: `Test Singleton B Value`;
+      readonly testSingletonCKey: `Test Singleton C Value`;
+    };
     readonly collections: {
       readonly exampleCollectionAKey: `Example Collection A Data`;
       readonly exampleCollectionBKey:
@@ -750,10 +979,31 @@ test(`upserts when existing as awaiting pull`, () => {
     ExampleSchema,
     ExampleAdditionalCollectionData
   > = {
-    collectionOrder: [
-      `exampleCollectionCKey`,
-      `exampleCollectionBKey`,
-      `exampleCollectionAKey`,
+    order: [
+      {
+        type: `collection`,
+        key: `exampleCollectionCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonAKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionBKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonCKey`,
+      },
+      {
+        type: `singleton`,
+        key: `testSingletonBKey`,
+      },
+      {
+        type: `collection`,
+        key: `exampleCollectionAKey`,
+      },
     ],
     collections: {
       exampleCollectionAKey: {
@@ -773,6 +1023,21 @@ test(`upserts when existing as awaiting pull`, () => {
   const syncableStateHelper = new SyncableStateHelper(syncConfiguration);
   const setState = jest.fn();
   const state: SyncableState<ExampleSchema> = {
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {
@@ -832,6 +1097,21 @@ test(`upserts when existing as awaiting pull`, () => {
   expect(listFilesC).not.toHaveBeenCalled();
   expect(setState).toBeCalledTimes(1);
   expect(setState).toBeCalledWith({
+    singletons: {
+      testSingletonAKey: {
+        type: `upToDate`,
+        version: `Test Singleton A Version A`,
+        value: `Test Singleton A Value`,
+      },
+      testSingletonBKey: {
+        type: `absent`,
+      },
+      testSingletonCKey: {
+        type: `upToDate`,
+        version: `Test Singleton C Version A`,
+        value: `Test Singleton C Value`,
+      },
+    },
     collections: {
       exampleCollectionAKey: {
         "b990662b-9f09-4b77-94a1-da75595dd6a3": {

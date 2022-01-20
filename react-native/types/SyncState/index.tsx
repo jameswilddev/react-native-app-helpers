@@ -96,7 +96,23 @@ export type SyncState<
       /**
        * Indicates the type of sync status.
        */
-      readonly type: `pulling`;
+      readonly type: `pullingSingleton`;
+
+      /**
+       * The number of items pulled so far (not including the item in progress).
+       */
+      readonly completedSteps: number;
+
+      /**
+       * The number of items which will be pulled should sync succeed.
+       */
+      readonly totalSteps: number;
+    }
+  | {
+      /**
+       * Indicates the type of sync status.
+       */
+      readonly type: `pullingCollectionItem`;
 
       /**
        * The number of items pulled so far (not including the item in progress).

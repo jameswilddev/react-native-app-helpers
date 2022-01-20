@@ -33,6 +33,7 @@ export const createTextComponent = (
       lineHeight: fontSize * 1.4,
       color,
       textAlign: alignment,
+      flexShrink: 1,
     },
   });
 

@@ -8,6 +8,14 @@ The schema of information which can be synced.
 import type { SyncableSchema } from "react-native-app-helpers";
 
 const example: SyncableSchema = {
+  readonly singletons: {
+    readonly exampleSingletonAKey: {
+      readonly exampleDataAKey: boolean;
+    };
+    readonly exampleSingletonBKey: {
+      readonly exampleDataBKey: number;
+    };
+  };
   collections: {
     exampleCollectionAKey: {
       exampleDataKey: `Example Data Value`,

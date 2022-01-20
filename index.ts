@@ -1,4 +1,5 @@
 import "react-native-get-random-values";
+export { AbsentSyncableStateSingleton } from "./react-native/types/AbsentSyncableStateSingleton";
 export { Aligned } from "./react-native/components/Aligned";
 export { AwaitingPullSyncableStateCollectionItem } from "./react-native/types/AwaitingPullSyncableStateCollectionItem";
 export { AwaitingPushSyncableStateCollectionItem } from "./react-native/types/AwaitingPushSyncableStateCollectionItem";
@@ -32,6 +33,7 @@ export { createHeaderComponent } from "./react-native/components/createHeaderCom
 export { createHrComponent } from "./react-native/components/createHrComponent";
 export { createImageBackgroundComponent } from "./react-native/components/createImageBackgroundComponent";
 export { createInputComponent } from "./react-native/components/createInputComponent";
+export { createLimitedWidthComponent } from "./react-native/components/createLimitedWidthComponent";
 export { createNullableEmailInputComponent } from "./react-native/components/createNullableEmailInputComponent";
 export { createNullableFloatInputComponent } from "./react-native/components/createNullableFloatInputComponent";
 export { createNullableIntegerInputComponent } from "./react-native/components/createNullableIntegerInputComponent";
@@ -90,6 +92,7 @@ export { PictureHelperInterface } from "./react-native/types/PictureHelperInterf
 export { PreflightResponse } from "./react-native/types/PreflightResponse";
 export { PreflightResponseCollection } from "./react-native/types/PreflightResponseCollection";
 export { PreflightResponseCollectionItem } from "./react-native/types/PreflightResponseCollectionItem";
+export { PreflightResponseSingleton } from "./react-native/types/PreflightResponseSingleton";
 export { PushingSyncableStateCollectionItem } from "./react-native/types/PushingSyncableStateCollectionItem";
 export { QueryParameter } from "./react-native/types/QueryParameter";
 export { QueryParameters } from "./react-native/types/QueryParameters";
@@ -121,6 +124,7 @@ export { SyncableSchema } from "./react-native/types/SyncableSchema";
 export { SyncableState } from "./react-native/types/SyncableState";
 export { SyncableStateCollection } from "./react-native/types/SyncableStateCollection";
 export { SyncableStateCollectionItem } from "./react-native/types/SyncableStateCollectionItem";
+export { SyncableStateSingleton } from "./react-native/types/SyncableStateSingleton";
 export { SyncableStateHelper } from "./react-native/services/SyncableStateHelper";
 export { SyncConfiguration } from "./react-native/types/SyncConfiguration";
 export { SyncConfigurationCollection } from "./react-native/types/SyncConfigurationCollection";
@@ -139,6 +143,7 @@ export { UnderlinedTopTabBarStyle } from "./react-native/types/UnderlinedTopTabB
 export { UnderlinedTopTabBarStyleState } from "./react-native/types/UnderlinedTopTabBarStyleState";
 export { unwrapRenderedFunctionComponent } from "./react-native/utilities/unwrapRenderedFunctionComponent";
 export { UpToDateSyncableStateCollectionItem } from "./react-native/types/UpToDateSyncableStateCollectionItem";
+export { UpToDateSyncableStateSingleton } from "./react-native/types/UpToDateSyncableStateSingleton";
 export { useBackButton } from "./react-native/hooks/useBackButton";
 export { useEventRefresh } from "./react-native/hooks/useEventRefresh";
 export { useMeasure } from "./react-native/hooks/useMeasure";

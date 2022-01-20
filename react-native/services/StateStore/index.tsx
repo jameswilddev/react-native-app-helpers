@@ -3,12 +3,18 @@ import { EventEmitter } from "events";
 import type { Json } from "../../types/Json";
 import type { StateStoreInterface } from "../../types/StateStoreInterface";
 
+type StateStoreContent<T extends Json> = {
+  readonly version: string;
+  readonly value: T;
+};
+
 /**
  * A wrapper around expo-file-system which adds:
  * - Concurrency control.
  * - JSON parsing and serialization.
  * - Change events.
  * - A synchronous read/write API (with asynchronous write-back).
+ * - Versioning.
  * @template T The type of JSON stored.
  */
 export class StateStore<T extends Json> implements StateStoreInterface<T> {
@@ -22,8 +28,13 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
   /**
    * @param initial The value to use when no such record exists
    *                in expo-file-system.
+   * @param version A string which identifies the version of the data structure
+   *                within the state store.  States previously written with a
+   *                differing version will be discarded and replaced with the
+   *                initial value.  This can be used to handle drastic data
+   *                store redesigns early in development.
    */
-  constructor(private readonly initial: T) {}
+  constructor(private readonly initial: T, private readonly version: string) {}
 
   addListener(eventType: `set`, listener: () => void): void {
     this.eventEmitter.addListener(eventType, listener);
@@ -52,7 +63,14 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
 
       if ((await FileSystem.getInfoAsync(fileUri)).exists) {
         const raw = await FileSystem.readAsStringAsync(fileUri);
-        this.value = JSON.parse(raw);
+
+        const content: StateStoreContent<T> = JSON.parse(raw);
+
+        if (content.version === this.version) {
+          this.value = content.value;
+        } else {
+          this.value = this.initial;
+        }
       } else {
         this.value = this.initial;
       }
@@ -73,9 +91,14 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
 
   private startWrite(): void {
     (async () => {
+      const content: StateStoreContent<T> = {
+        version: this.version,
+        value: this.value as T,
+      };
+
       await FileSystem.writeAsStringAsync(
         this.fileUri as string,
-        JSON.stringify(this.value as T)
+        JSON.stringify(content)
       );
 
       this.writeQueueLength--;

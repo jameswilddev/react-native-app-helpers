@@ -8,6 +8,14 @@ Represents a local mirror of data which can be synced.
 import type { SyncableState } from "react-native-app-helpers";
 
 type ExampleSchema = {
+  readonly singletons: {
+    readonly exampleSingletonAKey: {
+      readonly exampleDataAKey: boolean;
+    };
+    readonly exampleSingletonBKey: {
+      readonly exampleDataBKey: number;
+    };
+  };
   readonly collections: {
     readonly exampleCollectionAKey: {
       readonly exampleDataAKey: boolean;
@@ -22,6 +30,23 @@ type ExampleSchema = {
 };
 
 const example: SyncableState<ExampleSchema> = {
+  singletons: {
+    exampleSingletonAKey: {
+      type: `absent`,
+    },
+    exampleSingletonBKey: {
+      type: `upToDate`,
+      version: `Example Version`,
+      items: {
+        "5a82bfb8-35ef-4cd6-92d7-efcb532e5fd1": {
+            exampleDataBKey: 1234,
+        },
+        "459ef49b-59a2-4f1b-a055-3577b8f974dd": {
+            exampleDataBKey: 5678,
+        },
+      },
+    },
+  },
   collections: {
     exampleCollectionAKey: {
       "5a82bfb8-35ef-4cd6-92d7-efcb532e5fd1": {

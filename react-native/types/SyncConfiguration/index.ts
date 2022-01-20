@@ -13,11 +13,20 @@ export type SyncConfiguration<
   TAdditionalCollectionData extends Record<string, unknown>
 > = {
   /**
-   * The order in which collections which are to be synced.  This order will be
-   * followed for additions and updates, then reversed for deletions in a
-   * subsequent pass.
+   * The order in which singletons and collections which are to be synced.  This
+   * order will be followed for additions and updates, then reversed for
+   * deletions in a subsequent pass.
    */
-  readonly collectionOrder: ReadonlyArray<keyof TSchema[`collections`]>;
+  readonly order: ReadonlyArray<
+    | {
+        readonly type: `singleton`;
+        readonly key: keyof TSchema[`singletons`];
+      }
+    | {
+        readonly type: `collection`;
+        readonly key: keyof TSchema[`collections`];
+      }
+  >;
 
   /**
    * The collections which are to be synced.

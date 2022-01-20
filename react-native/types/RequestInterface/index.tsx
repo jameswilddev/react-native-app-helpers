@@ -78,17 +78,19 @@ export interface RequestInterface {
   /**
    * Performs a request which returns a file.  NOTE: timeouts are not yet
    * available for this method.
-   * @template T                The expected response status code(s).
-   * @param method              The HTTP method to use.
-   * @param route               The URL path relative to the base URL.
-   * @param requestBody         The request body to send.
-   * @param queryParameters     The query parameters to include in the URL.
-   * @param abortSignal         When non-null, an AbortController's signal which
-   *                            may be used to remotely cancel the request.
-   * @param fileUri             The URI to which the returned file is to be
-   *                            downloaded.
-   * @param expectedStatusCodes The status codes expected to be returned.
-   * @returns                   The returned status code.
+   * @template T                    The expected response status code(s).
+   * @param method                  The HTTP method to use.
+   * @param route                   The URL path relative to the base URL.
+   * @param requestBody             The request body to send.
+   * @param queryParameters         The query parameters to include in the URL.
+   * @param abortSignal             When non-null, an AbortController's signal
+   *                                which may be used to remotely cancel the
+   *                                request.
+   * @param fileUri                 The URI to which the returned file is to be
+   *                                downloaded.
+   * @param successfulStatusCodes   The status codes which indicate success.
+   * @param unsuccessfulStatusCodes The status codes which indicate failure.
+   * @returns                       The returned status code.
    */
   returningFile<T extends string>(
     method: `GET`,
@@ -97,6 +99,7 @@ export interface RequestInterface {
     queryParameters: QueryParameters,
     abortSignal: null,
     fileUri: string,
-    expectedStatusCodes: ReadonlyArray<T>
+    successfulStatusCodes: ReadonlyArray<T>,
+    unsuccessfulStatusCodes: ReadonlyArray<T>
   ): Promise<T>;
 }

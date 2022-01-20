@@ -1,5 +1,6 @@
 import type { Json } from "../Json";
 import type { PreflightResponseCollection } from "../PreflightResponseCollection";
+import type { PreflightResponseSingleton } from "../PreflightResponseSingleton";
 import type { SyncableSchema } from "../SyncableSchema";
 
 /**
@@ -14,6 +15,13 @@ export type PreflightResponse<
   TSchema extends SyncableSchema,
   TAdditionalCollectionItemData extends Record<string, Json>
 > = {
+  /**
+   * The singletons available to be synced.
+   */
+  readonly singletons: {
+    readonly [TKey in keyof TSchema[`singletons`]]: PreflightResponseSingleton;
+  };
+
   /**
    * The collections available to be synced.
    */
