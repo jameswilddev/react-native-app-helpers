@@ -42,6 +42,7 @@ export { createNullableTextAreaComponent } from "./react-native/components/creat
 export { createNullableTextInputComponent } from "./react-native/components/createNullableTextInputComponent";
 export { createOfflineTableComponent } from "./react-native/components/createOfflineTableComponent";
 export { createPaddingComponent } from "./react-native/components/createPaddingComponent";
+export { createPickerButtonComponent } from "./react-native/components/createPickerButtonComponent";
 export { createProportionalRowComponent } from "./react-native/components/createProportionalRowComponent";
 export { createRequiredEmailInputComponent } from "./react-native/components/createRequiredEmailInputComponent";
 export { createRequiredFloatInputComponent } from "./react-native/components/createRequiredFloatInputComponent";
@@ -124,8 +125,8 @@ export { SyncableSchema } from "./react-native/types/SyncableSchema";
 export { SyncableState } from "./react-native/types/SyncableState";
 export { SyncableStateCollection } from "./react-native/types/SyncableStateCollection";
 export { SyncableStateCollectionItem } from "./react-native/types/SyncableStateCollectionItem";
-export { SyncableStateSingleton } from "./react-native/types/SyncableStateSingleton";
 export { SyncableStateHelper } from "./react-native/services/SyncableStateHelper";
+export { SyncableStateSingleton } from "./react-native/types/SyncableStateSingleton";
 export { SyncConfiguration } from "./react-native/types/SyncConfiguration";
 export { SyncConfigurationCollection } from "./react-native/types/SyncConfigurationCollection";
 export { SyncInterface } from "./react-native/types/SyncInterface";

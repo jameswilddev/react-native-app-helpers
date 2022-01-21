@@ -47,6 +47,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createNullableTextInputComponent](./react-native/components/createNullableTextInputComponent/readme.md)
 - [createOfflineTableComponent](./react-native/components/createOfflineTableComponent/readme.md)
 - [createPaddingComponent](./react-native/components/createPaddingComponent/readme.md)
+- [createPickerButtonComponent](./react-native/components/createPickerButtonComponent/readme.md)
 - [createProportionalRowComponent](./react-native/components/createProportionalRowComponent/readme.md)
 - [createRequiredEmailInputComponent](./react-native/components/createRequiredEmailInputComponent/readme.md)
 - [createRequiredFloatInputComponent](./react-native/components/createRequiredFloatInputComponent/readme.md)
