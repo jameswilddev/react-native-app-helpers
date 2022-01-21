@@ -57,8 +57,8 @@
   "dependencies": {
     "events": "3.3.0",
     "expo": "44.0.5",
-    "expo-constants": "13.0.0",
-    "expo-file-system": "13.2.0",
+    "expo-constants": "13.0.1",
+    "expo-file-system": "13.2.1",
     "expo-image-picker": "12.0.1",
     "expo-intent-launcher": "10.1.0",
     "expo-media-library": "14.0.0",
