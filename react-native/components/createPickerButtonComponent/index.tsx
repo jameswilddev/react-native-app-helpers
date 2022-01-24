@@ -231,11 +231,11 @@ export const createPickerButtonComponent = (
           key: `leftIcon`,
           fill: disabled
             ? valid
-              ? controlStyle.disabledValid.placeholderColor
-              : controlStyle.disabledInvalid.placeholderColor
+              ? controlStyle.disabledValid.iconColor
+              : controlStyle.disabledInvalid.iconColor
             : valid
-            ? controlStyle.blurredValid.placeholderColor
-            : controlStyle.blurredInvalid.placeholderColor,
+            ? controlStyle.blurredValid.iconColor
+            : controlStyle.blurredInvalid.iconColor,
         })
       );
     }
@@ -298,11 +298,11 @@ export const createPickerButtonComponent = (
           key: `rightIcon`,
           fill: disabled
             ? valid
-              ? controlStyle.disabledValid.placeholderColor
-              : controlStyle.disabledInvalid.placeholderColor
+              ? controlStyle.disabledValid.iconColor
+              : controlStyle.disabledInvalid.iconColor
             : valid
-            ? controlStyle.blurredValid.placeholderColor
-            : controlStyle.blurredInvalid.placeholderColor,
+            ? controlStyle.blurredValid.iconColor
+            : controlStyle.blurredInvalid.iconColor,
         })
       );
     }

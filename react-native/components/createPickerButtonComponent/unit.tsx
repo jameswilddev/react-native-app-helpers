@@ -786,7 +786,7 @@ test(`renders with a left icon`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
           expect.objectContaining({
@@ -946,7 +946,7 @@ test(`renders with a right icon`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
         ],
@@ -1072,7 +1072,7 @@ test(`renders with left and right icons`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
           expect.objectContaining({
@@ -1096,7 +1096,7 @@ test(`renders with left and right icons`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
         ],
@@ -1221,7 +1221,7 @@ test(`renders as expected with a left icon when invalid`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#CACA3A`,
+              fill: `#985E00`,
             },
           }),
           expect.objectContaining({
@@ -1382,7 +1382,7 @@ test(`renders as expected with a right icon when invalid`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#CACA3A`,
+              fill: `#985E00`,
             },
           }),
         ],
@@ -1509,7 +1509,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#CACA3A`,
+              fill: `#985E00`,
             },
           }),
           expect.objectContaining({
@@ -1533,7 +1533,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#CACA3A`,
+              fill: `#985E00`,
             },
           }),
         ],
@@ -1788,7 +1788,7 @@ test(`renders with a left icon without horizontal padding`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
           expect.objectContaining({
@@ -1945,7 +1945,7 @@ test(`renders with a right icon without horizontal padding`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
         ],
@@ -2070,7 +2070,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
           expect.objectContaining({
@@ -2093,7 +2093,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#E7AA32`,
+              fill: `#43AE21`,
             },
           }),
         ],
@@ -2734,7 +2734,7 @@ test(`renders when disabled with a left icon`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#FFAAEE`,
+              fill: `#ADAADA`,
             },
           }),
           expect.objectContaining({
@@ -2895,7 +2895,7 @@ test(`renders when disabled with a right icon`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#FFAAEE`,
+              fill: `#ADAADA`,
             },
           }),
         ],
@@ -3022,7 +3022,7 @@ test(`renders when disabled with left and right icons`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#FFAAEE`,
+              fill: `#ADAADA`,
             },
           }),
           expect.objectContaining({
@@ -3046,7 +3046,7 @@ test(`renders when disabled with left and right icons`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#FFAAEE`,
+              fill: `#ADAADA`,
             },
           }),
         ],
@@ -3171,7 +3171,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#233832`,
+              fill: `#709709`,
             },
           }),
           expect.objectContaining({
@@ -3332,7 +3332,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#233832`,
+              fill: `#709709`,
             },
           }),
         ],
@@ -3459,7 +3459,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
           expect.objectContaining({
             type: LeftIcon,
             props: {
-              fill: `#233832`,
+              fill: `#709709`,
             },
           }),
           expect.objectContaining({
@@ -3483,7 +3483,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
           expect.objectContaining({
             type: RightIcon,
             props: {
-              fill: `#233832`,
+              fill: `#709709`,
             },
           }),
         ],
