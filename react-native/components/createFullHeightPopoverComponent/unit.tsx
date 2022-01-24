@@ -1,19 +1,16 @@
 import * as React from "react";
-import { Dimensions, Text, View, TextInput } from "react-native";
+import { Dimensions, Text, TextInput, View } from "react-native";
 import { SafeAreaInsetsContext } from "react-native-safe-area-context";
 import * as TestRenderer from "react-test-renderer";
 import {
   createFullHeightPopoverComponent,
   Hitbox,
-  SimpleModal,
-  ContainerFillingKeyboardAvoidingView,
-  SizedHorizontallySymmetricalSafeAreaView,
   ControlStyle,
   unwrapRenderedFunctionComponent,
 } from "../../..";
-
-View;
-SimpleModal;
+import { ContainerFillingKeyboardAvoidingView } from "../ContainerFillingKeyboardAvoidingView";
+import { SimpleModal } from "../SimpleModal";
+import { SizedHorizontallySymmetricalSafeAreaView } from "../SizedHorizontallySymmetricalSafeAreaView";
 
 test(`renders as expected when not disabled`, () => {
   Dimensions.set({
@@ -716,9 +713,11 @@ test(`renders as expected when not disabled after layout after press`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -916,9 +915,11 @@ test(`renders as expected when not disabled after press after layout`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -1124,9 +1125,11 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 10,
@@ -1332,9 +1335,11 @@ test(`correctly handles layout changes which only change width`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -1540,9 +1545,11 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -1748,9 +1755,11 @@ test(`correctly handles layout changes which only change height`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -1956,9 +1965,11 @@ test(`correctly handles layout changes which have no effect`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -2695,9 +2706,11 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -3329,9 +3342,11 @@ test(`renders as expected without a label when open`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -3796,9 +3811,11 @@ test(`renders as expected when invalid when open`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
-                    borderLeftWidth: 12,
-                    borderRightWidth: 12,
+                    borderWidth: 12,
+                    borderBottomWidth: 0,
                     borderColor: `#98ADAA`,
+                    borderTopLeftRadius: 47,
+                    borderTopRightRadius: 47,
                   },
                   {
                     left: 70,
@@ -4263,9 +4280,11 @@ test(`renders as expected without a label when invalid`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
-                    borderLeftWidth: 12,
-                    borderRightWidth: 12,
+                    borderWidth: 12,
+                    borderBottomWidth: 0,
                     borderColor: `#98ADAA`,
+                    borderTopLeftRadius: 47,
+                    borderTopRightRadius: 47,
                   },
                   {
                     left: 70,
@@ -4576,6 +4595,8 @@ test(`renders as expected without borders`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
+                    borderTopLeftRadius: 3,
+                    borderTopRightRadius: 3,
                   },
                   {
                     left: 70,
@@ -4753,6 +4774,8 @@ test(`renders as expected when invalid without borders`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
+                    borderTopLeftRadius: 47,
+                    borderTopRightRadius: 47,
                   },
                   {
                     left: 70,
@@ -4949,8 +4972,8 @@ test(`renders as expected without radius`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
-                    borderLeftWidth: 5,
-                    borderRightWidth: 5,
+                    borderWidth: 5,
+                    borderBottomWidth: 0,
                     borderColor: `#646464`,
                   },
                   {
@@ -5149,8 +5172,8 @@ test(`renders as expected when invalid without radius`, () => {
                     top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
-                    borderLeftWidth: 12,
-                    borderRightWidth: 12,
+                    borderWidth: 12,
+                    borderBottomWidth: 0,
                     borderColor: `#98ADAA`,
                   },
                   {

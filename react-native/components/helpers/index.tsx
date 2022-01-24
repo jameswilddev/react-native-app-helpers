@@ -100,9 +100,14 @@ export const createFullHeightPopoverStateStyleInstance = (
   };
 
   if (controlStateStyle.border !== null) {
-    output.borderLeftWidth = controlStateStyle.border.width;
-    output.borderRightWidth = controlStateStyle.border.width;
+    output.borderWidth = controlStateStyle.border.width;
+    output.borderBottomWidth = 0;
     output.borderColor = controlStateStyle.border.color;
+  }
+
+  if (controlStateStyle.radius > 0) {
+    output.borderTopLeftRadius = controlStateStyle.radius;
+    output.borderTopRightRadius = controlStateStyle.radius;
   }
 
   return output;
