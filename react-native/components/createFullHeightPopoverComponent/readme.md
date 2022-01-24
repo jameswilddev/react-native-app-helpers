@@ -12,7 +12,7 @@ is desirable for the list of options).
 ```tsx
 import { createFullHeightPopoverComponent } from "react-native-app-helpers";
 
-const ExampleFullHeightPopover = createDropDownComponent(
+const ExampleFullHeightPopover = createFullHeightPopoverComponent(
   {
     fontFamily: `Example Font Family`,
     fontSize: 37,

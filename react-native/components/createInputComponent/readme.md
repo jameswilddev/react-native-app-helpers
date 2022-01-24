@@ -5,7 +5,7 @@ Creates a React component which allows for the editing of text.
 ## Usage
 
 ```tsx
-import { createDropDownComponent } from "react-native-app-helpers";
+import { createInputComponent } from "react-native-app-helpers";
 
 // This example allows any text containing only the letter "G".
 // The value is the length of the text.

@@ -21,7 +21,6 @@ export { createButtonComponent } from "./react-native/components/createButtonCom
 export { createCardComponent } from "./react-native/components/createCardComponent";
 export { createCheckboxComponent } from "./react-native/components/createCheckboxComponent";
 export { createCreatableSelectComponent } from "./react-native/components/createCreatableSelectComponent";
-export { createDropDownComponent } from "./react-native/components/createDropDownComponent";
 export { createFileStoreManagerComponent } from "./react-native/components/createFileStoreManagerComponent";
 export { createFiniteStateMachineRoutingComponent } from "./react-native/components/createFiniteStateMachineRoutingComponent";
 export { createFixedWidthComponent } from "./react-native/components/createFixedWidthComponent";
