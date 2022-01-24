@@ -635,46 +635,37 @@ test(`renders as expected when not disabled after layout after press`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -829,46 +820,37 @@ test(`renders as expected when not disabled after press after layout`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -1031,46 +1013,37 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 10,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 10,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -1233,46 +1206,37 @@ test(`correctly handles layout changes which only change width`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 190,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 190,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -1435,46 +1399,37 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -1637,46 +1592,37 @@ test(`correctly handles layout changes which only change height`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -1839,46 +1785,37 @@ test(`correctly handles layout changes which have no effect`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -2538,46 +2475,37 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -3133,46 +3061,37 @@ test(`renders as expected when invalid when open`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#32AA88`,
+                borderLeftWidth: 12,
+                borderRightWidth: 12,
+                borderColor: `#98ADAA`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#32AA88`,
-                    borderWidth: 12,
-                    borderBottomWidth: 0,
-                    borderColor: `#98ADAA`,
-                    borderTopLeftRadius: 47,
-                    borderTopRightRadius: 47,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -3309,43 +3228,34 @@ test(`renders as expected without borders`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -3482,43 +3392,34 @@ test(`renders as expected when invalid without borders`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#32AA88`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#32AA88`,
-                    borderTopLeftRadius: 47,
-                    borderTopRightRadius: 47,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -3673,44 +3574,37 @@ test(`renders as expected without radius`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#CABA99`,
+                borderLeftWidth: 5,
+                borderRightWidth: 5,
+                borderColor: `#646464`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#CABA99`,
-                    borderWidth: 5,
-                    borderBottomWidth: 0,
-                    borderColor: `#646464`,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },
@@ -3865,44 +3759,37 @@ test(`renders as expected when invalid without radius`, () => {
       props: expect.objectContaining({
         onClose: expect.any(Function),
         children: expect.objectContaining({
-          type: SizedHorizontallySymmetricalSafeAreaView,
+          type: View,
           props: {
-            top: true,
-            width: `fillsContainer`,
-            height: `fillsContainer`,
+            style: [
+              {
+                height: `100%`,
+                backgroundColor: `#32AA88`,
+                borderLeftWidth: 12,
+                borderRightWidth: 12,
+                borderColor: `#98ADAA`,
+              },
+              {
+                left: 70,
+                width: 220,
+              },
+            ],
             children: expect.objectContaining({
-              type: View,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
-                style: [
-                  {
-                    height: `100%`,
-                    backgroundColor: `#32AA88`,
-                    borderWidth: 12,
-                    borderBottomWidth: 0,
-                    borderColor: `#98ADAA`,
-                  },
-                  {
-                    left: 70,
-                    width: 220,
-                  },
-                ],
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
-                      type: ContainerFillingKeyboardAvoidingView,
+                      type: Text,
                       props: {
-                        children: expect.objectContaining({
-                          type: Text,
-                          props: {
-                            children: `Example Pop Over Content`,
-                          },
-                        }),
+                        children: `Example Pop Over Content`,
                       },
                     }),
                   },

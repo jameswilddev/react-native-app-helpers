@@ -191,30 +191,25 @@ export const createFullHeightPopoverComponent = (
         <React.Fragment>
           {inline}
           <SimpleModal onClose={onClose}>
-            <SizedHorizontallySymmetricalSafeAreaView
-              top
-              width="fillsContainer"
-              height="fillsContainer"
+            <View
+              style={[
+                valid ? styles.validView : styles.invalidView,
+                additionalModalViewStyle,
+              ]}
             >
-              <View
-                style={[
-                  valid ? styles.validView : styles.invalidView,
-                  additionalModalViewStyle,
-                ]}
+              <SizedHorizontallySymmetricalSafeAreaView
+                top
+                bottom
+                left
+                right
+                width="fillsContainer"
+                height="fillsContainer"
               >
-                <SizedHorizontallySymmetricalSafeAreaView
-                  bottom
-                  left
-                  right
-                  width="fillsContainer"
-                  height="fillsContainer"
-                >
-                  <ContainerFillingKeyboardAvoidingView>
-                    {children(onClose)}
-                  </ContainerFillingKeyboardAvoidingView>
-                </SizedHorizontallySymmetricalSafeAreaView>
-              </View>
-            </SizedHorizontallySymmetricalSafeAreaView>
+                <ContainerFillingKeyboardAvoidingView>
+                  {children(onClose)}
+                </ContainerFillingKeyboardAvoidingView>
+              </SizedHorizontallySymmetricalSafeAreaView>
+            </View>
           </SimpleModal>
         </React.Fragment>
       );
