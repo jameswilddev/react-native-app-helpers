@@ -48,29 +48,6 @@ export const createControlStateStyleInstance = (
   return output;
 };
 
-export const createDropDownStateStyleInstance = (
-  controlStateStyle: ControlStateStyle,
-  maxHeight: number
-): ViewStyle => {
-  const output: ViewStyle = {
-    position: `absolute`,
-    maxHeight,
-    backgroundColor: controlStateStyle.backgroundColor,
-    overflow: `hidden`,
-  };
-
-  if (controlStateStyle.radius !== 0) {
-    output.borderRadius = controlStateStyle.radius;
-  }
-
-  if (controlStateStyle.border !== null) {
-    output.borderWidth = controlStateStyle.border.width;
-    output.borderColor = controlStateStyle.border.color;
-  }
-
-  return output;
-};
-
 export const createControlTextStyleInstance = (
   controlStyle: ControlStyle,
   controlStateStyle: ControlStateStyle
@@ -106,46 +83,6 @@ export const createFullHeightPopoverStateStyleInstance = (
   if (controlStateStyle.radius > 0) {
     output.borderTopLeftRadius = controlStateStyle.radius;
     output.borderTopRightRadius = controlStateStyle.radius;
-  }
-
-  return output;
-};
-
-export const withoutTopBorder = (input: ViewStyle): ViewStyle => {
-  const output = { ...input };
-
-  if (output.borderWidth) {
-    output.borderTopWidth = 0;
-  }
-
-  if (output.borderRadius) {
-    output.borderBottomLeftRadius = output.borderRadius;
-    output.borderBottomRightRadius = output.borderRadius;
-    delete output.borderRadius;
-  }
-
-  if (output.margin) {
-    output.marginTop = 0;
-  }
-
-  return output;
-};
-
-export const withoutBottomBorder = (input: ViewStyle): ViewStyle => {
-  const output = { ...input };
-
-  if (output.borderWidth) {
-    output.borderBottomWidth = 0;
-  }
-
-  if (output.borderRadius) {
-    output.borderTopLeftRadius = output.borderRadius;
-    output.borderTopRightRadius = output.borderRadius;
-    delete output.borderRadius;
-  }
-
-  if (output.margin) {
-    output.marginBottom = 0;
   }
 
   return output;
