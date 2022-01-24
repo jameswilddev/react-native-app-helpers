@@ -1,5 +1,10 @@
 import * as React from "react";
-import { StyleSheet, TextInput, TextStyle } from "react-native";
+import {
+  MeasureOnSuccessCallback,
+  StyleSheet,
+  TextInput,
+  TextStyle,
+} from "react-native";
 import type { ControlStyle } from "../../types/ControlStyle";
 import { Hitbox } from "../Hitbox";
 import {
@@ -48,6 +53,11 @@ type Instance = React.FunctionComponent<{
    * component to render on the right.
    */
   readonly rightIcon?: SvgIcon;
+
+  /**
+   * Passed to useMeasure.
+   */
+  readonly onMeasure?: MeasureOnSuccessCallback;
 }>;
 
 /**
@@ -209,6 +219,7 @@ export const createPickerButtonComponent = (
     onPress,
     leftIcon,
     rightIcon,
+    onMeasure,
   }) => {
     disabled = disabled ?? false;
 
@@ -309,6 +320,7 @@ export const createPickerButtonComponent = (
         }
         onPress={onPress}
         disabled={disabled}
+        onMeasure={onMeasure}
       >
         {children}
       </Hitbox>

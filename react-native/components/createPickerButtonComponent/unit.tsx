@@ -76,6 +76,7 @@ test(`renders as expected when valid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -84,6 +85,7 @@ test(`renders as expected when valid`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -102,6 +104,7 @@ test(`renders as expected when valid`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -129,6 +132,7 @@ test(`renders as expected when valid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when invalid`, () => {
@@ -199,6 +203,7 @@ test(`renders as expected when invalid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -207,6 +212,7 @@ test(`renders as expected when invalid`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -226,6 +232,7 @@ test(`renders as expected when invalid`, () => {
           margin: -2,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -253,6 +260,7 @@ test(`renders as expected when invalid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled when valid`, () => {
@@ -323,6 +331,7 @@ test(`renders as expected when disabled when valid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -331,6 +340,7 @@ test(`renders as expected when disabled when valid`, () => {
       disabled
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -350,6 +360,7 @@ test(`renders as expected when disabled when valid`, () => {
           margin: -10,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -377,6 +388,7 @@ test(`renders as expected when disabled when valid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled when invalid`, () => {
@@ -447,6 +459,7 @@ test(`renders as expected when disabled when invalid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -455,6 +468,7 @@ test(`renders as expected when disabled when invalid`, () => {
       disabled
       placeholder="Test Placeholder"
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -474,6 +488,7 @@ test(`renders as expected when disabled when invalid`, () => {
           margin: -15,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -501,6 +516,7 @@ test(`renders as expected when disabled when invalid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when the border width does not change`, () => {
@@ -571,6 +587,7 @@ test(`renders as expected when the border width does not change`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -579,6 +596,7 @@ test(`renders as expected when the border width does not change`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -597,6 +615,7 @@ test(`renders as expected when the border width does not change`, () => {
           borderRadius: 10,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -624,6 +643,7 @@ test(`renders as expected when the border width does not change`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders with a left icon`, () => {
@@ -694,6 +714,7 @@ test(`renders with a left icon`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -704,6 +725,7 @@ test(`renders with a left icon`, () => {
       placeholder="Test Placeholder"
       valid
       leftIcon={LeftIcon}
+      onMeasure={onMeasure}
     />
   );
 
@@ -722,6 +744,7 @@ test(`renders with a left icon`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -756,6 +779,7 @@ test(`renders with a left icon`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders with a right icon`, () => {
@@ -826,6 +850,7 @@ test(`renders with a right icon`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const RightIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -836,6 +861,7 @@ test(`renders with a right icon`, () => {
       placeholder="Test Placeholder"
       rightIcon={RightIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -854,6 +880,7 @@ test(`renders with a right icon`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -888,6 +915,7 @@ test(`renders with a right icon`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders with left and right icons`, () => {
@@ -958,6 +986,7 @@ test(`renders with left and right icons`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
   const RightIcon: SvgIcon = () => null;
 
@@ -970,6 +999,7 @@ test(`renders with left and right icons`, () => {
       leftIcon={LeftIcon}
       rightIcon={RightIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -988,6 +1018,7 @@ test(`renders with left and right icons`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1028,6 +1059,7 @@ test(`renders with left and right icons`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected with a left icon when invalid`, () => {
@@ -1098,6 +1130,7 @@ test(`renders as expected with a left icon when invalid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -1108,6 +1141,7 @@ test(`renders as expected with a left icon when invalid`, () => {
       placeholder="Test Placeholder"
       leftIcon={LeftIcon}
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -1127,6 +1161,7 @@ test(`renders as expected with a left icon when invalid`, () => {
           margin: -2,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1161,6 +1196,7 @@ test(`renders as expected with a left icon when invalid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected with a right icon when invalid`, () => {
@@ -1231,6 +1267,7 @@ test(`renders as expected with a right icon when invalid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const RightIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -1241,6 +1278,7 @@ test(`renders as expected with a right icon when invalid`, () => {
       placeholder="Test Placeholder"
       rightIcon={RightIcon}
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -1260,6 +1298,7 @@ test(`renders as expected with a right icon when invalid`, () => {
           margin: -2,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1294,6 +1333,7 @@ test(`renders as expected with a right icon when invalid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected with left and right icons when invalid`, () => {
@@ -1364,6 +1404,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
   const RightIcon: SvgIcon = () => null;
 
@@ -1376,6 +1417,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
       valid={false}
       leftIcon={LeftIcon}
       rightIcon={RightIcon}
+      onMeasure={onMeasure}
     />
   );
 
@@ -1395,6 +1437,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
           margin: -2,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1435,6 +1478,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders without horizontal padding`, () => {
@@ -1505,6 +1549,7 @@ test(`renders without horizontal padding`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -1513,6 +1558,7 @@ test(`renders without horizontal padding`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -1530,6 +1576,7 @@ test(`renders without horizontal padding`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1557,6 +1604,7 @@ test(`renders without horizontal padding`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders with a left icon without horizontal padding`, () => {
@@ -1627,6 +1675,7 @@ test(`renders with a left icon without horizontal padding`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -1637,6 +1686,7 @@ test(`renders with a left icon without horizontal padding`, () => {
       placeholder="Test Placeholder"
       leftIcon={LeftIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -1654,6 +1704,7 @@ test(`renders with a left icon without horizontal padding`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1687,6 +1738,7 @@ test(`renders with a left icon without horizontal padding`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders with a right icon without horizontal padding`, () => {
@@ -1757,6 +1809,7 @@ test(`renders with a right icon without horizontal padding`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const RightIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -1767,6 +1820,7 @@ test(`renders with a right icon without horizontal padding`, () => {
       placeholder="Test Placeholder"
       rightIcon={RightIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -1784,6 +1838,7 @@ test(`renders with a right icon without horizontal padding`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1817,6 +1872,7 @@ test(`renders with a right icon without horizontal padding`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders with left and right icons without horizontal padding`, () => {
@@ -1887,6 +1943,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
   const RightIcon: SvgIcon = () => null;
 
@@ -1899,6 +1956,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
       leftIcon={LeftIcon}
       rightIcon={RightIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -1916,6 +1974,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -1955,6 +2014,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected without vertical padding`, () => {
@@ -2025,6 +2085,7 @@ test(`renders as expected without vertical padding`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -2033,6 +2094,7 @@ test(`renders as expected without vertical padding`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -2051,6 +2113,7 @@ test(`renders as expected without vertical padding`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -2077,6 +2140,7 @@ test(`renders as expected without vertical padding`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected without borders`, () => {
@@ -2135,6 +2199,7 @@ test(`renders as expected without borders`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -2143,6 +2208,7 @@ test(`renders as expected without borders`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -2159,6 +2225,7 @@ test(`renders as expected without borders`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -2186,6 +2253,7 @@ test(`renders as expected without borders`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when a state does not alter border thickness`, () => {
@@ -2256,6 +2324,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -2264,6 +2333,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -2282,6 +2352,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
           borderRadius: 10,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -2309,6 +2380,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected without a radius`, () => {
@@ -2379,6 +2451,7 @@ test(`renders as expected without a radius`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -2387,6 +2460,7 @@ test(`renders as expected without a radius`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -2404,6 +2478,7 @@ test(`renders as expected without a radius`, () => {
           borderColor: `#FF00FF`,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -2431,6 +2506,7 @@ test(`renders as expected without a radius`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders when disabled with a left icon`, () => {
@@ -2501,6 +2577,7 @@ test(`renders when disabled with a left icon`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -2511,6 +2588,7 @@ test(`renders when disabled with a left icon`, () => {
       placeholder="Test Placeholder"
       leftIcon={LeftIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -2530,6 +2608,7 @@ test(`renders when disabled with a left icon`, () => {
           margin: -10,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -2564,6 +2643,7 @@ test(`renders when disabled with a left icon`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders when disabled with a right icon`, () => {
@@ -2634,6 +2714,7 @@ test(`renders when disabled with a right icon`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const RightIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -2644,6 +2725,7 @@ test(`renders when disabled with a right icon`, () => {
       placeholder="Test Placeholder"
       rightIcon={RightIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -2663,6 +2745,7 @@ test(`renders when disabled with a right icon`, () => {
           margin: -10,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -2697,6 +2780,7 @@ test(`renders when disabled with a right icon`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders when disabled with left and right icons`, () => {
@@ -2767,6 +2851,7 @@ test(`renders when disabled with left and right icons`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
   const RightIcon: SvgIcon = () => null;
 
@@ -2779,6 +2864,7 @@ test(`renders when disabled with left and right icons`, () => {
       leftIcon={LeftIcon}
       rightIcon={RightIcon}
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -2798,6 +2884,7 @@ test(`renders when disabled with left and right icons`, () => {
           margin: -10,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -2838,6 +2925,7 @@ test(`renders when disabled with left and right icons`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled with a left icon when invalid`, () => {
@@ -2908,6 +2996,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -2918,6 +3007,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
       placeholder="Test Placeholder"
       leftIcon={LeftIcon}
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -2937,6 +3027,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
           margin: -15,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -2971,6 +3062,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled with a right icon when invalid`, () => {
@@ -3041,6 +3133,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const RightIcon: SvgIcon = () => null;
 
   const renderer = TestRenderer.create(
@@ -3051,6 +3144,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
       placeholder="Test Placeholder"
       rightIcon={RightIcon}
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -3070,6 +3164,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
           margin: -15,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -3104,6 +3199,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled with left and right icons when invalid`, () => {
@@ -3174,6 +3270,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const LeftIcon: SvgIcon = () => null;
   const RightIcon: SvgIcon = () => null;
 
@@ -3186,6 +3283,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
       leftIcon={LeftIcon}
       rightIcon={RightIcon}
       valid={false}
+      onMeasure={onMeasure}
     />
   );
 
@@ -3205,6 +3303,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
           margin: -15,
         },
         onPress,
+        onMeasure,
         disabled: true,
         children: [
           expect.objectContaining({
@@ -3245,6 +3344,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`allows introspection when used in a higher-order component`, () => {
@@ -3316,6 +3416,7 @@ test(`allows introspection when used in a higher-order component`, () => {
   };
   const InputComponent = createPickerButtonComponent(controlStyle);
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
   const ParentComponent = () => (
     <InputComponent
       label="Example Label"
@@ -3323,6 +3424,7 @@ test(`allows introspection when used in a higher-order component`, () => {
       disabled={false}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -3405,6 +3507,7 @@ test(`treats disabled missing as disabled false`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -3412,6 +3515,7 @@ test(`treats disabled missing as disabled false`, () => {
       onPress={onPress}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -3430,6 +3534,7 @@ test(`treats disabled missing as disabled false`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -3457,6 +3562,7 @@ test(`treats disabled missing as disabled false`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
 
 test(`treats disabled undefined as disabled false`, () => {
@@ -3527,6 +3633,7 @@ test(`treats disabled undefined as disabled false`, () => {
     },
   });
   const onPress = jest.fn();
+  const onMeasure = jest.fn();
 
   const renderer = TestRenderer.create(
     <Component
@@ -3535,6 +3642,7 @@ test(`treats disabled undefined as disabled false`, () => {
       disabled={undefined}
       placeholder="Test Placeholder"
       valid
+      onMeasure={onMeasure}
     />
   );
 
@@ -3553,6 +3661,7 @@ test(`treats disabled undefined as disabled false`, () => {
           borderRadius: 5,
         },
         onPress,
+        onMeasure,
         disabled: false,
         children: [
           expect.objectContaining({
@@ -3580,4 +3689,5 @@ test(`treats disabled undefined as disabled false`, () => {
   renderer.unmount();
 
   expect(onPress).not.toHaveBeenCalled();
+  expect(onMeasure).not.toHaveBeenCalled();
 });
