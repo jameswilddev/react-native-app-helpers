@@ -720,17 +720,17 @@ test(`renders as expected when not disabled after layout after press`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -913,17 +913,17 @@ test(`renders as expected when not disabled after press after layout`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1114,17 +1114,17 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1315,17 +1315,17 @@ test(`correctly handles layout changes which only change width`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1516,17 +1516,17 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1717,17 +1717,17 @@ test(`correctly handles layout changes which only change height`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1918,17 +1918,17 @@ test(`correctly handles layout changes which have no effect`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -2650,17 +2650,17 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -3277,17 +3277,17 @@ test(`renders as expected without a label when open`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -3737,17 +3737,17 @@ test(`renders as expected when invalid when open`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -4197,17 +4197,17 @@ test(`renders as expected without a label when invalid`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -4500,17 +4500,17 @@ test(`renders as expected without borders`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -4670,17 +4670,17 @@ test(`renders as expected when invalid without borders`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -4862,17 +4862,17 @@ test(`renders as expected without radius`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -5055,17 +5055,17 @@ test(`renders as expected when invalid without radius`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {

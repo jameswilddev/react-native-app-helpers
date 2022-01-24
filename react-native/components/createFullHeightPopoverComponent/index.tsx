@@ -226,18 +226,18 @@ export const createFullHeightPopoverComponent = (
                 additionalModalViewStyle,
               ]}
             >
-              <ContainerFillingKeyboardAvoidingView>
-                <SizedHorizontallySymmetricalSafeAreaView
-                  top
-                  bottom
-                  left
-                  right
-                  width="fillsContainer"
-                  height="fillsContainer"
-                >
+              <SizedHorizontallySymmetricalSafeAreaView
+                top
+                bottom
+                left
+                right
+                width="fillsContainer"
+                height="fillsContainer"
+              >
+                <ContainerFillingKeyboardAvoidingView>
                   {children(onClose)}
-                </SizedHorizontallySymmetricalSafeAreaView>
-              </ContainerFillingKeyboardAvoidingView>
+                </ContainerFillingKeyboardAvoidingView>
+              </SizedHorizontallySymmetricalSafeAreaView>
             </View>
           </SimpleModal>
         </React.Fragment>
