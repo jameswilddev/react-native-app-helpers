@@ -709,8 +709,6 @@ test(`renders as expected when not disabled after layout after press`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -911,8 +909,6 @@ test(`renders as expected when not disabled after press after layout`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -1121,8 +1117,6 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -1331,8 +1325,6 @@ test(`correctly handles layout changes which only change width`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -1541,8 +1533,6 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -1751,8 +1741,6 @@ test(`correctly handles layout changes which only change height`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -1961,8 +1949,6 @@ test(`correctly handles layout changes which have no effect`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -2702,8 +2688,6 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -3338,8 +3322,6 @@ test(`renders as expected without a label when open`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -3807,8 +3789,6 @@ test(`renders as expected when invalid when open`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
                     borderWidth: 12,
@@ -4276,8 +4256,6 @@ test(`renders as expected without a label when invalid`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
                     borderWidth: 12,
@@ -4591,8 +4569,6 @@ test(`renders as expected without borders`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderTopLeftRadius: 3,
@@ -4770,8 +4746,6 @@ test(`renders as expected when invalid without borders`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
                     borderTopLeftRadius: 47,
@@ -4968,8 +4942,6 @@ test(`renders as expected without radius`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#CABA99`,
                     borderWidth: 5,
@@ -5168,8 +5140,6 @@ test(`renders as expected when invalid without radius`, () => {
               props: {
                 style: [
                   {
-                    position: `absolute`,
-                    top: 0,
                     height: `100%`,
                     backgroundColor: `#32AA88`,
                     borderWidth: 12,

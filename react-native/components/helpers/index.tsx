@@ -93,8 +93,6 @@ export const createFullHeightPopoverStateStyleInstance = (
   controlStateStyle: ControlStateStyle
 ): ViewStyle => {
   const output: ViewStyle = {
-    position: `absolute`,
-    top: 0,
     height: `100%`,
     backgroundColor: controlStateStyle.backgroundColor,
   };
