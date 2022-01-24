@@ -81,8 +81,11 @@ const controlStyle: ControlStyle = {
 };
 
 test(`renders as expected when none of the selected options are listed`, () => {
-  const Component =
-    createSearchableMultiSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createSearchableMultiSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -132,7 +135,7 @@ test(`renders as expected when none of the selected options are listed`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -181,11 +184,15 @@ test(`renders as expected when none of the selected options are listed`, () => {
 
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected with a present selected value`, () => {
-  const Component =
-    createSearchableMultiSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createSearchableMultiSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -235,7 +242,7 @@ test(`renders as expected with a present selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -284,11 +291,15 @@ test(`renders as expected with a present selected value`, () => {
 
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled when none of the selected options are listed`, () => {
-  const Component =
-    createSearchableMultiSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createSearchableMultiSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -338,7 +349,7 @@ test(`renders as expected when disabled when none of the selected options are li
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -387,11 +398,15 @@ test(`renders as expected when disabled when none of the selected options are li
 
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled with a present selected value`, () => {
-  const Component =
-    createSearchableMultiSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createSearchableMultiSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -441,7 +456,7 @@ test(`renders as expected when disabled with a present selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -490,11 +505,15 @@ test(`renders as expected when disabled with a present selected value`, () => {
 
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected without any options`, () => {
-  const Component =
-    createSearchableMultiSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createSearchableMultiSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -519,7 +538,7 @@ test(`renders as expected without any options`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -543,11 +562,15 @@ test(`renders as expected without any options`, () => {
 
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled without any options`, () => {
-  const Component =
-    createSearchableMultiSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createSearchableMultiSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -572,7 +595,7 @@ test(`renders as expected when disabled without any options`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -596,4 +619,5 @@ test(`renders as expected when disabled without any options`, () => {
 
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });

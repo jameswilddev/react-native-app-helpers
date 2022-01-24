@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { SvgIcon } from "../../types/SvgIcon";
 import type { ControlStyle } from "../../types/ControlStyle";
 import { createFullHeightPopoverComponent } from "../createFullHeightPopoverComponent";
 import { createCreatableSelectChildrenComponent } from "./createCreatableSelectChildrenComponent";
@@ -8,12 +9,15 @@ import { createCreatableSelectChildrenComponent } from "./createCreatableSelectC
  * pressing a button.
  * @template T         The value of a listed option.
  * @param controlStyle The style to apply to the component.
+ * @param rightIcon    When null, no icon is to be placed on the right side of
+ *                     the button.  Otherwise, the icon to show there.
  * @returns            The created React component.
  */
 export function createCreatableSelectComponent<
   T extends null | number | string
 >(
-  controlStyle: ControlStyle
+  controlStyle: ControlStyle,
+  rightIcon: null | SvgIcon
 ): React.FunctionComponent<{
   /**
    * When true, it will not be possible to select an option.  It will otherwise
@@ -75,7 +79,10 @@ export function createCreatableSelectComponent<
    */
   readonly willCreateText: string;
 }> {
-  const FullHeightPopover = createFullHeightPopoverComponent(controlStyle);
+  const FullHeightPopover = createFullHeightPopoverComponent(
+    controlStyle,
+    rightIcon
+  );
   const ContentComponent =
     createCreatableSelectChildrenComponent<T>(controlStyle);
 

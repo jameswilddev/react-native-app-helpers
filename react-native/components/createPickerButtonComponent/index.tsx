@@ -69,6 +69,12 @@ type Introspection = {
    * The styling to use.
    */
   readonly controlStyle: ControlStyle;
+
+  /**
+   * When null, no icon is to be shown on the right.  Otherwise, the icon
+   * component to render on the right.
+   */
+  readonly rightIcon?: SvgIcon;
 };
 
 /**

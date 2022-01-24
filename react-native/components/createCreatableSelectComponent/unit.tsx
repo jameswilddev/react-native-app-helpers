@@ -81,7 +81,11 @@ const controlStyle: ControlStyle = {
 };
 
 test(`renders as expected with an absent selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -119,7 +123,7 @@ test(`renders as expected with an absent selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -153,10 +157,15 @@ test(`renders as expected with an absent selected value`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected with a present selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -198,7 +207,7 @@ test(`renders as expected with a present selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -239,10 +248,15 @@ test(`renders as expected with a present selected value`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when required with an absent selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -280,7 +294,7 @@ test(`renders as expected when required with an absent selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -314,10 +328,15 @@ test(`renders as expected when required with an absent selected value`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when required with a present selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -359,7 +378,7 @@ test(`renders as expected when required with a present selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -400,10 +419,15 @@ test(`renders as expected when required with a present selected value`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled with an absent selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -441,7 +465,7 @@ test(`renders as expected when disabled with an absent selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -475,10 +499,15 @@ test(`renders as expected when disabled with an absent selected value`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled with a present selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -520,7 +549,7 @@ test(`renders as expected when disabled with a present selected value`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -561,10 +590,15 @@ test(`renders as expected when disabled with a present selected value`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when required and disabled with an absent selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -602,7 +636,7 @@ test(`renders as expected when required and disabled with an absent selected val
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -636,10 +670,15 @@ test(`renders as expected when required and disabled with an absent selected val
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when required and disabled with a present selected value`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -681,7 +720,7 @@ test(`renders as expected when required and disabled with a present selected val
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -722,10 +761,15 @@ test(`renders as expected when required and disabled with a present selected val
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected without any options`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -754,7 +798,7 @@ test(`renders as expected without any options`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -779,10 +823,15 @@ test(`renders as expected without any options`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when required without any options`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -811,7 +860,7 @@ test(`renders as expected when required without any options`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -836,10 +885,15 @@ test(`renders as expected when required without any options`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when disabled without any options`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -868,7 +922,7 @@ test(`renders as expected when disabled without any options`, () => {
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -893,10 +947,15 @@ test(`renders as expected when disabled without any options`, () => {
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`renders as expected when required and disabled without any options`, () => {
-  const Component = createCreatableSelectComponent<TestValue>(controlStyle);
+  const RightIcon = jest.fn();
+  const Component = createCreatableSelectComponent<TestValue>(
+    controlStyle,
+    RightIcon
+  );
   const onChange = jest.fn();
   const onCreate = jest.fn();
 
@@ -925,7 +984,7 @@ test(`renders as expected when required and disabled without any options`, () =>
   });
 
   expect(rendered.type).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
 
   const close = jest.fn();
@@ -950,4 +1009,5 @@ test(`renders as expected when required and disabled without any options`, () =>
   expect(close).not.toHaveBeenCalled();
   expect(onChange).not.toHaveBeenCalled();
   expect(onCreate).not.toHaveBeenCalled();
+  expect(RightIcon).not.toHaveBeenCalled();
 });

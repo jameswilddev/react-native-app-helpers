@@ -94,7 +94,7 @@ test(`renders as expected when not disabled`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -119,6 +119,130 @@ test(`renders as expected when not disabled`, () => {
         label: `Example Button Content`,
         placeholder: `Example Placeholder`,
         valid: true,
+      },
+    })
+  );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
+  renderer.unmount();
+});
+
+test(`renders as expected with a right icon`, () => {
+  Dimensions.set({
+    window: {
+      width: 640,
+      height: 480,
+      scale: 2.42,
+      fontScale: 3.51,
+    },
+  });
+
+  const controlStyle: ControlStyle = {
+    fontFamily: `Example Font Family`,
+    fontSize: 37,
+    paddingVertical: 12,
+    paddingHorizontal: 29,
+    blurredValid: {
+      textColor: `#FFEE00`,
+      placeholderColor: `#E7AA32`,
+      backgroundColor: `#32AE12`,
+      radius: 5,
+      border: {
+        width: 4,
+        color: `#FF00FF`,
+      },
+      iconColor: `#43AE21`,
+    },
+    blurredInvalid: {
+      textColor: `#99FE88`,
+      placeholderColor: `#CACA3A`,
+      backgroundColor: `#259284`,
+      radius: 10,
+      border: {
+        width: 6,
+        color: `#9A9A8E`,
+      },
+      iconColor: `#985E00`,
+    },
+    focusedValid: {
+      textColor: `#55EA13`,
+      placeholderColor: `#273346`,
+      backgroundColor: `#CABA99`,
+      radius: 3,
+      border: {
+        width: 5,
+        color: `#646464`,
+      },
+      iconColor: `#789521`,
+    },
+    focusedInvalid: {
+      textColor: `#ABAADE`,
+      placeholderColor: `#47ADAD`,
+      backgroundColor: `#32AA88`,
+      radius: 47,
+      border: {
+        width: 12,
+        color: `#98ADAA`,
+      },
+      iconColor: `#449438`,
+    },
+    disabledValid: {
+      textColor: `#AE2195`,
+      placeholderColor: `#FFAAEE`,
+      backgroundColor: `#772728`,
+      radius: 100,
+      border: {
+        width: 14,
+        color: `#5E5E5E`,
+      },
+      iconColor: `#ADAADA`,
+    },
+    disabledInvalid: {
+      textColor: `#340297`,
+      placeholderColor: `#233832`,
+      backgroundColor: `#938837`,
+      radius: 2,
+      border: {
+        width: 19,
+        color: `#573829`,
+      },
+      iconColor: `#709709`,
+    },
+  };
+
+  const RightIcon = () => null;
+
+  const Component = createFullHeightPopoverComponent(controlStyle, RightIcon);
+
+  const renderer = TestRenderer.create(
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      props: {
+        onMeasure: expect.any(Function),
+        onPress: expect.any(Function),
+        disabled: false,
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
+        rightIcon: RightIcon,
       },
     })
   );
@@ -215,7 +339,7 @@ test(`renders as expected when disabled`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -336,7 +460,7 @@ test(`renders as expected when not disabled after layout`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -463,7 +587,7 @@ test(`renders as expected when disabled after layout`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -590,7 +714,7 @@ test(`renders as expected when not disabled after layout after press`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -775,7 +899,7 @@ test(`renders as expected when not disabled after press after layout`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -960,7 +1084,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1153,7 +1277,7 @@ test(`correctly handles layout changes which only change width`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1346,7 +1470,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1539,7 +1663,7 @@ test(`correctly handles layout changes which only change height`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1732,7 +1856,7 @@ test(`correctly handles layout changes which have no effect`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1925,7 +2049,7 @@ test(`can be enabled after being created disabled`, async () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2088,7 +2212,7 @@ test(`closes if disabled while open`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2235,7 +2359,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2396,7 +2520,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2615,7 +2739,7 @@ test(`closes when the modal is dismissed`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2756,7 +2880,7 @@ test(`closes when the close callback is invoked`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
   const children = jest.fn(() => <Text>Example Pop Over Content</Text>);
 
   const renderer = TestRenderer.create(
@@ -2895,7 +3019,7 @@ test(`renders as expected when invalid`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3016,7 +3140,7 @@ test(`renders as expected when invalid when open`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3183,7 +3307,7 @@ test(`renders as expected without borders`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3347,7 +3471,7 @@ test(`renders as expected when invalid without borders`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3529,7 +3653,7 @@ test(`renders as expected without radius`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3714,7 +3838,7 @@ test(`renders as expected when invalid without radius`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3890,8 +4014,12 @@ test(`allows introspection when used in a higher-order component`, () => {
     },
   };
 
-  const FullHeightPopoverComponent =
-    createFullHeightPopoverComponent(controlStyle);
+  const RightIcon = jest.fn();
+
+  const FullHeightPopoverComponent = createFullHeightPopoverComponent(
+    controlStyle,
+    RightIcon
+  );
 
   const ParentComponent = () => (
     <FullHeightPopoverComponent
@@ -3908,8 +4036,9 @@ test(`allows introspection when used in a higher-order component`, () => {
   expect(
     unwrapRenderedFunctionComponent(rendered).type
   ).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`treats disabled undefined as disabled false`, () => {
@@ -3995,7 +4124,7 @@ test(`treats disabled undefined as disabled false`, () => {
     },
   };
 
-  const Component = createFullHeightPopoverComponent(controlStyle);
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
