@@ -244,6 +244,25 @@ test(`does not call through to useMeasure when no callback is given`, () => {
   renderer.unmount();
 });
 
+test(`does not call through to useMeasure when an undefined callback is given`, () => {
+  const onPress = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Hitbox
+      disabled={false}
+      style={{ backgroundColor: `red` }}
+      onPress={onPress}
+      onMeasure={undefined}
+    >
+      <Text>Test Children</Text>
+    </Hitbox>
+  );
+
+  expect(onPress).not.toHaveBeenCalled();
+
+  renderer.unmount();
+});
+
 test(`executes the press callback once when hitboxes are enabled`, () => {
   const onPress = jest.fn();
   const onMeasure = jest.fn();

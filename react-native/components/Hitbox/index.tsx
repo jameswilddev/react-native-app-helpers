@@ -23,7 +23,7 @@ type Component = React.FunctionComponent<{
   /**
    * Passed to useMeasure.
    */
-  readonly onMeasure?: MeasureOnSuccessCallback;
+  readonly onMeasure?: undefined | MeasureOnSuccessCallback;
 
   /**
    * Similar to TouchableOpacity's onPress, but remote-controlled using the
