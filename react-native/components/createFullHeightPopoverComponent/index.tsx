@@ -1,8 +1,7 @@
 import * as React from "react";
-import { View, ViewStyle, StyleSheet, TextInput } from "react-native";
+import { View, ViewStyle, StyleSheet } from "react-native";
 import type { ControlStyle } from "../../types/ControlStyle";
 import { useRefresh } from "../../hooks/useRefresh";
-import { Hitbox } from "../Hitbox";
 import { SimpleModal } from "../SimpleModal";
 import {
   createControlStateStyleInstance,
@@ -12,6 +11,7 @@ import {
 } from "../helpers";
 import { ContainerFillingKeyboardAvoidingView } from "../ContainerFillingKeyboardAvoidingView";
 import { SizedHorizontallySymmetricalSafeAreaView } from "../SizedHorizontallySymmetricalSafeAreaView";
+import { createPickerButtonComponent } from "../createPickerButtonComponent";
 
 type Instance = React.FunctionComponent<{
   /**
@@ -104,6 +104,8 @@ export const createFullHeightPopoverComponent = (
     ),
   });
 
+  const PickerButton = createPickerButtonComponent(controlStyle);
+
   const FullHeightPopOver: Instance & { fullHeightPopover?: Introspection } = ({
     label,
     placeholder,
@@ -144,16 +146,7 @@ export const createFullHeightPopoverComponent = (
     }
 
     const inline = (
-      <Hitbox
-        style={
-          disabled
-            ? valid
-              ? styles.disabledValidHitbox
-              : styles.disabledInvalidHitbox
-            : valid
-            ? styles.validHitbox
-            : styles.invalidHitbox
-        }
+      <PickerButton
         onMeasure={(x, y, width, height, pageX, pageY) => {
           x;
           y;
@@ -179,32 +172,10 @@ export const createFullHeightPopoverComponent = (
           refresh();
         }}
         disabled={disabled}
-      >
-        <TextInput
-          style={
-            disabled
-              ? valid
-                ? styles.disabledValidText
-                : styles.disabledInvalidText
-              : valid
-              ? styles.validText
-              : styles.invalidText
-          }
-          pointerEvents="none"
-          editable={false}
-          value={label ?? undefined}
-          placeholder={placeholder}
-          placeholderTextColor={
-            disabled
-              ? valid
-                ? controlStyle.disabledValid.placeholderColor
-                : controlStyle.disabledInvalid.placeholderColor
-              : valid
-              ? controlStyle.blurredValid.placeholderColor
-              : controlStyle.blurredInvalid.placeholderColor
-          }
-        />
-      </Hitbox>
+        label={label}
+        placeholder={placeholder}
+        valid={valid}
+      />
     );
 
     if (additionalModalViewStyle === null) {
