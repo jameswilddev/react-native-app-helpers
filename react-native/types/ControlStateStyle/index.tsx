@@ -30,4 +30,9 @@ export type ControlStateStyle = {
    * The style of the control's border, or null should no border be desired.
    */
   readonly border: null | BorderStyle;
+
+  /**
+   * The color of icons displayed within the control.
+   */
+  readonly iconColor: ColorValue;
 };

@@ -21,6 +21,7 @@ test(`renders as expected without bounds`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -31,6 +32,7 @@ test(`renders as expected without bounds`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -41,6 +43,7 @@ test(`renders as expected without bounds`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -51,6 +54,7 @@ test(`renders as expected without bounds`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -61,6 +65,7 @@ test(`renders as expected without bounds`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -71,6 +76,7 @@ test(`renders as expected without bounds`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   };
   const onChange = jest.fn();
@@ -187,6 +193,7 @@ test(`renders as expected with a minimum length`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -197,6 +204,7 @@ test(`renders as expected with a minimum length`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -207,6 +215,7 @@ test(`renders as expected with a minimum length`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -217,6 +226,7 @@ test(`renders as expected with a minimum length`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -227,6 +237,7 @@ test(`renders as expected with a minimum length`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -237,6 +248,7 @@ test(`renders as expected with a minimum length`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   };
   const onChange = jest.fn();
@@ -387,6 +399,7 @@ test(`renders as expected with a maximum length`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -397,6 +410,7 @@ test(`renders as expected with a maximum length`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -407,6 +421,7 @@ test(`renders as expected with a maximum length`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -417,6 +432,7 @@ test(`renders as expected with a maximum length`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -427,6 +443,7 @@ test(`renders as expected with a maximum length`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -437,6 +454,7 @@ test(`renders as expected with a maximum length`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   };
   const onChange = jest.fn();
@@ -587,6 +605,7 @@ test(`passes down an empty array when unique is undefined`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -597,6 +616,7 @@ test(`passes down an empty array when unique is undefined`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -607,6 +627,7 @@ test(`passes down an empty array when unique is undefined`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -617,6 +638,7 @@ test(`passes down an empty array when unique is undefined`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -627,6 +649,7 @@ test(`passes down an empty array when unique is undefined`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -637,6 +660,7 @@ test(`passes down an empty array when unique is undefined`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   };
   const onChange = jest.fn();
@@ -689,6 +713,7 @@ test(`passes down an empty array when unique is not given`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -699,6 +724,7 @@ test(`passes down an empty array when unique is not given`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -709,6 +735,7 @@ test(`passes down an empty array when unique is not given`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -719,6 +746,7 @@ test(`passes down an empty array when unique is not given`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -729,6 +757,7 @@ test(`passes down an empty array when unique is not given`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -739,6 +768,7 @@ test(`passes down an empty array when unique is not given`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   };
   const onChange = jest.fn();

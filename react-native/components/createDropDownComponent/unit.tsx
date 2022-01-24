@@ -28,6 +28,7 @@ test(`renders as expected when not disabled`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -38,6 +39,7 @@ test(`renders as expected when not disabled`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -48,6 +50,7 @@ test(`renders as expected when not disabled`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -58,6 +61,7 @@ test(`renders as expected when not disabled`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -68,6 +72,7 @@ test(`renders as expected when not disabled`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -78,6 +83,7 @@ test(`renders as expected when not disabled`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -160,6 +166,7 @@ test(`renders as expected when disabled`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -170,6 +177,7 @@ test(`renders as expected when disabled`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -180,6 +188,7 @@ test(`renders as expected when disabled`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -190,6 +199,7 @@ test(`renders as expected when disabled`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -200,6 +210,7 @@ test(`renders as expected when disabled`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -210,6 +221,7 @@ test(`renders as expected when disabled`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -293,6 +305,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -303,6 +316,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -313,6 +327,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -323,6 +338,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -333,6 +349,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -343,6 +360,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -431,6 +449,7 @@ test(`renders as expected when disabled after layout when too close to the botto
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -441,6 +460,7 @@ test(`renders as expected when disabled after layout when too close to the botto
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -451,6 +471,7 @@ test(`renders as expected when disabled after layout when too close to the botto
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -461,6 +482,7 @@ test(`renders as expected when disabled after layout when too close to the botto
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -471,6 +493,7 @@ test(`renders as expected when disabled after layout when too close to the botto
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -481,6 +504,7 @@ test(`renders as expected when disabled after layout when too close to the botto
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -570,6 +594,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -580,6 +605,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -590,6 +616,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -600,6 +627,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -610,6 +638,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -620,6 +649,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -708,6 +738,7 @@ test(`renders as expected when disabled after layout when not too close to the b
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -718,6 +749,7 @@ test(`renders as expected when disabled after layout when not too close to the b
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -728,6 +760,7 @@ test(`renders as expected when disabled after layout when not too close to the b
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -738,6 +771,7 @@ test(`renders as expected when disabled after layout when not too close to the b
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -748,6 +782,7 @@ test(`renders as expected when disabled after layout when not too close to the b
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -758,6 +793,7 @@ test(`renders as expected when disabled after layout when not too close to the b
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -847,6 +883,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -857,6 +894,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -867,6 +905,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -877,6 +916,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -887,6 +927,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -897,6 +938,7 @@ test(`renders as expected when not disabled after layout when too close to the b
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -1031,6 +1073,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -1041,6 +1084,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -1051,6 +1095,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -1061,6 +1106,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -1071,6 +1117,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -1081,6 +1128,7 @@ test(`renders as expected when not disabled after layout when not too close to t
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -1215,6 +1263,7 @@ test(`renders as expected when not disabled after press after layout when too cl
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -1225,6 +1274,7 @@ test(`renders as expected when not disabled after press after layout when too cl
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -1235,6 +1285,7 @@ test(`renders as expected when not disabled after press after layout when too cl
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -1245,6 +1296,7 @@ test(`renders as expected when not disabled after press after layout when too cl
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -1255,6 +1307,7 @@ test(`renders as expected when not disabled after press after layout when too cl
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -1265,6 +1318,7 @@ test(`renders as expected when not disabled after press after layout when too cl
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -1399,6 +1453,7 @@ test(`renders as expected when not disabled after press after layout when not to
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -1409,6 +1464,7 @@ test(`renders as expected when not disabled after press after layout when not to
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -1419,6 +1475,7 @@ test(`renders as expected when not disabled after press after layout when not to
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -1429,6 +1486,7 @@ test(`renders as expected when not disabled after press after layout when not to
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -1439,6 +1497,7 @@ test(`renders as expected when not disabled after press after layout when not to
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -1449,6 +1508,7 @@ test(`renders as expected when not disabled after press after layout when not to
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -1583,6 +1643,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -1593,6 +1654,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -1603,6 +1665,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -1613,6 +1676,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -1623,6 +1687,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -1633,6 +1698,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -1775,6 +1841,7 @@ test(`correctly handles layout changes which only change width`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -1785,6 +1852,7 @@ test(`correctly handles layout changes which only change width`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -1795,6 +1863,7 @@ test(`correctly handles layout changes which only change width`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -1805,6 +1874,7 @@ test(`correctly handles layout changes which only change width`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -1815,6 +1885,7 @@ test(`correctly handles layout changes which only change width`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -1825,6 +1896,7 @@ test(`correctly handles layout changes which only change width`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -1967,6 +2039,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -1977,6 +2050,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -1987,6 +2061,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -1997,6 +2072,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -2007,6 +2083,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -2017,6 +2094,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -2159,6 +2237,7 @@ test(`correctly handles layout changes which only change height`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -2169,6 +2248,7 @@ test(`correctly handles layout changes which only change height`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -2179,6 +2259,7 @@ test(`correctly handles layout changes which only change height`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -2189,6 +2270,7 @@ test(`correctly handles layout changes which only change height`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -2199,6 +2281,7 @@ test(`correctly handles layout changes which only change height`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -2209,6 +2292,7 @@ test(`correctly handles layout changes which only change height`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -2351,6 +2435,7 @@ test(`correctly handles layout changes which have no effect`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -2361,6 +2446,7 @@ test(`correctly handles layout changes which have no effect`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -2371,6 +2457,7 @@ test(`correctly handles layout changes which have no effect`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -2381,6 +2468,7 @@ test(`correctly handles layout changes which have no effect`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -2391,6 +2479,7 @@ test(`correctly handles layout changes which have no effect`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -2401,6 +2490,7 @@ test(`correctly handles layout changes which have no effect`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -2543,6 +2633,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -2553,6 +2644,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -2563,6 +2655,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -2573,6 +2666,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -2583,6 +2677,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -2593,6 +2688,7 @@ test(`correctly handles layout changes which swap from being above to below`, ()
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -2735,6 +2831,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -2745,6 +2842,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -2755,6 +2853,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -2765,6 +2864,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -2775,6 +2875,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -2785,6 +2886,7 @@ test(`correctly handles layout changes which swap from being below to above`, ()
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -2927,6 +3029,7 @@ test(`correctly handles window dimension changes which swap from being above to 
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -2937,6 +3040,7 @@ test(`correctly handles window dimension changes which swap from being above to 
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -2947,6 +3051,7 @@ test(`correctly handles window dimension changes which swap from being above to 
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -2957,6 +3062,7 @@ test(`correctly handles window dimension changes which swap from being above to 
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -2967,6 +3073,7 @@ test(`correctly handles window dimension changes which swap from being above to 
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -2977,6 +3084,7 @@ test(`correctly handles window dimension changes which swap from being above to 
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -3127,6 +3235,7 @@ test(`correctly handles window dimension changes which swap from being below to 
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -3137,6 +3246,7 @@ test(`correctly handles window dimension changes which swap from being below to 
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -3147,6 +3257,7 @@ test(`correctly handles window dimension changes which swap from being below to 
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -3157,6 +3268,7 @@ test(`correctly handles window dimension changes which swap from being below to 
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -3167,6 +3279,7 @@ test(`correctly handles window dimension changes which swap from being below to 
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -3177,6 +3290,7 @@ test(`correctly handles window dimension changes which swap from being below to 
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -3327,6 +3441,7 @@ test(`can be enabled after being created disabled`, async () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -3337,6 +3452,7 @@ test(`can be enabled after being created disabled`, async () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -3347,6 +3463,7 @@ test(`can be enabled after being created disabled`, async () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -3357,6 +3474,7 @@ test(`can be enabled after being created disabled`, async () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -3367,6 +3485,7 @@ test(`can be enabled after being created disabled`, async () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -3377,6 +3496,7 @@ test(`can be enabled after being created disabled`, async () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -3498,6 +3618,7 @@ test(`closes if disabled while open`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -3508,6 +3629,7 @@ test(`closes if disabled while open`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -3518,6 +3640,7 @@ test(`closes if disabled while open`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -3528,6 +3651,7 @@ test(`closes if disabled while open`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -3538,6 +3662,7 @@ test(`closes if disabled while open`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -3548,6 +3673,7 @@ test(`closes if disabled while open`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -3654,6 +3780,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -3664,6 +3791,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -3674,6 +3802,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -3684,6 +3813,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -3694,6 +3824,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -3704,6 +3835,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -3820,6 +3952,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -3830,6 +3963,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -3840,6 +3974,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -3850,6 +3985,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -3860,6 +3996,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -3870,6 +4007,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -4032,6 +4170,7 @@ test(`closes when the modal is dismissed`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -4042,6 +4181,7 @@ test(`closes when the modal is dismissed`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -4052,6 +4192,7 @@ test(`closes when the modal is dismissed`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -4062,6 +4203,7 @@ test(`closes when the modal is dismissed`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -4072,6 +4214,7 @@ test(`closes when the modal is dismissed`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -4082,6 +4225,7 @@ test(`closes when the modal is dismissed`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -4184,6 +4328,7 @@ test(`renders as expected without a label`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -4194,6 +4339,7 @@ test(`renders as expected without a label`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -4204,6 +4350,7 @@ test(`renders as expected without a label`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -4214,6 +4361,7 @@ test(`renders as expected without a label`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -4224,6 +4372,7 @@ test(`renders as expected without a label`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -4234,6 +4383,7 @@ test(`renders as expected without a label`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -4316,6 +4466,7 @@ test(`renders as expected without a label when open above`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -4326,6 +4477,7 @@ test(`renders as expected without a label when open above`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -4336,6 +4488,7 @@ test(`renders as expected without a label when open above`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -4346,6 +4499,7 @@ test(`renders as expected without a label when open above`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -4356,6 +4510,7 @@ test(`renders as expected without a label when open above`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -4366,6 +4521,7 @@ test(`renders as expected without a label when open above`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -4500,6 +4656,7 @@ test(`renders as expected without a label when open below`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -4510,6 +4667,7 @@ test(`renders as expected without a label when open below`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -4520,6 +4678,7 @@ test(`renders as expected without a label when open below`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -4530,6 +4689,7 @@ test(`renders as expected without a label when open below`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -4540,6 +4700,7 @@ test(`renders as expected without a label when open below`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -4550,6 +4711,7 @@ test(`renders as expected without a label when open below`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -4684,6 +4846,7 @@ test(`renders as expected without a label when disabled`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -4694,6 +4857,7 @@ test(`renders as expected without a label when disabled`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -4704,6 +4868,7 @@ test(`renders as expected without a label when disabled`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -4714,6 +4879,7 @@ test(`renders as expected without a label when disabled`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -4724,6 +4890,7 @@ test(`renders as expected without a label when disabled`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -4734,6 +4901,7 @@ test(`renders as expected without a label when disabled`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -4812,6 +4980,7 @@ test(`renders as expected when invalid`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -4822,6 +4991,7 @@ test(`renders as expected when invalid`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -4832,6 +5002,7 @@ test(`renders as expected when invalid`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -4842,6 +5013,7 @@ test(`renders as expected when invalid`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -4852,6 +5024,7 @@ test(`renders as expected when invalid`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -4862,6 +5035,7 @@ test(`renders as expected when invalid`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -4945,6 +5119,7 @@ test(`renders as expected when invalid and open above`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -4955,6 +5130,7 @@ test(`renders as expected when invalid and open above`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -4965,6 +5141,7 @@ test(`renders as expected when invalid and open above`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -4975,6 +5152,7 @@ test(`renders as expected when invalid and open above`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -4985,6 +5163,7 @@ test(`renders as expected when invalid and open above`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -4995,6 +5174,7 @@ test(`renders as expected when invalid and open above`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -5129,6 +5309,7 @@ test(`renders as expected when invalid and open below`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -5139,6 +5320,7 @@ test(`renders as expected when invalid and open below`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -5149,6 +5331,7 @@ test(`renders as expected when invalid and open below`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -5159,6 +5342,7 @@ test(`renders as expected when invalid and open below`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -5169,6 +5353,7 @@ test(`renders as expected when invalid and open below`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -5179,6 +5364,7 @@ test(`renders as expected when invalid and open below`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -5313,6 +5499,7 @@ test(`renders as expected when invalid and disabled`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -5323,6 +5510,7 @@ test(`renders as expected when invalid and disabled`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -5333,6 +5521,7 @@ test(`renders as expected when invalid and disabled`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -5343,6 +5532,7 @@ test(`renders as expected when invalid and disabled`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -5353,6 +5543,7 @@ test(`renders as expected when invalid and disabled`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -5363,6 +5554,7 @@ test(`renders as expected when invalid and disabled`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -5446,6 +5638,7 @@ test(`renders as expected when invalid without a label`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -5456,6 +5649,7 @@ test(`renders as expected when invalid without a label`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -5466,6 +5660,7 @@ test(`renders as expected when invalid without a label`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -5476,6 +5671,7 @@ test(`renders as expected when invalid without a label`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -5486,6 +5682,7 @@ test(`renders as expected when invalid without a label`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -5496,6 +5693,7 @@ test(`renders as expected when invalid without a label`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -5579,6 +5777,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -5589,6 +5788,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -5599,6 +5799,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -5609,6 +5810,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -5619,6 +5821,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -5629,6 +5832,7 @@ test(`renders as expected without a label when open above and invalid`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -5763,6 +5967,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -5773,6 +5978,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -5783,6 +5989,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -5793,6 +6000,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -5803,6 +6011,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -5813,6 +6022,7 @@ test(`renders as expected without a label when open below and invalid`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -5947,6 +6157,7 @@ test(`renders as expected without a label when disabled and invalid`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -5957,6 +6168,7 @@ test(`renders as expected without a label when disabled and invalid`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -5967,6 +6179,7 @@ test(`renders as expected without a label when disabled and invalid`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -5977,6 +6190,7 @@ test(`renders as expected without a label when disabled and invalid`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -5987,6 +6201,7 @@ test(`renders as expected without a label when disabled and invalid`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -5997,6 +6212,7 @@ test(`renders as expected without a label when disabled and invalid`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -6077,6 +6293,7 @@ test(`renders as expected when open above without borders`, () => {
         backgroundColor: `#32AE12`,
         radius: 5,
         border: null,
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -6084,6 +6301,7 @@ test(`renders as expected when open above without borders`, () => {
         backgroundColor: `#259284`,
         radius: 10,
         border: null,
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -6091,6 +6309,7 @@ test(`renders as expected when open above without borders`, () => {
         backgroundColor: `#CABA99`,
         radius: 3,
         border: null,
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -6098,6 +6317,7 @@ test(`renders as expected when open above without borders`, () => {
         backgroundColor: `#32AA88`,
         radius: 47,
         border: null,
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -6105,6 +6325,7 @@ test(`renders as expected when open above without borders`, () => {
         backgroundColor: `#772728`,
         radius: 100,
         border: null,
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -6112,6 +6333,7 @@ test(`renders as expected when open above without borders`, () => {
         backgroundColor: `#938837`,
         radius: 2,
         border: null,
+        iconColor: `#709709`,
       },
     },
     150
@@ -6235,6 +6457,7 @@ test(`renders as expected when open below without borders`, () => {
         backgroundColor: `#32AE12`,
         radius: 5,
         border: null,
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -6242,6 +6465,7 @@ test(`renders as expected when open below without borders`, () => {
         backgroundColor: `#259284`,
         radius: 10,
         border: null,
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -6249,6 +6473,7 @@ test(`renders as expected when open below without borders`, () => {
         backgroundColor: `#CABA99`,
         radius: 3,
         border: null,
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -6256,6 +6481,7 @@ test(`renders as expected when open below without borders`, () => {
         backgroundColor: `#32AA88`,
         radius: 47,
         border: null,
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -6263,6 +6489,7 @@ test(`renders as expected when open below without borders`, () => {
         backgroundColor: `#772728`,
         radius: 100,
         border: null,
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -6270,6 +6497,7 @@ test(`renders as expected when open below without borders`, () => {
         backgroundColor: `#938837`,
         radius: 2,
         border: null,
+        iconColor: `#709709`,
       },
     },
     150
@@ -6393,6 +6621,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
         backgroundColor: `#32AE12`,
         radius: 5,
         border: null,
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -6400,6 +6629,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
         backgroundColor: `#259284`,
         radius: 10,
         border: null,
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -6407,6 +6637,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
         backgroundColor: `#CABA99`,
         radius: 3,
         border: null,
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -6414,6 +6645,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
         backgroundColor: `#32AA88`,
         radius: 47,
         border: null,
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -6421,6 +6653,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
         backgroundColor: `#772728`,
         radius: 100,
         border: null,
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -6428,6 +6661,7 @@ test(`renders as expected when invalid and open above without borders`, () => {
         backgroundColor: `#938837`,
         radius: 2,
         border: null,
+        iconColor: `#709709`,
       },
     },
     150
@@ -6551,6 +6785,7 @@ test(`renders as expected when invalid open below without borders`, () => {
         backgroundColor: `#32AE12`,
         radius: 5,
         border: null,
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -6558,6 +6793,7 @@ test(`renders as expected when invalid open below without borders`, () => {
         backgroundColor: `#259284`,
         radius: 10,
         border: null,
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -6565,6 +6801,7 @@ test(`renders as expected when invalid open below without borders`, () => {
         backgroundColor: `#CABA99`,
         radius: 3,
         border: null,
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -6572,6 +6809,7 @@ test(`renders as expected when invalid open below without borders`, () => {
         backgroundColor: `#32AA88`,
         radius: 47,
         border: null,
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -6579,6 +6817,7 @@ test(`renders as expected when invalid open below without borders`, () => {
         backgroundColor: `#772728`,
         radius: 100,
         border: null,
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -6586,6 +6825,7 @@ test(`renders as expected when invalid open below without borders`, () => {
         backgroundColor: `#938837`,
         radius: 2,
         border: null,
+        iconColor: `#709709`,
       },
     },
     150
@@ -6712,6 +6952,7 @@ test(`renders as expected when open above without radius`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -6722,6 +6963,7 @@ test(`renders as expected when open above without radius`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -6732,6 +6974,7 @@ test(`renders as expected when open above without radius`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -6742,6 +6985,7 @@ test(`renders as expected when open above without radius`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -6752,6 +6996,7 @@ test(`renders as expected when open above without radius`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -6762,6 +7007,7 @@ test(`renders as expected when open above without radius`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -6892,6 +7138,7 @@ test(`renders as expected when open below without radius`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -6902,6 +7149,7 @@ test(`renders as expected when open below without radius`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -6912,6 +7160,7 @@ test(`renders as expected when open below without radius`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -6922,6 +7171,7 @@ test(`renders as expected when open below without radius`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -6932,6 +7182,7 @@ test(`renders as expected when open below without radius`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -6942,6 +7193,7 @@ test(`renders as expected when open below without radius`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -7072,6 +7324,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -7082,6 +7335,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -7092,6 +7346,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -7102,6 +7357,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -7112,6 +7368,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -7122,6 +7379,7 @@ test(`renders as expected when invalid and open above without radius`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -7252,6 +7510,7 @@ test(`renders as expected when invalid open below without radius`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -7262,6 +7521,7 @@ test(`renders as expected when invalid open below without radius`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -7272,6 +7532,7 @@ test(`renders as expected when invalid open below without radius`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -7282,6 +7543,7 @@ test(`renders as expected when invalid open below without radius`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -7292,6 +7554,7 @@ test(`renders as expected when invalid open below without radius`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -7302,6 +7565,7 @@ test(`renders as expected when invalid open below without radius`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150
@@ -7432,6 +7696,7 @@ test(`treats disabled undefined as disabled false`, () => {
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -7442,6 +7707,7 @@ test(`treats disabled undefined as disabled false`, () => {
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -7452,6 +7718,7 @@ test(`treats disabled undefined as disabled false`, () => {
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -7462,6 +7729,7 @@ test(`treats disabled undefined as disabled false`, () => {
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -7472,6 +7740,7 @@ test(`treats disabled undefined as disabled false`, () => {
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -7482,6 +7751,7 @@ test(`treats disabled undefined as disabled false`, () => {
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     150

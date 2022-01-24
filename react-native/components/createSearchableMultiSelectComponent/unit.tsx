@@ -21,6 +21,7 @@ const controlStyle: ControlStyle = {
       width: 4,
       color: `#FF00FF`,
     },
+    iconColor: `#43AE21`,
   },
   blurredInvalid: {
     textColor: `#99FE88`,
@@ -31,6 +32,7 @@ const controlStyle: ControlStyle = {
       width: 6,
       color: `#9A9A8E`,
     },
+    iconColor: `#985E00`,
   },
   focusedValid: {
     textColor: `#55EA13`,
@@ -41,6 +43,7 @@ const controlStyle: ControlStyle = {
       width: 5,
       color: `#646464`,
     },
+    iconColor: `#789521`,
   },
   focusedInvalid: {
     textColor: `#ABAADE`,
@@ -51,6 +54,7 @@ const controlStyle: ControlStyle = {
       width: 12,
       color: `#98ADAA`,
     },
+    iconColor: `#449438`,
   },
   disabledValid: {
     textColor: `#AE2195`,
@@ -61,6 +65,7 @@ const controlStyle: ControlStyle = {
       width: 14,
       color: `#5E5E5E`,
     },
+    iconColor: `#ADAADA`,
   },
   disabledInvalid: {
     textColor: `#340297`,
@@ -71,6 +76,7 @@ const controlStyle: ControlStyle = {
       width: 19,
       color: `#573829`,
     },
+    iconColor: `#709709`,
   },
 };
 

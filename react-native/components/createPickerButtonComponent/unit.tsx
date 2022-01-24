@@ -23,6 +23,7 @@ test(`renders as expected when valid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -33,6 +34,7 @@ test(`renders as expected when valid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -43,6 +45,7 @@ test(`renders as expected when valid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -53,6 +56,7 @@ test(`renders as expected when valid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -63,6 +67,7 @@ test(`renders as expected when valid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -73,6 +78,7 @@ test(`renders as expected when valid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -150,6 +156,7 @@ test(`renders as expected when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -160,6 +167,7 @@ test(`renders as expected when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -170,6 +178,7 @@ test(`renders as expected when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -180,6 +189,7 @@ test(`renders as expected when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -190,6 +200,7 @@ test(`renders as expected when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -200,6 +211,7 @@ test(`renders as expected when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -278,6 +290,7 @@ test(`renders as expected when disabled when valid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -288,6 +301,7 @@ test(`renders as expected when disabled when valid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -298,6 +312,7 @@ test(`renders as expected when disabled when valid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -308,6 +323,7 @@ test(`renders as expected when disabled when valid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -318,6 +334,7 @@ test(`renders as expected when disabled when valid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -328,6 +345,7 @@ test(`renders as expected when disabled when valid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -406,6 +424,7 @@ test(`renders as expected when disabled when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -416,6 +435,7 @@ test(`renders as expected when disabled when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -426,6 +446,7 @@ test(`renders as expected when disabled when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -436,6 +457,7 @@ test(`renders as expected when disabled when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -446,6 +468,7 @@ test(`renders as expected when disabled when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -456,6 +479,7 @@ test(`renders as expected when disabled when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -534,6 +558,7 @@ test(`renders as expected when the border width does not change`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -544,6 +569,7 @@ test(`renders as expected when the border width does not change`, () => {
         width: 4,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -554,6 +580,7 @@ test(`renders as expected when the border width does not change`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -564,6 +591,7 @@ test(`renders as expected when the border width does not change`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -574,6 +602,7 @@ test(`renders as expected when the border width does not change`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -584,6 +613,7 @@ test(`renders as expected when the border width does not change`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -661,6 +691,7 @@ test(`renders with a left icon`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -671,6 +702,7 @@ test(`renders with a left icon`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -681,6 +713,7 @@ test(`renders with a left icon`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -691,6 +724,7 @@ test(`renders with a left icon`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -701,6 +735,7 @@ test(`renders with a left icon`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -711,6 +746,7 @@ test(`renders with a left icon`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -797,6 +833,7 @@ test(`renders with a right icon`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -807,6 +844,7 @@ test(`renders with a right icon`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -817,6 +855,7 @@ test(`renders with a right icon`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -827,6 +866,7 @@ test(`renders with a right icon`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -837,6 +877,7 @@ test(`renders with a right icon`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -847,6 +888,7 @@ test(`renders with a right icon`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -933,6 +975,7 @@ test(`renders with left and right icons`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -943,6 +986,7 @@ test(`renders with left and right icons`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -953,6 +997,7 @@ test(`renders with left and right icons`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -963,6 +1008,7 @@ test(`renders with left and right icons`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -973,6 +1019,7 @@ test(`renders with left and right icons`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -983,6 +1030,7 @@ test(`renders with left and right icons`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -1077,6 +1125,7 @@ test(`renders as expected with a left icon when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1087,6 +1136,7 @@ test(`renders as expected with a left icon when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1097,6 +1147,7 @@ test(`renders as expected with a left icon when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1107,6 +1158,7 @@ test(`renders as expected with a left icon when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1117,6 +1169,7 @@ test(`renders as expected with a left icon when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1127,6 +1180,7 @@ test(`renders as expected with a left icon when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -1214,6 +1268,7 @@ test(`renders as expected with a right icon when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1224,6 +1279,7 @@ test(`renders as expected with a right icon when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1234,6 +1290,7 @@ test(`renders as expected with a right icon when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1244,6 +1301,7 @@ test(`renders as expected with a right icon when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1254,6 +1312,7 @@ test(`renders as expected with a right icon when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1264,6 +1323,7 @@ test(`renders as expected with a right icon when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -1351,6 +1411,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1361,6 +1422,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1371,6 +1433,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1381,6 +1444,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1391,6 +1455,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1401,6 +1466,7 @@ test(`renders as expected with left and right icons when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -1496,6 +1562,7 @@ test(`renders without horizontal padding`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1506,6 +1573,7 @@ test(`renders without horizontal padding`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1516,6 +1584,7 @@ test(`renders without horizontal padding`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1526,6 +1595,7 @@ test(`renders without horizontal padding`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1536,6 +1606,7 @@ test(`renders without horizontal padding`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1546,6 +1617,7 @@ test(`renders without horizontal padding`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -1622,6 +1694,7 @@ test(`renders with a left icon without horizontal padding`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1632,6 +1705,7 @@ test(`renders with a left icon without horizontal padding`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1642,6 +1716,7 @@ test(`renders with a left icon without horizontal padding`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1652,6 +1727,7 @@ test(`renders with a left icon without horizontal padding`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1662,6 +1738,7 @@ test(`renders with a left icon without horizontal padding`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1672,6 +1749,7 @@ test(`renders with a left icon without horizontal padding`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -1756,6 +1834,7 @@ test(`renders with a right icon without horizontal padding`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1766,6 +1845,7 @@ test(`renders with a right icon without horizontal padding`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1776,6 +1856,7 @@ test(`renders with a right icon without horizontal padding`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1786,6 +1867,7 @@ test(`renders with a right icon without horizontal padding`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1796,6 +1878,7 @@ test(`renders with a right icon without horizontal padding`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1806,6 +1889,7 @@ test(`renders with a right icon without horizontal padding`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -1890,6 +1974,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1900,6 +1985,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1910,6 +1996,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1920,6 +2007,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1930,6 +2018,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1940,6 +2029,7 @@ test(`renders with left and right icons without horizontal padding`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2032,6 +2122,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2042,6 +2133,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2052,6 +2144,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2062,6 +2155,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2072,6 +2166,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2082,6 +2177,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2155,6 +2251,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#32AE12`,
       radius: 5,
       border: null,
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2162,6 +2259,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#259284`,
       radius: 10,
       border: null,
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2169,6 +2267,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#CABA99`,
       radius: 3,
       border: null,
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2176,6 +2275,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#32AA88`,
       radius: 47,
       border: null,
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2186,6 +2286,7 @@ test(`renders as expected without borders`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2196,6 +2297,7 @@ test(`renders as expected without borders`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2271,6 +2373,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2281,6 +2384,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
         width: 4,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2291,6 +2395,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2301,6 +2406,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2311,6 +2417,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2321,6 +2428,7 @@ test(`renders as expected when a state does not alter border thickness`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2398,6 +2506,7 @@ test(`renders as expected without a radius`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2408,6 +2517,7 @@ test(`renders as expected without a radius`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2418,6 +2528,7 @@ test(`renders as expected without a radius`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2428,6 +2539,7 @@ test(`renders as expected without a radius`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2438,6 +2550,7 @@ test(`renders as expected without a radius`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2448,6 +2561,7 @@ test(`renders as expected without a radius`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2524,6 +2638,7 @@ test(`renders when disabled with a left icon`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2534,6 +2649,7 @@ test(`renders when disabled with a left icon`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2544,6 +2660,7 @@ test(`renders when disabled with a left icon`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2554,6 +2671,7 @@ test(`renders when disabled with a left icon`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2564,6 +2682,7 @@ test(`renders when disabled with a left icon`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2574,6 +2693,7 @@ test(`renders when disabled with a left icon`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2661,6 +2781,7 @@ test(`renders when disabled with a right icon`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2671,6 +2792,7 @@ test(`renders when disabled with a right icon`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2681,6 +2803,7 @@ test(`renders when disabled with a right icon`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2691,6 +2814,7 @@ test(`renders when disabled with a right icon`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2701,6 +2825,7 @@ test(`renders when disabled with a right icon`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2711,6 +2836,7 @@ test(`renders when disabled with a right icon`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2798,6 +2924,7 @@ test(`renders when disabled with left and right icons`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2808,6 +2935,7 @@ test(`renders when disabled with left and right icons`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2818,6 +2946,7 @@ test(`renders when disabled with left and right icons`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2828,6 +2957,7 @@ test(`renders when disabled with left and right icons`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2838,6 +2968,7 @@ test(`renders when disabled with left and right icons`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2848,6 +2979,7 @@ test(`renders when disabled with left and right icons`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -2943,6 +3075,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2953,6 +3086,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2963,6 +3097,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2973,6 +3108,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2983,6 +3119,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2993,6 +3130,7 @@ test(`renders as expected when disabled with a left icon when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -3080,6 +3218,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -3090,6 +3229,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -3100,6 +3240,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -3110,6 +3251,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -3120,6 +3262,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -3130,6 +3273,7 @@ test(`renders as expected when disabled with a right icon when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -3217,6 +3361,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -3227,6 +3372,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -3237,6 +3383,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -3247,6 +3394,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -3257,6 +3405,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -3267,6 +3416,7 @@ test(`renders as expected when disabled with left and right icons when invalid`,
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -3362,6 +3512,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -3372,6 +3523,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -3382,6 +3534,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -3392,6 +3545,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -3402,6 +3556,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -3412,6 +3567,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   };
   const InputComponent = createPickerButtonComponent(controlStyle);
@@ -3454,6 +3610,7 @@ test(`treats disabled missing as disabled false`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -3464,6 +3621,7 @@ test(`treats disabled missing as disabled false`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -3474,6 +3632,7 @@ test(`treats disabled missing as disabled false`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -3484,6 +3643,7 @@ test(`treats disabled missing as disabled false`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -3494,6 +3654,7 @@ test(`treats disabled missing as disabled false`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -3504,6 +3665,7 @@ test(`treats disabled missing as disabled false`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
@@ -3580,6 +3742,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -3590,6 +3753,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -3600,6 +3764,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -3610,6 +3775,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -3620,6 +3786,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -3630,6 +3797,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onPress = jest.fn();
