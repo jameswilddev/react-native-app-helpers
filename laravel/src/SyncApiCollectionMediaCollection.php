@@ -182,6 +182,6 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
   public function generateRoutes(): void
   {
-    $this->syncApi->generateRoutes();
+    $this->syncApiCollection->generateRoutes();
   }
 }
