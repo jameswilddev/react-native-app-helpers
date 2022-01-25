@@ -27,6 +27,7 @@ test(`renders as expected without a filter`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -37,6 +38,7 @@ test(`renders as expected without a filter`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -47,6 +49,7 @@ test(`renders as expected without a filter`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -57,6 +60,7 @@ test(`renders as expected without a filter`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -67,6 +71,7 @@ test(`renders as expected without a filter`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -77,6 +82,7 @@ test(`renders as expected without a filter`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -324,6 +330,7 @@ test(`renders as expected without a filter`, () => {
           backgroundColor: `#32AE12`,
           radius: 0,
           border: null,
+          iconColor: `#43AE21`,
         },
         blurredInvalid: {
           textColor: `#99FE88`,
@@ -331,6 +338,7 @@ test(`renders as expected without a filter`, () => {
           backgroundColor: `#259284`,
           radius: 0,
           border: null,
+          iconColor: `#985E00`,
         },
         focusedValid: {
           textColor: `#55EA13`,
@@ -338,6 +346,7 @@ test(`renders as expected without a filter`, () => {
           backgroundColor: `#CABA99`,
           radius: 0,
           border: null,
+          iconColor: `#789521`,
         },
         focusedInvalid: {
           textColor: `#ABAADE`,
@@ -345,6 +354,7 @@ test(`renders as expected without a filter`, () => {
           backgroundColor: `#32AA88`,
           radius: 0,
           border: null,
+          iconColor: `#449438`,
         },
         disabledValid: {
           textColor: `#AE2195`,
@@ -352,6 +362,7 @@ test(`renders as expected without a filter`, () => {
           backgroundColor: `#772728`,
           radius: 0,
           border: null,
+          iconColor: `#ADAADA`,
         },
         disabledInvalid: {
           textColor: `#340297`,
@@ -359,6 +370,7 @@ test(`renders as expected without a filter`, () => {
           backgroundColor: `#938837`,
           radius: 0,
           border: null,
+          iconColor: `#709709`,
         },
       },
       multiLine: false,
@@ -404,6 +416,7 @@ test(`filters the list down to only those matching the user's input`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -414,6 +427,7 @@ test(`filters the list down to only those matching the user's input`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -424,6 +438,7 @@ test(`filters the list down to only those matching the user's input`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -434,6 +449,7 @@ test(`filters the list down to only those matching the user's input`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -444,6 +460,7 @@ test(`filters the list down to only those matching the user's input`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -454,6 +471,7 @@ test(`filters the list down to only those matching the user's input`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -586,6 +604,7 @@ test(`selects items on press`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -596,6 +615,7 @@ test(`selects items on press`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -606,6 +626,7 @@ test(`selects items on press`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -616,6 +637,7 @@ test(`selects items on press`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -626,6 +648,7 @@ test(`selects items on press`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -636,6 +659,7 @@ test(`selects items on press`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -724,6 +748,7 @@ test(`deselects items on press`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -734,6 +759,7 @@ test(`deselects items on press`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -744,6 +770,7 @@ test(`deselects items on press`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -754,6 +781,7 @@ test(`deselects items on press`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -764,6 +792,7 @@ test(`deselects items on press`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -774,6 +803,7 @@ test(`deselects items on press`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -862,6 +892,7 @@ test(`closes the select when submitting without any input`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -872,6 +903,7 @@ test(`closes the select when submitting without any input`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -882,6 +914,7 @@ test(`closes the select when submitting without any input`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -892,6 +925,7 @@ test(`closes the select when submitting without any input`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -902,6 +936,7 @@ test(`closes the select when submitting without any input`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -912,6 +947,7 @@ test(`closes the select when submitting without any input`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -986,6 +1022,7 @@ test(`selects the first matching item on submitting`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -996,6 +1033,7 @@ test(`selects the first matching item on submitting`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1006,6 +1044,7 @@ test(`selects the first matching item on submitting`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1016,6 +1055,7 @@ test(`selects the first matching item on submitting`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1026,6 +1066,7 @@ test(`selects the first matching item on submitting`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1036,6 +1077,7 @@ test(`selects the first matching item on submitting`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -1111,6 +1153,7 @@ test(`deselects the first matching item on submitting`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1121,6 +1164,7 @@ test(`deselects the first matching item on submitting`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1131,6 +1175,7 @@ test(`deselects the first matching item on submitting`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1141,6 +1186,7 @@ test(`deselects the first matching item on submitting`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1151,6 +1197,7 @@ test(`deselects the first matching item on submitting`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1161,6 +1208,7 @@ test(`deselects the first matching item on submitting`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -1236,6 +1284,7 @@ test(`closes the select when submitting without matches`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1246,6 +1295,7 @@ test(`closes the select when submitting without matches`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1256,6 +1306,7 @@ test(`closes the select when submitting without matches`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1266,6 +1317,7 @@ test(`closes the select when submitting without matches`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1276,6 +1328,7 @@ test(`closes the select when submitting without matches`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1286,6 +1339,7 @@ test(`closes the select when submitting without matches`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -1360,6 +1414,7 @@ test(`renders as expected without horizontal padding`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1370,6 +1425,7 @@ test(`renders as expected without horizontal padding`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1380,6 +1436,7 @@ test(`renders as expected without horizontal padding`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1390,6 +1447,7 @@ test(`renders as expected without horizontal padding`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1400,6 +1458,7 @@ test(`renders as expected without horizontal padding`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1410,6 +1469,7 @@ test(`renders as expected without horizontal padding`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -1653,6 +1713,7 @@ test(`renders as expected without horizontal padding`, () => {
           backgroundColor: `#32AE12`,
           radius: 0,
           border: null,
+          iconColor: `#43AE21`,
         },
         blurredInvalid: {
           textColor: `#99FE88`,
@@ -1660,6 +1721,7 @@ test(`renders as expected without horizontal padding`, () => {
           backgroundColor: `#259284`,
           radius: 0,
           border: null,
+          iconColor: `#985E00`,
         },
         focusedValid: {
           textColor: `#55EA13`,
@@ -1667,6 +1729,7 @@ test(`renders as expected without horizontal padding`, () => {
           backgroundColor: `#CABA99`,
           radius: 0,
           border: null,
+          iconColor: `#789521`,
         },
         focusedInvalid: {
           textColor: `#ABAADE`,
@@ -1674,6 +1737,7 @@ test(`renders as expected without horizontal padding`, () => {
           backgroundColor: `#32AA88`,
           radius: 0,
           border: null,
+          iconColor: `#449438`,
         },
         disabledValid: {
           textColor: `#AE2195`,
@@ -1681,6 +1745,7 @@ test(`renders as expected without horizontal padding`, () => {
           backgroundColor: `#772728`,
           radius: 0,
           border: null,
+          iconColor: `#ADAADA`,
         },
         disabledInvalid: {
           textColor: `#340297`,
@@ -1688,6 +1753,7 @@ test(`renders as expected without horizontal padding`, () => {
           backgroundColor: `#938837`,
           radius: 0,
           border: null,
+          iconColor: `#709709`,
         },
       },
       multiLine: false,
@@ -1733,6 +1799,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1743,6 +1810,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1753,6 +1821,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1763,6 +1832,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1773,6 +1843,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1783,6 +1854,7 @@ test(`renders as expected without vertical padding`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();
@@ -2025,6 +2097,7 @@ test(`renders as expected without vertical padding`, () => {
           backgroundColor: `#32AE12`,
           radius: 0,
           border: null,
+          iconColor: `#43AE21`,
         },
         blurredInvalid: {
           textColor: `#99FE88`,
@@ -2032,6 +2105,7 @@ test(`renders as expected without vertical padding`, () => {
           backgroundColor: `#259284`,
           radius: 0,
           border: null,
+          iconColor: `#985E00`,
         },
         focusedValid: {
           textColor: `#55EA13`,
@@ -2039,6 +2113,7 @@ test(`renders as expected without vertical padding`, () => {
           backgroundColor: `#CABA99`,
           radius: 0,
           border: null,
+          iconColor: `#789521`,
         },
         focusedInvalid: {
           textColor: `#ABAADE`,
@@ -2046,6 +2121,7 @@ test(`renders as expected without vertical padding`, () => {
           backgroundColor: `#32AA88`,
           radius: 0,
           border: null,
+          iconColor: `#449438`,
         },
         disabledValid: {
           textColor: `#AE2195`,
@@ -2053,6 +2129,7 @@ test(`renders as expected without vertical padding`, () => {
           backgroundColor: `#772728`,
           radius: 0,
           border: null,
+          iconColor: `#ADAADA`,
         },
         disabledInvalid: {
           textColor: `#340297`,
@@ -2060,6 +2137,7 @@ test(`renders as expected without vertical padding`, () => {
           backgroundColor: `#938837`,
           radius: 0,
           border: null,
+          iconColor: `#709709`,
         },
       },
       multiLine: false,
@@ -2105,6 +2183,7 @@ test(`does nothing when user input is invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2115,6 +2194,7 @@ test(`does nothing when user input is invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2125,6 +2205,7 @@ test(`does nothing when user input is invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2135,6 +2216,7 @@ test(`does nothing when user input is invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2145,6 +2227,7 @@ test(`does nothing when user input is invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2155,6 +2238,7 @@ test(`does nothing when user input is invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   });
   const onChange = jest.fn();

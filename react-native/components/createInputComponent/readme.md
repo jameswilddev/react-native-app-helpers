@@ -5,7 +5,7 @@ Creates a React component which allows for the editing of text.
 ## Usage
 
 ```tsx
-import { createDropDownComponent } from "react-native-app-helpers";
+import { createInputComponent } from "react-native-app-helpers";
 
 // This example allows any text containing only the letter "G".
 // The value is the length of the text.
@@ -27,6 +27,7 @@ const ExampleInput = createInputComponent<number, null>(
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -37,6 +38,7 @@ const ExampleInput = createInputComponent<number, null>(
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -47,6 +49,7 @@ const ExampleInput = createInputComponent<number, null>(
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -57,6 +60,7 @@ const ExampleInput = createInputComponent<number, null>(
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -67,6 +71,7 @@ const ExampleInput = createInputComponent<number, null>(
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -77,6 +82,7 @@ const ExampleInput = createInputComponent<number, null>(
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     false,

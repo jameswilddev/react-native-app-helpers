@@ -19,6 +19,7 @@ const value: ControlStyle = {
     backgroundColor: `yellow`,
     radius: 10,
     border: null,
+    iconColor: `purple`,
   },
   blurredInvalid: {
     textColor: `blue`,
@@ -29,6 +30,7 @@ const value: ControlStyle = {
       width: 5,
       color: `red`,
     },
+    iconColor: `purple`,
   },
   focusedValid: {
     textColor: `blue`,
@@ -36,6 +38,7 @@ const value: ControlStyle = {
     backgroundColor: `yellow`,
     radius: 10,
     border: null,
+    iconColor: `purple`,
   },
   focusedInvalid: {
     textColor: `blue`,
@@ -46,6 +49,7 @@ const value: ControlStyle = {
       width: 5,
       color: `red`,
     },
+    iconColor: `purple`,
   },
   disabledValid: {
     textColor: `blue`,
@@ -53,6 +57,7 @@ const value: ControlStyle = {
     backgroundColor: `yellow`,
     radius: 10,
     border: null,
+    iconColor: `purple`,
   },
   disabledInvalid: {
     textColor: `blue`,
@@ -63,6 +68,7 @@ const value: ControlStyle = {
       width: 5,
       color: `red`,
     },
+    iconColor: `purple`,
   },
 };
 ```

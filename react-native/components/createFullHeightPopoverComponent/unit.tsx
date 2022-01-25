@@ -1,19 +1,15 @@
 import * as React from "react";
-import { Dimensions, Text, View, TextInput } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import { SafeAreaInsetsContext } from "react-native-safe-area-context";
 import * as TestRenderer from "react-test-renderer";
 import {
-  createFullHeightPopoverComponent,
-  Hitbox,
-  SimpleModal,
-  ContainerFillingKeyboardAvoidingView,
-  SizedHorizontallySymmetricalSafeAreaView,
   ControlStyle,
+  createFullHeightPopoverComponent,
+  SimpleModal,
+  SizedHorizontallySymmetricalSafeAreaView,
+  ContainerFillingKeyboardAvoidingView,
   unwrapRenderedFunctionComponent,
 } from "../../..";
-
-View;
-SimpleModal;
 
 test(`renders as expected when not disabled`, () => {
   Dimensions.set({
@@ -25,7 +21,7 @@ test(`renders as expected when not disabled`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -39,6 +35,7 @@ test(`renders as expected when not disabled`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -49,6 +46,7 @@ test(`renders as expected when not disabled`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -59,6 +57,7 @@ test(`renders as expected when not disabled`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -69,6 +68,7 @@ test(`renders as expected when not disabled`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -79,6 +79,7 @@ test(`renders as expected when not disabled`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -89,8 +90,11 @@ test(`renders as expected when not disabled`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -108,41 +112,146 @@ test(`renders as expected when not disabled`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
+  renderer.unmount();
+});
+
+test(`renders as expected with a right icon`, () => {
+  Dimensions.set({
+    window: {
+      width: 640,
+      height: 480,
+      scale: 2.42,
+      fontScale: 3.51,
+    },
+  });
+
+  const controlStyle: ControlStyle = {
+    fontFamily: `Example Font Family`,
+    fontSize: 37,
+    paddingVertical: 12,
+    paddingHorizontal: 29,
+    blurredValid: {
+      textColor: `#FFEE00`,
+      placeholderColor: `#E7AA32`,
+      backgroundColor: `#32AE12`,
+      radius: 5,
+      border: {
+        width: 4,
+        color: `#FF00FF`,
+      },
+      iconColor: `#43AE21`,
+    },
+    blurredInvalid: {
+      textColor: `#99FE88`,
+      placeholderColor: `#CACA3A`,
+      backgroundColor: `#259284`,
+      radius: 10,
+      border: {
+        width: 6,
+        color: `#9A9A8E`,
+      },
+      iconColor: `#985E00`,
+    },
+    focusedValid: {
+      textColor: `#55EA13`,
+      placeholderColor: `#273346`,
+      backgroundColor: `#CABA99`,
+      radius: 3,
+      border: {
+        width: 5,
+        color: `#646464`,
+      },
+      iconColor: `#789521`,
+    },
+    focusedInvalid: {
+      textColor: `#ABAADE`,
+      placeholderColor: `#47ADAD`,
+      backgroundColor: `#32AA88`,
+      radius: 47,
+      border: {
+        width: 12,
+        color: `#98ADAA`,
+      },
+      iconColor: `#449438`,
+    },
+    disabledValid: {
+      textColor: `#AE2195`,
+      placeholderColor: `#FFAAEE`,
+      backgroundColor: `#772728`,
+      radius: 100,
+      border: {
+        width: 14,
+        color: `#5E5E5E`,
+      },
+      iconColor: `#ADAADA`,
+    },
+    disabledInvalid: {
+      textColor: `#340297`,
+      placeholderColor: `#233832`,
+      backgroundColor: `#938837`,
+      radius: 2,
+      border: {
+        width: 19,
+        color: `#573829`,
+      },
+      iconColor: `#709709`,
+    },
+  };
+
+  const RightIcon = () => null;
+
+  const Component = createFullHeightPopoverComponent(controlStyle, RightIcon);
+
+  const renderer = TestRenderer.create(
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <Component
+        label="Example Button Content"
+        placeholder="Example Placeholder"
+        valid
+        disabled={false}
+        children={() => <Text>Example Pop Over Content</Text>}
+      />
+    </SafeAreaInsetsContext.Provider>
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      props: {
+        onMeasure: expect.any(Function),
+        onPress: expect.any(Function),
+        disabled: false,
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
+        rightIcon: RightIcon,
+      },
+    })
+  );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -157,7 +266,7 @@ test(`renders as expected when disabled`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -171,6 +280,7 @@ test(`renders as expected when disabled`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -181,6 +291,7 @@ test(`renders as expected when disabled`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -191,6 +302,7 @@ test(`renders as expected when disabled`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -201,6 +313,7 @@ test(`renders as expected when disabled`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -211,6 +324,7 @@ test(`renders as expected when disabled`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -221,8 +335,11 @@ test(`renders as expected when disabled`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -240,42 +357,22 @@ test(`renders as expected when disabled`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
-        style: {
-          backgroundColor: `#772728`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 14,
-          borderColor: `#5E5E5E`,
-          borderRadius: 100,
-          margin: -10,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#AE2195`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#FFAAEE`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -290,7 +387,7 @@ test(`renders as expected when not disabled after layout`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -304,6 +401,7 @@ test(`renders as expected when not disabled after layout`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -314,6 +412,7 @@ test(`renders as expected when not disabled after layout`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -324,6 +423,7 @@ test(`renders as expected when not disabled after layout`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -334,6 +434,7 @@ test(`renders as expected when not disabled after layout`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -344,6 +445,7 @@ test(`renders as expected when not disabled after layout`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -354,8 +456,11 @@ test(`renders as expected when not disabled after layout`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -379,41 +484,22 @@ test(`renders as expected when not disabled after layout`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -428,7 +514,7 @@ test(`renders as expected when disabled after layout`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -442,6 +528,7 @@ test(`renders as expected when disabled after layout`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -452,6 +539,7 @@ test(`renders as expected when disabled after layout`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -462,6 +550,7 @@ test(`renders as expected when disabled after layout`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -472,6 +561,7 @@ test(`renders as expected when disabled after layout`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -482,6 +572,7 @@ test(`renders as expected when disabled after layout`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -492,8 +583,11 @@ test(`renders as expected when disabled after layout`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -517,42 +611,22 @@ test(`renders as expected when disabled after layout`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
-        style: {
-          backgroundColor: `#772728`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 14,
-          borderColor: `#5E5E5E`,
-          borderRadius: 100,
-          margin: -10,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#AE2195`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#FFAAEE`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -567,7 +641,7 @@ test(`renders as expected when not disabled after layout after press`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -581,6 +655,7 @@ test(`renders as expected when not disabled after layout after press`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -591,6 +666,7 @@ test(`renders as expected when not disabled after layout after press`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -601,6 +677,7 @@ test(`renders as expected when not disabled after layout after press`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -611,6 +688,7 @@ test(`renders as expected when not disabled after layout after press`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -621,6 +699,7 @@ test(`renders as expected when not disabled after layout after press`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -631,8 +710,11 @@ test(`renders as expected when not disabled after layout after press`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -662,38 +744,13 @@ test(`renders as expected when not disabled after layout after press`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -706,8 +763,6 @@ test(`renders as expected when not disabled after layout after press`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -720,17 +775,17 @@ test(`renders as expected when not disabled after layout after press`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -746,6 +801,17 @@ test(`renders as expected when not disabled after layout after press`, () => {
       }),
     }),
   ]);
+
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -760,7 +826,7 @@ test(`renders as expected when not disabled after press after layout`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -774,6 +840,7 @@ test(`renders as expected when not disabled after press after layout`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -784,6 +851,7 @@ test(`renders as expected when not disabled after press after layout`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -794,6 +862,7 @@ test(`renders as expected when not disabled after press after layout`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -804,6 +873,7 @@ test(`renders as expected when not disabled after press after layout`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -814,6 +884,7 @@ test(`renders as expected when not disabled after press after layout`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -824,8 +895,11 @@ test(`renders as expected when not disabled after press after layout`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -855,38 +929,13 @@ test(`renders as expected when not disabled after press after layout`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -899,8 +948,6 @@ test(`renders as expected when not disabled after press after layout`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -913,17 +960,17 @@ test(`renders as expected when not disabled after press after layout`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -940,6 +987,17 @@ test(`renders as expected when not disabled after press after layout`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -953,7 +1011,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -967,6 +1025,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -977,6 +1036,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -987,6 +1047,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -997,6 +1058,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1007,6 +1069,7 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1017,8 +1080,11 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1056,38 +1122,13 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -1100,8 +1141,6 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -1114,17 +1153,17 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1141,6 +1180,17 @@ test(`correctly handles layout changes which only move on the X axis`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -1154,7 +1204,7 @@ test(`correctly handles layout changes which only change width`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -1168,6 +1218,7 @@ test(`correctly handles layout changes which only change width`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1178,6 +1229,7 @@ test(`correctly handles layout changes which only change width`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1188,6 +1240,7 @@ test(`correctly handles layout changes which only change width`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1198,6 +1251,7 @@ test(`correctly handles layout changes which only change width`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1208,6 +1262,7 @@ test(`correctly handles layout changes which only change width`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1218,8 +1273,11 @@ test(`correctly handles layout changes which only change width`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1257,38 +1315,13 @@ test(`correctly handles layout changes which only change width`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -1301,8 +1334,6 @@ test(`correctly handles layout changes which only change width`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -1315,17 +1346,17 @@ test(`correctly handles layout changes which only change width`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1342,6 +1373,17 @@ test(`correctly handles layout changes which only change width`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -1355,7 +1397,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -1369,6 +1411,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1379,6 +1422,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1389,6 +1433,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1399,6 +1444,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1409,6 +1455,7 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1419,8 +1466,11 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1458,38 +1508,13 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -1502,8 +1527,6 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -1516,17 +1539,17 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1543,6 +1566,17 @@ test(`correctly handles layout changes which only move on the Y axis`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -1556,7 +1590,7 @@ test(`correctly handles layout changes which only change height`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -1570,6 +1604,7 @@ test(`correctly handles layout changes which only change height`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1580,6 +1615,7 @@ test(`correctly handles layout changes which only change height`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1590,6 +1626,7 @@ test(`correctly handles layout changes which only change height`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1600,6 +1637,7 @@ test(`correctly handles layout changes which only change height`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1610,6 +1648,7 @@ test(`correctly handles layout changes which only change height`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1620,8 +1659,11 @@ test(`correctly handles layout changes which only change height`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1659,38 +1701,13 @@ test(`correctly handles layout changes which only change height`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -1703,8 +1720,6 @@ test(`correctly handles layout changes which only change height`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -1717,17 +1732,17 @@ test(`correctly handles layout changes which only change height`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1744,6 +1759,17 @@ test(`correctly handles layout changes which only change height`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -1757,7 +1783,7 @@ test(`correctly handles layout changes which have no effect`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -1771,6 +1797,7 @@ test(`correctly handles layout changes which have no effect`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1781,6 +1808,7 @@ test(`correctly handles layout changes which have no effect`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1791,6 +1819,7 @@ test(`correctly handles layout changes which have no effect`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -1801,6 +1830,7 @@ test(`correctly handles layout changes which have no effect`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -1811,6 +1841,7 @@ test(`correctly handles layout changes which have no effect`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -1821,8 +1852,11 @@ test(`correctly handles layout changes which have no effect`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -1860,38 +1894,13 @@ test(`correctly handles layout changes which have no effect`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -1904,8 +1913,6 @@ test(`correctly handles layout changes which have no effect`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -1918,17 +1925,17 @@ test(`correctly handles layout changes which have no effect`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -1945,6 +1952,17 @@ test(`correctly handles layout changes which have no effect`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -1958,7 +1976,7 @@ test(`can be enabled after being created disabled`, async () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -1972,6 +1990,7 @@ test(`can be enabled after being created disabled`, async () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -1982,6 +2001,7 @@ test(`can be enabled after being created disabled`, async () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -1992,6 +2012,7 @@ test(`can be enabled after being created disabled`, async () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2002,6 +2023,7 @@ test(`can be enabled after being created disabled`, async () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2012,6 +2034,7 @@ test(`can be enabled after being created disabled`, async () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2022,8 +2045,11 @@ test(`can be enabled after being created disabled`, async () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2078,41 +2104,22 @@ test(`can be enabled after being created disabled`, async () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 
@@ -2132,7 +2139,7 @@ test(`closes if disabled while open`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -2146,6 +2153,7 @@ test(`closes if disabled while open`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2156,6 +2164,7 @@ test(`closes if disabled while open`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2166,6 +2175,7 @@ test(`closes if disabled while open`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2176,6 +2186,7 @@ test(`closes if disabled while open`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2186,6 +2197,7 @@ test(`closes if disabled while open`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2196,8 +2208,11 @@ test(`closes if disabled while open`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2241,42 +2256,22 @@ test(`closes if disabled while open`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: true,
-        style: {
-          backgroundColor: `#772728`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 14,
-          borderColor: `#5E5E5E`,
-          borderRadius: 100,
-          margin: -10,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#AE2195`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#FFAAEE`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -2291,7 +2286,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -2305,6 +2300,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2315,6 +2311,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2325,6 +2322,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2335,6 +2333,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2345,6 +2344,7 @@ test(`does not re-open if enabled after disabled while open`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2355,8 +2355,11 @@ test(`does not re-open if enabled after disabled while open`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2414,41 +2417,22 @@ test(`does not re-open if enabled after disabled while open`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -2463,7 +2447,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -2477,6 +2461,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2487,6 +2472,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2497,6 +2483,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2507,6 +2494,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2517,6 +2505,7 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2527,8 +2516,11 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#ADAADA`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2592,38 +2584,13 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -2636,8 +2603,6 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -2650,17 +2615,17 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -2677,6 +2642,17 @@ test(`can be re-opened once re-enabled after disabled while open`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -2690,7 +2666,7 @@ test(`closes when the modal is dismissed`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -2704,6 +2680,7 @@ test(`closes when the modal is dismissed`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2714,6 +2691,7 @@ test(`closes when the modal is dismissed`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2724,6 +2702,7 @@ test(`closes when the modal is dismissed`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2734,6 +2713,7 @@ test(`closes when the modal is dismissed`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2744,6 +2724,7 @@ test(`closes when the modal is dismissed`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2754,8 +2735,11 @@ test(`closes when the modal is dismissed`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -2793,41 +2777,22 @@ test(`closes when the modal is dismissed`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -2842,7 +2807,7 @@ test(`closes when the close callback is invoked`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -2856,6 +2821,7 @@ test(`closes when the close callback is invoked`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -2866,6 +2832,7 @@ test(`closes when the close callback is invoked`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -2876,6 +2843,7 @@ test(`closes when the close callback is invoked`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -2886,6 +2854,7 @@ test(`closes when the close callback is invoked`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -2896,6 +2865,7 @@ test(`closes when the close callback is invoked`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -2906,8 +2876,11 @@ test(`closes when the close callback is invoked`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
   const children = jest.fn(() => <Text>Example Pop Over Content</Text>);
 
   const renderer = TestRenderer.create(
@@ -2943,499 +2916,22 @@ test(`closes when the close callback is invoked`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
 
-  renderer.unmount();
-});
-
-test(`renders as expected without a label`, () => {
-  Dimensions.set({
-    window: {
-      width: 640,
-      height: 480,
-      scale: 2.42,
-      fontScale: 3.51,
-    },
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
   });
-
-  const Component = createFullHeightPopoverComponent({
-    fontFamily: `Example Font Family`,
-    fontSize: 37,
-    paddingVertical: 12,
-    paddingHorizontal: 29,
-    blurredValid: {
-      textColor: `#FFEE00`,
-      placeholderColor: `#E7AA32`,
-      backgroundColor: `#32AE12`,
-      radius: 5,
-      border: {
-        width: 4,
-        color: `#FF00FF`,
-      },
-    },
-    blurredInvalid: {
-      textColor: `#99FE88`,
-      placeholderColor: `#CACA3A`,
-      backgroundColor: `#259284`,
-      radius: 10,
-      border: {
-        width: 6,
-        color: `#9A9A8E`,
-      },
-    },
-    focusedValid: {
-      textColor: `#55EA13`,
-      placeholderColor: `#273346`,
-      backgroundColor: `#CABA99`,
-      radius: 3,
-      border: {
-        width: 5,
-        color: `#646464`,
-      },
-    },
-    focusedInvalid: {
-      textColor: `#ABAADE`,
-      placeholderColor: `#47ADAD`,
-      backgroundColor: `#32AA88`,
-      radius: 47,
-      border: {
-        width: 12,
-        color: `#98ADAA`,
-      },
-    },
-    disabledValid: {
-      textColor: `#AE2195`,
-      placeholderColor: `#FFAAEE`,
-      backgroundColor: `#772728`,
-      radius: 100,
-      border: {
-        width: 14,
-        color: `#5E5E5E`,
-      },
-    },
-    disabledInvalid: {
-      textColor: `#340297`,
-      placeholderColor: `#233832`,
-      backgroundColor: `#938837`,
-      radius: 2,
-      border: {
-        width: 19,
-        color: `#573829`,
-      },
-    },
-  });
-
-  const renderer = TestRenderer.create(
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <Component
-        label={null}
-        placeholder="Example Placeholder"
-        valid
-        disabled={false}
-        children={() => <Text>Example Pop Over Content</Text>}
-      />
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  expect(renderer.toTree()?.rendered).toEqual(
-    expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
-      props: {
-        onMeasure: expect.any(Function),
-        onPress: expect.any(Function),
-        disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: undefined,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
-      },
-    })
-  );
-
-  renderer.unmount();
-});
-
-test(`renders as expected without a label when open`, () => {
-  Dimensions.set({
-    window: {
-      width: 640,
-      height: 480,
-      scale: 2.42,
-      fontScale: 3.51,
-    },
-  });
-
-  const Component = createFullHeightPopoverComponent({
-    fontFamily: `Example Font Family`,
-    fontSize: 37,
-    paddingVertical: 12,
-    paddingHorizontal: 29,
-    blurredValid: {
-      textColor: `#FFEE00`,
-      placeholderColor: `#E7AA32`,
-      backgroundColor: `#32AE12`,
-      radius: 5,
-      border: {
-        width: 4,
-        color: `#FF00FF`,
-      },
-    },
-    blurredInvalid: {
-      textColor: `#99FE88`,
-      placeholderColor: `#CACA3A`,
-      backgroundColor: `#259284`,
-      radius: 10,
-      border: {
-        width: 6,
-        color: `#9A9A8E`,
-      },
-    },
-    focusedValid: {
-      textColor: `#55EA13`,
-      placeholderColor: `#273346`,
-      backgroundColor: `#CABA99`,
-      radius: 3,
-      border: {
-        width: 5,
-        color: `#646464`,
-      },
-    },
-    focusedInvalid: {
-      textColor: `#ABAADE`,
-      placeholderColor: `#47ADAD`,
-      backgroundColor: `#32AA88`,
-      radius: 47,
-      border: {
-        width: 12,
-        color: `#98ADAA`,
-      },
-    },
-    disabledValid: {
-      textColor: `#AE2195`,
-      placeholderColor: `#FFAAEE`,
-      backgroundColor: `#772728`,
-      radius: 100,
-      border: {
-        width: 14,
-        color: `#5E5E5E`,
-      },
-    },
-    disabledInvalid: {
-      textColor: `#340297`,
-      placeholderColor: `#233832`,
-      backgroundColor: `#938837`,
-      radius: 2,
-      border: {
-        width: 19,
-        color: `#573829`,
-      },
-    },
-  });
-
-  const renderer = TestRenderer.create(
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <Component
-        label={null}
-        placeholder="Example Placeholder"
-        valid
-        disabled={false}
-        children={() => <Text>Example Pop Over Content</Text>}
-      />
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  TestRenderer.act(() => {
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onMeasure`
-    ](123, 456, 220, 20, 70, 320);
-  });
-
-  TestRenderer.act(() => {
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onPress`
-    ]();
-  });
-
-  expect(renderer.toTree()?.rendered).toEqual([
-    expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
-      props: {
-        onMeasure: expect.any(Function),
-        onPress: expect.any(Function),
-        disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: undefined,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
-      },
-    }),
-    expect.objectContaining({
-      nodeType: `component`,
-      type: SimpleModal,
-      props: expect.objectContaining({
-        onClose: expect.any(Function),
-        children: expect.objectContaining({
-          type: View,
-          props: {
-            style: [
-              {
-                position: `absolute`,
-                top: 0,
-                height: `100%`,
-                backgroundColor: `#CABA99`,
-                borderLeftWidth: 5,
-                borderRightWidth: 5,
-                borderColor: `#646464`,
-              },
-              {
-                left: 70,
-                width: 220,
-              },
-            ],
-            children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
-              props: {
-                children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
-                  props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
-                    children: expect.objectContaining({
-                      type: Text,
-                      props: {
-                        children: `Example Pop Over Content`,
-                      },
-                    }),
-                  },
-                }),
-              },
-            }),
-          },
-        }),
-      }),
-    }),
-  ]);
-
-  renderer.unmount();
-});
-
-test(`renders as expected without a label when disabled`, () => {
-  Dimensions.set({
-    window: {
-      width: 640,
-      height: 480,
-      scale: 2.42,
-      fontScale: 3.51,
-    },
-  });
-
-  const Component = createFullHeightPopoverComponent({
-    fontFamily: `Example Font Family`,
-    fontSize: 37,
-    paddingVertical: 12,
-    paddingHorizontal: 29,
-    blurredValid: {
-      textColor: `#FFEE00`,
-      placeholderColor: `#E7AA32`,
-      backgroundColor: `#32AE12`,
-      radius: 5,
-      border: {
-        width: 4,
-        color: `#FF00FF`,
-      },
-    },
-    blurredInvalid: {
-      textColor: `#99FE88`,
-      placeholderColor: `#CACA3A`,
-      backgroundColor: `#259284`,
-      radius: 10,
-      border: {
-        width: 6,
-        color: `#9A9A8E`,
-      },
-    },
-    focusedValid: {
-      textColor: `#55EA13`,
-      placeholderColor: `#273346`,
-      backgroundColor: `#CABA99`,
-      radius: 3,
-      border: {
-        width: 5,
-        color: `#646464`,
-      },
-    },
-    focusedInvalid: {
-      textColor: `#ABAADE`,
-      placeholderColor: `#47ADAD`,
-      backgroundColor: `#32AA88`,
-      radius: 47,
-      border: {
-        width: 12,
-        color: `#98ADAA`,
-      },
-    },
-    disabledValid: {
-      textColor: `#AE2195`,
-      placeholderColor: `#FFAAEE`,
-      backgroundColor: `#772728`,
-      radius: 100,
-      border: {
-        width: 14,
-        color: `#5E5E5E`,
-      },
-    },
-    disabledInvalid: {
-      textColor: `#340297`,
-      placeholderColor: `#233832`,
-      backgroundColor: `#938837`,
-      radius: 2,
-      border: {
-        width: 19,
-        color: `#573829`,
-      },
-    },
-  });
-
-  const renderer = TestRenderer.create(
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <Component
-        label={null}
-        placeholder="Example Placeholder"
-        valid
-        disabled
-        children={() => <Text>Example Pop Over Content</Text>}
-      />
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  expect(renderer.toTree()?.rendered).toEqual(
-    expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
-      props: {
-        onMeasure: expect.any(Function),
-        onPress: expect.any(Function),
-        disabled: true,
-        style: {
-          backgroundColor: `#772728`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 14,
-          borderColor: `#5E5E5E`,
-          borderRadius: 100,
-          margin: -10,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#AE2195`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: undefined,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#FFAAEE`,
-          },
-        }),
-      },
-    })
-  );
 
   renderer.unmount();
 });
@@ -3450,7 +2946,7 @@ test(`renders as expected when invalid`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -3464,6 +2960,7 @@ test(`renders as expected when invalid`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -3474,6 +2971,7 @@ test(`renders as expected when invalid`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -3484,6 +2982,7 @@ test(`renders as expected when invalid`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -3494,6 +2993,7 @@ test(`renders as expected when invalid`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -3504,6 +3004,7 @@ test(`renders as expected when invalid`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -3514,8 +3015,11 @@ test(`renders as expected when invalid`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3533,42 +3037,22 @@ test(`renders as expected when invalid`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#259284`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 6,
-          borderColor: `#9A9A8E`,
-          borderRadius: 10,
-          margin: -2,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#99FE88`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#CACA3A`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: false,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -3583,7 +3067,7 @@ test(`renders as expected when invalid when open`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -3597,6 +3081,7 @@ test(`renders as expected when invalid when open`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -3607,6 +3092,7 @@ test(`renders as expected when invalid when open`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -3617,6 +3103,7 @@ test(`renders as expected when invalid when open`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -3627,6 +3114,7 @@ test(`renders as expected when invalid when open`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -3637,6 +3125,7 @@ test(`renders as expected when invalid when open`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -3647,8 +3136,11 @@ test(`renders as expected when invalid when open`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -3678,39 +3170,13 @@ test(`renders as expected when invalid when open`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#259284`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 6,
-          borderColor: `#9A9A8E`,
-          margin: -2,
-          borderRadius: 10,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#99FE88`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: undefined,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#CACA3A`,
-          },
-        }),
+        label: null,
+        placeholder: `Example Placeholder`,
+        valid: false,
       },
     }),
     expect.objectContaining({
@@ -3723,8 +3189,6 @@ test(`renders as expected when invalid when open`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#32AA88`,
                 borderLeftWidth: 12,
@@ -3737,17 +3201,17 @@ test(`renders as expected when invalid when open`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -3764,598 +3228,16 @@ test(`renders as expected when invalid when open`, () => {
     }),
   ]);
 
-  renderer.unmount();
-});
-
-test(`renders as expected when invalid and disabled`, () => {
-  Dimensions.set({
-    window: {
-      width: 640,
-      height: 480,
-      scale: 2.42,
-      fontScale: 3.51,
-    },
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
   });
-
-  const Component = createFullHeightPopoverComponent({
-    fontFamily: `Example Font Family`,
-    fontSize: 37,
-    paddingVertical: 12,
-    paddingHorizontal: 29,
-    blurredValid: {
-      textColor: `#FFEE00`,
-      placeholderColor: `#E7AA32`,
-      backgroundColor: `#32AE12`,
-      radius: 5,
-      border: {
-        width: 4,
-        color: `#FF00FF`,
-      },
-    },
-    blurredInvalid: {
-      textColor: `#99FE88`,
-      placeholderColor: `#CACA3A`,
-      backgroundColor: `#259284`,
-      radius: 10,
-      border: {
-        width: 6,
-        color: `#9A9A8E`,
-      },
-    },
-    focusedValid: {
-      textColor: `#55EA13`,
-      placeholderColor: `#273346`,
-      backgroundColor: `#CABA99`,
-      radius: 3,
-      border: {
-        width: 5,
-        color: `#646464`,
-      },
-    },
-    focusedInvalid: {
-      textColor: `#ABAADE`,
-      placeholderColor: `#47ADAD`,
-      backgroundColor: `#32AA88`,
-      radius: 47,
-      border: {
-        width: 12,
-        color: `#98ADAA`,
-      },
-    },
-    disabledValid: {
-      textColor: `#AE2195`,
-      placeholderColor: `#FFAAEE`,
-      backgroundColor: `#772728`,
-      radius: 100,
-      border: {
-        width: 14,
-        color: `#5E5E5E`,
-      },
-    },
-    disabledInvalid: {
-      textColor: `#340297`,
-      placeholderColor: `#233832`,
-      backgroundColor: `#938837`,
-      radius: 2,
-      border: {
-        width: 19,
-        color: `#573829`,
-      },
-    },
-  });
-
-  const renderer = TestRenderer.create(
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <Component
-        label="Example Button Content"
-        placeholder="Example Placeholder"
-        valid={false}
-        disabled
-        children={() => <Text>Example Pop Over Content</Text>}
-      />
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  expect(renderer.toTree()?.rendered).toEqual(
-    expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
-      props: {
-        onMeasure: expect.any(Function),
-        onPress: expect.any(Function),
-        disabled: true,
-        style: {
-          backgroundColor: `#938837`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 19,
-          borderColor: `#573829`,
-          borderRadius: 2,
-          margin: -15,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#340297`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#233832`,
-          },
-        }),
-      },
-    })
-  );
-
-  renderer.unmount();
-});
-
-test(`renders as expected when invalid without a label`, () => {
-  Dimensions.set({
-    window: {
-      width: 640,
-      height: 480,
-      scale: 2.42,
-      fontScale: 3.51,
-    },
-  });
-
-  const Component = createFullHeightPopoverComponent({
-    fontFamily: `Example Font Family`,
-    fontSize: 37,
-    paddingVertical: 12,
-    paddingHorizontal: 29,
-    blurredValid: {
-      textColor: `#FFEE00`,
-      placeholderColor: `#E7AA32`,
-      backgroundColor: `#32AE12`,
-      radius: 5,
-      border: {
-        width: 4,
-        color: `#FF00FF`,
-      },
-    },
-    blurredInvalid: {
-      textColor: `#99FE88`,
-      placeholderColor: `#CACA3A`,
-      backgroundColor: `#259284`,
-      radius: 10,
-      border: {
-        width: 6,
-        color: `#9A9A8E`,
-      },
-    },
-    focusedValid: {
-      textColor: `#55EA13`,
-      placeholderColor: `#273346`,
-      backgroundColor: `#CABA99`,
-      radius: 3,
-      border: {
-        width: 5,
-        color: `#646464`,
-      },
-    },
-    focusedInvalid: {
-      textColor: `#ABAADE`,
-      placeholderColor: `#47ADAD`,
-      backgroundColor: `#32AA88`,
-      radius: 47,
-      border: {
-        width: 12,
-        color: `#98ADAA`,
-      },
-    },
-    disabledValid: {
-      textColor: `#AE2195`,
-      placeholderColor: `#FFAAEE`,
-      backgroundColor: `#772728`,
-      radius: 100,
-      border: {
-        width: 14,
-        color: `#5E5E5E`,
-      },
-    },
-    disabledInvalid: {
-      textColor: `#340297`,
-      placeholderColor: `#233832`,
-      backgroundColor: `#938837`,
-      radius: 2,
-      border: {
-        width: 19,
-        color: `#573829`,
-      },
-    },
-  });
-
-  const renderer = TestRenderer.create(
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <Component
-        label={null}
-        placeholder="Example Placeholder"
-        valid={false}
-        disabled={false}
-        children={() => <Text>Example Pop Over Content</Text>}
-      />
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  expect(renderer.toTree()?.rendered).toEqual(
-    expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
-      props: {
-        onMeasure: expect.any(Function),
-        onPress: expect.any(Function),
-        disabled: false,
-        style: {
-          backgroundColor: `#259284`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 6,
-          borderColor: `#9A9A8E`,
-          borderRadius: 10,
-          margin: -2,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#99FE88`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: undefined,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#CACA3A`,
-          },
-        }),
-      },
-    })
-  );
-
-  renderer.unmount();
-});
-
-test(`renders as expected without a label when invalid`, () => {
-  Dimensions.set({
-    window: {
-      width: 640,
-      height: 480,
-      scale: 2.42,
-      fontScale: 3.51,
-    },
-  });
-
-  const Component = createFullHeightPopoverComponent({
-    fontFamily: `Example Font Family`,
-    fontSize: 37,
-    paddingVertical: 12,
-    paddingHorizontal: 29,
-    blurredValid: {
-      textColor: `#FFEE00`,
-      placeholderColor: `#E7AA32`,
-      backgroundColor: `#32AE12`,
-      radius: 5,
-      border: {
-        width: 4,
-        color: `#FF00FF`,
-      },
-    },
-    blurredInvalid: {
-      textColor: `#99FE88`,
-      placeholderColor: `#CACA3A`,
-      backgroundColor: `#259284`,
-      radius: 10,
-      border: {
-        width: 6,
-        color: `#9A9A8E`,
-      },
-    },
-    focusedValid: {
-      textColor: `#55EA13`,
-      placeholderColor: `#273346`,
-      backgroundColor: `#CABA99`,
-      radius: 3,
-      border: {
-        width: 5,
-        color: `#646464`,
-      },
-    },
-    focusedInvalid: {
-      textColor: `#ABAADE`,
-      placeholderColor: `#47ADAD`,
-      backgroundColor: `#32AA88`,
-      radius: 47,
-      border: {
-        width: 12,
-        color: `#98ADAA`,
-      },
-    },
-    disabledValid: {
-      textColor: `#AE2195`,
-      placeholderColor: `#FFAAEE`,
-      backgroundColor: `#772728`,
-      radius: 100,
-      border: {
-        width: 14,
-        color: `#5E5E5E`,
-      },
-    },
-    disabledInvalid: {
-      textColor: `#340297`,
-      placeholderColor: `#233832`,
-      backgroundColor: `#938837`,
-      radius: 2,
-      border: {
-        width: 19,
-        color: `#573829`,
-      },
-    },
-  });
-
-  const renderer = TestRenderer.create(
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <Component
-        label={null}
-        placeholder="Example Placeholder"
-        valid={false}
-        disabled={false}
-        children={() => <Text>Example Pop Over Content</Text>}
-      />
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  TestRenderer.act(() => {
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onMeasure`
-    ](123, 456, 220, 20, 70, 320);
-  });
-
-  TestRenderer.act(() => {
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onPress`
-    ]();
-  });
-
-  expect(renderer.toTree()?.rendered).toEqual([
-    expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
-      props: {
-        onMeasure: expect.any(Function),
-        onPress: expect.any(Function),
-        disabled: false,
-        style: {
-          backgroundColor: `#259284`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 6,
-          borderColor: `#9A9A8E`,
-          margin: -2,
-          borderRadius: 10,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#99FE88`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: undefined,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#CACA3A`,
-          },
-        }),
-      },
-    }),
-    expect.objectContaining({
-      nodeType: `component`,
-      type: SimpleModal,
-      props: expect.objectContaining({
-        onClose: expect.any(Function),
-        children: expect.objectContaining({
-          type: View,
-          props: {
-            style: [
-              {
-                position: `absolute`,
-                top: 0,
-                height: `100%`,
-                backgroundColor: `#32AA88`,
-                borderLeftWidth: 12,
-                borderRightWidth: 12,
-                borderColor: `#98ADAA`,
-              },
-              {
-                left: 70,
-                width: 220,
-              },
-            ],
-            children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
-              props: {
-                children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
-                  props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
-                    children: expect.objectContaining({
-                      type: Text,
-                      props: {
-                        children: `Example Pop Over Content`,
-                      },
-                    }),
-                  },
-                }),
-              },
-            }),
-          },
-        }),
-      }),
-    }),
-  ]);
-
-  renderer.unmount();
-});
-
-test(`renders as expected without a label when disabled and invalid`, () => {
-  Dimensions.set({
-    window: {
-      width: 640,
-      height: 480,
-      scale: 2.42,
-      fontScale: 3.51,
-    },
-  });
-
-  const Component = createFullHeightPopoverComponent({
-    fontFamily: `Example Font Family`,
-    fontSize: 37,
-    paddingVertical: 12,
-    paddingHorizontal: 29,
-    blurredValid: {
-      textColor: `#FFEE00`,
-      placeholderColor: `#E7AA32`,
-      backgroundColor: `#32AE12`,
-      radius: 5,
-      border: {
-        width: 4,
-        color: `#FF00FF`,
-      },
-    },
-    blurredInvalid: {
-      textColor: `#99FE88`,
-      placeholderColor: `#CACA3A`,
-      backgroundColor: `#259284`,
-      radius: 10,
-      border: {
-        width: 6,
-        color: `#9A9A8E`,
-      },
-    },
-    focusedValid: {
-      textColor: `#55EA13`,
-      placeholderColor: `#273346`,
-      backgroundColor: `#CABA99`,
-      radius: 3,
-      border: {
-        width: 5,
-        color: `#646464`,
-      },
-    },
-    focusedInvalid: {
-      textColor: `#ABAADE`,
-      placeholderColor: `#47ADAD`,
-      backgroundColor: `#32AA88`,
-      radius: 47,
-      border: {
-        width: 12,
-        color: `#98ADAA`,
-      },
-    },
-    disabledValid: {
-      textColor: `#AE2195`,
-      placeholderColor: `#FFAAEE`,
-      backgroundColor: `#772728`,
-      radius: 100,
-      border: {
-        width: 14,
-        color: `#5E5E5E`,
-      },
-    },
-    disabledInvalid: {
-      textColor: `#340297`,
-      placeholderColor: `#233832`,
-      backgroundColor: `#938837`,
-      radius: 2,
-      border: {
-        width: 19,
-        color: `#573829`,
-      },
-    },
-  });
-
-  const renderer = TestRenderer.create(
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <Component
-        label={null}
-        placeholder="Example Placeholder"
-        valid={false}
-        disabled
-        children={() => <Text>Example Pop Over Content</Text>}
-      />
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  expect(renderer.toTree()?.rendered).toEqual(
-    expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
-      props: {
-        onMeasure: expect.any(Function),
-        onPress: expect.any(Function),
-        disabled: true,
-        style: {
-          backgroundColor: `#938837`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 19,
-          borderColor: `#573829`,
-          borderRadius: 2,
-          margin: -15,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#340297`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: undefined,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#233832`,
-          },
-        }),
-      },
-    })
-  );
 
   renderer.unmount();
 });
@@ -4370,7 +3252,7 @@ test(`renders as expected without borders`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -4381,6 +3263,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#32AE12`,
       radius: 5,
       border: null,
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -4388,6 +3271,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#259284`,
       radius: 10,
       border: null,
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -4395,6 +3279,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#CABA99`,
       radius: 3,
       border: null,
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -4402,6 +3287,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#32AA88`,
       radius: 47,
       border: null,
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -4409,6 +3295,7 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#772728`,
       radius: 100,
       border: null,
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -4416,8 +3303,11 @@ test(`renders as expected without borders`, () => {
       backgroundColor: `#938837`,
       radius: 2,
       border: null,
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -4447,36 +3337,13 @@ test(`renders as expected without borders`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -4489,8 +3356,6 @@ test(`renders as expected without borders`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
               },
@@ -4500,17 +3365,17 @@ test(`renders as expected without borders`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -4527,6 +3392,17 @@ test(`renders as expected without borders`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -4540,7 +3416,7 @@ test(`renders as expected when invalid without borders`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -4551,6 +3427,7 @@ test(`renders as expected when invalid without borders`, () => {
       backgroundColor: `#32AE12`,
       radius: 5,
       border: null,
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -4558,6 +3435,7 @@ test(`renders as expected when invalid without borders`, () => {
       backgroundColor: `#259284`,
       radius: 10,
       border: null,
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -4565,6 +3443,7 @@ test(`renders as expected when invalid without borders`, () => {
       backgroundColor: `#CABA99`,
       radius: 3,
       border: null,
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -4572,6 +3451,7 @@ test(`renders as expected when invalid without borders`, () => {
       backgroundColor: `#32AA88`,
       radius: 47,
       border: null,
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -4579,6 +3459,7 @@ test(`renders as expected when invalid without borders`, () => {
       backgroundColor: `#772728`,
       radius: 100,
       border: null,
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -4586,8 +3467,11 @@ test(`renders as expected when invalid without borders`, () => {
       backgroundColor: `#938837`,
       radius: 2,
       border: null,
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -4617,36 +3501,13 @@ test(`renders as expected when invalid without borders`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#259284`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderRadius: 10,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#99FE88`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#CACA3A`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: false,
       },
     }),
     expect.objectContaining({
@@ -4659,8 +3520,6 @@ test(`renders as expected when invalid without borders`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#32AA88`,
               },
@@ -4670,17 +3529,17 @@ test(`renders as expected when invalid without borders`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -4697,6 +3556,17 @@ test(`renders as expected when invalid without borders`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -4710,7 +3580,7 @@ test(`renders as expected without radius`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -4724,6 +3594,7 @@ test(`renders as expected without radius`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -4734,6 +3605,7 @@ test(`renders as expected without radius`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -4744,6 +3616,7 @@ test(`renders as expected without radius`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -4754,6 +3627,7 @@ test(`renders as expected without radius`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -4764,6 +3638,7 @@ test(`renders as expected without radius`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -4774,8 +3649,11 @@ test(`renders as expected without radius`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -4805,37 +3683,13 @@ test(`renders as expected without radius`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     }),
     expect.objectContaining({
@@ -4848,8 +3702,6 @@ test(`renders as expected without radius`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#CABA99`,
                 borderLeftWidth: 5,
@@ -4862,17 +3714,17 @@ test(`renders as expected without radius`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -4889,6 +3741,17 @@ test(`renders as expected without radius`, () => {
     }),
   ]);
 
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
+
   renderer.unmount();
 });
 
@@ -4902,7 +3765,7 @@ test(`renders as expected when invalid without radius`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -4916,6 +3779,7 @@ test(`renders as expected when invalid without radius`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -4926,6 +3790,7 @@ test(`renders as expected when invalid without radius`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -4936,6 +3801,7 @@ test(`renders as expected when invalid without radius`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -4946,6 +3812,7 @@ test(`renders as expected when invalid without radius`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -4956,6 +3823,7 @@ test(`renders as expected when invalid without radius`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -4966,8 +3834,11 @@ test(`renders as expected when invalid without radius`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -4997,38 +3868,13 @@ test(`renders as expected when invalid without radius`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual([
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#259284`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 6,
-          borderColor: `#9A9A8E`,
-          margin: -2,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#99FE88`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#CACA3A`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: false,
       },
     }),
     expect.objectContaining({
@@ -5041,8 +3887,6 @@ test(`renders as expected when invalid without radius`, () => {
           props: {
             style: [
               {
-                position: `absolute`,
-                top: 0,
                 height: `100%`,
                 backgroundColor: `#32AA88`,
                 borderLeftWidth: 12,
@@ -5055,17 +3899,17 @@ test(`renders as expected when invalid without radius`, () => {
               },
             ],
             children: expect.objectContaining({
-              type: ContainerFillingKeyboardAvoidingView,
+              type: SizedHorizontallySymmetricalSafeAreaView,
               props: {
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+                width: `fillsContainer`,
+                height: `fillsContainer`,
                 children: expect.objectContaining({
-                  type: SizedHorizontallySymmetricalSafeAreaView,
+                  type: ContainerFillingKeyboardAvoidingView,
                   props: {
-                    top: true,
-                    bottom: true,
-                    left: true,
-                    right: true,
-                    width: `fillsContainer`,
-                    height: `fillsContainer`,
                     children: expect.objectContaining({
                       type: Text,
                       props: {
@@ -5081,6 +3925,17 @@ test(`renders as expected when invalid without radius`, () => {
       }),
     }),
   ]);
+
+  expect(
+    (
+      (
+        renderer.toTree()
+          ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+      )[0] as TestRenderer.ReactTestRendererTree
+    ).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });
@@ -5100,6 +3955,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -5110,6 +3966,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -5120,6 +3977,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -5130,6 +3988,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -5140,6 +3999,7 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -5150,11 +4010,16 @@ test(`allows introspection when used in a higher-order component`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   };
 
-  const FullHeightPopoverComponent =
-    createFullHeightPopoverComponent(controlStyle);
+  const RightIcon = jest.fn();
+
+  const FullHeightPopoverComponent = createFullHeightPopoverComponent(
+    controlStyle,
+    RightIcon
+  );
 
   const ParentComponent = () => (
     <FullHeightPopoverComponent
@@ -5171,8 +4036,9 @@ test(`allows introspection when used in a higher-order component`, () => {
   expect(
     unwrapRenderedFunctionComponent(rendered).type
   ).toBeAFunctionWithTheStaticProperties({
-    fullHeightPopover: { controlStyle },
+    fullHeightPopover: { controlStyle, rightIcon: RightIcon },
   });
+  expect(RightIcon).not.toHaveBeenCalled();
 });
 
 test(`treats disabled undefined as disabled false`, () => {
@@ -5185,7 +4051,7 @@ test(`treats disabled undefined as disabled false`, () => {
     },
   });
 
-  const Component = createFullHeightPopoverComponent({
+  const controlStyle: ControlStyle = {
     fontFamily: `Example Font Family`,
     fontSize: 37,
     paddingVertical: 12,
@@ -5199,6 +4065,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -5209,6 +4076,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -5219,6 +4087,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -5229,6 +4098,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -5239,6 +4109,7 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -5249,8 +4120,11 @@ test(`treats disabled undefined as disabled false`, () => {
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  });
+  };
+
+  const Component = createFullHeightPopoverComponent(controlStyle, null);
 
   const renderer = TestRenderer.create(
     <SafeAreaInsetsContext.Provider
@@ -5268,41 +4142,22 @@ test(`treats disabled undefined as disabled false`, () => {
 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
-      nodeType: `component`,
-      type: Hitbox,
       props: {
         onMeasure: expect.any(Function),
         onPress: expect.any(Function),
         disabled: false,
-        style: {
-          backgroundColor: `#32AE12`,
-          flexDirection: `row`,
-          alignItems: `center`,
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: `#FF00FF`,
-          borderRadius: 5,
-        },
-        children: expect.objectContaining({
-          type: TextInput,
-          props: {
-            style: {
-              flexGrow: 1,
-              color: `#FFEE00`,
-              paddingVertical: 12,
-              fontFamily: `Example Font Family`,
-              fontSize: 37,
-            },
-            editable: false,
-            pointerEvents: `none`,
-            value: `Example Button Content`,
-            placeholder: `Example Placeholder`,
-            placeholderTextColor: `#E7AA32`,
-          },
-        }),
+        label: `Example Button Content`,
+        placeholder: `Example Placeholder`,
+        valid: true,
       },
     })
   );
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).type
+  ).toBeAFunctionWithTheStaticProperties({
+    pickerButton: { controlStyle },
+  });
 
   renderer.unmount();
 });

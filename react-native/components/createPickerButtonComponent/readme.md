@@ -1,14 +1,14 @@
-# `react-native-app-helpers/createFlatColorBackgroundComponent`
+# `react-native-app-helpers/createPickerButtonComponent`
 
-Creates a new React component which displays a button which can be pressed to
-show an element in a drop-down area.
+Creates a new React component which displays a button which could represent a
+picker (select, date picker, etc.).
 
 ## Usage
 
 ```tsx
-import { createDropDownComponent } from "react-native-app-helpers";
+import { createPickerButtonComponent } from "react-native-app-helpers";
 
-const ExampleDropDown = createDropDownComponent(
+const ExamplePickerButton = createPickerButtonComponent(
   {
     fontFamily: `Example Font Family`,
     fontSize: 37,
@@ -23,6 +23,7 @@ const ExampleDropDown = createDropDownComponent(
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -33,6 +34,7 @@ const ExampleDropDown = createDropDownComponent(
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -43,6 +45,7 @@ const ExampleDropDown = createDropDownComponent(
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -53,6 +56,7 @@ const ExampleDropDown = createDropDownComponent(
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -63,6 +67,7 @@ const ExampleDropDown = createDropDownComponent(
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -73,21 +78,19 @@ const ExampleDropDown = createDropDownComponent(
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
-  },
-  150
+  }
 );
 
 const ExampleScreen = () => (
-  <ExampleDropDown
-    button={<Text>Click or touch to open the drop-down.</Text>}
-    body={(position) => (
-      <Text>
-        This is shown {position} (above or below) the button when the drop-down
-        is open.  It can be up to 150 in height.
-      </Text>
-    )}
-    disabled={false}
+  <ExampleFullHeightPopover
+    label="Example Label"
+    placeholder="Example Placeholder"
+    valid
+    onPress={() => {
+      alert(`Pressed.`);
+    }}
   />
 );
 ```

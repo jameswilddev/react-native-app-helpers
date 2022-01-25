@@ -22,6 +22,7 @@ const ExampleInput = createNullableTextAreaComponent(
           width: 4,
           color: `#FF00FF`,
         },
+        iconColor: `#43AE21`,
       },
       blurredInvalid: {
         textColor: `#99FE88`,
@@ -32,6 +33,7 @@ const ExampleInput = createNullableTextAreaComponent(
           width: 6,
           color: `#9A9A8E`,
         },
+        iconColor: `#985E00`,
       },
       focusedValid: {
         textColor: `#55EA13`,
@@ -42,6 +44,7 @@ const ExampleInput = createNullableTextAreaComponent(
           width: 5,
           color: `#646464`,
         },
+        iconColor: `#789521`,
       },
       focusedInvalid: {
         textColor: `#ABAADE`,
@@ -52,6 +55,7 @@ const ExampleInput = createNullableTextAreaComponent(
           width: 12,
           color: `#98ADAA`,
         },
+        iconColor: `#449438`,
       },
       disabledValid: {
         textColor: `#AE2195`,
@@ -62,6 +66,7 @@ const ExampleInput = createNullableTextAreaComponent(
           width: 14,
           color: `#5E5E5E`,
         },
+        iconColor: `#ADAADA`,
       },
       disabledInvalid: {
         textColor: `#340297`,
@@ -72,6 +77,7 @@ const ExampleInput = createNullableTextAreaComponent(
           width: 19,
           color: `#573829`,
         },
+        iconColor: `#709709`,
       },
     },
     <Text>Shown to the left</Text>,

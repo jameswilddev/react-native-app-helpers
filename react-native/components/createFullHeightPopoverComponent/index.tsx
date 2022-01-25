@@ -1,8 +1,7 @@
 import * as React from "react";
-import { View, ViewStyle, StyleSheet, TextInput } from "react-native";
+import { View, ViewStyle, StyleSheet } from "react-native";
 import type { ControlStyle } from "../../types/ControlStyle";
 import { useRefresh } from "../../hooks/useRefresh";
-import { Hitbox } from "../Hitbox";
 import { SimpleModal } from "../SimpleModal";
 import {
   createControlStateStyleInstance,
@@ -12,6 +11,8 @@ import {
 } from "../helpers";
 import { ContainerFillingKeyboardAvoidingView } from "../ContainerFillingKeyboardAvoidingView";
 import { SizedHorizontallySymmetricalSafeAreaView } from "../SizedHorizontallySymmetricalSafeAreaView";
+import { createPickerButtonComponent } from "../createPickerButtonComponent";
+import type { SvgIcon } from "../../..";
 
 type Instance = React.FunctionComponent<{
   /**
@@ -52,16 +53,25 @@ type Introspection = {
    * The styling to use.
    */
   readonly controlStyle: ControlStyle;
+
+  /**
+   * When null, no icon is to be placed on the right side of the button.
+   * Otherwise, the icon to show there.
+   */
+  readonly rightIcon: null | SvgIcon;
 };
 
 /**
  * Creates a new React component which displays a button which can be pressed to
  * show an element in a pop-over which fills the display vertically.
  * @param controlStyle  The styling to use.
+ * @param rightIcon     When null, no icon is to be placed on the right side of
+ *                      the button.  Otherwise, the icon to show there.
  * @returns             The created React component.
  */
 export const createFullHeightPopoverComponent = (
-  controlStyle: ControlStyle
+  controlStyle: ControlStyle,
+  rightIcon: null | SvgIcon
 ): Instance & { readonly fullHeightPopover: Introspection } => {
   const styles = StyleSheet.create({
     validHitbox: createControlStyleInstance(
@@ -104,6 +114,8 @@ export const createFullHeightPopoverComponent = (
     ),
   });
 
+  const PickerButton = createPickerButtonComponent(controlStyle);
+
   const FullHeightPopOver: Instance & { fullHeightPopover?: Introspection } = ({
     label,
     placeholder,
@@ -144,16 +156,7 @@ export const createFullHeightPopoverComponent = (
     }
 
     const inline = (
-      <Hitbox
-        style={
-          disabled
-            ? valid
-              ? styles.disabledValidHitbox
-              : styles.disabledInvalidHitbox
-            : valid
-            ? styles.validHitbox
-            : styles.invalidHitbox
-        }
+      <PickerButton
         onMeasure={(x, y, width, height, pageX, pageY) => {
           x;
           y;
@@ -179,32 +182,11 @@ export const createFullHeightPopoverComponent = (
           refresh();
         }}
         disabled={disabled}
-      >
-        <TextInput
-          style={
-            disabled
-              ? valid
-                ? styles.disabledValidText
-                : styles.disabledInvalidText
-              : valid
-              ? styles.validText
-              : styles.invalidText
-          }
-          pointerEvents="none"
-          editable={false}
-          value={label ?? undefined}
-          placeholder={placeholder}
-          placeholderTextColor={
-            disabled
-              ? valid
-                ? controlStyle.disabledValid.placeholderColor
-                : controlStyle.disabledInvalid.placeholderColor
-              : valid
-              ? controlStyle.blurredValid.placeholderColor
-              : controlStyle.blurredInvalid.placeholderColor
-          }
-        />
-      </Hitbox>
+        label={label}
+        placeholder={placeholder}
+        valid={valid}
+        {...(rightIcon === null ? {} : { rightIcon })}
+      />
     );
 
     if (additionalModalViewStyle === null) {
@@ -226,18 +208,18 @@ export const createFullHeightPopoverComponent = (
                 additionalModalViewStyle,
               ]}
             >
-              <ContainerFillingKeyboardAvoidingView>
-                <SizedHorizontallySymmetricalSafeAreaView
-                  top
-                  bottom
-                  left
-                  right
-                  width="fillsContainer"
-                  height="fillsContainer"
-                >
+              <SizedHorizontallySymmetricalSafeAreaView
+                top
+                bottom
+                left
+                right
+                width="fillsContainer"
+                height="fillsContainer"
+              >
+                <ContainerFillingKeyboardAvoidingView>
                   {children(onClose)}
-                </SizedHorizontallySymmetricalSafeAreaView>
-              </ContainerFillingKeyboardAvoidingView>
+                </ContainerFillingKeyboardAvoidingView>
+              </SizedHorizontallySymmetricalSafeAreaView>
             </View>
           </SimpleModal>
         </React.Fragment>
@@ -245,7 +227,7 @@ export const createFullHeightPopoverComponent = (
     }
   };
 
-  FullHeightPopOver.fullHeightPopover = { controlStyle };
+  FullHeightPopOver.fullHeightPopover = { controlStyle, rightIcon };
 
   return FullHeightPopOver as Instance & {
     readonly fullHeightPopover: Introspection;

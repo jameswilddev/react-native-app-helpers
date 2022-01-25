@@ -12,7 +12,7 @@ is desirable for the list of options).
 ```tsx
 import { createFullHeightPopoverComponent } from "react-native-app-helpers";
 
-const ExampleFullHeightPopover = createDropDownComponent(
+const ExampleFullHeightPopover = createFullHeightPopoverComponent(
   {
     fontFamily: `Example Font Family`,
     fontSize: 37,
@@ -27,6 +27,7 @@ const ExampleFullHeightPopover = createDropDownComponent(
         width: 4,
         color: `#FF00FF`,
       },
+      iconColor: `#43AE21`,
     },
     blurredInvalid: {
       textColor: `#99FE88`,
@@ -37,6 +38,7 @@ const ExampleFullHeightPopover = createDropDownComponent(
         width: 6,
         color: `#9A9A8E`,
       },
+      iconColor: `#985E00`,
     },
     focusedValid: {
       textColor: `#55EA13`,
@@ -47,6 +49,7 @@ const ExampleFullHeightPopover = createDropDownComponent(
         width: 5,
         color: `#646464`,
       },
+      iconColor: `#789521`,
     },
     focusedInvalid: {
       textColor: `#ABAADE`,
@@ -57,6 +60,7 @@ const ExampleFullHeightPopover = createDropDownComponent(
         width: 12,
         color: `#98ADAA`,
       },
+      iconColor: `#449438`,
     },
     disabledValid: {
       textColor: `#AE2195`,
@@ -67,6 +71,7 @@ const ExampleFullHeightPopover = createDropDownComponent(
         width: 14,
         color: `#5E5E5E`,
       },
+      iconColor: `#ADAADA`,
     },
     disabledInvalid: {
       textColor: `#340297`,
@@ -77,6 +82,7 @@ const ExampleFullHeightPopover = createDropDownComponent(
         width: 19,
         color: `#573829`,
       },
+      iconColor: `#709709`,
     },
   }
 );

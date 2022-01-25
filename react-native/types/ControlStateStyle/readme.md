@@ -14,6 +14,7 @@ const withoutBorder: ControlStateStyle = {
   backgroundColor: `yellow`,
   radius: 10,
   border: null,
+  iconColor: `purple`,
 };
 
 const withBorder: ControlStateStyle = {
@@ -25,5 +26,6 @@ const withBorder: ControlStateStyle = {
     width: 5,
     color: `red`,
   },
+  iconColor: `purple`,
 };
 ```
