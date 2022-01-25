@@ -81,7 +81,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
   public function generateKebabCasedMediaCollectionName(): string
   {
-    return Str::kebab(Str::pluralStudly($this->name));
+    return Str::kebab(Str::pluralStudly(preg_replace('/.*:/', '', $this->name)));
   }
 
   public function generateCollectionMediaCollectionRoutes(): void
