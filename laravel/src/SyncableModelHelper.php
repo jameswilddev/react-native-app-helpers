@@ -54,13 +54,29 @@ final class SyncableModelHelper
     string $scopeName,
     string $uuid,
   ): ?SyncableModel {
-    $model = $modelClass::withTrashed()
+    $hasSoftDeletes = in_array(SoftDeletes::class, class_uses_recursive($modelClass));
+
+    $model = $modelClass::query();
+
+    if ($hasSoftDeletes) {
+      $model = $model->withTrashed();
+    }
+
+    $model = $model
       ->$scopeName()
       ->where('uuid', $uuid)
       ->first();
 
     if ($model === null) {
-      if ($modelClass::withTrashed()->where('uuid', $uuid)->exists()) {
+      $query = $modelClass::query();
+
+      if ($hasSoftDeletes) {
+        $query = $query->withTrashed();
+      }
+
+
+
+      if ($query->where('uuid', $uuid)->exists()) {
         throw new UnauthorizedException();
       } else {
         return null;
