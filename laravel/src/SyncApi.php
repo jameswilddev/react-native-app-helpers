@@ -12,6 +12,7 @@ class SyncApi implements SyncApiInterface
 {
   private array $mes = [];
   private array $enums = [];
+  private array $constants = [];
   private array $collections = [];
 
   public function withMe(
@@ -42,6 +43,18 @@ class SyncApi implements SyncApiInterface
     $this->enums[] = $syncApiEnum;
 
     return $syncApiEnum;
+  }
+
+  public function withConstant(array $value): SyncApiConstant
+  {
+    $syncApiConstant = new SyncApiConstant(
+      $this,
+      $value,
+    );
+
+    $this->constants[] = $syncApiConstant;
+
+    return $syncApiConstant;
   }
 
   public function withCollection(
@@ -86,6 +99,15 @@ class SyncApi implements SyncApiInterface
         $singletons[$key] = compact('version');
       }
 
+      foreach ($this->constants as $constant) {
+        $key = $constant->generateCamelCasedName();
+
+        $data = $constant->value;
+        $version = $enum->hashData($data);
+
+        $singletons[$key] = compact('version');
+      }
+
       $collections = [];
 
       foreach ($this->collections as $collection) {
@@ -105,6 +127,10 @@ class SyncApi implements SyncApiInterface
 
     foreach ($this->enums as $enum) {
       $enum->generateEnumRoutes();
+    }
+
+    foreach ($this->constants as $constant) {
+      $constant->generateConstantRoutes();
     }
 
     foreach ($this->collections as $collection) {

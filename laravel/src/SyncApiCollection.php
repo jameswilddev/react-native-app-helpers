@@ -82,6 +82,16 @@ class SyncApiCollection implements SyncApiCollectionInterface
     );
   }
 
+  function withConstant(
+    array $value,
+  ): SyncApiConstant {
+    return $this
+      ->syncApi
+      ->withConstant(
+        $value,
+      );
+  }
+
   public function withCollection(
     string $modelClass,
     string $scopeName,

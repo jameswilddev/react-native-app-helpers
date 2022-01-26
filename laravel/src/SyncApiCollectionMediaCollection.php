@@ -60,6 +60,16 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     );
   }
 
+  function withConstant(
+    array $value,
+  ): SyncApiConstant {
+    return $this
+      ->syncApiCollection
+      ->withConstant(
+        $value,
+      );
+  }
+
   public function withCollection(
     string $modelClass,
     string $scopeName,

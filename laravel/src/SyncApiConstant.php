@@ -6,25 +6,21 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 /**
- * Represents an enum within a sync API.  Create instances using
- * SyncApi::withEnum().
+ * Represents a constant within a sync API.  Create instances using
+ * SyncApi::withConstant().
  */
-class SyncApiEnum implements SyncApiEnumInterface
+class SyncApiConstant implements SyncApiConstantInterface
 {
   private SyncApi $syncApi;
 
-  private string $enumClass;
-
-  private string $resourceClass;
+  public array $value;
 
   public function __construct(
     SyncApi $syncApi,
-    string $enumClass,
-    string $resourceClass,
+    array $value,
   ) {
     $this->syncApi = $syncApi;
-    $this->enumClass = $enumClass;
-    $this->resourceClass = $resourceClass;
+    $this->value = $value;
   }
 
   function withMe(
@@ -87,17 +83,6 @@ class SyncApiEnum implements SyncApiEnumInterface
     return Str::kebab(Str::pluralStudly(class_basename($this->enumClass)));
   }
 
-  public function generateData(): array
-  {
-    return array_combine(
-      $this->enumClass::getValues(),
-      array_map(
-        fn ($instance) => new $this->resourceClass($instance),
-        $this->enumClass::getInstances()
-      )
-    );
-  }
-
   public function hashData(array $data): string
   {
     ksort($data);
@@ -105,12 +90,12 @@ class SyncApiEnum implements SyncApiEnumInterface
     return hash('sha1', json_encode($data));
   }
 
-  public function generateEnumRoutes(): void
+  public function generateConstantRoutes(): void
   {
     Route::get(
       $this->generateKebabCasedName(),
       function () {
-        $data = $this->generateData();
+        $data = $this->value;
 
         return [
           'version' => $this->hashData($data),

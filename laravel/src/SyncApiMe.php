@@ -51,6 +51,16 @@ class SyncApiMe implements SyncApiMeInterface
       );
   }
 
+  function withConstant(
+    array $value,
+  ): SyncApiConstant {
+    return $this
+      ->syncApi
+      ->withConstant(
+        $value,
+      );
+  }
+
   function withCollection(
     string $modelClass,
     string $scopeName,

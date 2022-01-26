@@ -32,6 +32,14 @@ interface SyncApiInterface
   ): SyncApiEnum;
 
   /**
+   * Adds a new constant to this sync API.
+   * @param array $value The JSON-serializable value to add.
+   */
+  function withConstant(
+    array $value,
+  ): SyncApiConstant;
+
+  /**
    * Adds a new collection of Models to this sync API.
    * @param string $modelClass       The Laravel Model class of which this is a
    *                                 collection.
