@@ -135,16 +135,28 @@ export const createOfflineTableComponent = <
     headerView.borderBottomWidth = style.headerFirstRowSeparator.width;
   }
 
+  const headerTextBase: TextStyle = {
+    fontFamily: style.header.fontFamily,
+    fontSize: style.header.fontSize,
+    lineHeight: style.header.fontSize * 1.4,
+    color: style.header.color,
+  };
+
   const styles = StyleSheet.create({
     wrapperView: {
       width: `100%`,
     },
     headerView,
-    headerText: {
-      fontFamily: style.header.fontFamily,
-      fontSize: style.header.fontSize,
-      lineHeight: style.header.fontSize * 1.4,
-      color: style.header.color,
+    leftHeaderText: {
+      ...headerTextBase,
+    },
+    middleHeaderText: {
+      ...headerTextBase,
+      textAlign: `center`,
+    },
+    rightHeaderText: {
+      ...headerTextBase,
+      textAlign: `right`,
     },
     firstRowView,
     oddRowView: {
@@ -231,6 +243,22 @@ export const createOfflineTableComponent = <
         style.body.verticalPadding;
       (evenRowCellInput[key] as TextStyle).paddingVertical =
         style.body.verticalPadding;
+    }
+
+    switch (column?.alignment) {
+      case `middle`:
+        (customHeaderInput[key] as TextStyle).textAlign = `center`;
+        (customCellInput[key] as ViewStyle).justifyContent = `center`;
+        (oddRowCellInput[key] as TextStyle).textAlign = `center`;
+        (evenRowCellInput[key] as TextStyle).textAlign = `center`;
+        break;
+
+      case `right`:
+        (customHeaderInput[key] as TextStyle).textAlign = `right`;
+        (customCellInput[key] as ViewStyle).justifyContent = `flex-end`;
+        (oddRowCellInput[key] as TextStyle).textAlign = `right`;
+        (evenRowCellInput[key] as TextStyle).textAlign = `right`;
+        break;
     }
   }
 
@@ -415,7 +443,15 @@ export const createOfflineTableComponent = <
                       );
                     }}
                   >
-                    <Text style={styles.headerText}>
+                    <Text
+                      style={
+                        column.alignment === `left`
+                          ? styles.leftHeaderText
+                          : column.alignment === `middle`
+                          ? styles.middleHeaderText
+                          : styles.rightHeaderText
+                      }
+                    >
                       {sortBy === column.key
                         ? `${column.label} ${
                             sortDirection === `ascending` ? `↑` : `↓`

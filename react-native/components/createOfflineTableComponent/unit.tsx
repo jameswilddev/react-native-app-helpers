@@ -72,12 +72,14 @@ test(`renders as expected`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `right`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -109,12 +111,14 @@ test(`renders as expected`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `middle`,
         },
       ],
     }
@@ -190,6 +194,7 @@ test(`renders as expected`, () => {
                 fontFamily: `Example Header Font Family`,
                 fontSize: 31,
                 lineHeight: 43.4,
+                textAlign: `right`,
               }}
             >
               Example Column A Label ↓
@@ -248,6 +253,7 @@ test(`renders as expected`, () => {
                 fontFamily: `Example Header Font Family`,
                 fontSize: 31,
                 lineHeight: 43.4,
+                textAlign: `center`,
               }}
             >
               Example Column D Label
@@ -273,6 +279,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 56,
                 paddingRight: 28,
                 paddingVertical: 3,
+                justifyContent: `flex-end`,
               }}
             >
               <Text>Example Null</Text>
@@ -311,6 +318,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
+                justifyContent: `center`,
               }}
             >
               <Text>Example False</Text>
@@ -340,6 +348,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 56,
                 paddingRight: 28,
                 paddingVertical: 3,
+                textAlign: `right`,
               }}
             >
               Example Column A Value A
@@ -374,6 +383,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
+                justifyContent: `center`,
               }}
             >
               <Text>Example True</Text>
@@ -403,6 +413,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 56,
                 paddingRight: 28,
                 paddingVertical: 3,
+                textAlign: `right`,
               }}
             >
               Example Column A Value B
@@ -441,6 +452,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
+                justifyContent: `center`,
               }}
             >
               <Text>Example Null</Text>
@@ -470,6 +482,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 56,
                 paddingRight: 28,
                 paddingVertical: 3,
+                textAlign: `right`,
               }}
             >
               Example Column A Value C
@@ -508,6 +521,7 @@ test(`renders as expected`, () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
+                justifyContent: `center`,
               }}
             >
               <Text>Example True</Text>
@@ -583,6 +597,7 @@ test(`renders as expected with only one string column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `right`,
         },
       ],
     }
@@ -645,6 +660,7 @@ test(`renders as expected with only one string column`, () => {
                 fontFamily: `Example Header Font Family`,
                 fontSize: 31,
                 lineHeight: 43.4,
+                textAlign: `right`,
               }}
             >
               Example Column A Label ↓
@@ -669,6 +685,7 @@ test(`renders as expected with only one string column`, () => {
                 flexGrow: 44,
                 paddingHorizontal: 56,
                 paddingVertical: 3,
+                justifyContent: `flex-end`,
               }}
             >
               <Text>Example Null</Text>
@@ -697,6 +714,7 @@ test(`renders as expected with only one string column`, () => {
                 lineHeight: 37.8,
                 paddingHorizontal: 56,
                 paddingVertical: 3,
+                textAlign: `right`,
               }}
             >
               Example Column A Value A
@@ -725,6 +743,7 @@ test(`renders as expected with only one string column`, () => {
                 lineHeight: 37.8,
                 paddingHorizontal: 56,
                 paddingVertical: 3,
+                textAlign: `right`,
               }}
             >
               Example Column A Value B
@@ -753,6 +772,7 @@ test(`renders as expected with only one string column`, () => {
                 lineHeight: 37.8,
                 paddingHorizontal: 56,
                 paddingVertical: 3,
+                textAlign: `right`,
               }}
             >
               Example Column A Value C
@@ -831,12 +851,14 @@ test(`renders as expected without rows`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -868,12 +890,14 @@ test(`renders as expected without rows`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -1075,12 +1099,14 @@ test(`renders as expected without rows without vertical padding`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `middle`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -1112,12 +1138,14 @@ test(`renders as expected without rows without vertical padding`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -1168,6 +1196,7 @@ test(`renders as expected without rows without vertical padding`, () => {
                 fontFamily: `Example Header Font Family`,
                 fontSize: 31,
                 lineHeight: 43.4,
+                textAlign: `center`,
               }}
             >
               Example Column A Label ↓
@@ -1318,12 +1347,14 @@ test(`renders as expected without rows without horizontal padding`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -1355,12 +1386,14 @@ test(`renders as expected without rows without horizontal padding`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -1558,12 +1591,14 @@ test(`renders as expected without a header/first row separator`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -1595,12 +1630,14 @@ test(`renders as expected without a header/first row separator`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -1800,12 +1837,14 @@ test(`renders as expected when filtering by a string column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `middle`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -1837,12 +1876,14 @@ test(`renders as expected when filtering by a string column`, () => {
               row.columnC === 3
             );
           },
+          alignment: `right`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -1918,6 +1959,7 @@ test(`renders as expected when filtering by a string column`, () => {
                 fontFamily: `Example Header Font Family`,
                 fontSize: 31,
                 lineHeight: 43.4,
+                textAlign: `center`,
               }}
             >
               Example Column A Label ↓
@@ -1955,6 +1997,7 @@ test(`renders as expected when filtering by a string column`, () => {
               fontFamily: `Example Header Font Family`,
               fontSize: 31,
               lineHeight: 43.4,
+              textAlign: `right`,
             }}
           >
             Example Column C Label
@@ -2005,6 +2048,7 @@ test(`renders as expected when filtering by a string column`, () => {
                 paddingLeft: 56,
                 paddingRight: 28,
                 paddingVertical: 3,
+                textAlign: `center`,
               }}
             >
               {`   \n  \n \t \r    Example \t \t  \n Column    \r \r A \t \t \r  Value  \n \n \t \r    A  \n \n \t   \r   `}
@@ -2027,6 +2071,7 @@ test(`renders as expected when filtering by a string column`, () => {
                 flexGrow: 11,
                 paddingHorizontal: 28,
                 paddingVertical: 3,
+                justifyContent: `flex-end`,
               }}
             >
               <Text>Example Column C Value A</Text>
@@ -2117,12 +2162,14 @@ test(`renders as expected when filtering by a numeric column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -2154,12 +2201,14 @@ test(`renders as expected when filtering by a numeric column`, () => {
               row.columnC === 3
             );
           },
+          alignment: `middle`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -2272,6 +2321,7 @@ test(`renders as expected when filtering by a numeric column`, () => {
               fontFamily: `Example Header Font Family`,
               fontSize: 31,
               lineHeight: 43.4,
+              textAlign: `center`,
             }}
           >
             Example Column C Label
@@ -2348,6 +2398,7 @@ test(`renders as expected when filtering by a numeric column`, () => {
                 flexGrow: 11,
                 paddingHorizontal: 28,
                 paddingVertical: 3,
+                justifyContent: `center`,
               }}
             >
               <Text>Example Column C Value D</Text>
@@ -2438,12 +2489,14 @@ test(`renders as expected when filtering by a custom column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -2475,12 +2528,14 @@ test(`renders as expected when filtering by a custom column`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -2759,12 +2814,14 @@ test(`renders as expected when everything is filtered out`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -2796,12 +2853,14 @@ test(`renders as expected when everything is filtered out`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -3028,12 +3087,14 @@ test(`renders as expected when sorting by a string column, ascending`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -3065,12 +3126,14 @@ test(`renders as expected when sorting by a string column, ascending`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -3542,12 +3605,14 @@ test(`renders as expected when sorting by a boolean column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -3579,12 +3644,14 @@ test(`renders as expected when sorting by a boolean column`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -4056,12 +4123,14 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -4093,12 +4162,14 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -4570,12 +4641,14 @@ test(`renders as expected when sorting by a numeric column`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -4607,12 +4680,14 @@ test(`renders as expected when sorting by a numeric column`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -5084,12 +5159,14 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -5121,12 +5198,14 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -5598,12 +5677,14 @@ test(`renders as expected without horizontal padding`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -5635,12 +5716,14 @@ test(`renders as expected without horizontal padding`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -6082,12 +6165,14 @@ test(`renders as expected without vertical padding on the header`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -6119,12 +6204,14 @@ test(`renders as expected without vertical padding on the header`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -6592,12 +6679,14 @@ test(`renders as expected without vertical padding on cells`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -6629,12 +6718,14 @@ test(`renders as expected without vertical padding on cells`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -7087,12 +7178,14 @@ test(`renders as expected without header/row separators`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -7124,12 +7217,14 @@ test(`renders as expected without header/row separators`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -7596,12 +7691,14 @@ test(`renders as expected without row separators`, () => {
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -7633,12 +7730,14 @@ test(`renders as expected without row separators`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -8104,12 +8203,14 @@ test(`executes the expected callback on clicking on a column header which is not
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -8141,12 +8242,14 @@ test(`executes the expected callback on clicking on a column header which is not
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -8267,12 +8370,14 @@ test(`executes the expected callback on clicking on a column header which is sor
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -8304,12 +8409,14 @@ test(`executes the expected callback on clicking on a column header which is sor
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -8430,12 +8537,14 @@ test(`executes the expected callback on clicking on a column header which is sor
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -8467,12 +8576,14 @@ test(`executes the expected callback on clicking on a column header which is sor
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
       ],
     }
@@ -8618,12 +8729,14 @@ test(`styles correctly when the first and last columns are custom`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -8655,6 +8768,7 @@ test(`styles correctly when the first and last columns are custom`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -8686,6 +8800,7 @@ test(`styles correctly when the first and last columns are custom`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
       ],
     }
@@ -9133,18 +9248,21 @@ test(`styles correctly when the first column is a boolean`, () => {
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -9176,6 +9294,7 @@ test(`styles correctly when the first column is a boolean`, () => {
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
       ],
     }
@@ -9647,6 +9766,7 @@ test(`styles correctly when the last column is not custom and does not contain a
           label: `Example Column B Label`,
           width: 22,
           key: `columnB`,
+          alignment: `left`,
         },
         {
           type: `customElement`,
@@ -9678,18 +9798,21 @@ test(`styles correctly when the last column is not custom and does not contain a
               row.columnC === 3
             );
           },
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column D Label`,
           width: 33,
           key: `columnD`,
+          alignment: `left`,
         },
         {
           type: `basic`,
           label: `Example Column A Label`,
           width: 44,
           key: `columnA`,
+          alignment: `left`,
         },
       ],
     }
@@ -10177,6 +10300,7 @@ test(`renders as expected with only one custom text column`, () => {
               }
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -10441,6 +10565,7 @@ test(`renders as expected with only one custom number column`, () => {
               }
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -10705,6 +10830,7 @@ test(`renders as expected with only one custom boolean column`, () => {
               }
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -10959,6 +11085,7 @@ test(`renders as expected with multiple custom text columns`, () => {
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -10972,6 +11099,7 @@ test(`renders as expected with multiple custom text columns`, () => {
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -10985,6 +11113,7 @@ test(`renders as expected with multiple custom text columns`, () => {
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -11419,6 +11548,7 @@ test(`can sort by a custom text column descending`, () => {
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -11432,6 +11562,7 @@ test(`can sort by a custom text column descending`, () => {
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -11445,6 +11576,7 @@ test(`can sort by a custom text column descending`, () => {
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -11879,6 +12011,7 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -11892,6 +12025,7 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -11905,6 +12039,7 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -12339,6 +12474,7 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -12352,6 +12488,7 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -12365,6 +12502,7 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -12799,6 +12937,7 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -12812,6 +12951,7 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -12825,6 +12965,7 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -13260,6 +13401,7 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -13273,6 +13415,7 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -13286,6 +13429,7 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -13721,6 +13865,7 @@ test(`sorts descending on pressing a custom column header which is currently sor
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -13734,6 +13879,7 @@ test(`sorts descending on pressing a custom column header which is currently sor
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -13747,6 +13893,7 @@ test(`sorts descending on pressing a custom column header which is currently sor
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -13881,6 +14028,7 @@ test(`sorts ascending on pressing a custom column header which is currently sort
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -13894,6 +14042,7 @@ test(`sorts ascending on pressing a custom column header which is currently sort
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -13907,6 +14056,7 @@ test(`sorts ascending on pressing a custom column header which is currently sort
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -14041,6 +14191,7 @@ test(`sorts ascending on pressing a custom column header which is currently unso
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -14054,6 +14205,7 @@ test(`sorts ascending on pressing a custom column header which is currently unso
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -14067,6 +14219,7 @@ test(`sorts ascending on pressing a custom column header which is currently unso
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -14201,6 +14354,7 @@ test(`renders as expected with custom text columns without horizontal padding`, 
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -14214,6 +14368,7 @@ test(`renders as expected with custom text columns without horizontal padding`, 
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -14227,6 +14382,7 @@ test(`renders as expected with custom text columns without horizontal padding`, 
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -14636,6 +14792,7 @@ test(`renders as expected with custom text columns without vertical padding`, ()
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -14649,6 +14806,7 @@ test(`renders as expected with custom text columns without vertical padding`, ()
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -14662,6 +14820,7 @@ test(`renders as expected with custom text columns without vertical padding`, ()
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -15084,6 +15243,7 @@ test(`renders as expected with custom text columns without horizontal padding in
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -15097,6 +15257,7 @@ test(`renders as expected with custom text columns without horizontal padding in
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -15110,6 +15271,7 @@ test(`renders as expected with custom text columns without horizontal padding in
               return `Prefix ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -15541,6 +15703,7 @@ test(`can filter a custom text column rendered as a string`, () => {
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -15554,6 +15717,7 @@ test(`can filter a custom text column rendered as a string`, () => {
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -15567,6 +15731,7 @@ test(`can filter a custom text column rendered as a string`, () => {
               return `Prefix \n \r \t ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
@@ -15833,6 +15998,7 @@ test(`can filter a custom text column rendered as a number`, () => {
               }
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -15846,6 +16012,7 @@ test(`can filter a custom text column rendered as a number`, () => {
               return (value ?? 33) + 100;
             }
           },
+          alignment: `left`,
         },
         {
           type: `customText`,
@@ -15859,6 +16026,7 @@ test(`can filter a custom text column rendered as a number`, () => {
               return `Prefix \n \r \t ${value} Suffix`;
             }
           },
+          alignment: `left`,
         },
       ],
     }
