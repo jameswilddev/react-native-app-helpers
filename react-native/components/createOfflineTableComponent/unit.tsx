@@ -153,7 +153,7 @@ test(`renders as expected`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -609,7 +609,7 @@ test(`renders as expected with only one string column`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -887,7 +887,7 @@ test(`renders as expected without rows`, () => {
         rows: [],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -1131,7 +1131,7 @@ test(`renders as expected without rows without vertical padding`, () => {
         rows: [],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -1374,7 +1374,7 @@ test(`renders as expected without rows without horizontal padding`, () => {
         rows: [],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -1614,7 +1614,7 @@ test(`renders as expected without a header/first row separator`, () => {
         rows: [],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -1881,7 +1881,7 @@ test(`renders as expected when filtering by a string column`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={` \n \n \t \r  LUe  \r \r \t \t \n   a    \t \t \r \n  `}
       whenEmpty="Example When Empty"
@@ -2198,7 +2198,7 @@ test(`renders as expected when filtering by a numeric column`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={` \n \n \t \r  348  \r \r \t \t \n  `}
       whenEmpty="Example When Empty"
@@ -2519,7 +2519,7 @@ test(`renders as expected when filtering by a custom column`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={` \n \n \t \r  Example    \r \r \t  Filter \n \n \n \t Text  \r \r \t \t \n  `}
       whenEmpty="Example When Empty"
@@ -2840,7 +2840,7 @@ test(`renders as expected when everything is filtered out`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t   Example \n Total  \t   Mismatch \r   \n \r \t   `}
       whenEmpty="Example When Empty"
@@ -2962,7 +2962,7 @@ test(`renders as expected when everything is filtered out`, () => {
   expect(onSortChange).not.toHaveBeenCalled();
 });
 
-test(`renders as expected when sorting by a string column, descending`, () => {
+test(`renders as expected when sorting by a string column, ascending`, () => {
   type TableRow = {
     readonly columnA: null | string;
     readonly columnB: null | number;
@@ -3109,7 +3109,7 @@ test(`renders as expected when sorting by a string column, descending`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="descending"
+      sortDirection="ascending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -3623,7 +3623,7 @@ test(`renders as expected when sorting by a boolean column`, () => {
         ],
       }}
       sortBy="columnD"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -4137,7 +4137,7 @@ test(`renders as expected when sorting by a boolean column, descending`, () => {
         ],
       }}
       sortBy="columnD"
-      sortDirection="descending"
+      sortDirection="ascending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -4651,7 +4651,7 @@ test(`renders as expected when sorting by a numeric column`, () => {
         ],
       }}
       sortBy="columnB"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -5165,7 +5165,7 @@ test(`renders as expected when sorting by a numeric column, descending`, () => {
         ],
       }}
       sortBy="columnB"
-      sortDirection="descending"
+      sortDirection="ascending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -5679,7 +5679,7 @@ test(`renders as expected without horizontal padding`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -6163,7 +6163,7 @@ test(`renders as expected without vertical padding on the header`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -6673,7 +6673,7 @@ test(`renders as expected without vertical padding on cells`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -7168,7 +7168,7 @@ test(`renders as expected without header/row separators`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -7677,7 +7677,7 @@ test(`renders as expected without row separators`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -8185,7 +8185,7 @@ test(`executes the expected callback on clicking on a column header which is not
         ],
       }}
       sortBy="columnD"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -8724,7 +8724,7 @@ test(`styles correctly when the first and last columns are custom`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -9214,7 +9214,7 @@ test(`styles correctly when the first column is a boolean`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -9728,7 +9728,7 @@ test(`styles correctly when the last column is not custom and does not contain a
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -10203,7 +10203,7 @@ test(`renders as expected with only one custom text column`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -10467,7 +10467,7 @@ test(`renders as expected with only one custom number column`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -10731,7 +10731,7 @@ test(`renders as expected with only one custom boolean column`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -11019,7 +11019,7 @@ test(`renders as expected with multiple custom text columns`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -11479,7 +11479,7 @@ test(`can sort by a custom text column descending`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="descending"
+      sortDirection="ascending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -11939,7 +11939,7 @@ test(`can sort by a custom text column ascending when it backs onto a boolean`, 
         ],
       }}
       sortBy="columnC"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -12399,7 +12399,7 @@ test(`can sort by a custom text column descending when it backs onto a boolean`,
         ],
       }}
       sortBy="columnC"
-      sortDirection="descending"
+      sortDirection="ascending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -12859,7 +12859,7 @@ test(`can sort by a custom text column ascending when it backs onto a number`, (
         ],
       }}
       sortBy="columnB"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -13320,7 +13320,7 @@ test(`can sort by a custom text column descending when it backs onto a number`, 
         ],
       }}
       sortBy="columnB"
-      sortDirection="descending"
+      sortDirection="ascending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -14101,7 +14101,7 @@ test(`sorts ascending on pressing a custom column header which is currently unso
         ],
       }}
       sortBy="columnC"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -14261,7 +14261,7 @@ test(`renders as expected with custom text columns without horizontal padding`, 
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -14696,7 +14696,7 @@ test(`renders as expected with custom text columns without vertical padding`, ()
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -15144,7 +15144,7 @@ test(`renders as expected with custom text columns without horizontal padding in
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    `}
       whenEmpty="Example When Empty"
@@ -15601,7 +15601,7 @@ test(`can filter a custom text column rendered as a string`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    FIX \n \t \r faL \n \n \r \t  `}
       whenEmpty="Example When Empty"
@@ -15893,7 +15893,7 @@ test(`can filter a custom text column rendered as a number`, () => {
         ],
       }}
       sortBy="columnA"
-      sortDirection="ascending"
+      sortDirection="descending"
       onSortChange={onSortChange}
       filter={`   \n   \r    \t    15 \n \n \r \t  `}
       whenEmpty="Example When Empty"

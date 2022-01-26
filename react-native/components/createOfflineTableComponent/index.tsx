@@ -388,7 +388,7 @@ export const createOfflineTableComponent = <
         }
       }
 
-      if (sortDirection === `descending`) {
+      if (sortDirection === `ascending`) {
         comparisonResult = -comparisonResult;
       }
 
@@ -418,7 +418,7 @@ export const createOfflineTableComponent = <
                     <Text style={styles.headerText}>
                       {sortBy === column.key
                         ? `${column.label} ${
-                            sortDirection === `ascending` ? `↓` : `↑`
+                            sortDirection === `ascending` ? `↑` : `↓`
                           }`
                         : column.label}
                     </Text>
