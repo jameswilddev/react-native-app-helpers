@@ -72,7 +72,8 @@ export const createCreatableSelectChildrenComponent = <
     `default`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
 
   let flatList: null | ViewStyle = null;

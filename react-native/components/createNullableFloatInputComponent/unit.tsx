@@ -87,7 +87,8 @@ test(`renders as expected without bounds`, () => {
     null,
     null,
     null,
-    null
+    null,
+    `left`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -109,6 +110,7 @@ test(`renders as expected without bounds`, () => {
       keyboardType: `numeric`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      alignment: `left`,
     },
   });
 
@@ -297,7 +299,8 @@ test(`renders as expected with an inclusive lower bound`, () => {
     null,
     -4096.12,
     null,
-    null
+    null,
+    `left`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -319,6 +322,7 @@ test(`renders as expected with an inclusive lower bound`, () => {
       keyboardType: `numeric`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      alignment: `left`,
     },
   });
 
@@ -509,7 +513,8 @@ test(`renders as expected with an exclusive lower bound`, () => {
     -4096.12,
     null,
     null,
-    null
+    null,
+    `left`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -531,6 +536,7 @@ test(`renders as expected with an exclusive lower bound`, () => {
       keyboardType: `numeric`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      alignment: `left`,
     },
   });
 
@@ -721,7 +727,8 @@ test(`renders as expected with an inclusive upper bound`, () => {
     null,
     null,
     null,
-    4096.12
+    4096.12,
+    `left`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -743,6 +750,7 @@ test(`renders as expected with an inclusive upper bound`, () => {
       keyboardType: `numeric`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      alignment: `left`,
     },
   });
 
@@ -933,7 +941,8 @@ test(`renders as expected with an exclusive upper bound`, () => {
     null,
     null,
     4096.12,
-    null
+    null,
+    `left`
   );
 
   const rendered = unwrapRenderedFunctionComponent(
@@ -955,6 +964,7 @@ test(`renders as expected with an exclusive upper bound`, () => {
       keyboardType: `numeric`,
       autoFocus: false,
       keepFocusOnSubmit: false,
+      alignment: `left`,
     },
   });
 

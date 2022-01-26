@@ -50,7 +50,8 @@ export const createControlStateStyleInstance = (
 
 export const createControlTextStyleInstance = (
   controlStyle: ControlStyle,
-  controlStateStyle: ControlStateStyle
+  controlStateStyle: ControlStateStyle,
+  alignment: `left` | `middle` | `right`
 ): TextStyle => {
   const output: TextStyle = {
     flexGrow: 1,
@@ -58,6 +59,16 @@ export const createControlTextStyleInstance = (
     fontFamily: controlStyle.fontFamily,
     fontSize: controlStyle.fontSize,
   };
+
+  switch (alignment) {
+    case `middle`:
+      output.textAlign = `center`;
+      break;
+
+    case `right`:
+      output.textAlign = `right`;
+      break;
+  }
 
   if (controlStyle.paddingVertical) {
     output.paddingVertical = controlStyle.paddingVertical;

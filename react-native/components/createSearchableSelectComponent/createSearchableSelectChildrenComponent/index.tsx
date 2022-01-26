@@ -70,7 +70,8 @@ export const createSearchableSelectChildrenComponent = <
     `default`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
 
   let flatList: null | ViewStyle = null;

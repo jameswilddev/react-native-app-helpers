@@ -125,6 +125,11 @@ type Introspection<TValue, TContext> = {
    * blur.
    */
   readonly keepFocusOnSubmit: boolean;
+
+  /**
+   * The alignment of the text within the input.
+   */
+  readonly alignment: `left` | `middle` | `right`;
 };
 
 /**
@@ -150,6 +155,7 @@ type Introspection<TValue, TContext> = {
  *                          it.
  * @param keepFocusOnSubmit When true, the text input will keep focus on submit.
  *                          It will otherwise blur.
+ * @param alignment         The alignment of the text within the input.
  * @returns                 A React component which allows for the editing of
  *                          text.
  */
@@ -162,7 +168,8 @@ export function createInputComponent<TValue, TContext>(
   keyboardType: `default` | `email-address` | `numeric`,
   autoCapitalize: `none` | `sentences` | `words` | `characters`,
   autoFocus: boolean,
-  keepFocusOnSubmit: boolean
+  keepFocusOnSubmit: boolean,
+  alignment: `left` | `middle` | `right`
 ): Instance<TValue, TContext> & {
   /**
    * The arguments used to create this input component; for testing higher-order
@@ -209,151 +216,175 @@ export function createInputComponent<TValue, TContext>(
     ),
     disabledValidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.disabledValid
+      controlStyle.disabledValid,
+      alignment
     ),
     disabledInvalidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.disabledInvalid
+      controlStyle.disabledInvalid,
+      alignment
     ),
     blurredValidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.blurredValid
+      controlStyle.blurredValid,
+      alignment
     ),
     blurredInvalidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.blurredInvalid
+      controlStyle.blurredInvalid,
+      alignment
     ),
     focusedValidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.focusedValid
+      controlStyle.focusedValid,
+      alignment
     ),
     focusedInvalidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.focusedInvalid
+      controlStyle.focusedInvalid,
+      alignment
     ),
     disabledValidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledValid
+        controlStyle.disabledValid,
+        alignment
       ),
       ...withLeftIcon,
     },
     disabledInvalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledInvalid
+        controlStyle.disabledInvalid,
+        alignment
       ),
       ...withLeftIcon,
     },
     blurredValidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredValid
+        controlStyle.blurredValid,
+        alignment
       ),
       ...withLeftIcon,
     },
     blurredInvalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredInvalid
+        controlStyle.blurredInvalid,
+        alignment
       ),
       ...withLeftIcon,
     },
     focusedValidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.focusedValid
+        controlStyle.focusedValid,
+        alignment
       ),
       ...withLeftIcon,
     },
     focusedInvalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.focusedInvalid
+        controlStyle.focusedInvalid,
+        alignment
       ),
       ...withLeftIcon,
     },
     disabledValidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledValid
+        controlStyle.disabledValid,
+        alignment
       ),
       ...withRightIcon,
     },
     disabledInvalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledInvalid
+        controlStyle.disabledInvalid,
+        alignment
       ),
       ...withRightIcon,
     },
     blurredValidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredValid
+        controlStyle.blurredValid,
+        alignment
       ),
       ...withRightIcon,
     },
     blurredInvalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredInvalid
+        controlStyle.blurredInvalid,
+        alignment
       ),
       ...withRightIcon,
     },
     focusedValidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.focusedValid
+        controlStyle.focusedValid,
+        alignment
       ),
       ...withRightIcon,
     },
     focusedInvalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.focusedInvalid
+        controlStyle.focusedInvalid,
+        alignment
       ),
       ...withRightIcon,
     },
     disabledValidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledValid
+        controlStyle.disabledValid,
+        alignment
       ),
       ...withLeftAndRightIcons,
     },
     disabledInvalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledInvalid
+        controlStyle.disabledInvalid,
+        alignment
       ),
       ...withLeftAndRightIcons,
     },
     blurredValidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredValid
+        controlStyle.blurredValid,
+        alignment
       ),
       ...withLeftAndRightIcons,
     },
     blurredInvalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredInvalid
+        controlStyle.blurredInvalid,
+        alignment
       ),
       ...withLeftAndRightIcons,
     },
     focusedValidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.focusedValid
+        controlStyle.focusedValid,
+        alignment
       ),
       ...withLeftAndRightIcons,
     },
     focusedInvalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.focusedInvalid
+        controlStyle.focusedInvalid,
+        alignment
       ),
       ...withLeftAndRightIcons,
     },
@@ -559,6 +590,7 @@ export function createInputComponent<TValue, TContext>(
     autoCapitalize,
     autoFocus,
     keepFocusOnSubmit,
+    alignment,
   };
 
   return Input as Instance<TValue, TContext> & {

@@ -73,7 +73,8 @@ export const createRequiredPasswordInputComponent = (
     `default`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
 
   return ({ value, onChange, disabled, placeholder, match }) => (

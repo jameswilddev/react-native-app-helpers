@@ -80,7 +80,8 @@ export const createNullableTextAreaComponent = (
     `default`,
     `sentences`,
     false,
-    true
+    true,
+    `left`
   );
 
   return ({ value, onChange, disabled, placeholder }) => (
