@@ -43,7 +43,7 @@ export const createSearchableSelectChildrenComponent = <
 ): Instance<T> & { readonly searchableSelectChildren: Introspection } => {
   const InputComponent = createInputComponent<string, null>(
     (value) => value,
-    (value) => value.trim() || undefined,
+    (value) => value.trim(),
     {
       ...controlStyle,
       blurredInvalid: {

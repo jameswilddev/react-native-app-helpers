@@ -301,9 +301,9 @@ test(`renders as expected with an absent selected value`, () => {
     `Example Text`
   );
 
-  expect(inputType.inputComponent.tryParse(``)).toEqual(undefined);
+  expect(inputType.inputComponent.tryParse(``)).toEqual(``);
   expect(inputType.inputComponent.tryParse(`   \n     \r     \t    `)).toEqual(
-    undefined
+    ``
   );
   expect(
     inputType.inputComponent.tryParse(
@@ -641,9 +641,9 @@ test(`renders as expected with a present selected value`, () => {
     `Example Text`
   );
 
-  expect(inputType.inputComponent.tryParse(``)).toEqual(undefined);
+  expect(inputType.inputComponent.tryParse(``)).toEqual(``);
   expect(inputType.inputComponent.tryParse(`   \n     \r     \t    `)).toEqual(
-    undefined
+    ``
   );
   expect(
     inputType.inputComponent.tryParse(
@@ -1824,9 +1824,9 @@ test(`renders as expected when horizontal padding is not present`, () => {
     `Example Text`
   );
 
-  expect(inputType.inputComponent.tryParse(``)).toEqual(undefined);
+  expect(inputType.inputComponent.tryParse(``)).toEqual(``);
   expect(inputType.inputComponent.tryParse(`   \n     \r     \t    `)).toEqual(
-    undefined
+    ``
   );
   expect(
     inputType.inputComponent.tryParse(
@@ -2160,9 +2160,9 @@ test(`renders as expected when vertical padding is not present`, () => {
     `Example Text`
   );
 
-  expect(inputType.inputComponent.tryParse(``)).toEqual(undefined);
+  expect(inputType.inputComponent.tryParse(``)).toEqual(``);
   expect(inputType.inputComponent.tryParse(`   \n     \r     \t    `)).toEqual(
-    undefined
+    ``
   );
   expect(
     inputType.inputComponent.tryParse(
