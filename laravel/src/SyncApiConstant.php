@@ -80,12 +80,12 @@ class SyncApiConstant implements SyncApiConstantInterface
 
   public function generateCamelCasedName(): string
   {
-    return Str::camel(Str::pluralStudly($this->name));
+    return Str::camel($this->name);
   }
 
   public function generateKebabCasedName(): string
   {
-    return Str::kebab(Str::pluralStudly($this->name));
+    return Str::kebab($this->name);
   }
 
   public function hashData(array $data): string
