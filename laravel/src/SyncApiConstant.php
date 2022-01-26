@@ -13,13 +13,16 @@ class SyncApiConstant implements SyncApiConstantInterface
 {
   private SyncApi $syncApi;
 
+  private string $name;
   public array $value;
 
   public function __construct(
     SyncApi $syncApi,
+    string $name,
     array $value,
   ) {
     $this->syncApi = $syncApi;
+    $this->name = $name;
     $this->value = $value;
   }
 
@@ -48,11 +51,13 @@ class SyncApiConstant implements SyncApiConstantInterface
   }
 
   function withConstant(
+    string $name,
     array $value,
   ): SyncApiConstant {
     return $this
       ->syncApi
       ->withConstant(
+        $name,
         $value,
       );
   }
@@ -75,12 +80,12 @@ class SyncApiConstant implements SyncApiConstantInterface
 
   public function generateCamelCasedName(): string
   {
-    return Str::camel(Str::pluralStudly(class_basename($this->enumClass)));
+    return Str::camel(Str::pluralStudly($this->name));
   }
 
   public function generateKebabCasedName(): string
   {
-    return Str::kebab(Str::pluralStudly(class_basename($this->enumClass)));
+    return Str::kebab(Str::pluralStudly($this->name));
   }
 
   public function hashData(array $data): string

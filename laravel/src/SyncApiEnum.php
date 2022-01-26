@@ -52,11 +52,13 @@ class SyncApiEnum implements SyncApiEnumInterface
   }
 
   function withConstant(
+    string $name,
     array $value,
   ): SyncApiConstant {
     return $this
       ->syncApi
       ->withConstant(
+        $name,
         $value,
       );
   }

@@ -45,10 +45,13 @@ class SyncApi implements SyncApiInterface
     return $syncApiEnum;
   }
 
-  public function withConstant(array $value): SyncApiConstant
-  {
+  public function withConstant(
+    string $name,
+    array $value,
+  ): SyncApiConstant {
     $syncApiConstant = new SyncApiConstant(
       $this,
+      $name,
       $value,
     );
 
