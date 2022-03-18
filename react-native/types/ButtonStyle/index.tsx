@@ -15,6 +15,11 @@ export type ButtonStyle = {
   readonly fontSize: number;
 
   /**
+   * The weight of the text on the button.
+   */
+ readonly fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900" | undefined;
+
+  /**
    * The amount of horizontal padding inside the button.
    */
   readonly horizontalPadding: number;

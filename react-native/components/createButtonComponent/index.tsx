@@ -66,6 +66,7 @@ export const createButtonComponent = (
   const textBase: TextStyle = {
     fontFamily: buttonStyle.fontFamily,
     fontSize: buttonStyle.fontSize,
+    fontWeight: buttonStyle.fontWeight,
     lineHeight: buttonStyle.fontSize * 1.4,
   };
 
