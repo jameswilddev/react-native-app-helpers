@@ -86,7 +86,8 @@ export const createNullableEmailInputComponent = (
     `email-address`,
     `none`,
     false,
-    false
+    false,
+    `left`
   );
 
   return ({ value, onChange, disabled, placeholder, unique }) => (

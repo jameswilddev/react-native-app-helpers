@@ -43,4 +43,9 @@ export type CustomTextTableColumn<
    * The key in the corresponding TableRow which the column represents.
    */
   readonly key: TKey;
+
+  /**
+   * The horizontal alignment of the column's content.
+   */
+  readonly alignment: `left` | `middle` | `right`;
 };

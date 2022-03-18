@@ -94,7 +94,8 @@ test(`renders as expected with a value`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -261,7 +262,8 @@ test(`renders as expected without a value`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -429,7 +431,8 @@ test(`renders as expected when disabled with a value`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -597,7 +600,8 @@ test(`renders as expected when disabled without a value`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -765,7 +769,8 @@ test(`can be focused when valid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -944,7 +949,8 @@ test(`can be focused when invalid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -1123,7 +1129,8 @@ test(`can be blurred`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -1312,7 +1319,8 @@ test(`can be disabled during edit`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -1520,7 +1528,8 @@ test(`can be disabled during edit when starting invalid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -1728,7 +1737,8 @@ test(`can be re-enabled following edit`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -1952,7 +1962,8 @@ test(`does not lose pending changes on update`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -2160,7 +2171,8 @@ test(`resets the value on external changes`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -2344,7 +2356,8 @@ test(`ignores external changes to the value when an edit is in progress`, () => 
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -2552,7 +2565,8 @@ test(`allows valid incomplete edits`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -2743,7 +2757,8 @@ test(`allows valid incomplete edits`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -2938,7 +2953,8 @@ test(`allows valid incomplete edits`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -3133,7 +3149,8 @@ test(`allows invalid incomplete edits`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -3324,7 +3341,8 @@ test(`allows invalid incomplete edits`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -3519,7 +3537,8 @@ test(`allows invalid incomplete edits`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -3713,7 +3732,8 @@ test(`renders as expected when the border width does not change`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -3880,7 +3900,8 @@ test(`passes down secureTextEntry`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -4047,7 +4068,8 @@ test(`renders with a left icon`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -4222,7 +4244,8 @@ test(`renders with a right icon`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -4397,7 +4420,8 @@ test(`renders with left and right icons`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -4579,7 +4603,8 @@ test(`renders as expected with a left icon without a value`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -4755,7 +4780,8 @@ test(`renders as expected with a left icon without a value`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -4931,7 +4957,8 @@ test(`renders as expected with left and right icons without a value`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -5114,7 +5141,8 @@ test(`renders as expected with a left icon when focused and valid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -5301,7 +5329,8 @@ test(`renders as expected with a right icon when focused and valid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -5488,7 +5517,8 @@ test(`renders as expected with a right icon when focused and valid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -5682,7 +5712,8 @@ test(`renders as expected with a left icon when focused and invalid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -5869,7 +5900,8 @@ test(`renders as expected with a right icon when focused and invalid`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -6056,7 +6088,8 @@ test(`renders as expected with left and right icons when focused and invalid`, (
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -6250,7 +6283,8 @@ test(`renders without horizontal padding`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -6416,7 +6450,8 @@ test(`renders with a left icon without horizontal padding`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -6589,7 +6624,8 @@ test(`renders with a right icon without horizontal padding`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -6762,7 +6798,8 @@ test(`renders with left and right icons without horizontal padding`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -6942,7 +6979,8 @@ test(`renders as expected without vertical padding`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7096,7 +7134,8 @@ test(`renders as expected without borders`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7261,7 +7300,8 @@ test(`renders as expected when a state does not alter border thickness`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7428,7 +7468,8 @@ test(`renders as expected without a radius`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7594,7 +7635,8 @@ test(`renders when disabled with a left icon`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7770,7 +7812,8 @@ test(`renders when disabled with a right icon`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -7946,7 +7989,8 @@ test(`renders when disabled with left and right icons`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -8129,7 +8173,8 @@ test(`renders as expected when disabled with a left icon without a value`, () =>
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -8305,7 +8350,8 @@ test(`renders as expected when disabled with a right icon without a value`, () =
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -8481,7 +8527,8 @@ test(`renders as expected when disabled with left and right icons without a valu
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -8664,7 +8711,8 @@ test(`allows introspection when used in a higher-order component`, () => {
     `numeric`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -8700,6 +8748,7 @@ test(`allows introspection when used in a higher-order component`, () => {
       autoCapitalize: `sentences`,
       autoFocus: true,
       keepFocusOnSubmit: false,
+      alignment: `left`,
     },
   });
 });
@@ -8792,7 +8841,8 @@ test(`does nothing when auto-focus is enabled`, () => {
     `numeric`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -8960,7 +9010,8 @@ test(`focuses the text input on layout when the ref is ready`, () => {
     `numeric`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -9092,7 +9143,8 @@ test(`does not focus the text input a second time`, () => {
     `numeric`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -9231,7 +9283,8 @@ test(`renders as expected with a value when focus is to be retained`, () => {
     `numeric`,
     `sentences`,
     false,
-    true
+    true,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -9398,7 +9451,8 @@ test(`renders as expected without a value when focus is to be retained`, () => {
     `numeric`,
     `sentences`,
     false,
-    true
+    true,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -9566,7 +9620,8 @@ test(`treats disabled undefined as disabled false`, () => {
     `numeric`,
     `sentences`,
     false,
-    false
+    false,
+    `left`
   );
   const onChange = jest.fn();
   const onSubmit = jest.fn();
@@ -9615,6 +9670,344 @@ test(`treats disabled undefined as disabled false`, () => {
                 paddingVertical: 12,
                 fontFamily: `Example Font Family`,
                 fontSize: 37,
+              },
+              value: `GGGGGG`,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
+              editable: true,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#E7AA32`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: true,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders as expected when middle-aligned`, () => {
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+        iconColor: `#43AE21`,
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+        iconColor: `#985E00`,
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+        iconColor: `#789521`,
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+        iconColor: `#449438`,
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+        iconColor: `#ADAADA`,
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+        iconColor: `#709709`,
+      },
+    },
+    false,
+    `email`,
+    `numeric`,
+    `sentences`,
+    false,
+    false,
+    `middle`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#32AE12`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#FFEE00`,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                textAlign: `center`,
+              },
+              value: `GGGGGG`,
+              multiline: false,
+              scrollEnabled: false,
+              autoComplete: `email`,
+              secureTextEntry: false,
+              keyboardType: `numeric`,
+              autoCapitalize: `sentences`,
+              editable: true,
+              placeholder: `Test Placeholder`,
+              placeholderTextColor: `#E7AA32`,
+              onChangeText: expect.any(Function),
+              onEndEditing: expect.any(Function),
+              onFocus: expect.any(Function),
+              onBlur: expect.any(Function),
+              blurOnSubmit: true,
+              onSubmitEditing: expect.any(Function),
+            },
+          }),
+        ],
+      }),
+    })
+  );
+
+  renderer.unmount();
+
+  expect(onChange).not.toHaveBeenCalled();
+  expect(onSubmit).not.toHaveBeenCalled();
+});
+
+test(`renders as expected when right-aligned`, () => {
+  type ExampleContext = {
+    readonly character: string;
+    readonly regex: RegExp;
+  };
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || !value
+        ? undefined
+        : value.split(context.character).length - 1,
+    {
+      fontFamily: `Example Font Family`,
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: `#FFEE00`,
+        placeholderColor: `#E7AA32`,
+        backgroundColor: `#32AE12`,
+        radius: 5,
+        border: {
+          width: 4,
+          color: `#FF00FF`,
+        },
+        iconColor: `#43AE21`,
+      },
+      blurredInvalid: {
+        textColor: `#99FE88`,
+        placeholderColor: `#CACA3A`,
+        backgroundColor: `#259284`,
+        radius: 10,
+        border: {
+          width: 6,
+          color: `#9A9A8E`,
+        },
+        iconColor: `#985E00`,
+      },
+      focusedValid: {
+        textColor: `#55EA13`,
+        placeholderColor: `#273346`,
+        backgroundColor: `#CABA99`,
+        radius: 3,
+        border: {
+          width: 5,
+          color: `#646464`,
+        },
+        iconColor: `#789521`,
+      },
+      focusedInvalid: {
+        textColor: `#ABAADE`,
+        placeholderColor: `#47ADAD`,
+        backgroundColor: `#32AA88`,
+        radius: 47,
+        border: {
+          width: 12,
+          color: `#98ADAA`,
+        },
+        iconColor: `#449438`,
+      },
+      disabledValid: {
+        textColor: `#AE2195`,
+        placeholderColor: `#FFAAEE`,
+        backgroundColor: `#772728`,
+        radius: 100,
+        border: {
+          width: 14,
+          color: `#5E5E5E`,
+        },
+        iconColor: `#ADAADA`,
+      },
+      disabledInvalid: {
+        textColor: `#340297`,
+        placeholderColor: `#233832`,
+        backgroundColor: `#938837`,
+        radius: 2,
+        border: {
+          width: 19,
+          color: `#573829`,
+        },
+        iconColor: `#709709`,
+      },
+    },
+    false,
+    `email`,
+    `numeric`,
+    `sentences`,
+    false,
+    false,
+    `right`
+  );
+  const onChange = jest.fn();
+  const onSubmit = jest.fn();
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: `G`,
+      }}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      nodeType: `component`,
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          backgroundColor: `#32AE12`,
+          flexDirection: `row`,
+          alignItems: `center`,
+          paddingHorizontal: 29,
+          borderWidth: 4,
+          borderColor: `#FF00FF`,
+          borderRadius: 5,
+        },
+      }),
+      rendered: expect.objectContaining({
+        rendered: [
+          expect.objectContaining({
+            nodeType: `component`,
+            type: TextInput,
+            props: {
+              style: {
+                flexGrow: 1,
+                color: `#FFEE00`,
+                paddingVertical: 12,
+                fontFamily: `Example Font Family`,
+                fontSize: 37,
+                textAlign: `right`,
               },
               value: `GGGGGG`,
               multiline: false,

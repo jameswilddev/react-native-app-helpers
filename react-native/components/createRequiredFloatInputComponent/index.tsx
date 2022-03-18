@@ -17,6 +17,10 @@ import { createInputComponent } from "../createInputComponent";
  *                             validation to succeed.
  * @param lessThanOrEqualTo    When non-null, entered values must be lesser or
  *                             equal for validation to succeed.
+ * @param alignment            The alignment of the text within the input.
+ * @param decimalPlaces        When null, any number of decimal places may be
+ *                             specified.  Otherwise, the number of decimal
+ *                             places accepted/shown.
  * @returns                    The created component.
  */
 export const createRequiredFloatInputComponent = (
@@ -26,7 +30,9 @@ export const createRequiredFloatInputComponent = (
   greaterThan: null | number,
   greaterThanOrEqualTo: null | number,
   lessThan: null | number,
-  lessThanOrEqualTo: null | number
+  lessThanOrEqualTo: null | number,
+  alignment: `left` | `right`,
+  decimalPlaces: null | number
 ): React.FunctionComponent<{
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
@@ -53,13 +59,26 @@ export const createRequiredFloatInputComponent = (
   readonly placeholder: string;
 }> => {
   const RequiredFloatInputComponent = createInputComponent<number, null>(
-    (value) => String(value),
+    (value) =>
+      decimalPlaces === null ? String(value) : value.toFixed(decimalPlaces),
     (unparsed) => {
       if (
         /^\s*[+-]?\d+\s*$|^\s*[+-]?\d+\.\d+\s*$|^\s*[+-]?\.\d+\s*$|^\s*[+-]?\d+\.\s*$/.test(
           unparsed
         )
       ) {
+        if (decimalPlaces !== null) {
+          const splitByDecimalPlace = unparsed.split(`.`);
+
+          if (
+            splitByDecimalPlace.length > 1 &&
+            (splitByDecimalPlace[1] as string).replace(/\D/g, ``).length >
+              decimalPlaces
+          ) {
+            return undefined;
+          }
+        }
+
         const parsed = Number.parseFloat(unparsed);
 
         if (greaterThan !== null && parsed <= greaterThan) {
@@ -86,7 +105,8 @@ export const createRequiredFloatInputComponent = (
     `numeric`,
     `none`,
     false,
-    false
+    false,
+    alignment
   );
 
   return ({ value, onChange, disabled, placeholder }) => (

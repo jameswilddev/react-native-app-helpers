@@ -28,4 +28,9 @@ export type BasicTableColumn<
    * The key in the corresponding TableRow from which to retrieve a value.
    */
   readonly key: TKeyableColumnKey | TNonKeyableColumnKey;
+
+  /**
+   * The horizontal alignment of the column's content.
+   */
+  readonly alignment: `left` | `middle` | `right`;
 };

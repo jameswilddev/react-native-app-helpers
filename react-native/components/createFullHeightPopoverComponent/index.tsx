@@ -92,19 +92,23 @@ export const createFullHeightPopoverComponent = (
     ),
     disabledValidText: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.disabledValid
+      controlStyle.disabledValid,
+      `left`
     ),
     disabledInvalidText: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.disabledInvalid
+      controlStyle.disabledInvalid,
+      `left`
     ),
     validText: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.blurredValid
+      controlStyle.blurredValid,
+      `left`
     ),
     invalidText: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.blurredInvalid
+      controlStyle.blurredInvalid,
+      `left`
     ),
     validView: createFullHeightPopoverStateStyleInstance(
       controlStyle.focusedValid

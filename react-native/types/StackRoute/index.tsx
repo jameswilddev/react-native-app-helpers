@@ -67,6 +67,12 @@ export type StackRoute<
     reset(...replacementItems: ReadonlyArray<Item<TRouteParameters>>): void;
 
     /**
+     * Changes the parameters of this card.
+     * @param parameters The replacement parameters.
+     */
+    setParameters(parameters: TRouteParameters[TRouteKey]): void;
+
+    /**
      * The route parameters for this card.
      */
     readonly parameters: TRouteParameters[TRouteKey];
