@@ -45,7 +45,7 @@ export const createCreatableSelectChildrenComponent = <
 ): Instance<T> & { readonly creatableSelectChildren: Introspection } => {
   const InputComponent = createInputComponent<string, null>(
     (value) => value,
-    (value) => value.trim() || undefined,
+    (value) => value.trim(),
     {
       ...controlStyle,
       blurredInvalid: {
@@ -72,7 +72,8 @@ export const createCreatableSelectChildrenComponent = <
     `default`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
 
   let flatList: null | ViewStyle = null;

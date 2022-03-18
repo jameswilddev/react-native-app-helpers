@@ -43,7 +43,7 @@ export const createSearchableSelectChildrenComponent = <
 ): Instance<T> & { readonly searchableSelectChildren: Introspection } => {
   const InputComponent = createInputComponent<string, null>(
     (value) => value,
-    (value) => value.trim() || undefined,
+    (value) => value.trim(),
     {
       ...controlStyle,
       blurredInvalid: {
@@ -70,7 +70,8 @@ export const createSearchableSelectChildrenComponent = <
     `default`,
     `sentences`,
     true,
-    false
+    false,
+    `left`
   );
 
   let flatList: null | ViewStyle = null;

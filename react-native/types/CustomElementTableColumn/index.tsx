@@ -58,4 +58,9 @@ export type CustomElementTableColumn<
     filter: string,
     context: TContext
   ): boolean;
+
+  /**
+   * The horizontal alignment of the column's content.
+   */
+  readonly alignment: `left` | `middle` | `right`;
 };

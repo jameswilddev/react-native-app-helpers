@@ -120,6 +120,7 @@ test(`can render one item`, async () => {
               pop: expect.any(Function),
               replace: expect.any(Function),
               reset: expect.any(Function),
+              setParameters: expect.any(Function),
               bottom: true,
               top: true,
               parameters: {
@@ -367,6 +368,7 @@ test(`can render two items`, async () => {
                 pop: expect.any(Function),
                 replace: expect.any(Function),
                 reset: expect.any(Function),
+                setParameters: expect.any(Function),
                 bottom: true,
                 top: false,
                 parameters: {
@@ -404,6 +406,7 @@ test(`can render two items`, async () => {
                 pop: expect.any(Function),
                 replace: expect.any(Function),
                 reset: expect.any(Function),
+                setParameters: expect.any(Function),
                 bottom: false,
                 top: true,
                 parameters: {
@@ -668,6 +671,7 @@ test(`can render three items`, async () => {
                 pop: expect.any(Function),
                 replace: expect.any(Function),
                 reset: expect.any(Function),
+                setParameters: expect.any(Function),
                 bottom: true,
                 top: false,
                 parameters: {
@@ -705,6 +709,7 @@ test(`can render three items`, async () => {
                 pop: expect.any(Function),
                 replace: expect.any(Function),
                 reset: expect.any(Function),
+                setParameters: expect.any(Function),
                 bottom: false,
                 top: false,
                 parameters: {
@@ -742,6 +747,7 @@ test(`can render three items`, async () => {
                 pop: expect.any(Function),
                 replace: expect.any(Function),
                 reset: expect.any(Function),
+                setParameters: expect.any(Function),
                 bottom: false,
                 top: true,
                 parameters: {
@@ -2030,6 +2036,151 @@ test(`reset`, async () => {
       key: `testRouteBKey`,
       parameters: {
         testRouteBParameterKey: `Test Route B Parameter Value B`,
+      },
+    },
+  ]);
+
+  expect(onBack).not.toHaveBeenCalled();
+
+  renderer.unmount();
+});
+
+test(`setParameters`, async () => {
+  type ParametersA = {
+    readonly testRouteAParameterKey:
+      | `Test Route A Parameter Value A`
+      | `Test Route A Parameter Value B`
+      | `Test Route A Parameter Value C`;
+  };
+
+  type ParametersB = {
+    readonly testRouteBParameterKey:
+      | `Test Route B Parameter Value A`
+      | `Test Route B Parameter Value B`;
+  };
+
+  type ParametersC = {
+    readonly testRouteCParameterKey:
+      | `Test Route C Parameter Value A`
+      | `Test Route C Parameter Value B`;
+  };
+
+  type Parameters = {
+    testRouteAKey: ParametersA;
+    testRouteBKey: ParametersB;
+    testRouteCKey: ParametersC;
+  };
+
+  type OtherProps = {
+    exampleOtherPropKey: `Example Other Prop Value`;
+  };
+
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
+    parameters: { testRouteAParameterKey },
+    exampleOtherPropKey,
+  }) => (
+    <Text>
+      Example Route A with parameter {testRouteAParameterKey}{" "}
+      {exampleOtherPropKey}
+    </Text>
+  );
+
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
+    parameters: { testRouteBParameterKey },
+    exampleOtherPropKey,
+  }) => (
+    <Text>
+      Example Route B with parameter {testRouteBParameterKey}{" "}
+      {exampleOtherPropKey}
+    </Text>
+  );
+
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
+    parameters: { testRouteCParameterKey },
+    exampleOtherPropKey,
+  }) => (
+    <Text>
+      Example Route C with parameter {testRouteCParameterKey}{" "}
+      {exampleOtherPropKey}
+    </Text>
+  );
+
+  const routeTable: StackRouteTable<Parameters, OtherProps> = {
+    testRouteAKey: RouteA,
+    testRouteBKey: RouteB,
+    testRouteCKey: RouteC,
+  };
+
+  const routeState: StackRouterState<Parameters> = [
+    {
+      uuid: `ec055b0f-0659-4e9a-a889-06a7586bb61a`,
+      key: `testRouteBKey`,
+      parameters: {
+        testRouteBParameterKey: `Test Route B Parameter Value A`,
+      },
+    },
+    {
+      uuid: `f36ce5e7-d37e-443a-8635-718118c27128`,
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value A`,
+      },
+    },
+    {
+      uuid: "345d1eff-3d1d-4d93-8136-e0c3ff0f7f7c",
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value B`,
+      },
+    },
+  ];
+
+  const setRouteState = jest.fn();
+  const onBack = jest.fn();
+
+  const Component = createStackRoutingComponent(routeTable);
+
+  const renderer = TestRenderer.create(
+    <Component
+      routeState={routeState}
+      setRouteState={setRouteState}
+      exampleOtherPropKey="Example Other Prop Value"
+      onBack={onBack}
+    />
+  );
+
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 100);
+  });
+
+  (
+    renderer.toTree()
+      ?.rendered as ReadonlyArray<TestRenderer.ReactTestRendererTree>
+  )[1]?.props[`children`].props.children.props.setParameters({
+    testRouteAParameterKey: `Test Route A Parameter Value C`,
+  });
+
+  expect(setRouteState).toBeCalledTimes(1);
+  expect(setRouteState).toHaveBeenCalledWith([
+    {
+      uuid: `ec055b0f-0659-4e9a-a889-06a7586bb61a`,
+      key: `testRouteBKey`,
+      parameters: {
+        testRouteBParameterKey: `Test Route B Parameter Value A`,
+      },
+    },
+    {
+      uuid: `f36ce5e7-d37e-443a-8635-718118c27128`,
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value C`,
+      },
+    },
+    {
+      uuid: "345d1eff-3d1d-4d93-8136-e0c3ff0f7f7c",
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value B`,
       },
     },
   ]);

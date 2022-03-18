@@ -117,101 +117,117 @@ export const createPickerButtonComponent = (
     ),
     disabledValidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.disabledValid
+      controlStyle.disabledValid,
+      `left`
     ),
     disabledInvalidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.disabledInvalid
+      controlStyle.disabledInvalid,
+      `left`
     ),
     validTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.blurredValid
+      controlStyle.blurredValid,
+      `left`
     ),
     invalidTextInput: createControlTextStyleInstance(
       controlStyle,
-      controlStyle.blurredInvalid
+      controlStyle.blurredInvalid,
+      `left`
     ),
     disabledValidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledValid
+        controlStyle.disabledValid,
+        `left`
       ),
       ...withLeftIcon,
     },
     disabledInvalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledInvalid
+        controlStyle.disabledInvalid,
+        `left`
       ),
       ...withLeftIcon,
     },
     validTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredValid
+        controlStyle.blurredValid,
+        `left`
       ),
       ...withLeftIcon,
     },
     invalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredInvalid
+        controlStyle.blurredInvalid,
+        `left`
       ),
       ...withLeftIcon,
     },
     disabledValidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledValid
+        controlStyle.disabledValid,
+        `left`
       ),
       ...withRightIcon,
     },
     disabledInvalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledInvalid
+        controlStyle.disabledInvalid,
+        `left`
       ),
       ...withRightIcon,
     },
     validTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredValid
+        controlStyle.blurredValid,
+        `left`
       ),
       ...withRightIcon,
     },
     invalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredInvalid
+        controlStyle.blurredInvalid,
+        `left`
       ),
       ...withRightIcon,
     },
     disabledValidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledValid
+        controlStyle.disabledValid,
+        `left`
       ),
       ...withLeftAndRightIcons,
     },
     disabledInvalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.disabledInvalid
+        controlStyle.disabledInvalid,
+        `left`
       ),
       ...withLeftAndRightIcons,
     },
     validTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredValid
+        controlStyle.blurredValid,
+        `left`
       ),
       ...withLeftAndRightIcons,
     },
     invalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
         controlStyle,
-        controlStyle.blurredInvalid
+        controlStyle.blurredInvalid,
+        `left`
       ),
       ...withLeftAndRightIcons,
     },

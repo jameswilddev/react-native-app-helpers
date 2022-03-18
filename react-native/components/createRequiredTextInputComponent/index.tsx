@@ -85,7 +85,8 @@ export const createRequiredTextInputComponent = (
     `default`,
     autoCapitalize,
     false,
-    false
+    false,
+    `left`
   );
 
   return ({ value, onChange, disabled, placeholder, unique }) => (

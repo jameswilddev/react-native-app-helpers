@@ -17,6 +17,7 @@ import { createInputComponent } from "../createInputComponent";
  *                             validation to succeed.
  * @param lessThanOrEqualTo    When non-null, entered values must be lesser or
  *                             equal for validation to succeed.
+ * @param alignment            The alignment of the text within the input.
  * @returns                    The created component.
  */
 export const createRequiredIntegerInputComponent = (
@@ -26,7 +27,8 @@ export const createRequiredIntegerInputComponent = (
   greaterThan: null | number,
   greaterThanOrEqualTo: null | number,
   lessThan: null | number,
-  lessThanOrEqualTo: null | number
+  lessThanOrEqualTo: null | number,
+  alignment: `left` | `right`
 ): React.FunctionComponent<{
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
@@ -82,7 +84,8 @@ export const createRequiredIntegerInputComponent = (
     `numeric`,
     `none`,
     false,
-    false
+    false,
+    alignment
   );
 
   return ({ value, onChange, disabled, placeholder }) => (

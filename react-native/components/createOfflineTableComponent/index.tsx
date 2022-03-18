@@ -89,6 +89,12 @@ export const createOfflineTableComponent = <
    * The context in which the table is being rendered.
    */
   readonly context: TContext;
+
+  /**
+   * Called on pressing a row.
+   * @param row The row pressed.
+   */
+  onPressRow?(row: TRow): void;
 }> => {
   const rowViewBase: ViewStyle = {
     width: `100%`,
@@ -135,16 +141,28 @@ export const createOfflineTableComponent = <
     headerView.borderBottomWidth = style.headerFirstRowSeparator.width;
   }
 
+  const headerTextBase: TextStyle = {
+    fontFamily: style.header.fontFamily,
+    fontSize: style.header.fontSize,
+    lineHeight: style.header.fontSize * 1.4,
+    color: style.header.color,
+  };
+
   const styles = StyleSheet.create({
     wrapperView: {
       width: `100%`,
     },
     headerView,
-    headerText: {
-      fontFamily: style.header.fontFamily,
-      fontSize: style.header.fontSize,
-      lineHeight: style.header.fontSize * 1.4,
-      color: style.header.color,
+    leftHeaderText: {
+      ...headerTextBase,
+    },
+    middleHeaderText: {
+      ...headerTextBase,
+      textAlign: `center`,
+    },
+    rightHeaderText: {
+      ...headerTextBase,
+      textAlign: `right`,
     },
     firstRowView,
     oddRowView: {
@@ -232,6 +250,22 @@ export const createOfflineTableComponent = <
       (evenRowCellInput[key] as TextStyle).paddingVertical =
         style.body.verticalPadding;
     }
+
+    switch (column?.alignment) {
+      case `middle`:
+        (customHeaderInput[key] as TextStyle).textAlign = `center`;
+        (customCellInput[key] as ViewStyle).justifyContent = `center`;
+        (oddRowCellInput[key] as TextStyle).textAlign = `center`;
+        (evenRowCellInput[key] as TextStyle).textAlign = `center`;
+        break;
+
+      case `right`:
+        (customHeaderInput[key] as TextStyle).textAlign = `right`;
+        (customCellInput[key] as ViewStyle).justifyContent = `flex-end`;
+        (oddRowCellInput[key] as TextStyle).textAlign = `right`;
+        (evenRowCellInput[key] as TextStyle).textAlign = `right`;
+        break;
+    }
   }
 
   if (style.body.horizontalPadding !== 0) {
@@ -318,6 +352,7 @@ export const createOfflineTableComponent = <
     sortDirection,
     onSortChange,
     context,
+    onPressRow,
   }) => {
     let rows = [...data.rows];
 
@@ -388,7 +423,7 @@ export const createOfflineTableComponent = <
         }
       }
 
-      if (sortDirection === `descending`) {
+      if (sortDirection === `ascending`) {
         comparisonResult = -comparisonResult;
       }
 
@@ -415,10 +450,18 @@ export const createOfflineTableComponent = <
                       );
                     }}
                   >
-                    <Text style={styles.headerText}>
+                    <Text
+                      style={
+                        column.alignment === `left`
+                          ? styles.leftHeaderText
+                          : column.alignment === `middle`
+                          ? styles.middleHeaderText
+                          : styles.rightHeaderText
+                      }
+                    >
                       {sortBy === column.key
                         ? `${column.label} ${
-                            sortDirection === `ascending` ? `↓` : `↑`
+                            sortDirection === `ascending` ? `↑` : `↓`
                           }`
                         : column.label}
                     </Text>
@@ -437,137 +480,161 @@ export const createOfflineTableComponent = <
         {rows.length === 0 ? (
           <Text style={styles.emptyText}>{whenEmpty}</Text>
         ) : (
-          rows.map((row, index) => (
-            <View
-              key={String(row[schema.key])}
-              style={
-                index === 0
-                  ? styles.firstRowView
-                  : index % 2 === 0
-                  ? styles.oddRowView
-                  : styles.evenRowView
-              }
-            >
-              {schema.columns.map((column, columnIndex) => {
-                switch (column.type) {
-                  case `basic`: {
-                    const value = row[column.key];
+          rows.map((row, index) => {
+            const cells = schema.columns.map((column, columnIndex) => {
+              switch (column.type) {
+                case `basic`: {
+                  const value = row[column.key];
 
-                    // TODO: why does TypeScript think this cannot be null, false or true?
-                    switch (value as unknown) {
-                      case null:
-                        return (
-                          <View
-                            key={String(columnIndex)}
-                            style={customCellStyles[columnIndex]}
-                          >
-                            {style.body.primitiveElements.null}
-                          </View>
-                        );
+                  // TODO: why does TypeScript think this cannot be null, false or true?
+                  switch (value as unknown) {
+                    case null:
+                      return (
+                        <View
+                          key={String(columnIndex)}
+                          style={customCellStyles[columnIndex]}
+                        >
+                          {style.body.primitiveElements.null}
+                        </View>
+                      );
 
-                      case false:
-                        return (
-                          <View
-                            key={String(columnIndex)}
-                            style={customCellStyles[columnIndex]}
-                          >
-                            {style.body.primitiveElements.false}
-                          </View>
-                        );
+                    case false:
+                      return (
+                        <View
+                          key={String(columnIndex)}
+                          style={customCellStyles[columnIndex]}
+                        >
+                          {style.body.primitiveElements.false}
+                        </View>
+                      );
 
-                      case true:
-                        return (
-                          <View
-                            key={String(columnIndex)}
-                            style={customCellStyles[columnIndex]}
-                          >
-                            {style.body.primitiveElements.true}
-                          </View>
-                        );
+                    case true:
+                      return (
+                        <View
+                          key={String(columnIndex)}
+                          style={customCellStyles[columnIndex]}
+                        >
+                          {style.body.primitiveElements.true}
+                        </View>
+                      );
 
-                      default:
-                        return (
-                          <Text
-                            key={String(columnIndex)}
-                            style={
-                              index % 2 === 0
-                                ? oddRowCellStyles[columnIndex]
-                                : evenRowCellStyles[columnIndex]
-                            }
-                          >
-                            {value}
-                          </Text>
-                        );
-                    }
+                    default:
+                      return (
+                        <Text
+                          key={String(columnIndex)}
+                          style={
+                            index % 2 === 0
+                              ? oddRowCellStyles[columnIndex]
+                              : evenRowCellStyles[columnIndex]
+                          }
+                        >
+                          {value}
+                        </Text>
+                      );
                   }
-
-                  case `customText`: {
-                    const value = column.render(
-                      row[column.key] as never,
-                      context
-                    );
-
-                    // TODO: why does TypeScript think this cannot be null, false or true?
-                    switch (value as unknown) {
-                      case null:
-                        return (
-                          <View
-                            key={String(columnIndex)}
-                            style={customCellStyles[columnIndex]}
-                          >
-                            {style.body.primitiveElements.null}
-                          </View>
-                        );
-
-                      case false:
-                        return (
-                          <View
-                            key={String(columnIndex)}
-                            style={customCellStyles[columnIndex]}
-                          >
-                            {style.body.primitiveElements.false}
-                          </View>
-                        );
-
-                      case true:
-                        return (
-                          <View
-                            key={String(columnIndex)}
-                            style={customCellStyles[columnIndex]}
-                          >
-                            {style.body.primitiveElements.true}
-                          </View>
-                        );
-
-                      default:
-                        return (
-                          <Text
-                            key={String(columnIndex)}
-                            style={
-                              index % 2 === 0
-                                ? oddRowCellStyles[columnIndex]
-                                : evenRowCellStyles[columnIndex]
-                            }
-                          >
-                            {value}
-                          </Text>
-                        );
-                    }
-                  }
-
-                  case `customElement`:
-                    return (
-                      <View
-                        key={String(columnIndex)}
-                        style={customCellStyles[columnIndex]}
-                      >
-                        {column.render(row, context)}
-                      </View>
-                    );
                 }
-              })}
-            </View>
-          ))
+
+                case `customText`: {
+                  const value = column.render(
+                    row[column.key] as never,
+                    context
+                  );
+
+                  // TODO: why does TypeScript think this cannot be null, false or true?
+                  switch (value as unknown) {
+                    case null:
+                      return (
+                        <View
+                          key={String(columnIndex)}
+                          style={customCellStyles[columnIndex]}
+                        >
+                          {style.body.primitiveElements.null}
+                        </View>
+                      );
+
+                    case false:
+                      return (
+                        <View
+                          key={String(columnIndex)}
+                          style={customCellStyles[columnIndex]}
+                        >
+                          {style.body.primitiveElements.false}
+                        </View>
+                      );
+
+                    case true:
+                      return (
+                        <View
+                          key={String(columnIndex)}
+                          style={customCellStyles[columnIndex]}
+                        >
+                          {style.body.primitiveElements.true}
+                        </View>
+                      );
+
+                    default:
+                      return (
+                        <Text
+                          key={String(columnIndex)}
+                          style={
+                            index % 2 === 0
+                              ? oddRowCellStyles[columnIndex]
+                              : evenRowCellStyles[columnIndex]
+                          }
+                        >
+                          {value}
+                        </Text>
+                      );
+                  }
+                }
+
+                case `customElement`:
+                  return (
+                    <View
+                      key={String(columnIndex)}
+                      style={customCellStyles[columnIndex]}
+                    >
+                      {column.render(row, context)}
+                    </View>
+                  );
+              }
+            });
+
+            if (onPressRow === undefined) {
+              return (
+                <View
+                  key={String(row[schema.key])}
+                  style={
+                    index === 0
+                      ? styles.firstRowView
+                      : index % 2 === 0
+                      ? styles.oddRowView
+                      : styles.evenRowView
+                  }
+                >
+                  {cells}
+                </View>
+              );
+            } else {
+              return (
+                <Hitbox
+                  key={String(row[schema.key])}
+                  style={
+                    index === 0
+                      ? styles.firstRowView
+                      : index % 2 === 0
+                      ? styles.oddRowView
+                      : styles.evenRowView
+                  }
+                  onPress={() => {
+                    onPressRow(row);
+                  }}
+                >
+                  {cells}
+                </Hitbox>
+              );
+            }
+          })
         )}
       </View>
     );

@@ -18,6 +18,36 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
   private int $syncCapabilities;
 
+  private function getMediaUuidField(): string
+  {
+    if (config('react-native-sync')) {
+      if (config('react-native-sync.uuid-fields')) {
+        if (config('react-native-sync.uuid-fields.media')) {
+          return config('react-native-sync.uuid-fields.media');
+        }
+        if (config('react-native-sync.uuid-fields.default')) {
+          return config('react-native-sync.uuid-fields.default');
+        }
+      }
+    }
+    return "uuid";
+  }
+
+  private function getModelUuidField(string $modelName): string
+  {
+    if (config('react-native-sync')) {
+      if (config('react-native-sync.uuid-fields')) {
+        if (config('react-native-sync.uuid-fields.models.' . $modelName)) {
+          return config('react-native-sync.uuid-fields.models.' . $modelName);
+        }
+        if (config('react-native-sync.uuid-fields.default')) {
+          return config('react-native-sync.uuid-fields.default');
+        }
+      }
+    }
+    return "uuid";
+  }
+
   public function __construct(
     SyncApiCollection $syncApiCollection,
     string $name,
@@ -107,20 +137,25 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
           $model = $this
             ->syncApiCollection
             ->modelClass::$scopeName()
-            ->where('uuid', $modelUuid)
+            ->where($this->getModelUuidField($this->syncApiCollection->modelClass), $modelUuid)
             ->first();
 
           if ($model) {
             $media = $model
               ->getMedia($this->name)
-              ->where('name', $mediaUuid)
+              ->where($this->getMediaUuidField(), $mediaUuid)
               ->first();
 
             if ($media === null) {
               // TODO why isn't this propagating
               throw new ModelNotFoundException();
             } else {
-              return redirect()->to($media->getTemporaryUrl(now()->addHour()));
+              if (config("filesystems.disks.{$media->disk}.driver" == "s3")) {
+                return redirect()->to($media->getTemporaryUrl(now()->addHour()));
+              } else {
+
+                return redirect()->to($media->getFullUrl());
+              }
             }
           } else {
             throw new ModelNotFoundException();
@@ -138,13 +173,13 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
         $model = $this
           ->syncApiCollection
           ->modelClass::$scopeName()
-          ->where('uuid', $modelUuid)
+          ->where($this->getModelUuidField($this->syncApiCollection->modelClass), $modelUuid)
           ->first();
 
         if ($model) {
           $media = $model
             ->getMedia($this->name)
-            ->where('name', $mediaUuid)
+            ->where($this->getMediaUuidField(), $mediaUuid)
             ->first();
 
           if ($media === null) {
@@ -172,13 +207,13 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
           $model = $this
             ->syncApiCollection
             ->modelClass::$scopeName()
-            ->where('uuid', $modelUuid)
+            ->where($this->getModelUuidField($this->syncApiCollection->modelClass), $modelUuid)
             ->first();
 
           if ($model) {
             $media = $model
               ->getMedia($this->name)
-              ->where('name', $mediaUuid)
+              ->where($this->getMediaUuidField(), $mediaUuid)
               ->first();
 
             if ($media !== null) {

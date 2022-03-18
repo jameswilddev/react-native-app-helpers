@@ -129,6 +129,16 @@ export const createStackRoutingComponent = <
                   reset: (...replacementItems) => {
                     props.setRouteState(replacementItems);
                   },
+                  setParameters: (parameters) => {
+                    const routeStateCopy = [...props.routeState];
+
+                    routeStateCopy.splice(index, 1, {
+                      ...item,
+                      parameters,
+                    });
+
+                    props.setRouteState(routeStateCopy);
+                  },
                   bottom: index === 0,
                   top: index === props.routeState.length - 1,
                   ...props,
