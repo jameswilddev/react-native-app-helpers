@@ -150,7 +150,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
               // TODO why isn't this propagating
               throw new ModelNotFoundException();
             } else {
-              if (config("filesystems.disks.{$media->disk}.driver" == "s3")) {
+              if ($media->getDiskDriverName() == "s3") {
                 return redirect()->to($media->getTemporaryUrl(now()->addHour()));
               } else {
 
