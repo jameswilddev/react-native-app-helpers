@@ -2,6 +2,7 @@
 
 namespace JamesWildDev\ReactNativeAppHelpers;
 
+use finfo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -183,9 +184,25 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
             ->first();
 
           if ($media === null) {
+            $data = request()->getContent();
+
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $mimeType = $finfo->buffer($data);
+
+            if ($mimeType) {
+              if (preg_match('/^[^\/]+\/([a-z]{3,4})$/', $mimeType, $matches)) {
+                $extension = '.' . $matches[1];
+              } else {
+                $extension = '';
+              }
+            } else {
+              $extension = '';
+            }
+
             $model
-              ->addMediaFromString(request()->getContent())
-              ->usingName($mediaUuid)
+              ->addMediaFromString($data)
+              ->usingName($mediaUuid . $extension)
+              ->withProperties(['uuid' => $mediaUuid])
               ->toMediaCollection($this->name);
           }
         } else {
