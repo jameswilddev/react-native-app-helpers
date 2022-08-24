@@ -3884,3 +3884,142 @@ test(`renders with a right icon when the left icon is undefined`, () => {
   );
   expect(onPress).not.toHaveBeenCalled();
 });
+
+test(`renders with a font weight`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontWeight: `700`,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component
+      leftIcon={() => null}
+      rightIcon={() => null}
+      onPress={onPress}
+      disabled={false}
+    >
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        alignItems: `center`,
+      }}
+    >
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+          fontWeight: `700`,
+        }}
+      >
+        Example Content
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+test(`renders with a font weight of undefined`, () => {
+  const Component = createButtonComponent({
+    fontFamily: `Example Font Family`,
+    fontWeight: undefined,
+    fontSize: 16,
+    horizontalPadding: 10,
+    verticalPadding: 2,
+    iconSpacing: 7,
+    default: {
+      backgroundColor: `yellow`,
+      color: `blue`,
+      radius: 25,
+      border: {
+        width: 5,
+        color: `aquamarine`,
+      },
+    },
+    disabled: {
+      backgroundColor: `orange`,
+      color: `purple`,
+      radius: 7,
+      border: {
+        width: 2,
+        color: `aquamarine`,
+      },
+    },
+  });
+  const onPress = jest.fn();
+
+  const rendered = (
+    <Component
+      leftIcon={() => null}
+      rightIcon={() => null}
+      onPress={onPress}
+      disabled={false}
+    >
+      Example Content
+    </Component>
+  );
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Hitbox
+      disabled={false}
+      onPress={onPress}
+      style={{
+        backgroundColor: `yellow`,
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
+        borderWidth: 5,
+        borderColor: `aquamarine`,
+        alignItems: `center`,
+      }}
+    >
+      <Text
+        style={{
+          color: `blue`,
+          fontFamily: `Example Font Family`,
+          fontSize: 16,
+          lineHeight: 22.4,
+        }}
+      >
+        Example Content
+      </Text>
+    </Hitbox>
+  );
+  expect(onPress).not.toHaveBeenCalled();
+});
