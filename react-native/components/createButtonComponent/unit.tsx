@@ -587,11 +587,7 @@ test(`renders when enabled with a left icon`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -666,11 +662,7 @@ test(`renders when disabled with a left icon`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <Text
         style={{
           color: `purple`,
@@ -755,11 +747,7 @@ test(`renders when enabled with a right icon`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -834,11 +822,7 @@ test(`renders when disabled with a right icon`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -903,11 +887,7 @@ test(`renders when enabled with left and right icons`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -919,11 +899,7 @@ test(`renders when enabled with left and right icons`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -989,11 +965,7 @@ test(`renders when disabled with left and right icons`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <Text
         style={{
           color: `purple`,
@@ -1005,11 +977,7 @@ test(`renders when disabled with left and right icons`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -1341,11 +1309,7 @@ test(`renders when enabled without horizontal padding with a left icon`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -1419,11 +1383,7 @@ test(`renders when disabled without horizontal padding with a left icon`, () => 
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <Text
         style={{
           color: `purple`,
@@ -1507,11 +1467,7 @@ test(`renders when enabled without horizontal padding with a right icon`, () => 
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -1585,11 +1541,7 @@ test(`renders when disabled without horizontal padding with a right icon`, () =>
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -1653,11 +1605,7 @@ test(`renders when enabled without horizontal padding with left and right icons`
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -1669,11 +1617,7 @@ test(`renders when enabled without horizontal padding with left and right icons`
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -1738,11 +1682,7 @@ test(`renders when disabled without horizontal padding with left and right icons
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <Text
         style={{
           color: `purple`,
@@ -1754,11 +1694,7 @@ test(`renders when disabled without horizontal padding with left and right icons
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2093,11 +2029,7 @@ test(`renders when enabled with a left icon without icon spacing`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -2171,11 +2103,7 @@ test(`renders when disabled with a left icon without icon spacing`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <Text
         style={{
           color: `purple`,
@@ -2258,11 +2186,7 @@ test(`renders when enabled with a right icon without icon spacing`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2336,11 +2260,7 @@ test(`renders when disabled with a right icon without icon spacing`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2405,11 +2325,7 @@ test(`renders when enabled with left and right icons without icon spacing`, () =
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -2420,11 +2336,7 @@ test(`renders when enabled with left and right icons without icon spacing`, () =
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2490,11 +2402,7 @@ test(`renders when disabled with left and right icons without icon spacing`, () 
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <Text
         style={{
           color: `purple`,
@@ -2505,11 +2413,7 @@ test(`renders when disabled with left and right icons without icon spacing`, () 
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2567,11 +2471,7 @@ test(`renders when enabled with a custom element`, () => {
         alignItems: `center`,
       }}
     >
-      <Text>
-        {`Example Children (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Children (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2630,11 +2530,7 @@ test(`renders when disabled with a custom element`, () => {
         margin: 3,
       }}
     >
-      <Text>
-        {`Example Children (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Children (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2696,17 +2592,9 @@ test(`renders when enabled with a custom element with a left icon`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <View style={{ paddingLeft: 7 }}>
-        <Text>
-          {`Example Children (`}
-          {`blue`}
-          {`)`}
-        </Text>
+        <Text>{`Example Children (blue)`}</Text>
       </View>
     </Hitbox>
   );
@@ -2770,17 +2658,9 @@ test(`renders when disabled with a custom element with a left icon`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <View style={{ paddingLeft: 7 }}>
-        <Text>
-          {`Example Children (`}
-          {`purple`}
-          {`)`}
-        </Text>
+        <Text>{`Example Children (purple)`}</Text>
       </View>
     </Hitbox>
   );
@@ -2844,17 +2724,9 @@ test(`renders when enabled with a custom element with a right icon`, () => {
       }}
     >
       <View style={{ paddingRight: 7 }}>
-        <Text>
-          {`Example Children (`}
-          {`blue`}
-          {`)`}
-        </Text>
+        <Text>{`Example Children (blue)`}</Text>
       </View>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2918,17 +2790,9 @@ test(`renders when disabled with a custom element with a right icon`, () => {
       }}
     >
       <View style={{ paddingRight: 7 }}>
-        <Text>
-          {`Example Children (`}
-          {`purple`}
-          {`)`}
-        </Text>
+        <Text>{`Example Children (purple)`}</Text>
       </View>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -2992,23 +2856,11 @@ test(`renders when enabled with a custom element with left and right icons`, () 
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <View style={{ paddingHorizontal: 7 }}>
-        <Text>
-          {`Example Children (`}
-          {`blue`}
-          {`)`}
-        </Text>
+        <Text>{`Example Children (blue)`}</Text>
       </View>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3073,23 +2925,11 @@ test(`renders when disabled with a custom element with left and right icons`, ()
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
       <View style={{ paddingHorizontal: 7 }}>
-        <Text>
-          {`Example Children (`}
-          {`purple`}
-          {`)`}
-        </Text>
+        <Text>{`Example Children (purple)`}</Text>
       </View>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3147,11 +2987,7 @@ test(`renders when enabled with a custom element without icon spacing`, () => {
         alignItems: `center`,
       }}
     >
-      <Text>
-        {`Example Children (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Children (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3210,11 +3046,7 @@ test(`renders when disabled with a custom element without icon spacing`, () => {
         margin: 3,
       }}
     >
-      <Text>
-        {`Example Children (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Children (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3276,16 +3108,8 @@ test(`renders when enabled with a custom element with a left icon without icon s
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Children (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
+      <Text>{`Example Children (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3348,16 +3172,8 @@ test(`renders when disabled with a custom element with a left icon without icon 
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Children (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
+      <Text>{`Example Children (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3419,16 +3235,8 @@ test(`renders when enabled with a custom element with a right icon without icon 
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Children (`}
-        {`blue`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Children (blue)`}</Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3491,16 +3299,8 @@ test(`renders when disabled with a custom element with a right icon without icon
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Children (`}
-        {`purple`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Children (purple)`}</Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3564,21 +3364,9 @@ test(`renders when enabled with a custom element with left and right icons witho
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Children (`}
-        {`blue`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
+      <Text>{`Example Children (blue)`}</Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3643,21 +3431,9 @@ test(`renders when disabled with a custom element with left and right icons with
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Children (`}
-        {`purple`}
-        {`)`}
-      </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`purple`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (purple)`}</Text>
+      <Text>{`Example Children (purple)`}</Text>
+      <Text>{`Example Right Icon (purple)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3719,11 +3495,7 @@ test(`renders with a left icon when the right icon is missing`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -3797,11 +3569,7 @@ test(`renders with a left icon when the right icon is undefined`, () => {
         flexDirection: `row`,
       }}
     >
-      <Text>
-        {`Example Left Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Left Icon (blue)`}</Text>
       <Text
         style={{
           color: `blue`,
@@ -3885,11 +3653,7 @@ test(`renders with a right icon when the left icon is missing`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
@@ -3963,11 +3727,7 @@ test(`renders with a right icon when the left icon is undefined`, () => {
       >
         Example Content
       </Text>
-      <Text>
-        {`Example Right Icon (`}
-        {`blue`}
-        {`)`}
-      </Text>
+      <Text>{`Example Right Icon (blue)`}</Text>
     </Hitbox>
   );
   expect(onPress).not.toHaveBeenCalled();
