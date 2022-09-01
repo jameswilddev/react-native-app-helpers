@@ -560,7 +560,9 @@ test(`renders when enabled with a left icon`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
       onPress={onPress}
       disabled={false}
@@ -636,7 +638,9 @@ test(`renders when disabled with a left icon`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
       onPress={onPress}
       disabled
@@ -714,7 +718,9 @@ test(`renders when enabled with a right icon`, () => {
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -790,7 +796,9 @@ test(`renders when disabled with a right icon`, () => {
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled
     >
@@ -866,8 +874,12 @@ test(`renders when enabled with left and right icons`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -947,8 +959,12 @@ test(`renders when disabled with left and right icons`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled
     >
@@ -1299,7 +1315,9 @@ test(`renders when enabled without horizontal padding with a left icon`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
       onPress={onPress}
       disabled={false}
@@ -1374,7 +1392,9 @@ test(`renders when disabled without horizontal padding with a left icon`, () => 
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
       onPress={onPress}
       disabled
@@ -1451,7 +1471,9 @@ test(`renders when enabled without horizontal padding with a right icon`, () => 
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -1526,7 +1548,9 @@ test(`renders when disabled without horizontal padding with a right icon`, () =>
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled
     >
@@ -1601,8 +1625,12 @@ test(`renders when enabled without horizontal padding with left and right icons`
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -1681,8 +1709,12 @@ test(`renders when disabled without horizontal padding with left and right icons
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled
     >
@@ -2034,7 +2066,9 @@ test(`renders when enabled with a left icon without icon spacing`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
       onPress={onPress}
       disabled={false}
@@ -2109,7 +2143,9 @@ test(`renders when disabled with a left icon without icon spacing`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
       onPress={onPress}
       disabled
@@ -2186,7 +2222,9 @@ test(`renders when enabled with a right icon without icon spacing`, () => {
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -2261,7 +2299,9 @@ test(`renders when disabled with a right icon without icon spacing`, () => {
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled
     >
@@ -2336,8 +2376,12 @@ test(`renders when enabled with left and right icons without icon spacing`, () =
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -2416,8 +2460,12 @@ test(`renders when disabled with left and right icons without icon spacing`, () 
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled
     >
@@ -2499,7 +2547,7 @@ test(`renders when enabled with a custom element`, () => {
     <Component
       leftIcon={() => null}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -2561,7 +2609,7 @@ test(`renders when disabled with a custom element`, () => {
     <Component
       leftIcon={() => null}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -2622,9 +2670,11 @@ test(`renders when enabled with a custom element with a left icon`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -2693,9 +2743,11 @@ test(`renders when disabled with a custom element with a left icon`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -2766,8 +2818,10 @@ test(`renders when enabled with a custom element with a right icon`, () => {
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -2837,8 +2891,10 @@ test(`renders when disabled with a custom element with a right icon`, () => {
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -2908,9 +2964,13 @@ test(`renders when enabled with a custom element with left and right icons`, () 
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -2984,9 +3044,13 @@ test(`renders when disabled with a custom element with left and right icons`, ()
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -3063,7 +3127,7 @@ test(`renders when enabled with a custom element without icon spacing`, () => {
     <Component
       leftIcon={() => null}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -3125,7 +3189,7 @@ test(`renders when disabled with a custom element without icon spacing`, () => {
     <Component
       leftIcon={() => null}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -3186,9 +3250,11 @@ test(`renders when enabled with a custom element with a left icon without icon s
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -3255,9 +3321,11 @@ test(`renders when disabled with a custom element with a left icon without icon 
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={() => null}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -3326,8 +3394,10 @@ test(`renders when enabled with a custom element with a right icon without icon 
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -3395,8 +3465,10 @@ test(`renders when disabled with a custom element with a right icon without icon
   const rendered = (
     <Component
       leftIcon={() => null}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -3464,9 +3536,13 @@ test(`renders when enabled with a custom element with left and right icons witho
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled={false}
     />
@@ -3538,9 +3614,13 @@ test(`renders when disabled with a custom element with left and right icons with
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
-      children={(color) => <Text>Example Children ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
+      children={(color) => <Text>{`Example Children (${String(color)})`}</Text>}
       onPress={onPress}
       disabled
     />
@@ -3613,7 +3693,9 @@ test(`renders with a left icon when the right icon is missing`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -3688,7 +3770,9 @@ test(`renders with a left icon when the right icon is undefined`, () => {
 
   const rendered = (
     <Component
-      leftIcon={(color) => <Text>Example Left Icon ({color})</Text>}
+      leftIcon={(color) => (
+        <Text>{`Example Left Icon (${String(color)})`}</Text>
+      )}
       rightIcon={undefined}
       onPress={onPress}
       disabled={false}
@@ -3764,7 +3848,9 @@ test(`renders with a right icon when the left icon is missing`, () => {
 
   const rendered = (
     <Component
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >
@@ -3840,7 +3926,9 @@ test(`renders with a right icon when the left icon is undefined`, () => {
   const rendered = (
     <Component
       leftIcon={undefined}
-      rightIcon={(color) => <Text>Example Right Icon ({color})</Text>}
+      rightIcon={(color) => (
+        <Text>{`Example Right Icon (${String(color)})`}</Text>
+      )}
       onPress={onPress}
       disabled={false}
     >

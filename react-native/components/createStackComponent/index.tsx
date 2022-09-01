@@ -23,7 +23,7 @@ const globalStyles = StyleSheet.create({
 export const createStackComponent = (
   spacing: number,
   direction: `horizontal` | `vertical`
-): React.FunctionComponent => {
+): React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> => {
   if (spacing) {
     const localStyles = StyleSheet.create({
       spacingView:

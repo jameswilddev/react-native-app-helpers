@@ -7,30 +7,32 @@ import {
 } from "react-native";
 import { useMeasure } from "../../..";
 
-type Component = React.FunctionComponent<{
-  /**
-   * When true, this component does not accept touch input.
-   * This will, of course, not apply until the next render.  To synchronously
-   * disable all Hitboxes, use the "enabled" static property.
-   */
-  readonly disabled?: undefined | boolean;
+type Component = React.FunctionComponent<
+  React.PropsWithChildren<{
+    /**
+     * When true, this component does not accept touch input.
+     * This will, of course, not apply until the next render.  To synchronously
+     * disable all Hitboxes, use the "enabled" static property.
+     */
+    readonly disabled?: undefined | boolean;
 
-  /**
-   * Passed down to TouchableOpacity.
-   */
-  readonly style?: ViewStyle;
+    /**
+     * Passed down to TouchableOpacity.
+     */
+    readonly style?: ViewStyle;
 
-  /**
-   * Passed to useMeasure.
-   */
-  readonly onMeasure?: undefined | MeasureOnSuccessCallback;
+    /**
+     * Passed to useMeasure.
+     */
+    readonly onMeasure?: undefined | MeasureOnSuccessCallback;
 
-  /**
-   * Similar to TouchableOpacity's onPress, but remote-controlled using the
-   * "enabled" static property.
-   */
-  readonly onPress: () => void;
-}>;
+    /**
+     * Similar to TouchableOpacity's onPress, but remote-controlled using the
+     * "enabled" static property.
+     */
+    readonly onPress: () => void;
+  }>
+>;
 
 /**
  * A React component which mimics TouchableOpacity, but can be remotely,

@@ -18,13 +18,15 @@ let webStyles: null | {
  * A replacement for the React Native `Modal` component which supports web
  * browsers as a target.
  */
-export const SimpleModal: React.FunctionComponent<{
-  /**
-   * Called when the back button is pressed or the background is clicked or
-   * touched.
-   */
-  readonly onClose: () => void;
-}> = ({ onClose, children }) => {
+export const SimpleModal: React.FunctionComponent<
+  React.PropsWithChildren<{
+    /**
+     * Called when the back button is pressed or the background is clicked or
+     * touched.
+     */
+    readonly onClose: () => void;
+  }>
+> = ({ onClose, children }) => {
   switch (Platform.OS) {
     case `android`:
     case `ios`:

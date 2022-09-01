@@ -27,7 +27,7 @@ export const createTiledComponent = (
   columnSpacing: number,
   rowSpacing: number,
   minimumTileSize: number
-): React.FunctionComponent => {
+): React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> => {
   return ({ children }) => {
     const [sizing, setSizing] = React.useState<null | {
       readonly size: number;

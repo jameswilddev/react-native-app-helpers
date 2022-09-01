@@ -23,9 +23,11 @@ export const createPaddingComponent = (
     | readonly [number]
     | readonly [number, number]
     | readonly [number, number, number, number]
-): React.FunctionComponent<{
-  readonly size: `fitsContent` | `fillsContainer`;
-}> => {
+): React.FunctionComponent<
+  React.PropsWithChildren<{
+    readonly size: `fitsContent` | `fillsContainer`;
+  }>
+> => {
   const contentFittingView: { [key: string]: number } = {};
 
   switch (paddings.length) {

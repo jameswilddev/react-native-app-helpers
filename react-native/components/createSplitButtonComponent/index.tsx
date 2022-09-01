@@ -135,18 +135,20 @@ const createButtonTextStyleInstance = (
   };
 };
 
-type Instance<TValue extends null | number | string> = React.FunctionComponent<{
-  /**
-   * The currently selected value.
-   */
-  readonly value: TValue;
+type Instance<TValue extends null | number | string> = React.FunctionComponent<
+  React.PropsWithChildren<{
+    /**
+     * The currently selected value.
+     */
+    readonly value: TValue;
 
-  /**
-   * Invoked when the selected value changes.
-   * @param to The newly selected value.
-   */
-  onChange(to: TValue): void;
-}>;
+    /**
+     * Invoked when the selected value changes.
+     * @param to The newly selected value.
+     */
+    onChange(to: TValue): void;
+  }>
+>;
 
 type SegmentInstance<TValue extends null | number | string> =
   React.FunctionComponent<{

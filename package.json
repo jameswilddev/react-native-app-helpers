@@ -17,7 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "27.4.0",
-    "@types/react": "17.0.38",
+    "@types/react": "18.0.18",
     "@types/react-native": "0.66.15",
     "@types/react-test-renderer": "17.0.1",
     "@types/uuid": "8.3.4",

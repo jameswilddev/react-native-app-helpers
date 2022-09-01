@@ -8,10 +8,12 @@ import { StyleSheet, View } from "react-native";
  */
 export const createFixedWidthComponent = (
   width: number
-): React.FunctionComponent<{
-  /** Determines how the column is to be sized vertically. */
-  readonly height: `fillsContainer` | `fitsContent`;
-}> => {
+): React.FunctionComponent<
+  React.PropsWithChildren<{
+    /** Determines how the column is to be sized vertically. */
+    readonly height: `fillsContainer` | `fitsContent`;
+  }>
+> => {
   const styles = StyleSheet.create({
     fillsContainer: {
       width,
