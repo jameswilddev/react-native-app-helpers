@@ -161,7 +161,7 @@ test(`take picture without saving to media library cancelled`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
   });
   expect(ImagePicker.launchImageLibraryAsync).not.toHaveBeenCalled();
   expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
@@ -226,7 +226,7 @@ test(`take picture saving to media library cancelled`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
   });
   expect(ImagePicker.launchImageLibraryAsync).not.toHaveBeenCalled();
   expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
@@ -295,7 +295,7 @@ test(`take picture without saving to media library successful`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
   });
   expect(ImagePicker.launchImageLibraryAsync).not.toHaveBeenCalled();
   expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
@@ -374,7 +374,7 @@ test(`take picture saving to media library successful`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
   });
   expect(ImagePicker.launchImageLibraryAsync).not.toHaveBeenCalled();
   expect(MediaLibrary.saveToLibraryAsync).toBeCalledTimes(1);
@@ -497,7 +497,7 @@ test(`select one picture from media library cancelled`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
     allowsMultipleSelection: false,
   });
   expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
@@ -566,7 +566,7 @@ test(`select one picture from media library successful`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
     allowsMultipleSelection: false,
   });
   expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
@@ -684,7 +684,7 @@ test(`select multiple pictures from media library cancelled`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
     allowsMultipleSelection: true,
   });
   expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
@@ -769,7 +769,7 @@ test(`select multiple pictures from media library successful`, async () => {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
-    presentationStyle: 0,
+    presentationStyle: "fullScreen",
     allowsMultipleSelection: true,
   });
   expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
