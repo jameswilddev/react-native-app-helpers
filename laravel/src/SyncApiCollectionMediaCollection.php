@@ -66,12 +66,10 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
   public function withMediaCollection(
     string $name,
     int $syncCapabilities,
-    ?string $routeFragment,
   ): SyncApiCollectionMediaCollection {
     return $this->syncApiCollection->withMediaCollection(
       $name,
       $syncCapabilities,
-      $routeFragment,
     );
   }
 
