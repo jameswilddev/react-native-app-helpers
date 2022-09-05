@@ -89,6 +89,10 @@ interface SyncApiInterface
    *                                              from this method.
    *                                 When null, none of these routes will be
    *                                 generated.
+   * @param ?string $routeFragment   When specified and non-null, the route
+   *                                 fragment to use within the URL, otherwise
+   *                                 auto-generated
+   *                                 (e.g. SomeClassName = some-class-names).
    * @return SyncApiCollection       The created SyncApiCollection.
    */
   function withCollection(
@@ -96,6 +100,7 @@ interface SyncApiInterface
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ): SyncApiCollection;
 
   /**

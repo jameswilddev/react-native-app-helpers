@@ -68,6 +68,7 @@ class SyncApiEnum implements SyncApiEnumInterface
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ): SyncApiCollection {
     return $this
       ->syncApi
@@ -76,6 +77,7 @@ class SyncApiEnum implements SyncApiEnumInterface
         $scopeName,
         $resourceClass,
         $controllerClass,
+        $routeFragment,
       );
   }
 

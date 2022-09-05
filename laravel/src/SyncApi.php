@@ -65,6 +65,7 @@ class SyncApi implements SyncApiInterface
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ): SyncApiCollection {
     $syncApiCollection = new SyncApiCollection(
       $this,
@@ -72,6 +73,7 @@ class SyncApi implements SyncApiInterface
       $scopeName,
       $resourceClass,
       $controllerClass,
+      $routeFragment,
     );
 
     $this->collections[] = $syncApiCollection;

@@ -67,6 +67,7 @@ class SyncApiConstant implements SyncApiConstantInterface
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ): SyncApiCollection {
     return $this
       ->syncApi
@@ -75,6 +76,7 @@ class SyncApiConstant implements SyncApiConstantInterface
         $scopeName,
         $resourceClass,
         $controllerClass,
+        $routeFragment,
       );
   }
 

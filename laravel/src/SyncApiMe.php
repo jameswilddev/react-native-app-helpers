@@ -68,6 +68,7 @@ class SyncApiMe implements SyncApiMeInterface
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ): SyncApiCollection {
     return $this
       ->syncApi
@@ -76,6 +77,7 @@ class SyncApiMe implements SyncApiMeInterface
         $scopeName,
         $resourceClass,
         $controllerClass,
+        $routeFragment,
       );
   }
 

@@ -19,6 +19,8 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
   private int $syncCapabilities;
 
+  private string $routeFragment;
+
   private function getMediaUuidField(): string
   {
     if (config('react-native-sync')) {
@@ -53,19 +55,23 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     SyncApiCollection $syncApiCollection,
     string $name,
     int $syncCapabilities,
+    ?string $routeFragment,
   ) {
     $this->syncApiCollection = $syncApiCollection;
     $this->name = $name;
     $this->syncCapabilities = $syncCapabilities;
+    $this->routeFragment = $routeFragment ?? Str::kebab(Str::pluralStudly(class_basename($this->syncApiCollection->modelClass)));
   }
 
   public function withMediaCollection(
     string $name,
     int $syncCapabilities,
+    ?string $routeFragment,
   ): SyncApiCollectionMediaCollection {
     return $this->syncApiCollection->withMediaCollection(
       $name,
       $syncCapabilities,
+      $routeFragment,
     );
   }
 
@@ -108,18 +114,15 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ): SyncApiCollection {
     return $this->syncApiCollection->withCollection(
       $modelClass,
       $scopeName,
       $resourceClass,
-      $controllerClass
+      $controllerClass,
+      $routeFragment,
     );
-  }
-
-  public function generateKebabCasedModelClassName(): string
-  {
-    return Str::kebab(Str::pluralStudly(class_basename($this->syncApiCollection->modelClass)));
   }
 
   public function generateKebabCasedMediaCollectionName(): string
@@ -131,7 +134,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
   {
     if ($this->syncCapabilities & SyncCapability::READ) {
       Route::get(
-        $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
+        $this->routeFragment . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
           $scopeName = $this->syncApiCollection->scopeName;
 
@@ -166,7 +169,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     }
 
     if ($this->syncCapabilities & SyncCapability::UPSERT) {
-      $route = $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}';
+      $route = $this->routeFragment . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}';
 
       $implementation = function (string $modelUuid, string $mediaUuid) {
         $scopeName = $this->syncApiCollection->scopeName;
@@ -217,7 +220,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
     if ($this->syncCapabilities & SyncCapability::DELETE) {
       Route::delete(
-        $this->generateKebabCasedModelClassName() . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
+        $this->routeFragment . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
           $scopeName = $this->syncApiCollection->scopeName;
 

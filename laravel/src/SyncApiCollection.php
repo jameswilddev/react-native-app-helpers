@@ -22,6 +22,8 @@ class SyncApiCollection implements SyncApiCollectionInterface
 
   private ?string $controllerClass;
 
+  private string $routeFragment;
+
   private array $syncApiCollectionMediaCollections = [];
 
   public function __construct(
@@ -30,12 +32,14 @@ class SyncApiCollection implements SyncApiCollectionInterface
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ) {
     $this->syncApi = $syncApi;
     $this->modelClass = $modelClass;
     $this->scopeName = $scopeName;
     $this->resourceClass = $resourceClass;
     $this->controllerClass = $controllerClass;
+    $this->routeFragment = $routeFragment ?? Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
   }
 
   /**
@@ -43,16 +47,23 @@ class SyncApiCollection implements SyncApiCollectionInterface
    * @param string $name                      The name of the media collection.
    * @param int $syncCapabilities             The actions available to API
    *                                          consumers.
+   * @param ?string $routeFragment            When specified and non-null, the
+   *                                          route fragment to use within the
+   *                                          URL, otherwise auto-generated
+   *                                          (e.g. SomeClassName
+   *                                          = some-class-names).
    * @return SyncApiCollectionMediaCollection The created media collection.
    */
   public function withMediaCollection(
     string $name,
     int $syncCapabilities,
+    ?string $routeFragment,
   ): SyncApiCollectionMediaCollection {
     $syncApiCollectionMediaCollection = new SyncApiCollectionMediaCollection(
       $this,
       $name,
       $syncCapabilities,
+      $routeFragment,
     );
 
     $this->syncApiCollectionMediaCollections[] = $syncApiCollectionMediaCollection;
@@ -99,23 +110,20 @@ class SyncApiCollection implements SyncApiCollectionInterface
     string $scopeName,
     ?string $resourceClass,
     ?string $controllerClass,
+    ?string $routeFragment,
   ): SyncApiCollection {
     return $this->syncApi->withCollection(
       $modelClass,
       $scopeName,
       $resourceClass,
-      $controllerClass
+      $controllerClass,
+      $routeFragment,
     );
   }
 
   public function generateCamelCasedName(): string
   {
     return Str::camel(Str::pluralStudly(class_basename($this->modelClass)));
-  }
-
-  public function generateKebabCasedName(): string
-  {
-    return Str::kebab(Str::pluralStudly(class_basename($this->modelClass)));
   }
 
   public function generatePreflightCollection(): ?array
@@ -141,7 +149,7 @@ class SyncApiCollection implements SyncApiCollectionInterface
   {
     if ($this->resourceClass !== null) {
       Route::get(
-        $this->generateKebabCasedName() . '/{uuid}',
+        $this->routeFragment . '/{uuid}',
         function (string $uuid) {
           $scopeName = $this->scopeName;
 
@@ -165,14 +173,14 @@ class SyncApiCollection implements SyncApiCollectionInterface
     if ($this->controllerClass !== null) {
       if (method_exists($this->controllerClass, 'upsert')) {
         Route::put(
-          $this->generateKebabCasedName() . '/{uuid}',
+          $this->routeFragment . '/{uuid}',
           [$this->controllerClass, 'upsert']
         );
       }
 
       if (method_exists($this->controllerClass, 'destroy')) {
         Route::delete(
-          $this->generateKebabCasedName() . '/{uuid}',
+          $this->routeFragment . '/{uuid}',
           [$this->controllerClass, 'destroy']
         );
       }
