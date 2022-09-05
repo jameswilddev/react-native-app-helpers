@@ -24,17 +24,14 @@ export const Card: React.FunctionComponent<
   return (
     <Swipeable
       ref={ref}
+      enabled={allowsSwiping}
       childrenContainerStyle={styles.swipeableChildrenContainer}
-      {...(allowsSwiping
-        ? {
-            renderLeftActions: () => <View style={styles.leftActionsView} />,
-            onSwipeableLeftOpen() {
-              onBack(pop, () => {
-                ref.current?.close();
-              });
-            },
-          }
-        : {})}
+      renderLeftActions={() => <View style={styles.leftActionsView} />}
+      onSwipeableLeftOpen={() => {
+        onBack(pop, () => {
+          ref.current?.close();
+        });
+      }}
     >
       {children}
     </Swipeable>
