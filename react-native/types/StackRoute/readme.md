@@ -1,6 +1,7 @@
 # `react-native-app-helpers/StackRoute`
 
-A React component which can be used to render a route within a stack router.
+A React component which can be used to render a route within a stack router,
+and some metadata for doing so.
 
 ## Usage
 
@@ -23,11 +24,14 @@ type OtherProps = {
   otherPropKey: `Other Prop Value`,
 };
 
-const route: StackRoute<RouteParameters, `routeBKey`, OtherProps> = ({
-  reset, push, pop, replace, bottom, top,
-  parameters,
-  otherPropKey,
-}) => <React.Fragment>
-  {/* Your view goes here. */}
-</React.Fragment>;
+const route: StackRoute<RouteParameters, `routeBKey`, OtherProps> = {
+  component: ({
+    reset, push, pop, replace, bottom, top,
+    parameters,
+    otherPropKey,
+  }) => <React.Fragment>
+    {/* Your view goes here. */}
+  </React.Fragment>,
+  allowsSwiping: true,
+};
 ```
