@@ -65,9 +65,9 @@ class SyncApiConstant implements SyncApiConstantInterface
   function withCollection(
     string $modelClass,
     string $scopeName,
-    ?string $resourceClass,
-    ?string $controllerClass,
-    ?string $routeFragment,
+    ?string $resourceClass = null,
+    ?string $controllerClass = null,
+    ?string $routeFragment = null,
   ): SyncApiCollection {
     return $this
       ->syncApi
