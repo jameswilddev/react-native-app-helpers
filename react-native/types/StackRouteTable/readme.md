@@ -24,28 +24,37 @@ type OtherProps = {
 };
 
 const route: StackRouteTable<RouteParameters, OtherProps> = {
-  routeAKey: ({
-    reset, push, pop, replace,
-    parameters: { routeAParameterKey },
-    otherPropKey,
-  }) => <React.Fragment>
-    {/* Your view goes here. */}
-  </React.Fragment>,
+  routeAKey: {
+    component: ({
+      reset, push, pop, replace,
+      parameters: { routeAParameterKey },
+      otherPropKey,
+    }) => <React.Fragment>
+      {/* Your view goes here. */}
+    </React.Fragment>,
+    allowsSwiping: true,
+  },
 
-  routeBKey: ({
-    reset, push, pop, replace,
-    parameters: { routeBParameterKey },
-    otherPropKey,
-  }) => <React.Fragment>
-    {/* Your view goes here. */}
-  </React.Fragment>,
+  routeBKey: {
+    component: ({
+      reset, push, pop, replace,
+      parameters: { routeBParameterKey },
+      otherPropKey,
+    }) => <React.Fragment>
+      {/* Your view goes here. */}
+    </React.Fragment>,
+    allowsSwiping: false,
+  },
 
-  routeCKey: ({
-    reset, push, pop, replace,
-    parameters: { routeCParameterKey },
-    otherPropKey,
-  }) => <React.Fragment>
-    {/* Your view goes here. */}
-  </React.Fragment>,
+  routeCKey: {
+    component: ({
+      reset, push, pop, replace,
+      parameters: { routeCParameterKey },
+      otherPropKey,
+    }) => <React.Fragment>
+      {/* Your view goes here. */}
+    </React.Fragment>,
+    allowsSwiping: true,
+  },
 };
 ```

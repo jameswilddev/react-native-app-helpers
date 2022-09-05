@@ -12,17 +12,19 @@ import { HorizontallySymmetricalSafeAreaView } from "../HorizontallySymmetricalS
  */
 export const createHeaderComponent = (
   headerStyle: HeaderStyle
-): React.FunctionComponent<{
-  /**
-   * The icons to show on the left.
-   */
-  readonly leftIcons: ReadonlyArray<HeaderIcon>;
+): React.FunctionComponent<
+  React.PropsWithChildren<{
+    /**
+     * The icons to show on the left.
+     */
+    readonly leftIcons: ReadonlyArray<HeaderIcon>;
 
-  /**
-   * The icons to show on the right.
-   */
-  readonly rightIcons: ReadonlyArray<HeaderIcon>;
-}> => {
+    /**
+     * The icons to show on the right.
+     */
+    readonly rightIcons: ReadonlyArray<HeaderIcon>;
+  }>
+> => {
   const viewBase: ViewStyle = {
     flexBasis: 0,
     flexGrow: 1,

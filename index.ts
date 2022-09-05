@@ -1,4 +1,4 @@
-import "react-native-get-random-values";
+import "./react-native/polyfills";
 export { AbsentSyncableStateSingleton } from "./react-native/types/AbsentSyncableStateSingleton";
 export { Aligned } from "./react-native/components/Aligned";
 export { AwaitingPullSyncableStateCollectionItem } from "./react-native/types/AwaitingPullSyncableStateCollectionItem";

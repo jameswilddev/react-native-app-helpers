@@ -46,10 +46,12 @@ const styles = StyleSheet.create({
  * A React component which fills its container and aligns its children
  * horizontally and vertically.
  */
-export const Aligned: React.FunctionComponent<{
-  readonly horizontally: `left` | `centered` | `right`;
-  readonly vertically: `top` | `centered` | `bottom`;
-}> = ({ horizontally, vertically, children }) => {
+export const Aligned: React.FunctionComponent<
+  React.PropsWithChildren<{
+    readonly horizontally: `left` | `centered` | `right`;
+    readonly vertically: `top` | `centered` | `bottom`;
+  }>
+> = ({ horizontally, vertically, children }) => {
   let style: ViewStyle;
 
   switch (horizontally) {

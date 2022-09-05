@@ -19,13 +19,15 @@ export const createTextComponent = (
   color: ColorValue,
   alignment: `left` | `center` | `right`,
   multiLine: boolean
-): React.FunctionComponent<{
-  /**
-   * Similar to Text's onPress, but remote-controlled using the "enabled" static
-   * property of Hitbox.
-   */
-  readonly onPress?: undefined | (() => void);
-}> => {
+): React.FunctionComponent<
+  React.PropsWithChildren<{
+    /**
+     * Similar to Text's onPress, but remote-controlled using the "enabled" static
+     * property of Hitbox.
+     */
+    readonly onPress?: undefined | (() => void);
+  }>
+> => {
   const styles = StyleSheet.create({
     text: {
       fontFamily,

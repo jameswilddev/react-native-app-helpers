@@ -98,10 +98,12 @@ export const createStackRoutingComponent = <
                 }}
                 onBack={props.onBack}
                 allowsSwiping={
-                  index > 0 && index === props.routeState.length - 1
+                  index > 0 &&
+                  index === props.routeState.length - 1 &&
+                  routeTable[item.key].allowsSwiping
                 }
               >
-                {React.createElement(routeTable[item.key], {
+                {React.createElement(routeTable[item.key].component, {
                   parameters: item.parameters,
                   push: (...itemsToAdd) => {
                     props.setRouteState([...props.routeState, ...itemsToAdd]);

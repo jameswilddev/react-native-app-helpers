@@ -12,27 +12,26 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Card: React.FunctionComponent<{
-  pop(): void;
-  onBack(pop: () => void, cancel: () => void): void;
-  readonly allowsSwiping: boolean;
-}> = ({ pop, allowsSwiping, onBack, children }) => {
+export const Card: React.FunctionComponent<
+  React.PropsWithChildren<{
+    pop(): void;
+    onBack(pop: () => void, cancel: () => void): void;
+    readonly allowsSwiping: boolean;
+  }>
+> = ({ pop, allowsSwiping, onBack, children }) => {
   const ref = React.useRef<null | Swipeable>(null);
 
   return (
     <Swipeable
       ref={ref}
+      enabled={allowsSwiping}
       childrenContainerStyle={styles.swipeableChildrenContainer}
-      {...(allowsSwiping
-        ? {
-            renderLeftActions: () => <View style={styles.leftActionsView} />,
-            onSwipeableLeftOpen() {
-              onBack(pop, () => {
-                ref.current?.close();
-              });
-            },
-          }
-        : {})}
+      renderLeftActions={() => <View style={styles.leftActionsView} />}
+      onSwipeableLeftOpen={() => {
+        onBack(pop, () => {
+          ref.current?.close();
+        });
+      }}
     >
       {children}
     </Swipeable>

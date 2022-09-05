@@ -34,35 +34,44 @@ test(`can render one item`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -114,7 +123,7 @@ test(`can render one item`, async () => {
           onBack,
           allowsSwiping: false,
           children: expect.objectContaining({
-            type: RouteB,
+            type: RouteB.component,
             props: {
               push: expect.any(Function),
               pop: expect.any(Function),
@@ -168,35 +177,44 @@ test(`does not hook the back button for a single item`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -274,35 +292,44 @@ test(`can render two items`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -362,7 +389,7 @@ test(`can render two items`, async () => {
             onBack,
             allowsSwiping: false,
             children: expect.objectContaining({
-              type: RouteB,
+              type: RouteB.component,
               props: {
                 push: expect.any(Function),
                 pop: expect.any(Function),
@@ -400,7 +427,7 @@ test(`can render two items`, async () => {
             onBack,
             allowsSwiping: true,
             children: expect.objectContaining({
-              type: RouteA,
+              type: RouteA.component,
               props: {
                 push: expect.any(Function),
                 pop: expect.any(Function),
@@ -455,35 +482,44 @@ test(`hooks the back button for two items`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -569,35 +605,44 @@ test(`can render three items`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -665,7 +710,7 @@ test(`can render three items`, async () => {
             onBack,
             allowsSwiping: false,
             children: expect.objectContaining({
-              type: RouteB,
+              type: RouteB.component,
               props: {
                 push: expect.any(Function),
                 pop: expect.any(Function),
@@ -703,7 +748,7 @@ test(`can render three items`, async () => {
             onBack,
             allowsSwiping: false,
             children: expect.objectContaining({
-              type: RouteA,
+              type: RouteA.component,
               props: {
                 push: expect.any(Function),
                 pop: expect.any(Function),
@@ -741,7 +786,7 @@ test(`can render three items`, async () => {
             onBack,
             allowsSwiping: true,
             children: expect.objectContaining({
-              type: RouteA,
+              type: RouteA.component,
               props: {
                 push: expect.any(Function),
                 pop: expect.any(Function),
@@ -796,35 +841,44 @@ test(`hooks the back button for three items`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -892,6 +946,242 @@ test(`hooks the back button for three items`, async () => {
   renderer.unmount();
 });
 
+test(`can disable swiping to go back`, async () => {
+  type ParametersA = {
+    readonly testRouteAParameterKey:
+      | `Test Route A Parameter Value A`
+      | `Test Route A Parameter Value B`;
+  };
+
+  type ParametersB = {
+    readonly testRouteBParameterKey: `Test Route B Parameter Value`;
+  };
+
+  type ParametersC = {
+    readonly testRouteCParameterKey: `Test Route C Parameter Value`;
+  };
+
+  type Parameters = {
+    testRouteAKey: ParametersA;
+    testRouteBKey: ParametersB;
+    testRouteCKey: ParametersC;
+  };
+
+  type OtherProps = {
+    exampleOtherPropKey: `Example Other Prop Value`;
+  };
+
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: false,
+  };
+
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
+
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
+
+  const routeTable: StackRouteTable<Parameters, OtherProps> = {
+    testRouteAKey: RouteA,
+    testRouteBKey: RouteB,
+    testRouteCKey: RouteC,
+  };
+
+  const routeState: StackRouterState<Parameters> = [
+    {
+      uuid: `ec055b0f-0659-4e9a-a889-06a7586bb61a`,
+      key: `testRouteBKey`,
+      parameters: {
+        testRouteBParameterKey: `Test Route B Parameter Value`,
+      },
+    },
+    {
+      uuid: `f36ce5e7-d37e-443a-8635-718118c27128`,
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value A`,
+      },
+    },
+    {
+      uuid: `345d1eff-3d1d-4d93-8136-e0c3ff0f7f7c`,
+      key: `testRouteAKey`,
+      parameters: {
+        testRouteAParameterKey: `Test Route A Parameter Value B`,
+      },
+    },
+  ];
+
+  const setRouteState = jest.fn();
+  const onBack = jest.fn();
+
+  const Component = createStackRoutingComponent(routeTable);
+
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 100);
+  });
+
+  const renderer = TestRenderer.create(
+    <Component
+      routeState={routeState}
+      setRouteState={setRouteState}
+      exampleOtherPropKey="Example Other Prop Value"
+      onBack={onBack}
+    />
+  );
+
+  expect(renderer.toTree()?.rendered).toEqual([
+    expect.objectContaining({
+      type: View,
+      props: expect.objectContaining({
+        style: {
+          position: `absolute`,
+          width: `100%`,
+          height: `100%`,
+          display: `none`,
+        },
+        pointerEvents: `none`,
+        children: expect.objectContaining({
+          type: Card,
+          props: {
+            pop: expect.any(Function),
+            onBack,
+            allowsSwiping: false,
+            children: expect.objectContaining({
+              type: RouteB.component,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                setParameters: expect.any(Function),
+                bottom: true,
+                top: false,
+                parameters: {
+                  testRouteBParameterKey: `Test Route B Parameter Value`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
+          },
+        }),
+      }),
+    }),
+    expect.objectContaining({
+      type: View,
+      props: {
+        style: {
+          position: `absolute`,
+          width: `100%`,
+          height: `100%`,
+        },
+        pointerEvents: `none`,
+        children: expect.objectContaining({
+          type: Card,
+          props: {
+            pop: expect.any(Function),
+            onBack,
+            allowsSwiping: false,
+            children: expect.objectContaining({
+              type: RouteA.component,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                setParameters: expect.any(Function),
+                bottom: false,
+                top: false,
+                parameters: {
+                  testRouteAParameterKey: `Test Route A Parameter Value A`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
+          },
+        }),
+      },
+    }),
+    expect.objectContaining({
+      type: View,
+      props: {
+        style: {
+          position: `absolute`,
+          width: `100%`,
+          height: `100%`,
+        },
+        pointerEvents: `auto`,
+        children: expect.objectContaining({
+          type: Card,
+          props: {
+            pop: expect.any(Function),
+            onBack,
+            allowsSwiping: false,
+            children: expect.objectContaining({
+              type: RouteA.component,
+              props: {
+                push: expect.any(Function),
+                pop: expect.any(Function),
+                replace: expect.any(Function),
+                reset: expect.any(Function),
+                setParameters: expect.any(Function),
+                bottom: false,
+                top: true,
+                parameters: {
+                  testRouteAParameterKey: `Test Route A Parameter Value B`,
+                },
+                routeState: routeState,
+                setRouteState: setRouteState,
+                exampleOtherPropKey: `Example Other Prop Value`,
+                onBack,
+              },
+            }),
+          },
+        }),
+      },
+    }),
+  ]);
+
+  expect(setRouteState).not.toHaveBeenCalled();
+  expect(onBack).not.toHaveBeenCalled();
+
+  renderer.unmount();
+});
+
 test(`pops one card on confirming after pressing the back button`, async () => {
   type ParametersA = {
     readonly testRouteAParameterKey:
@@ -917,35 +1207,44 @@ test(`pops one card on confirming after pressing the back button`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -1056,35 +1355,44 @@ test(`does nothing on cancelling after pressing the back button`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -1183,35 +1491,44 @@ test(`push`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -1354,35 +1671,44 @@ test(`pop`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -1482,35 +1808,44 @@ test(`pop default`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -1617,35 +1952,44 @@ test(`card pop`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -1752,35 +2096,44 @@ test(`replace`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -1924,35 +2277,44 @@ test(`reset`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,
@@ -2075,35 +2437,44 @@ test(`setParameters`, async () => {
     exampleOtherPropKey: `Example Other Prop Value`;
   };
 
-  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = ({
-    parameters: { testRouteAParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route A with parameter {testRouteAParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteA: StackRoute<Parameters, `testRouteAKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteAParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route A with parameter {testRouteAParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = ({
-    parameters: { testRouteBParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteB: StackRoute<Parameters, `testRouteBKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteBParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route B with parameter {testRouteBParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
-  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = ({
-    parameters: { testRouteCParameterKey },
-    exampleOtherPropKey,
-  }) => (
-    <Text>
-      Example Route C with parameter {testRouteCParameterKey}{" "}
-      {exampleOtherPropKey}
-    </Text>
-  );
+  const RouteC: StackRoute<Parameters, `testRouteCKey`, OtherProps> = {
+    component: ({
+      parameters: { testRouteCParameterKey },
+      exampleOtherPropKey,
+    }) => (
+      <Text>
+        Example Route C with parameter {testRouteCParameterKey}{" "}
+        {exampleOtherPropKey}
+      </Text>
+    ),
+    allowsSwiping: true,
+  };
 
   const routeTable: StackRouteTable<Parameters, OtherProps> = {
     testRouteAKey: RouteA,

@@ -3,9 +3,9 @@ import { Text } from "react-native";
 import { unwrapRenderedFunctionComponent } from "../../..";
 
 test(`unwraps a wrapped element`, () => {
-  const Component: React.FunctionComponent = ({ children }) => (
-    <Text>{children}</Text>
-  );
+  const Component: React.FunctionComponent<
+    React.PropsWithChildren<Record<never, never>>
+  > = ({ children }) => <Text>{children}</Text>;
   const rendered = <Component>Test Content</Component>;
 
   const unwrapped = unwrapRenderedFunctionComponent(rendered);

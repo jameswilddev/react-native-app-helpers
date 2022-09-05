@@ -7,16 +7,18 @@ const styles: { [key: string]: ViewStyle } = {};
  * A React component which fills the container horizontally and applies a flex
  * row to its children.
  */
-export const Row: React.FunctionComponent<{
-  readonly height: `fitsContent` | `fillsContainer`;
-  readonly horizontalDistribution:
-    | `left`
-    | `centered`
-    | `right`
-    | `spaced`
-    | `spacedTouchingEnds`;
-  readonly verticalAlignment: `top` | `centered` | `bottom` | `stretched`;
-}> = ({ height, horizontalDistribution, verticalAlignment, children }) => {
+export const Row: React.FunctionComponent<
+  React.PropsWithChildren<{
+    readonly height: `fitsContent` | `fillsContainer`;
+    readonly horizontalDistribution:
+      | `left`
+      | `centered`
+      | `right`
+      | `spaced`
+      | `spacedTouchingEnds`;
+    readonly verticalAlignment: `top` | `centered` | `bottom` | `stretched`;
+  }>
+> = ({ height, horizontalDistribution, verticalAlignment, children }) => {
   const styleKey = `${height}-${horizontalDistribution}-${verticalAlignment}`;
 
   if (!(styleKey in styles)) {

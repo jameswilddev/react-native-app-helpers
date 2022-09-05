@@ -74,25 +74,27 @@ const createTextStyle = (
  */
 export const createCheckboxComponent = (
   checkboxStyle: CheckboxStyle
-): React.FunctionComponent<{
-  /**
-   * When true, the checkbox is checked.  It is otherwise unchecked.
-   */
-  value: boolean;
+): React.FunctionComponent<
+  React.PropsWithChildren<{
+    /**
+     * When true, the checkbox is checked.  It is otherwise unchecked.
+     */
+    value: boolean;
 
-  /**
-   * Invoked when the checkbox is pressed.
-   * @param to True when the checkbox is changing from unchecked to checked,
-   *           otherwise, false.
-   */
-  onChange(to: boolean): void;
+    /**
+     * Invoked when the checkbox is pressed.
+     * @param to True when the checkbox is changing from unchecked to checked,
+     *           otherwise, false.
+     */
+    onChange(to: boolean): void;
 
-  /**
-   * When true, the checkbox will show alternative styles and will not accept
-   * input.  It will otherwise show its default styles and accept input.
-   */
-  disabled: boolean;
-}> => {
+    /**
+     * When true, the checkbox will show alternative styles and will not accept
+     * input.  It will otherwise show its default styles and accept input.
+     */
+    disabled: boolean;
+  }>
+> => {
   const styles = StyleSheet.create({
     hitbox: {
       width: `100%`,

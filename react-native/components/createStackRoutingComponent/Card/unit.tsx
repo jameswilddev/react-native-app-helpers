@@ -25,9 +25,18 @@ test(`renders as expected when disallowing swiping`, () => {
             children: `Example Children`,
           },
         }),
+        renderLeftActions: expect.any(Function),
+        onSwipeableLeftOpen: expect.any(Function),
+        enabled: false,
       },
     }),
   });
+
+  expect(
+    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
+      `renderLeftActions`
+    ]()
+  ).toEqual(<View style={{ width: `100%` }} />);
 
   expect(pop).not.toHaveBeenCalled();
   expect(onBack).not.toHaveBeenCalled();
@@ -62,6 +71,7 @@ test(`renders as expected when allowing swiping`, () => {
         }),
         renderLeftActions: expect.any(Function),
         onSwipeableLeftOpen: expect.any(Function),
+        enabled: true,
       },
     }),
   });

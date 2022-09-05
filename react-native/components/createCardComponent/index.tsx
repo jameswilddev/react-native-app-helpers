@@ -28,10 +28,12 @@ export const createCardComponent = (
   borderRadius: number,
   shadowRadius: number,
   border: null | BorderStyle
-): React.FunctionComponent<{
-  readonly width: `fillsContainer` | `fitsContent`;
-  readonly height: `fillsContainer` | `fitsContent`;
-}> => {
+): React.FunctionComponent<
+  React.PropsWithChildren<{
+    readonly width: `fillsContainer` | `fitsContent`;
+    readonly height: `fillsContainer` | `fitsContent`;
+  }>
+> => {
   if (borderRadius === 0) {
     if (shadowRadius === 0) {
       if (border === null) {

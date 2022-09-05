@@ -37,7 +37,9 @@ export class PictureHelper implements PictureHelperInterface {
           base64: false,
 
           // Workaround for https://github.com/expo/expo/issues/14903#issuecomment-966161497.
-          presentationStyle: 0,
+          presentationStyle:
+            // TODO: why is this export missing at runtime?
+            "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
         });
 
         if (result.cancelled) {
@@ -73,7 +75,9 @@ export class PictureHelper implements PictureHelperInterface {
           allowsMultipleSelection: false,
 
           // Workaround for https://github.com/expo/expo/issues/14903#issuecomment-966161497.
-          presentationStyle: 0,
+          presentationStyle:
+            // TODO: why is this export missing at runtime?
+            "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
         });
 
         if (result.cancelled) {
@@ -103,7 +107,9 @@ export class PictureHelper implements PictureHelperInterface {
           allowsMultipleSelection: true,
 
           // Workaround for https://github.com/expo/expo/issues/14903#issuecomment-966161497.
-          presentationStyle: 0,
+          presentationStyle:
+            // TODO: why is this export missing at runtime?
+            "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
         });
 
         if (result.cancelled) {
