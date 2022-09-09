@@ -171,7 +171,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
       $implementation = function (string $modelUuid, string $mediaUuid) {
         $scopeName = $this->syncApiCollection->scopeName;
-
+        // TODO transaction
         $model = $this
           ->syncApiCollection
           ->modelClass::$scopeName()
@@ -217,6 +217,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     }
 
     if ($this->syncCapabilities & SyncCapability::DELETE) {
+      // TODO transaction
       Route::delete(
         $this->routeFragment . '/{modelUuid}/' . $this->generateKebabCasedMediaCollectionName() . '/{mediaUuid}',
         function (string $modelUuid, string $mediaUuid) {
