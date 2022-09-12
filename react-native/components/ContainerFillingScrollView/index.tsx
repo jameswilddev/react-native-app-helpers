@@ -18,7 +18,6 @@ export const ContainerFillingScrollView: React.FunctionComponent<
   ScrollViewProps
 > = (props) => (
   <ScrollView
-    pointerEvents="box-none"
     style={styles.scrollView}
     contentContainerStyle={styles.scrollViewContentContainer}
     keyboardShouldPersistTaps="handled"
