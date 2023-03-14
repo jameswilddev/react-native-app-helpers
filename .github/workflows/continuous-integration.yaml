@@ -2,7 +2,8 @@ name: Continuous Integration
 on:
   push:
   pull_request:
-  release: [created]
+  release:
+    types: [created]
 jobs:
   test:
     runs-on: ${{ matrix.os }}
