@@ -6,7 +6,7 @@ all items in the stack are continuously rendered).
 ## Usage
 
 ```tsx
-import * as uuid from "uuid";
+import * as Crypto from "expo-crypto";
 import React from "react";
 import { Button, SafeAreaView, Text } from "react-native";
 import {
@@ -237,10 +237,10 @@ export default () => {
       <RoutingComponent
         routeState={routeState}
         pushA={() => {
-          setRouteState([ ...routeState, { uuid: uuid.v4(), key: `routeAKey`, parameters: null } ]);
+          setRouteState([ ...routeState, { uuid: Crypto.randomUUID(), key: `routeAKey`, parameters: null } ]);
         }}
         pushB={(value) => {
-          setRouteState([ ...routeState, { uuid: uuid.v4(), key: `routeBKey`, parameters: { value } } ]);
+          setRouteState([ ...routeState, { uuid: Crypto.randomUUID(), key: `routeBKey`, parameters: { value } } ]);
         }}
         pop={() => {
           setRouteState(routeState.slice(0, routeState.length - 1));

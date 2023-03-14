@@ -1,4 +1,4 @@
-import * as uuid from "uuid";
+import * as Crypto from "expo-crypto";
 import * as FileSystem from "expo-file-system";
 import type { FileStoreInterface } from "../../types/FileStoreInterface";
 
@@ -99,7 +99,7 @@ export class FileStore implements FileStoreInterface {
       try {
         this.operationsInProgress++;
 
-        const output = uuid.v4();
+        const output = Crypto.randomUUID();
 
         await FileSystem.moveAsync({
           from: fileUri,

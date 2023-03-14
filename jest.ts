@@ -108,6 +108,14 @@ jest.mock(`expo-image-picker`, () => {
   };
 });
 
+jest.mock(`expo-crypto`, () => {
+  const uuid = jest.requireActual(`uuid`);
+
+  return {
+    randomUUID: () => uuid.v4(),
+  };
+});
+
 jest.mock(`expo-file-system`, () => {
   const uuid = jest.requireActual(`uuid`);
   const fs = jest.requireActual(`fs`);
