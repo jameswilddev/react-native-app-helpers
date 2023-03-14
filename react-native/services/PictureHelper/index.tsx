@@ -42,14 +42,17 @@ export class PictureHelper implements PictureHelperInterface {
             "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
         });
 
-        if (result.cancelled) {
+        if (result.canceled || result.assets.length === 0) {
           await onCancel();
         } else {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const uri = result.assets[0]!.uri;
+
           if (saveToMediaLibrary) {
-            await MediaLibrary.saveToLibraryAsync(result.uri);
+            await MediaLibrary.saveToLibraryAsync(uri);
           }
 
-          const uuid = await this.fileStore.import(result.uri);
+          const uuid = await this.fileStore.import(uri);
 
           await onSuccess(uuid);
         }
@@ -80,10 +83,11 @@ export class PictureHelper implements PictureHelperInterface {
             "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
         });
 
-        if (result.cancelled) {
+        if (result.canceled || result.assets.length < 1) {
           await onCancel();
         } else {
-          await onSuccess(await this.fileStore.import(result.uri));
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          await onSuccess(await this.fileStore.import(result.assets[0]!.uri));
         }
       }
     );
@@ -112,12 +116,12 @@ export class PictureHelper implements PictureHelperInterface {
             "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
         });
 
-        if (result.cancelled) {
+        if (result.canceled) {
           await onCancel();
         } else {
           await onSuccess(
             await Promise.all(
-              result.selected.map((image) => this.fileStore.import(image.uri))
+              result.assets.map((image) => this.fileStore.import(image.uri))
             )
           );
         }

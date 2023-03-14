@@ -116,7 +116,73 @@ test(`take picture saving to media library permission denied`, async () => {
 
 test(`take picture without saving to media library cancelled`, async () => {
   ImagePicker.launchCameraAsync.mockResolvedValue({
-    cancelled: true,
+    canceled: true,
+  });
+
+  const fileStore: FileStoreInterface = {
+    load: jest.fn(),
+    list: jest.fn(),
+    delete: jest.fn(),
+    generatePath: jest.fn(),
+    import: jest.fn(),
+    unload: jest.fn(),
+  };
+
+  const permissionHelper: PermissionHelperInterface = {
+    acquire: jest.fn(async (permissions, permissionDenied, onSuccess) => {
+      permissions;
+      permissionDenied;
+
+      await onSuccess();
+    }),
+  };
+
+  const onPermissionDenied = jest.fn();
+  const onCancel = jest.fn().mockResolvedValue(undefined);
+  const onSuccess = jest.fn();
+
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper);
+
+  await pictureHelper.takePicture(
+    false,
+    onPermissionDenied,
+    onCancel,
+    onSuccess
+  );
+
+  expect(onPermissionDenied).not.toHaveBeenCalled();
+  expect(onCancel).toHaveBeenCalledTimes(1);
+  expect(onSuccess).not.toHaveBeenCalled();
+
+  expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1);
+  expect(ImagePicker.launchCameraAsync).toBeCalledWith({
+    allowsEditing: true,
+    quality: 0.7,
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    exif: false,
+    base64: false,
+    presentationStyle: "fullScreen",
+  });
+  expect(ImagePicker.launchImageLibraryAsync).not.toHaveBeenCalled();
+  expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
+  expect(fileStore.load).not.toHaveBeenCalled();
+  expect(fileStore.list).not.toHaveBeenCalled();
+  expect(fileStore.delete).not.toHaveBeenCalled();
+  expect(fileStore.generatePath).not.toHaveBeenCalled();
+  expect(fileStore.import).not.toHaveBeenCalled();
+  expect(fileStore.unload).not.toHaveBeenCalled();
+  expect(permissionHelper.acquire).toBeCalledTimes(1);
+  expect(permissionHelper.acquire).toBeCalledWith(
+    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    onPermissionDenied,
+    expect.any(Function)
+  );
+});
+
+test(`take picture without saving to media library none selected`, async () => {
+  ImagePicker.launchCameraAsync.mockResolvedValue({
+    canceled: false,
+    assets: [],
   });
 
   const fileStore: FileStoreInterface = {
@@ -181,7 +247,73 @@ test(`take picture without saving to media library cancelled`, async () => {
 
 test(`take picture saving to media library cancelled`, async () => {
   ImagePicker.launchCameraAsync.mockResolvedValue({
-    cancelled: true,
+    canceled: true,
+  });
+
+  const fileStore: FileStoreInterface = {
+    load: jest.fn(),
+    list: jest.fn(),
+    delete: jest.fn(),
+    generatePath: jest.fn(),
+    import: jest.fn(),
+    unload: jest.fn(),
+  };
+
+  const permissionHelper: PermissionHelperInterface = {
+    acquire: jest.fn(async (permissions, permissionDenied, onSuccess) => {
+      permissions;
+      permissionDenied;
+
+      await onSuccess();
+    }),
+  };
+
+  const onPermissionDenied = jest.fn();
+  const onCancel = jest.fn().mockResolvedValue(undefined);
+  const onSuccess = jest.fn();
+
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper);
+
+  await pictureHelper.takePicture(
+    true,
+    onPermissionDenied,
+    onCancel,
+    onSuccess
+  );
+
+  expect(onPermissionDenied).not.toHaveBeenCalled();
+  expect(onCancel).toHaveBeenCalledTimes(1);
+  expect(onSuccess).not.toHaveBeenCalled();
+
+  expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1);
+  expect(ImagePicker.launchCameraAsync).toBeCalledWith({
+    allowsEditing: true,
+    quality: 0.7,
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    exif: false,
+    base64: false,
+    presentationStyle: "fullScreen",
+  });
+  expect(ImagePicker.launchImageLibraryAsync).not.toHaveBeenCalled();
+  expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
+  expect(fileStore.load).not.toHaveBeenCalled();
+  expect(fileStore.list).not.toHaveBeenCalled();
+  expect(fileStore.delete).not.toHaveBeenCalled();
+  expect(fileStore.generatePath).not.toHaveBeenCalled();
+  expect(fileStore.import).not.toHaveBeenCalled();
+  expect(fileStore.unload).not.toHaveBeenCalled();
+  expect(permissionHelper.acquire).toBeCalledTimes(1);
+  expect(permissionHelper.acquire).toBeCalledWith(
+    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    onPermissionDenied,
+    expect.any(Function)
+  );
+});
+
+test(`take picture saving to media library none selected`, async () => {
+  ImagePicker.launchCameraAsync.mockResolvedValue({
+    canceled: false,
+    assets: [],
   });
 
   const fileStore: FileStoreInterface = {
@@ -246,8 +378,8 @@ test(`take picture saving to media library cancelled`, async () => {
 
 test(`take picture without saving to media library successful`, async () => {
   ImagePicker.launchCameraAsync.mockResolvedValue({
-    cancelled: false,
-    uri: `Example File Uri`,
+    canceled: false,
+    assets: [{ uri: `Example File Uri` }],
   });
 
   const fileStore: FileStoreInterface = {
@@ -318,8 +450,8 @@ test(`take picture saving to media library successful`, async () => {
   const callOrder: string[] = [];
 
   ImagePicker.launchCameraAsync.mockResolvedValue({
-    cancelled: false,
-    uri: `Example File Uri`,
+    canceled: false,
+    assets: [{ uri: `Example File Uri` }],
   });
 
   MediaLibrary.saveToLibraryAsync.mockImplementation(async () => {
@@ -452,7 +584,73 @@ test(`select one picture from media library permission denied`, async () => {
 
 test(`select one picture from media library cancelled`, async () => {
   ImagePicker.launchImageLibraryAsync.mockResolvedValue({
-    cancelled: true,
+    canceled: true,
+  });
+
+  const fileStore: FileStoreInterface = {
+    load: jest.fn(),
+    list: jest.fn(),
+    delete: jest.fn(),
+    generatePath: jest.fn(),
+    import: jest.fn(),
+    unload: jest.fn(),
+  };
+
+  const permissionHelper: PermissionHelperInterface = {
+    acquire: jest.fn(async (permissions, permissionDenied, onSuccess) => {
+      permissions;
+      permissionDenied;
+
+      await onSuccess();
+    }),
+  };
+
+  const onPermissionDenied = jest.fn();
+  const onCancel = jest.fn();
+  const onSuccess = jest.fn().mockResolvedValue(undefined);
+
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper);
+
+  await pictureHelper.selectOnePictureFromMediaLibrary(
+    onPermissionDenied,
+    onCancel,
+    onSuccess
+  );
+
+  expect(onPermissionDenied).not.toHaveBeenCalled();
+  expect(onCancel).toBeCalledTimes(1);
+  expect(onSuccess).not.toHaveBeenCalled();
+
+  expect(ImagePicker.launchCameraAsync).not.toHaveBeenCalled();
+  expect(ImagePicker.launchImageLibraryAsync).toHaveBeenCalledTimes(1);
+  expect(ImagePicker.launchImageLibraryAsync).toBeCalledWith({
+    allowsEditing: true,
+    quality: 0.7,
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    exif: false,
+    base64: false,
+    presentationStyle: "fullScreen",
+    allowsMultipleSelection: false,
+  });
+  expect(MediaLibrary.saveToLibraryAsync).not.toHaveBeenCalled();
+  expect(fileStore.load).not.toHaveBeenCalled();
+  expect(fileStore.list).not.toHaveBeenCalled();
+  expect(fileStore.delete).not.toHaveBeenCalled();
+  expect(fileStore.generatePath).not.toHaveBeenCalled();
+  expect(fileStore.import).not.toBeCalled();
+  expect(fileStore.unload).not.toHaveBeenCalled();
+  expect(permissionHelper.acquire).toBeCalledTimes(1);
+  expect(permissionHelper.acquire).toBeCalledWith(
+    [Permissions.MEDIA_LIBRARY],
+    onPermissionDenied,
+    expect.any(Function)
+  );
+});
+
+test(`select one picture from media library no assets`, async () => {
+  ImagePicker.launchImageLibraryAsync.mockResolvedValue({
+    canceled: false,
+    assets: [],
   });
 
   const fileStore: FileStoreInterface = {
@@ -517,8 +715,8 @@ test(`select one picture from media library cancelled`, async () => {
 
 test(`select one picture from media library successful`, async () => {
   ImagePicker.launchImageLibraryAsync.mockResolvedValue({
-    cancelled: false,
-    uri: `Example File Uri`,
+    canceled: false,
+    assets: [{ uri: `Example File Uri` }],
   });
 
   const fileStore: FileStoreInterface = {
@@ -639,7 +837,7 @@ test(`select multiple pictures from media library permission denied`, async () =
 
 test(`select multiple pictures from media library cancelled`, async () => {
   ImagePicker.launchImageLibraryAsync.mockResolvedValue({
-    cancelled: true,
+    canceled: true,
   });
 
   const fileStore: FileStoreInterface = {
@@ -704,8 +902,8 @@ test(`select multiple pictures from media library cancelled`, async () => {
 
 test(`select multiple pictures from media library successful`, async () => {
   ImagePicker.launchImageLibraryAsync.mockResolvedValue({
-    cancelled: false,
-    selected: [
+    canceled: false,
+    assets: [
       {
         uri: `Example File Uri A`,
       },
