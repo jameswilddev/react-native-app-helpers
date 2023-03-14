@@ -1,5 +1,8 @@
 name: Continuous Integration
-on: [push, pull_request, release]
+on:
+  push:
+  pull_request:
+  release: [created]
 jobs:
   test:
     runs-on: ${{ matrix.os }}
