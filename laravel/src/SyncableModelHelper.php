@@ -2,8 +2,8 @@
 
 namespace JamesWildDev\ReactNativeAppHelpers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Validation\UnauthorizedException;
 
 /**
  * Helpers for working with syncable models.
@@ -37,17 +37,17 @@ final class SyncableModelHelper
   }
 
   /**
-   * Retrieves a model by its UUID if it exists.
-   * @param string $modelClass     The Laravel Model class which is to be
-   *                               retrieved.
-   * @param string $scopeName      The name of the scope which will be used to
-   *                               filter the Models (e.g. "exampleTest" ->
-   *                               "function scopeExampleTest()").
-   * @param string $uuid           The UUID of the model to retrieve.
-   * @return ?SyncableModel        When the model exists, the model, otherwise,
-   *                               null.
-   * @throws UnauthorizedException When the model exists, but access is blocked
-   *                               by the scope.
+   * Upserts a model by its UUID if it exists.
+   * @param string $modelClass      The Laravel Model class which is to be
+   *                                upserted.
+   * @param string $scopeName       The name of the scope which will be used to
+   *                                filter the Models (e.g. "exampleTest" ->
+   *                                "function scopeExampleTest()").
+   * @param string $uuid            The UUID of the model to upsert.
+   * @return ?SyncableModel         When the model exists, the model, otherwise,
+   *                                null.
+   * @throws AuthorizationException When the model exists, but access is blocked
+   *                                by the scope.
    */
   static function upsert(
     string $modelClass,
@@ -74,10 +74,8 @@ final class SyncableModelHelper
         $query = $query->withTrashed();
       }
 
-
-
       if ($query->where('uuid', $uuid)->exists()) {
-        throw new UnauthorizedException();
+        throw new AuthorizationException();
       } else {
         return null;
       }
