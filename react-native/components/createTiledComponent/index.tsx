@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
-import { flattenRenderedToArray } from "../../..";
+import { flattenRenderedToArray } from "../../utilities/flattenRenderedToArray";
 import { useMeasure } from "../../hooks/useMeasure";
 import { getRenderedKey } from "../../utilities/getRenderedKey";
 

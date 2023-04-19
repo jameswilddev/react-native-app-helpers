@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
-import { useMeasure } from "../../..";
+import { useMeasure } from "../../hooks/useMeasure";
 
 type Component = React.FunctionComponent<
   React.PropsWithChildren<{

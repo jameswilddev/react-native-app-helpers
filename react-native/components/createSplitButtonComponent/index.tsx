@@ -1,10 +1,8 @@
 import * as React from "react";
 import { StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
-import {
-  flattenRenderedToArray,
-  SplitButtonStyle,
-  SplitButtonStateStyle,
-} from "../../..";
+import { flattenRenderedToArray } from "../../utilities/flattenRenderedToArray";
+import type { SplitButtonStyle } from "../../types/SplitButtonStyle";
+import type { SplitButtonStateStyle } from "../../types/SplitButtonStateStyle";
 import { Hitbox } from "../Hitbox";
 
 const createSingleButtonHitboxStyleInstance = (
