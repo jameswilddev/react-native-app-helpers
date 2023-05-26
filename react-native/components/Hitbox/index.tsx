@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   LayoutChangeEvent,
   MeasureOnSuccessCallback,
+  StyleProp,
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
@@ -19,7 +20,7 @@ type Component = React.FunctionComponent<
     /**
      * Passed down to TouchableOpacity.
      */
-    readonly style?: ViewStyle;
+    readonly style?: StyleProp<ViewStyle>;
 
     /**
      * Passed to useMeasure.
