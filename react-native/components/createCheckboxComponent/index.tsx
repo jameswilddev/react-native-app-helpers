@@ -109,7 +109,7 @@ export const createCheckboxComponent = (
     enabledTrueText: createTextStyle(checkboxStyle, checkboxStyle.enabledTrue)
   })
 
-  return ({ value, onChange, disabled, children }) => (
+  const Checkbox: React.FunctionComponent<CheckboxProps> = ({ value, onChange, disabled, children }) => (
     <Hitbox
       disabled={disabled}
       onPress={() => {
@@ -151,4 +151,6 @@ export const createCheckboxComponent = (
       </Text>
     </Hitbox>
   )
+
+  return Checkbox
 }
