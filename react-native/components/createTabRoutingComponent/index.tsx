@@ -2,6 +2,7 @@ import * as React from 'react'
 import type { FunctionComponent } from 'react'
 import type { TabRouteTable } from '../../types/TabRouteTable'
 import { StyleSheet, View, type ViewStyle } from 'react-native'
+import type { TabRoutingProps } from '../../types/TabRoutingProps'
 
 const viewBase: ViewStyle = {
   width: '100%',
@@ -32,14 +33,7 @@ export const createTabRoutingComponent = <
   TOtherProps extends Readonly<Record<string, unknown>>
 >(
     routeTable: TabRouteTable<TRoute, TOtherProps>
-  ): FunctionComponent<
-  {
-    /**
-     * The key of the route to display.
-     */
-    readonly route: TRoute
-  } & TOtherProps
-  > => {
+  ): FunctionComponent<TabRoutingProps<TRoute, TOtherProps>> => {
   const keys = Object.keys(
     routeTable
   ).sort() as unknown as readonly TRoute[]
