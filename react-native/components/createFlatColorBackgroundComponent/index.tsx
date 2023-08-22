@@ -22,9 +22,11 @@ export const createFlatColorBackgroundComponent = (
     }
   })
 
-  return ({ size, children }) => (
+  const FlatColorBackground: React.FunctionComponent<FlatColorBackgroundProps> = ({ size, children }) => (
     <View style={styles[size]} pointerEvents="box-none">
       {children}
     </View>
   )
+
+  return FlatColorBackground
 }
