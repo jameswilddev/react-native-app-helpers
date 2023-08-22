@@ -145,6 +145,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [RequiredEmailInputProps](./react-native/types/RequiredEmailInputProps/readme.md)
 - [RequiredFloatInputProps](./react-native/types/RequiredFloatInputProps/readme.md)
 - [RequiredIntegerInputProps](./react-native/types/RequiredIntegerInputProps/readme.md)
+- [RequiredPasswordInputProps](./react-native/types/RequiredPasswordInputProps/readme.md)
 - [RequiredTextAreaProps](./react-native/types/RequiredTextAreaProps/readme.md)
 - [RequiredTextInputProps](./react-native/types/RequiredTextInputProps/readme.md)
 - [Route](./react-native/types/Route/readme.md)
