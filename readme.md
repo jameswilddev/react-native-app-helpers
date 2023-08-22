@@ -130,6 +130,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Json](./react-native/types/Json/readme.md)
 - [JsonRequestBody](./react-native/types/JsonRequestBody/readme.md)
 - [KeyableTableCell](./react-native/types/KeyableTableCell/readme.md)
+- [LimitedWidthProps](./react-native/types/LimitedWidthProps/readme.md)
 - [NonKeyableTableCell](./react-native/types/NonKeyableTableCell/readme.md)
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
 - [OfflineTableProps](./react-native/types/OfflineTableProps/readme.md)
