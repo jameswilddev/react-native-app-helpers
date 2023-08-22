@@ -20,7 +20,7 @@ export class PermissionHelper implements PermissionHelperInterface {
    */
   async acquire (
     permissions: readonly Permissions.PermissionType[],
-    onFailure: (showSettingsScreen: () => void) => Promise<void>,
+    onFailure: (showSettingsScreen: () => Promise<void>) => Promise<void>,
     onSuccess: () => Promise<void>
   ): Promise<void> {
     const result = await Permissions.askAsync(...permissions)

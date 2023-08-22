@@ -16,7 +16,7 @@ export interface PermissionHelperInterface {
    */
   acquire: (
     permissions: readonly Permissions.PermissionType[],
-    onFailure: (showSettingsScreen: () => void) => Promise<void>,
+    onFailure: (showSettingsScreen: () => Promise<void>) => Promise<void>,
     onSuccess: () => Promise<void>
   ) => Promise<void>
 }
