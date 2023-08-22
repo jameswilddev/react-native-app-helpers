@@ -158,6 +158,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [StackRoute](./react-native/types/StackRoute/readme.md)
 - [StackRouterState](./react-native/types/StackRouterState/readme.md)
 - [StackRouteTable](./react-native/types/StackRouteTable/readme.md)
+- [StatusPillProps](./react-native/types/StatusPillProps/readme.md)
 - [StatusPillStyle](./react-native/types/StatusPillStyle/readme.md)
 - [StatusPillStyleStatus](./react-native/types/StatusPillStyleStatus/readme.md)
 - [SvgIcon](./react-native/types/SvgIcon/readme.md)

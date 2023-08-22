@@ -2,6 +2,7 @@ import * as React from 'react'
 import { StyleSheet, Text, type TextStyle } from 'react-native'
 import type { StatusPillStyle } from '../../types/StatusPillStyle'
 import type { StatusPillStyleStatus } from '../../types/StatusPillStyleStatus'
+import type { StatusPillProps } from '../../types/StatusPillProps'
 
 /**
  * Creates a new React component for showing a status in a "pill".
@@ -11,7 +12,7 @@ import type { StatusPillStyleStatus } from '../../types/StatusPillStyleStatus'
  */
 export function createStatusPillComponent<T extends string> (
   statusPillStyle: StatusPillStyle<T>
-): React.FunctionComponent<{ readonly status: T }> {
+): React.FunctionComponent<StatusPillProps<T>> {
   const statusStyles: { [TStatus in T]?: TextStyle } = {}
 
   for (const statusKey in statusPillStyle.statuses) {
