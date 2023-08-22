@@ -126,6 +126,7 @@ export type { PushingSyncableStateCollectionItem } from './react-native/types/Pu
 export type { QueryParameter } from './react-native/types/QueryParameter'
 export type { QueryParameters } from './react-native/types/QueryParameters'
 export type { RequestInterface } from './react-native/types/RequestInterface'
+export type { RequiredFloatInputProps } from './react-native/types/RequiredFloatInputProps'
 export type { RequiredIntegerInputProps } from './react-native/types/RequiredIntegerInputProps'
 export type { RequiredTextAreaProps } from './react-native/types/RequiredTextAreaProps'
 export type { RequiredTextInputProps } from './react-native/types/RequiredTextInputProps'
