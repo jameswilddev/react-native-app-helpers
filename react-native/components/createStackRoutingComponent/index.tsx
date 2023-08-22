@@ -38,7 +38,7 @@ export const createStackRoutingComponent = <
 >(
     routeTable: StackRouteTable<TRouteParameters, TOtherProps>
   ): FunctionComponent<StackRoutingProps<TRouteParameters, TOtherProps>> => {
-  return (props) => {
+  const StackRouting: FunctionComponent<StackRoutingProps<TRouteParameters, TOtherProps>> = (props) => {
     useBackButton(() => {
       if (props.routeState.length > 1) {
         props.onBack(
@@ -137,4 +137,6 @@ export const createStackRoutingComponent = <
       </React.Fragment>
     )
   }
+
+  return StackRouting
 }
