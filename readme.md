@@ -135,6 +135,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
 - [RequiredIntegerInputProps](./react-native/types/RequiredIntegerInputProps/readme.md)
+- [RequiredTextAreaProps](./react-native/types/RequiredTextAreaProps/readme.md)
 - [RequiredTextInputProps](./react-native/types/RequiredTextInputProps/readme.md)
 - [Route](./react-native/types/Route/readme.md)
 - [RouteParameters](./react-native/types/RouteParameters/readme.md)
