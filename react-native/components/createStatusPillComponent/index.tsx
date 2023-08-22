@@ -45,7 +45,7 @@ export function createStatusPillComponent<T extends string> (
     statusStyles as { [TStatus in T]: TextStyle }
   )
 
-  return ({ status }) => {
+  const StatusPill: React.FunctionComponent<StatusPillProps<T>> = ({ status }) => {
     const object = statusPillStyle.statuses[status] as StatusPillStyleStatus
 
     return (
@@ -54,4 +54,6 @@ export function createStatusPillComponent<T extends string> (
       </Text>
     )
   }
+
+  return StatusPill
 }
