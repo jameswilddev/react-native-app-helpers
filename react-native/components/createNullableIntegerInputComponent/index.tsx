@@ -70,7 +70,7 @@ export const createNullableIntegerInputComponent = (
     alignment
   )
 
-  return ({ value, onChange, disabled, placeholder }) => (
+  const NullableIntegerInput: React.FunctionComponent<NullableIntegerInputProps> = ({ value, onChange, disabled, placeholder }) => (
     <NullableIntegerInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -85,4 +85,6 @@ export const createNullableIntegerInputComponent = (
       }}
     />
   )
+
+  return NullableIntegerInput
 }

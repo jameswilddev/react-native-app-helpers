@@ -59,7 +59,7 @@ export const createNullableTextInputComponent = (
     'left'
   )
 
-  return ({ value, onChange, disabled, placeholder, unique }) => (
+  const NullableTextInput: React.FunctionComponent<NullableTextInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
     <NullableTextInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -74,4 +74,6 @@ export const createNullableTextInputComponent = (
       }}
     />
   )
+
+  return NullableTextInput
 }

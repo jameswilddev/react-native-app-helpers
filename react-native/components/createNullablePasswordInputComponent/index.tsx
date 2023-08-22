@@ -49,7 +49,7 @@ export const createNullablePasswordInputComponent = (
     'left'
   )
 
-  return ({ value, onChange, disabled, placeholder, match }) => (
+  const NullablePasswordInput: React.FunctionComponent<NullablePasswordInputProps> = ({ value, onChange, disabled, placeholder, match }) => (
     <NullablePasswordInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -64,4 +64,6 @@ export const createNullablePasswordInputComponent = (
       }}
     />
   )
+
+  return NullablePasswordInput
 }

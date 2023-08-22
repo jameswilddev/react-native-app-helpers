@@ -92,7 +92,7 @@ export const createNullableFloatInputComponent = (
     alignment
   )
 
-  return ({ value, onChange, disabled, placeholder }) => (
+  const NullableFloatInput: React.FunctionComponent<NullableFloatInputProps> = ({ value, onChange, disabled, placeholder }) => (
     <NullableFloatInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -107,4 +107,6 @@ export const createNullableFloatInputComponent = (
       }}
     />
   )
+
+  return NullableFloatInput
 }

@@ -62,7 +62,7 @@ export const createNullableEmailInputComponent = (
     'left'
   )
 
-  return ({ value, onChange, disabled, placeholder, unique }) => (
+  const NullableEmailInput: React.FunctionComponent<NullableEmailInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
     <NullableEmailInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -77,4 +77,6 @@ export const createNullableEmailInputComponent = (
       }}
     />
   )
+
+  return NullableEmailInput
 }
