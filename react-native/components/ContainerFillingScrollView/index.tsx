@@ -1,21 +1,21 @@
-import * as React from "react";
-import { StyleSheet, ScrollView, ScrollViewProps } from "react-native";
+import * as React from 'react'
+import { StyleSheet, ScrollView, type ScrollViewProps } from 'react-native'
 
 const styles = StyleSheet.create({
   scrollView: {
-    width: `100%`,
-    height: `100%`,
+    width: '100%',
+    height: '100%'
   },
   scrollViewContentContainer: {
-    flexGrow: 1,
-  },
-});
+    flexGrow: 1
+  }
+})
 
 /**
  * A ScrollView which is styled to fill its container.
  */
 export const ContainerFillingScrollView: React.FunctionComponent<
-  ScrollViewProps
+ScrollViewProps
 > = (props) => (
   <ScrollView
     style={styles.scrollView}
@@ -23,4 +23,4 @@ export const ContainerFillingScrollView: React.FunctionComponent<
     keyboardShouldPersistTaps="handled"
     {...props}
   />
-);
+)

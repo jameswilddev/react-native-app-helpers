@@ -1,98 +1,98 @@
-import * as React from "react";
-import { View, Text } from "react-native";
-import { createHeaderBodyFooterComponent } from "../../..";
-import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import { createHeaderBodyFooterComponent } from '../../..'
+import { unwrapRenderedFunctionComponent } from '../../utilities/unwrapRenderedFunctionComponent'
 
-test(`renders without spacings without a header body or footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings without a header body or footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%` }}
+      style={{ width: '100%', height: '100%' }}
       pointerEvents="box-none"
     ></View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a header`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings with only a header', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
-  const rendered = <Component header={<Text>Example Header</Text>} />;
+  const rendered = <Component header={<Text>Example Header</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a body`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings with only a body', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a header and body`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings with only a header and body', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings with only a footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
-  const rendered = <Component footer={<Text>Example Footer</Text>} />;
+  const rendered = <Component footer={<Text>Example Footer</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `flex-end`,
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -100,26 +100,26 @@ test(`renders without spacings with only a footer`, () => {
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a header and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings with only a header and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `space-between`,
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -130,26 +130,26 @@ test(`renders without spacings with only a header and footer`, () => {
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings with only a body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -158,11 +158,11 @@ test(`renders without spacings with only a body and footer`, () => {
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with a header body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 0);
+test('renders without spacings with a header body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 0)
 
   const rendered = (
     <Component
@@ -170,18 +170,18 @@ test(`renders without spacings with a header body and footer`, () => {
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -190,96 +190,96 @@ test(`renders without spacings with a header body and footer`, () => {
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive header-body spacing without a header body or footer`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing without a header body or footer', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a positive header-body spacing with only a header`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing with only a header', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
-  const rendered = <Component header={<Text>Example Header</Text>} />;
+  const rendered = <Component header={<Text>Example Header</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive header-body spacing with only a body`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing with only a body', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive header-body spacing with only a header and body`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing with only a header and body', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View style={{ marginBottom: 53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive header-body spacing with only a footer`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing with only a footer', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
-  const rendered = <Component footer={<Text>Example Footer</Text>} />;
+  const rendered = <Component footer={<Text>Example Footer</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `flex-end`,
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -287,26 +287,26 @@ test(`renders with only a positive header-body spacing with only a footer`, () =
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive header-body spacing with only a header and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing with only a header and footer', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `space-between`,
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -317,26 +317,26 @@ test(`renders with only a positive header-body spacing with only a header and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive header-body spacing with only a body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing with only a body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -345,11 +345,11 @@ test(`renders with only a positive header-body spacing with only a body and foot
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive header-body spacing with a header body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(53, 0);
+test('renders with only a positive header-body spacing with a header body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(53, 0)
 
   const rendered = (
     <Component
@@ -357,18 +357,18 @@ test(`renders with only a positive header-body spacing with a header body and fo
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View style={{ marginBottom: 53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -377,96 +377,96 @@ test(`renders with only a positive header-body spacing with a header body and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative header-body spacing without a header body or footer`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing without a header body or footer', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a negative header-body spacing with only a header`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing with only a header', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
-  const rendered = <Component header={<Text>Example Header</Text>} />;
+  const rendered = <Component header={<Text>Example Header</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative header-body spacing with only a body`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing with only a body', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative header-body spacing with only a header and body`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing with only a header and body', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View style={{ marginBottom: -53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative header-body spacing with only a footer`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing with only a footer', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
-  const rendered = <Component footer={<Text>Example Footer</Text>} />;
+  const rendered = <Component footer={<Text>Example Footer</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `flex-end`,
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -474,26 +474,26 @@ test(`renders with only a negative header-body spacing with only a footer`, () =
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative header-body spacing with only a header and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing with only a header and footer', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `space-between`,
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -504,26 +504,26 @@ test(`renders with only a negative header-body spacing with only a header and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative header-body spacing with only a body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing with only a body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -532,11 +532,11 @@ test(`renders with only a negative header-body spacing with only a body and foot
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative header-body spacing with a header body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(-53, 0);
+test('renders with only a negative header-body spacing with a header body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(-53, 0)
 
   const rendered = (
     <Component
@@ -544,18 +544,18 @@ test(`renders with only a negative header-body spacing with a header body and fo
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View style={{ marginBottom: -53 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -564,96 +564,96 @@ test(`renders with only a negative header-body spacing with a header body and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-footer spacing without a header body or footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing without a header body or footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a positive body-footer spacing with only a header`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing with only a header', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
-  const rendered = <Component header={<Text>Example Header</Text>} />;
+  const rendered = <Component header={<Text>Example Header</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-footer spacing with only a body`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing with only a body', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-footer spacing with only a header and body`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing with only a header and body', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-footer spacing with only a footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing with only a footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
-  const rendered = <Component footer={<Text>Example Footer</Text>} />;
+  const rendered = <Component footer={<Text>Example Footer</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `flex-end`,
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -661,26 +661,26 @@ test(`renders with only a positive body-footer spacing with only a footer`, () =
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-footer spacing with only a header and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing with only a header and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `space-between`,
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -691,26 +691,26 @@ test(`renders with only a positive body-footer spacing with only a header and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-footer spacing with only a body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing with only a body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -719,11 +719,11 @@ test(`renders with only a positive body-footer spacing with only a body and foot
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-footer spacing with a header body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, 53);
+test('renders with only a positive body-footer spacing with a header body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, 53)
 
   const rendered = (
     <Component
@@ -731,18 +731,18 @@ test(`renders with only a positive body-footer spacing with a header body and fo
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -751,96 +751,96 @@ test(`renders with only a positive body-footer spacing with a header body and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-footer spacing without a header body or footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing without a header body or footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a negative body-footer spacing with only a header`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing with only a header', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
-  const rendered = <Component header={<Text>Example Header</Text>} />;
+  const rendered = <Component header={<Text>Example Header</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-footer spacing with only a body`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing with only a body', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-footer spacing with only a header and body`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing with only a header and body', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-footer spacing with only a footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing with only a footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
-  const rendered = <Component footer={<Text>Example Footer</Text>} />;
+  const rendered = <Component footer={<Text>Example Footer</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `flex-end`,
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -848,26 +848,26 @@ test(`renders with only a negative body-footer spacing with only a footer`, () =
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-footer spacing with only a header and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing with only a header and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `space-between`,
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -878,26 +878,26 @@ test(`renders with only a negative body-footer spacing with only a header and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-footer spacing with only a body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing with only a body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -906,11 +906,11 @@ test(`renders with only a negative body-footer spacing with only a body and foot
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-footer spacing with a header body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(0, -53);
+test('renders with only a negative body-footer spacing with a header body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(0, -53)
 
   const rendered = (
     <Component
@@ -918,18 +918,18 @@ test(`renders with only a negative body-footer spacing with a header body and fo
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -938,96 +938,96 @@ test(`renders with only a negative body-footer spacing with a header body and fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings without a header body or footer`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings without a header body or footer', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings with only a header`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings with only a header', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
-  const rendered = <Component header={<Text>Example Header</Text>} />;
+  const rendered = <Component header={<Text>Example Header</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings with only a body`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings with only a body', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings with only a header and body`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings with only a header and body', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View style={{ marginBottom: 27 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings with only a footer`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings with only a footer', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
-  const rendered = <Component footer={<Text>Example Footer</Text>} />;
+  const rendered = <Component footer={<Text>Example Footer</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `flex-end`,
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -1035,26 +1035,26 @@ test(`renders with with both header-body and body-footer spacings with only a fo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings with only a header and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings with only a header and footer', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
   const rendered = (
     <Component
       header={<Text>Example Header</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        justifyContent: `space-between`,
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -1065,26 +1065,26 @@ test(`renders with with both header-body and body-footer spacings with only a he
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings with only a body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings with only a body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -1093,11 +1093,11 @@ test(`renders with with both header-body and body-footer spacings with only a bo
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both header-body and body-footer spacings with a header body and footer`, () => {
-  const Component = createHeaderBodyFooterComponent(27, 53);
+test('renders with with both header-body and body-footer spacings with a header body and footer', () => {
+  const Component = createHeaderBodyFooterComponent(27, 53)
 
   const rendered = (
     <Component
@@ -1105,18 +1105,18 @@ test(`renders with with both header-body and body-footer spacings with a header 
       body={<Text>Example Body</Text>}
       footer={<Text>Example Footer</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1 }}
+      style={{ width: '100%', height: '100%', flex: 1 }}
       pointerEvents="box-none"
     >
       <View style={{ marginBottom: 27 }} pointerEvents="box-none">
         <Text>Example Header</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -1125,5 +1125,5 @@ test(`renders with with both header-body and body-footer spacings with a header 
         <Text>Example Footer</Text>
       </View>
     </View>
-  );
-});
+  )
+})

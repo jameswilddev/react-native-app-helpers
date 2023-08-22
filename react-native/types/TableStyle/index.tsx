@@ -1,11 +1,11 @@
-import type { ColorValue } from "react-native";
-import type { BorderStyle } from "../BorderStyle";
-import type { TableRowStyle } from "../TableRowStyle";
+import type { ColorValue } from 'react-native'
+import type { BorderStyle } from '../BorderStyle'
+import type { TableRowStyle } from '../TableRowStyle'
 
 /**
  * Describes the styling applied to a table.
  */
-export type TableStyle = {
+export interface TableStyle {
   /**
    * Styles which apply to the header of the table.
    */
@@ -13,30 +13,30 @@ export type TableStyle = {
     /**
      * The font family to use within the table's header cells.
      */
-    readonly fontFamily: string;
+    readonly fontFamily: string
 
     /**
      * The font size to use within the table's header cells.
      */
-    readonly fontSize: number;
+    readonly fontSize: number
 
     /**
      * The color of the table's header cells.
      */
-    readonly background: ColorValue;
+    readonly background: ColorValue
 
     /**
      * The color of the text within the table's header cells.
      */
-    readonly color: ColorValue;
+    readonly color: ColorValue
 
     /**
      * The vertical padding to apply within the table's header cells.
      */
-    readonly verticalPadding: number;
-  };
+    readonly verticalPadding: number
+  }
 
-  readonly headerFirstRowSeparator: null | BorderStyle;
+  readonly headerFirstRowSeparator: null | BorderStyle
 
   /**
    * Styles which apply to cells within the body of the table.
@@ -45,32 +45,32 @@ export type TableStyle = {
     /**
      * The font family to use within the table's body cells.
      */
-    readonly fontFamily: string;
+    readonly fontFamily: string
 
     /**
      * The font size to use within the table's body cells.
      */
-    readonly fontSize: number;
+    readonly fontSize: number
 
     /**
      * The horizontal padding to apply within the table's body cells.
      */
-    readonly horizontalPadding: number;
+    readonly horizontalPadding: number
 
     /**
      * The vertical padding to apply within the table's body cells.
      */
-    readonly verticalPadding: number;
+    readonly verticalPadding: number
 
     /**
      * Styling to apply on odd rows.
      */
-    readonly odd: TableRowStyle;
+    readonly odd: TableRowStyle
 
     /**
      * Styling to apply on even rows.
      */
-    readonly even: TableRowStyle;
+    readonly even: TableRowStyle
 
     /**
      * Elements to use for primitive values in basic columns.
@@ -79,24 +79,24 @@ export type TableStyle = {
       /**
        * The element to use where a cell for a basic column contains null.
        */
-      readonly null: null | React.ReactNode | JSX.Element;
+      readonly null: null | React.ReactNode | JSX.Element
 
       /**
        * The element to use where a cell for a basic column contains false.
        */
-      readonly false: null | React.ReactNode | JSX.Element;
+      readonly false: null | React.ReactNode | JSX.Element
 
       /**
        * The element to use where a cell for a basic column contains true.
        */
-      readonly true: null | React.ReactNode | JSX.Element;
-    };
-  };
+      readonly true: null | React.ReactNode | JSX.Element
+    }
+  }
 
   /**
    * The separator to display between rows (or null if none).
    */
-  readonly rowSeparator: null | BorderStyle;
+  readonly rowSeparator: null | BorderStyle
 
   /**
    * Styles to apply to the placeholder shown when there are no rows in the
@@ -106,31 +106,31 @@ export type TableStyle = {
     /**
      * The font family to use for the placeholder.
      */
-    readonly fontFamily: string;
+    readonly fontFamily: string
 
     /**
      * The font size to use for the placeholder.
      */
-    readonly fontSize: number;
+    readonly fontSize: number
 
     /**
      * The amount of horizontal padding to include within the placeholder.
      */
-    readonly horizontalPadding: number;
+    readonly horizontalPadding: number
 
     /**
      * The amount of vertical padding to include within the placeholder.
      */
-    readonly verticalPadding: number;
+    readonly verticalPadding: number
 
     /**
      * The background color to use behind the placeholder text.
      */
-    readonly background: ColorValue;
+    readonly background: ColorValue
 
     /**
      * The color of the placeholder text.
      */
-    readonly color: ColorValue;
-  };
-};
+    readonly color: ColorValue
+  }
+}

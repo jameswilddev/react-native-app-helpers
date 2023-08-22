@@ -1,6 +1,6 @@
-import * as React from "react";
-import type { ControlStyle } from "../../..";
-import { createInputComponent } from "../createInputComponent";
+import * as React from 'react'
+import type { ControlStyle } from '../../..'
+import { createInputComponent } from '../createInputComponent'
 
 /**
  * Creates a new input component pre-configured as a required integer input.
@@ -28,65 +28,65 @@ export const createRequiredIntegerInputComponent = (
   greaterThanOrEqualTo: null | number,
   lessThan: null | number,
   lessThanOrEqualTo: null | number,
-  alignment: `left` | `right`
+  alignment: 'left' | 'right'
 ): React.FunctionComponent<{
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
    * string.
    */
-  readonly value: undefined | number;
+    readonly value: undefined | number
 
-  /**
+    /**
    * Invoked when the user edits the text in the box.
    * @param parsed   The value parsed, or undefined should it not be parseable.
    * @param complete True when the user has finished editing, otherwise, false.
    */
-  onChange(parsed: undefined | number, complete: boolean): void;
+    onChange: (parsed: undefined | number, complete: boolean) => void
 
-  /**
+    /**
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled?: undefined | boolean;
+    readonly disabled?: undefined | boolean
 
-  /**
+    /**
    * Text to be shown when no value has been entered.
    */
-  readonly placeholder: string;
-}> => {
+    readonly placeholder: string
+  }> => {
   const RequiredIntegerInputComponent = createInputComponent<number, null>(
     (value) => String(value),
     (unparsed) => {
       if (/^\s*[+-]?\d+\.?\s*$/.test(unparsed)) {
-        const parsed = Number.parseInt(unparsed);
+        const parsed = Number.parseInt(unparsed)
 
         if (greaterThan !== null && parsed <= greaterThan) {
-          return undefined;
+          return undefined
         } else if (lessThan !== null && parsed >= lessThan) {
-          return undefined;
+          return undefined
         } else if (
           greaterThanOrEqualTo !== null &&
           parsed < greaterThanOrEqualTo
         ) {
-          return undefined;
+          return undefined
         } else if (lessThanOrEqualTo !== null && parsed > lessThanOrEqualTo) {
-          return undefined;
+          return undefined
         } else {
-          return parsed;
+          return parsed
         }
       } else {
-        return undefined;
+        return undefined
       }
     },
     controlStyle,
     false,
-    `off`,
-    `numeric`,
-    `none`,
+    'off',
+    'numeric',
+    'none',
     false,
     false,
     alignment
-  );
+  )
 
   return ({ value, onChange, disabled, placeholder }) => (
     <RequiredIntegerInputComponent
@@ -102,5 +102,5 @@ export const createRequiredIntegerInputComponent = (
         /* No-op. */
       }}
     />
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { ColorValue, StyleSheet, Text } from "react-native";
-import { Hitbox } from "../Hitbox";
+import * as React from 'react'
+import { type ColorValue, StyleSheet, Text } from 'react-native'
+import { Hitbox } from '../Hitbox'
 
 /**
  * Creates a new React component which can be used to render text.
@@ -17,7 +17,7 @@ export const createTextComponent = (
   fontFamily: string,
   fontSize: number,
   color: ColorValue,
-  alignment: `left` | `center` | `right`,
+  alignment: 'left' | 'center' | 'right',
   multiLine: boolean
 ): React.FunctionComponent<
   React.PropsWithChildren<{
@@ -25,9 +25,9 @@ export const createTextComponent = (
      * Similar to Text's onPress, but remote-controlled using the "enabled" static
      * property of Hitbox.
      */
-    readonly onPress?: undefined | (() => void);
+    readonly onPress?: undefined | (() => void)
   }>
-> => {
+  > => {
   const styles = StyleSheet.create({
     text: {
       fontFamily,
@@ -35,25 +35,26 @@ export const createTextComponent = (
       lineHeight: fontSize * 1.4,
       color,
       textAlign: alignment,
-      flexShrink: 1,
-    },
-  });
+      flexShrink: 1
+    }
+  })
 
   return ({ onPress, children }) => (
     <Text
       style={styles.text}
       numberOfLines={multiLine ? 0 : 1}
-      {...(onPress
-        ? {
+      {...(onPress === undefined
+        ? {}
+        : {
             onPress: () => {
               if (Hitbox.enabled) {
-                onPress();
+                onPress()
               }
-            },
+            }
           }
-        : {})}
+        )}
     >
       {children}
     </Text>
-  );
-};
+  )
+}

@@ -1,11 +1,6 @@
-import type { QueryParameter } from "../QueryParameter";
+import type { QueryParameter } from '../QueryParameter'
 
 /**
  * A map of query parameter keys to values.
  */
-export type QueryParameters = {
-  /**
-   * The mapped query parameter keys and values.
-   */
-  readonly [key: string]: QueryParameter;
-};
+export type QueryParameters = Readonly<Record<string, QueryParameter>>

@@ -1,12 +1,12 @@
-import * as React from "react";
-import { Text } from "react-native";
+import * as React from 'react'
+import { Text } from 'react-native'
 import {
   SizedHorizontallySymmetricalSafeAreaView,
-  HorizontallySymmetricalSafeAreaView,
-} from "../../..";
-import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
+  HorizontallySymmetricalSafeAreaView
+} from '../../..'
+import { unwrapRenderedFunctionComponent } from '../../utilities/unwrapRenderedFunctionComponent'
 
-test(`renders as expected when width fills container and height fills container`, () => {
+test('renders as expected when width fills container and height fills container', () => {
   const rendered = (
     <SizedHorizontallySymmetricalSafeAreaView
       width="fillsContainer"
@@ -15,19 +15,19 @@ test(`renders as expected when width fills container and height fills container`
     >
       <Text>Test Content</Text>
     </SizedHorizontallySymmetricalSafeAreaView>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
       left
-      style={{ width: `100%`, height: `100%` }}
+      style={{ width: '100%', height: '100%' }}
     >
       <Text>Test Content</Text>
     </HorizontallySymmetricalSafeAreaView>
-  );
-});
+  )
+})
 
-test(`renders as expected when width fills container and height fits content`, () => {
+test('renders as expected when width fills container and height fits content', () => {
   const rendered = (
     <SizedHorizontallySymmetricalSafeAreaView
       width="fillsContainer"
@@ -36,16 +36,16 @@ test(`renders as expected when width fills container and height fits content`, (
     >
       <Text>Test Content</Text>
     </SizedHorizontallySymmetricalSafeAreaView>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <HorizontallySymmetricalSafeAreaView left style={{ width: `100%` }}>
+    <HorizontallySymmetricalSafeAreaView left style={{ width: '100%' }}>
       <Text>Test Content</Text>
     </HorizontallySymmetricalSafeAreaView>
-  );
-});
+  )
+})
 
-test(`renders as expected when width fits content and height fills container`, () => {
+test('renders as expected when width fits content and height fills container', () => {
   const rendered = (
     <SizedHorizontallySymmetricalSafeAreaView
       width="fitsContent"
@@ -54,16 +54,16 @@ test(`renders as expected when width fits content and height fills container`, (
     >
       <Text>Test Content</Text>
     </SizedHorizontallySymmetricalSafeAreaView>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <HorizontallySymmetricalSafeAreaView left style={{ height: `100%` }}>
+    <HorizontallySymmetricalSafeAreaView left style={{ height: '100%' }}>
       <Text>Test Content</Text>
     </HorizontallySymmetricalSafeAreaView>
-  );
-});
+  )
+})
 
-test(`renders as expected when width fits content and height fits content`, () => {
+test('renders as expected when width fits content and height fits content', () => {
   const rendered = (
     <SizedHorizontallySymmetricalSafeAreaView
       width="fitsContent"
@@ -72,11 +72,11 @@ test(`renders as expected when width fits content and height fits content`, () =
     >
       <Text>Test Content</Text>
     </SizedHorizontallySymmetricalSafeAreaView>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView left>
       <Text>Test Content</Text>
     </HorizontallySymmetricalSafeAreaView>
-  );
-});
+  )
+})

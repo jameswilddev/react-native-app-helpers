@@ -1,6 +1,6 @@
-import * as React from "react";
-import type { ControlStyle } from "../../..";
-import { createInputComponent } from "../createInputComponent";
+import * as React from 'react'
+import type { ControlStyle } from '../../..'
+import { createInputComponent } from '../createInputComponent'
 
 /**
  * Creates a new input component pre-configured as a nullable text input.
@@ -24,68 +24,68 @@ export const createNullableTextInputComponent = (
    * The value to edit.  When undefined, it is treated as an invalid empty
    * string.
    */
-  readonly value: undefined | null | string;
+    readonly value: undefined | null | string
 
-  /**
+    /**
    * Invoked when the user edits the text in the box.
    * @param parsed   The value parsed, or undefined should it not be parseable.
    * @param complete True when the user has finished editing, otherwise, false.
    */
-  onChange(parsed: undefined | null | string, complete: boolean): void;
+    onChange: (parsed: undefined | null | string, complete: boolean) => void
 
-  /**
+    /**
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled?: undefined | boolean;
+    readonly disabled?: undefined | boolean
 
-  /**
+    /**
    * Text to be shown when no value has been entered.
    */
-  readonly placeholder: string;
+    readonly placeholder: string
 
-  /**
+    /**
    * The value entered must not appear in this list.
    */
-  readonly unique?: undefined | ReadonlyArray<string>;
-}> => {
+    readonly unique?: undefined | readonly string[]
+  }> => {
   const NullableTextInputComponent = createInputComponent<
-    null | string,
-    ReadonlyArray<string>
+  null | string,
+  readonly string[]
   >(
-    (value) => (value === null ? `` : value.trim().replace(/\s+/g, ` `)),
+    (value) => (value === null ? '' : value.trim().replace(/\s+/g, ' ')),
     (unparsed, context) => {
-      if (unparsed.trim() === ``) {
-        return null;
+      if (unparsed.trim() === '') {
+        return null
       } else {
-        const parsed = unparsed.trim().replace(/\s+/g, ` `);
+        const parsed = unparsed.trim().replace(/\s+/g, ' ')
 
         if (minimumLength !== null && parsed.length < minimumLength) {
-          return undefined;
+          return undefined
         } else if (maximumLength !== null && parsed.length > maximumLength) {
-          return undefined;
+          return undefined
         } else {
-          const match = parsed.toLowerCase();
+          const match = parsed.toLowerCase()
 
           for (const option of context) {
-            if (option.trim().replace(/\s+/g, ` `).toLowerCase() === match) {
-              return undefined;
+            if (option.trim().replace(/\s+/g, ' ').toLowerCase() === match) {
+              return undefined
             }
           }
 
-          return parsed;
+          return parsed
         }
       }
     },
     controlStyle,
     false,
-    `off`,
-    `default`,
-    `sentences`,
+    'off',
+    'default',
+    'sentences',
     false,
     false,
-    `left`
-  );
+    'left'
+  )
 
   return ({ value, onChange, disabled, placeholder, unique }) => (
     <NullableTextInputComponent
@@ -101,5 +101,5 @@ export const createNullableTextInputComponent = (
         /* No-op. */
       }}
     />
-  );
-};
+  )
+}

@@ -1,20 +1,16 @@
-import type { Json } from "../Json";
+import type { Json } from '../Json'
 
 /**
  * The schema of information which can be synced.
  */
-export type SyncableSchema = {
+export interface SyncableSchema {
   /**
    * The singletons which can be synced.
    */
-  readonly singletons: {
-    readonly [key: string]: Json;
-  };
+  readonly singletons: Readonly<Record<string, Json>>
 
   /**
    * The collections which can be synced.
    */
-  readonly collections: {
-    readonly [key: string]: Json;
-  };
-};
+  readonly collections: Readonly<Record<string, Json>>
+}

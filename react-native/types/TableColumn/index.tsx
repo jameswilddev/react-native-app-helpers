@@ -1,7 +1,7 @@
-import type { BasicTableColumn } from "../BasicTableColumn";
-import type { CustomElementTableColumn } from "../CustomElementTableColumn";
-import type { CustomTextTableColumn } from "../CustomTextTableColumn";
-import type { TableRow } from "../TableRow";
+import type { BasicTableColumn } from '../BasicTableColumn'
+import type { CustomElementTableColumn } from '../CustomElementTableColumn'
+import type { CustomTextTableColumn } from '../CustomTextTableColumn'
+import type { TableRow } from '../TableRow'
 
 /**
  * Describes the schema of a column in a table.
@@ -21,13 +21,13 @@ export type TableColumn<
 > =
   | BasicTableColumn<TKeyableColumnKey, TNonKeyableColumnKey>
   | CustomElementTableColumn<
-      TKeyableColumnKey,
-      TNonKeyableColumnKey,
-      TRow,
-      TContext
-    >
+  TKeyableColumnKey,
+  TNonKeyableColumnKey,
+  TRow,
+  TContext
+  >
   | {
-      readonly [TKey in
-        | TKeyableColumnKey
-        | TNonKeyableColumnKey]: CustomTextTableColumn<TKey, TRow, TContext>;
-    }[TKeyableColumnKey | TNonKeyableColumnKey];
+    readonly [TKey in
+    | TKeyableColumnKey
+    | TNonKeyableColumnKey]: CustomTextTableColumn<TKey, TRow, TContext>;
+  }[TKeyableColumnKey | TNonKeyableColumnKey]

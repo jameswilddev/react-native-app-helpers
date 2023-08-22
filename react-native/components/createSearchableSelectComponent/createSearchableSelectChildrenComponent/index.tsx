@@ -1,46 +1,46 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   FlatList,
   StyleSheet,
   Text,
-  TextStyle,
+  type TextStyle,
   View,
-  ViewStyle,
-} from "react-native";
-import type { ControlStyle } from "../../../types/ControlStyle";
-import { createInputComponent } from "../../createInputComponent";
-import { Hitbox } from "../../Hitbox";
+  type ViewStyle
+} from 'react-native'
+import type { ControlStyle } from '../../../types/ControlStyle'
+import { createInputComponent } from '../../createInputComponent'
+import { Hitbox } from '../../Hitbox'
 
 type Instance<T extends null | number | string> = React.FunctionComponent<{
   readonly options: ReadonlyArray<{
-    readonly value: T;
-    readonly label: string;
-  }>;
-  readonly selectedOption: null | { readonly value: T; readonly label: string };
-  readonly placeholder: string;
-  onChange(to: T): void;
-  close(): void;
-  readonly noMatchesText: string;
-}>;
+    readonly value: T
+    readonly label: string
+  }>
+  readonly selectedOption: null | { readonly value: T, readonly label: string }
+  readonly placeholder: string
+  onChange: (to: T) => void
+  close: () => void
+  readonly noMatchesText: string
+}>
 
-type Introspection = {
-  readonly controlStyle: ControlStyle;
-};
+interface Introspection {
+  readonly controlStyle: ControlStyle
+}
 
-const normalize = (value: string) =>
-  value.trim().replace(/\s+/g, ` `).toLowerCase();
+const normalize = (value: string): string =>
+  value.trim().replace(/\s+/g, ' ').toLowerCase()
 
 const globalStyles = StyleSheet.create({
   wrappingView: {
-    flex: 1,
-  },
-});
+    flex: 1
+  }
+})
 
 export const createSearchableSelectChildrenComponent = <
   T extends null | number | string
 >(
-  controlStyle: ControlStyle
-): Instance<T> & { readonly searchableSelectChildren: Introspection } => {
+    controlStyle: ControlStyle
+  ): Instance<T> & { readonly searchableSelectChildren: Introspection } => {
   const InputComponent = createInputComponent<string, null>(
     (value) => value,
     (value) => value.trim(),
@@ -49,98 +49,98 @@ export const createSearchableSelectChildrenComponent = <
       blurredInvalid: {
         ...controlStyle.blurredInvalid,
         border: null,
-        radius: 0,
+        radius: 0
       },
       blurredValid: { ...controlStyle.blurredValid, border: null, radius: 0 },
       focusedInvalid: {
         ...controlStyle.focusedInvalid,
         border: null,
-        radius: 0,
+        radius: 0
       },
       focusedValid: { ...controlStyle.focusedValid, border: null, radius: 0 },
       disabledInvalid: {
         ...controlStyle.disabledInvalid,
         border: null,
-        radius: 0,
+        radius: 0
       },
-      disabledValid: { ...controlStyle.disabledValid, border: null, radius: 0 },
+      disabledValid: { ...controlStyle.disabledValid, border: null, radius: 0 }
     },
     false,
-    `off`,
-    `default`,
-    `sentences`,
+    'off',
+    'default',
+    'sentences',
     true,
     false,
-    `left`
-  );
+    'left'
+  )
 
-  let flatList: null | ViewStyle = null;
+  let flatList: null | ViewStyle = null
 
   const optionTextBase: TextStyle = {
     fontFamily: controlStyle.fontFamily,
     fontSize: controlStyle.fontSize,
-    lineHeight: controlStyle.fontSize * 1.4,
-  };
+    lineHeight: controlStyle.fontSize * 1.4
+  }
 
   const listEmptyText: TextStyle = {
     fontFamily: controlStyle.fontFamily,
     fontSize: controlStyle.fontSize,
     lineHeight: controlStyle.fontSize * 1.4,
-    color: controlStyle.focusedValid.placeholderColor,
-  };
+    color: controlStyle.focusedValid.placeholderColor
+  }
 
   if (controlStyle.paddingHorizontal !== 0) {
-    optionTextBase.paddingHorizontal = controlStyle.paddingHorizontal;
-    listEmptyText.paddingHorizontal = controlStyle.paddingHorizontal;
+    optionTextBase.paddingHorizontal = controlStyle.paddingHorizontal
+    listEmptyText.paddingHorizontal = controlStyle.paddingHorizontal
   }
 
   if (controlStyle.paddingVertical !== 0) {
-    optionTextBase.paddingVertical = controlStyle.paddingVertical / 2;
-    listEmptyText.paddingVertical = controlStyle.paddingVertical;
+    optionTextBase.paddingVertical = controlStyle.paddingVertical / 2
+    listEmptyText.paddingVertical = controlStyle.paddingVertical
     flatList = {
-      marginBottom: controlStyle.paddingVertical / -2,
-    };
+      marginBottom: controlStyle.paddingVertical / -2
+    }
   }
 
   const localStyles = StyleSheet.create({
     focusedOptionText: {
       ...optionTextBase,
-      color: controlStyle.focusedValid.textColor,
+      color: controlStyle.focusedValid.textColor
     },
     blurredOptionText: {
       ...optionTextBase,
-      color: controlStyle.blurredValid.textColor,
+      color: controlStyle.blurredValid.textColor
     },
     listEmptyText,
-    ...(flatList === null ? {} : { flatList }),
-  });
+    ...(flatList === null ? {} : { flatList })
+  })
 
   const SearchableSelectChildren: Instance<T> & {
-    searchableSelectChildren?: Introspection;
+    searchableSelectChildren?: Introspection
   } = ({
     options,
     selectedOption,
     placeholder,
     onChange,
     close,
-    noMatchesText,
+    noMatchesText
   }) => {
-    const [filter, setFilter] = React.useState(``);
+    const [filter, setFilter] = React.useState('')
 
-    const normalizedFilter = normalize(filter);
+    const normalizedFilter = normalize(filter)
 
     const sortedOptions = [...options].sort(({ label: a }, { label: b }) =>
       a.localeCompare(b, [], { numeric: true })
-    );
+    )
 
-    let filteredOptions;
+    let filteredOptions
 
-    if (normalizedFilter) {
+    if (normalizedFilter !== '') {
       filteredOptions = sortedOptions.filter(({ label }) =>
         normalize(label).includes(normalizedFilter)
-      );
+      )
     } else {
-      filteredOptions = sortedOptions;
+      filteredOptions = sortedOptions
     }
 
     return (
@@ -150,19 +150,21 @@ export const createSearchableSelectChildrenComponent = <
           data={filteredOptions}
           keyExtractor={(item) => String(item.value)}
           renderItem={({ item }) =>
-            selectedOption !== null && item.value === selectedOption.value ? (
+            selectedOption !== null && item.value === selectedOption.value
+              ? (
               <Text style={localStyles.focusedOptionText}>{item.label}</Text>
-            ) : (
+                )
+              : (
               <Hitbox
                 disabled={false}
                 onPress={() => {
-                  onChange(item.value);
-                  close();
+                  onChange(item.value)
+                  close()
                 }}
               >
                 <Text style={localStyles.blurredOptionText}>{item.label}</Text>
               </Hitbox>
-            )
+                )
           }
           inverted
           keyboardShouldPersistTaps="handled"
@@ -174,11 +176,9 @@ export const createSearchableSelectChildrenComponent = <
           leftIcon={null}
           rightIcon={null}
           value={filter}
-          onChange={(parsed, complete) => {
-            complete;
-
+          onChange={(parsed, _complete) => {
             if (parsed !== undefined) {
-              setFilter(parsed);
+              setFilter(parsed)
             }
           }}
           secureTextEntry={false}
@@ -187,28 +187,28 @@ export const createSearchableSelectChildrenComponent = <
             selectedOption === null ? placeholder : selectedOption.label
           }
           onSubmit={(parsed) => {
-            const normalizedParsed = normalize(parsed);
+            const normalizedParsed = normalize(parsed)
 
             const filteredOptions = sortedOptions.filter(({ label }) =>
               normalize(label).includes(normalizedParsed)
-            );
+            )
 
             if (filteredOptions.length > 0) {
-              onChange(filteredOptions[0]?.value as T);
-              close();
+              onChange(filteredOptions[0]?.value as T)
+              close()
             }
           }}
           context={null}
         />
       </View>
-    );
-  };
+    )
+  }
 
   SearchableSelectChildren.searchableSelectChildren = {
-    controlStyle,
-  };
+    controlStyle
+  }
 
   return SearchableSelectChildren as Instance<T> & {
-    readonly searchableSelectChildren: Introspection;
-  };
-};
+    readonly searchableSelectChildren: Introspection
+  }
+}

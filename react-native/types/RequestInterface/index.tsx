@@ -1,8 +1,8 @@
-import type { EmptyRequestBody } from "../EmptyRequestBody";
-import type { FileRequestBody } from "../FileRequestBody";
-import type { Json } from "../Json";
-import type { JsonRequestBody } from "../JsonRequestBody";
-import type { QueryParameters } from "../QueryParameters";
+import type { EmptyRequestBody } from '../EmptyRequestBody'
+import type { FileRequestBody } from '../FileRequestBody'
+import type { Json } from '../Json'
+import type { JsonRequestBody } from '../JsonRequestBody'
+import type { QueryParameters } from '../QueryParameters'
 
 /**
  * The methods made available by the Request implementation.
@@ -26,14 +26,14 @@ export interface RequestInterface {
    * @throws                    When the timeout elapses without a successful
    *                            response.
    */
-  withoutResponse<T extends string>(
+  withoutResponse: <T extends string>(
     method: string,
     route: string,
     requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody,
     queryParameters: QueryParameters,
     abortSignal: null | AbortSignal,
-    expectedStatusCodes: ReadonlyArray<T>
-  ): Promise<T>;
+    expectedStatusCodes: readonly T[]
+  ) => Promise<T>
 
   /**
    * Performs a request which returns JSON.
@@ -55,10 +55,8 @@ export interface RequestInterface {
    * @throws                    When the timeout elapses without a successful
    *                            response.
    */
-  returningJson<
-    T extends {
-      readonly [statusCode: string]: Json;
-    }
+  returningJson: <
+    T extends Readonly<Record<string, Json>>
   >(
     method: string,
     route: string,
@@ -66,14 +64,14 @@ export interface RequestInterface {
     queryParameters: QueryParameters,
     abortSignal: null | AbortSignal,
     expectedStatusCodes: ReadonlyArray<keyof T>
-  ): Promise<
-    {
-      readonly [TStatusCode in keyof T]: {
-        readonly statusCode: TStatusCode;
-        readonly value: T[TStatusCode];
-      };
-    }[keyof T]
-  >;
+  ) => Promise<
+  {
+    readonly [TStatusCode in keyof T]: {
+      readonly statusCode: TStatusCode
+      readonly value: T[TStatusCode]
+    };
+  }[keyof T]
+  >
 
   /**
    * Performs a request which returns a file.  NOTE: timeouts are not yet
@@ -92,14 +90,14 @@ export interface RequestInterface {
    * @param unsuccessfulStatusCodes The status codes which indicate failure.
    * @returns                       The returned status code.
    */
-  returningFile<T extends string>(
-    method: `GET`,
+  returningFile: <T extends string>(
+    method: 'GET',
     route: string,
     requestBody: EmptyRequestBody,
     queryParameters: QueryParameters,
     abortSignal: null,
     fileUri: string,
-    successfulStatusCodes: ReadonlyArray<T>,
-    unsuccessfulStatusCodes: ReadonlyArray<T>
-  ): Promise<T>;
+    successfulStatusCodes: readonly T[],
+    unsuccessfulStatusCodes: readonly T[]
+  ) => Promise<T>
 }

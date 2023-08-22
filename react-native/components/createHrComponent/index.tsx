@@ -1,14 +1,16 @@
-import * as React from "react";
-import { View, StyleSheet, ColorValue } from "react-native";
+import * as React from 'react'
+import { View, StyleSheet, type ColorValue } from 'react-native'
 
-export const createHrComponent = (color: ColorValue, height: number) => {
+export const createHrComponent = (color: ColorValue, height: number): React.FunctionComponent => {
   const styles = StyleSheet.create({
     view: {
-      width: `100%`,
+      width: '100%',
       height,
-      backgroundColor: color,
-    },
-  });
+      backgroundColor: color
+    }
+  })
 
-  return () => <View style={styles.view} />;
-};
+  const Hr: React.FunctionComponent = () => <View style={styles.view} />
+
+  return Hr
+}

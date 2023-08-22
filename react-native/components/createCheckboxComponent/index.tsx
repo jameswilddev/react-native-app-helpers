@@ -1,8 +1,8 @@
-import * as React from "react";
-import { StyleSheet, View, Text, ViewStyle, TextStyle } from "react-native";
-import type { CheckboxStateStyle } from "../../types/CheckboxStateStyle";
-import type { CheckboxStyle } from "../../types/CheckboxStyle";
-import { Hitbox } from "../Hitbox";
+import * as React from 'react'
+import { StyleSheet, View, Text, type ViewStyle, type TextStyle } from 'react-native'
+import type { CheckboxStateStyle } from '../../types/CheckboxStateStyle'
+import type { CheckboxStyle } from '../../types/CheckboxStyle'
+import { Hitbox } from '../Hitbox'
 
 const createViewStyle = (
   checkboxStyle: CheckboxStyle,
@@ -12,37 +12,37 @@ const createViewStyle = (
     backgroundColor: checkboxStateStyle.backgroundColor,
     width: checkboxStyle.boxSize,
     height: checkboxStyle.boxSize,
-    justifyContent: `center`,
-    alignItems: `center`,
-  };
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 
   if (checkboxStateStyle.border !== null) {
-    output.borderWidth = checkboxStateStyle.border.width;
-    output.borderColor = checkboxStateStyle.border.color;
+    output.borderWidth = checkboxStateStyle.border.width
+    output.borderColor = checkboxStateStyle.border.color
   }
 
   if (checkboxStateStyle.radius !== 0) {
-    output.borderRadius = checkboxStateStyle.radius;
+    output.borderRadius = checkboxStateStyle.radius
   }
 
   const relativeBorderWidth =
     (checkboxStyle.enabledFalse.border === null
       ? 0
       : checkboxStyle.enabledFalse.border.width) -
-    (checkboxStateStyle.border === null ? 0 : checkboxStateStyle.border.width);
+    (checkboxStateStyle.border === null ? 0 : checkboxStateStyle.border.width)
 
   if (relativeBorderWidth !== 0) {
-    output.margin = relativeBorderWidth;
+    output.margin = relativeBorderWidth
   }
 
   if (checkboxStyle.fontSize * 1.4 > checkboxStyle.boxSize) {
     output.marginTop =
       relativeBorderWidth +
-      (checkboxStyle.fontSize * 1.4 - checkboxStyle.boxSize) / 2;
+      (checkboxStyle.fontSize * 1.4 - checkboxStyle.boxSize) / 2
   }
 
-  return output;
-};
+  return output
+}
 
 const createTextStyle = (
   checkboxStyle: CheckboxStyle,
@@ -52,20 +52,20 @@ const createTextStyle = (
     fontFamily: checkboxStyle.fontFamily,
     fontSize: checkboxStyle.fontSize,
     lineHeight: checkboxStyle.fontSize * 1.4,
-    color: checkboxStateStyle.color,
-  };
+    color: checkboxStateStyle.color
+  }
 
   if (checkboxStyle.boxLabelSpacing !== 0) {
-    output.paddingLeft = checkboxStyle.boxLabelSpacing;
+    output.paddingLeft = checkboxStyle.boxLabelSpacing
   }
 
   if (checkboxStyle.boxSize > checkboxStyle.fontSize * 1.4) {
     output.paddingTop =
-      (checkboxStyle.boxSize - checkboxStyle.fontSize * 1.4) / 2;
+      (checkboxStyle.boxSize - checkboxStyle.fontSize * 1.4) / 2
   }
 
-  return output;
-};
+  return output
+}
 
 /**
  * Creates a React component representing a form checkbox.
@@ -79,26 +79,26 @@ export const createCheckboxComponent = (
     /**
      * When true, the checkbox is checked.  It is otherwise unchecked.
      */
-    value: boolean;
+    value: boolean
 
     /**
      * Invoked when the checkbox is pressed.
      * @param to True when the checkbox is changing from unchecked to checked,
      *           otherwise, false.
      */
-    onChange(to: boolean): void;
+    onChange: (to: boolean) => void
 
     /**
      * When true, the checkbox will show alternative styles and will not accept
      * input.  It will otherwise show its default styles and accept input.
      */
-    disabled: boolean;
+    disabled: boolean
   }>
-> => {
+  > => {
   const styles = StyleSheet.create({
     hitbox: {
-      width: `100%`,
-      flexDirection: `row`,
+      width: '100%',
+      flexDirection: 'row'
     },
     disabledFalseView: createViewStyle(
       checkboxStyle,
@@ -125,14 +125,14 @@ export const createCheckboxComponent = (
       checkboxStyle,
       checkboxStyle.enabledFalse
     ),
-    enabledTrueText: createTextStyle(checkboxStyle, checkboxStyle.enabledTrue),
-  });
+    enabledTrueText: createTextStyle(checkboxStyle, checkboxStyle.enabledTrue)
+  })
 
   return ({ value, onChange, disabled, children }) => (
     <Hitbox
       disabled={disabled}
       onPress={() => {
-        onChange(!value);
+        onChange(!value)
       }}
       style={styles.hitbox}
     >
@@ -143,8 +143,8 @@ export const createCheckboxComponent = (
               ? styles.disabledTrueView
               : styles.enabledTrueView
             : disabled
-            ? styles.disabledFalseView
-            : styles.enabledFalseView
+              ? styles.disabledFalseView
+              : styles.enabledFalseView
         }
       >
         {value
@@ -152,8 +152,8 @@ export const createCheckboxComponent = (
             ? checkboxStyle.disabledTrue.boxChild
             : checkboxStyle.enabledTrue.boxChild
           : disabled
-          ? checkboxStyle.disabledFalse.boxChild
-          : checkboxStyle.enabledFalse.boxChild}
+            ? checkboxStyle.disabledFalse.boxChild
+            : checkboxStyle.enabledFalse.boxChild}
       </View>
       <Text
         style={
@@ -162,12 +162,12 @@ export const createCheckboxComponent = (
               ? styles.disabledTrueText
               : styles.enabledTrueText
             : disabled
-            ? styles.disabledFalseText
-            : styles.enabledFalseText
+              ? styles.disabledFalseText
+              : styles.enabledFalseText
         }
       >
         {children}
       </Text>
     </Hitbox>
-  );
-};
+  )
+}

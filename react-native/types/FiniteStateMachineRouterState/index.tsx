@@ -1,4 +1,4 @@
-import type { RouteParameters } from "../RouteParameters";
+import type { RouteParameters } from '../RouteParameters'
 
 /**
  * The state of a finite state machine router.
@@ -7,7 +7,7 @@ import type { RouteParameters } from "../RouteParameters";
  */
 export type FiniteStateMachineRouterState<T extends RouteParameters> = {
   readonly [TKey in keyof T]: {
-    readonly key: TKey;
-    readonly parameters: T[TKey];
+    readonly key: TKey
+    readonly parameters: T[TKey]
   };
-}[keyof T];
+}[keyof T]

@@ -1,4 +1,4 @@
-import type { ColorValue } from "react-native";
+import type { ColorValue } from 'react-native'
 
 /**
  * Represents a SVG icon imported using react-native-svg-transformer.  A fill
@@ -8,5 +8,5 @@ export type SvgIcon = React.FunctionComponent<{
   /**
    * An override for the SVG icon's fill color.
    */
-  readonly fill: ColorValue;
-}>;
+  readonly fill: ColorValue
+}>

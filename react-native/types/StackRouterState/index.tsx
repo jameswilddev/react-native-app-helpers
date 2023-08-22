@@ -1,23 +1,23 @@
-import type { RouteParameters } from "../RouteParameters";
+import type { RouteParameters } from '../RouteParameters'
 
 type Item<T extends RouteParameters> = {
   readonly [TKey in keyof T]: {
     /**
      * Uniquely identifies this card within the stack.
      */
-    readonly uuid: string;
+    readonly uuid: string
 
     /**
      * The route key.
      */
-    readonly key: TKey;
+    readonly key: TKey
 
     /**
      * The parameters to the route.
      */
-    readonly parameters: T[TKey];
+    readonly parameters: T[TKey]
   };
-}[keyof T];
+}[keyof T]
 
 /**
  * The state of a stack router.
@@ -25,5 +25,5 @@ type Item<T extends RouteParameters> = {
  *             produced.
  */
 export type StackRouterState<T extends RouteParameters> = ReadonlyArray<
-  Item<T>
->;
+Item<T>
+>

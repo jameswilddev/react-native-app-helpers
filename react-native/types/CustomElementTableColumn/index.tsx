@@ -1,4 +1,4 @@
-import type { TableRow } from "../TableRow";
+import type { TableRow } from '../TableRow'
 
 /**
  * Describes the schema of a column in a table which has a custom renderer.
@@ -10,26 +10,26 @@ import type { TableRow } from "../TableRow";
  * @template TContext             The type of the context in which the table is
  *                                being rendered.
  */
-export type CustomElementTableColumn<
+export interface CustomElementTableColumn<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string,
   TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>,
   TContext
-> = {
+> {
   /**
    * Describes the type of column.
    */
-  readonly type: `customElement`;
+  readonly type: 'customElement'
 
   /**
    * The label shown on the column's header.
    */
-  readonly label: string;
+  readonly label: string
 
   /**
    * The width of the column.  This is a proportion.
    */
-  readonly width: number;
+  readonly width: number
 
   /**
    * Renders the content of the column for a specified row.
@@ -37,10 +37,10 @@ export type CustomElementTableColumn<
    * @param context  The context in which the table is being rendered.
    * @returns        The rendered column content.
    */
-  render(
+  render: (
     tableRow: TRow,
     context: TContext
-  ): null | React.ReactNode | JSX.Element;
+  ) => null | React.ReactNode | JSX.Element
 
   /**
    * Determines whether a search string occurs within this column on a given
@@ -53,14 +53,14 @@ export type CustomElementTableColumn<
    * @returns        True when the given search string occurs within this
    *                 column on the given table row, otherwise, false.
    */
-  containsSearchTerm(
+  containsSearchTerm: (
     tableRow: TRow,
     filter: string,
     context: TContext
-  ): boolean;
+  ) => boolean
 
   /**
    * The horizontal alignment of the column's content.
    */
-  readonly alignment: `left` | `middle` | `right`;
-};
+  readonly alignment: 'left' | 'middle' | 'right'
+}

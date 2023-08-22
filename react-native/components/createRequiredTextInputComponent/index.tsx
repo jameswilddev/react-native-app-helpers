@@ -1,6 +1,6 @@
-import * as React from "react";
-import type { ControlStyle } from "../../..";
-import { createInputComponent } from "../createInputComponent";
+import * as React from 'react'
+import type { ControlStyle } from '../../..'
+import { createInputComponent } from '../createInputComponent'
 
 /**
  * Creates a new input component pre-configured as a required text input.
@@ -20,74 +20,74 @@ export const createRequiredTextInputComponent = (
   rightIcon: null | React.ReactNode | JSX.Element,
   minimumLength: null | number,
   maximumLength: null | number,
-  autoCapitalize: `none` | `sentences` | `words` | `characters`
+  autoCapitalize: 'none' | 'sentences' | 'words' | 'characters'
 ): React.FunctionComponent<{
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
    * string.
    */
-  readonly value: undefined | string;
+    readonly value: undefined | string
 
-  /**
+    /**
    * Invoked when the user edits the text in the box.
    * @param parsed   The value parsed, or undefined should it not be parseable.
    * @param complete True when the user has finished editing, otherwise, false.
    */
-  onChange(parsed: undefined | string, complete: boolean): void;
+    onChange: (parsed: undefined | string, complete: boolean) => void
 
-  /**
+    /**
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled?: undefined | boolean;
+    readonly disabled?: undefined | boolean
 
-  /**
+    /**
    * Text to be shown when no value has been entered.
    */
-  readonly placeholder: string;
+    readonly placeholder: string
 
-  /**
+    /**
    * The value entered must not appear in this list.
    */
-  readonly unique?: undefined | ReadonlyArray<string>;
-}> => {
+    readonly unique?: undefined | readonly string[]
+  }> => {
   const RequiredTextInputComponent = createInputComponent<
-    string,
-    ReadonlyArray<string>
+  string,
+  readonly string[]
   >(
-    (value) => value.trim().replace(/\s+/g, ` `),
+    (value) => value.trim().replace(/\s+/g, ' '),
     (unparsed, context) => {
-      if (unparsed.trim() === ``) {
-        return undefined;
+      if (unparsed.trim() === '') {
+        return undefined
       } else {
-        const parsed = unparsed.trim().replace(/\s+/g, ` `);
+        const parsed = unparsed.trim().replace(/\s+/g, ' ')
 
         if (minimumLength !== null && parsed.length < minimumLength) {
-          return undefined;
+          return undefined
         } else if (maximumLength !== null && parsed.length > maximumLength) {
-          return undefined;
+          return undefined
         } else {
-          const match = parsed.toLowerCase();
+          const match = parsed.toLowerCase()
 
           for (const option of context) {
-            if (option.trim().replace(/\s+/g, ` `).toLowerCase() === match) {
-              return undefined;
+            if (option.trim().replace(/\s+/g, ' ').toLowerCase() === match) {
+              return undefined
             }
           }
 
-          return parsed;
+          return parsed
         }
       }
     },
     controlStyle,
     false,
-    `off`,
-    `default`,
+    'off',
+    'default',
     autoCapitalize,
     false,
     false,
-    `left`
-  );
+    'left'
+  )
 
   return ({ value, onChange, disabled, placeholder, unique }) => (
     <RequiredTextInputComponent
@@ -103,5 +103,5 @@ export const createRequiredTextInputComponent = (
         /* No-op. */
       }}
     />
-  );
-};
+  )
+}

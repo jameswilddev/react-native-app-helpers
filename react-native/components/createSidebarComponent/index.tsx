@@ -1,38 +1,40 @@
-import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import * as React from 'react'
+import { View, StyleSheet } from 'react-native'
+import type { SidebarProps } from '../../types/SidebarProps'
+import { isRenderedByReact } from '../../utilities/isRenderedByReact'
 
 const wrappingViewBase = {
-  width: `100%`,
-  height: `100%`,
-};
+  width: '100%',
+  height: '100%'
+}
 
 const globalStyles = StyleSheet.create({
   emptyWrappingView: {
-    ...wrappingViewBase,
+    ...wrappingViewBase
   },
   wrappingView: {
     ...wrappingViewBase,
     flex: 1,
-    flexDirection: `row`,
+    flexDirection: 'row'
   },
   wrappingViewWithoutBody: {
     ...wrappingViewBase,
     flex: 1,
-    flexDirection: `row`,
-    justifyContent: `space-between`,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   wrappingViewWithOnlyRight: {
     ...wrappingViewBase,
     flex: 1,
-    flexDirection: `row`,
-    justifyContent: `flex-end`,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   },
   bodyView: {
     flexShrink: 1,
     flexGrow: 1,
-    overflow: `hidden`,
-  },
-});
+    overflow: 'hidden'
+  }
+})
 
 /**
  * Creates a new React component which displays sidebars to the left and right
@@ -46,40 +48,25 @@ const globalStyles = StyleSheet.create({
 export const createSidebarComponent = (
   leftBodySpacing: number,
   bodyRightSpacing: number
-): React.FunctionComponent<{
-  /**
-   * The element to show in the left sidebar.
-   */
-  readonly left?: JSX.Element;
-
-  /**
-   * The element to show in the middle, with fluid width.
-   */
-  readonly body?: JSX.Element;
-
-  /**
-   * The element to show in the right sidebar.
-   */
-  readonly right?: JSX.Element;
-}> => {
+): React.FunctionComponent<SidebarProps> => {
   const localStyles = StyleSheet.create({
     leftView: {
-      marginRight: leftBodySpacing,
+      marginRight: leftBodySpacing
     },
     rightView: {
-      marginLeft: bodyRightSpacing,
-    },
-  });
+      marginLeft: bodyRightSpacing
+    }
+  })
 
-  return ({ left, body, right }) => {
-    if (left) {
-      if (body) {
-        if (right) {
+  const Sidebar: React.FunctionComponent<SidebarProps> = ({ left, body, right }) => {
+    if (isRenderedByReact(left)) {
+      if (isRenderedByReact(body)) {
+        if (isRenderedByReact(right)) {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View
                 pointerEvents="box-none"
-                {...(leftBodySpacing ? { style: localStyles.leftView } : {})}
+                {...(leftBodySpacing === 0 ? {} : { style: localStyles.leftView })}
               >
                 {left}
               </View>
@@ -88,18 +75,18 @@ export const createSidebarComponent = (
               </View>
               <View
                 pointerEvents="box-none"
-                {...(bodyRightSpacing ? { style: localStyles.rightView } : {})}
+                {...(bodyRightSpacing === 0 ? {} : { style: localStyles.rightView })}
               >
                 {right}
               </View>
             </View>
-          );
+          )
         } else {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View
                 pointerEvents="box-none"
-                {...(leftBodySpacing ? { style: localStyles.leftView } : {})}
+                {...(leftBodySpacing === 0 ? {} : { style: localStyles.leftView })}
               >
                 {left}
               </View>
@@ -107,10 +94,10 @@ export const createSidebarComponent = (
                 {body}
               </View>
             </View>
-          );
+          )
         }
       } else {
-        if (right) {
+        if (isRenderedByReact(right)) {
           return (
             <View
               pointerEvents="box-none"
@@ -119,18 +106,18 @@ export const createSidebarComponent = (
               <View pointerEvents="box-none">{left}</View>
               <View pointerEvents="box-none">{right}</View>
             </View>
-          );
+          )
         } else {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View pointerEvents="box-none">{left}</View>
             </View>
-          );
+          )
         }
       }
     } else {
-      if (body) {
-        if (right) {
+      if (isRenderedByReact(body)) {
+        if (isRenderedByReact(right)) {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View style={globalStyles.bodyView} pointerEvents="box-none">
@@ -138,12 +125,12 @@ export const createSidebarComponent = (
               </View>
               <View
                 pointerEvents="box-none"
-                {...(bodyRightSpacing ? { style: localStyles.rightView } : {})}
+                {...(bodyRightSpacing === 0 ? {} : { style: localStyles.rightView })}
               >
                 {right}
               </View>
             </View>
-          );
+          )
         } else {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
@@ -151,10 +138,10 @@ export const createSidebarComponent = (
                 {body}
               </View>
             </View>
-          );
+          )
         }
       } else {
-        if (right) {
+        if (isRenderedByReact(right)) {
           return (
             <View
               pointerEvents="box-none"
@@ -162,16 +149,18 @@ export const createSidebarComponent = (
             >
               <View pointerEvents="box-none">{right}</View>
             </View>
-          );
+          )
         } else {
           return (
             <View
               pointerEvents="box-none"
               style={globalStyles.emptyWrappingView}
             />
-          );
+          )
         }
       }
     }
-  };
-};
+  }
+
+  return Sidebar
+}

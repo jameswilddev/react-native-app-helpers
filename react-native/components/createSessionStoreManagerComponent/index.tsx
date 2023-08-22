@@ -1,8 +1,8 @@
-import * as React from "react";
-import { useRefresh } from "../../hooks/useRefresh";
-import { useEventRefresh } from "../../hooks/useEventRefresh";
-import type { SessionStore } from "../../services/SessionStore";
-import type { Json } from "../../types/Json";
+import * as React from 'react'
+import { useRefresh } from '../../hooks/useRefresh'
+import { useEventRefresh } from '../../hooks/useEventRefresh'
+import type { SessionStore } from '../../services/SessionStore'
+import type { Json } from '../../types/Json'
 
 /**
  * Creates a React component which automatically manages a session store,
@@ -20,56 +20,56 @@ import type { Json } from "../../types/Json";
 export const createSessionStoreManagerComponent = <T extends Json>(
   sessionStore: SessionStore<T>
 ): React.FunctionComponent<{
-  readonly loading: null | JSX.Element;
-  readonly ready: (
-    session: T,
-    setSession: (to: T) => void
-  ) => null | JSX.Element;
-}> => {
+    readonly loading: null | JSX.Element
+    readonly ready: (
+      session: T,
+      setSession: (to: T) => void
+    ) => null | JSX.Element
+  }> => {
   return ({ loading, ready }) => {
-    const loaded = React.useRef(false);
-    const refresh = useRefresh();
-    useEventRefresh(sessionStore, `set`);
+    const loaded = React.useRef(false)
+    const refresh = useRefresh()
+    useEventRefresh(sessionStore, 'set')
 
     React.useEffect(() => {
-      let state: `loading` | `loaded` | `aborting` = `loading`;
+      let state: 'loading' | 'loaded' | 'aborting' = 'loading'
 
-      (async () => {
-        await sessionStore.load();
+      void (async () => {
+        await sessionStore.load()
 
-        switch (state as `loading` | `aborting`) {
-          case `loading`:
-            state = `loaded`;
-            loaded.current = true;
-            refresh();
-            break;
+        switch (state as 'loading' | 'aborting') {
+          case 'loading':
+            state = 'loaded'
+            loaded.current = true
+            refresh()
+            break
 
-          case `aborting`:
-            await sessionStore.unload();
-            break;
+          case 'aborting':
+            await sessionStore.unload()
+            break
         }
-      })();
+      })()
 
       return () => {
         switch (state) {
-          case `loading`:
-            state = `aborting`;
-            break;
+          case 'loading':
+            state = 'aborting'
+            break
 
-          case `loaded`:
-            (async () => {
-              await sessionStore.unload();
-            })();
+          case 'loaded':
+            void (async () => {
+              await sessionStore.unload()
+            })()
         }
-      };
-    }, []);
+      }
+    }, [])
 
     if (loaded.current) {
       return ready(sessionStore.get(), (to: T) => {
-        sessionStore.set(to);
-      });
+        sessionStore.set(to)
+      })
     } else {
-      return loading;
+      return loading
     }
-  };
-};
+  }
+}

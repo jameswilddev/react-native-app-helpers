@@ -1,16 +1,16 @@
-import * as React from "react";
-import { StyleSheet, View, ViewStyle } from "react-native";
-import { flattenRenderedToArray } from "../../utilities/flattenRenderedToArray";
-import { useMeasure } from "../../hooks/useMeasure";
-import { getRenderedKey } from "../../utilities/getRenderedKey";
+import * as React from 'react'
+import { StyleSheet, View, type ViewStyle } from 'react-native'
+import { flattenRenderedToArray } from '../../utilities/flattenRenderedToArray'
+import { useMeasure } from '../../hooks/useMeasure'
+import { getRenderedKey } from '../../utilities/getRenderedKey'
 
 const globalStyles = StyleSheet.create({
   outerView: {
-    width: `100%`,
-    flexDirection: `row`,
-    flexWrap: `wrap`,
-  },
-});
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
+})
 
 /**
  * Creates a new React component which shows a grid of equally sized tiles,
@@ -28,30 +28,27 @@ export const createTiledComponent = (
   rowSpacing: number,
   minimumTileSize: number
 ): React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> => {
-  return ({ children }) => {
+  const Tiled: React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> = ({ children }) => {
     const [sizing, setSizing] = React.useState<null | {
-      readonly size: number;
-      readonly perRow: number;
-    }>(null);
+      readonly size: number
+      readonly perRow: number
+    }>(null)
 
-    const [ref, onLayout] = useMeasure((x, y, width) => {
-      x;
-      y;
-
-      let perRow = 1;
+    const [ref, onLayout] = useMeasure((_x, _y, width) => {
+      let perRow = 1
 
       while (
         (width - perRow * columnSpacing) / (perRow + 1) >=
         minimumTileSize
       ) {
-        perRow++;
+        perRow++
       }
 
       setSizing({
         size: (width - (perRow - 1) * columnSpacing) / perRow,
-        perRow,
-      });
-    });
+        perRow
+      })
+    })
 
     if (sizing === null) {
       return (
@@ -61,28 +58,28 @@ export const createTiledComponent = (
           style={globalStyles.outerView}
           pointerEvents="box-none"
         />
-      );
+      )
     } else {
-      const transformedChildren: JSX.Element[] = [];
+      const transformedChildren: JSX.Element[] = []
 
       for (const child of flattenRenderedToArray(children)) {
-        const style: ViewStyle = {};
+        const style: ViewStyle = {}
 
         if (
           transformedChildren.length % sizing.perRow === 0 ||
           columnSpacing === 0
         ) {
-          style.flexBasis = sizing.size;
+          style.flexBasis = sizing.size
         } else {
-          style.flexBasis = sizing.size + columnSpacing;
-          style.paddingLeft = columnSpacing;
+          style.flexBasis = sizing.size + columnSpacing
+          style.paddingLeft = columnSpacing
         }
 
         if (transformedChildren.length < sizing.perRow || rowSpacing === 0) {
-          style.height = sizing.size;
+          style.height = sizing.size
         } else {
-          style.height = sizing.size + rowSpacing;
-          style.paddingTop = rowSpacing;
+          style.height = sizing.size + rowSpacing
+          style.paddingTop = rowSpacing
         }
 
         transformedChildren.push(
@@ -93,7 +90,7 @@ export const createTiledComponent = (
           >
             {child}
           </View>
-        );
+        )
       }
 
       return (
@@ -105,7 +102,9 @@ export const createTiledComponent = (
         >
           {transformedChildren}
         </View>
-      );
+      )
     }
-  };
-};
+  }
+
+  return Tiled
+}

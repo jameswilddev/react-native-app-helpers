@@ -1,6 +1,6 @@
-import type { Json } from "../Json";
-import type { SyncableSchema } from "../SyncableSchema";
-import type { SyncState } from "../SyncState";
+import type { Json } from '../Json'
+import type { SyncableSchema } from '../SyncableSchema'
+import type { SyncState } from '../SyncState'
 
 /**
  * The methods made available by the Sync implementation.
@@ -24,14 +24,14 @@ export interface SyncInterface<
    * React state before their references are committed to the state store MUST
    * increment this on mount and decrement it on unmount.
    */
-  fileCleanUpBlockers: number;
+  fileCleanUpBlockers: number
 
   /**
    * Adds a listener for events to this sync process.
    * @param eventType The type of the event to listen for.
    * @param listener  The callback to execute when the event is emitted.
    */
-  addListener(eventType: `stateChange`, listener: () => void): void;
+  addListener: (eventType: 'stateChange', listener: () => void) => void
 
   /**
    * Removes a listener for events from this sync process.
@@ -39,17 +39,17 @@ export interface SyncInterface<
    * @param listener  The callback to no longer execute when the event is
    *                  emitted.
    */
-  removeListener(eventType: `stateChange`, listener: () => void): void;
+  removeListener: (eventType: 'stateChange', listener: () => void) => void
 
   /**
    * Retrieves the current status of this sync process.
    * @returns The current status of this sync process.
    */
-  getState(): SyncState<
-    TSchema,
-    TAdditionalCollectionData,
-    TAdditionalCollectionItemData
-  >;
+  getState: () => SyncState<
+  TSchema,
+  TAdditionalCollectionData,
+  TAdditionalCollectionItemData
+  >
 
   /**
    * @param abortSignal An AbortSignal which can be used to cancel the sync.
@@ -57,7 +57,7 @@ export interface SyncInterface<
    *                    process and any further action required by the caller.
    * @throws            When sync is already in progress.
    */
-  run(
+  run: (
     abortSignal: null | AbortSignal
-  ): Promise<`noChangesMade` | `needsToRunAgain` | `atLeastOneChangeMade`>;
+  ) => Promise<'noChangesMade' | 'needsToRunAgain' | 'atLeastOneChangeMade'>
 }

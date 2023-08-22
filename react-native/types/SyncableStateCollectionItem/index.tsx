@@ -1,8 +1,8 @@
-import type { AwaitingPullSyncableStateCollectionItem } from "../AwaitingPullSyncableStateCollectionItem";
-import type { AwaitingPushSyncableStateCollectionItem } from "../AwaitingPushSyncableStateCollectionItem";
-import type { Json } from "../Json";
-import type { PushingSyncableStateCollectionItem } from "../PushingSyncableStateCollectionItem";
-import type { UpToDateSyncableStateCollectionItem } from "../UpToDateSyncableStateCollectionItem";
+import type { AwaitingPullSyncableStateCollectionItem } from '../AwaitingPullSyncableStateCollectionItem'
+import type { AwaitingPushSyncableStateCollectionItem } from '../AwaitingPushSyncableStateCollectionItem'
+import type { Json } from '../Json'
+import type { PushingSyncableStateCollectionItem } from '../PushingSyncableStateCollectionItem'
+import type { UpToDateSyncableStateCollectionItem } from '../UpToDateSyncableStateCollectionItem'
 
 /**
  * Represents an item of a collection which can be synced.
@@ -12,4 +12,4 @@ export type SyncableStateCollectionItem<TData extends Json> =
   | AwaitingPushSyncableStateCollectionItem<TData>
   | PushingSyncableStateCollectionItem<TData>
   | AwaitingPullSyncableStateCollectionItem<TData>
-  | UpToDateSyncableStateCollectionItem<TData>;
+  | UpToDateSyncableStateCollectionItem<TData>

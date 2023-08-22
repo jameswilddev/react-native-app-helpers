@@ -1,6 +1,6 @@
-import type * as React from "react";
-import type { RouteParameters } from "../RouteParameters";
-import type { StackRouterState } from "../StackRouterState";
+import type * as React from 'react'
+import type { RouteParameters } from '../RouteParameters'
+import type { StackRouterState } from '../StackRouterState'
 
 /**
  * Describes an item of stack router state.
@@ -10,19 +10,19 @@ type Item<T extends RouteParameters> = {
     /**
      * Uniquely identifies this card within the stack.
      */
-    readonly uuid: string;
+    readonly uuid: string
 
     /**
      * The key of the route.
      */
-    readonly key: TKey;
+    readonly key: TKey
 
     /**
      * The parameters passed to the route.
      */
-    readonly parameters: T[TKey];
+    readonly parameters: T[TKey]
   };
-}[keyof T];
+}[keyof T]
 
 /**
  * A React component which can be used to render a route within a stack router.
@@ -30,66 +30,66 @@ type Item<T extends RouteParameters> = {
  * @template TRouteKey        The key of this route.
  * @template TOtherProps      Any other props the route accepts.
  */
-export type StackRoute<
+export interface StackRoute<
   TRouteParameters extends RouteParameters,
   TRouteKey extends keyof TRouteParameters,
-  TOtherProps extends { readonly [key: string]: unknown }
-> = {
+  TOtherProps extends Readonly<Record<string, unknown>>
+> {
   readonly component: React.FunctionComponent<
-    {
-      /**
+  {
+    /**
        * Call to add one or more card(s) to the top of the stack.
        * @param itemsToAdd The card(s) to add.
        */
-      push(...itemsToAdd: ReadonlyArray<Item<TRouteParameters>>): void;
+    push: (...itemsToAdd: ReadonlyArray<Item<TRouteParameters>>) => void
 
-      /**
+    /**
        * Pops one or more card(s) from the top of the stack.
        * @param numberOfItemsToRemove The number of card(s) to remove.  Defaults
        *                              to 1 when not given.
        */
-      pop(numberOfItemsToRemove?: number): void;
+    pop: (numberOfItemsToRemove?: number) => void
 
-      /**
+    /**
        * Pops one or more card(s) from the top of stack, then adds one or more
        * card(s) to the top of the stack in their place.
        * @param numberOfItemsToRemove The number of card(s) to remove.
        * @param itemsToAdd            The card(s) to add in their place.
        */
-      replace(
-        numberOfItemsToRemove: number,
-        ...itemsToAdd: ReadonlyArray<Item<TRouteParameters>>
-      ): void;
+    replace: (
+      numberOfItemsToRemove: number,
+      ...itemsToAdd: ReadonlyArray<Item<TRouteParameters>>
+    ) => void
 
-      /**
+    /**
        * Resets the entire card stack to a new stack.
        * @param replacementItems The replacement stack.
        */
-      reset(...replacementItems: ReadonlyArray<Item<TRouteParameters>>): void;
+    reset: (...replacementItems: ReadonlyArray<Item<TRouteParameters>>) => void
 
-      /**
+    /**
        * Changes the parameters of this card.
        * @param parameters The replacement parameters.
        */
-      setParameters(parameters: TRouteParameters[TRouteKey]): void;
+    setParameters: (parameters: TRouteParameters[TRouteKey]) => void
 
-      /**
+    /**
        * The route parameters for this card.
        */
-      readonly parameters: TRouteParameters[TRouteKey];
+    readonly parameters: TRouteParameters[TRouteKey]
 
-      /**
+    /**
        * The state of the stack router.
        */
-      readonly routeState: StackRouterState<TRouteParameters>;
+    readonly routeState: StackRouterState<TRouteParameters>
 
-      /**
+    /**
        * Sets a new state within the stack router.
        * @param to The new state to set.
        */
-      setRouteState(to: StackRouterState<TRouteParameters>): void;
+    setRouteState: (to: StackRouterState<TRouteParameters>) => void
 
-      /**
+    /**
        * This function should not be used by your routes and is included here as
        * an implementation oversight.  Called when the user makes a gesture to go
        * back, e.g. swiping from the left or pressing the hardware "back" button.
@@ -98,29 +98,29 @@ export type StackRoute<
        * @param cancel Call to cancel; for a swipe gesture, this will unswipe the
        *               top card.
        */
-      onBack(pop: () => void, cancel: () => void): void;
+    onBack: (pop: () => void, cancel: () => void) => void
 
-      /**
+    /**
        * When true, the card is at the top of the stack and is visible (unless
        * something else like a parent tab router is hiding the stack itself).  It
        * is otherwise underneath another card.  Note that swiping to go back may
        * reveal a card which is not top!
        */
-      readonly top: boolean;
+    readonly top: boolean
 
-      /**
+    /**
        * When true, the card is at the bottom of the stack and it is not possible
        * to pop it (as there would be no card underneath to reveal).  When false,
        * at least one card is beneath this one to which it is possible to pop.
        */
-      readonly bottom: boolean;
-    } & TOtherProps
-  >;
+    readonly bottom: boolean
+  } & TOtherProps
+  >
 
   /**
    * When true, the card can be swiped away to dismiss it (e.g. the left edge page-turning gesture on iOS/Android).
    * It may be necessary to set this to false when cards include draggable elements, as the touch handler on the card can interfere with those of its contents.
    * This does NOT affect hardware back buttons.
    */
-  readonly allowsSwiping: boolean;
-};
+  readonly allowsSwiping: boolean
+}

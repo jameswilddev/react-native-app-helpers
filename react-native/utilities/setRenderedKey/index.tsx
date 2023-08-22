@@ -12,12 +12,12 @@ export const setRenderedKey = (
   element: undefined | React.ReactNode | JSX.Element,
   key: string
 ): undefined | React.ReactNode | JSX.Element => {
-  if (typeof element === `object` && element !== null && `key` in element) {
+  if (typeof element === 'object' && element !== null && 'key' in element) {
     return {
       ...element,
-      key: element.key ?? key,
-    };
+      key: element.key ?? key
+    }
   } else {
-    return element;
+    return element
   }
-};
+}

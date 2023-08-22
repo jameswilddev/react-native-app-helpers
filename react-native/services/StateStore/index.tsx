@@ -1,12 +1,12 @@
-import * as FileSystem from "expo-file-system";
-import { EventEmitter } from "events";
-import type { Json } from "../../types/Json";
-import type { StateStoreInterface } from "../../types/StateStoreInterface";
+import * as FileSystem from 'expo-file-system'
+import { EventEmitter } from 'events'
+import type { Json } from '../../types/Json'
+import type { StateStoreInterface } from '../../types/StateStoreInterface'
 
-type StateStoreContent<T extends Json> = {
-  readonly version: string;
-  readonly value: T;
-};
+interface StateStoreContent<T extends Json> {
+  readonly version: string
+  readonly value: T
+}
 
 /**
  * A wrapper around expo-file-system which adds:
@@ -18,12 +18,12 @@ type StateStoreContent<T extends Json> = {
  * @template T The type of JSON stored.
  */
 export class StateStore<T extends Json> implements StateStoreInterface<T> {
-  private fileUri: null | string = null;
-  private value: undefined | T = undefined;
-  private writeQueueLength: 0 | 1 | 2 = 0;
-  private resolveOnUnload: null | (() => void) = null;
+  private fileUri: null | string = null
+  private value: undefined | T = undefined
+  private writeQueueLength: 0 | 1 | 2 = 0
+  private resolveOnUnload: null | (() => void) = null
 
-  private readonly eventEmitter = new EventEmitter();
+  private readonly eventEmitter = new EventEmitter()
 
   /**
    * @param initial The value to use when no such record exists
@@ -34,122 +34,122 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
    *                initial value.  This can be used to handle drastic data
    *                store redesigns early in development.
    */
-  constructor(private readonly initial: T, private readonly version: string) {}
+  constructor (private readonly initial: T, private readonly version: string) {}
 
-  addListener(eventType: `set`, listener: () => void): void {
-    this.eventEmitter.addListener(eventType, listener);
+  addListener (eventType: 'set', listener: () => void): void {
+    this.eventEmitter.addListener(eventType, listener)
   }
 
-  removeListener(eventType: `set`, listener: () => void): void {
-    this.eventEmitter.removeListener(eventType, listener);
+  removeListener (eventType: 'set', listener: () => void): void {
+    this.eventEmitter.removeListener(eventType, listener)
   }
 
-  async load(key: string): Promise<void> {
+  async load (key: string): Promise<void> {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The state store is currently unloading.`);
+      throw new Error('The state store is currently unloading.')
     } else if (this.value !== undefined) {
-      throw new Error(`The state store is already loaded.`);
+      throw new Error('The state store is already loaded.')
     } else if (this.fileUri !== null) {
-      throw new Error(`The state store is already loading.`);
+      throw new Error('The state store is already loading.')
     } else {
-      const directoryUri = `${FileSystem.documentDirectory}/react-native-app-helpers/state-store`;
-      const fileUri = `${directoryUri}/${key}`;
+      const directoryUri = `${FileSystem.documentDirectory}/react-native-app-helpers/state-store`
+      const fileUri = `${directoryUri}/${key}`
 
-      this.fileUri = fileUri;
+      this.fileUri = fileUri
 
       await FileSystem.makeDirectoryAsync(directoryUri, {
-        intermediates: true,
-      });
+        intermediates: true
+      })
 
       if ((await FileSystem.getInfoAsync(fileUri)).exists) {
-        const raw = await FileSystem.readAsStringAsync(fileUri);
+        const raw = await FileSystem.readAsStringAsync(fileUri)
 
-        const content: StateStoreContent<T> = JSON.parse(raw);
+        const content: StateStoreContent<T> = JSON.parse(raw)
 
         if (content.version === this.version) {
-          this.value = content.value;
+          this.value = content.value
         } else {
-          this.value = this.initial;
+          this.value = this.initial
         }
       } else {
-        this.value = this.initial;
+        this.value = this.initial
       }
     }
   }
 
-  get(): T {
+  get (): T {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The state store is currently unloading.`);
+      throw new Error('The state store is currently unloading.')
     } else if (this.fileUri === null) {
-      throw new Error(`The state store is not loaded.`);
+      throw new Error('The state store is not loaded.')
     } else if (this.value === undefined) {
-      throw new Error(`The state store is currently loading.`);
+      throw new Error('The state store is currently loading.')
     } else {
-      return this.value;
+      return this.value
     }
   }
 
-  private startWrite(): void {
-    (async () => {
+  private startWrite (): void {
+    void (async () => {
       const content: StateStoreContent<T> = {
         version: this.version,
-        value: this.value as T,
-      };
+        value: this.value as T
+      }
 
       await FileSystem.writeAsStringAsync(
         this.fileUri as string,
         JSON.stringify(content)
-      );
+      )
 
-      this.writeQueueLength--;
+      this.writeQueueLength--
 
       if (this.writeQueueLength > 0) {
-        this.startWrite();
+        this.startWrite()
       } else if (this.resolveOnUnload !== null) {
-        const resolveOnUnload = this.resolveOnUnload;
-        this.fileUri = null;
-        this.value = undefined;
-        this.resolveOnUnload = null;
-        resolveOnUnload();
+        const resolveOnUnload = this.resolveOnUnload
+        this.fileUri = null
+        this.value = undefined
+        this.resolveOnUnload = null
+        resolveOnUnload()
       }
-    })();
+    })()
   }
 
-  set(to: T): void {
+  set (to: T): void {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The state store is currently unloading.`);
+      throw new Error('The state store is currently unloading.')
     } else if (this.fileUri === null) {
-      throw new Error(`The state store is not loaded.`);
+      throw new Error('The state store is not loaded.')
     } else if (this.value === undefined) {
-      throw new Error(`The state store is currently loading.`);
+      throw new Error('The state store is currently loading.')
     } else {
-      this.value = to;
+      this.value = to
 
       if (this.writeQueueLength === 0) {
-        this.writeQueueLength = 1;
-        this.startWrite();
+        this.writeQueueLength = 1
+        this.startWrite()
       } else {
-        this.writeQueueLength = 2;
+        this.writeQueueLength = 2
       }
 
-      this.eventEmitter.emit(`set`);
+      this.eventEmitter.emit('set')
     }
   }
 
-  async unload(): Promise<void> {
+  async unload (): Promise<void> {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The state store is already unloading.`);
+      throw new Error('The state store is already unloading.')
     } else if (this.fileUri === null) {
-      throw new Error(`The state store is not loaded.`);
+      throw new Error('The state store is not loaded.')
     } else if (this.value === undefined) {
-      throw new Error(`The state store is currently loading.`);
+      throw new Error('The state store is currently loading.')
     } else if (this.writeQueueLength > 0) {
       await new Promise<void>((resolve) => {
-        this.resolveOnUnload = resolve;
-      });
+        this.resolveOnUnload = resolve
+      })
     } else {
-      this.fileUri = null;
-      this.value = undefined;
+      this.fileUri = null
+      this.value = undefined
     }
   }
 }

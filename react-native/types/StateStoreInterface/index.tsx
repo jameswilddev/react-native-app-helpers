@@ -1,4 +1,4 @@
-import type { Json } from "../../types/Json";
+import type { Json } from '../../types/Json'
 
 /**
  * The methods made available by the StateStore implementation.
@@ -10,7 +10,7 @@ export interface StateStoreInterface<T extends Json> {
    * @param eventType The type of the event to listen for.
    * @param listener  The callback to execute when the event is emitted.
    */
-  addListener(eventType: `set`, listener: () => void): void;
+  addListener: (eventType: 'set', listener: () => void) => void
 
   /**
    * Removes a listener for events from this state store.
@@ -18,7 +18,7 @@ export interface StateStoreInterface<T extends Json> {
    * @param listener  The callback to no longer execute when the event is
    *                  emitted.
    */
-  removeListener(eventType: `set`, listener: () => void): void;
+  removeListener: (eventType: 'set', listener: () => void) => void
 
   /**
    * Loads the content of a record in expo-file-system into memory.
@@ -27,7 +27,7 @@ export interface StateStoreInterface<T extends Json> {
    * @throws When the state store is already loaded.
    * @throws When the state store is currently unloading.
    */
-  load(key: string): Promise<void>;
+  load: (key: string) => Promise<void>
 
   /**
    * Retrieves the current value from the store.
@@ -36,7 +36,7 @@ export interface StateStoreInterface<T extends Json> {
    * @throws When the state store is currently loading.
    * @throws When the state store is currently unloading.
    */
-  get(): T;
+  get: () => T
 
   /**
    * Sets the current value in the store.  It will be written back to disk
@@ -46,10 +46,10 @@ export interface StateStoreInterface<T extends Json> {
    * @throws When the state store is currently loading.
    * @throws When the state store is currently unloading.
    */
-  set(to: T): void;
+  set: (to: T) => void
 
   /**
    * Awaits any queued writes and unloads the current record from memory.
    */
-  unload(): Promise<void>;
+  unload: () => Promise<void>
 }

@@ -1,76 +1,76 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import * as React from 'react'
+import { Text, View } from 'react-native'
 import {
   createHeaderComponent,
   HorizontallySymmetricalSafeAreaView,
   Hitbox,
   unwrapRenderedFunctionComponent,
-  SvgIcon,
-} from "../../..";
+  type SvgIcon
+} from '../../..'
 
-test(`renders as expected`, () => {
+test('renders as expected', () => {
   const Component = createHeaderComponent({
-    textColor: `red`,
-    fontFamily: `Example Font Family`,
+    textColor: 'red',
+    fontFamily: 'Example Font Family',
     fontSize: 30,
-    background: `green`,
+    background: 'green',
     outerHorizontalPadding: 50,
     innerHorizontalPadding: 14,
-    verticalPadding: 3,
-  });
-  const ExampleLeftIconAIcon: SvgIcon = () => null;
-  const onPressLeftIconA = jest.fn();
-  const ExampleLeftIconBIcon: SvgIcon = () => null;
-  const onPressLeftIconB = jest.fn();
-  const ExampleLeftIconCIcon: SvgIcon = () => null;
-  const onPressLeftIconC = jest.fn();
-  const ExampleLeftIconDIcon: SvgIcon = () => null;
-  const onPressLeftIconD = jest.fn();
-  const ExampleRightIconAIcon: SvgIcon = () => null;
-  const onPressRightIconA = jest.fn();
-  const ExampleRightIconBIcon: SvgIcon = () => null;
-  const onPressRightIconB = jest.fn();
-  const ExampleRightIconCIcon: SvgIcon = () => null;
-  const onPressRightIconC = jest.fn();
+    verticalPadding: 3
+  })
+  const ExampleLeftIconAIcon: SvgIcon = () => null
+  const onPressLeftIconA = jest.fn()
+  const ExampleLeftIconBIcon: SvgIcon = () => null
+  const onPressLeftIconB = jest.fn()
+  const ExampleLeftIconCIcon: SvgIcon = () => null
+  const onPressLeftIconC = jest.fn()
+  const ExampleLeftIconDIcon: SvgIcon = () => null
+  const onPressLeftIconD = jest.fn()
+  const ExampleRightIconAIcon: SvgIcon = () => null
+  const onPressRightIconA = jest.fn()
+  const ExampleRightIconBIcon: SvgIcon = () => null
+  const onPressRightIconB = jest.fn()
+  const ExampleRightIconCIcon: SvgIcon = () => null
+  const onPressRightIconC = jest.fn()
 
   const rendered = (
     <Component
       leftIcons={[
         {
           icon: ExampleLeftIconAIcon,
-          onPress: onPressLeftIconA,
+          onPress: onPressLeftIconA
         },
         {
           icon: ExampleLeftIconBIcon,
-          onPress: onPressLeftIconB,
+          onPress: onPressLeftIconB
         },
         {
           icon: ExampleLeftIconCIcon,
-          onPress: onPressLeftIconC,
+          onPress: onPressLeftIconC
         },
         {
           icon: ExampleLeftIconDIcon,
-          onPress: onPressLeftIconD,
-        },
+          onPress: onPressLeftIconD
+        }
       ]}
       rightIcons={[
         {
           icon: ExampleRightIconAIcon,
-          onPress: onPressRightIconA,
+          onPress: onPressRightIconA
         },
         {
           icon: ExampleRightIconBIcon,
-          onPress: onPressRightIconB,
+          onPress: onPressRightIconB
         },
         {
           icon: ExampleRightIconCIcon,
-          onPress: onPressRightIconC,
-        },
+          onPress: onPressRightIconC
+        }
       ]}
     >
       Example Text
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -78,24 +78,24 @@ test(`renders as expected`, () => {
       top
       right
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        backgroundColor: `green`,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: 'green'
       }}
     >
       <View
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          marginLeft: 43,
+          flexDirection: 'row',
+          marginLeft: 43
         }}
       >
         <Hitbox
           key="0"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -105,7 +105,7 @@ test(`renders as expected`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -115,7 +115,7 @@ test(`renders as expected`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -125,7 +125,7 @@ test(`renders as expected`, () => {
           key="3"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -135,11 +135,11 @@ test(`renders as expected`, () => {
       <Text
         numberOfLines={1}
         style={{
-          color: `red`,
-          fontFamily: `Example Font Family`,
+          color: 'red',
+          fontFamily: 'Example Font Family',
           fontSize: 30,
           lineHeight: 42,
-          paddingVertical: 3,
+          paddingVertical: 3
         }}
       >
         Example Text
@@ -148,16 +148,16 @@ test(`renders as expected`, () => {
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          justifyContent: `flex-end`,
-          marginRight: 43,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          marginRight: 43
         }}
       >
         <Hitbox
           key="0"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -167,7 +167,7 @@ test(`renders as expected`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -177,7 +177,7 @@ test(`renders as expected`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -185,79 +185,79 @@ test(`renders as expected`, () => {
         </Hitbox>
       </View>
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(onPressLeftIconA).not.toHaveBeenCalled();
-  expect(onPressLeftIconB).not.toHaveBeenCalled();
-  expect(onPressLeftIconC).not.toHaveBeenCalled();
-  expect(onPressLeftIconD).not.toHaveBeenCalled();
-  expect(onPressRightIconA).not.toHaveBeenCalled();
-  expect(onPressRightIconB).not.toHaveBeenCalled();
-  expect(onPressRightIconC).not.toHaveBeenCalled();
-});
+  )
+  expect(onPressLeftIconA).not.toHaveBeenCalled()
+  expect(onPressLeftIconB).not.toHaveBeenCalled()
+  expect(onPressLeftIconC).not.toHaveBeenCalled()
+  expect(onPressLeftIconD).not.toHaveBeenCalled()
+  expect(onPressRightIconA).not.toHaveBeenCalled()
+  expect(onPressRightIconB).not.toHaveBeenCalled()
+  expect(onPressRightIconC).not.toHaveBeenCalled()
+})
 
-test(`renders as expected without vertical padding`, () => {
+test('renders as expected without vertical padding', () => {
   const Component = createHeaderComponent({
-    textColor: `red`,
-    fontFamily: `Example Font Family`,
+    textColor: 'red',
+    fontFamily: 'Example Font Family',
     fontSize: 30,
-    background: `green`,
+    background: 'green',
     outerHorizontalPadding: 50,
     innerHorizontalPadding: 14,
-    verticalPadding: 0,
-  });
-  const ExampleLeftIconAIcon: SvgIcon = () => null;
-  const onPressLeftIconA = jest.fn();
-  const ExampleLeftIconBIcon: SvgIcon = () => null;
-  const onPressLeftIconB = jest.fn();
-  const ExampleLeftIconCIcon: SvgIcon = () => null;
-  const onPressLeftIconC = jest.fn();
-  const ExampleLeftIconDIcon: SvgIcon = () => null;
-  const onPressLeftIconD = jest.fn();
-  const ExampleRightIconAIcon: SvgIcon = () => null;
-  const onPressRightIconA = jest.fn();
-  const ExampleRightIconBIcon: SvgIcon = () => null;
-  const onPressRightIconB = jest.fn();
-  const ExampleRightIconCIcon: SvgIcon = () => null;
-  const onPressRightIconC = jest.fn();
+    verticalPadding: 0
+  })
+  const ExampleLeftIconAIcon: SvgIcon = () => null
+  const onPressLeftIconA = jest.fn()
+  const ExampleLeftIconBIcon: SvgIcon = () => null
+  const onPressLeftIconB = jest.fn()
+  const ExampleLeftIconCIcon: SvgIcon = () => null
+  const onPressLeftIconC = jest.fn()
+  const ExampleLeftIconDIcon: SvgIcon = () => null
+  const onPressLeftIconD = jest.fn()
+  const ExampleRightIconAIcon: SvgIcon = () => null
+  const onPressRightIconA = jest.fn()
+  const ExampleRightIconBIcon: SvgIcon = () => null
+  const onPressRightIconB = jest.fn()
+  const ExampleRightIconCIcon: SvgIcon = () => null
+  const onPressRightIconC = jest.fn()
 
   const rendered = (
     <Component
       leftIcons={[
         {
           icon: ExampleLeftIconAIcon,
-          onPress: onPressLeftIconA,
+          onPress: onPressLeftIconA
         },
         {
           icon: ExampleLeftIconBIcon,
-          onPress: onPressLeftIconB,
+          onPress: onPressLeftIconB
         },
         {
           icon: ExampleLeftIconCIcon,
-          onPress: onPressLeftIconC,
+          onPress: onPressLeftIconC
         },
         {
           icon: ExampleLeftIconDIcon,
-          onPress: onPressLeftIconD,
-        },
+          onPress: onPressLeftIconD
+        }
       ]}
       rightIcons={[
         {
           icon: ExampleRightIconAIcon,
-          onPress: onPressRightIconA,
+          onPress: onPressRightIconA
         },
         {
           icon: ExampleRightIconBIcon,
-          onPress: onPressRightIconB,
+          onPress: onPressRightIconB
         },
         {
           icon: ExampleRightIconCIcon,
-          onPress: onPressRightIconC,
-        },
+          onPress: onPressRightIconC
+        }
       ]}
     >
       Example Text
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -265,24 +265,24 @@ test(`renders as expected without vertical padding`, () => {
       top
       right
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        backgroundColor: `green`,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: 'green'
       }}
     >
       <View
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          marginLeft: 43,
+          flexDirection: 'row',
+          marginLeft: 43
         }}
       >
         <Hitbox
           key="0"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -292,7 +292,7 @@ test(`renders as expected without vertical padding`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -302,7 +302,7 @@ test(`renders as expected without vertical padding`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -312,7 +312,7 @@ test(`renders as expected without vertical padding`, () => {
           key="3"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -322,10 +322,10 @@ test(`renders as expected without vertical padding`, () => {
       <Text
         numberOfLines={1}
         style={{
-          color: `red`,
-          fontFamily: `Example Font Family`,
+          color: 'red',
+          fontFamily: 'Example Font Family',
           fontSize: 30,
-          lineHeight: 42,
+          lineHeight: 42
         }}
       >
         Example Text
@@ -334,16 +334,16 @@ test(`renders as expected without vertical padding`, () => {
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          justifyContent: `flex-end`,
-          marginRight: 43,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          marginRight: 43
         }}
       >
         <Hitbox
           key="0"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -353,7 +353,7 @@ test(`renders as expected without vertical padding`, () => {
           key="1"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -363,7 +363,7 @@ test(`renders as expected without vertical padding`, () => {
           key="2"
           style={{
             paddingHorizontal: 7,
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -371,79 +371,79 @@ test(`renders as expected without vertical padding`, () => {
         </Hitbox>
       </View>
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(onPressLeftIconA).not.toHaveBeenCalled();
-  expect(onPressLeftIconB).not.toHaveBeenCalled();
-  expect(onPressLeftIconC).not.toHaveBeenCalled();
-  expect(onPressLeftIconD).not.toHaveBeenCalled();
-  expect(onPressRightIconA).not.toHaveBeenCalled();
-  expect(onPressRightIconB).not.toHaveBeenCalled();
-  expect(onPressRightIconC).not.toHaveBeenCalled();
-});
+  )
+  expect(onPressLeftIconA).not.toHaveBeenCalled()
+  expect(onPressLeftIconB).not.toHaveBeenCalled()
+  expect(onPressLeftIconC).not.toHaveBeenCalled()
+  expect(onPressLeftIconD).not.toHaveBeenCalled()
+  expect(onPressRightIconA).not.toHaveBeenCalled()
+  expect(onPressRightIconB).not.toHaveBeenCalled()
+  expect(onPressRightIconC).not.toHaveBeenCalled()
+})
 
-test(`renders as expected without inner horizontal padding`, () => {
+test('renders as expected without inner horizontal padding', () => {
   const Component = createHeaderComponent({
-    textColor: `red`,
-    fontFamily: `Example Font Family`,
+    textColor: 'red',
+    fontFamily: 'Example Font Family',
     fontSize: 30,
-    background: `green`,
+    background: 'green',
     outerHorizontalPadding: 50,
     innerHorizontalPadding: 0,
-    verticalPadding: 3,
-  });
-  const ExampleLeftIconAIcon: SvgIcon = () => null;
-  const onPressLeftIconA = jest.fn();
-  const ExampleLeftIconBIcon: SvgIcon = () => null;
-  const onPressLeftIconB = jest.fn();
-  const ExampleLeftIconCIcon: SvgIcon = () => null;
-  const onPressLeftIconC = jest.fn();
-  const ExampleLeftIconDIcon: SvgIcon = () => null;
-  const onPressLeftIconD = jest.fn();
-  const ExampleRightIconAIcon: SvgIcon = () => null;
-  const onPressRightIconA = jest.fn();
-  const ExampleRightIconBIcon: SvgIcon = () => null;
-  const onPressRightIconB = jest.fn();
-  const ExampleRightIconCIcon: SvgIcon = () => null;
-  const onPressRightIconC = jest.fn();
+    verticalPadding: 3
+  })
+  const ExampleLeftIconAIcon: SvgIcon = () => null
+  const onPressLeftIconA = jest.fn()
+  const ExampleLeftIconBIcon: SvgIcon = () => null
+  const onPressLeftIconB = jest.fn()
+  const ExampleLeftIconCIcon: SvgIcon = () => null
+  const onPressLeftIconC = jest.fn()
+  const ExampleLeftIconDIcon: SvgIcon = () => null
+  const onPressLeftIconD = jest.fn()
+  const ExampleRightIconAIcon: SvgIcon = () => null
+  const onPressRightIconA = jest.fn()
+  const ExampleRightIconBIcon: SvgIcon = () => null
+  const onPressRightIconB = jest.fn()
+  const ExampleRightIconCIcon: SvgIcon = () => null
+  const onPressRightIconC = jest.fn()
 
   const rendered = (
     <Component
       leftIcons={[
         {
           icon: ExampleLeftIconAIcon,
-          onPress: onPressLeftIconA,
+          onPress: onPressLeftIconA
         },
         {
           icon: ExampleLeftIconBIcon,
-          onPress: onPressLeftIconB,
+          onPress: onPressLeftIconB
         },
         {
           icon: ExampleLeftIconCIcon,
-          onPress: onPressLeftIconC,
+          onPress: onPressLeftIconC
         },
         {
           icon: ExampleLeftIconDIcon,
-          onPress: onPressLeftIconD,
-        },
+          onPress: onPressLeftIconD
+        }
       ]}
       rightIcons={[
         {
           icon: ExampleRightIconAIcon,
-          onPress: onPressRightIconA,
+          onPress: onPressRightIconA
         },
         {
           icon: ExampleRightIconBIcon,
-          onPress: onPressRightIconB,
+          onPress: onPressRightIconB
         },
         {
           icon: ExampleRightIconCIcon,
-          onPress: onPressRightIconC,
-        },
+          onPress: onPressRightIconC
+        }
       ]}
     >
       Example Text
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -451,23 +451,23 @@ test(`renders as expected without inner horizontal padding`, () => {
       top
       right
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        backgroundColor: `green`,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: 'green'
       }}
     >
       <View
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          marginLeft: 50,
+          flexDirection: 'row',
+          marginLeft: 50
         }}
       >
         <Hitbox
           key="0"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -476,7 +476,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -485,7 +485,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -494,7 +494,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="3"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -504,11 +504,11 @@ test(`renders as expected without inner horizontal padding`, () => {
       <Text
         numberOfLines={1}
         style={{
-          color: `red`,
-          fontFamily: `Example Font Family`,
+          color: 'red',
+          fontFamily: 'Example Font Family',
           fontSize: 30,
           lineHeight: 42,
-          paddingVertical: 3,
+          paddingVertical: 3
         }}
       >
         Example Text
@@ -517,15 +517,15 @@ test(`renders as expected without inner horizontal padding`, () => {
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          justifyContent: `flex-end`,
-          marginRight: 50,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          marginRight: 50
         }}
       >
         <Hitbox
           key="0"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -534,7 +534,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -543,7 +543,7 @@ test(`renders as expected without inner horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -551,79 +551,79 @@ test(`renders as expected without inner horizontal padding`, () => {
         </Hitbox>
       </View>
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(onPressLeftIconA).not.toHaveBeenCalled();
-  expect(onPressLeftIconB).not.toHaveBeenCalled();
-  expect(onPressLeftIconC).not.toHaveBeenCalled();
-  expect(onPressLeftIconD).not.toHaveBeenCalled();
-  expect(onPressRightIconA).not.toHaveBeenCalled();
-  expect(onPressRightIconB).not.toHaveBeenCalled();
-  expect(onPressRightIconC).not.toHaveBeenCalled();
-});
+  )
+  expect(onPressLeftIconA).not.toHaveBeenCalled()
+  expect(onPressLeftIconB).not.toHaveBeenCalled()
+  expect(onPressLeftIconC).not.toHaveBeenCalled()
+  expect(onPressLeftIconD).not.toHaveBeenCalled()
+  expect(onPressRightIconA).not.toHaveBeenCalled()
+  expect(onPressRightIconB).not.toHaveBeenCalled()
+  expect(onPressRightIconC).not.toHaveBeenCalled()
+})
 
-test(`renders as expected without inner or outer horizontal padding`, () => {
+test('renders as expected without inner or outer horizontal padding', () => {
   const Component = createHeaderComponent({
-    textColor: `red`,
-    fontFamily: `Example Font Family`,
+    textColor: 'red',
+    fontFamily: 'Example Font Family',
     fontSize: 30,
-    background: `green`,
+    background: 'green',
     outerHorizontalPadding: 0,
     innerHorizontalPadding: 0,
-    verticalPadding: 3,
-  });
-  const ExampleLeftIconAIcon: SvgIcon = () => null;
-  const onPressLeftIconA = jest.fn();
-  const ExampleLeftIconBIcon: SvgIcon = () => null;
-  const onPressLeftIconB = jest.fn();
-  const ExampleLeftIconCIcon: SvgIcon = () => null;
-  const onPressLeftIconC = jest.fn();
-  const ExampleLeftIconDIcon: SvgIcon = () => null;
-  const onPressLeftIconD = jest.fn();
-  const ExampleRightIconAIcon: SvgIcon = () => null;
-  const onPressRightIconA = jest.fn();
-  const ExampleRightIconBIcon: SvgIcon = () => null;
-  const onPressRightIconB = jest.fn();
-  const ExampleRightIconCIcon: SvgIcon = () => null;
-  const onPressRightIconC = jest.fn();
+    verticalPadding: 3
+  })
+  const ExampleLeftIconAIcon: SvgIcon = () => null
+  const onPressLeftIconA = jest.fn()
+  const ExampleLeftIconBIcon: SvgIcon = () => null
+  const onPressLeftIconB = jest.fn()
+  const ExampleLeftIconCIcon: SvgIcon = () => null
+  const onPressLeftIconC = jest.fn()
+  const ExampleLeftIconDIcon: SvgIcon = () => null
+  const onPressLeftIconD = jest.fn()
+  const ExampleRightIconAIcon: SvgIcon = () => null
+  const onPressRightIconA = jest.fn()
+  const ExampleRightIconBIcon: SvgIcon = () => null
+  const onPressRightIconB = jest.fn()
+  const ExampleRightIconCIcon: SvgIcon = () => null
+  const onPressRightIconC = jest.fn()
 
   const rendered = (
     <Component
       leftIcons={[
         {
           icon: ExampleLeftIconAIcon,
-          onPress: onPressLeftIconA,
+          onPress: onPressLeftIconA
         },
         {
           icon: ExampleLeftIconBIcon,
-          onPress: onPressLeftIconB,
+          onPress: onPressLeftIconB
         },
         {
           icon: ExampleLeftIconCIcon,
-          onPress: onPressLeftIconC,
+          onPress: onPressLeftIconC
         },
         {
           icon: ExampleLeftIconDIcon,
-          onPress: onPressLeftIconD,
-        },
+          onPress: onPressLeftIconD
+        }
       ]}
       rightIcons={[
         {
           icon: ExampleRightIconAIcon,
-          onPress: onPressRightIconA,
+          onPress: onPressRightIconA
         },
         {
           icon: ExampleRightIconBIcon,
-          onPress: onPressRightIconB,
+          onPress: onPressRightIconB
         },
         {
           icon: ExampleRightIconCIcon,
-          onPress: onPressRightIconC,
-        },
+          onPress: onPressRightIconC
+        }
       ]}
     >
       Example Text
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -631,22 +631,22 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
       top
       right
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        backgroundColor: `green`,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: 'green'
       }}
     >
       <View
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
+          flexDirection: 'row'
         }}
       >
         <Hitbox
           key="0"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -655,7 +655,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -664,7 +664,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -673,7 +673,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="3"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -683,11 +683,11 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
       <Text
         numberOfLines={1}
         style={{
-          color: `red`,
-          fontFamily: `Example Font Family`,
+          color: 'red',
+          fontFamily: 'Example Font Family',
           fontSize: 30,
           lineHeight: 42,
-          paddingVertical: 3,
+          paddingVertical: 3
         }}
       >
         Example Text
@@ -696,14 +696,14 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          justifyContent: `flex-end`,
+          flexDirection: 'row',
+          justifyContent: 'flex-end'
         }}
       >
         <Hitbox
           key="0"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -712,7 +712,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="1"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -721,7 +721,7 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         <Hitbox
           key="2"
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
         >
@@ -729,79 +729,79 @@ test(`renders as expected without inner or outer horizontal padding`, () => {
         </Hitbox>
       </View>
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(onPressLeftIconA).not.toHaveBeenCalled();
-  expect(onPressLeftIconB).not.toHaveBeenCalled();
-  expect(onPressLeftIconC).not.toHaveBeenCalled();
-  expect(onPressLeftIconD).not.toHaveBeenCalled();
-  expect(onPressRightIconA).not.toHaveBeenCalled();
-  expect(onPressRightIconB).not.toHaveBeenCalled();
-  expect(onPressRightIconC).not.toHaveBeenCalled();
-});
+  )
+  expect(onPressLeftIconA).not.toHaveBeenCalled()
+  expect(onPressLeftIconB).not.toHaveBeenCalled()
+  expect(onPressLeftIconC).not.toHaveBeenCalled()
+  expect(onPressLeftIconD).not.toHaveBeenCalled()
+  expect(onPressRightIconA).not.toHaveBeenCalled()
+  expect(onPressRightIconB).not.toHaveBeenCalled()
+  expect(onPressRightIconC).not.toHaveBeenCalled()
+})
 
-test(`renders as expected without vertical or inner horizontal padding`, () => {
+test('renders as expected without vertical or inner horizontal padding', () => {
   const Component = createHeaderComponent({
-    textColor: `red`,
-    fontFamily: `Example Font Family`,
+    textColor: 'red',
+    fontFamily: 'Example Font Family',
     fontSize: 30,
-    background: `green`,
+    background: 'green',
     outerHorizontalPadding: 50,
     innerHorizontalPadding: 0,
-    verticalPadding: 0,
-  });
-  const ExampleLeftIconAIcon: SvgIcon = () => null;
-  const onPressLeftIconA = jest.fn();
-  const ExampleLeftIconBIcon: SvgIcon = () => null;
-  const onPressLeftIconB = jest.fn();
-  const ExampleLeftIconCIcon: SvgIcon = () => null;
-  const onPressLeftIconC = jest.fn();
-  const ExampleLeftIconDIcon: SvgIcon = () => null;
-  const onPressLeftIconD = jest.fn();
-  const ExampleRightIconAIcon: SvgIcon = () => null;
-  const onPressRightIconA = jest.fn();
-  const ExampleRightIconBIcon: SvgIcon = () => null;
-  const onPressRightIconB = jest.fn();
-  const ExampleRightIconCIcon: SvgIcon = () => null;
-  const onPressRightIconC = jest.fn();
+    verticalPadding: 0
+  })
+  const ExampleLeftIconAIcon: SvgIcon = () => null
+  const onPressLeftIconA = jest.fn()
+  const ExampleLeftIconBIcon: SvgIcon = () => null
+  const onPressLeftIconB = jest.fn()
+  const ExampleLeftIconCIcon: SvgIcon = () => null
+  const onPressLeftIconC = jest.fn()
+  const ExampleLeftIconDIcon: SvgIcon = () => null
+  const onPressLeftIconD = jest.fn()
+  const ExampleRightIconAIcon: SvgIcon = () => null
+  const onPressRightIconA = jest.fn()
+  const ExampleRightIconBIcon: SvgIcon = () => null
+  const onPressRightIconB = jest.fn()
+  const ExampleRightIconCIcon: SvgIcon = () => null
+  const onPressRightIconC = jest.fn()
 
   const rendered = (
     <Component
       leftIcons={[
         {
           icon: ExampleLeftIconAIcon,
-          onPress: onPressLeftIconA,
+          onPress: onPressLeftIconA
         },
         {
           icon: ExampleLeftIconBIcon,
-          onPress: onPressLeftIconB,
+          onPress: onPressLeftIconB
         },
         {
           icon: ExampleLeftIconCIcon,
-          onPress: onPressLeftIconC,
+          onPress: onPressLeftIconC
         },
         {
           icon: ExampleLeftIconDIcon,
-          onPress: onPressLeftIconD,
-        },
+          onPress: onPressLeftIconD
+        }
       ]}
       rightIcons={[
         {
           icon: ExampleRightIconAIcon,
-          onPress: onPressRightIconA,
+          onPress: onPressRightIconA
         },
         {
           icon: ExampleRightIconBIcon,
-          onPress: onPressRightIconB,
+          onPress: onPressRightIconB
         },
         {
           icon: ExampleRightIconCIcon,
-          onPress: onPressRightIconC,
-        },
+          onPress: onPressRightIconC
+        }
       ]}
     >
       Example Text
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
@@ -809,24 +809,24 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
       top
       right
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        backgroundColor: `green`,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: 'green'
       }}
     >
       <View
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          marginLeft: 50,
+          flexDirection: 'row',
+          marginLeft: 50
         }}
       >
         <Hitbox
           key="0"
           onPress={expect.any(Function)}
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
         >
           <ExampleLeftIconAIcon fill="red" />
@@ -835,7 +835,7 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
           key="1"
           onPress={expect.any(Function)}
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
         >
           <ExampleLeftIconBIcon fill="red" />
@@ -844,7 +844,7 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
           key="2"
           onPress={expect.any(Function)}
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
         >
           <ExampleLeftIconCIcon fill="red" />
@@ -853,7 +853,7 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
           key="3"
           onPress={expect.any(Function)}
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
         >
           <ExampleLeftIconDIcon fill="red" />
@@ -862,10 +862,10 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
       <Text
         numberOfLines={1}
         style={{
-          color: `red`,
-          fontFamily: `Example Font Family`,
+          color: 'red',
+          fontFamily: 'Example Font Family',
           fontSize: 30,
-          lineHeight: 42,
+          lineHeight: 42
         }}
       >
         Example Text
@@ -874,16 +874,16 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
         style={{
           flexBasis: 0,
           flexGrow: 1,
-          flexDirection: `row`,
-          justifyContent: `flex-end`,
-          marginRight: 50,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          marginRight: 50
         }}
       >
         <Hitbox
           key="0"
           onPress={expect.any(Function)}
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
         >
           <ExampleRightIconAIcon fill="red" />
@@ -892,7 +892,7 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
           key="1"
           onPress={expect.any(Function)}
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
         >
           <ExampleRightIconBIcon fill="red" />
@@ -901,171 +901,167 @@ test(`renders as expected without vertical or inner horizontal padding`, () => {
           key="2"
           onPress={expect.any(Function)}
           style={{
-            justifyContent: `center`,
+            justifyContent: 'center'
           }}
         >
           <ExampleRightIconCIcon fill="red" />
         </Hitbox>
       </View>
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(onPressLeftIconA).not.toHaveBeenCalled();
-  expect(onPressLeftIconB).not.toHaveBeenCalled();
-  expect(onPressLeftIconC).not.toHaveBeenCalled();
-  expect(onPressLeftIconD).not.toHaveBeenCalled();
-  expect(onPressRightIconA).not.toHaveBeenCalled();
-  expect(onPressRightIconB).not.toHaveBeenCalled();
-  expect(onPressRightIconC).not.toHaveBeenCalled();
-});
+  )
+  expect(onPressLeftIconA).not.toHaveBeenCalled()
+  expect(onPressLeftIconB).not.toHaveBeenCalled()
+  expect(onPressLeftIconC).not.toHaveBeenCalled()
+  expect(onPressLeftIconD).not.toHaveBeenCalled()
+  expect(onPressRightIconA).not.toHaveBeenCalled()
+  expect(onPressRightIconB).not.toHaveBeenCalled()
+  expect(onPressRightIconC).not.toHaveBeenCalled()
+})
 
-test(`executes the appropriate callback on pressing on a left icon`, () => {
+test('executes the appropriate callback on pressing on a left icon', () => {
   const Component = createHeaderComponent({
-    textColor: `red`,
-    fontFamily: `Example Font Family`,
+    textColor: 'red',
+    fontFamily: 'Example Font Family',
     fontSize: 30,
-    background: `green`,
+    background: 'green',
     outerHorizontalPadding: 50,
     innerHorizontalPadding: 14,
-    verticalPadding: 3,
-  });
-  const ExampleLeftIconAIcon: SvgIcon = () => null;
-  const onPressLeftIconA = jest.fn();
-  const ExampleLeftIconBIcon: SvgIcon = () => null;
-  const onPressLeftIconB = jest.fn();
-  const ExampleLeftIconCIcon: SvgIcon = () => null;
-  const onPressLeftIconC = jest.fn();
-  const ExampleLeftIconDIcon: SvgIcon = () => null;
-  const onPressLeftIconD = jest.fn();
-  const ExampleRightIconAIcon: SvgIcon = () => null;
-  const onPressRightIconA = jest.fn();
-  const ExampleRightIconBIcon: SvgIcon = () => null;
-  const onPressRightIconB = jest.fn();
-  const ExampleRightIconCIcon: SvgIcon = () => null;
-  const onPressRightIconC = jest.fn();
+    verticalPadding: 3
+  })
+  const ExampleLeftIconAIcon: SvgIcon = () => null
+  const onPressLeftIconA = jest.fn()
+  const ExampleLeftIconBIcon: SvgIcon = () => null
+  const onPressLeftIconB = jest.fn()
+  const ExampleLeftIconCIcon: SvgIcon = () => null
+  const onPressLeftIconC = jest.fn()
+  const ExampleLeftIconDIcon: SvgIcon = () => null
+  const onPressLeftIconD = jest.fn()
+  const ExampleRightIconAIcon: SvgIcon = () => null
+  const onPressRightIconA = jest.fn()
+  const ExampleRightIconBIcon: SvgIcon = () => null
+  const onPressRightIconB = jest.fn()
+  const ExampleRightIconCIcon: SvgIcon = () => null
+  const onPressRightIconC = jest.fn()
   const rendered = (
     <Component
       leftIcons={[
         {
           icon: ExampleLeftIconAIcon,
-          onPress: onPressLeftIconA,
+          onPress: onPressLeftIconA
         },
         {
           icon: ExampleLeftIconBIcon,
-          onPress: onPressLeftIconB,
+          onPress: onPressLeftIconB
         },
         {
           icon: ExampleLeftIconCIcon,
-          onPress: onPressLeftIconC,
+          onPress: onPressLeftIconC
         },
         {
           icon: ExampleLeftIconDIcon,
-          onPress: onPressLeftIconD,
-        },
+          onPress: onPressLeftIconD
+        }
       ]}
       rightIcons={[
         {
           icon: ExampleRightIconAIcon,
-          onPress: onPressRightIconA,
+          onPress: onPressRightIconA
         },
         {
           icon: ExampleRightIconBIcon,
-          onPress: onPressRightIconB,
+          onPress: onPressRightIconB
         },
         {
           icon: ExampleRightIconCIcon,
-          onPress: onPressRightIconC,
-        },
+          onPress: onPressRightIconC
+        }
       ]}
     >
       Example Text
     </Component>
-  );
+  )
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][0].props.children[1].props.onPress();
+  unwrapRenderedFunctionComponent(rendered).props.children[0].props.children[1].props.onPress()
 
-  expect(onPressLeftIconA).not.toHaveBeenCalled();
-  expect(onPressLeftIconB).toBeCalledTimes(1);
-  expect(onPressLeftIconC).not.toHaveBeenCalled();
-  expect(onPressLeftIconD).not.toHaveBeenCalled();
-  expect(onPressRightIconA).not.toHaveBeenCalled();
-  expect(onPressRightIconB).not.toHaveBeenCalled();
-  expect(onPressRightIconC).not.toHaveBeenCalled();
-});
+  expect(onPressLeftIconA).not.toHaveBeenCalled()
+  expect(onPressLeftIconB).toBeCalledTimes(1)
+  expect(onPressLeftIconC).not.toHaveBeenCalled()
+  expect(onPressLeftIconD).not.toHaveBeenCalled()
+  expect(onPressRightIconA).not.toHaveBeenCalled()
+  expect(onPressRightIconB).not.toHaveBeenCalled()
+  expect(onPressRightIconC).not.toHaveBeenCalled()
+})
 
-test(`executes the appropriate callback on pressing on a right icon`, () => {
+test('executes the appropriate callback on pressing on a right icon', () => {
   const Component = createHeaderComponent({
-    textColor: `red`,
-    fontFamily: `Example Font Family`,
+    textColor: 'red',
+    fontFamily: 'Example Font Family',
     fontSize: 30,
-    background: `green`,
+    background: 'green',
     outerHorizontalPadding: 50,
     innerHorizontalPadding: 14,
-    verticalPadding: 3,
-  });
-  const ExampleLeftIconAIcon: SvgIcon = () => null;
-  const onPressLeftIconA = jest.fn();
-  const ExampleLeftIconBIcon: SvgIcon = () => null;
-  const onPressLeftIconB = jest.fn();
-  const ExampleLeftIconCIcon: SvgIcon = () => null;
-  const onPressLeftIconC = jest.fn();
-  const ExampleLeftIconDIcon: SvgIcon = () => null;
-  const onPressLeftIconD = jest.fn();
-  const ExampleRightIconAIcon: SvgIcon = () => null;
-  const onPressRightIconA = jest.fn();
-  const ExampleRightIconBIcon: SvgIcon = () => null;
-  const onPressRightIconB = jest.fn();
-  const ExampleRightIconCIcon: SvgIcon = () => null;
-  const onPressRightIconC = jest.fn();
+    verticalPadding: 3
+  })
+  const ExampleLeftIconAIcon: SvgIcon = () => null
+  const onPressLeftIconA = jest.fn()
+  const ExampleLeftIconBIcon: SvgIcon = () => null
+  const onPressLeftIconB = jest.fn()
+  const ExampleLeftIconCIcon: SvgIcon = () => null
+  const onPressLeftIconC = jest.fn()
+  const ExampleLeftIconDIcon: SvgIcon = () => null
+  const onPressLeftIconD = jest.fn()
+  const ExampleRightIconAIcon: SvgIcon = () => null
+  const onPressRightIconA = jest.fn()
+  const ExampleRightIconBIcon: SvgIcon = () => null
+  const onPressRightIconB = jest.fn()
+  const ExampleRightIconCIcon: SvgIcon = () => null
+  const onPressRightIconC = jest.fn()
   const rendered = (
     <Component
       leftIcons={[
         {
           icon: ExampleLeftIconAIcon,
-          onPress: onPressLeftIconA,
+          onPress: onPressLeftIconA
         },
         {
           icon: ExampleLeftIconBIcon,
-          onPress: onPressLeftIconB,
+          onPress: onPressLeftIconB
         },
         {
           icon: ExampleLeftIconCIcon,
-          onPress: onPressLeftIconC,
+          onPress: onPressLeftIconC
         },
         {
           icon: ExampleLeftIconDIcon,
-          onPress: onPressLeftIconD,
-        },
+          onPress: onPressLeftIconD
+        }
       ]}
       rightIcons={[
         {
           icon: ExampleRightIconAIcon,
-          onPress: onPressRightIconA,
+          onPress: onPressRightIconA
         },
         {
           icon: ExampleRightIconBIcon,
-          onPress: onPressRightIconB,
+          onPress: onPressRightIconB
         },
         {
           icon: ExampleRightIconCIcon,
-          onPress: onPressRightIconC,
-        },
+          onPress: onPressRightIconC
+        }
       ]}
     >
       Example Text
     </Component>
-  );
+  )
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][2].props.children[1].props.onPress();
+  unwrapRenderedFunctionComponent(rendered).props.children[2].props.children[1].props.onPress()
 
-  expect(onPressLeftIconA).not.toHaveBeenCalled();
-  expect(onPressLeftIconB).not.toHaveBeenCalled();
-  expect(onPressLeftIconC).not.toHaveBeenCalled();
-  expect(onPressLeftIconD).not.toHaveBeenCalled();
-  expect(onPressRightIconA).not.toHaveBeenCalled();
-  expect(onPressRightIconB).toBeCalledTimes(1);
-  expect(onPressRightIconC).not.toHaveBeenCalled();
-});
+  expect(onPressLeftIconA).not.toHaveBeenCalled()
+  expect(onPressLeftIconB).not.toHaveBeenCalled()
+  expect(onPressLeftIconC).not.toHaveBeenCalled()
+  expect(onPressLeftIconD).not.toHaveBeenCalled()
+  expect(onPressRightIconA).not.toHaveBeenCalled()
+  expect(onPressRightIconB).toBeCalledTimes(1)
+  expect(onPressRightIconC).not.toHaveBeenCalled()
+})

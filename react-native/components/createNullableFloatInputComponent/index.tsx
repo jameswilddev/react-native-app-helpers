@@ -1,6 +1,6 @@
-import * as React from "react";
-import type { ControlStyle } from "../../..";
-import { createInputComponent } from "../createInputComponent";
+import * as React from 'react'
+import type { ControlStyle } from '../../..'
+import { createInputComponent } from '../createInputComponent'
 
 /**
  * Creates a new input component pre-configured as a nullable float input.
@@ -31,89 +31,89 @@ export const createNullableFloatInputComponent = (
   greaterThanOrEqualTo: null | number,
   lessThan: null | number,
   lessThanOrEqualTo: null | number,
-  alignment: `left` | `right`,
+  alignment: 'left' | 'right',
   decimalPlaces: null | number
 ): React.FunctionComponent<{
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
    * string.
    */
-  readonly value: undefined | null | number;
+    readonly value: undefined | null | number
 
-  /**
+    /**
    * Invoked when the user edits the text in the box.
    * @param parsed   The value parsed, or undefined should it not be parseable.
    * @param complete True when the user has finished editing, otherwise, false.
    */
-  onChange(parsed: undefined | null | number, complete: boolean): void;
+    onChange: (parsed: undefined | null | number, complete: boolean) => void
 
-  /**
+    /**
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled?: undefined | boolean;
+    readonly disabled?: undefined | boolean
 
-  /**
+    /**
    * Text to be shown when no value has been entered.
    */
-  readonly placeholder: string;
-}> => {
+    readonly placeholder: string
+  }> => {
   const NullableFloatInputComponent = createInputComponent<null | number, null>(
     (value) =>
       value === null
-        ? ``
+        ? ''
         : decimalPlaces === null
-        ? String(value)
-        : value.toFixed(decimalPlaces),
+          ? String(value)
+          : value.toFixed(decimalPlaces),
     (unparsed) => {
-      if (unparsed.trim() === ``) {
-        return null;
+      if (unparsed.trim() === '') {
+        return null
       } else if (
         /^\s*[+-]?\d+\s*$|^\s*[+-]?\d+\.\d+\s*$|^\s*[+-]?\.\d+\s*$|^\s*[+-]?\d+\.\s*$/.test(
           unparsed
         )
       ) {
         if (decimalPlaces !== null) {
-          const splitByDecimalPlace = unparsed.split(`.`);
+          const splitByDecimalPlace = unparsed.split('.')
 
           if (
             splitByDecimalPlace.length > 1 &&
-            (splitByDecimalPlace[1] as string).replace(/\D/g, ``).length >
+            (splitByDecimalPlace[1] as string).replace(/\D/g, '').length >
               decimalPlaces
           ) {
-            return undefined;
+            return undefined
           }
         }
 
-        const parsed = Number.parseFloat(unparsed);
+        const parsed = Number.parseFloat(unparsed)
 
         if (greaterThan !== null && parsed <= greaterThan) {
-          return undefined;
+          return undefined
         } else if (lessThan !== null && parsed >= lessThan) {
-          return undefined;
+          return undefined
         } else if (
           greaterThanOrEqualTo !== null &&
           parsed < greaterThanOrEqualTo
         ) {
-          return undefined;
+          return undefined
         } else if (lessThanOrEqualTo !== null && parsed > lessThanOrEqualTo) {
-          return undefined;
+          return undefined
         } else {
-          return parsed;
+          return parsed
         }
       } else {
-        return undefined;
+        return undefined
       }
     },
     controlStyle,
     false,
-    `off`,
-    `numeric`,
-    `none`,
+    'off',
+    'numeric',
+    'none',
     false,
     false,
     alignment
-  );
+  )
 
   return ({ value, onChange, disabled, placeholder }) => (
     <NullableFloatInputComponent
@@ -129,5 +129,5 @@ export const createNullableFloatInputComponent = (
         /* No-op. */
       }}
     />
-  );
-};
+  )
+}

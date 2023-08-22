@@ -19,12 +19,12 @@ export interface PictureHelperInterface {
    *                           argument.  The modal will have closed
    *                           automatically.
    */
-  takePicture(
+  takePicture: (
     saveToMediaLibrary: boolean,
     onPermissionDenied: (showSettingsScreen: () => void) => Promise<void>,
     onCancel: () => Promise<void>,
     onSuccess: (uuid: string) => Promise<void>
-  ): Promise<void>;
+  ) => Promise<void>
 
   /**
    * Shows a modal for selecting a single picture from the user's media library.
@@ -40,11 +40,11 @@ export interface PictureHelperInterface {
    *                           argument.  The modal will have closed
    *                           automatically.
    */
-  selectOnePictureFromMediaLibrary(
+  selectOnePictureFromMediaLibrary: (
     onPermissionDenied: (showSettingsScreen: () => void) => Promise<void>,
     onCancel: () => Promise<void>,
     onSuccess: (uuid: string) => Promise<void>
-  ): Promise<void>;
+  ) => Promise<void>
 
   /**
    * Shows a modal for selecting multiple pictures from the user's media
@@ -60,9 +60,9 @@ export interface PictureHelperInterface {
    *                           of the pictures saved are given as an argument.
    *                           The modal will have closed automatically.
    */
-  selectMultiplePicturesFromMediaLibrary(
+  selectMultiplePicturesFromMediaLibrary: (
     onPermissionDenied: (showSettingsScreen: () => void) => Promise<void>,
     onCancel: () => Promise<void>,
-    onSuccess: (uuids: ReadonlyArray<string>) => Promise<void>
-  ): Promise<void>;
+    onSuccess: (uuids: readonly string[]) => Promise<void>
+  ) => Promise<void>
 }

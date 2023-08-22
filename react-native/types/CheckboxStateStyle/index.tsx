@@ -1,33 +1,33 @@
-import type * as React from "react";
-import type { ColorValue } from "react-native";
-import type { BorderStyle } from "../BorderStyle";
+import type * as React from 'react'
+import type { ColorValue } from 'react-native'
+import type { BorderStyle } from '../BorderStyle'
 
 /**
  * Describes the style of a checkbox in a specific state.
  */
-export type CheckboxStateStyle = {
+export interface CheckboxStateStyle {
   /**
    * The box's background color.
    */
-  readonly backgroundColor: ColorValue;
+  readonly backgroundColor: ColorValue
 
   /**
    * The color of the checkbox's label text.
    */
-  readonly color: ColorValue;
+  readonly color: ColorValue
 
   /**
    * The element shown inside the box.
    */
-  readonly boxChild: null | React.ReactNode | JSX.Element;
+  readonly boxChild: null | React.ReactNode | JSX.Element
 
   /**
    * The border radius of the box.
    */
-  readonly radius: number;
+  readonly radius: number
 
   /**
    * The style of the box's border.
    */
-  readonly border: null | BorderStyle;
-};
+  readonly border: null | BorderStyle
+}

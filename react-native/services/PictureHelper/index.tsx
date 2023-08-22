@@ -1,9 +1,9 @@
-import * as Permissions from "expo-permissions";
-import * as ImagePicker from "expo-image-picker";
-import * as MediaLibrary from "expo-media-library";
-import type { FileStoreInterface } from "../../..";
-import type { PermissionHelper } from "../PermissionHelper";
-import type { PictureHelperInterface } from "../../types/PictureHelperInterface";
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
+import * as MediaLibrary from 'expo-media-library'
+import type { FileStoreInterface } from '../../..'
+import type { PermissionHelper } from '../PermissionHelper'
+import type { PictureHelperInterface } from '../../types/PictureHelperInterface'
 
 /**
  * Provides helpers for working with pictures.
@@ -14,12 +14,12 @@ export class PictureHelper implements PictureHelperInterface {
    * @param permissionHelper The permission helper which will be used when
    *                         acquiring pictures.
    */
-  constructor(
+  constructor (
     private readonly fileStore: FileStoreInterface,
     private readonly permissionHelper: PermissionHelper
   ) {}
 
-  async takePicture(
+  async takePicture (
     saveToMediaLibrary: boolean,
     onPermissionDenied: (showSettingsScreen: () => void) => Promise<void>,
     onCancel: () => Promise<void>,
@@ -39,28 +39,28 @@ export class PictureHelper implements PictureHelperInterface {
           // Workaround for https://github.com/expo/expo/issues/14903#issuecomment-966161497.
           presentationStyle:
             // TODO: why is this export missing at runtime?
-            "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
-        });
+            'fullScreen' as ImagePicker.UIImagePickerPresentationStyle
+        })
 
         if (result.canceled || result.assets.length === 0) {
-          await onCancel();
+          await onCancel()
         } else {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          const uri = result.assets[0]!.uri;
+          const uri = result.assets[0]!.uri
 
           if (saveToMediaLibrary) {
-            await MediaLibrary.saveToLibraryAsync(uri);
+            await MediaLibrary.saveToLibraryAsync(uri)
           }
 
-          const uuid = await this.fileStore.import(uri);
+          const uuid = await this.fileStore.import(uri)
 
-          await onSuccess(uuid);
+          await onSuccess(uuid)
         }
       }
-    );
+    )
   }
 
-  async selectOnePictureFromMediaLibrary(
+  async selectOnePictureFromMediaLibrary (
     onPermissionDenied: (showSettingsScreen: () => void) => Promise<void>,
     onCancel: () => Promise<void>,
     onSuccess: (uuid: string) => Promise<void>
@@ -80,23 +80,23 @@ export class PictureHelper implements PictureHelperInterface {
           // Workaround for https://github.com/expo/expo/issues/14903#issuecomment-966161497.
           presentationStyle:
             // TODO: why is this export missing at runtime?
-            "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
-        });
+            'fullScreen' as ImagePicker.UIImagePickerPresentationStyle
+        })
 
         if (result.canceled || result.assets.length < 1) {
-          await onCancel();
+          await onCancel()
         } else {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          await onSuccess(await this.fileStore.import(result.assets[0]!.uri));
+          await onSuccess(await this.fileStore.import(result.assets[0]!.uri))
         }
       }
-    );
+    )
   }
 
-  async selectMultiplePicturesFromMediaLibrary(
+  async selectMultiplePicturesFromMediaLibrary (
     onPermissionDenied: (showSettingsScreen: () => void) => Promise<void>,
     onCancel: () => Promise<void>,
-    onSuccess: (uuids: ReadonlyArray<string>) => Promise<void>
+    onSuccess: (uuids: readonly string[]) => Promise<void>
   ): Promise<void> {
     await this.permissionHelper.acquire(
       [Permissions.MEDIA_LIBRARY],
@@ -113,19 +113,19 @@ export class PictureHelper implements PictureHelperInterface {
           // Workaround for https://github.com/expo/expo/issues/14903#issuecomment-966161497.
           presentationStyle:
             // TODO: why is this export missing at runtime?
-            "fullScreen" as ImagePicker.UIImagePickerPresentationStyle,
-        });
+            'fullScreen' as ImagePicker.UIImagePickerPresentationStyle
+        })
 
         if (result.canceled) {
-          await onCancel();
+          await onCancel()
         } else {
           await onSuccess(
             await Promise.all(
-              result.assets.map((image) => this.fileStore.import(image.uri))
+              result.assets.map(async (image) => await this.fileStore.import(image.uri))
             )
-          );
+          )
         }
       }
-    );
+    )
   }
 }

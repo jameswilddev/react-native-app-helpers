@@ -1,4 +1,4 @@
-import type * as React from "react";
+import type * as React from 'react'
 
 /**
  * A React component which can be used to render a route.
@@ -7,12 +7,12 @@ import type * as React from "react";
  */
 export type Route<
   TRouteParameters,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 > = React.FunctionComponent<
-  {
-    readonly routeState: {
-      readonly key: string;
-      readonly parameters: TRouteParameters;
-    };
-  } & TOtherProps
->;
+{
+  readonly routeState: {
+    readonly key: string
+    readonly parameters: TRouteParameters
+  }
+} & TOtherProps
+>

@@ -1,40 +1,40 @@
-import type { ColorValue } from "react-native";
-import type { BorderStyle } from "../BorderStyle";
+import type { ColorValue } from 'react-native'
+import type { BorderStyle } from '../BorderStyle'
 
 /**
  * Describes the style of a flash message.
  * @template T The names of the types available.
  */
-export type FlashMessageStyle<T extends string> = {
+export interface FlashMessageStyle<T extends string> {
   /**
    * The font family to use.
    */
-  readonly fontFamily: string;
+  readonly fontFamily: string
 
   /**
    * The font size to use.
    */
-  readonly fontSize: number;
+  readonly fontSize: number
 
   /**
    * The border radius to apply.
    */
-  readonly radius: number;
+  readonly radius: number
 
   /**
    * The internal horizontal padding to include.
    */
-  readonly horizontalPadding: number;
+  readonly horizontalPadding: number
 
   /**
    * The internal vertical padding to include.
    */
-  readonly verticalPadding: number;
+  readonly verticalPadding: number
 
   /**
    * The external margin to include below.
    */
-  readonly bottomMargin: number;
+  readonly bottomMargin: number
 
   /**
    * Details specific to flash message types.
@@ -44,17 +44,17 @@ export type FlashMessageStyle<T extends string> = {
       /**
        * The background color used by this type.
        */
-      readonly backgroundColor: ColorValue;
+      readonly backgroundColor: ColorValue
 
       /**
        * The foreground color used by this type.
        */
-      readonly color: ColorValue;
+      readonly color: ColorValue
 
       /**
        * The border used by this type (or null if no border is to be included).
        */
-      readonly border: null | BorderStyle;
+      readonly border: null | BorderStyle
     };
-  };
-};
+  }
+}

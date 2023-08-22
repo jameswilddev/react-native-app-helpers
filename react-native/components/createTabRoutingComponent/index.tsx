@@ -1,22 +1,22 @@
-import * as React from "react";
-import type { FunctionComponent } from "react";
-import type { TabRouteTable } from "../../types/TabRouteTable";
-import { StyleSheet, View, ViewStyle } from "react-native";
+import * as React from 'react'
+import type { FunctionComponent } from 'react'
+import type { TabRouteTable } from '../../types/TabRouteTable'
+import { StyleSheet, View, type ViewStyle } from 'react-native'
 
 const viewBase: ViewStyle = {
-  width: `100%`,
-  height: `100%`,
-};
+  width: '100%',
+  height: '100%'
+}
 
 const styles = StyleSheet.create({
   activeView: {
-    ...viewBase,
+    ...viewBase
   },
   inactiveView: {
     ...viewBase,
-    display: `none`,
-  },
-});
+    display: 'none'
+  }
+})
 
 /**
  * Creates a React component which displays a single route at a time (though all
@@ -29,20 +29,20 @@ const styles = StyleSheet.create({
  */
 export const createTabRoutingComponent = <
   TRoute extends string,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 >(
-  routeTable: TabRouteTable<TRoute, TOtherProps>
-): FunctionComponent<
+    routeTable: TabRouteTable<TRoute, TOtherProps>
+  ): FunctionComponent<
   {
     /**
      * The key of the route to display.
      */
-    readonly route: TRoute;
+    readonly route: TRoute
   } & TOtherProps
-> => {
+  > => {
   const keys = Object.keys(
     routeTable
-  ).sort() as unknown as ReadonlyArray<TRoute>;
+  ).sort() as unknown as readonly TRoute[]
 
   return (props) => (
     <React.Fragment>
@@ -55,5 +55,5 @@ export const createTabRoutingComponent = <
         </View>
       ))}
     </React.Fragment>
-  );
-};
+  )
+}

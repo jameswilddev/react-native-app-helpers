@@ -1,17 +1,17 @@
-import * as FileSystem from "expo-file-system";
-import type { EmptyRequestBody } from "../../types/EmptyRequestBody";
-import type { FileRequestBody } from "../../types/FileRequestBody";
-import type { Json } from "../../types/Json";
-import type { JsonRequestBody } from "../../types/JsonRequestBody";
-import type { QueryParameter } from "../../types/QueryParameter";
-import type { QueryParameters } from "../../types/QueryParameters";
-import type { RequestInterface } from "../../types/RequestInterface";
+import * as FileSystem from 'expo-file-system'
+import type { EmptyRequestBody } from '../../types/EmptyRequestBody'
+import type { FileRequestBody } from '../../types/FileRequestBody'
+import type { Json } from '../../types/Json'
+import type { JsonRequestBody } from '../../types/JsonRequestBody'
+import type { QueryParameter } from '../../types/QueryParameter'
+import type { QueryParameters } from '../../types/QueryParameters'
+import type { RequestInterface } from '../../types/RequestInterface'
 
 class AbortError extends Error {
-  constructor() {
-    super(`Aborted.`);
+  constructor () {
+    super('Aborted.')
 
-    this.name = `AbortError`;
+    this.name = 'AbortError'
   }
 }
 
@@ -19,7 +19,7 @@ class AbortError extends Error {
  * Allows HTTP/S requests to be made for JSON and files relative to a base URL.
  */
 export class Request implements RequestInterface {
-  private readonly baseUrl: string;
+  private readonly baseUrl: string
 
   /**
    * @param baseUrl                    The base URL to which all requests will
@@ -32,135 +32,135 @@ export class Request implements RequestInterface {
    *                                   "BEARER 1234") is taken as the
    *                                   Authorization header.
    */
-  constructor(
+  constructor (
     baseUrl: string,
     private readonly timeoutMilliseconds: number,
     private readonly authorizationHeaderFactory: () => null | string
   ) {
     if (!/^[a-z]+:\/\//.test(baseUrl)) {
-      baseUrl = `https://${baseUrl}`;
+      baseUrl = `https://${baseUrl}`
     }
 
-    if (!baseUrl.endsWith(`/`)) {
-      baseUrl += `/`;
+    if (!baseUrl.endsWith('/')) {
+      baseUrl += '/'
     }
 
-    this.baseUrl = baseUrl;
+    this.baseUrl = baseUrl
   }
 
-  private constructUrl(
+  private constructUrl (
     route: string,
     queryParameters: QueryParameters
   ): string {
-    let url = this.baseUrl + route;
+    let url = this.baseUrl + route
 
     for (const queryParameterKey in queryParameters) {
       const queryParameterValue = queryParameters[
         queryParameterKey
-      ] as QueryParameter;
+      ] as QueryParameter
 
       if (queryParameterValue === false) {
-        continue;
+        continue
       } else {
-        const delimiter = url.includes(`?`) ? `&` : `?`;
-        const encodedQueryParameterKey = encodeURIComponent(queryParameterKey);
+        const delimiter = url.includes('?') ? '&' : '?'
+        const encodedQueryParameterKey = encodeURIComponent(queryParameterKey)
 
         if (queryParameterValue === true) {
-          url += `${delimiter}${encodedQueryParameterKey}`;
+          url += `${delimiter}${encodedQueryParameterKey}`
         } else {
           const encodedQueryParameterValue =
-            encodeURIComponent(queryParameterValue);
+            encodeURIComponent(queryParameterValue)
 
-          url += `${delimiter}${encodedQueryParameterKey}=${encodedQueryParameterValue}`;
+          url += `${delimiter}${encodedQueryParameterKey}=${encodedQueryParameterValue}`
         }
       }
     }
 
-    return url;
+    return url
   }
 
   private async withTimeout<T>(
     abortSignal: null | AbortSignal,
     then: (signal: AbortSignal) => T
   ): Promise<T> {
-    const internalAbortController = new AbortController();
-    const abortControllerCallback = () => {
-      internalAbortController.abort();
-    };
+    const internalAbortController = new AbortController()
+    const abortControllerCallback = (): void => {
+      internalAbortController.abort()
+    }
 
-    let timeout: null | NodeJS.Timeout = null;
+    let timeout: null | NodeJS.Timeout = null
 
     try {
       if (abortSignal !== null) {
-        abortSignal.addEventListener(`abort`, abortControllerCallback);
+        abortSignal.addEventListener('abort', abortControllerCallback)
       }
 
-      timeout = setTimeout(abortControllerCallback, this.timeoutMilliseconds);
+      timeout = setTimeout(abortControllerCallback, this.timeoutMilliseconds)
 
-      return await then(internalAbortController.signal);
+      return then(internalAbortController.signal)
     } finally {
       if (abortSignal !== null) {
-        abortSignal.removeEventListener(`abort`, abortControllerCallback);
+        abortSignal.removeEventListener('abort', abortControllerCallback)
       }
 
       // It is impossible to skip this branch by force.
       /* istanbul ignore else */
       if (timeout !== null) {
-        clearTimeout(timeout);
+        clearTimeout(timeout)
       }
     }
   }
 
-  private checkStatusCode(
+  private checkStatusCode (
     method: string,
     url: string,
     statusCode: number,
-    expectedStatusCodes: ReadonlyArray<string>
+    expectedStatusCodes: readonly string[]
   ): void {
     if (!expectedStatusCodes.includes(String(statusCode))) {
       throw new Error(
         `Unexpected status code ${statusCode} during ${method} of ${url}.`
-      );
+      )
     }
   }
 
-  private commonHeaders(): { readonly [key: string]: string } {
-    const authorizationHeader = this.authorizationHeaderFactory();
+  private commonHeaders (): Readonly<Record<string, string>> {
+    const authorizationHeader = this.authorizationHeaderFactory()
 
     if (authorizationHeader === null) {
-      return {};
+      return {}
     } else {
       return {
-        Authorization: authorizationHeader,
-      };
+        Authorization: authorizationHeader
+      }
     }
   }
 
-  private requestBodyHeaders(
+  private requestBodyHeaders (
     requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody
-  ): { readonly [key: string]: string } {
+  ): Readonly<Record<string, string>> {
     switch (requestBody.type) {
-      case `empty`:
-      case `file`:
-        return {};
+      case 'empty':
+      case 'file':
+        return {}
 
-      case `json`:
+      case 'json':
         return {
-          "Content-Type": `application/json`,
-        };
+          'Content-Type': 'application/json'
+        }
     }
   }
 
-  private requestBodyBody(
+  private requestBodyBody (
     requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody
   ): null | BodyInit_ {
     switch (requestBody.type) {
-      case `empty`:
-      case `file`:
-        return null;
+      case 'empty':
+      case 'file':
+        return null
 
-      case `json`:
-        return JSON.stringify(requestBody.value);
+      case 'json':
+        return JSON.stringify(requestBody.value)
     }
   }
 
@@ -170,69 +170,67 @@ export class Request implements RequestInterface {
     requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody,
     queryParameters: QueryParameters,
     abortSignal: null | AbortSignal,
-    expectedStatusCodes: ReadonlyArray<T>
+    expectedStatusCodes: readonly T[]
   ): Promise<T> {
     return await this.withTimeout(abortSignal, async (signal) => {
-      const url = this.constructUrl(route, queryParameters);
+      const url = this.constructUrl(route, queryParameters)
 
-      let response: { readonly status: number };
+      let response: { readonly status: number }
 
       switch (requestBody.type) {
-        case `empty`:
-        case `json`:
+        case 'empty':
+        case 'json':
           response = await fetch(url, {
             signal,
             method,
             headers: {
               ...this.commonHeaders(),
               ...this.requestBodyHeaders(requestBody),
-              Accept: `application/json`, // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
+              Accept: 'application/json' // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
             },
-            body: this.requestBodyBody(requestBody),
-          });
-          break;
+            body: this.requestBodyBody(requestBody)
+          })
+          break
 
-        case `file`: {
+        case 'file': {
           const task = FileSystem.createUploadTask(url, requestBody.fileUri, {
             uploadType: FileSystem.FileSystemUploadType.BINARY_CONTENT,
             headers: {
               ...this.commonHeaders(),
               ...this.requestBodyHeaders(requestBody),
-              Accept: `application/json`, // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
-            },
-          });
+              Accept: 'application/json' // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
+            }
+          })
 
-          const eventListener = () => {
-            task.cancelAsync();
-          };
+          const eventListener = (): void => {
+            void task.cancelAsync()
+          }
 
           try {
-            signal.addEventListener("abort", eventListener);
+            signal.addEventListener('abort', eventListener)
 
-            const result = await task.uploadAsync();
+            const result = await task.uploadAsync()
 
             if (result === undefined) {
-              throw new AbortError();
+              throw new AbortError()
             } else {
-              response = result;
+              response = result
             }
           } finally {
-            signal.removeEventListener(`abort`, eventListener);
+            signal.removeEventListener('abort', eventListener)
           }
-          break;
+          break
         }
       }
 
-      this.checkStatusCode(method, url, response.status, expectedStatusCodes);
+      this.checkStatusCode(method, url, response.status, expectedStatusCodes)
 
-      return String(response.status) as T;
-    });
+      return String(response.status) as T
+    })
   }
 
   async returningJson<
-    T extends {
-      readonly [statusCode: string]: Json;
-    }
+    T extends Readonly<Record<string, Json>>
   >(
     method: string,
     route: string,
@@ -243,13 +241,13 @@ export class Request implements RequestInterface {
   ): Promise<
     {
       readonly [TStatusCode in keyof T]: {
-        readonly statusCode: TStatusCode;
-        readonly value: T[TStatusCode];
+        readonly statusCode: TStatusCode
+        readonly value: T[TStatusCode]
       };
     }[keyof T]
-  > {
+    > {
     return await this.withTimeout(abortSignal, async (signal) => {
-      const url = this.constructUrl(route, queryParameters);
+      const url = this.constructUrl(route, queryParameters)
 
       const response = await fetch(url, {
         signal,
@@ -257,63 +255,63 @@ export class Request implements RequestInterface {
         headers: {
           ...this.commonHeaders(),
           ...this.requestBodyHeaders(requestBody),
-          Accept: `application/json`,
+          Accept: 'application/json'
         },
-        body: this.requestBodyBody(requestBody),
-      });
+        body: this.requestBodyBody(requestBody)
+      })
 
-      this.checkStatusCode(method, url, response.status, expectedStatusCodes);
+      this.checkStatusCode(method, url, response.status, expectedStatusCodes as readonly string[])
 
       return {
         statusCode: String(response.status) as keyof T,
-        value: await response.json(),
-      };
-    });
+        value: await response.json()
+      }
+    })
   }
 
   async returningFile<T extends string>(
-    method: `GET`,
+    method: 'GET',
     route: string,
     requestBody: EmptyRequestBody,
     queryParameters: QueryParameters,
-    abortSignal: null,
-    fileUri: string,
-    successfulStatusCodes: ReadonlyArray<T>,
-    unsuccessfulStatusCodes: ReadonlyArray<T>
-  ): Promise<T> {
-    // Not yet possible with FileSystem.downloadAsync.
-    abortSignal;
 
-    const url = this.constructUrl(route, queryParameters);
+    // Not yet possible with FileSystem.downloadAsync.
+    _abortSignal: null,
+
+    fileUri: string,
+    successfulStatusCodes: readonly T[],
+    unsuccessfulStatusCodes: readonly T[]
+  ): Promise<T> {
+    const url = this.constructUrl(route, queryParameters)
 
     try {
       const response = await FileSystem.downloadAsync(url, fileUri, {
         headers: {
           ...this.commonHeaders(),
-          ...this.requestBodyHeaders(requestBody),
-        },
-      });
+          ...this.requestBodyHeaders(requestBody)
+        }
+      })
 
       this.checkStatusCode(method, url, response.status, [
         ...successfulStatusCodes,
-        ...unsuccessfulStatusCodes,
-      ]);
+        ...unsuccessfulStatusCodes
+      ])
 
       // It's possible that the application will close before we hit this line,
       // but this is the best we can do unfortunately.
       if (unsuccessfulStatusCodes.includes(String(response.status) as T)) {
-        await FileSystem.deleteAsync(fileUri, { idempotent: true });
+        await FileSystem.deleteAsync(fileUri, { idempotent: true })
       }
 
-      return String(response.status) as T;
+      return String(response.status) as T
     } catch (e) {
       // It has been observed that FileSystem.downloadAsync will still create
       // files for non-2xx status codes.  It's possible that the application
       // will close before we hit this line, but this is the best we can do
       // unfortunately.
-      await FileSystem.deleteAsync(fileUri, { idempotent: true });
+      await FileSystem.deleteAsync(fileUri, { idempotent: true })
 
-      throw e;
+      throw e
     }
   }
 }

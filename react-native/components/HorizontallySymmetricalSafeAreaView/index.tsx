@@ -1,16 +1,16 @@
-import * as React from "react";
-import { StyleProp, View, ViewProps, ViewStyle } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import * as React from 'react'
+import { type StyleProp, View, type ViewProps, type ViewStyle } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const coerceToNumber = (value: undefined | number | string): null | number => {
   if (value === undefined) {
-    return null;
-  } else if (typeof value === `string`) {
-    return Number.parseFloat(value);
+    return null
+  } else if (typeof value === 'string') {
+    return Number.parseFloat(value)
   } else {
-    return value;
+    return value
   }
-};
+}
 
 /**
  * Similar to SafeAreaView, but ensures that the left and right safe area insets
@@ -18,98 +18,98 @@ const coerceToNumber = (value: undefined | number | string): null | number => {
  * bar's contents off-center when the device is horizontal.
  */
 export const HorizontallySymmetricalSafeAreaView: React.FunctionComponent<
-  ViewProps & {
-    /**
+ViewProps & {
+  /**
      * When true, the safe area at the top of the screen will be added to any
      * top padding within the style.  It will otherwise use the style's top
      * padding.
      */
-    readonly top?: boolean;
+  readonly top?: boolean
 
-    /**
+  /**
      * When true, the safe area at the bottom of the screen will be added to any
      * bottom padding within the style.  It will otherwise use the style's
      * bottom padding.
      */
-    readonly bottom?: boolean;
+  readonly bottom?: boolean
 
-    /**
+  /**
      * When true, the widest of the safe areas at the left and right of the
      * screen will be added to any left padding within the style.  It will
      * otherwise use the style's left padding.
      */
-    readonly left?: boolean;
+  readonly left?: boolean
 
-    /**
+  /**
      * When true, the widest of the safe areas at the left and right of the
      * screen will be added to any right padding within the style.  It will
      * otherwise use the style's right padding.
      */
-    readonly right?: boolean;
-  }
+  readonly right?: boolean
+}
 > = ({ style, left, right, top, bottom, ...otherProps }) => {
-  const safeAreaInsets = useSafeAreaInsets();
+  const safeAreaInsets = useSafeAreaInsets()
 
-  const horizontalInset = Math.max(safeAreaInsets.left, safeAreaInsets.right);
+  const horizontalInset = Math.max(safeAreaInsets.left, safeAreaInsets.right)
 
-  let stylePadding: null | number = null;
-  let stylePaddingVertical: null | number = null;
-  let stylePaddingHorizontal: null | number = null;
-  let stylePaddingTop: null | number = null;
-  let stylePaddingBottom: null | number = null;
-  let stylePaddingLeft: null | number = null;
-  let stylePaddingRight: null | number = null;
+  let stylePadding: null | number = null
+  let stylePaddingVertical: null | number = null
+  let stylePaddingHorizontal: null | number = null
+  let stylePaddingTop: null | number = null
+  let stylePaddingBottom: null | number = null
+  let stylePaddingLeft: null | number = null
+  let stylePaddingRight: null | number = null
 
   const processStyleObject = (styleObject: ViewStyle): void => {
-    stylePadding = coerceToNumber(styleObject.padding) ?? stylePadding;
+    stylePadding = coerceToNumber(styleObject.padding) ?? stylePadding
     stylePaddingVertical =
-      coerceToNumber(styleObject.paddingVertical) ?? stylePaddingVertical;
+      coerceToNumber(styleObject.paddingVertical) ?? stylePaddingVertical
     stylePaddingHorizontal =
-      coerceToNumber(styleObject.paddingHorizontal) ?? stylePaddingHorizontal;
-    stylePaddingTop = coerceToNumber(styleObject.paddingTop) ?? stylePaddingTop;
+      coerceToNumber(styleObject.paddingHorizontal) ?? stylePaddingHorizontal
+    stylePaddingTop = coerceToNumber(styleObject.paddingTop) ?? stylePaddingTop
     stylePaddingBottom =
-      coerceToNumber(styleObject.paddingBottom) ?? stylePaddingBottom;
+      coerceToNumber(styleObject.paddingBottom) ?? stylePaddingBottom
     stylePaddingLeft =
-      coerceToNumber(styleObject.paddingLeft) ?? stylePaddingLeft;
+      coerceToNumber(styleObject.paddingLeft) ?? stylePaddingLeft
     stylePaddingRight =
-      coerceToNumber(styleObject.paddingRight) ?? stylePaddingRight;
-  };
+      coerceToNumber(styleObject.paddingRight) ?? stylePaddingRight
+  }
 
   const recurseStyleTree = (recursedStyle: StyleProp<ViewStyle>): void => {
     if (Array.isArray(recursedStyle)) {
       for (const child of recursedStyle) {
-        recurseStyleTree(child as StyleProp<ViewStyle>);
+        recurseStyleTree(child as StyleProp<ViewStyle>)
       }
     } else if (
       recursedStyle !== undefined &&
-      typeof recursedStyle !== `object`
+      typeof recursedStyle !== 'object'
     ) {
       throw new Error(
-        `Registered styles cannot be used with HorizontallySymmetricalSafeAreaView.`
-      );
+        'Registered styles cannot be used with HorizontallySymmetricalSafeAreaView.'
+      )
     } else if (recursedStyle !== undefined && recursedStyle !== null) {
-      processStyleObject(recursedStyle as ViewStyle);
+      processStyleObject(recursedStyle)
     }
-  };
+  }
 
-  recurseStyleTree(style);
+  recurseStyleTree(style)
 
-  const styleTop = stylePaddingTop ?? stylePaddingVertical ?? stylePadding ?? 0;
-  const effectiveTop = (top ? safeAreaInsets.top : 0) + styleTop;
+  const styleTop = stylePaddingTop ?? stylePaddingVertical ?? stylePadding ?? 0
+  const effectiveTop = (top === true ? safeAreaInsets.top : 0) + styleTop
 
   const styleBottom =
-    stylePaddingBottom ?? stylePaddingVertical ?? stylePadding ?? 0;
-  const effectiveBottom = (bottom ? safeAreaInsets.bottom : 0) + styleBottom;
+    stylePaddingBottom ?? stylePaddingVertical ?? stylePadding ?? 0
+  const effectiveBottom = (bottom === true ? safeAreaInsets.bottom : 0) + styleBottom
 
   const styleLeft =
-    stylePaddingLeft ?? stylePaddingHorizontal ?? stylePadding ?? 0;
-  const effectiveLeft = (left ? horizontalInset : 0) + styleLeft;
+    stylePaddingLeft ?? stylePaddingHorizontal ?? stylePadding ?? 0
+  const effectiveLeft = (left === true ? horizontalInset : 0) + styleLeft
 
   const styleRight =
-    stylePaddingRight ?? stylePaddingHorizontal ?? stylePadding ?? 0;
-  const effectiveRight = (right ? horizontalInset : 0) + styleRight;
+    stylePaddingRight ?? stylePaddingHorizontal ?? stylePadding ?? 0
+  const effectiveRight = (right === true ? horizontalInset : 0) + styleRight
 
-  let composedStyle: StyleProp<ViewStyle>;
+  let composedStyle: StyleProp<ViewStyle>
 
   if (
     styleLeft === effectiveLeft &&
@@ -117,9 +117,9 @@ export const HorizontallySymmetricalSafeAreaView: React.FunctionComponent<
     styleTop === effectiveTop &&
     styleBottom === effectiveBottom
   ) {
-    composedStyle = style;
+    composedStyle = style
   } else {
-    const additionalStyle: ViewStyle = {};
+    const additionalStyle: ViewStyle = {}
 
     if (
       effectiveTop !== styleTop &&
@@ -136,7 +136,7 @@ export const HorizontallySymmetricalSafeAreaView: React.FunctionComponent<
       stylePaddingLeft === null &&
       stylePaddingRight === null
     ) {
-      additionalStyle.padding = effectiveTop;
+      additionalStyle.padding = effectiveTop
     } else {
       if (
         effectiveTop !== styleTop &&
@@ -145,14 +145,14 @@ export const HorizontallySymmetricalSafeAreaView: React.FunctionComponent<
         stylePaddingTop === null &&
         stylePaddingBottom === null
       ) {
-        additionalStyle.paddingVertical = effectiveTop;
+        additionalStyle.paddingVertical = effectiveTop
       } else {
         if (effectiveTop !== styleTop) {
-          additionalStyle.paddingTop = effectiveTop;
+          additionalStyle.paddingTop = effectiveTop
         }
 
         if (effectiveBottom !== styleBottom) {
-          additionalStyle.paddingBottom = effectiveBottom;
+          additionalStyle.paddingBottom = effectiveBottom
         }
       }
 
@@ -163,26 +163,26 @@ export const HorizontallySymmetricalSafeAreaView: React.FunctionComponent<
         stylePaddingLeft === null &&
         stylePaddingRight === null
       ) {
-        additionalStyle.paddingHorizontal = effectiveLeft;
+        additionalStyle.paddingHorizontal = effectiveLeft
       } else {
         if (effectiveLeft !== styleLeft) {
-          additionalStyle.paddingLeft = effectiveLeft;
+          additionalStyle.paddingLeft = effectiveLeft
         }
 
         if (effectiveRight !== styleRight) {
-          additionalStyle.paddingRight = effectiveRight;
+          additionalStyle.paddingRight = effectiveRight
         }
       }
     }
 
-    if (style) {
-      composedStyle = [style, additionalStyle];
+    if (style === undefined || style === null || style === false) {
+      composedStyle = additionalStyle
     } else {
-      composedStyle = additionalStyle;
+      composedStyle = [style, additionalStyle]
     }
   }
 
   return (
     <View style={composedStyle} pointerEvents="box-none" {...otherProps} />
-  );
-};
+  )
+}

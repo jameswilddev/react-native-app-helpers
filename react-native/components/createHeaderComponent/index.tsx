@@ -1,9 +1,9 @@
-import * as React from "react";
-import { StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
-import type { HeaderIcon } from "../../types/HeaderIcon";
-import type { HeaderStyle } from "../../types/HeaderStyle";
-import { Hitbox } from "../Hitbox";
-import { HorizontallySymmetricalSafeAreaView } from "../HorizontallySymmetricalSafeAreaView";
+import * as React from 'react'
+import { StyleSheet, Text, type TextStyle, View, type ViewStyle } from 'react-native'
+import type { HeaderStyle } from '../../types/HeaderStyle'
+import { Hitbox } from '../Hitbox'
+import { HorizontallySymmetricalSafeAreaView } from '../HorizontallySymmetricalSafeAreaView'
+import type { HeaderProps } from '../../types/HeaderProps'
 
 /**
  * Creates a new React component which represents a header bar.
@@ -12,74 +12,63 @@ import { HorizontallySymmetricalSafeAreaView } from "../HorizontallySymmetricalS
  */
 export const createHeaderComponent = (
   headerStyle: HeaderStyle
-): React.FunctionComponent<
-  React.PropsWithChildren<{
-    /**
-     * The icons to show on the left.
-     */
-    readonly leftIcons: ReadonlyArray<HeaderIcon>;
-
-    /**
-     * The icons to show on the right.
-     */
-    readonly rightIcons: ReadonlyArray<HeaderIcon>;
-  }>
-> => {
+): React.FunctionComponent<HeaderProps>
+=> {
   const viewBase: ViewStyle = {
     flexBasis: 0,
     flexGrow: 1,
-    flexDirection: `row`,
-  };
+    flexDirection: 'row'
+  }
 
   const leftView: ViewStyle = {
-    ...viewBase,
-  };
+    ...viewBase
+  }
 
   const rightView: ViewStyle = {
     ...viewBase,
-    justifyContent: `flex-end`,
-  };
+    justifyContent: 'flex-end'
+  }
 
   const hitbox: ViewStyle = {
-    justifyContent: `center`,
-  };
+    justifyContent: 'center'
+  }
 
   const viewMargin =
-    headerStyle.outerHorizontalPadding - headerStyle.innerHorizontalPadding / 2;
+    headerStyle.outerHorizontalPadding - headerStyle.innerHorizontalPadding / 2
 
   if (viewMargin !== 0) {
-    leftView.marginLeft = viewMargin;
-    rightView.marginRight = viewMargin;
+    leftView.marginLeft = viewMargin
+    rightView.marginRight = viewMargin
   }
 
   if (headerStyle.innerHorizontalPadding !== 0) {
-    hitbox.paddingHorizontal = headerStyle.innerHorizontalPadding / 2;
+    hitbox.paddingHorizontal = headerStyle.innerHorizontalPadding / 2
   }
 
   const text: TextStyle = {
     color: headerStyle.textColor,
     fontFamily: headerStyle.fontFamily,
     fontSize: headerStyle.fontSize,
-    lineHeight: headerStyle.fontSize * 1.4,
-  };
+    lineHeight: headerStyle.fontSize * 1.4
+  }
 
   if (headerStyle.verticalPadding !== 0) {
-    text.paddingVertical = headerStyle.verticalPadding;
+    text.paddingVertical = headerStyle.verticalPadding
   }
 
   const styles = StyleSheet.create({
     horizontallySymmetricalSafeAreaView: {
-      width: `100%`,
-      flexDirection: `row`,
-      backgroundColor: headerStyle.background,
+      width: '100%',
+      flexDirection: 'row',
+      backgroundColor: headerStyle.background
     },
     leftView,
     rightView,
     hitbox,
-    text,
-  });
+    text
+  })
 
-  return ({ leftIcons, children, rightIcons }) => (
+  const Header: React.FunctionComponent<HeaderProps> = ({ leftIcons, children, rightIcons }) => (
     <HorizontallySymmetricalSafeAreaView
       left
       top
@@ -112,5 +101,7 @@ export const createHeaderComponent = (
         ))}
       </View>
     </HorizontallySymmetricalSafeAreaView>
-  );
-};
+  )
+
+  return Header
+}

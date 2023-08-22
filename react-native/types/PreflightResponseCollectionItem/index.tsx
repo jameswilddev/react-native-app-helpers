@@ -1,4 +1,4 @@
-import type { Json } from "../Json";
+import type { Json } from '../Json'
 
 /**
  * The an item in a collection within a response to a successful preflight
@@ -14,5 +14,5 @@ export type PreflightResponseCollectionItem<
    * The current version of the item.  If the record either does not exist
    * locally or has a different version, it is to be pulled down.
    */
-  readonly version: string | number;
-} & TAdditionalCollectionItemData;
+  readonly version: string | number
+} & TAdditionalCollectionItemData

@@ -1,8 +1,8 @@
-import * as React from "react";
-import type { FunctionComponent } from "react";
-import type { RouteParameters } from "../../types/RouteParameters";
-import type { RouteTable } from "../../types/RouteTable";
-import type { FiniteStateMachineRouterState } from "../../types/FiniteStateMachineRouterState";
+import * as React from 'react'
+import type { FunctionComponent } from 'react'
+import type { RouteParameters } from '../../types/RouteParameters'
+import type { RouteTable } from '../../types/RouteTable'
+import type { FiniteStateMachineRouterState } from '../../types/FiniteStateMachineRouterState'
 
 /**
  * Creates a React component which renders a single route from state.
@@ -14,14 +14,14 @@ import type { FiniteStateMachineRouterState } from "../../types/FiniteStateMachi
  */
 export const createFiniteStateMachineRoutingComponent = <
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 >(
-  routeTable: RouteTable<TRouteParameters, TOtherProps>
-): FunctionComponent<
+    routeTable: RouteTable<TRouteParameters, TOtherProps>
+  ): FunctionComponent<
   {
-    readonly routeState: FiniteStateMachineRouterState<TRouteParameters>;
+    readonly routeState: FiniteStateMachineRouterState<TRouteParameters>
   } & TOtherProps
-> => {
+  > => {
   return (props) =>
-    React.createElement(routeTable[props.routeState.key], props);
-};
+    React.createElement(routeTable[props.routeState.key], props)
+}

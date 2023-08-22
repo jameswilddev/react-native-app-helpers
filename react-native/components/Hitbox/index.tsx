@@ -1,39 +1,39 @@
-import * as React from "react";
+import * as React from 'react'
 import {
-  LayoutChangeEvent,
-  MeasureOnSuccessCallback,
-  StyleProp,
+  type LayoutChangeEvent,
+  type MeasureOnSuccessCallback,
+  type StyleProp,
   TouchableOpacity,
-  ViewStyle,
-} from "react-native";
-import { useMeasure } from "../../hooks/useMeasure";
+  type ViewStyle
+} from 'react-native'
+import { useMeasure } from '../../hooks/useMeasure'
 
 type Component = React.FunctionComponent<
-  React.PropsWithChildren<{
-    /**
+React.PropsWithChildren<{
+  /**
      * When true, this component does not accept touch input.
      * This will, of course, not apply until the next render.  To synchronously
      * disable all Hitboxes, use the "enabled" static property.
      */
-    readonly disabled?: undefined | boolean;
+  readonly disabled?: undefined | boolean
 
-    /**
+  /**
      * Passed down to TouchableOpacity.
      */
-    readonly style?: StyleProp<ViewStyle>;
+  readonly style?: StyleProp<ViewStyle>
 
-    /**
+  /**
      * Passed to useMeasure.
      */
-    readonly onMeasure?: undefined | MeasureOnSuccessCallback;
+  readonly onMeasure?: undefined | MeasureOnSuccessCallback
 
-    /**
+  /**
      * Similar to TouchableOpacity's onPress, but remote-controlled using the
      * "enabled" static property.
      */
-    readonly onPress: () => void;
-  }>
->;
+  readonly onPress: () => void
+}>
+>
 
 /**
  * A React component which mimics TouchableOpacity, but can be remotely,
@@ -46,16 +46,16 @@ export const Hitbox: Component & {
    * and set it back to true when the side effect succeeds or fails.  This will
    * prevent accidental concurrency where the user rapidly taps buttons.
    */
-  enabled: boolean;
+  enabled: boolean
 } = (({ disabled, style, onMeasure, onPress, children }) => {
-  let ref: undefined | React.RefCallback<TouchableOpacity>;
-  let onLayout: undefined | ((event: LayoutChangeEvent) => void);
+  let ref: undefined | React.RefCallback<TouchableOpacity>
+  let onLayout: undefined | ((event: LayoutChangeEvent) => void)
 
   if (onMeasure === undefined) {
-    ref = undefined;
-    onLayout = undefined;
+    ref = undefined
+    onLayout = undefined
   } else {
-    [ref, onLayout] = useMeasure(onMeasure);
+    [ref, onLayout] = useMeasure(onMeasure)
   }
 
   return (
@@ -66,15 +66,15 @@ export const Hitbox: Component & {
       onLayout={onLayout}
       onPress={() => {
         if (Hitbox.enabled) {
-          onPress();
+          onPress()
         }
       }}
     >
       {children}
     </TouchableOpacity>
-  );
+  )
 }) as Component as unknown as Component & {
-  enabled: boolean;
-};
+  enabled: boolean
+}
 
-Hitbox.enabled = true;
+Hitbox.enabled = true

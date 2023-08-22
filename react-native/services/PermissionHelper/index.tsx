@@ -1,6 +1,6 @@
-import * as Permissions from "expo-permissions";
-import type { PermissionHelperInterface } from "../../types/PermissionHelperInterface";
-import { showSettingsScreen } from "../../utilities/showSettingsScreen";
+import * as Permissions from 'expo-permissions'
+import type { PermissionHelperInterface } from '../../types/PermissionHelperInterface'
+import { showSettingsScreen } from '../../utilities/showSettingsScreen'
 
 /**
  * Provides helpers for working with permissions.
@@ -18,17 +18,17 @@ export class PermissionHelper implements PermissionHelperInterface {
    *                    for some permissions, such as the camera roll, this
    *                    might only grant access to a small subset of resources.
    */
-  async acquire(
-    permissions: ReadonlyArray<Permissions.PermissionType>,
+  async acquire (
+    permissions: readonly Permissions.PermissionType[],
     onFailure: (showSettingsScreen: () => void) => Promise<void>,
     onSuccess: () => Promise<void>
   ): Promise<void> {
-    const result = await Permissions.askAsync(...permissions);
+    const result = await Permissions.askAsync(...permissions)
 
     if (result.granted) {
-      await onSuccess();
+      await onSuccess()
     } else {
-      await onFailure(showSettingsScreen);
+      await onFailure(showSettingsScreen)
     }
   }
 }
