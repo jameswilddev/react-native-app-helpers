@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { type ColorValue, StyleSheet, Text } from 'react-native'
+import { type ColorValue, StyleSheet, Text as RNText } from 'react-native'
 import { Hitbox } from '../Hitbox'
 import type { TextProps } from '../../types/TextProps'
 
@@ -32,8 +32,8 @@ export const createTextComponent = (
     }
   })
 
-  return ({ onPress, children }) => (
-    <Text
+  const Text: React.FunctionComponent<TextProps> = ({ onPress, children }) => (
+    <RNText
       style={styles.text}
       numberOfLines={multiLine ? 0 : 1}
       {...(onPress === undefined
@@ -48,6 +48,8 @@ export const createTextComponent = (
         )}
     >
       {children}
-    </Text>
+    </RNText>
   )
+
+  return Text
 }
