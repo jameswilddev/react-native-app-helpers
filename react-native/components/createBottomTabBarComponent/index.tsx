@@ -74,7 +74,7 @@ export function createBottomTabBarComponent<
     }
   })
 
-  return ({ tab, setTab, resetActiveTab }) => (
+  const BottomTabBar: React.FunctionComponent<BottomTabBarProps<TTab>> = ({ tab, setTab, resetActiveTab }) => (
     <HorizontallySymmetricalSafeAreaView
       left
       right
@@ -116,4 +116,6 @@ export function createBottomTabBarComponent<
       })}
     </HorizontallySymmetricalSafeAreaView>
   )
+
+  return BottomTabBar
 }
