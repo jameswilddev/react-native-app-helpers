@@ -2,7 +2,7 @@ import * as React from 'react'
 import type { FunctionComponent } from 'react'
 import type { RouteParameters } from '../../types/RouteParameters'
 import type { RouteTable } from '../../types/RouteTable'
-import type { FiniteStateMachineRouterState } from '../../types/FiniteStateMachineRouterState'
+import type { FiniteStateMachineRoutingProps } from '../../types/FiniteStateMachineRoutingProps'
 
 /**
  * Creates a React component which renders a single route from state.
@@ -17,11 +17,7 @@ export const createFiniteStateMachineRoutingComponent = <
   TOtherProps extends Readonly<Record<string, unknown>>
 >(
     routeTable: RouteTable<TRouteParameters, TOtherProps>
-  ): FunctionComponent<
-  {
-    readonly routeState: FiniteStateMachineRouterState<TRouteParameters>
-  } & TOtherProps
-  > => {
+  ): FunctionComponent<FiniteStateMachineRoutingProps<TRouteParameters, TOtherProps>> => {
   return (props) =>
     React.createElement(routeTable[props.routeState.key], props)
 }

@@ -120,6 +120,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [EmptyRequestBody](./react-native/types/EmptyRequestBody/readme.md)
 - [FileRequestBody](./react-native/types/FileRequestBody/readme.md)
 - [FiniteStateMachineRouterState](./react-native/types/FiniteStateMachineRouterState/readme.md)
+- [FiniteStateMachineRoutingProps](./react-native/types/FiniteStateMachineRoutingProps/readme.md)
 - [FixedWidthProps](./react-native/types/FixedWidthProps/readme.md)
 - [FlashMessageProps](./react-native/types/FlashMessageProps/readme.md)
 - [FlashMessageState](./react-native/types/FlashMessageState/readme.md)
