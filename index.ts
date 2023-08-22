@@ -110,6 +110,7 @@ export type { HeaderBodyFooterProps } from './react-native/types/HeaderBodyFoote
 export type { HeaderIcon } from './react-native/types/HeaderIcon'
 export type { HeaderProps } from './react-native/types/HeaderProps'
 export type { HeaderStyle } from './react-native/types/HeaderStyle'
+export type { ImageBackgroundProps } from './react-native/types/ImageBackgroundProps'
 export type { Json } from './react-native/types/Json'
 export type { JsonRequestBody } from './react-native/types/JsonRequestBody'
 export type { KeyableTableCell } from './react-native/types/KeyableTableCell'

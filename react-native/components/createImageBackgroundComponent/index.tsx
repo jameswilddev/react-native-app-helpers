@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Image, type ImageSourcePropType, StyleSheet, View } from 'react-native'
+import type { ImageBackgroundProps } from '../../types/ImageColorBackgroundProps'
 
 const styles = StyleSheet.create({
   image: {
@@ -27,9 +28,7 @@ const styles = StyleSheet.create({
  */
 export const createImageBackgroundComponent = (
   source: ImageSourcePropType
-): React.FunctionComponent<
-React.PropsWithChildren<{ size: 'fitsContent' | 'fillsContainer' }>
-> => {
+): React.FunctionComponent<ImageBackgroundProps> => {
   return ({ size, children }) => (
     <View
       {...(size === 'fillsContainer'

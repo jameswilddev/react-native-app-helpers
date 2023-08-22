@@ -130,6 +130,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [HeaderIcon](./react-native/types/HeaderIcon/readme.md)
 - [HeaderProps](./react-native/types/HeaderProps/readme.md)
 - [HeaderStyle](./react-native/types/HeaderStyle/readme.md)
+- [ImageBackgroundProps](./react-native/types/ImageBackgroundProps/readme.md)
 - [Json](./react-native/types/Json/readme.md)
 - [JsonRequestBody](./react-native/types/JsonRequestBody/readme.md)
 - [KeyableTableCell](./react-native/types/KeyableTableCell/readme.md)
