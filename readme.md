@@ -134,6 +134,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [PushingSyncableStateCollectionItem](./react-native/types/PushingSyncableStateCollectionItem/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
+- [RequiredTextInputProps](./react-native/types/RequiredTextInputProps/readme.md)
 - [Route](./react-native/types/Route/readme.md)
 - [RouteParameters](./react-native/types/RouteParameters/readme.md)
 - [RouteTable](./react-native/types/RouteTable/readme.md)
