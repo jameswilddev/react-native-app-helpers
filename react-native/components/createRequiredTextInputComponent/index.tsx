@@ -61,7 +61,7 @@ export const createRequiredTextInputComponent = (
     'left'
   )
 
-  return ({ value, onChange, disabled, placeholder, unique }) => (
+  const RequiredTextInput: React.FunctionComponent<RequiredTextInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
     <RequiredTextInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -76,4 +76,6 @@ export const createRequiredTextInputComponent = (
       }}
     />
   )
+
+  return RequiredTextInput
 }
