@@ -150,6 +150,7 @@ export type { SplitButtonTypeStyle } from './react-native/types/SplitButtonTypeS
 export type { StackRoute } from './react-native/types/StackRoute'
 export type { StackRouterState } from './react-native/types/StackRouterState'
 export type { StackRouteTable } from './react-native/types/StackRouteTable'
+export type { StackRoutingProps } from './react-native/types/StackRoutingProps'
 export type { StateStoreInterface } from './react-native/types/StateStoreInterface'
 export type { StatusPillProps } from './react-native/types/StatusPillProps'
 export type { StatusPillStyle } from './react-native/types/StatusPillStyle'

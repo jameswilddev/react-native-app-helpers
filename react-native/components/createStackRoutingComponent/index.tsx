@@ -1,11 +1,11 @@
 import * as React from 'react'
 import type { FunctionComponent } from 'react'
 import type { RouteParameters } from '../../types/RouteParameters'
-import type { StackRouterState } from '../../types/StackRouterState'
 import { StyleSheet, View, type ViewStyle } from 'react-native'
 import type { StackRouteTable } from '../../types/StackRouteTable'
 import { useBackButton } from '../../hooks/useBackButton'
 import { Card } from './Card'
+import type { StackRoutingProps } from '../../types/StackRoutingProps'
 
 const viewBase: ViewStyle = {
   position: 'absolute',
@@ -37,22 +37,7 @@ export const createStackRoutingComponent = <
   TOtherProps extends Readonly<Record<string, unknown>>
 >(
     routeTable: StackRouteTable<TRouteParameters, TOtherProps>
-  ): FunctionComponent<
-  {
-    readonly routeState: StackRouterState<TRouteParameters>
-    readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void
-
-    /**
-     * Called when the user makes a gesture to go back, e.g. swiping from the
-     * left or pressing the hardware "back" button.
-     * @param pop    Call to proceed, popping the current card from the top of
-     *               the stack.
-     * @param cancel Call to cancel; for a swipe gesture, this will unswipe the
-     *               top card.
-     */
-    onBack: (pop: () => void, cancel: () => void) => void
-  } & TOtherProps
-  > => {
+  ): FunctionComponent<StackRoutingProps<TRouteParameters, TOtherProps>> => {
   return (props) => {
     useBackButton(() => {
       if (props.routeState.length > 1) {
