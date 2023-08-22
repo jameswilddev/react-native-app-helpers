@@ -65,7 +65,7 @@ export function createFlashMessageComponent<T extends string> (
     textStylesInput as { readonly [TKey in T]: TextStyle }
   )
 
-  return ({ state }) => {
+  const FlashMessage: React.FunctionComponent<FlashMessageProps<T>> = ({ state }) => {
     const refresh = useRefresh()
     const internalState = React.useRef({
       open: state !== null,
@@ -103,4 +103,6 @@ export function createFlashMessageComponent<T extends string> (
       return null
     }
   }
+
+  return FlashMessage
 }
