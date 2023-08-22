@@ -175,6 +175,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [TableStyle](./react-native/types/TableStyle/readme.md)
 - [TabRoute](./react-native/types/TabRoute/readme.md)
 - [TabRouteTable](./react-native/types/TabRouteTable/readme.md)
+- [TextProps](./react-native/types/TextProps/readme.md)
 - [UnderlinedTopTab](./react-native/types/UnderlinedTopTab/readme.md)
 - [UnderlinedTopTabBarStyle](./react-native/types/UnderlinedTopTabBarStyle/readme.md)
 - [UnderlinedTopTabBarStyleState](./react-native/types/UnderlinedTopTabBarStyleState/readme.md)
