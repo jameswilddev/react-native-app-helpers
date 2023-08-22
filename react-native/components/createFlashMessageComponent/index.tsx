@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { StyleSheet, Text, type TextStyle, type ViewStyle } from 'react-native'
 import { useRefresh } from '../../hooks/useRefresh'
-import type { FlashMessageState } from '../../types/FlashMessageState'
 import type { FlashMessageStyle } from '../../types/FlashMessageStyle'
 import { Hitbox } from '../Hitbox'
+import type { FlashMessageProps } from '../../types/FlashMessageProps'
 
 /**
  * Creates a new React component representing a flash message.
@@ -13,14 +13,7 @@ import { Hitbox } from '../Hitbox'
  */
 export function createFlashMessageComponent<T extends string> (
   flashMessageStyle: FlashMessageStyle<T>
-): React.FunctionComponent<{
-  /**
-   * When null, the flash message is closed.  When non-null, the details of the
-   * flash message which may be displayed (the user can dismiss the current
-   * message).
-   */
-    readonly state: null | FlashMessageState<T>
-  }> {
+): React.FunctionComponent<FlashMessageProps<T>> {
   const hitboxStylesInput: { [TKey in T]?: ViewStyle } = {}
   const textStylesInput: { [TKey in T]?: TextStyle } = {}
 
