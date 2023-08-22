@@ -80,7 +80,7 @@ export function createProportionalRowComponent<T extends readonly never[]> (
     }
   })
 
-  return ({ height, verticalAlignment, children }) => {
+  const ProportionalRow: React.FunctionComponent<ProportionalRowProps<T>> = ({ height, verticalAlignment, children }) => {
     const intercalatedChildren: Array<null | JSX.Element> = []
 
     let index = 0
@@ -134,4 +134,6 @@ export function createProportionalRowComponent<T extends readonly never[]> (
       </View>
     )
   }
+
+  return ProportionalRow
 }
