@@ -6,8 +6,10 @@ Props to be given to padding components.
 
 ```tsx
 import type { PaddingProps } from "react-native-app-helpers";
+import { Text } from "react-native";
 
 const example: PaddingProps = {
   size: "fillsContainer",
+  children: <Text>Example Children</Text>,
 };
 ```

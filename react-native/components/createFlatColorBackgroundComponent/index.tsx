@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { type ColorValue, StyleSheet, View } from 'react-native'
+import type { FlatColorBackgroundProps } from '../../types/FlatColorBackgroundProps'
 
 /**
  * Creates a new React component which displays a solid color background behind
@@ -10,9 +11,7 @@ import { type ColorValue, StyleSheet, View } from 'react-native'
  */
 export const createFlatColorBackgroundComponent = (
   color: ColorValue
-): React.FunctionComponent<
-React.PropsWithChildren<{ size: 'fitsContent' | 'fillsContainer' }>
-> => {
+): React.FunctionComponent<FlatColorBackgroundProps> => {
   const styles = StyleSheet.create({
     fitsContent: {
       backgroundColor: color
