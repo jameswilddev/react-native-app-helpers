@@ -33,7 +33,7 @@ export const createCardComponent = (
   if (borderRadius === 0) {
     if (shadowRadius === 0) {
       if (border === null) {
-        return ({ width, height, children }) => {
+        const Card: React.FunctionComponent<CardProps> = ({ width, height, children }) => {
           if (width === 'fillsContainer') {
             if (height === 'fillsContainer') {
               return (
@@ -60,6 +60,8 @@ export const createCardComponent = (
             }
           }
         }
+
+        return Card
       } else {
         const base: ViewStyle = {
           borderWidth: border.width,
@@ -85,7 +87,7 @@ export const createCardComponent = (
           }
         })
 
-        return ({ width, height, children }) => {
+        const Card: React.FunctionComponent<CardProps> = ({ width, height, children }) => {
           if (width === 'fillsContainer') {
             if (height === 'fillsContainer') {
               return (
@@ -116,6 +118,8 @@ export const createCardComponent = (
             }
           }
         }
+
+        return Card
       }
     } else {
       const base: ViewStyle = shadow(shadowRadius)
@@ -144,7 +148,7 @@ export const createCardComponent = (
         }
       })
 
-      return ({ width, height, children }) => {
+      const Card: React.FunctionComponent<CardProps> = ({ width, height, children }) => {
         if (width === 'fillsContainer') {
           if (height === 'fillsContainer') {
             return (
@@ -169,6 +173,8 @@ export const createCardComponent = (
           }
         }
       }
+
+      return Card
     }
   } else {
     if (shadowRadius === 0) {
@@ -198,7 +204,7 @@ export const createCardComponent = (
         }
       })
 
-      return ({ width, height, children }) => {
+      const Card: React.FunctionComponent<CardProps> = ({ width, height, children }) => {
         if (width === 'fillsContainer') {
           if (height === 'fillsContainer') {
             return (
@@ -223,6 +229,8 @@ export const createCardComponent = (
           }
         }
       }
+
+      return Card
     } else {
       const outerBase: ViewStyle = {
         borderRadius,
@@ -274,7 +282,7 @@ export const createCardComponent = (
         }
       })
 
-      return ({ width, height, children }) => {
+      const Card: React.FunctionComponent<CardProps> = ({ width, height, children }) => {
         if (width === 'fillsContainer') {
           if (height === 'fillsContainer') {
             return (
@@ -313,6 +321,8 @@ export const createCardComponent = (
           }
         }
       }
+
+      return Card
     }
   }
 }
