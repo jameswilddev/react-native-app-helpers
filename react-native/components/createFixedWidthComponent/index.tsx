@@ -20,7 +20,7 @@ export const createFixedWidthComponent = (
     }
   })
 
-  return ({ children, height }) => (
+  const FixedWidth: React.FunctionComponent<FixedWidthProps> = ({ children, height }) => (
     <View
       style={
         height === 'fillsContainer' ? styles.fillsContainer : styles.fitsContent
@@ -30,4 +30,6 @@ export const createFixedWidthComponent = (
       {children}
     </View>
   )
+
+  return FixedWidth
 }
