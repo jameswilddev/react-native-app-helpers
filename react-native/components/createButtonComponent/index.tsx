@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {
-  type ColorValue,
   StyleSheet,
   Text,
   type TextStyle,
@@ -9,6 +8,7 @@ import {
 } from 'react-native'
 import type { ButtonStyle } from '../../types/ButtonStyle'
 import { Hitbox } from '../Hitbox'
+import type { ButtonProps } from '../../types/ButtonProps'
 
 /**
  * Creates a new React component which renders a button.
@@ -17,40 +17,7 @@ import { Hitbox } from '../Hitbox'
  */
 export const createButtonComponent = (
   buttonStyle: ButtonStyle
-): React.FunctionComponent<{
-  /**
-   * Renders the button's left icon.
-   * @param color The color of the icon.
-   * @returns The icon to show, or null if no icon is to be shown.
-   */
-    leftIcon?: (color: ColorValue) => null | React.ReactNode | JSX.Element
-
-    /**
-   * Renders the button's right icon.
-   * @param color The color of the icon.
-   * @returns The icon to show, or null if no icon is to be shown.
-   */
-    rightIcon?: (color: ColorValue) => null | React.ReactNode | JSX.Element
-
-    /**
-   * Executed when the button is pressed.
-   */
-    onPress: () => void
-
-    /**
-   * When true, the button is disabled and does not accept input.
-   * When false, the button is not disabled and accepts input.
-   */
-    readonly disabled?: undefined | boolean
-
-    /**
-   * The contents of the button.  This can be null (indicating no content), a
-   * string, or a function which returns a custom element to display.
-   */
-    readonly children:
-    | string
-    | ((color: ColorValue) => null | React.ReactNode | JSX.Element)
-  }> => {
+): React.FunctionComponent<ButtonProps> => {
   const hitboxBase: ViewStyle = {
     alignItems: 'center'
   }

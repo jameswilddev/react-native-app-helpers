@@ -105,6 +105,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [BottomTabBarProps](./react-native/types/BottomTabBarProps/readme.md)
 - [BottomTabBarStyle](./react-native/types/BottomTabBarStyle/readme.md)
 - [BottomTabBarStyleState](./react-native/types/BottomTabBarStateStyle/readme.md)
+- [ButtonProps](./react-native/types/ButtonProps/readme.md)
 - [ButtonStateStyle](./react-native/types/ButtonStateStyle/readme.md)
 - [ButtonStyle](./react-native/types/ButtonStyle/readme.md)
 - [CheckboxStateStyle](./react-native/types/CheckboxStateStyle/readme.md)
