@@ -5,4 +5,4 @@
  */
 export const isRenderedByReact = (
   item: undefined | React.ReactNode | JSX.Element
-): boolean => item !== null && item !== false && item !== undefined && item !== '' && (!Array.isArray(item) || item.some(child => isRenderedByReact(child)))
+): boolean => item !== null && item !== false && item !== 0 && item !== undefined && item !== '' && (!Array.isArray(item) || item.some(child => isRenderedByReact(child)))
