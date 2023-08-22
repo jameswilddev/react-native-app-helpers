@@ -159,15 +159,15 @@ export const createButtonComponent = (
     }
   })
 
-  return ({ leftIcon, rightIcon, onPress, disabled, children }) => {
+  const Button: React.FunctionComponent<ButtonProps> = ({ leftIcon, rightIcon, onPress, disabled, children }) => {
     disabled = disabled ?? false
 
     const color = disabled
       ? buttonStyle.disabled.color
       : buttonStyle.default.color
 
-    const leftIconElement = leftIcon === null ? null : leftIcon(color)
-    const rightIconElement = rightIcon === null ? null : rightIcon(color)
+    const leftIconElement = leftIcon === null || leftIcon === undefined ? null : leftIcon(color)
+    const rightIconElement = rightIcon === null || rightIcon === undefined ? null : rightIcon(color)
 
     if (typeof children === 'function') {
       if (leftIconElement === null) {
@@ -379,4 +379,6 @@ export const createButtonComponent = (
       }
     }
   }
+
+  return Button
 }
