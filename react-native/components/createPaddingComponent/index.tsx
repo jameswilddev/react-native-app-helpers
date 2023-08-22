@@ -64,7 +64,7 @@ export const createPaddingComponent = (
   }
 
   if (Object.keys(contentFittingView).length === 0) {
-    return ({ size, children }) =>
+    const Padding: React.FunctionComponent<PaddingProps> = ({ size, children }) =>
       size === 'fillsContainer'
         ? (
         <View
@@ -77,6 +77,8 @@ export const createPaddingComponent = (
         : (
         <View pointerEvents="box-none">{children}</View>
           )
+
+    return Padding
   } else {
     const localStyles = StyleSheet.create({
       contentFittingView,
@@ -88,7 +90,7 @@ export const createPaddingComponent = (
       }
     })
 
-    return ({ size, children }) =>
+    const Padding: React.FunctionComponent<PaddingProps> = ({ size, children }) =>
       size === 'fillsContainer'
         ? (
         <View pointerEvents="box-none" style={localStyles.containerFillingView}>
@@ -100,5 +102,7 @@ export const createPaddingComponent = (
           {children}
         </View>
           )
+
+    return Padding
   }
 }
