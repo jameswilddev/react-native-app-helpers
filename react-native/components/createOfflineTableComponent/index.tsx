@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { StyleSheet, Text, type TextStyle, View, type ViewStyle } from 'react-native'
-import type { SortDirection } from '../../types/SortDirection'
-import type { OfflineTableData } from '../../types/OfflineTableData'
 import type { TableSchema } from '../../types/TableSchema'
 import type { TableStyle } from '../../types/TableStyle'
 import type { TableRow } from '../../types/TableRow'
 import { Hitbox } from '../Hitbox'
 import type { KeyableTableCell, NonKeyableTableCell } from '../../..'
+import type { OfflineTableProps } from '../../types/OfflineTableProps'
 
 const normalize = (cell: KeyableTableCell | NonKeyableTableCell): string => {
   switch (typeof cell) {
@@ -45,57 +44,7 @@ export const createOfflineTableComponent = <
 >(
     style: TableStyle,
     schema: TableSchema<TKeyableColumnKey, TNonKeyableColumnKey, TRow, TContext>
-  ): React.FunctionComponent<{
-  /**
-   * The data to show in the table.
-   */
-    readonly data: OfflineTableData<
-    TKeyableColumnKey,
-    TNonKeyableColumnKey,
-    TRow
-    >
-
-    /**
-   * The key of the column to sort by.
-   */
-    readonly sortBy: TKeyableColumnKey | TNonKeyableColumnKey
-
-    /**
-   * The direction in which to sort.
-   */
-    readonly sortDirection: SortDirection
-
-    /**
-   * Invoked when the user request a change of sort direction.
-   * @param sortBy        The key of the column to sort by.
-   * @param sortDirection The direction in which sorting is to be performed.
-   */
-    readonly onSortChange: (
-      sortBy: TKeyableColumnKey | TNonKeyableColumnKey,
-      sortDirection: SortDirection
-    ) => void
-
-    /**
-   * A piece of text to the data by.  Not used if empty or white space.
-   */
-    readonly filter: string
-
-    /**
-   * Shown when there are no rows to display.
-   */
-    readonly whenEmpty: string
-
-    /**
-   * The context in which the table is being rendered.
-   */
-    readonly context: TContext
-
-    /**
-   * Called on pressing a row.
-   * @param row The row pressed.
-   */
-    onPressRow?: (row: TRow) => void
-  }> => {
+  ): React.FunctionComponent<OfflineTableProps<TKeyableColumnKey, TNonKeyableColumnKey, TRow, TContext>> => {
   const rowViewBase: ViewStyle = {
     width: '100%',
     flexDirection: 'row'

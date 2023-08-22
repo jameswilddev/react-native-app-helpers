@@ -129,6 +129,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [KeyableTableCell](./react-native/types/KeyableTableCell/readme.md)
 - [NonKeyableTableCell](./react-native/types/NonKeyableTableCell/readme.md)
 - [OfflineTableData](./react-native/types/OfflineTableData/readme.md)
+- [OfflineTableProps](./react-native/types/OfflineTableProps/readme.md)
 - [PaddingProps](./react-native/types/PaddingProps/readme.md)
 - [PreflightResponse](./react-native/types/PreflightResponse/readme.md)
 - [PreflightResponseCollection](./react-native/types/PreflightResponseCollection/readme.md)
