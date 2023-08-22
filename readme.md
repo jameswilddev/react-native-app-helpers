@@ -147,6 +147,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [Route](./react-native/types/Route/readme.md)
 - [RouteParameters](./react-native/types/RouteParameters/readme.md)
 - [RouteTable](./react-native/types/RouteTable/readme.md)
+- [SearchableMultiSelectProps](./react-native/types/SearchableMultiSelectProps/readme.md)
 - [SearchableSelectProps](./react-native/types/SearchableSelectProps/readme.md)
 - [SidebarProps](./react-native/types/SidebarProps/readme.md)
 - [SortDirection](./react-native/types/SortDirection/readme.md)

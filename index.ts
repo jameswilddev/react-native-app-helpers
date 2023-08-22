@@ -131,6 +131,7 @@ export type { RequiredTextInputProps } from './react-native/types/RequiredTextIn
 export type { Route } from './react-native/types/Route'
 export type { RouteParameters } from './react-native/types/RouteParameters'
 export type { RouteTable } from './react-native/types/RouteTable'
+export type { SearchableMultiSelectProps } from './react-native/types/SearchableMultiSelectProps'
 export type { SearchableSelectProps } from './react-native/types/SearchableSelectProps'
 export type { SidebarProps } from './react-native/types/SidebarProps'
 export type { SortDirection } from './react-native/types/SortDirection'
