@@ -428,49 +428,49 @@ export const createOfflineTableComponent = <
             }
           })}
         </View>
-        {rows.length === 0 ? (
-          <Text style={styles.emptyText}>{whenEmpty}</Text>
-        ) : (
-          rows.map((row, index) => {
-            const cells = schema.columns.map((column, columnIndex) => {
-              switch (column.type) {
-                case 'basic': {
-                  const value = row[column.key]
+        {rows.length === 0
+          ? <Text style={styles.emptyText}>{whenEmpty}</Text>
+          : (
+              rows.map((row, index) => {
+                const cells = schema.columns.map((column, columnIndex) => {
+                  switch (column.type) {
+                    case 'basic': {
+                      const value = row[column.key]
 
-                  // TODO: why does TypeScript think this cannot be null, false or true?
-                  switch (value as unknown) {
-                    case null:
-                      return (
+                      // TODO: why does TypeScript think this cannot be null, false or true?
+                      switch (value as unknown) {
+                        case null:
+                          return (
                         <View
                           key={String(columnIndex)}
                           style={customCellStyles[columnIndex]}
                         >
                           {style.body.primitiveElements.null}
                         </View>
-                      )
+                          )
 
-                    case false:
-                      return (
+                        case false:
+                          return (
                         <View
                           key={String(columnIndex)}
                           style={customCellStyles[columnIndex]}
                         >
                           {style.body.primitiveElements.false}
                         </View>
-                      )
+                          )
 
-                    case true:
-                      return (
+                        case true:
+                          return (
                         <View
                           key={String(columnIndex)}
                           style={customCellStyles[columnIndex]}
                         >
                           {style.body.primitiveElements.true}
                         </View>
-                      )
+                          )
 
-                    default:
-                      return (
+                        default:
+                          return (
                         <Text
                           key={String(columnIndex)}
                           style={
@@ -481,50 +481,50 @@ export const createOfflineTableComponent = <
                         >
                           {value}
                         </Text>
+                          )
+                      }
+                    }
+
+                    case 'customText': {
+                      const value = column.render(
+                        row[column.key] as never,
+                        context
                       )
-                  }
-                }
 
-                case 'customText': {
-                  const value = column.render(
-                    row[column.key] as never,
-                    context
-                  )
-
-                  // TODO: why does TypeScript think this cannot be null, false or true?
-                  switch (value as unknown) {
-                    case null:
-                      return (
+                      // TODO: why does TypeScript think this cannot be null, false or true?
+                      switch (value as unknown) {
+                        case null:
+                          return (
                         <View
                           key={String(columnIndex)}
                           style={customCellStyles[columnIndex]}
                         >
                           {style.body.primitiveElements.null}
                         </View>
-                      )
+                          )
 
-                    case false:
-                      return (
+                        case false:
+                          return (
                         <View
                           key={String(columnIndex)}
                           style={customCellStyles[columnIndex]}
                         >
                           {style.body.primitiveElements.false}
                         </View>
-                      )
+                          )
 
-                    case true:
-                      return (
+                        case true:
+                          return (
                         <View
                           key={String(columnIndex)}
                           style={customCellStyles[columnIndex]}
                         >
                           {style.body.primitiveElements.true}
                         </View>
-                      )
+                          )
 
-                    default:
-                      return (
+                        default:
+                          return (
                         <Text
                           key={String(columnIndex)}
                           style={
@@ -535,24 +535,28 @@ export const createOfflineTableComponent = <
                         >
                           {value}
                         </Text>
-                      )
-                  }
-                }
+                          )
+                      }
+                    }
 
-                case 'customElement':
-                  return (
+                    case 'customElement':
+                      return (
                     <View
                       key={String(columnIndex)}
                       style={customCellStyles[columnIndex]}
                     >
                       {column.render(row, context)}
                     </View>
-                  )
-              }
-            })
+                      )
 
-            if (onPressRow === undefined) {
-              return (
+                      // TODO: This is required because ESLint seems unaware that the type cannot be anything other.
+                    default:
+                      throw new Error('Unimplemented column type.')
+                  }
+                })
+
+                if (onPressRow === undefined) {
+                  return (
                 <View
                   key={String(row[schema.key])}
                   style={
@@ -565,9 +569,9 @@ export const createOfflineTableComponent = <
                 >
                   {cells}
                 </View>
-              )
-            } else {
-              return (
+                  )
+                } else {
+                  return (
                 <Hitbox
                   key={String(row[schema.key])}
                   style={
@@ -583,10 +587,10 @@ export const createOfflineTableComponent = <
                 >
                   {cells}
                 </Hitbox>
-              )
-            }
-          })
-        )}
+                  )
+                }
+              })
+            )}
       </View>
     )
   }
