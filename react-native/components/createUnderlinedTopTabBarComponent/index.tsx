@@ -92,7 +92,7 @@ export function createUnderlinedTopTabBarComponent<
     }
   })
 
-  return ({ tab, setTab }) => (
+  const UnderlinedTopTabBar: React.FunctionComponent<UnderlinedTopTabBarProps<TTab>> = ({ tab, setTab }) => (
     <HorizontallySymmetricalSafeAreaView
       style={styles.horizontallySymmetricalSafeAreaView}
       left
@@ -120,4 +120,6 @@ export function createUnderlinedTopTabBarComponent<
       })}
     </HorizontallySymmetricalSafeAreaView>
   )
+
+  return UnderlinedTopTabBar
 }
