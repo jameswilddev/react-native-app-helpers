@@ -55,7 +55,7 @@ export const createHeaderBodyFooterComponent = (
     }
   })
 
-  return ({ header, body, footer }) => {
+  const HeaderBodyFooter: React.FunctionComponent<HeaderBodyFooterProps> = ({ header, body, footer }) => {
     if (isRenderedByReact(header)) {
       if (isRenderedByReact(body)) {
         if (isRenderedByReact(footer)) {
@@ -169,4 +169,6 @@ export const createHeaderBodyFooterComponent = (
       }
     }
   }
+
+  return HeaderBodyFooter
 }
