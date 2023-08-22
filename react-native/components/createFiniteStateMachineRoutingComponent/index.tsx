@@ -18,6 +18,9 @@ export const createFiniteStateMachineRoutingComponent = <
 >(
     routeTable: RouteTable<TRouteParameters, TOtherProps>
   ): FunctionComponent<FiniteStateMachineRoutingProps<TRouteParameters, TOtherProps>> => {
-  return (props) =>
-    React.createElement(routeTable[props.routeState.key], props)
+  // TODO: can we improve the types here?  Really shouldn't be force casting routes like this.
+  const FiniteStateMachineRouting: FunctionComponent<FiniteStateMachineRoutingProps<TRouteParameters, TOtherProps>> = (props) =>
+    React.createElement(routeTable[props.routeState.key] as unknown as React.FunctionComponent<FiniteStateMachineRoutingProps<TRouteParameters, TOtherProps>>, props)
+
+  return FiniteStateMachineRouting
 }
