@@ -102,6 +102,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [BasicTableColumn](./react-native/types/BasicTableColumn/readme.md)
 - [BorderStyle](./react-native/types/BorderStyle/readme.md)
 - [BottomTab](./react-native/types/BottomTab/readme.md)
+- [BottomTabBarProps](./react-native/types/BottomTabBarProps/readme.md)
 - [BottomTabBarStyle](./react-native/types/BottomTabBarStyle/readme.md)
 - [BottomTabBarStyleState](./react-native/types/BottomTabBarStateStyle/readme.md)
 - [ButtonStateStyle](./react-native/types/ButtonStateStyle/readme.md)

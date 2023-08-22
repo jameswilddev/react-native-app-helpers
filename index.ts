@@ -81,6 +81,7 @@ export type { AwaitingPushSyncableStateCollectionItem } from './react-native/typ
 export type { BasicTableColumn } from './react-native/types/BasicTableColumn'
 export type { BorderStyle } from './react-native/types/BorderStyle'
 export type { BottomTab } from './react-native/types/BottomTab'
+export type { BottomTabBarProps } from './react-native/types/BottomTabBarProps'
 export type { BottomTabBarStyle } from './react-native/types/BottomTabBarStyle'
 export type { BottomTabBarStyleState } from './react-native/types/BottomTabBarStateStyle'
 export type { ButtonStateStyle } from './react-native/types/ButtonStateStyle'

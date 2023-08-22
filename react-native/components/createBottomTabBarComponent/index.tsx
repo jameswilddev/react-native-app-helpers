@@ -4,6 +4,7 @@ import type { BottomTab } from '../../types/BottomTab'
 import type { BottomTabBarStyle } from '../../types/BottomTabBarStyle'
 import { Hitbox } from '../Hitbox'
 import { HorizontallySymmetricalSafeAreaView } from '../HorizontallySymmetricalSafeAreaView'
+import type { BottomTabBarProps } from '../../types/BottomTabBarProps'
 
 /**
  * Creates a new React component which can be used to render a bottom tab bar.
@@ -17,25 +18,7 @@ export function createBottomTabBarComponent<
 > (
   bottomTabBarStyle: BottomTabBarStyle,
   bottomTabs: ReadonlyArray<BottomTab<TTab>>
-): React.FunctionComponent<{
-  /**
-   * The selected tab.
-   */
-    readonly tab: TTab
-
-    /**
-   * Called when the user presses an inactive tab.
-   * @param to The tab which the user pressed.
-   */
-    setTab: (to: TTab) => void
-
-    /**
-   * Called when the user presses the active tab; this should return to the
-   * "home" route of the active tab, e.g. return to the list of records if
-   * currently viewing a particular record.
-   */
-    resetActiveTab: () => void
-  }> {
+): React.FunctionComponent<BottomTabBarProps<TTab>> {
   const textBase: TextStyle = {
     fontSize: bottomTabBarStyle.fontSize,
     lineHeight: bottomTabBarStyle.fontSize * 1.4
