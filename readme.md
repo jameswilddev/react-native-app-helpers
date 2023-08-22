@@ -188,6 +188,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [TabRouteTable](./react-native/types/TabRouteTable/readme.md)
 - [TextProps](./react-native/types/TextProps/readme.md)
 - [UnderlinedTopTab](./react-native/types/UnderlinedTopTab/readme.md)
+- [UnderlinedTopTabBarProps](./react-native/types/UnderlinedTopTabBarProps/readme.md)
 - [UnderlinedTopTabBarStyle](./react-native/types/UnderlinedTopTabBarStyle/readme.md)
 - [UnderlinedTopTabBarStyleState](./react-native/types/UnderlinedTopTabBarStyleState/readme.md)
 - [UpToDateSyncableStateCollectionItem](./react-native/types/UpToDateSyncableStateCollectionItem/readme.md)

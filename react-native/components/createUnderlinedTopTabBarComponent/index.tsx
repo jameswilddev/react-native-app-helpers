@@ -4,6 +4,7 @@ import type { UnderlinedTopTab } from '../../types/UnderlinedTopTab'
 import type { UnderlinedTopTabBarStyle } from '../../types/UnderlinedTopTabBarStyle'
 import { Hitbox } from '../Hitbox'
 import { HorizontallySymmetricalSafeAreaView } from '../HorizontallySymmetricalSafeAreaView'
+import type { UnderlinedTopTabBarProps } from '../../types/UnderlinedTopTabBarProps'
 
 /**
  * Creates a new React component which can be used to render a top tab bar,
@@ -18,7 +19,7 @@ export function createUnderlinedTopTabBarComponent<
 > (
   underlinedTopTabBarStyle: UnderlinedTopTabBarStyle,
   underlinedTopTabs: ReadonlyArray<UnderlinedTopTab<TTab>>
-): React.FunctionComponent<{ readonly tab: TTab, setTab: (to: TTab) => void }> {
+): React.FunctionComponent<UnderlinedTopTabBarProps<TTab>> {
   const inactiveUnderlineWidth =
     underlinedTopTabBarStyle.inactive.underline === null
       ? 0
