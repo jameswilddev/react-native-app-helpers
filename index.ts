@@ -93,6 +93,7 @@ export type { CheckboxStateStyle } from './react-native/types/CheckboxStateStyle
 export type { CheckboxStyle } from './react-native/types/CheckboxStyle'
 export type { ControlStateStyle } from './react-native/types/ControlStateStyle'
 export type { ControlStyle } from './react-native/types/ControlStyle'
+export type { CreatableSelectProps } from './react-native/types/CreatableSelectProps'
 export type { CustomElementTableColumn } from './react-native/types/CustomElementTableColumn'
 export type { CustomTextTableColumn } from './react-native/types/CustomTextTableColumn'
 export type { EmptyRequestBody } from './react-native/types/EmptyRequestBody'

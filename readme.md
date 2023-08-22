@@ -114,6 +114,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [CheckboxStyle](./react-native/types/CheckboxStyle/readme.md)
 - [ControlStateStyle](./react-native/types/ControlStateStyle/readme.md)
 - [ControlStyle](./react-native/types/ControlStyle/readme.md)
+- [CreatableSelectProps](./react-native/types/CreatableSelectProps/readme.md)
 - [CustomElementTableColumn](./react-native/types/CustomElementTableColumn/readme.md)
 - [CustomTextTableColumn](./react-native/types/CustomTextTableColumn/readme.md)
 - [EmptyRequestBody](./react-native/types/EmptyRequestBody/readme.md)
