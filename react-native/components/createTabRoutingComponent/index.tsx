@@ -38,7 +38,7 @@ export const createTabRoutingComponent = <
     routeTable
   ).sort() as unknown as readonly TRoute[]
 
-  return (props) => (
+  const TabRouting: FunctionComponent<TabRoutingProps<TRoute, TOtherProps>> = (props) => (
     <React.Fragment>
       {keys.map((key) => (
         <View
@@ -50,4 +50,6 @@ export const createTabRoutingComponent = <
       ))}
     </React.Fragment>
   )
+
+  return TabRouting
 }
