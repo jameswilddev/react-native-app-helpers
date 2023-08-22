@@ -20,7 +20,7 @@ export const createLimitedWidthComponent = (
     }
   })
 
-  return ({ children, height }) => (
+  const LimitedWidth: React.FunctionComponent<LimitedWidthProps> = ({ children, height }) => (
     <View
       style={
         height === 'fillsContainer' ? styles.fillsContainer : styles.fitsContent
@@ -30,4 +30,6 @@ export const createLimitedWidthComponent = (
       {children}
     </View>
   )
+
+  return LimitedWidth
 }
