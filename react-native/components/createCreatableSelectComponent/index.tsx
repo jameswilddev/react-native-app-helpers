@@ -27,7 +27,7 @@ export function createCreatableSelectComponent<
   const ContentComponent =
     createCreatableSelectChildrenComponent<T>(controlStyle)
 
-  return ({
+  const CreatableSelect: React.FunctionComponent<CreatableSelectProps> = ({
     disabled,
     placeholder,
     required,
@@ -63,4 +63,6 @@ export function createCreatableSelectComponent<
       </FullHeightPopover>
     )
   }
+
+  return CreatableSelect
 }
