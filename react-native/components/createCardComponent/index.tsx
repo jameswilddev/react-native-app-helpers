@@ -2,6 +2,7 @@ import * as React from 'react'
 import { StyleSheet, View, type ViewStyle } from 'react-native'
 import type { BorderStyle } from '../../types/BorderStyle'
 import { shadow } from '../helpers'
+import type { CardProps } from '../../types/CardProps'
 
 const globalStyles = StyleSheet.create({
   fillsContainerFillsContainer: {
@@ -28,12 +29,7 @@ export const createCardComponent = (
   borderRadius: number,
   shadowRadius: number,
   border: null | BorderStyle
-): React.FunctionComponent<
-React.PropsWithChildren<{
-  readonly width: 'fillsContainer' | 'fitsContent'
-  readonly height: 'fillsContainer' | 'fitsContent'
-}>
-> => {
+): React.FunctionComponent<CardProps> => {
   if (borderRadius === 0) {
     if (shadowRadius === 0) {
       if (border === null) {

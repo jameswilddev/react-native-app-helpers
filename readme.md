@@ -108,6 +108,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [ButtonProps](./react-native/types/ButtonProps/readme.md)
 - [ButtonStateStyle](./react-native/types/ButtonStateStyle/readme.md)
 - [ButtonStyle](./react-native/types/ButtonStyle/readme.md)
+- [CardProps](./react-native/types/CardProps/readme.md)
 - [CheckboxStateStyle](./react-native/types/CheckboxStateStyle/readme.md)
 - [CheckboxStyle](./react-native/types/CheckboxStyle/readme.md)
 - [ControlStateStyle](./react-native/types/ControlStateStyle/readme.md)
