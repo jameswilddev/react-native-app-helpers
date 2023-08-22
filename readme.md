@@ -142,6 +142,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [PushingSyncableStateCollectionItem](./react-native/types/PushingSyncableStateCollectionItem/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
+- [RequiredEmailInputProps](./react-native/types/RequiredEmailInputProps/readme.md)
 - [RequiredFloatInputProps](./react-native/types/RequiredFloatInputProps/readme.md)
 - [RequiredIntegerInputProps](./react-native/types/RequiredIntegerInputProps/readme.md)
 - [RequiredTextAreaProps](./react-native/types/RequiredTextAreaProps/readme.md)
