@@ -62,7 +62,7 @@ export const createRequiredEmailInputComponent = (
     'left'
   )
 
-  return ({ value, onChange, disabled, placeholder, unique }) => (
+  const RequiredEmailInput: React.FunctionComponent<RequiredEmailInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
     <RequiredEmailInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -77,4 +77,6 @@ export const createRequiredEmailInputComponent = (
       }}
     />
   )
+
+  return RequiredEmailInput
 }

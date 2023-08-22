@@ -49,7 +49,7 @@ export const createRequiredPasswordInputComponent = (
     'left'
   )
 
-  return ({ value, onChange, disabled, placeholder, match }) => (
+  const RequiredPasswordInput: React.FunctionComponent<RequiredPasswordInputProps> = ({ value, onChange, disabled, placeholder, match }) => (
     <RequiredPasswordInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -64,4 +64,6 @@ export const createRequiredPasswordInputComponent = (
       }}
     />
   )
+
+  return RequiredPasswordInput
 }
