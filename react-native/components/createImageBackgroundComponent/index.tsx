@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 export const createImageBackgroundComponent = (
   source: ImageSourcePropType
 ): React.FunctionComponent<ImageBackgroundProps> => {
-  return ({ size, children }) => (
+  const ImageBackground: React.FunctionComponent<ImageBackgroundProps> = ({ size, children }) => (
     <View
       {...(size === 'fillsContainer'
         ? { style: styles.containerFillingView }
@@ -42,4 +42,6 @@ export const createImageBackgroundComponent = (
       {children}
     </View>
   )
+
+  return ImageBackground
 }
