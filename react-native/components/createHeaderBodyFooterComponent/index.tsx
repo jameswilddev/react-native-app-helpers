@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { isRenderedByReact } from '../../utilities/isRenderedByReact'
+import type { HeaderBodyFooterProps } from '../../types/HeaderBodyFooterProps'
 
 const wrappingViewBase = {
   width: '100%',
@@ -44,11 +45,7 @@ const globalStyles = StyleSheet.create({
 export const createHeaderBodyFooterComponent = (
   headerBodySpacing: number,
   bodyFooterSpacing: number
-): React.FunctionComponent<{
-  readonly header?: null | React.ReactNode | JSX.Element
-  readonly body?: null | React.ReactNode | JSX.Element
-  readonly footer?: null | React.ReactNode | JSX.Element
-}> => {
+): React.FunctionComponent<HeaderBodyFooterProps> => {
   const localStyles = StyleSheet.create({
     headerView: {
       marginBottom: headerBodySpacing

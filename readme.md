@@ -126,6 +126,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [FlashMessageState](./react-native/types/FlashMessageState/readme.md)
 - [FlashMessageStyle](./react-native/types/FlashMessageStyle/readme.md)
 - [FlatColorBackgroundProps](./react-native/types/FlatColorBackgroundProps/readme.md)
+- [HeaderBodyFooterProps](./react-native/types/HeaderBodyFooterProps/readme.md)
 - [HeaderIcon](./react-native/types/HeaderIcon/readme.md)
 - [HeaderProps](./react-native/types/HeaderProps/readme.md)
 - [HeaderStyle](./react-native/types/HeaderStyle/readme.md)
