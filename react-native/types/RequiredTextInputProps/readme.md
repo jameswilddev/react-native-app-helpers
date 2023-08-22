@@ -6,11 +6,10 @@ Props to be given to required text input components.
 
 ```tsx
 import type { RequiredTextInputProps } from "react-native-app-helpers";
-import { Text } from "react-native";
 
 const example: RequiredTextInputProps = {
   value: "Example Value",
-  onChange={(value, complete) => {
+  onChange={(value: undefined | string, complete: boolean) => {
     console.log(`Value: ${value}, complete: ${complete ? "Yes" : "No"}`);
   }}
   disabled: false,
