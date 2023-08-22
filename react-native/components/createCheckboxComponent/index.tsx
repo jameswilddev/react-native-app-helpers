@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, type ViewStyle, type TextStyle } from 'react-na
 import type { CheckboxStateStyle } from '../../types/CheckboxStateStyle'
 import type { CheckboxStyle } from '../../types/CheckboxStyle'
 import { Hitbox } from '../Hitbox'
+import type { CheckboxProps } from '../../types/CheckboxProps'
 
 const createViewStyle = (
   checkboxStyle: CheckboxStyle,
@@ -74,27 +75,7 @@ const createTextStyle = (
  */
 export const createCheckboxComponent = (
   checkboxStyle: CheckboxStyle
-): React.FunctionComponent<
-  React.PropsWithChildren<{
-    /**
-     * When true, the checkbox is checked.  It is otherwise unchecked.
-     */
-    value: boolean
-
-    /**
-     * Invoked when the checkbox is pressed.
-     * @param to True when the checkbox is changing from unchecked to checked,
-     *           otherwise, false.
-     */
-    onChange: (to: boolean) => void
-
-    /**
-     * When true, the checkbox will show alternative styles and will not accept
-     * input.  It will otherwise show its default styles and accept input.
-     */
-    disabled: boolean
-  }>
-  > => {
+): React.FunctionComponent<CheckboxProps> => {
   const styles = StyleSheet.create({
     hitbox: {
       width: '100%',
