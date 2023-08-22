@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
+import type { PaddingProps } from '../../types/PaddingProps'
 
 const globalStyles = StyleSheet.create({
   containerFillingView: {
@@ -23,11 +24,7 @@ export const createPaddingComponent = (
   | readonly [number]
   | readonly [number, number]
   | readonly [number, number, number, number]
-): React.FunctionComponent<
-React.PropsWithChildren<{
-  readonly size: 'fitsContent' | 'fillsContainer'
-}>
-> => {
+): React.FunctionComponent<PaddingProps> => {
   const contentFittingView: Record<string, number> = {}
 
   switch (paddings.length) {
