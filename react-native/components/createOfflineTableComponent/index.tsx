@@ -291,7 +291,7 @@ export const createOfflineTableComponent = <
   const oddRowCellStyles = StyleSheet.create(oddRowCellInput)
   const evenRowCellStyles = StyleSheet.create(evenRowCellInput)
 
-  return ({
+  const OfflineTable: React.FunctionComponent<OfflineTableProps<TKeyableColumnKey, TNonKeyableColumnKey, TRow, TContext>> = ({
     data,
     whenEmpty,
     filter,
@@ -590,4 +590,6 @@ export const createOfflineTableComponent = <
       </View>
     )
   }
+
+  return OfflineTable
 }
