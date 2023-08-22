@@ -473,7 +473,7 @@ test('remains open if unchanged', () => {
   renderer.unmount()
 })
 
-test('closes when pressed', () => {
+test('closes when pressed', async () => {
   const Component = createFlashMessageComponent({
     fontFamily: 'Example Font Family',
     fontSize: 25,
@@ -531,7 +531,7 @@ test('closes when pressed', () => {
   renderer.unmount()
 })
 
-test('remains closed when the state does not change', () => {
+test('remains closed when the state does not change', async () => {
   const Component = createFlashMessageComponent({
     fontFamily: 'Example Font Family',
     fontSize: 25,
@@ -598,7 +598,7 @@ test('remains closed when the state does not change', () => {
   renderer.unmount()
 })
 
-test('shows again when the message changes', () => {
+test('shows again when the message changes', async () => {
   const Component = createFlashMessageComponent({
     fontFamily: 'Example Font Family',
     fontSize: 25,
@@ -692,7 +692,7 @@ test('shows again when the message changes', () => {
   renderer.unmount()
 })
 
-test('shows again when the type changes', () => {
+test('shows again when the type changes', async () => {
   const Component = createFlashMessageComponent({
     fontFamily: 'Example Font Family',
     fontSize: 25,

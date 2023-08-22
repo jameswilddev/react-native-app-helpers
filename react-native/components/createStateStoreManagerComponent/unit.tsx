@@ -4,7 +4,8 @@ import { Button, Text } from 'react-native'
 import * as TestRenderer from 'react-test-renderer'
 import { createStateStoreManagerComponent, StateStore } from '../../..'
 
-interface TestState { readonly value: number }
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type TestState = { readonly value: number }
 
 test('displays the loading screen', async () => {
   const stateKey = uuid.v4()

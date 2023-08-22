@@ -657,7 +657,7 @@ test('renders as expected with a present selected value', () => {
   expect(stub).not.toHaveBeenCalled()
 })
 
-test('renders as expected when matches are found for user input', () => {
+test('renders as expected when matches are found for user input', async () => {
   const Component = createSearchableSelectChildrenComponent<TestValue>({
     fontFamily: 'Example Font Family',
     fontSize: 37,
@@ -836,7 +836,7 @@ test('renders as expected when matches are found for user input', () => {
   expect(stub).not.toHaveBeenCalled()
 })
 
-test('renders as expected when matches are not found for user input', () => {
+test('renders as expected when matches are not found for user input', async () => {
   const Component = createSearchableSelectChildrenComponent<TestValue>({
     fontFamily: 'Example Font Family',
     fontSize: 37,

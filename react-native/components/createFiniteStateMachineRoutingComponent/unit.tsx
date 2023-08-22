@@ -13,7 +13,8 @@ test('passes through to the appropriate route', () => {
     readonly testRouteBParameterKey: 'Test Route B Parameter Value'
   }
 
-  interface Parameters {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  type Parameters = {
     testRouteAKey: {
       readonly testRouteAParameterKey: 'Test Route A Parameter Value'
     }
@@ -23,7 +24,8 @@ test('passes through to the appropriate route', () => {
     }
   }
 
-  interface OtherProps {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  type OtherProps = {
     exampleOtherPropKey: 'Example Other Prop Value'
   }
 

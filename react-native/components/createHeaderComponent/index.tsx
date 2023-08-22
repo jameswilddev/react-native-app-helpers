@@ -12,8 +12,7 @@ import type { HeaderProps } from '../../types/HeaderProps'
  */
 export const createHeaderComponent = (
   headerStyle: HeaderStyle
-): React.FunctionComponent<HeaderProps>
-=> {
+): React.FunctionComponent<HeaderProps> => {
   const viewBase: ViewStyle = {
     flexBasis: 0,
     flexGrow: 1,

@@ -2,7 +2,7 @@
  * Props to be given to creatable select components.
  * @template T The value of a listed option.
  */
-export interface CreatableSelectProps {
+export interface CreatableSelectProps<T extends null | number | string> {
   /**
    * When true, it will not be possible to select an option.  It will otherwise
    * be possible to do so.

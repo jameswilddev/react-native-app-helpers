@@ -10,7 +10,8 @@ import {
 test('renders the appropriate routes', () => {
   type RouteKey = 'testRouteAKey' | 'testRouteBKey' | 'testRouteCKey'
 
-  interface OtherProps {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  type OtherProps = {
     exampleOtherPropKey: 'Example Other Prop Value'
   }
 

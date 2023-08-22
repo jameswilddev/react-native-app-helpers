@@ -4,7 +4,8 @@ import { Button, Text } from 'react-native'
 import * as TestRenderer from 'react-test-renderer'
 import { createSessionStoreManagerComponent, SessionStore } from '../../..'
 
-interface TestSession { readonly value: number }
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type TestSession = { readonly value: number }
 
 test('displays the loading screen', async () => {
   const sessionStore = new SessionStore<TestSession>({ value: 5 }, uuid.v4())

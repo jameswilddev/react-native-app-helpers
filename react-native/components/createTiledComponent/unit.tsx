@@ -53,7 +53,7 @@ test('renders as expected without any children', async () => {
   renderer.unmount()
 })
 
-test('renders as expected with less than one row', () => {
+test('renders as expected with less than one row', async () => {
   const Component = createTiledComponent(30, 60, 100)
 
   const renderer = TestRenderer.create(
@@ -144,7 +144,7 @@ test('renders as expected with less than one row', () => {
   renderer.unmount()
 })
 
-test('renders as expected with exactly one row', () => {
+test('renders as expected with exactly one row', async () => {
   const Component = createTiledComponent(30, 60, 100)
 
   const renderer = TestRenderer.create(
@@ -254,7 +254,7 @@ test('renders as expected with exactly one row', () => {
   renderer.unmount()
 })
 
-test('renders as expected with less than two rows', () => {
+test('renders as expected with less than two rows', async () => {
   const Component = createTiledComponent(30, 60, 100)
 
   const renderer = TestRenderer.create(
@@ -403,7 +403,7 @@ test('renders as expected with less than two rows', () => {
   renderer.unmount()
 })
 
-test('renders as expected with exactly two rows', () => {
+test('renders as expected with exactly two rows', async () => {
   const Component = createTiledComponent(30, 60, 100)
 
   const renderer = TestRenderer.create(
@@ -572,7 +572,7 @@ test('renders as expected with exactly two rows', () => {
   renderer.unmount()
 })
 
-test('renders as expected with less than three rows', () => {
+test('renders as expected with less than three rows', async () => {
   const Component = createTiledComponent(30, 60, 100)
 
   const renderer = TestRenderer.create(
@@ -1008,7 +1008,7 @@ test('renders as expected with exactly three rows', async () => {
   renderer.unmount()
 })
 
-test('renders as expected without column spacing', () => {
+test('renders as expected without column spacing', async () => {
   const Component = createTiledComponent(0, 60, 100)
 
   const renderer = TestRenderer.create(
@@ -1230,7 +1230,7 @@ test('renders as expected without column spacing', () => {
   renderer.unmount()
 })
 
-test('renders as expected without row spacing', () => {
+test('renders as expected without row spacing', async () => {
   const Component = createTiledComponent(30, 0, 100)
 
   const renderer = TestRenderer.create(

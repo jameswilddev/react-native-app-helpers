@@ -12,7 +12,7 @@ import { Hitbox } from '../../Hitbox'
 
 type TestValue = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 | 110 | 120
 
-test('renders as expected without a filter', () => {
+test('renders as expected without a filter', async () => {
   const Component = createSearchableMultiSelectChildrenComponent<TestValue>({
     fontFamily: 'Example Font Family',
     fontSize: 37,
@@ -401,7 +401,7 @@ test('renders as expected without a filter', () => {
   expect(stub).not.toHaveBeenCalled()
 })
 
-test('filters the list down to only those matching the user\'s input', () => {
+test('filters the list down to only those matching the user\'s input', async () => {
   const Component = createSearchableMultiSelectChildrenComponent<TestValue>({
     fontFamily: 'Example Font Family',
     fontSize: 37,

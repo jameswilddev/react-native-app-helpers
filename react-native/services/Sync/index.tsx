@@ -1099,7 +1099,7 @@ export class Sync<
               )) {
                 for (const file of syncConfigurationCollection.listFiles(
                   uuid,
-                  syncableStateCollectionItem.data
+                  syncableStateCollectionItem.data as TSchema['collections'][keyof TSchema['collections']]
                 )) {
                   allReferencedFileUuids.push(file.uuid)
                 }

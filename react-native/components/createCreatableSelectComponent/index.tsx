@@ -19,7 +19,7 @@ export function createCreatableSelectComponent<
 > (
   controlStyle: ControlStyle,
   rightIcon: null | SvgIcon
-): React.FunctionComponent<CreatableSelectProps> {
+): React.FunctionComponent<CreatableSelectProps<T>> {
   const FullHeightPopover = createFullHeightPopoverComponent(
     controlStyle,
     rightIcon
@@ -27,7 +27,7 @@ export function createCreatableSelectComponent<
   const ContentComponent =
     createCreatableSelectChildrenComponent<T>(controlStyle)
 
-  const CreatableSelect: React.FunctionComponent<CreatableSelectProps> = ({
+  const CreatableSelect: React.FunctionComponent<CreatableSelectProps<T>> = ({
     disabled,
     placeholder,
     required,

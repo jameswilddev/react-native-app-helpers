@@ -58,11 +58,13 @@ interface TestSchema {
   }
 }
 
-interface TestAdditionalCollectionData {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type TestAdditionalCollectionData = {
   readonly testAdditionalCollectionDataKey: string
 }
 
-interface TestAdditionalCollectionItemData {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type TestAdditionalCollectionItemData = {
   readonly testAdditionalCollectionDataItemKey: string
 }
 
@@ -410,7 +412,7 @@ function scenario (
             route,
             requestBody,
             queryParameters,
-            expectedStatusCodes,
+            expectedStatusCodes: expectedStatusCodes as readonly string[],
             response: expect.anything(),
             statusCode: expect.anything()
           })
@@ -1062,7 +1064,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -1074,7 +1079,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -1286,7 +1294,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -1300,7 +1311,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -1571,7 +1585,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -1583,7 +1600,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -1666,7 +1686,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -1678,7 +1701,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -1893,7 +1919,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -1907,7 +1936,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -2173,7 +2205,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -2185,7 +2220,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -2397,7 +2435,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -2411,7 +2452,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -2682,7 +2726,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -2694,7 +2741,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -2777,7 +2827,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -2789,7 +2842,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -3004,7 +3060,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -3018,7 +3077,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -3656,7 +3718,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -3668,7 +3733,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -4245,7 +4313,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -4259,7 +4330,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -4535,7 +4609,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -4547,7 +4624,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -4762,7 +4842,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -4776,7 +4859,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -5181,7 +5267,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -5195,7 +5284,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -5605,7 +5697,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -5619,7 +5714,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -5653,7 +5751,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -5669,7 +5770,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -5706,7 +5810,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 1,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -5722,7 +5829,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 1,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -6126,7 +6236,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -6140,7 +6253,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -6536,7 +6652,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -6550,7 +6669,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -6584,7 +6706,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -6600,7 +6725,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -6637,7 +6765,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 1,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -6653,7 +6784,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 1,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -7052,7 +7186,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -7066,7 +7203,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -7394,7 +7534,10 @@ scenario(
         totalSteps: 4,
         completedFiles: null,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -7406,7 +7549,10 @@ scenario(
         totalSteps: 4,
         completedFiles: null,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -7517,7 +7663,10 @@ scenario(
         totalSteps: 4,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -7529,7 +7678,10 @@ scenario(
         totalSteps: 4,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -7640,7 +7792,10 @@ scenario(
         totalSteps: 4,
         completedFiles: 1,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -7652,7 +7807,10 @@ scenario(
         totalSteps: 4,
         completedFiles: 1,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -7763,7 +7921,10 @@ scenario(
         totalSteps: 4,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionC
+        syncConfigurationCollection: syncConfigurationCollectionC as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -7775,7 +7936,10 @@ scenario(
         totalSteps: 4,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionC
+        syncConfigurationCollection: syncConfigurationCollectionC as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -8036,7 +8200,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B E Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B E Additional Item Value'
@@ -8050,7 +8217,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B E Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B E Additional Item Value'
@@ -8170,7 +8340,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 1,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -8184,7 +8357,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 1,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -8218,7 +8394,10 @@ scenario(
         totalSteps: 7,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -8234,7 +8413,10 @@ scenario(
         totalSteps: 7,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -8358,7 +8540,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 2,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -8372,7 +8557,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 2,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -8620,7 +8808,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 4,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionC,
+        syncConfigurationCollection: syncConfigurationCollectionC as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection C A Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection C A Additional Item Value'
@@ -8634,7 +8825,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 4,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionC,
+        syncConfigurationCollection: syncConfigurationCollectionC as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection C A Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection C A Additional Item Value'
@@ -8887,7 +9081,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 6,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionA,
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection A A Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection A A Additional Item Value'
@@ -8901,7 +9098,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 6,
         totalSteps: 7,
-        syncConfigurationCollection: syncConfigurationCollectionA,
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection A A Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection A A Additional Item Value'
@@ -9437,7 +9637,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -9451,7 +9654,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -9754,7 +9960,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -9768,7 +9977,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -9946,7 +10158,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -9958,7 +10173,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10129,7 +10347,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10141,7 +10362,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10224,7 +10448,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10236,7 +10463,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10410,7 +10640,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10422,7 +10655,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10593,7 +10829,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10605,7 +10844,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10688,7 +10930,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10700,7 +10945,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10879,7 +11127,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -10891,7 +11142,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -12018,7 +12272,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -12032,7 +12289,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -12342,7 +12602,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -12356,7 +12619,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -12530,7 +12796,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -12542,7 +12811,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -12754,7 +13026,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -12768,7 +13043,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -12942,7 +13220,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -12954,7 +13235,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -13166,7 +13450,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -13180,7 +13467,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -13483,7 +13773,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -13497,7 +13790,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -13959,7 +14255,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -13971,7 +14270,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -14341,7 +14643,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -14353,7 +14658,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -15311,7 +15619,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -15323,7 +15634,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -15768,7 +16082,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -15780,7 +16097,10 @@ scenario(
         totalSteps: 1,
         completedFiles: null,
         totalFiles: 0,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -17526,7 +17846,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionA
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -17538,7 +17861,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionA
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -17621,7 +17947,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionA
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -17633,7 +17962,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionA
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -17848,7 +18180,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionA,
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection A A Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection A A Additional Item Value'
@@ -17862,7 +18197,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionA,
+        syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection A A Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection A A Additional Item Value'
@@ -18267,7 +18605,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -18281,7 +18622,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -18581,7 +18925,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -18595,7 +18942,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -18904,7 +19254,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -18918,7 +19271,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -18952,7 +19308,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -18968,7 +19327,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B C Version A',
           testAdditionalCollectionDataItemKey: 'Test Collection B C Additional Item Value'
@@ -19269,7 +19631,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -19283,7 +19648,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -19317,7 +19685,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -19333,7 +19704,10 @@ scenario(
         totalSteps: 1,
         completedFiles: 0,
         totalFiles: 2,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version B',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -19509,7 +19883,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -19521,7 +19898,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -19914,7 +20294,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -19926,7 +20309,10 @@ scenario(
         totalSteps: 2,
         completedFiles: null,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -20009,7 +20395,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -20021,7 +20410,10 @@ scenario(
         totalSteps: 2,
         completedFiles: 0,
         totalFiles: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
       }
     },
     {
@@ -20236,7 +20628,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'
@@ -20250,7 +20645,10 @@ scenario(
         type: 'pullingCollectionItem',
         completedSteps: 0,
         totalSteps: 1,
-        syncConfigurationCollection: syncConfigurationCollectionB,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >,
         preflightResponseCollectionItem: {
           version: 'Test Collection B B Version C',
           testAdditionalCollectionDataItemKey: 'Test Collection B B Additional Item Value'

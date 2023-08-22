@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Image, type ImageSourcePropType, StyleSheet, View } from 'react-native'
-import type { ImageBackgroundProps } from '../../types/ImageColorBackgroundProps'
+import type { ImageBackgroundProps } from '../../types/ImageBackgroundProps'
 
 const styles = StyleSheet.create({
   image: {
