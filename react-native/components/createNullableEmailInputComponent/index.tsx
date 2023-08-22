@@ -2,6 +2,7 @@ import validateEmail from 'filter-validate-email'
 import * as React from 'react'
 import type { ControlStyle } from '../../..'
 import { createInputComponent } from '../createInputComponent'
+import type { NullableEmailInputProps } from '../../types/NullableEmailInputProps'
 
 /**
  * Creates a new input component pre-configured as a nullable email input.
@@ -20,36 +21,7 @@ export const createNullableEmailInputComponent = (
   rightIcon: null | React.ReactNode | JSX.Element,
   minimumLength: null | number,
   maximumLength: null | number
-): React.FunctionComponent<{
-  /**
-   * The value to edit.  When undefined, it is treated as an invalid empty
-   * string.
-   */
-    readonly value: undefined | null | string
-
-    /**
-   * Invoked when the user edits the address in the box.
-   * @param parsed   The value parsed, or undefined should it not be parseable.
-   * @param complete True when the user has finished editing, otherwise, false.
-   */
-    onChange: (parsed: undefined | null | string, complete: boolean) => void
-
-    /**
-   * When true, the text box is rendered semi-transparently and does not accept
-   * focus or input.
-   */
-    readonly disabled?: undefined | boolean
-
-    /**
-   * Text to be shown when no value has been entered.
-   */
-    readonly placeholder: string
-
-    /**
-   * The value entered must not appear in this list.
-   */
-    readonly unique: readonly string[]
-  }> => {
+): React.FunctionComponent<NullableEmailInputProps> => {
   const NullableEmailInputComponent = createInputComponent<
   null | string,
   readonly string[]
