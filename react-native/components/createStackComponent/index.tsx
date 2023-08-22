@@ -25,7 +25,7 @@ export const createStackComponent = (
   direction: 'horizontal' | 'vertical'
 ): React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> => {
   if (spacing === 0) {
-    return ({ children }) => (
+    const Stack: React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> = ({ children }) => (
       <View
         pointerEvents="box-none"
         style={globalStyles[`${direction}WrappingView`]}
@@ -33,6 +33,8 @@ export const createStackComponent = (
         {children}
       </View>
     )
+
+    return Stack
   } else {
     const localStyles = StyleSheet.create({
       spacingView:
@@ -43,7 +45,7 @@ export const createStackComponent = (
           : { width: spacing }
     })
 
-    return ({ children }) => {
+    const Stack: React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> = ({ children }) => {
       const childArray = intercalateRendered(
         <View pointerEvents="none" style={localStyles.spacingView} />,
         children
@@ -61,5 +63,7 @@ export const createStackComponent = (
         />
       )
     }
+
+    return Stack
   }
 }
