@@ -27,7 +27,7 @@ export function createSearchableMultiSelectComponent<
   const ContentComponent =
     createSearchableMultiSelectChildrenComponent<T>(controlStyle)
 
-  return ({
+  const SearchableMultiSelect: React.FunctionComponent<SearchableMultiSelectProps<T>> = ({
     disabled,
     placeholder,
     values,
@@ -61,4 +61,6 @@ export function createSearchableMultiSelectComponent<
       </FullHeightPopover>
     )
   }
+
+  return SearchableMultiSelect
 }

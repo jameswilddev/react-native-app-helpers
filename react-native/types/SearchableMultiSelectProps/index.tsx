@@ -7,9 +7,9 @@ import type { SvgIcon } from '../SvgIcon'
  */
 export type SearchableMultiSelectProps<T> = React.PropsWithChildren<{
   /**
-   * When true, it will not be possible to select an option.  It will otherwise
-   * be possible to do so.
-   */
+    * When true, it will not be possible to select an option.  It will otherwise
+    * be possible to do so.
+    */
   readonly disabled?: undefined | boolean
 
   /**
@@ -18,21 +18,15 @@ export type SearchableMultiSelectProps<T> = React.PropsWithChildren<{
   readonly placeholder: string
 
   /**
- * When true, the control will be styled as invalid should no option have its
- * current value.  It will otherwise always appear valid.
+ * The current values.
  */
-  readonly required: boolean
+  readonly values: readonly T[]
 
   /**
- * The current value.
+ * Invoked when the current values change.
+ * @param to The values which were selected.
  */
-  readonly value: T
-
-  /**
- * Invoked when the current value changes.
- * @param to The value which was selected.
- */
-  onChange: (to: T) => void
+  onChange: (to: readonly T[]) => void
 
   /**
  * The options displayed.
