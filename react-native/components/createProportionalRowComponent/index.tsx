@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { StyleSheet, View, type ViewStyle } from 'react-native'
+import type { ProportionalRowProps } from '../../types/ProportionalRowProps'
 
 const globalStyles = StyleSheet.create({
   fillsContainerTop: {
@@ -51,6 +52,7 @@ const globalStyles = StyleSheet.create({
 /**
  * Creates a new React component which fills its container horizontally and
  * presents a fixed set of columns with proportional width and optional spacing.
+ * @template T Keys representing the columns within.
  * @param spacing The spacing between the columns.
  * @param widths  The proportional widths of the columns.
  * @returns       The created React component.
@@ -58,22 +60,7 @@ const globalStyles = StyleSheet.create({
 export function createProportionalRowComponent<T extends readonly never[]> (
   spacing: number,
   widths: { [TKey in keyof T]: number }
-): React.FunctionComponent<{
-  /**
-   * How the component should size itself vertically.
-   */
-    readonly height: 'fitsContent' | 'fillsContainer'
-
-    /**
-   * How the columns should align themselves vertically.
-   */
-    readonly verticalAlignment: 'top' | 'centered' | 'bottom' | 'stretched'
-
-    /**
-   * The contents of the columns, in order.
-   */
-    readonly children: { readonly [TItem in keyof T]: null | JSX.Element }
-  }> {
+): React.FunctionComponent<ProportionalRowProps<T>> {
   const viewStyles: Array<{ readonly view: ViewStyle }> = []
 
   for (const width of widths) {

@@ -143,6 +143,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [PreflightResponseCollection](./react-native/types/PreflightResponseCollection/readme.md)
 - [PreflightResponseCollectionItem](./react-native/types/PreflightResponseCollectionItem/readme.md)
 - [PreflightResponseSingleton](./react-native/types/PreflightResponseSingleton/readme.md)
+- [ProportionalRowProps](./react-native/types/ProportionalRowProps/readme.md)
 - [PushingSyncableStateCollectionItem](./react-native/types/PushingSyncableStateCollectionItem/readme.md)
 - [QueryParameter](./react-native/types/QueryParameter/readme.md)
 - [QueryParameters](./react-native/types/QueryParameters/readme.md)
