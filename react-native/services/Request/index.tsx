@@ -81,7 +81,7 @@ export class Request implements RequestInterface {
 
   private async withTimeout<T>(
     abortSignal: null | AbortSignal,
-    then: (signal: AbortSignal) => T
+    then: (signal: AbortSignal) => Promise<T>
   ): Promise<T> {
     const internalAbortController = new AbortController()
     const abortControllerCallback = (): void => {
@@ -97,7 +97,7 @@ export class Request implements RequestInterface {
 
       timeout = setTimeout(abortControllerCallback, this.timeoutMilliseconds)
 
-      return then(internalAbortController.signal)
+      return await then(internalAbortController.signal)
     } finally {
       if (abortSignal !== null) {
         abortSignal.removeEventListener('abort', abortControllerCallback)
