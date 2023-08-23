@@ -506,20 +506,14 @@ test('get request empty response before timeout', async () => {
 })
 
 test('get request empty response empty timeout', async () => {
-  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+  const fetch = jest.fn(async () => {
     let resolve: (result: { readonly status: number }) => void
-    let reject: (reason: Error) => void
 
     const promise = new Promise<{ readonly status: number }>(
       (_resolve, _reject) => {
         resolve = _resolve
-        reject = _reject
       }
     )
-
-    init?.signal?.addEventListener('abort', () => {
-      reject(new AbortError())
-    })
 
     setTimeout(() => {
       resolve({ status: 123 })
@@ -547,8 +541,6 @@ test('get request empty response empty timeout', async () => {
     abortController.signal,
     ['244', '123', '89']
   )
-
-  abortController.abort()
 
   await expect(promise).rejects.toEqual(new AbortError())
 
@@ -677,20 +669,14 @@ test('get request json response empty external abort', async () => {
 })
 
 test('get request json response empty timeout', async () => {
-  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+  const fetch = jest.fn(async () => {
     let resolve: (result: { readonly status: number }) => void
-    let reject: (reason: Error) => void
 
     const promise = new Promise<{ readonly status: number }>(
       (_resolve, _reject) => {
         resolve = _resolve
-        reject = _reject
       }
     )
-
-    init?.signal?.addEventListener('abort', () => {
-      reject(new AbortError())
-    })
 
     setTimeout(() => {
       resolve({ status: 123 })
@@ -718,8 +704,6 @@ test('get request json response empty timeout', async () => {
     abortController.signal,
     ['244', '123', '89']
   )
-
-  abortController.abort()
 
   await expect(promise).rejects.toEqual(new AbortError())
 
@@ -1041,20 +1025,14 @@ test('get request empty response json external abort', async () => {
 })
 
 test('get request empty response json timeout', async () => {
-  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+  const fetch = jest.fn(async () => {
     let resolve: (result: { readonly status: number }) => void
-    let reject: (reason: Error) => void
 
     const promise = new Promise<{ readonly status: number }>(
       (_resolve, _reject) => {
         resolve = _resolve
-        reject = _reject
       }
     )
-
-    init?.signal?.addEventListener('abort', () => {
-      reject(new AbortError())
-    })
 
     setTimeout(() => {
       resolve({ status: 123 })
@@ -1088,8 +1066,6 @@ test('get request empty response json timeout', async () => {
     abortController.signal,
     ['244', '123', '89']
   )
-
-  abortController.abort()
 
   await expect(promise).rejects.toEqual(new AbortError())
 
@@ -1293,20 +1269,14 @@ test('get request json response json external abort', async () => {
 })
 
 test('get request json response json timeout', async () => {
-  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+  const fetch = jest.fn(async () => {
     let resolve: (result: { readonly status: number }) => void
-    let reject: (reason: Error) => void
 
     const promise = new Promise<{ readonly status: number }>(
       (_resolve, _reject) => {
         resolve = _resolve
-        reject = _reject
       }
     )
-
-    init?.signal?.addEventListener('abort', () => {
-      reject(new AbortError())
-    })
 
     setTimeout(() => {
       resolve({ status: 123 })
@@ -1340,8 +1310,6 @@ test('get request json response json timeout', async () => {
     abortController.signal,
     ['244', '123', '89']
   )
-
-  abortController.abort()
 
   await expect(promise).rejects.toEqual(new AbortError())
 
