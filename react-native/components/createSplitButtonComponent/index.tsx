@@ -58,7 +58,7 @@ const createLeftButtonHitboxStyleInstance = (
     output.borderRightWidth = 0
   }
 
-  if (output.borderRadius !== 0) {
+  if (output.borderRadius !== undefined) {
     output.borderTopLeftRadius = output.borderRadius
     output.borderBottomLeftRadius = output.borderRadius
     delete output.borderRadius
@@ -80,7 +80,7 @@ const createMiddleButtonHitboxStyleInstance = (
     splitButtonStateStyle
   )
 
-  if (output.borderWidth !== 0) {
+  if (output.borderWidth !== undefined) {
     output.borderTopWidth = output.borderWidth
     output.borderBottomWidth = output.borderWidth
     delete output.borderWidth
@@ -109,7 +109,7 @@ const createRightButtonHitboxStyleInstance = (
     output.borderLeftWidth = 0
   }
 
-  if (output.borderRadius !== 0) {
+  if (output.borderRadius !== undefined) {
     output.borderTopRightRadius = output.borderRadius
     output.borderBottomRightRadius = output.borderRadius
     delete output.borderRadius

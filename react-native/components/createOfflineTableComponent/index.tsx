@@ -423,6 +423,7 @@ export const createOfflineTableComponent = <
                 )
 
               // TODO: This is required because ESLint seems unaware that the type cannot be anything other.
+              /* istanbul ignore next */
               default:
                 throw new Error('Unimplemented column type.')
             }
@@ -550,6 +551,7 @@ export const createOfflineTableComponent = <
                       )
 
                       // TODO: This is required because ESLint seems unaware that the type cannot be anything other.
+                      /* istanbul ignore next */
                     default:
                       throw new Error('Unimplemented column type.')
                   }
