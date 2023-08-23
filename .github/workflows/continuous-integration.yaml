@@ -25,6 +25,7 @@ jobs:
         node-version: '16.x'
         registry-url: 'https://registry.npmjs.org'
     - run: npm ci
+    - run: npm run-script buildExpoDoctor
     - run: npm run-script buildLint
     - run: npm run-script buildTypeScript
     - run: npm run-script buildJest
