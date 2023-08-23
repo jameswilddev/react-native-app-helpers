@@ -778,7 +778,7 @@ test('renders as expected when exact matches are found for user input', async ()
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -958,7 +958,7 @@ test('renders as expected when partial matches are found for user input', async 
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -1155,7 +1155,7 @@ test('renders as expected when matches are not found for user input', async () =
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -1987,7 +1987,7 @@ test('renders as expected when horizontal padding is not present', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -2182,7 +2182,7 @@ test('renders as expected when vertical padding is not present', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree

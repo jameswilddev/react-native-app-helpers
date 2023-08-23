@@ -185,7 +185,7 @@ test('does nothing when the subdirectory name changes to null during loading', a
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName={null}
@@ -254,7 +254,7 @@ test('unloads when the subdirectory name changes to null and loading completes',
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName={null}
@@ -325,7 +325,7 @@ test('unloads when loading completes and the subdirectory name changes to null',
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName={null}
@@ -395,7 +395,7 @@ test('does nothing when the subdirectory name changes during loading', async () 
     setTimeout(resolve, 250)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName="Example Subdirectory Name B"
@@ -468,7 +468,7 @@ test('unloads and starts loading again when the subdirectory name changes and lo
     setTimeout(resolve, 250)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName="Example Subdirectory Name B"
@@ -558,7 +558,7 @@ test('unloads and starts loading again when loading completes and the subdirecto
     setTimeout(resolve, 250)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName="Example Subdirectory Name B"
@@ -629,7 +629,7 @@ test('displays the loading screen from null', async () => {
 
   await new Promise((resolve) => setTimeout(resolve, 250))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName="Example Subdirectory Name"
@@ -693,7 +693,7 @@ test('shows the ready screen once given time to load from null', async () => {
 
   await new Promise((resolve) => setTimeout(resolve, 250))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <FileStoreManager
         subdirectoryName="Example Subdirectory Name"

@@ -518,7 +518,7 @@ test('filters the list down to only those matching the user\'s input', async () 
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree

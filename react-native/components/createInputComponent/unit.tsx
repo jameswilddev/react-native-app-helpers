@@ -792,7 +792,7 @@ test('can be focused when valid', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -972,7 +972,7 @@ test('can be focused when invalid', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1152,7 +1152,7 @@ test('can be blurred', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1163,7 +1163,7 @@ test('can be blurred', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1342,7 +1342,7 @@ test('can be disabled during edit', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1353,7 +1353,7 @@ test('can be disabled during edit', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1551,7 +1551,7 @@ test('can be disabled during edit when starting invalid', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1562,7 +1562,7 @@ test('can be disabled during edit when starting invalid', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1760,7 +1760,7 @@ test('can be re-enabled following edit', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1771,7 +1771,7 @@ test('can be re-enabled following edit', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1985,7 +1985,7 @@ test('does not lose pending changes on update', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -1996,7 +1996,7 @@ test('does not lose pending changes on update', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2379,7 +2379,7 @@ test('ignores external changes to the value when an edit is in progress', async 
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2390,7 +2390,7 @@ test('ignores external changes to the value when an edit is in progress', async 
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2588,7 +2588,7 @@ test('allows valid incomplete edits', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2599,7 +2599,7 @@ test('allows valid incomplete edits', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2780,7 +2780,7 @@ test('allows valid incomplete edits', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2791,7 +2791,7 @@ test('allows valid incomplete edits', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2976,7 +2976,7 @@ test('allows valid incomplete edits', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -2987,7 +2987,7 @@ test('allows valid incomplete edits', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -3172,7 +3172,7 @@ test('allows invalid incomplete edits', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -3183,7 +3183,7 @@ test('allows invalid incomplete edits', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -3364,7 +3364,7 @@ test('allows invalid incomplete edits', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -3375,7 +3375,7 @@ test('allows invalid incomplete edits', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -3560,7 +3560,7 @@ test('allows invalid incomplete edits', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -3571,7 +3571,7 @@ test('allows invalid incomplete edits', async () => {
     ).props['onFocus']()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -5164,7 +5164,7 @@ test('renders as expected with a left icon when focused and valid', async () => 
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -5352,7 +5352,7 @@ test('renders as expected with a right icon when focused and valid', async () =>
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -5540,7 +5540,7 @@ test('renders as expected with a right icon when focused and valid', async () =>
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -5735,7 +5735,7 @@ test('renders as expected with a left icon when focused and invalid', async () =
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -5923,7 +5923,7 @@ test('renders as expected with a right icon when focused and invalid', async () 
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (
@@ -6111,7 +6111,7 @@ test('renders as expected with left and right icons when focused and invalid', a
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         (

@@ -63,7 +63,7 @@ test('refreshes the component once when the event is raised once', async () => {
 
   await new Promise((resolve) => setTimeout(resolve, 10))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     event.addListener.mock.calls[0][1]()
   })
 
@@ -110,11 +110,11 @@ test('refreshes the component twice when the event is raised twice', async () =>
 
   await new Promise((resolve) => setTimeout(resolve, 10))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     event.addListener.mock.calls[0][1]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     event.addListener.mock.calls[0][1]()
   })
 
@@ -229,7 +229,7 @@ test('refreshes the component once when the event type is changed and the event 
 
   await new Promise((resolve) => setTimeout(resolve, 10))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       event.addListener.mock.calls[1] as unknown as readonly [
         string,
@@ -370,7 +370,7 @@ test('refreshes the component once when the event type is changed twice and the 
 
   await new Promise((resolve) => setTimeout(resolve, 10))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       event.addListener.mock.calls[2] as unknown as readonly [
         string,
@@ -531,7 +531,7 @@ test('refreshes the component once when the event is changed then raised', async
 
   await new Promise((resolve) => setTimeout(resolve, 10))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       eventB.addListener.mock.calls[0] as unknown as readonly [
         string,
@@ -723,7 +723,7 @@ test('refreshes the component once when the event is changed then raised', async
 
   await new Promise((resolve) => setTimeout(resolve, 10))
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       eventC.addListener.mock.calls[0] as unknown as readonly [
         string,

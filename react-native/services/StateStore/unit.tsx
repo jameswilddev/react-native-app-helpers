@@ -349,10 +349,9 @@ test('throws an error when loading a loading store', async () => {
   const onSet = jest.fn()
   store.addListener('set', onSet)
 
-  const [, promise] = await Promise.all([
-    store.load(uuid.v4()),
-    store.load(uuid.v4())
-  ])
+  void store.load(uuid.v4())
+
+  const promise = store.load(uuid.v4())
 
   await expect(promise).rejects.toEqual(
     new Error('The state store is already loading.')

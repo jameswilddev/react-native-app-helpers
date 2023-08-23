@@ -480,7 +480,7 @@ test('renders as expected when not disabled after layout', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
@@ -608,7 +608,7 @@ test('renders as expected when disabled after layout', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
@@ -736,13 +736,13 @@ test('renders as expected when not disabled after layout after press', async () 
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -922,13 +922,13 @@ test('renders as expected when not disabled after press after layout', async () 
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
@@ -1108,19 +1108,19 @@ test('correctly handles layout changes which only move on the X axis', async () 
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
@@ -1302,19 +1302,19 @@ test('correctly handles layout changes which only change width', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
@@ -1496,19 +1496,19 @@ test('correctly handles layout changes which only move on the Y axis', async () 
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
@@ -1690,19 +1690,19 @@ test('correctly handles layout changes which only change height', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 45, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
@@ -1884,19 +1884,19 @@ test('correctly handles layout changes which have no effect', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
@@ -2078,19 +2078,19 @@ test('can be enabled after being created disabled', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     Dimensions.set({
       window: {
         width: 640,
@@ -2243,13 +2243,13 @@ test('closes if disabled while open', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -2392,13 +2392,13 @@ test('does not re-open if enabled after disabled while open', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -2556,13 +2556,13 @@ test('can be re-opened once re-enabled after disabled while open', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -2598,7 +2598,7 @@ test('can be re-opened once re-enabled after disabled while open', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -2778,19 +2778,19 @@ test('closes when the modal is dismissed', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (
         renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree[]
@@ -2921,19 +2921,19 @@ test('closes when the close callback is invoked', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 310)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     expect(children).toHaveBeenCalledTimes(1);
     (children.mock.calls[0] as ReadonlyArray<() => void>)[0]?.()
   })
@@ -3182,13 +3182,13 @@ test('renders as expected when invalid when open', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 320)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -3350,13 +3350,13 @@ test('renders as expected without borders', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 320)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -3515,13 +3515,13 @@ test('renders as expected when invalid without borders', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 320)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -3698,13 +3698,13 @@ test('renders as expected without radius', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 45, 220, 20, 70, 320)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -3884,13 +3884,13 @@ test('renders as expected when invalid without radius', async () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onMeasure'
     ](123, 456, 220, 20, 70, 320)
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()

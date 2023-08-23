@@ -31,7 +31,7 @@ test('renders as expected without any children', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -86,7 +86,7 @@ test('renders as expected with less than one row', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -178,7 +178,7 @@ test('renders as expected with exactly one row', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -290,7 +290,7 @@ test('renders as expected with less than two rows', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -440,7 +440,7 @@ test('renders as expected with exactly two rows', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -611,7 +611,7 @@ test('renders as expected with less than three rows', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -820,7 +820,7 @@ test('renders as expected with exactly three rows', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -1048,7 +1048,7 @@ test('renders as expected without column spacing', async () => {
     measureOnSuccessCallback(123, 403, 315, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree
@@ -1270,7 +1270,7 @@ test('renders as expected without row spacing', async () => {
     measureOnSuccessCallback(123, 403, 375, 583, 37, 96)
   }
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (
       (renderer.toTree() as TestRenderer.ReactTestRendererTree)
         .rendered as TestRenderer.ReactTestRendererTree

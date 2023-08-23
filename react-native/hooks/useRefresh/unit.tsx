@@ -48,7 +48,7 @@ test('refreshes the component the first time that the returned function is invok
 
   const renderer = TestRenderer.create(<Component />)
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -82,13 +82,13 @@ test('refreshes the component the second time that the returned function is invo
 
   const renderer = TestRenderer.create(<Component />)
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()

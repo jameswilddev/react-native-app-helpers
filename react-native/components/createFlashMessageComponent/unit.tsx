@@ -520,7 +520,7 @@ test('closes when pressed', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -578,7 +578,7 @@ test('remains closed when the state does not change', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -645,7 +645,7 @@ test('shows again when the message changes', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()
@@ -739,7 +739,7 @@ test('shows again when the type changes', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
       'onPress'
     ]()

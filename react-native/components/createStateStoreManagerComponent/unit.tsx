@@ -329,7 +329,7 @@ test('starts unloading when the state key changes to null during loading', async
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={null}
@@ -389,7 +389,7 @@ test('fully unloads when the state key changes to null during loading', async ()
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={null}
@@ -457,7 +457,7 @@ test('starts unloading when the state key changes to null after loading', async 
     await new Promise((resolve) => setTimeout(resolve, 250))
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={null}
@@ -521,7 +521,7 @@ test('fully unloads when the state key changes to null after loading', async () 
     await new Promise((resolve) => setTimeout(resolve, 250))
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={null}
@@ -589,7 +589,7 @@ test('starts reloading when the state key changes to another value during loadin
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={stateKeyB}
@@ -657,7 +657,7 @@ test('fully reloads when the state key changes to another value during loading',
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={stateKeyB}
@@ -733,7 +733,7 @@ test('starts reloading when the state key changes to another value after loading
     await new Promise((resolve) => setTimeout(resolve, 250))
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={stateKeyB}
@@ -805,7 +805,7 @@ test('fully reloads when the state key changes to another value after loading', 
     await new Promise((resolve) => setTimeout(resolve, 250))
   })
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={stateKeyB}
@@ -873,7 +873,7 @@ test('displays the loading screen from null', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={stateKey}
@@ -933,7 +933,7 @@ test('shows the ready screen once given time to load from null', async () => {
     />
   )
 
-  await TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     renderer.update(
       <StateStoreManager
         stateKey={stateKey}
