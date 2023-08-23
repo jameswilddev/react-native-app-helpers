@@ -3,7 +3,7 @@ import * as FileSystem from 'expo-file-system'
 
 class AbortError extends Error {
   constructor () {
-    super('Aborted')
+    super('Aborted.')
 
     this.name = 'AbortError'
   }
