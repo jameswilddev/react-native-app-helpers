@@ -99,7 +99,7 @@ export class FileStore implements FileStoreInterface {
       try {
         this.operationsInProgress++
 
-        const output = Crypto.randomUUID()
+        const output = Crypto.randomUUID().toLowerCase()
 
         await FileSystem.moveAsync({
           from: fileUri,

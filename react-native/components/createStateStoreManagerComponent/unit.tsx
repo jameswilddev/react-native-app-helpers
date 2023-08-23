@@ -8,7 +8,7 @@ import { createStateStoreManagerComponent, StateStore } from '../../..'
 type TestState = { readonly value: number }
 
 test('displays the loading screen', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -49,7 +49,7 @@ test('displays the loading screen', async () => {
 })
 
 test('shows the ready screen once given time to load', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -92,7 +92,7 @@ test('shows the ready screen once given time to load', async () => {
 })
 
 test('re-renders when the state is changed externally once', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -136,7 +136,7 @@ test('re-renders when the state is changed externally once', async () => {
 })
 
 test('re-renders when the state is changed externally twice', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -181,7 +181,7 @@ test('re-renders when the state is changed externally twice', async () => {
 })
 
 test('re-renders when the state is changed internally once', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -227,7 +227,7 @@ test('re-renders when the state is changed internally once', async () => {
 })
 
 test('re-renders when the state is changed internally twice', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -308,7 +308,7 @@ test('does not try to load without a key', async () => {
 })
 
 test('starts unloading when the state key changes to null during loading', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -368,7 +368,7 @@ test('starts unloading when the state key changes to null during loading', async
 })
 
 test('fully unloads when the state key changes to null during loading', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -432,7 +432,7 @@ test('fully unloads when the state key changes to null during loading', async ()
 })
 
 test('starts unloading when the state key changes to null after loading', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -496,7 +496,7 @@ test('starts unloading when the state key changes to null after loading', async 
 })
 
 test('fully unloads when the state key changes to null after loading', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -564,8 +564,8 @@ test('fully unloads when the state key changes to null after loading', async () 
 })
 
 test('starts reloading when the state key changes to another value during loading', async () => {
-  const stateKeyA = randomUUID()
-  const stateKeyB = randomUUID()
+  const stateKeyA = randomUUID().toLowerCase()
+  const stateKeyB = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   await stateStore.load(stateKeyB)
   stateStore.set({ value: 10 })
@@ -632,8 +632,8 @@ test('starts reloading when the state key changes to another value during loadin
 })
 
 test('starts reloading when the state key changes to another value during loading', async () => {
-  const stateKeyA = randomUUID()
-  const stateKeyB = randomUUID()
+  const stateKeyA = randomUUID().toLowerCase()
+  const stateKeyB = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   await stateStore.load(stateKeyB)
   stateStore.set({ value: 10 })
@@ -704,8 +704,8 @@ test('starts reloading when the state key changes to another value during loadin
 })
 
 test('fully reloads when the state key changes to another value during loading', async () => {
-  const stateKeyA = randomUUID()
-  const stateKeyB = randomUUID()
+  const stateKeyA = randomUUID().toLowerCase()
+  const stateKeyB = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   await stateStore.load(stateKeyB)
   stateStore.set({ value: 10 })
@@ -780,8 +780,8 @@ test('fully reloads when the state key changes to another value during loading',
 })
 
 test('starts reloading when the state key changes to another value after loading', async () => {
-  const stateKeyA = randomUUID()
-  const stateKeyB = randomUUID()
+  const stateKeyA = randomUUID().toLowerCase()
+  const stateKeyB = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   await stateStore.load(stateKeyB)
   stateStore.set({ value: 10 })
@@ -852,8 +852,8 @@ test('starts reloading when the state key changes to another value after loading
 })
 
 test('starts reloading when the state key changes to another value after loading', async () => {
-  const stateKeyA = randomUUID()
-  const stateKeyB = randomUUID()
+  const stateKeyA = randomUUID().toLowerCase()
+  const stateKeyB = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   await stateStore.load(stateKeyB)
   stateStore.set({ value: 10 })
@@ -928,8 +928,8 @@ test('starts reloading when the state key changes to another value after loading
 })
 
 test('fully reloads when the state key changes to another value after loading', async () => {
-  const stateKeyA = randomUUID()
-  const stateKeyB = randomUUID()
+  const stateKeyA = randomUUID().toLowerCase()
+  const stateKeyB = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   await stateStore.load(stateKeyB)
   stateStore.set({ value: 10 })
@@ -1008,7 +1008,7 @@ test('fully reloads when the state key changes to another value after loading', 
 })
 
 test('displays the loading screen from null', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
@@ -1068,7 +1068,7 @@ test('displays the loading screen from null', async () => {
 })
 
 test('shows the ready screen once given time to load from null', async () => {
-  const stateKey = randomUUID()
+  const stateKey = randomUUID().toLowerCase()
   const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 

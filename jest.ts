@@ -112,7 +112,7 @@ jest.mock('expo-crypto', () => {
   const crypto = jest.requireActual('crypto')
 
   return {
-    randomUUID: () => crypto.randomUUID()
+    randomUUID: () => crypto.randomUUID().toUpperCase()
   }
 })
 
@@ -122,7 +122,7 @@ jest.mock('expo-file-system', () => {
   const os = jest.requireActual('os')
   const path = jest.requireActual('path')
 
-  const documentDirectory = path.join(os.tmpdir(), crypto.randomUUID())
+  const documentDirectory = path.join(os.tmpdir(), crypto.randomUUID().toLowerCase())
 
   function isError (error: unknown): error is NodeJS.ErrnoException {
     return (

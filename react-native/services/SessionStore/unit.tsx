@@ -9,7 +9,7 @@ type TestSession = {
 test('throws an error when getting from an unloaded store', () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -24,7 +24,7 @@ test('throws an error when getting from an unloaded store', () => {
 test('throws an error when setting a value in an unloaded store', () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -39,7 +39,7 @@ test('throws an error when setting a value in an unloaded store', () => {
 test('throws an error when unloading an unloaded store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -55,7 +55,7 @@ test('throws an error when unloading an unloaded store', async () => {
 test('allows a store to be loaded and read from', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -70,7 +70,7 @@ test('allows a store to be loaded and read from', async () => {
 test('allows a store to be loaded, written to and read from', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
@@ -87,7 +87,7 @@ test('allows a store to be loaded, written to and read from', async () => {
 test('allows a store to be loaded, unloaded, loaded and read from', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -104,7 +104,7 @@ test('allows a store to be loaded, unloaded, loaded and read from', async () => 
 test('allows a store to be loaded, written to, unloaded, loaded and read from', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
@@ -123,13 +123,13 @@ test('allows a store to be loaded, written to, unloaded, loaded and read from', 
 test('treats two separate class instances as having their own state', async () => {
   const storeA = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSetA = jest.fn(() => storeA.get())
   storeA.addListener('set', onSetA)
   const storeB = new SessionStore<TestSession>(
     { testKey: 'Test Value B' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSetB = jest.fn(() => storeB.get())
   storeB.addListener('set', onSetB)
@@ -151,7 +151,7 @@ test('treats two separate class instances as having their own state', async () =
 test('allows a store to be loaded, written to twice in rapid succession and read from', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
@@ -170,7 +170,7 @@ test('allows a store to be loaded, written to twice in rapid succession and read
 test('allows a store to be loaded, written to twice and unloaded in rapid succession, loaded and read from', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
@@ -191,7 +191,7 @@ test('allows a store to be loaded, written to twice and unloaded in rapid succes
 test('works as expected without event listeners', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
 
   await store.load()
@@ -206,7 +206,7 @@ test('works as expected without event listeners', async () => {
 test('works as expected with multiple event listeners', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSetA = jest.fn(() => store.get())
   store.addListener('set', onSetA)
@@ -233,7 +233,7 @@ test('works as expected with multiple event listeners', async () => {
 test('allows removal of event listeners', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSetA = jest.fn(() => store.get())
   store.addListener('set', onSetA)
@@ -260,7 +260,7 @@ test('allows removal of event listeners', async () => {
 test('throws an error when loading a loading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -277,7 +277,7 @@ test('throws an error when loading a loading store', async () => {
 test('throws an error when getting from a loading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -293,7 +293,7 @@ test('throws an error when getting from a loading store', async () => {
 test('throws an error when setting a value in a loading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -309,7 +309,7 @@ test('throws an error when setting a value in a loading store', async () => {
 test('throws an error when unloading a loading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -326,7 +326,7 @@ test('throws an error when unloading a loading store', async () => {
 test('throws an error when loading a loaded store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
@@ -343,7 +343,7 @@ test('throws an error when loading a loaded store', async () => {
 test('throws an error when loading an unloading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
@@ -363,7 +363,7 @@ test('throws an error when loading an unloading store', async () => {
 test('throws an error when getting from an unloading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
@@ -382,7 +382,7 @@ test('throws an error when getting from an unloading store', async () => {
 test('throws an error when setting a value in an unloading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
@@ -401,7 +401,7 @@ test('throws an error when setting a value in an unloading store', async () => {
 test('throws an error when unloading an unloading store', async () => {
   const store = new SessionStore<TestSession>(
     { testKey: 'Test Value A' },
-    randomUUID()
+    randomUUID().toLowerCase()
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
