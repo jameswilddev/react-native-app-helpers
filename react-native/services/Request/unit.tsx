@@ -1,4 +1,4 @@
-import { Request } from '../../..'
+import { Request, type Json } from '../../..'
 import * as FileSystem from 'expo-file-system'
 
 class AbortError extends Error {
@@ -29,9 +29,28 @@ test('nothing happens', async () => {
 })
 
 test('get request empty response empty missing protocol', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
+
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
     'example-base-url.com/example/sub/path/',
@@ -76,8 +95,26 @@ test('get request empty response empty missing protocol', async () => {
 })
 
 test('get request empty response empty missing trailing slash', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -123,8 +160,26 @@ test('get request empty response empty missing trailing slash', async () => {
 })
 
 test('get request empty response empty no authorization', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -169,8 +224,26 @@ test('get request empty response empty no authorization', async () => {
 })
 
 test('get request empty response empty no abort signal', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -215,8 +288,26 @@ test('get request empty response empty no abort signal', async () => {
 })
 
 test('get request empty response empty no query parameters', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -257,8 +348,26 @@ test('get request empty response empty no query parameters', async () => {
 })
 
 test('get request empty response empty no retained query parameters', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -304,8 +413,26 @@ test('get request empty response empty no retained query parameters', async () =
 })
 
 test('get request empty response empty first query parameter dropped', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -351,8 +478,26 @@ test('get request empty response empty first query parameter dropped', async () 
 })
 
 test('get request empty response empty invalid status code', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 889
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 889
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -405,7 +550,7 @@ test('get request empty response empty external abort', async () => {
   const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
     let reject: (reason: Error) => void
 
-    const promise = new Promise<Response>((_resolve, _reject) => {
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
       reject = _reject
     })
 
@@ -460,9 +605,26 @@ test('get request empty response empty external abort', async () => {
 })
 
 test('get request empty response before timeout', async () => {
-  const fetch = jest.fn(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 950))
-    return { status: 123 }
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 950)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -506,18 +668,16 @@ test('get request empty response before timeout', async () => {
 })
 
 test('get request empty response empty timeout', async () => {
-  const fetch = jest.fn(async () => {
-    let resolve: (result: { readonly status: number }) => void
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let reject: (reason: Error) => void
 
-    const promise = new Promise<{ readonly status: number }>(
-      (_resolve, _reject) => {
-        resolve = _resolve
-      }
-    )
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      reject = _reject
+    })
 
-    setTimeout(() => {
-      resolve({ status: 123 })
-    }, 1050)
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
 
     return await promise
   });
@@ -564,8 +724,26 @@ test('get request empty response empty timeout', async () => {
 })
 
 test('get request json response empty', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -613,7 +791,7 @@ test('get request json response empty external abort', async () => {
   const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
     let reject: (reason: Error) => void
 
-    const promise = new Promise<Response>((_resolve, _reject) => {
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
       reject = _reject
     })
 
@@ -669,18 +847,16 @@ test('get request json response empty external abort', async () => {
 })
 
 test('get request json response empty timeout', async () => {
-  const fetch = jest.fn(async () => {
-    let resolve: (result: { readonly status: number }) => void
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let reject: (reason: Error) => void
 
-    const promise = new Promise<{ readonly status: number }>(
-      (_resolve, _reject) => {
-        resolve = _resolve
-      }
-    )
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      reject = _reject
+    })
 
-    setTimeout(() => {
-      resolve({ status: 123 })
-    }, 1050)
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
 
     return await promise
   });
@@ -728,8 +904,26 @@ test('get request json response empty timeout', async () => {
 })
 
 test('get request json response empty invalid status code', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 889
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 889
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -964,7 +1158,7 @@ test('get request empty response json external abort', async () => {
   const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
     let reject: (reason: Error) => void
 
-    const promise = new Promise<Response>((_resolve, _reject) => {
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
       reject = _reject
     })
 
@@ -1025,18 +1219,16 @@ test('get request empty response json external abort', async () => {
 })
 
 test('get request empty response json timeout', async () => {
-  const fetch = jest.fn(async () => {
-    let resolve: (result: { readonly status: number }) => void
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let reject: (reason: Error) => void
 
-    const promise = new Promise<{ readonly status: number }>(
-      (_resolve, _reject) => {
-        resolve = _resolve
-      }
-    )
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      reject = _reject
+    })
 
-    setTimeout(() => {
-      resolve({ status: 123 })
-    }, 1050)
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
 
     return await promise
   });
@@ -1089,8 +1281,26 @@ test('get request empty response json timeout', async () => {
 })
 
 test('get request empty response json invalid status code', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 889
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 889
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -1146,11 +1356,29 @@ test('get request empty response json invalid status code', async () => {
 })
 
 test('get request json response json', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 123,
-    json: async () => ({
-      example: ['json', 'response']
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number, json: () => Promise<Json> }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
     })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 123,
+        json: async () => ({
+          example: ['json', 'response']
+        })
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
@@ -1207,7 +1435,7 @@ test('get request json response json external abort', async () => {
   const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
     let reject: (reason: Error) => void
 
-    const promise = new Promise<Response>((_resolve, _reject) => {
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
       reject = _reject
     })
 
@@ -1269,18 +1497,16 @@ test('get request json response json external abort', async () => {
 })
 
 test('get request json response json timeout', async () => {
-  const fetch = jest.fn(async () => {
-    let resolve: (result: { readonly status: number }) => void
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let reject: (reason: Error) => void
 
-    const promise = new Promise<{ readonly status: number }>(
-      (_resolve, _reject) => {
-        resolve = _resolve
-      }
-    )
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      reject = _reject
+    })
 
-    setTimeout(() => {
-      resolve({ status: 123 })
-    }, 1050)
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
 
     return await promise
   });
@@ -1334,8 +1560,26 @@ test('get request json response json timeout', async () => {
 })
 
 test('get request json response json invalid status code', async () => {
-  const fetch = jest.fn().mockResolvedValue({
-    status: 889
+  const fetch = jest.fn(async (_, init: undefined | RequestInit) => {
+    let resolve: (result: { readonly status: number }) => void
+    let reject: (reason: Error) => void
+
+    const promise = new Promise<{ readonly status: number }>((_resolve, _reject) => {
+      resolve = _resolve
+      reject = _reject
+    })
+
+    init?.signal?.addEventListener('abort', () => {
+      reject(new AbortError())
+    })
+
+    setTimeout(() => {
+      resolve({
+        status: 889
+      })
+    }, 50)
+
+    return await promise
   });
   (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
