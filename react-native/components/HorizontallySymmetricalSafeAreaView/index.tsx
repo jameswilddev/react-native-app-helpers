@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { type StyleProp, View, type ViewProps, type ViewStyle } from 'react-native'
+import { type StyleProp, View, type ViewProps, type ViewStyle, type DimensionValue } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-const coerceToNumber = (value: undefined | number | string): null | number => {
-  if (value === undefined) {
+const coerceToNumber = (name: string, value: undefined | DimensionValue): null | number => {
+  if (value === undefined || value === null) {
     return null
-  } else if (typeof value === 'string') {
-    return Number.parseFloat(value)
-  } else {
+  } else if (typeof value === 'number') {
     return value
+  } else {
+    throw new Error(`Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView's "${name}" style.`)
   }
 }
 
@@ -61,18 +61,18 @@ ViewProps & {
   let stylePaddingRight: null | number = null
 
   const processStyleObject = (styleObject: ViewStyle): void => {
-    stylePadding = coerceToNumber(styleObject.padding) ?? stylePadding
+    stylePadding = coerceToNumber('padding', styleObject.padding) ?? stylePadding
     stylePaddingVertical =
-      coerceToNumber(styleObject.paddingVertical) ?? stylePaddingVertical
+      coerceToNumber('paddingVertical', styleObject.paddingVertical) ?? stylePaddingVertical
     stylePaddingHorizontal =
-      coerceToNumber(styleObject.paddingHorizontal) ?? stylePaddingHorizontal
-    stylePaddingTop = coerceToNumber(styleObject.paddingTop) ?? stylePaddingTop
+      coerceToNumber('paddingHorizontal', styleObject.paddingHorizontal) ?? stylePaddingHorizontal
+    stylePaddingTop = coerceToNumber('paddingTop', styleObject.paddingTop) ?? stylePaddingTop
     stylePaddingBottom =
-      coerceToNumber(styleObject.paddingBottom) ?? stylePaddingBottom
+      coerceToNumber('paddingBottom', styleObject.paddingBottom) ?? stylePaddingBottom
     stylePaddingLeft =
-      coerceToNumber(styleObject.paddingLeft) ?? stylePaddingLeft
+      coerceToNumber('paddingLeft', styleObject.paddingLeft) ?? stylePaddingLeft
     stylePaddingRight =
-      coerceToNumber(styleObject.paddingRight) ?? stylePaddingRight
+      coerceToNumber('paddingRight', styleObject.paddingRight) ?? stylePaddingRight
   }
 
   const recurseStyleTree = (recursedStyle: StyleProp<ViewStyle>): void => {

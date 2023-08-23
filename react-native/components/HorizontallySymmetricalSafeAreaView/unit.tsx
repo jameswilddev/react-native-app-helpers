@@ -464,7 +464,7 @@ test('adds to existing style when does not include paddings', () => {
   renderer.unmount()
 })
 
-test('adds to existing style when includes string paddings', () => {
+test('rejects non-numeric paddings', () => {
   const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
@@ -475,41 +475,15 @@ test('adds to existing style when includes string paddings', () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: 'red', padding: '12' }}
+        style={{ backgroundColor: 'red', padding: '12%' }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
   )
-
-  const renderer = TestRenderer.create(<Component />)
-
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: 'component',
-    type: View,
-    props: {
-      style: [
-        { backgroundColor: 'red', padding: '12' },
-        {
-          paddingTop: 28,
-          paddingBottom: 72,
-          paddingHorizontal: 65
-        }
-      ],
-      pointerEvents: 'box-none',
-      testID: 'Example',
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: 'Example Child'
-        }
-      })
-    }
-  })
-
-  renderer.unmount()
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "padding" style.')
 })
 
 test('adds to existing style when includes number paddings', () => {
@@ -560,7 +534,7 @@ test('adds to existing style when includes number paddings', () => {
   renderer.unmount()
 })
 
-test('adds to existing style when includes string axis paddings', () => {
+test('rejects non-numeric string axis paddings', () => {
   const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
@@ -571,41 +545,15 @@ test('adds to existing style when includes string axis paddings', () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: 'red', paddingVertical: '12' }}
+        style={{ backgroundColor: 'red', paddingVertical: '12%' }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
   )
-
-  const renderer = TestRenderer.create(<Component />)
-
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: 'component',
-    type: View,
-    props: {
-      style: [
-        { backgroundColor: 'red', paddingVertical: '12' },
-        {
-          paddingTop: 28,
-          paddingBottom: 72,
-          paddingHorizontal: 53
-        }
-      ],
-      pointerEvents: 'box-none',
-      testID: 'Example',
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: 'Example Child'
-        }
-      })
-    }
-  })
-
-  renderer.unmount()
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "paddingVertical" style.')
 })
 
 test('adds to existing style when includes number axis paddings', () => {
@@ -656,7 +604,7 @@ test('adds to existing style when includes number axis paddings', () => {
   renderer.unmount()
 })
 
-test('adds to existing style when includes string direction paddings', () => {
+test('rejects non-numeric string direction paddings', () => {
   const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
@@ -667,42 +615,16 @@ test('adds to existing style when includes string direction paddings', () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: 'red', paddingLeft: '12' }}
+        style={{ backgroundColor: 'red', paddingLeft: '12%' }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
   )
 
-  const renderer = TestRenderer.create(<Component />)
-
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: 'component',
-    type: View,
-    props: {
-      style: [
-        { backgroundColor: 'red', paddingLeft: '12' },
-        {
-          paddingTop: 16,
-          paddingBottom: 60,
-          paddingLeft: 65,
-          paddingRight: 53
-        }
-      ],
-      pointerEvents: 'box-none',
-      testID: 'Example',
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: 'Example Child'
-        }
-      })
-    }
-  })
-
-  renderer.unmount()
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "paddingLeft" style.')
 })
 
 test('adds to existing style when includes number direction paddings', () => {
@@ -754,7 +676,7 @@ test('adds to existing style when includes number direction paddings', () => {
   renderer.unmount()
 })
 
-test('adds to existing style when includes string layered paddings', () => {
+test('rejects non-numeric string layered paddings', () => {
   const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
@@ -766,8 +688,8 @@ test('adds to existing style when includes string layered paddings', () => {
         right
         testID="Example"
         style={[
-          [{ borderLeftColor: 'yellow', padding: '9' }, { paddingLeft: '12' }],
-          { backgroundColor: 'red', paddingHorizontal: '18' }
+          [{ borderLeftColor: 'yellow', padding: '9%' }, { paddingLeft: '12%' }],
+          { backgroundColor: 'red', paddingHorizontal: '18%' }
         ]}
       >
         <Text>Example Child</Text>
@@ -775,38 +697,9 @@ test('adds to existing style when includes string layered paddings', () => {
     </SafeAreaInsetsContext.Provider>
   )
 
-  const renderer = TestRenderer.create(<Component />)
-
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: 'component',
-    type: View,
-    props: {
-      style: [
-        [
-          [{ borderLeftColor: 'yellow', padding: '9' }, { paddingLeft: '12' }],
-          { backgroundColor: 'red', paddingHorizontal: '18' }
-        ],
-        {
-          paddingTop: 25,
-          paddingBottom: 69,
-          paddingLeft: 65,
-          paddingRight: 71
-        }
-      ],
-      pointerEvents: 'box-none',
-      testID: 'Example',
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: 'Example Child'
-        }
-      })
-    }
-  })
-
-  renderer.unmount()
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "padding" style.')
 })
 
 test('adds to existing style when includes number layered paddings', () => {

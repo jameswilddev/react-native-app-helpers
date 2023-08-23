@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import { isRenderedByReact } from '../../utilities/isRenderedByReact'
 import type { HeaderBodyFooterProps } from '../../types/HeaderBodyFooterProps'
 
-const wrappingViewBase = {
+const wrappingViewBase: { readonly width: '100%', readonly height: '100%' } = {
   width: '100%',
   height: '100%'
 }

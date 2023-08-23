@@ -1,4 +1,4 @@
-import * as uuid from 'uuid'
+import { randomUUID } from 'crypto'
 import { StateStore } from '../../..'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -60,7 +60,7 @@ test('allows a store to be loaded and read from', async () => {
   const onSet = jest.fn()
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   const output = store.get()
 
   expect(output).toEqual({ testKey: 'Test Value A' })
@@ -75,7 +75,7 @@ test('allows a store to be loaded, written to and read from', async () => {
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   store.set({ testKey: 'Test Value B' })
   const output = store.get()
 
@@ -91,7 +91,7 @@ test('allows a store to be loaded, unloaded, loaded and read from', async () => 
   )
   const onSet = jest.fn()
   store.addListener('set', onSet)
-  const key = uuid.v4()
+  const key = randomUUID()
 
   await store.load(key)
   await store.unload()
@@ -109,7 +109,7 @@ test('allows a store to be loaded, written to, unloaded, loaded and read from', 
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
-  const key = uuid.v4()
+  const key = randomUUID()
 
   await store.load(key)
   store.set({ testKey: 'Test Value B' })
@@ -123,7 +123,7 @@ test('allows a store to be loaded, written to, unloaded, loaded and read from', 
 })
 
 test('does not discard content when versions match', async () => {
-  const key = uuid.v4()
+  const key = randomUUID()
 
   const firstStore = new StateStore<TestState>(
     { testKey: 'Test Value A' },
@@ -152,7 +152,7 @@ test('does not discard content when versions match', async () => {
 })
 
 test('discards content when versions do not match', async () => {
-  const key = uuid.v4()
+  const key = randomUUID()
 
   const firstStore = new StateStore<TestState>(
     { testKey: 'Test Value A' },
@@ -188,10 +188,10 @@ test('treats two separate async storage keys as separate stores', async () => {
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   store.set({ testKey: 'Test Value B' })
   await store.unload()
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   const output = store.get()
 
   expect(output).toEqual({ testKey: 'Test Value A' })
@@ -213,7 +213,7 @@ test('treats two separate class instances as having their own state', async () =
   const onSetB = jest.fn(() => storeB.get())
   storeB.addListener('set', onSetB)
 
-  await Promise.all([storeA.load(uuid.v4()), storeB.load(uuid.v4())])
+  await Promise.all([storeA.load(randomUUID()), storeB.load(randomUUID())])
   storeA.set({ testKey: 'Test Value C' })
   storeB.set({ testKey: 'Test Value D' })
   const outputA = storeA.get()
@@ -234,7 +234,7 @@ test('allows a store to be loaded, written to twice in rapid succession and read
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
-  const key = uuid.v4()
+  const key = randomUUID()
 
   await store.load(key)
   store.set({ testKey: 'Test Value B' })
@@ -254,7 +254,7 @@ test('allows a store to be loaded, written to twice and unloaded in rapid succes
   )
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
-  const key = uuid.v4()
+  const key = randomUUID()
 
   await store.load(key)
   store.set({ testKey: 'Test Value B' })
@@ -274,7 +274,7 @@ test('works as expected without event listeners', async () => {
     { testKey: 'Test Value A' },
     'Test Version A'
   )
-  const key = uuid.v4()
+  const key = randomUUID()
 
   await store.load(key)
   store.set({ testKey: 'Test Value B' })
@@ -296,7 +296,7 @@ test('works as expected with multiple event listeners', async () => {
   store.addListener('set', onSetB)
   const onSetC = jest.fn(() => store.get())
   store.addListener('set', onSetC)
-  const key = uuid.v4()
+  const key = randomUUID()
 
   await store.load(key)
   store.set({ testKey: 'Test Value B' })
@@ -325,7 +325,7 @@ test('allows removal of event listeners', async () => {
   const onSetC = jest.fn(() => store.get())
   store.addListener('set', onSetC)
   store.removeListener('set', onSetB)
-  const key = uuid.v4()
+  const key = randomUUID()
 
   await store.load(key)
   store.set({ testKey: 'Test Value B' })
@@ -349,9 +349,9 @@ test('throws an error when loading a loading store', async () => {
   const onSet = jest.fn()
   store.addListener('set', onSet)
 
-  void store.load(uuid.v4())
+  void store.load(randomUUID())
 
-  const promise = store.load(uuid.v4())
+  const promise = store.load(randomUUID())
 
   await expect(promise).rejects.toEqual(
     new Error('The state store is already loading.')
@@ -367,7 +367,7 @@ test('throws an error when getting from a loading store', async () => {
   const onSet = jest.fn()
   store.addListener('set', onSet)
 
-  void store.load(uuid.v4())
+  void store.load(randomUUID())
   expect(() => {
     store.get()
   }).toThrowError('The state store is currently loading.')
@@ -383,7 +383,7 @@ test('throws an error when setting a value in a loading store', async () => {
   const onSet = jest.fn()
   store.addListener('set', onSet)
 
-  void store.load(uuid.v4())
+  void store.load(randomUUID())
   expect(() => {
     store.set({ testKey: 'Test Value B' })
   }).toThrowError('The state store is currently loading.')
@@ -399,7 +399,7 @@ test('throws an error when unloading a loading store', async () => {
   const onSet = jest.fn()
   store.addListener('set', onSet)
 
-  void store.load(uuid.v4())
+  void store.load(randomUUID())
   const promise = store.unload()
 
   await expect(promise).rejects.toEqual(
@@ -416,8 +416,8 @@ test('throws an error when loading a loaded store', async () => {
   const onSet = jest.fn()
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
-  const promise = store.load(uuid.v4())
+  await store.load(randomUUID())
+  const promise = store.load(randomUUID())
 
   await expect(promise).rejects.toEqual(
     new Error('The state store is already loaded.')
@@ -433,10 +433,10 @@ test('throws an error when loading an unloading store', async () => {
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   store.set({ testKey: 'Test Value B' })
   void store.unload()
-  const promise = store.load(uuid.v4())
+  const promise = store.load(randomUUID())
 
   await expect(promise).rejects.toEqual(
     new Error('The state store is currently unloading.')
@@ -453,7 +453,7 @@ test('throws an error when getting from an unloading store', async () => {
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   store.set({ testKey: 'Test Value B' })
   void store.unload()
   expect(() => {
@@ -472,7 +472,7 @@ test('throws an error when setting a value in an unloading store', async () => {
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   store.set({ testKey: 'Test Value B' })
   void store.unload()
   expect(() => {
@@ -491,7 +491,7 @@ test('throws an error when unloading an unloading store', async () => {
   const onSet = jest.fn(() => store.get())
   store.addListener('set', onSet)
 
-  await store.load(uuid.v4())
+  await store.load(randomUUID())
   store.set({ testKey: 'Test Value B' })
   void store.unload()
   const promise = store.unload()

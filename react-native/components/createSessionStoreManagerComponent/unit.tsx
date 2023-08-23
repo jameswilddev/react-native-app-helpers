@@ -1,4 +1,4 @@
-import * as uuid from 'uuid'
+import { randomUUID } from 'crypto'
 import * as React from 'react'
 import { Button, Text } from 'react-native'
 import * as TestRenderer from 'react-test-renderer'
@@ -8,7 +8,7 @@ import { createSessionStoreManagerComponent, SessionStore } from '../../..'
 type TestSession = { readonly value: number }
 
 test('displays the loading screen', async () => {
-  const sessionStore = new SessionStore<TestSession>({ value: 5 }, uuid.v4())
+  const sessionStore = new SessionStore<TestSession>({ value: 5 }, randomUUID())
   const SessionStoreManager = createSessionStoreManagerComponent(sessionStore)
 
   const renderer = TestRenderer.create(
@@ -45,7 +45,7 @@ test('displays the loading screen', async () => {
 })
 
 test('shows the ready screen once given time to load', async () => {
-  const sessionStore = new SessionStore<TestSession>({ value: 5 }, uuid.v4())
+  const sessionStore = new SessionStore<TestSession>({ value: 5 }, randomUUID())
   const SessionStoreManager = createSessionStoreManagerComponent(sessionStore)
 
   const renderer = TestRenderer.create(
@@ -84,7 +84,7 @@ test('shows the ready screen once given time to load', async () => {
 })
 
 test('re-renders when the session is changed externally once', async () => {
-  const sessionStore = new SessionStore<TestSession>({ value: 5 }, uuid.v4())
+  const sessionStore = new SessionStore<TestSession>({ value: 5 }, randomUUID())
   const SessionStoreManager = createSessionStoreManagerComponent(sessionStore)
 
   const renderer = TestRenderer.create(
@@ -124,7 +124,7 @@ test('re-renders when the session is changed externally once', async () => {
 })
 
 test('re-renders when the session is changed externally twice', async () => {
-  const sessionStore = new SessionStore<TestSession>({ value: 5 }, uuid.v4())
+  const sessionStore = new SessionStore<TestSession>({ value: 5 }, randomUUID())
   const SessionStoreManager = createSessionStoreManagerComponent(sessionStore)
 
   const renderer = TestRenderer.create(
@@ -165,7 +165,7 @@ test('re-renders when the session is changed externally twice', async () => {
 })
 
 test('re-renders when the session is changed internally once', async () => {
-  const sessionStore = new SessionStore<TestSession>({ value: 5 }, uuid.v4())
+  const sessionStore = new SessionStore<TestSession>({ value: 5 }, randomUUID())
   const SessionStoreManager = createSessionStoreManagerComponent(sessionStore)
 
   const renderer = TestRenderer.create(
@@ -207,7 +207,7 @@ test('re-renders when the session is changed internally once', async () => {
 })
 
 test('re-renders when the session is changed internally twice', async () => {
-  const sessionStore = new SessionStore<TestSession>({ value: 5 }, uuid.v4())
+  const sessionStore = new SessionStore<TestSession>({ value: 5 }, randomUUID())
   const SessionStoreManager = createSessionStoreManagerComponent(sessionStore)
 
   const renderer = TestRenderer.create(

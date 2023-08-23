@@ -109,20 +109,20 @@ jest.mock('expo-image-picker', () => {
 })
 
 jest.mock('expo-crypto', () => {
-  const uuid = jest.requireActual('uuid')
+  const crypto = jest.requireActual('crypto')
 
   return {
-    randomUUID: () => uuid.v4()
+    randomUUID: () => crypto.randomUUID()
   }
 })
 
 jest.mock('expo-file-system', () => {
-  const uuid = jest.requireActual('uuid')
+  const crypto = jest.requireActual('crypto')
   const fs = jest.requireActual('fs')
   const os = jest.requireActual('os')
   const path = jest.requireActual('path')
 
-  const documentDirectory = path.join(os.tmpdir(), uuid.v4())
+  const documentDirectory = path.join(os.tmpdir(), crypto.randomUUID())
 
   function isError (error: unknown): error is NodeJS.ErrnoException {
     return (

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, View, type ViewStyle } from 'react-native'
 
-const base: { readonly width: string, readonly height: string } = {
+const base: { readonly width: '100%', readonly height: '100%' } = {
   width: '100%',
   height: '100%'
 }

@@ -153,7 +153,7 @@ export class Request implements RequestInterface {
 
   private requestBodyBody (
     requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody
-  ): null | BodyInit_ {
+  ): null | BodyInit {
     switch (requestBody.type) {
       case 'empty':
       case 'file':

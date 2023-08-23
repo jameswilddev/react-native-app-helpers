@@ -4,7 +4,6 @@ import { flattenRenderedToArray } from '../../utilities/flattenRenderedToArray'
 import type { SplitButtonStyle } from '../../types/SplitButtonStyle'
 import type { SplitButtonStateStyle } from '../../types/SplitButtonStateStyle'
 import { Hitbox } from '../Hitbox'
-import { isRenderedByReact } from '../../utilities/isRenderedByReact'
 
 const createSingleButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
@@ -54,7 +53,7 @@ const createLeftButtonHitboxStyleInstance = (
     splitButtonStateStyle
   )
 
-  if (isRenderedByReact(output.borderWidth)) {
+  if (output.borderWidth !== undefined) {
     output.borderRightWidth = 0
   }
 
@@ -64,7 +63,7 @@ const createLeftButtonHitboxStyleInstance = (
     delete output.borderRadius
   }
 
-  if (isRenderedByReact(output.margin)) {
+  if (output.margin !== undefined) {
     output.marginRight = 0
   }
 
@@ -86,7 +85,7 @@ const createMiddleButtonHitboxStyleInstance = (
     delete output.borderWidth
   }
 
-  if (isRenderedByReact(output.margin)) {
+  if (output.margin !== undefined) {
     output.marginVertical = output.margin
     delete output.margin
   }
@@ -105,7 +104,7 @@ const createRightButtonHitboxStyleInstance = (
     splitButtonStateStyle
   )
 
-  if (isRenderedByReact(output.borderWidth)) {
+  if (output.borderWidth !== undefined) {
     output.borderLeftWidth = 0
   }
 
@@ -115,7 +114,7 @@ const createRightButtonHitboxStyleInstance = (
     delete output.borderRadius
   }
 
-  if (isRenderedByReact(output.margin)) {
+  if (output.margin !== undefined) {
     output.marginLeft = 0
   }
 
