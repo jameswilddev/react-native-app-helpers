@@ -631,6 +631,78 @@ test('starts reloading when the state key changes to another value during loadin
   await stateStore.unload()
 })
 
+test('starts reloading when the state key changes to another value during loading', async () => {
+  const stateKeyA = randomUUID()
+  const stateKeyB = randomUUID()
+  const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
+  await stateStore.load(stateKeyB)
+  stateStore.set({ value: 10 })
+  await stateStore.unload()
+  const StateStoreManager = createStateStoreManagerComponent(stateStore)
+
+  const renderer = TestRenderer.create(
+    <StateStoreManager
+      stateKey={stateKeyA}
+      unloaded={<Text>Unloaded</Text>}
+      loading={<Text>Loading</Text>}
+      ready={(state, setState) => (
+        <Button
+          title={`State contains ${state.value}`}
+          onPress={() => {
+            setState({ value: state.value + 1 })
+          }}
+        />
+      )}
+      unloading={<Text>Loading</Text>}
+    />
+  )
+
+  void TestRenderer.act(() => {
+    renderer.update(
+      <StateStoreManager
+        stateKey={stateKeyB}
+        unloaded={<Text>Unloaded</Text>}
+        loading={<Text>Loading</Text>}
+        ready={(state, setState) => (
+          <Button
+            title={`State contains ${state.value}`}
+            onPress={() => {
+              setState({ value: state.value + 1 })
+            }}
+          />
+        )}
+        unloading={<Text>Unloading</Text>}
+      />
+    )
+  })
+
+  await TestRenderer.act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  })
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      props: expect.objectContaining({
+        children: 'Loading'
+      })
+    })
+  )
+
+  renderer.unmount()
+
+  await TestRenderer.act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  })
+
+  await stateStore.load(stateKeyA)
+  expect(stateStore.get()).toEqual({ value: 5 })
+  await stateStore.unload()
+
+  await stateStore.load(stateKeyB)
+  expect(stateStore.get()).toEqual({ value: 10 })
+  await stateStore.unload()
+})
+
 test('fully reloads when the state key changes to another value during loading', async () => {
   const stateKeyA = randomUUID()
   const stateKeyB = randomUUID()
@@ -674,6 +746,10 @@ test('fully reloads when the state key changes to another value during loading',
         unloading={<Text>Unloading</Text>}
       />
     )
+  })
+
+  await TestRenderer.act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 250))
   })
 
   await TestRenderer.act(async () => {
@@ -775,6 +851,82 @@ test('starts reloading when the state key changes to another value after loading
   await stateStore.unload()
 })
 
+test('starts reloading when the state key changes to another value after loading', async () => {
+  const stateKeyA = randomUUID()
+  const stateKeyB = randomUUID()
+  const stateStore = new StateStore<TestState>({ value: 5 }, 'Test Version A')
+  await stateStore.load(stateKeyB)
+  stateStore.set({ value: 10 })
+  await stateStore.unload()
+  const StateStoreManager = createStateStoreManagerComponent(stateStore)
+
+  const renderer = TestRenderer.create(
+    <StateStoreManager
+      stateKey={stateKeyA}
+      unloaded={<Text>Unloaded</Text>}
+      loading={<Text>Loading</Text>}
+      ready={(state, setState) => (
+        <Button
+          title={`State contains ${state.value}`}
+          onPress={() => {
+            setState({ value: state.value + 1 })
+          }}
+        />
+      )}
+      unloading={<Text>Loading</Text>}
+    />
+  )
+
+  await TestRenderer.act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  })
+
+  void TestRenderer.act(() => {
+    renderer.update(
+      <StateStoreManager
+        stateKey={stateKeyB}
+        unloaded={<Text>Unloaded</Text>}
+        loading={<Text>Loading</Text>}
+        ready={(state, setState) => (
+          <Button
+            title={`State contains ${state.value}`}
+            onPress={() => {
+              setState({ value: state.value + 1 })
+            }}
+          />
+        )}
+        unloading={<Text>Unloading</Text>}
+      />
+    )
+  })
+
+  await TestRenderer.act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  })
+
+  expect(renderer.toTree()?.rendered).toEqual(
+    expect.objectContaining({
+      props: expect.objectContaining({
+        children: 'Loading'
+      })
+    })
+  )
+
+  renderer.unmount()
+
+  await TestRenderer.act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  })
+
+  await stateStore.load(stateKeyA)
+  expect(stateStore.get()).toEqual({ value: 5 })
+  await stateStore.unload()
+
+  await stateStore.load(stateKeyB)
+  expect(stateStore.get()).toEqual({ value: 10 })
+  await stateStore.unload()
+})
+
 test('fully reloads when the state key changes to another value after loading', async () => {
   const stateKeyA = randomUUID()
   const stateKeyB = randomUUID()
@@ -822,6 +974,10 @@ test('fully reloads when the state key changes to another value after loading', 
         unloading={<Text>Unloading</Text>}
       />
     )
+  })
+
+  await TestRenderer.act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 250))
   })
 
   await TestRenderer.act(async () => {
