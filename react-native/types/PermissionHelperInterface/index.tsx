@@ -1,4 +1,4 @@
-import type * as Permissions from "expo-permissions";
+import type * as Permissions from 'expo-permissions'
 
 /**
  * The methods made available by the PermissionHelper implementation.
@@ -14,9 +14,9 @@ export interface PermissionHelperInterface {
    *                    for some permissions, such as the camera roll, this
    *                    might only grant access to a small subset of resources.
    */
-  acquire(
-    permissions: ReadonlyArray<Permissions.PermissionType>,
-    onFailure: (showSettingsScreen: () => void) => Promise<void>,
+  acquire: (
+    permissions: readonly Permissions.PermissionType[],
+    onFailure: (showSettingsScreen: () => Promise<void>) => Promise<void>,
     onSuccess: () => Promise<void>
-  ): Promise<void>;
+  ) => Promise<void>
 }

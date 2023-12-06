@@ -1,9 +1,9 @@
-import * as React from "react";
-import { View, Text } from "react-native";
-import { Row } from "../../..";
-import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import { Row } from '../../..'
+import { unwrapRenderedFunctionComponent } from '../../utilities/unwrapRenderedFunctionComponent'
 
-test(`renders as expected when height fits content and horizontal distribution is left and vertical alignment is top`, () => {
+test('renders as expected when height fits content and horizontal distribution is left and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -12,19 +12,19 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, flexDirection: `row`, alignItems: `flex-start` }}
+      style={{ width: '100%', flexDirection: 'row', alignItems: 'flex-start' }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is left and vertical alignment is centered`, () => {
+test('renders as expected when height fits content and horizontal distribution is left and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -33,19 +33,19 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, flexDirection: `row`, alignItems: `center` }}
+      style={{ width: '100%', flexDirection: 'row', alignItems: 'center' }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is left and vertical alignment is bottom`, () => {
+test('renders as expected when height fits content and horizontal distribution is left and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -54,19 +54,19 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, flexDirection: `row`, alignItems: `flex-end` }}
+      style={{ width: '100%', flexDirection: 'row', alignItems: 'flex-end' }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is left and vertical alignment is stretched`, () => {
+test('renders as expected when height fits content and horizontal distribution is left and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -75,19 +75,19 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, flexDirection: `row` }}
+      style={{ width: '100%', flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is centered and vertical alignment is top`, () => {
+test('renders as expected when height fits content and horizontal distribution is centered and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -96,24 +96,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `center`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is centered and vertical alignment is centered`, () => {
+test('renders as expected when height fits content and horizontal distribution is centered and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -122,24 +122,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `center`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is centered and vertical alignment is bottom`, () => {
+test('renders as expected when height fits content and horizontal distribution is centered and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -148,24 +148,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `center`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is centered and vertical alignment is stretched`, () => {
+test('renders as expected when height fits content and horizontal distribution is centered and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -174,19 +174,19 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, flexDirection: `row`, justifyContent: `center` }}
+      style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is right and vertical alignment is top`, () => {
+test('renders as expected when height fits content and horizontal distribution is right and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -195,24 +195,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is right and vertical alignment is centered`, () => {
+test('renders as expected when height fits content and horizontal distribution is right and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -221,24 +221,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is right and vertical alignment is bottom`, () => {
+test('renders as expected when height fits content and horizontal distribution is right and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -247,24 +247,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is right and vertical alignment is stretched`, () => {
+test('renders as expected when height fits content and horizontal distribution is right and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -273,23 +273,23 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is top`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -298,24 +298,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is centered`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -324,24 +324,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is bottom`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -350,24 +350,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is stretched`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -376,23 +376,23 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is top`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -401,24 +401,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `space-between`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is centered`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -427,24 +427,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `space-between`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is bottom`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -453,24 +453,24 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `space-between`,
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is stretched`, () => {
+test('renders as expected when height fits content and horizontal distribution is spaced to ends and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fitsContent"
@@ -479,23 +479,23 @@ test(`renders as expected when height fits content and horizontal distribution i
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is left and vertical alignment is top`, () => {
+test('renders as expected when height fills container and horizontal distribution is left and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -504,24 +504,24 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is left and vertical alignment is centered`, () => {
+test('renders as expected when height fills container and horizontal distribution is left and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -530,24 +530,24 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is left and vertical alignment is bottom`, () => {
+test('renders as expected when height fills container and horizontal distribution is left and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -556,24 +556,24 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is left and vertical alignment is stretched`, () => {
+test('renders as expected when height fills container and horizontal distribution is left and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -582,19 +582,19 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is centered and vertical alignment is top`, () => {
+test('renders as expected when height fills container and horizontal distribution is centered and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -603,25 +603,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `center`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is centered and vertical alignment is centered`, () => {
+test('renders as expected when height fills container and horizontal distribution is centered and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -630,25 +630,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `center`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is centered and vertical alignment is bottom`, () => {
+test('renders as expected when height fills container and horizontal distribution is centered and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -657,25 +657,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `center`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is centered and vertical alignment is stretched`, () => {
+test('renders as expected when height fills container and horizontal distribution is centered and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -684,24 +684,24 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        justifyContent: `center`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is right and vertical alignment is top`, () => {
+test('renders as expected when height fills container and horizontal distribution is right and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -710,25 +710,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is right and vertical alignment is centered`, () => {
+test('renders as expected when height fills container and horizontal distribution is right and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -737,25 +737,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is right and vertical alignment is bottom`, () => {
+test('renders as expected when height fills container and horizontal distribution is right and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -764,25 +764,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is right and vertical alignment is stretched`, () => {
+test('renders as expected when height fills container and horizontal distribution is right and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -791,24 +791,24 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is top`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -817,25 +817,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is centered`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -844,25 +844,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is bottom`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -871,25 +871,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is stretched`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -898,24 +898,24 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        justifyContent: `space-evenly`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is top`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is top', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -924,25 +924,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-start`,
-        justifyContent: `space-between`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is centered`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is centered', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -951,25 +951,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `center`,
-        justifyContent: `space-between`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is bottom`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is bottom', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -978,25 +978,25 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        alignItems: `flex-end`,
-        justifyContent: `space-between`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is stretched`, () => {
+test('renders as expected when height fills container and horizontal distribution is spaced to ends and vertical alignment is stretched', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -1005,24 +1005,24 @@ test(`renders as expected when height fills container and horizontal distributio
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})
 
-test(`renders as expected a second time`, () => {
+test('renders as expected a second time', () => {
   const rendered = (
     <Row
       height="fillsContainer"
@@ -1031,19 +1031,19 @@ test(`renders as expected a second time`, () => {
     >
       <Text>Test Content</Text>
     </Row>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
       <Text>Test Content</Text>
     </View>
-  );
-});
+  )
+})

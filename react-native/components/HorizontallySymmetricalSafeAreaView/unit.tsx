@@ -1,11 +1,11 @@
-import * as React from "react";
-import { RegisteredStyle, Text, View, ViewStyle } from "react-native";
-import { SafeAreaInsetsContext } from "react-native-safe-area-context";
-import { HorizontallySymmetricalSafeAreaView } from "../../..";
-import * as TestRenderer from "react-test-renderer";
+import * as React from 'react'
+import { type RegisteredStyle, Text, View, type ViewStyle } from 'react-native'
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
+import { HorizontallySymmetricalSafeAreaView } from '../../..'
+import * as TestRenderer from 'react-test-renderer'
 
-test(`selects left inset when largest`, () => {
-  const Component = () => (
+test('selects left inset when largest', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -19,37 +19,37 @@ test(`selects left inset when largest`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
         paddingBottom: 60,
-        paddingHorizontal: 53,
+        paddingHorizontal: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`selects right inset when largest`, () => {
-  const Component = () => (
+test('selects right inset when largest', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 24, right: 53 }}
     >
@@ -63,37 +63,37 @@ test(`selects right inset when largest`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
         paddingBottom: 60,
-        paddingHorizontal: 53,
+        paddingHorizontal: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of top inset through omission`, () => {
-  const Component = () => (
+test('allows disabling of top inset through omission', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -101,36 +101,36 @@ test(`allows disabling of top inset through omission`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingBottom: 60,
-        paddingHorizontal: 53,
+        paddingHorizontal: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of bottom inset through omission`, () => {
-  const Component = () => (
+test('allows disabling of bottom inset through omission', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -138,36 +138,36 @@ test(`allows disabling of bottom inset through omission`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
-        paddingHorizontal: 53,
+        paddingHorizontal: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of left inset through omission`, () => {
-  const Component = () => (
+test('allows disabling of left inset through omission', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -175,37 +175,37 @@ test(`allows disabling of left inset through omission`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
         paddingBottom: 60,
-        paddingRight: 53,
+        paddingRight: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of right inset through omission`, () => {
-  const Component = () => (
+test('allows disabling of right inset through omission', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -213,37 +213,37 @@ test(`allows disabling of right inset through omission`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
         paddingBottom: 60,
-        paddingLeft: 53,
+        paddingLeft: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of top inset through false`, () => {
-  const Component = () => (
+test('allows disabling of top inset through false', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -257,36 +257,36 @@ test(`allows disabling of top inset through false`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingBottom: 60,
-        paddingHorizontal: 53,
+        paddingHorizontal: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of bottom inset through false`, () => {
-  const Component = () => (
+test('allows disabling of bottom inset through false', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -300,36 +300,36 @@ test(`allows disabling of bottom inset through false`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
-        paddingHorizontal: 53,
+        paddingHorizontal: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of left inset through false`, () => {
-  const Component = () => (
+test('allows disabling of left inset through false', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -343,37 +343,37 @@ test(`allows disabling of left inset through false`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
         paddingBottom: 60,
-        paddingRight: 53,
+        paddingRight: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`allows disabling of right inset through false`, () => {
-  const Component = () => (
+test('allows disabling of right inset through false', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -387,37 +387,37 @@ test(`allows disabling of right inset through false`, () => {
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: {
         paddingTop: 16,
         paddingBottom: 60,
-        paddingLeft: 53,
+        paddingLeft: 53
       },
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`adds to existing style when does not include paddings`, () => {
-  const Component = () => (
+test('adds to existing style when does not include paddings', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -427,45 +427,45 @@ test(`adds to existing style when does not include paddings`, () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: `red` }}
+        style={{ backgroundColor: 'red' }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
-        { backgroundColor: `red` },
+        { backgroundColor: 'red' },
         {
           paddingTop: 16,
           paddingBottom: 60,
-          paddingHorizontal: 53,
-        },
+          paddingHorizontal: 53
+        }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`adds to existing style when includes string paddings`, () => {
-  const Component = () => (
+test('rejects non-numeric paddings', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -475,45 +475,67 @@ test(`adds to existing style when includes string paddings`, () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: `red`, padding: `12` }}
+        style={{ backgroundColor: 'red', padding: '12%' }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "padding" style.')
+})
 
-  const renderer = TestRenderer.create(<Component />);
+test('adds to existing style when includes number paddings', () => {
+  const Component: React.FunctionComponent = () => (
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <HorizontallySymmetricalSafeAreaView
+        top
+        bottom
+        left
+        right
+        testID="Example"
+        style={{ backgroundColor: 'red', padding: 12 }}
+      >
+        <Text>Example Child</Text>
+      </HorizontallySymmetricalSafeAreaView>
+    </SafeAreaInsetsContext.Provider>
+  )
+
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
-        { backgroundColor: `red`, padding: `12` },
+        { backgroundColor: 'red', padding: 12 },
         {
           paddingTop: 28,
           paddingBottom: 72,
-          paddingHorizontal: 65,
-        },
+          paddingHorizontal: 65
+        }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`adds to existing style when includes number paddings`, () => {
-  const Component = () => (
+test('rejects non-numeric string axis paddings', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -523,45 +545,67 @@ test(`adds to existing style when includes number paddings`, () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: `red`, padding: 12 }}
+        style={{ backgroundColor: 'red', paddingVertical: '12%' }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "paddingVertical" style.')
+})
 
-  const renderer = TestRenderer.create(<Component />);
+test('adds to existing style when includes number axis paddings', () => {
+  const Component: React.FunctionComponent = () => (
+    <SafeAreaInsetsContext.Provider
+      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
+    >
+      <HorizontallySymmetricalSafeAreaView
+        top
+        bottom
+        left
+        right
+        testID="Example"
+        style={{ backgroundColor: 'red', paddingVertical: 12 }}
+      >
+        <Text>Example Child</Text>
+      </HorizontallySymmetricalSafeAreaView>
+    </SafeAreaInsetsContext.Provider>
+  )
+
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
-        { backgroundColor: `red`, padding: 12 },
+        { backgroundColor: 'red', paddingVertical: 12 },
         {
           paddingTop: 28,
           paddingBottom: 72,
-          paddingHorizontal: 65,
-        },
+          paddingHorizontal: 53
+        }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`adds to existing style when includes string axis paddings`, () => {
-  const Component = () => (
+test('rejects non-numeric string direction paddings', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -571,45 +615,20 @@ test(`adds to existing style when includes string axis paddings`, () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: `red`, paddingVertical: `12` }}
+        style={{ backgroundColor: 'red', paddingLeft: '12%' }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "paddingLeft" style.')
+})
 
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: `component`,
-    type: View,
-    props: {
-      style: [
-        { backgroundColor: `red`, paddingVertical: `12` },
-        {
-          paddingTop: 28,
-          paddingBottom: 72,
-          paddingHorizontal: 53,
-        },
-      ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
-
-  renderer.unmount();
-});
-
-test(`adds to existing style when includes number axis paddings`, () => {
-  const Component = () => (
+test('adds to existing style when includes number direction paddings', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -619,143 +638,46 @@ test(`adds to existing style when includes number axis paddings`, () => {
         left
         right
         testID="Example"
-        style={{ backgroundColor: `red`, paddingVertical: 12 }}
+        style={{ backgroundColor: 'red', paddingLeft: 12 }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
-
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: `component`,
-    type: View,
-    props: {
-      style: [
-        { backgroundColor: `red`, paddingVertical: 12 },
-        {
-          paddingTop: 28,
-          paddingBottom: 72,
-          paddingHorizontal: 53,
-        },
-      ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
-
-  renderer.unmount();
-});
-
-test(`adds to existing style when includes string direction paddings`, () => {
-  const Component = () => (
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <HorizontallySymmetricalSafeAreaView
-        top
-        bottom
-        left
-        right
-        testID="Example"
-        style={{ backgroundColor: `red`, paddingLeft: `12` }}
-      >
-        <Text>Example Child</Text>
-      </HorizontallySymmetricalSafeAreaView>
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
-        { backgroundColor: `red`, paddingLeft: `12` },
+        { backgroundColor: 'red', paddingLeft: 12 },
         {
           paddingTop: 16,
           paddingBottom: 60,
           paddingLeft: 65,
-          paddingRight: 53,
-        },
+          paddingRight: 53
+        }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`adds to existing style when includes number direction paddings`, () => {
-  const Component = () => (
-    <SafeAreaInsetsContext.Provider
-      value={{ top: 16, bottom: 60, left: 53, right: 24 }}
-    >
-      <HorizontallySymmetricalSafeAreaView
-        top
-        bottom
-        left
-        right
-        testID="Example"
-        style={{ backgroundColor: `red`, paddingLeft: 12 }}
-      >
-        <Text>Example Child</Text>
-      </HorizontallySymmetricalSafeAreaView>
-    </SafeAreaInsetsContext.Provider>
-  );
-
-  const renderer = TestRenderer.create(<Component />);
-
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: `component`,
-    type: View,
-    props: {
-      style: [
-        { backgroundColor: `red`, paddingLeft: 12 },
-        {
-          paddingTop: 16,
-          paddingBottom: 60,
-          paddingLeft: 65,
-          paddingRight: 53,
-        },
-      ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
-
-  renderer.unmount();
-});
-
-test(`adds to existing style when includes string layered paddings`, () => {
-  const Component = () => (
+test('rejects non-numeric string layered paddings', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -766,51 +688,22 @@ test(`adds to existing style when includes string layered paddings`, () => {
         right
         testID="Example"
         style={[
-          [{ borderLeftColor: `yellow`, padding: `9` }, { paddingLeft: `12` }],
-          { backgroundColor: `red`, paddingHorizontal: `18` },
+          [{ borderLeftColor: 'yellow', padding: '9%' }, { paddingLeft: '12%' }],
+          { backgroundColor: 'red', paddingHorizontal: '18%' }
         ]}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  expect(() => {
+    TestRenderer.create(<Component />)
+  }).toThrowError('Only numbers, null or undefined are currently supported for a HorizontallySymmetricalSafeAreaView\'s "padding" style.')
+})
 
-  expect(
-    (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
-  ).toMatchObject({
-    nodeType: `component`,
-    type: View,
-    props: {
-      style: [
-        [
-          [{ borderLeftColor: `yellow`, padding: `9` }, { paddingLeft: `12` }],
-          { backgroundColor: `red`, paddingHorizontal: `18` },
-        ],
-        {
-          paddingTop: 25,
-          paddingBottom: 69,
-          paddingLeft: 65,
-          paddingRight: 71,
-        },
-      ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
-      children: expect.objectContaining({
-        type: Text,
-        props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
-
-  renderer.unmount();
-});
-
-test(`adds to existing style when includes number layered paddings`, () => {
-  const Component = () => (
+test('adds to existing style when includes number layered paddings', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 16, bottom: 60, left: 53, right: 24 }}
     >
@@ -821,51 +714,51 @@ test(`adds to existing style when includes number layered paddings`, () => {
         right
         testID="Example"
         style={[
-          [{ borderLeftColor: `yellow`, padding: 9 }, { paddingLeft: 12 }],
-          { backgroundColor: `red`, paddingHorizontal: 18 },
+          [{ borderLeftColor: 'yellow', padding: 9 }, { paddingLeft: 12 }],
+          { backgroundColor: 'red', paddingHorizontal: 18 }
         ]}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
         [
-          [{ borderLeftColor: `yellow`, padding: 9 }, { paddingLeft: 12 }],
-          { backgroundColor: `red`, paddingHorizontal: 18 },
+          [{ borderLeftColor: 'yellow', padding: 9 }, { paddingLeft: 12 }],
+          { backgroundColor: 'red', paddingHorizontal: 18 }
         ],
         {
           paddingTop: 25,
           paddingBottom: 69,
           paddingLeft: 65,
-          paddingRight: 71,
-        },
+          paddingRight: 71
+        }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`does not include its own style when it would have no effect`, () => {
-  const Component = () => (
+test('does not include its own style when it would have no effect', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 0, bottom: 0, left: 0, right: 0 }}
     >
@@ -876,43 +769,43 @@ test(`does not include its own style when it would have no effect`, () => {
         right
         testID="Example"
         style={[
-          [{ borderLeftColor: `yellow`, padding: 9 }, { paddingTop: 12 }],
-          { backgroundColor: `red`, paddingHorizontal: 18 },
+          [{ borderLeftColor: 'yellow', padding: 9 }, { paddingTop: 12 }],
+          { backgroundColor: 'red', paddingHorizontal: 18 }
         ]}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
-        [{ borderLeftColor: `yellow`, padding: 9 }, { paddingTop: 12 }],
-        { backgroundColor: `red`, paddingHorizontal: 18 },
+        [{ borderLeftColor: 'yellow', padding: 9 }, { paddingTop: 12 }],
+        { backgroundColor: 'red', paddingHorizontal: 18 }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`can simplify down to a basic padding`, () => {
-  const Component = () => (
+test('can simplify down to a basic padding', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 25, bottom: 25, left: 25, right: 21 }}
     >
@@ -922,43 +815,43 @@ test(`can simplify down to a basic padding`, () => {
         left
         right
         testID="Example"
-        style={{ borderLeftColor: `yellow`, padding: 9 }}
+        style={{ borderLeftColor: 'yellow', padding: 9 }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
-        { borderLeftColor: `yellow`, padding: 9 },
+        { borderLeftColor: 'yellow', padding: 9 },
         {
-          padding: 34,
-        },
+          padding: 34
+        }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`can simplify down to a vertical padding`, () => {
-  const Component = () => (
+test('can simplify down to a vertical padding', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 25, bottom: 25, left: 7, right: 3 }}
     >
@@ -969,48 +862,48 @@ test(`can simplify down to a vertical padding`, () => {
         right
         testID="Example"
         style={{
-          borderLeftColor: `yellow`,
+          borderLeftColor: 'yellow',
           paddingVertical: 9,
-          paddingLeft: 1,
+          paddingLeft: 1
         }}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
-  const renderer = TestRenderer.create(<Component />);
+  const renderer = TestRenderer.create(<Component />)
 
   expect(
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).rendered
   ).toMatchObject({
-    nodeType: `component`,
+    nodeType: 'component',
     type: View,
     props: {
       style: [
-        { borderLeftColor: `yellow`, paddingVertical: 9, paddingLeft: 1 },
+        { borderLeftColor: 'yellow', paddingVertical: 9, paddingLeft: 1 },
         {
           paddingVertical: 34,
           paddingLeft: 8,
-          paddingRight: 7,
-        },
+          paddingRight: 7
+        }
       ],
-      pointerEvents: `box-none`,
-      testID: `Example`,
+      pointerEvents: 'box-none',
+      testID: 'Example',
       children: expect.objectContaining({
         type: Text,
         props: {
-          children: `Example Child`,
-        },
-      }),
-    },
-  });
+          children: 'Example Child'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`throws an error when a registered style is used`, () => {
-  const Component = () => (
+test('throws an error when a registered style is used', () => {
+  const Component: React.FunctionComponent = () => (
     <SafeAreaInsetsContext.Provider
       value={{ top: 25, bottom: 25, left: 7, right: 3 }}
     >
@@ -1024,19 +917,19 @@ test(`throws an error when a registered style is used`, () => {
           { paddingVertical: 9 },
           1234 as unknown as RegisteredStyle<ViewStyle>,
           {
-            borderLeftColor: `yellow`,
-            paddingLeft: 1,
-          },
+            borderLeftColor: 'yellow',
+            paddingLeft: 1
+          }
         ]}
       >
         <Text>Example Child</Text>
       </HorizontallySymmetricalSafeAreaView>
     </SafeAreaInsetsContext.Provider>
-  );
+  )
 
   expect(() => {
-    TestRenderer.create(<Component />);
+    TestRenderer.create(<Component />)
   }).toThrowError(
-    `Registered styles cannot be used with HorizontallySymmetricalSafeAreaView.`
-  );
-});
+    'Registered styles cannot be used with HorizontallySymmetricalSafeAreaView.'
+  )
+})

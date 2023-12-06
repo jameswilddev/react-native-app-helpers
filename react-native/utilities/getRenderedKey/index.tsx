@@ -7,13 +7,13 @@ export const getRenderedKey = (
   element: undefined | React.ReactNode | JSX.Element
 ): null | string => {
   if (
-    typeof element === `object` &&
+    typeof element === 'object' &&
     element !== null &&
-    `key` in element &&
+    'key' in element &&
     element.key !== null
   ) {
-    return String(element.key);
+    return String(element.key)
   } else {
-    return null;
+    return null
   }
-};
+}

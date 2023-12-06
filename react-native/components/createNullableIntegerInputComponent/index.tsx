@@ -1,6 +1,7 @@
-import * as React from "react";
-import type { ControlStyle } from "../../..";
-import { createInputComponent } from "../createInputComponent";
+import * as React from 'react'
+import type { ControlStyle } from '../../types/ControlStyle'
+import type { NullableIntegerInputProps } from '../../types/NullableIntegerInputProps'
+import { createInputComponent } from '../createInputComponent'
 
 /**
  * Creates a new input component pre-configured as a nullable integer input.
@@ -28,72 +29,48 @@ export const createNullableIntegerInputComponent = (
   greaterThanOrEqualTo: null | number,
   lessThan: null | number,
   lessThanOrEqualTo: null | number,
-  alignment: `left` | `right`
-): React.FunctionComponent<{
-  /**
-   * The value to edit.  When undefined, it is treated as an invalid empty
-   * string.
-   */
-  readonly value: undefined | null | number;
-
-  /**
-   * Invoked when the user edits the text in the box.
-   * @param parsed   The value parsed, or undefined should it not be parseable.
-   * @param complete True when the user has finished editing, otherwise, false.
-   */
-  onChange(parsed: undefined | null | number, complete: boolean): void;
-
-  /**
-   * When true, the text box is rendered semi-transparently and does not accept
-   * focus or input.
-   */
-  readonly disabled?: undefined | boolean;
-
-  /**
-   * Text to be shown when no value has been entered.
-   */
-  readonly placeholder: string;
-}> => {
+  alignment: 'left' | 'right'
+): React.FunctionComponent<NullableIntegerInputProps> => {
   const NullableIntegerInputComponent = createInputComponent<
-    null | number,
-    null
+  null | number,
+  null
   >(
-    (value) => (value === null ? `` : String(value)),
+    (value) => (value === null ? '' : String(value)),
     (unparsed) => {
-      if (unparsed.trim() === ``) {
-        return null;
+      if (unparsed.trim() === '') {
+        return null
       } else if (/^\s*[+-]?\d+\.?\s*$/.test(unparsed)) {
-        const parsed = Number.parseInt(unparsed);
+        const parsed = Number.parseInt(unparsed)
 
         if (greaterThan !== null && parsed <= greaterThan) {
-          return undefined;
+          return undefined
         } else if (lessThan !== null && parsed >= lessThan) {
-          return undefined;
+          return undefined
         } else if (
           greaterThanOrEqualTo !== null &&
           parsed < greaterThanOrEqualTo
         ) {
-          return undefined;
+          return undefined
         } else if (lessThanOrEqualTo !== null && parsed > lessThanOrEqualTo) {
-          return undefined;
+          return undefined
         } else {
-          return parsed;
+          return parsed
         }
       } else {
-        return undefined;
+        return undefined
       }
     },
     controlStyle,
     false,
-    `off`,
-    `numeric`,
-    `none`,
+    'off',
+    'numeric',
+    'none',
     false,
     false,
     alignment
-  );
+  )
 
-  return ({ value, onChange, disabled, placeholder }) => (
+  const NullableIntegerInput: React.FunctionComponent<NullableIntegerInputProps> = ({ value, onChange, disabled, placeholder }) => (
     <NullableIntegerInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -107,5 +84,7 @@ export const createNullableIntegerInputComponent = (
         /* No-op. */
       }}
     />
-  );
-};
+  )
+
+  return NullableIntegerInput
+}

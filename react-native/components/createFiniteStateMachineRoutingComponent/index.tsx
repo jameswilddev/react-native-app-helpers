@@ -1,8 +1,8 @@
-import * as React from "react";
-import type { FunctionComponent } from "react";
-import type { RouteParameters } from "../../types/RouteParameters";
-import type { RouteTable } from "../../types/RouteTable";
-import type { FiniteStateMachineRouterState } from "../../types/FiniteStateMachineRouterState";
+import * as React from 'react'
+import type { FunctionComponent } from 'react'
+import type { RouteParameters } from '../../types/RouteParameters'
+import type { RouteTable } from '../../types/RouteTable'
+import type { FiniteStateMachineRoutingProps } from '../../types/FiniteStateMachineRoutingProps'
 
 /**
  * Creates a React component which renders a single route from state.
@@ -14,14 +14,13 @@ import type { FiniteStateMachineRouterState } from "../../types/FiniteStateMachi
  */
 export const createFiniteStateMachineRoutingComponent = <
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 >(
-  routeTable: RouteTable<TRouteParameters, TOtherProps>
-): FunctionComponent<
-  {
-    readonly routeState: FiniteStateMachineRouterState<TRouteParameters>;
-  } & TOtherProps
-> => {
-  return (props) =>
-    React.createElement(routeTable[props.routeState.key], props);
-};
+    routeTable: RouteTable<TRouteParameters, TOtherProps>
+  ): FunctionComponent<FiniteStateMachineRoutingProps<TRouteParameters, TOtherProps>> => {
+  // TODO: can we improve the types here?  Really shouldn't be force casting routes like this.
+  const FiniteStateMachineRouting: FunctionComponent<FiniteStateMachineRoutingProps<TRouteParameters, TOtherProps>> = (props) =>
+    React.createElement(routeTable[props.routeState.key] as unknown as React.FunctionComponent<FiniteStateMachineRoutingProps<TRouteParameters, TOtherProps>>, props)
+
+  return FiniteStateMachineRouting
+}

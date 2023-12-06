@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 /**
  * A React hook which returns a function which can be invoked to force a refresh
@@ -6,7 +6,7 @@ import * as React from "react";
  * @returns A function which can be invoked to force a refresh of the Component.
  */
 export const useRefresh = (): (() => void) => {
-  const [, refresh] = React.useReducer((x) => x + 1, 0);
+  const [, refresh] = React.useReducer((x) => x + 1, 0)
 
-  return refresh;
-};
+  return refresh
+}

@@ -1,20 +1,20 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import * as React from 'react'
+import { Text, View } from 'react-native'
 import {
   createSplitButtonComponent,
-  unwrapRenderedFunctionComponent,
-} from "../../..";
-import { Hitbox } from "../Hitbox";
+  unwrapRenderedFunctionComponent
+} from '../../..'
+import { Hitbox } from '../Hitbox'
 
-test(`renders as expected with one inactive button`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one inactive button', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -22,122 +22,122 @@ test(`renders as expected with one inactive button`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -145,58 +145,58 @@ test(`renders as expected with one inactive button`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`raises the change event when a single button is pressed`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('raises the change event when a single button is pressed', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -204,122 +204,122 @@ test(`raises the change event when a single button is pressed`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -327,25 +327,23 @@ test(`raises the change event when a single button is pressed`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][0].props.onPress();
+  unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
-  expect(onChange).toHaveBeenCalledTimes(1);
-  expect(onChange).toHaveBeenCalledWith(`Example Value B`);
-});
+  expect(onChange).toHaveBeenCalledTimes(1)
+  expect(onChange).toHaveBeenCalledWith('Example Value B')
+})
 
-test(`renders as expected with one active button`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one active button', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -353,122 +351,122 @@ test(`renders as expected with one active button`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -476,58 +474,58 @@ test(`renders as expected with one active button`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
             borderRadius: 23,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled button`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled button', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -535,122 +533,122 @@ test(`renders as expected with one disabled button`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -658,58 +656,58 @@ test(`renders as expected with one disabled button`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
             borderRadius: 19,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled and active button`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled and active button', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -717,122 +715,122 @@ test(`renders as expected with one disabled and active button`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -840,58 +838,58 @@ test(`renders as expected with one disabled and active button`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
             borderRadius: 44,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one inactive button without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one inactive button without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -899,122 +897,122 @@ test(`renders as expected with one inactive button without horizontal padding`, 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -1022,57 +1020,57 @@ test(`renders as expected with one inactive button without horizontal padding`, 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one active button without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one active button without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -1080,122 +1078,122 @@ test(`renders as expected with one active button without horizontal padding`, ()
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -1203,57 +1201,57 @@ test(`renders as expected with one active button without horizontal padding`, ()
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
             borderRadius: 23,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled button without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled button without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -1261,122 +1259,122 @@ test(`renders as expected with one disabled button without horizontal padding`, 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -1384,57 +1382,57 @@ test(`renders as expected with one disabled button without horizontal padding`, 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
             borderRadius: 19,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled and active button without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled and active button without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -1442,122 +1440,122 @@ test(`renders as expected with one disabled and active button without horizontal
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -1565,57 +1563,57 @@ test(`renders as expected with one disabled and active button without horizontal
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
             borderRadius: 44,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one inactive button without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one inactive button without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -1623,122 +1621,122 @@ test(`renders as expected with one inactive button without vertical padding`, ()
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -1746,57 +1744,57 @@ test(`renders as expected with one inactive button without vertical padding`, ()
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one active button without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one active button without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -1804,122 +1802,122 @@ test(`renders as expected with one active button without vertical padding`, () =
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -1927,57 +1925,57 @@ test(`renders as expected with one active button without vertical padding`, () =
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
             borderRadius: 23,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled button without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled button without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -1985,122 +1983,122 @@ test(`renders as expected with one disabled button without vertical padding`, ()
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -2108,57 +2106,57 @@ test(`renders as expected with one disabled button without vertical padding`, ()
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
             borderRadius: 19,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled and active button without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled and active button without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -2166,122 +2164,122 @@ test(`renders as expected with one disabled and active button without vertical p
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -2289,57 +2287,57 @@ test(`renders as expected with one disabled and active button without vertical p
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
             borderRadius: 44,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one inactive button without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one inactive button without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -2347,122 +2345,122 @@ test(`renders as expected with one inactive button without radius`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 0,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -2470,57 +2468,57 @@ test(`renders as expected with one inactive button without radius`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one active button without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one active button without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -2528,122 +2526,122 @@ test(`renders as expected with one active button without radius`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 0,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -2651,57 +2649,57 @@ test(`renders as expected with one active button without radius`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled button without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled button without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -2709,122 +2707,122 @@ test(`renders as expected with one disabled button without radius`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 0,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -2832,57 +2830,57 @@ test(`renders as expected with one disabled button without radius`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled and active button without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled and active button without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -2890,122 +2888,122 @@ test(`renders as expected with one disabled and active button without radius`, (
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 0,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -3013,57 +3011,57 @@ test(`renders as expected with one disabled and active button without radius`, (
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one inactive button without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one inactive button without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -3071,119 +3069,119 @@ test(`renders as expected with one inactive button without borders`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
-          border: null,
+          border: null
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -3191,56 +3189,56 @@ test(`renders as expected with one inactive button without borders`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderRadius: 15,
             margin: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one active button without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one active button without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -3248,119 +3246,119 @@ test(`renders as expected with one active button without borders`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
-          border: null,
+          border: null
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -3368,56 +3366,56 @@ test(`renders as expected with one active button without borders`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderRadius: 23,
             margin: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled button without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled button without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -3425,119 +3423,119 @@ test(`renders as expected with one disabled button without borders`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
-          border: null,
+          border: null
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -3545,56 +3543,56 @@ test(`renders as expected with one disabled button without borders`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderRadius: 19,
             margin: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one disabled and active button without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one disabled and active button without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -3602,119 +3600,119 @@ test(`renders as expected with one disabled and active button without borders`, 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
-          border: null,
-        },
+          border: null
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -3722,56 +3720,56 @@ test(`renders as expected with one disabled and active button without borders`, 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderRadius: 44,
             margin: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two inactive buttons`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two inactive buttons', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -3779,123 +3777,123 @@ test(`renders as expected with two inactive buttons`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -3906,39 +3904,39 @@ test(`renders as expected with two inactive buttons`, () => {
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -3948,48 +3946,48 @@ test(`renders as expected with two inactive buttons`, () => {
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -3997,123 +3995,123 @@ test(`renders as expected with two buttons, the left of which is active`, () => 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -4124,39 +4122,39 @@ test(`renders as expected with two buttons, the left of which is active`, () => 
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderWidth: 43,
             borderRightWidth: 0,
             borderTopLeftRadius: 33,
             borderBottomLeftRadius: 33,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             margin: -36,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -4166,48 +4164,48 @@ test(`renders as expected with two buttons, the left of which is active`, () => 
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -4215,123 +4213,123 @@ test(`renders as expected with two buttons, the left of which is disabled`, () =
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -4342,39 +4340,39 @@ test(`renders as expected with two buttons, the left of which is disabled`, () =
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderWidth: 1,
             borderRightWidth: 0,
             borderTopLeftRadius: 72,
             borderBottomLeftRadius: 72,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             margin: 6,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -4384,48 +4382,48 @@ test(`renders as expected with two buttons, the left of which is disabled`, () =
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled and active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled and active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -4433,123 +4431,123 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -4560,39 +4558,39 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderWidth: 9,
             borderRightWidth: 0,
             borderTopLeftRadius: 7,
             borderBottomLeftRadius: 7,
-            borderColor: `tan`,
+            borderColor: 'tan',
             margin: -2,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -4602,48 +4600,48 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -4651,123 +4649,123 @@ test(`renders as expected with two buttons, the right of which is active`, () =>
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -4778,39 +4776,39 @@ test(`renders as expected with two buttons, the right of which is active`, () =>
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -4820,48 +4818,48 @@ test(`renders as expected with two buttons, the right of which is active`, () =>
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderWidth: 76,
             borderLeftWidth: 0,
             borderTopRightRadius: 52,
             borderBottomRightRadius: 52,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -4869,123 +4867,123 @@ test(`renders as expected with two buttons, the right of which is disabled`, () 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -4996,39 +4994,39 @@ test(`renders as expected with two buttons, the right of which is disabled`, () 
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -5038,48 +5036,48 @@ test(`renders as expected with two buttons, the right of which is disabled`, () 
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderWidth: 2,
             borderLeftWidth: 0,
             borderTopRightRadius: 34,
             borderBottomRightRadius: 34,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled and active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled and active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -5087,123 +5085,123 @@ test(`renders as expected with two buttons, the right of which is disabled and a
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -5214,39 +5212,39 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -5256,48 +5254,48 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderWidth: 48,
             borderLeftWidth: 0,
             borderTopRightRadius: 9,
             borderBottomRightRadius: 9,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two inactive buttons without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two inactive buttons without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -5305,123 +5303,123 @@ test(`renders as expected with two inactive buttons without horizontal padding`,
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -5432,38 +5430,38 @@ test(`renders as expected with two inactive buttons without horizontal padding`,
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -5473,47 +5471,47 @@ test(`renders as expected with two inactive buttons without horizontal padding`,
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -5521,123 +5519,123 @@ test(`renders as expected with two buttons, the left of which is active, without
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -5648,38 +5646,38 @@ test(`renders as expected with two buttons, the left of which is active, without
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderWidth: 43,
             borderRightWidth: 0,
             borderTopLeftRadius: 33,
             borderBottomLeftRadius: 33,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             margin: -36,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -5689,47 +5687,47 @@ test(`renders as expected with two buttons, the left of which is active, without
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -5737,123 +5735,123 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -5864,38 +5862,38 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderWidth: 1,
             borderRightWidth: 0,
             borderTopLeftRadius: 72,
             borderBottomLeftRadius: 72,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             margin: 6,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -5905,47 +5903,47 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled and active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled and active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -5953,123 +5951,123 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -6080,38 +6078,38 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderWidth: 9,
             borderRightWidth: 0,
             borderTopLeftRadius: 7,
             borderBottomLeftRadius: 7,
-            borderColor: `tan`,
+            borderColor: 'tan',
             margin: -2,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -6121,47 +6119,47 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -6169,123 +6167,123 @@ test(`renders as expected with two buttons, the right of which is active, withou
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -6296,38 +6294,38 @@ test(`renders as expected with two buttons, the right of which is active, withou
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -6337,47 +6335,47 @@ test(`renders as expected with two buttons, the right of which is active, withou
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderWidth: 76,
             borderLeftWidth: 0,
             borderTopRightRadius: 52,
             borderBottomRightRadius: 52,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -6385,123 +6383,123 @@ test(`renders as expected with two buttons, the right of which is disabled, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -6512,38 +6510,38 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -6553,47 +6551,47 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderWidth: 2,
             borderLeftWidth: 0,
             borderTopRightRadius: 34,
             borderBottomRightRadius: 34,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled and active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled and active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -6601,123 +6599,123 @@ test(`renders as expected with two buttons, the right of which is disabled and a
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -6728,38 +6726,38 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -6769,47 +6767,47 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderWidth: 48,
             borderLeftWidth: 0,
             borderTopRightRadius: 9,
             borderBottomRightRadius: 9,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two inactive buttons without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two inactive buttons without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -6817,123 +6815,123 @@ test(`renders as expected with two inactive buttons without vertical padding`, (
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -6944,38 +6942,38 @@ test(`renders as expected with two inactive buttons without vertical padding`, (
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -6985,47 +6983,47 @@ test(`renders as expected with two inactive buttons without vertical padding`, (
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -7033,123 +7031,123 @@ test(`renders as expected with two buttons, the left of which is active, without
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -7160,38 +7158,38 @@ test(`renders as expected with two buttons, the left of which is active, without
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderWidth: 43,
             borderRightWidth: 0,
             borderTopLeftRadius: 33,
             borderBottomLeftRadius: 33,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             margin: -36,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -7201,47 +7199,47 @@ test(`renders as expected with two buttons, the left of which is active, without
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -7249,123 +7247,123 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -7376,38 +7374,38 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderWidth: 1,
             borderRightWidth: 0,
             borderTopLeftRadius: 72,
             borderBottomLeftRadius: 72,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             margin: 6,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -7417,47 +7415,47 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled and active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled and active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -7465,123 +7463,123 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -7592,38 +7590,38 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderWidth: 9,
             borderRightWidth: 0,
             borderTopLeftRadius: 7,
             borderBottomLeftRadius: 7,
-            borderColor: `tan`,
+            borderColor: 'tan',
             margin: -2,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -7633,47 +7631,47 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -7681,123 +7679,123 @@ test(`renders as expected with two buttons, the right of which is active, withou
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -7808,38 +7806,38 @@ test(`renders as expected with two buttons, the right of which is active, withou
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -7849,47 +7847,47 @@ test(`renders as expected with two buttons, the right of which is active, withou
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderWidth: 76,
             borderLeftWidth: 0,
             borderTopRightRadius: 52,
             borderBottomRightRadius: 52,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -7897,123 +7895,123 @@ test(`renders as expected with two buttons, the right of which is disabled, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -8024,38 +8022,38 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -8065,47 +8063,47 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderWidth: 2,
             borderLeftWidth: 0,
             borderTopRightRadius: 34,
             borderBottomRightRadius: 34,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled and active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled and active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -8113,123 +8111,123 @@ test(`renders as expected with two buttons, the right of which is disabled and a
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -8240,38 +8238,38 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -8281,47 +8279,47 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderWidth: 48,
             borderLeftWidth: 0,
             borderTopRightRadius: 9,
             borderBottomRightRadius: 9,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two inactive buttons without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two inactive buttons without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -8329,123 +8327,123 @@ test(`renders as expected with two inactive buttons without radius`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 0,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 0,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -8456,37 +8454,37 @@ test(`renders as expected with two inactive buttons without radius`, () => {
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -8496,46 +8494,46 @@ test(`renders as expected with two inactive buttons without radius`, () => {
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -8543,123 +8541,123 @@ test(`renders as expected with two buttons, the left of which is active, without
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 0,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -8670,37 +8668,37 @@ test(`renders as expected with two buttons, the left of which is active, without
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderWidth: 43,
             borderRightWidth: 0,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             margin: -36,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -8710,48 +8708,48 @@ test(`renders as expected with two buttons, the left of which is active, without
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -8759,123 +8757,123 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 0,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -8886,37 +8884,37 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderWidth: 1,
             borderRightWidth: 0,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             margin: 6,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -8926,48 +8924,48 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled and active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled and active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -8975,123 +8973,123 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 0,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -9102,37 +9100,37 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderWidth: 9,
             borderRightWidth: 0,
-            borderColor: `tan`,
+            borderColor: 'tan',
             margin: -2,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -9142,48 +9140,48 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -9191,123 +9189,123 @@ test(`renders as expected with two buttons, the right of which is active, withou
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 0,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -9318,39 +9316,39 @@ test(`renders as expected with two buttons, the right of which is active, withou
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -9360,46 +9358,46 @@ test(`renders as expected with two buttons, the right of which is active, withou
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderWidth: 76,
             borderLeftWidth: 0,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -9407,123 +9405,123 @@ test(`renders as expected with two buttons, the right of which is disabled, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 0,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -9534,39 +9532,39 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -9576,46 +9574,46 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderWidth: 2,
             borderLeftWidth: 0,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled and active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled and active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -9623,123 +9621,123 @@ test(`renders as expected with two buttons, the right of which is disabled and a
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 0,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -9750,39 +9748,39 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -9792,46 +9790,46 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderWidth: 48,
             borderLeftWidth: 0,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two inactive buttons without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two inactive buttons without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -9839,117 +9837,117 @@ test(`renders as expected with two inactive buttons without borders`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
-          border: null,
+          border: null
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
-          border: null,
+          border: null
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -9960,36 +9958,36 @@ test(`renders as expected with two inactive buttons without borders`, () => {
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -9999,45 +9997,45 @@ test(`renders as expected with two inactive buttons without borders`, () => {
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -10045,120 +10043,120 @@ test(`renders as expected with two buttons, the left of which is active, without
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
-          border: null,
+          border: null
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -10169,36 +10167,36 @@ test(`renders as expected with two buttons, the left of which is active, without
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderTopLeftRadius: 33,
             borderBottomLeftRadius: 33,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -10208,48 +10206,48 @@ test(`renders as expected with two buttons, the left of which is active, without
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -10257,120 +10255,120 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
-          border: null,
+          border: null
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -10381,36 +10379,36 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderTopLeftRadius: 72,
             borderBottomLeftRadius: 72,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -10420,48 +10418,48 @@ test(`renders as expected with two buttons, the left of which is disabled, witho
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the left of which is disabled and active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the left of which is disabled and active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -10469,120 +10467,120 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
-          border: null,
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+          border: null
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -10593,36 +10591,36 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderTopLeftRadius: 7,
             borderBottomLeftRadius: 7,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -10632,48 +10630,48 @@ test(`renders as expected with two buttons, the left of which is disabled and ac
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderLeftWidth: 0,
             borderTopRightRadius: 10,
             borderBottomRightRadius: 10,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -10681,120 +10679,120 @@ test(`renders as expected with two buttons, the right of which is active, withou
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
-          border: null,
+          border: null
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -10805,39 +10803,39 @@ test(`renders as expected with two buttons, the right of which is active, withou
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -10847,45 +10845,45 @@ test(`renders as expected with two buttons, the right of which is active, withou
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderTopRightRadius: 52,
             borderBottomRightRadius: 52,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -10893,120 +10891,120 @@ test(`renders as expected with two buttons, the right of which is disabled, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
-          border: null,
+          border: null
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -11017,39 +11015,39 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -11059,45 +11057,45 @@ test(`renders as expected with two buttons, the right of which is disabled, with
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderTopRightRadius: 34,
             borderBottomRightRadius: 34,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with two buttons, the right of which is disabled and active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with two buttons, the right of which is disabled and active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -11105,120 +11103,120 @@ test(`renders as expected with two buttons, the right of which is disabled and a
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
-          border: null,
-        },
+          border: null
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -11229,39 +11227,39 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         Example Label A
       </SegmentA>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderWidth: 29,
             borderRightWidth: 0,
             borderTopLeftRadius: 47,
             borderBottomLeftRadius: 47,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             margin: -22,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -11271,45 +11269,45 @@ test(`renders as expected with two buttons, the right of which is disabled and a
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderTopRightRadius: 9,
             borderBottomRightRadius: 9,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
             Example Label A
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three inactive buttons`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three inactive buttons', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -11317,124 +11315,124 @@ test(`renders as expected with three inactive buttons`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -11448,39 +11446,39 @@ test(`renders as expected with three inactive buttons`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -11490,23 +11488,23 @@ test(`renders as expected with three inactive buttons`, () => {
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -11516,48 +11514,48 @@ test(`renders as expected with three inactive buttons`, () => {
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -11565,124 +11563,124 @@ test(`renders as expected with three buttons, the left of which is active`, () =
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -11696,39 +11694,39 @@ test(`renders as expected with three buttons, the left of which is active`, () =
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderTopLeftRadius: 52,
             borderBottomLeftRadius: 52,
             borderWidth: 76,
             borderRightWidth: 0,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
@@ -11738,23 +11736,23 @@ test(`renders as expected with three buttons, the left of which is active`, () =
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -11764,48 +11762,48 @@ test(`renders as expected with three buttons, the left of which is active`, () =
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -11813,124 +11811,124 @@ test(`renders as expected with three buttons, the left of which is disabled`, ()
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -11944,39 +11942,39 @@ test(`renders as expected with three buttons, the left of which is disabled`, ()
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderTopLeftRadius: 34,
             borderBottomLeftRadius: 34,
             borderWidth: 2,
             borderRightWidth: 0,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
@@ -11986,23 +11984,23 @@ test(`renders as expected with three buttons, the left of which is disabled`, ()
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -12012,48 +12010,48 @@ test(`renders as expected with three buttons, the left of which is disabled`, ()
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled and active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled and active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -12061,124 +12059,124 @@ test(`renders as expected with three buttons, the left of which is disabled and 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -12192,39 +12190,39 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderTopLeftRadius: 9,
             borderBottomLeftRadius: 9,
             borderWidth: 48,
             borderRightWidth: 0,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
@@ -12234,23 +12232,23 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -12260,48 +12258,48 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -12309,124 +12307,124 @@ test(`renders as expected with three buttons, the middle of which is active`, ()
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -12440,39 +12438,39 @@ test(`renders as expected with three buttons, the middle of which is active`, ()
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -12482,23 +12480,23 @@ test(`renders as expected with three buttons, the middle of which is active`, ()
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderTopWidth: 43,
             borderBottomWidth: 43,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             marginVertical: -36,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -12508,48 +12506,48 @@ test(`renders as expected with three buttons, the middle of which is active`, ()
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -12557,124 +12555,124 @@ test(`renders as expected with three buttons, the middle of which is disabled`, 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -12688,39 +12686,39 @@ test(`renders as expected with three buttons, the middle of which is disabled`, 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -12730,23 +12728,23 @@ test(`renders as expected with three buttons, the middle of which is disabled`, 
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderTopWidth: 1,
             borderBottomWidth: 1,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             marginVertical: 6,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -12756,48 +12754,48 @@ test(`renders as expected with three buttons, the middle of which is disabled`, 
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled and active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled and active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -12805,124 +12803,124 @@ test(`renders as expected with three buttons, the middle of which is disabled an
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -12936,39 +12934,39 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -12978,23 +12976,23 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderTopWidth: 9,
             borderBottomWidth: 9,
-            borderColor: `tan`,
+            borderColor: 'tan',
             marginVertical: -2,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -13004,48 +13002,48 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -13053,124 +13051,124 @@ test(`renders as expected with three buttons, the right of which is active`, () 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -13184,39 +13182,39 @@ test(`renders as expected with three buttons, the right of which is active`, () 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -13226,23 +13224,23 @@ test(`renders as expected with three buttons, the right of which is active`, () 
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -13252,48 +13250,48 @@ test(`renders as expected with three buttons, the right of which is active`, () 
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
             borderLeftWidth: 0,
             borderTopRightRadius: 23,
             borderBottomRightRadius: 23,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -13301,124 +13299,124 @@ test(`renders as expected with three buttons, the right of which is disabled`, (
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -13432,39 +13430,39 @@ test(`renders as expected with three buttons, the right of which is disabled`, (
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -13474,23 +13472,23 @@ test(`renders as expected with three buttons, the right of which is disabled`, (
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -13500,48 +13498,48 @@ test(`renders as expected with three buttons, the right of which is disabled`, (
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
             borderLeftWidth: 0,
             borderTopRightRadius: 19,
             borderBottomRightRadius: 19,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled and active`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled and active', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -13549,124 +13547,124 @@ test(`renders as expected with three buttons, the right of which is disabled and
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -13680,39 +13678,39 @@ test(`renders as expected with three buttons, the right of which is disabled and
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -13722,23 +13720,23 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -13748,48 +13746,48 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
             borderLeftWidth: 0,
             borderTopRightRadius: 44,
             borderBottomRightRadius: 44,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three inactive buttons without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three inactive buttons without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -13797,124 +13795,124 @@ test(`renders as expected with three inactive buttons without horizontal padding
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -13928,38 +13926,38 @@ test(`renders as expected with three inactive buttons without horizontal padding
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -13969,22 +13967,22 @@ test(`renders as expected with three inactive buttons without horizontal padding
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -13994,47 +13992,47 @@ test(`renders as expected with three inactive buttons without horizontal padding
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -14042,124 +14040,124 @@ test(`renders as expected with three buttons, the left of which is active, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -14173,38 +14171,38 @@ test(`renders as expected with three buttons, the left of which is active, witho
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderTopLeftRadius: 52,
             borderBottomLeftRadius: 52,
             borderWidth: 76,
             borderRightWidth: 0,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
@@ -14214,22 +14212,22 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -14239,47 +14237,47 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -14287,124 +14285,124 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -14418,38 +14416,38 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderTopLeftRadius: 34,
             borderBottomLeftRadius: 34,
             borderWidth: 2,
             borderRightWidth: 0,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
@@ -14459,22 +14457,22 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -14484,47 +14482,47 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled and active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled and active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -14532,124 +14530,124 @@ test(`renders as expected with three buttons, the left of which is disabled and 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -14663,38 +14661,38 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderTopLeftRadius: 9,
             borderBottomLeftRadius: 9,
             borderWidth: 48,
             borderRightWidth: 0,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
@@ -14704,22 +14702,22 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -14729,47 +14727,47 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -14777,124 +14775,124 @@ test(`renders as expected with three buttons, the middle of which is active, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -14908,38 +14906,38 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -14949,22 +14947,22 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderTopWidth: 43,
             borderBottomWidth: 43,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             marginVertical: -36,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -14974,47 +14972,47 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -15022,124 +15020,124 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -15153,38 +15151,38 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -15194,22 +15192,22 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderTopWidth: 1,
             borderBottomWidth: 1,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             marginVertical: 6,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -15219,47 +15217,47 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled and active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled and active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -15267,124 +15265,124 @@ test(`renders as expected with three buttons, the middle of which is disabled an
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -15398,38 +15396,38 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -15439,22 +15437,22 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderTopWidth: 9,
             borderBottomWidth: 9,
-            borderColor: `tan`,
+            borderColor: 'tan',
             marginVertical: -2,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -15464,47 +15462,47 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -15512,124 +15510,124 @@ test(`renders as expected with three buttons, the right of which is active, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -15643,38 +15641,38 @@ test(`renders as expected with three buttons, the right of which is active, with
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -15684,22 +15682,22 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -15709,47 +15707,47 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
             borderLeftWidth: 0,
             borderTopRightRadius: 23,
             borderBottomRightRadius: 23,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -15757,124 +15755,124 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -15888,38 +15886,38 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -15929,22 +15927,22 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -15954,47 +15952,47 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
             borderLeftWidth: 0,
             borderTopRightRadius: 19,
             borderBottomRightRadius: 19,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled and active, without horizontal padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled and active, without horizontal padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
     verticalPadding: 32,
@@ -16002,124 +16000,124 @@ test(`renders as expected with three buttons, the right of which is disabled and
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -16133,38 +16131,38 @@ test(`renders as expected with three buttons, the right of which is disabled and
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -16174,22 +16172,22 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -16199,47 +16197,47 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
             borderLeftWidth: 0,
             borderTopRightRadius: 44,
             borderBottomRightRadius: 44,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
             marginLeft: 0,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three inactive buttons without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three inactive buttons without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -16247,124 +16245,124 @@ test(`renders as expected with three inactive buttons without vertical padding`,
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -16378,38 +16376,38 @@ test(`renders as expected with three inactive buttons without vertical padding`,
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -16419,22 +16417,22 @@ test(`renders as expected with three inactive buttons without vertical padding`,
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -16444,47 +16442,47 @@ test(`renders as expected with three inactive buttons without vertical padding`,
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -16492,124 +16490,124 @@ test(`renders as expected with three buttons, the left of which is active, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -16623,38 +16621,38 @@ test(`renders as expected with three buttons, the left of which is active, witho
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderTopLeftRadius: 52,
             borderBottomLeftRadius: 52,
             borderWidth: 76,
             borderRightWidth: 0,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
@@ -16664,22 +16662,22 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -16689,47 +16687,47 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -16737,124 +16735,124 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -16868,38 +16866,38 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderTopLeftRadius: 34,
             borderBottomLeftRadius: 34,
             borderWidth: 2,
             borderRightWidth: 0,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
@@ -16909,22 +16907,22 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -16934,47 +16932,47 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled and active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled and active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -16982,124 +16980,124 @@ test(`renders as expected with three buttons, the left of which is disabled and 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -17113,38 +17111,38 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderTopLeftRadius: 9,
             borderBottomLeftRadius: 9,
             borderWidth: 48,
             borderRightWidth: 0,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
@@ -17154,22 +17152,22 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -17179,47 +17177,47 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -17227,124 +17225,124 @@ test(`renders as expected with three buttons, the middle of which is active, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -17358,38 +17356,38 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -17399,22 +17397,22 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderTopWidth: 43,
             borderBottomWidth: 43,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             marginVertical: -36,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -17424,47 +17422,47 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -17472,124 +17470,124 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -17603,38 +17601,38 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -17644,22 +17642,22 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderTopWidth: 1,
             borderBottomWidth: 1,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             marginVertical: 6,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -17669,47 +17667,47 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled and active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled and active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -17717,124 +17715,124 @@ test(`renders as expected with three buttons, the middle of which is disabled an
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -17848,38 +17846,38 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -17889,22 +17887,22 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderTopWidth: 9,
             borderBottomWidth: 9,
-            borderColor: `tan`,
+            borderColor: 'tan',
             marginVertical: -2,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -17914,47 +17912,47 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -17962,124 +17960,124 @@ test(`renders as expected with three buttons, the right of which is active, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -18093,38 +18091,38 @@ test(`renders as expected with three buttons, the right of which is active, with
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -18134,22 +18132,22 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -18159,47 +18157,47 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
             borderLeftWidth: 0,
             borderTopRightRadius: 23,
             borderBottomRightRadius: 23,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -18207,124 +18205,124 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -18338,38 +18336,38 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -18379,22 +18377,22 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -18404,47 +18402,47 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
             borderLeftWidth: 0,
             borderTopRightRadius: 19,
             borderBottomRightRadius: 19,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled and active, without vertical padding`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled and active, without vertical padding', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 0,
@@ -18452,124 +18450,124 @@ test(`renders as expected with three buttons, the right of which is disabled and
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -18583,38 +18581,38 @@ test(`renders as expected with three buttons, the right of which is disabled and
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -18624,22 +18622,22 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -18649,47 +18647,47 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
             borderLeftWidth: 0,
             borderTopRightRadius: 44,
             borderBottomRightRadius: 44,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
             marginLeft: 0,
-            paddingHorizontal: 54,
+            paddingHorizontal: 54
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three inactive buttons without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three inactive buttons without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -18697,124 +18695,124 @@ test(`renders as expected with three inactive buttons without radius`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 0,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 0,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 0,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -18828,37 +18826,37 @@ test(`renders as expected with three inactive buttons without radius`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -18868,23 +18866,23 @@ test(`renders as expected with three inactive buttons without radius`, () => {
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -18894,46 +18892,46 @@ test(`renders as expected with three inactive buttons without radius`, () => {
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -18941,124 +18939,124 @@ test(`renders as expected with three buttons, the left of which is active, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 0,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -19072,37 +19070,37 @@ test(`renders as expected with three buttons, the left of which is active, witho
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderWidth: 76,
             borderRightWidth: 0,
-            borderColor: `olivedrab`,
+            borderColor: 'olivedrab',
             margin: -69,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
@@ -19112,23 +19110,23 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -19138,48 +19136,48 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -19187,124 +19185,124 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 0,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -19318,37 +19316,37 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderWidth: 2,
             borderRightWidth: 0,
-            borderColor: `magenta`,
+            borderColor: 'magenta',
             margin: 5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
@@ -19358,23 +19356,23 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -19384,48 +19382,48 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled and active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled and active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -19433,124 +19431,124 @@ test(`renders as expected with three buttons, the left of which is disabled and 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 0,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -19564,37 +19562,37 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderWidth: 48,
             borderRightWidth: 0,
-            borderColor: `peachpuff`,
+            borderColor: 'peachpuff',
             margin: -41,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
@@ -19604,23 +19602,23 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -19630,48 +19628,48 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -19679,124 +19677,124 @@ test(`renders as expected with three buttons, the middle of which is active, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 0,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -19810,39 +19808,39 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -19852,23 +19850,23 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             borderTopWidth: 43,
             borderBottomWidth: 43,
-            borderColor: `saddlebrown`,
+            borderColor: 'saddlebrown',
             marginVertical: -36,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -19878,48 +19876,48 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -19927,124 +19925,124 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 0,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -20058,39 +20056,39 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -20100,23 +20098,23 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             borderTopWidth: 1,
             borderBottomWidth: 1,
-            borderColor: `slategray`,
+            borderColor: 'slategray',
             marginVertical: 6,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -20126,48 +20124,48 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled and active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled and active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -20175,124 +20173,124 @@ test(`renders as expected with three buttons, the middle of which is disabled an
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 0,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -20306,39 +20304,39 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -20348,23 +20346,23 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             borderTopWidth: 9,
             borderBottomWidth: 9,
-            borderColor: `tan`,
+            borderColor: 'tan',
             marginVertical: -2,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -20374,48 +20372,48 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -20423,124 +20421,124 @@ test(`renders as expected with three buttons, the right of which is active, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 0,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -20554,39 +20552,39 @@ test(`renders as expected with three buttons, the right of which is active, with
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -20596,23 +20594,23 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -20622,46 +20620,46 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderWidth: 4,
             borderLeftWidth: 0,
-            borderColor: `darkorange`,
+            borderColor: 'darkorange',
             margin: 3,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -20669,124 +20667,124 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 0,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -20800,39 +20798,39 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -20842,23 +20840,23 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -20868,46 +20866,46 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderWidth: 22,
             borderLeftWidth: 0,
-            borderColor: `darksalmon`,
+            borderColor: 'darksalmon',
             margin: -15,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled and active, without radius`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled and active, without radius', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -20915,124 +20913,124 @@ test(`renders as expected with three buttons, the right of which is disabled and
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 0,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -21046,39 +21044,39 @@ test(`renders as expected with three buttons, the right of which is disabled and
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -21088,23 +21086,23 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -21114,46 +21112,46 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderWidth: 77,
             borderLeftWidth: 0,
-            borderColor: `darkslategrey`,
+            borderColor: 'darkslategrey',
             margin: -70,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three inactive buttons without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three inactive buttons without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -21161,115 +21159,115 @@ test(`renders as expected with three inactive buttons without borders`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
-          border: null,
+          border: null
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
-          border: null,
+          border: null
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
-          border: null,
+          border: null
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -21283,36 +21281,36 @@ test(`renders as expected with three inactive buttons without borders`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -21322,20 +21320,20 @@ test(`renders as expected with three inactive buttons without borders`, () => {
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             marginVertical: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -21345,45 +21343,45 @@ test(`renders as expected with three inactive buttons without borders`, () => {
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -21391,121 +21389,121 @@ test(`renders as expected with three buttons, the left of which is active, witho
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
-          border: null,
+          border: null
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -21519,36 +21517,36 @@ test(`renders as expected with three buttons, the left of which is active, witho
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `oldlace`,
+            backgroundColor: 'oldlace',
             borderTopLeftRadius: 52,
             borderBottomLeftRadius: 52,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `mediumorchid`,
+              color: 'mediumorchid'
             }}
             numberOfLines={1}
           >
@@ -21558,23 +21556,23 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -21584,48 +21582,48 @@ test(`renders as expected with three buttons, the left of which is active, witho
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -21633,121 +21631,121 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
-          border: null,
+          border: null
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -21761,36 +21759,36 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `wheat`,
+            backgroundColor: 'wheat',
             borderTopLeftRadius: 34,
             borderBottomLeftRadius: 34,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `lightgreen`,
+              color: 'lightgreen'
             }}
             numberOfLines={1}
           >
@@ -21800,23 +21798,23 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -21826,48 +21824,48 @@ test(`renders as expected with three buttons, the left of which is disabled, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the left of which is disabled and active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the left of which is disabled and active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -21875,121 +21873,121 @@ test(`renders as expected with three buttons, the left of which is disabled and 
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
-          border: null,
-        },
+          border: null
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value A" onChange={onChange}>
@@ -22003,36 +22001,36 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `mintcream`,
+            backgroundColor: 'mintcream',
             borderTopLeftRadius: 9,
             borderBottomLeftRadius: 9,
             margin: 7,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `rebeccapurple`,
+              color: 'rebeccapurple'
             }}
             numberOfLines={1}
           >
@@ -22042,23 +22040,23 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -22068,48 +22066,48 @@ test(`renders as expected with three buttons, the left of which is disabled and 
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -22117,121 +22115,121 @@ test(`renders as expected with three buttons, the middle of which is active, wit
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
-          border: null,
+          border: null
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -22245,39 +22243,39 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -22287,20 +22285,20 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `seashell`,
+            backgroundColor: 'seashell',
             marginVertical: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `seagreen`,
+              color: 'seagreen'
             }}
             numberOfLines={1}
           >
@@ -22310,48 +22308,48 @@ test(`renders as expected with three buttons, the middle of which is active, wit
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -22359,121 +22357,121 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
-          border: null,
+          border: null
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -22487,39 +22485,39 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -22529,20 +22527,20 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `rosybrown`,
+            backgroundColor: 'rosybrown',
             marginVertical: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `sienna`,
+              color: 'sienna'
             }}
             numberOfLines={1}
           >
@@ -22552,48 +22550,48 @@ test(`renders as expected with three buttons, the middle of which is disabled, w
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the middle of which is disabled and active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the middle of which is disabled and active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -22601,121 +22599,121 @@ test(`renders as expected with three buttons, the middle of which is disabled an
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
-          border: null,
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+          border: null
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value C" onChange={onChange}>
@@ -22729,39 +22727,39 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -22771,20 +22769,20 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `thistle`,
+            backgroundColor: 'thistle',
             marginVertical: 7,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `teal`,
+              color: 'teal'
             }}
             numberOfLines={1}
           >
@@ -22794,48 +22792,48 @@ test(`renders as expected with three buttons, the middle of which is disabled an
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -22843,121 +22841,121 @@ test(`renders as expected with three buttons, the right of which is active, with
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
-          border: null,
+          border: null
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -22971,39 +22969,39 @@ test(`renders as expected with three buttons, the right of which is active, with
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -23013,23 +23011,23 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -23039,45 +23037,45 @@ test(`renders as expected with three buttons, the right of which is active, with
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkmagenta`,
+            backgroundColor: 'darkmagenta',
             borderTopRightRadius: 23,
             borderBottomRightRadius: 23,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkolivegreen`,
+              color: 'darkolivegreen'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -23085,121 +23083,121 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
-          border: null,
+          border: null
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -23213,39 +23211,39 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -23255,23 +23253,23 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -23281,45 +23279,45 @@ test(`renders as expected with three buttons, the right of which is disabled, wi
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkorchid`,
+            backgroundColor: 'darkorchid',
             borderTopRightRadius: 19,
             borderBottomRightRadius: 19,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkred`,
+              color: 'darkred'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three buttons, the right of which is disabled and active, without borders`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three buttons, the right of which is disabled and active, without borders', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -23327,121 +23325,121 @@ test(`renders as expected with three buttons, the right of which is disabled and
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
-          border: null,
-        },
+          border: null
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value B" onChange={onChange}>
@@ -23455,39 +23453,39 @@ test(`renders as expected with three buttons, the right of which is disabled and
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -23497,23 +23495,23 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -23523,45 +23521,45 @@ test(`renders as expected with three buttons, the right of which is disabled and
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `darkseagreen`,
+            backgroundColor: 'darkseagreen',
             borderTopRightRadius: 44,
             borderBottomRightRadius: 44,
             margin: 7,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkslateblue`,
+              color: 'darkslateblue'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`raises the change event when the first of three buttons is pressed`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('raises the change event when the first of three buttons is pressed', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -23569,124 +23567,124 @@ test(`raises the change event when the first of three buttons is pressed`, () =>
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -23700,25 +23698,23 @@ test(`raises the change event when the first of three buttons is pressed`, () =>
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][0].props.onPress();
+  unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
-  expect(onChange).toHaveBeenCalledTimes(1);
-  expect(onChange).toHaveBeenCalledWith(`Example Value A`);
-});
+  expect(onChange).toHaveBeenCalledTimes(1)
+  expect(onChange).toHaveBeenCalledWith('Example Value A')
+})
 
-test(`raises the change event when the second of three buttons is pressed`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('raises the change event when the second of three buttons is pressed', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -23726,124 +23722,124 @@ test(`raises the change event when the second of three buttons is pressed`, () =
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -23857,25 +23853,23 @@ test(`raises the change event when the second of three buttons is pressed`, () =
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][1].props.onPress();
+  unwrapRenderedFunctionComponent(rendered).props.children[1].props.onPress()
 
-  expect(onChange).toHaveBeenCalledTimes(1);
-  expect(onChange).toHaveBeenCalledWith(`Example Value C`);
-});
+  expect(onChange).toHaveBeenCalledTimes(1)
+  expect(onChange).toHaveBeenCalledWith('Example Value C')
+})
 
-test(`raises the change event when the third of three buttons is pressed`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('raises the change event when the third of three buttons is pressed', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -23883,124 +23877,124 @@ test(`raises the change event when the third of three buttons is pressed`, () =>
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -24014,25 +24008,23 @@ test(`raises the change event when the third of three buttons is pressed`, () =>
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][2].props.onPress();
+  unwrapRenderedFunctionComponent(rendered).props.children[2].props.onPress()
 
-  expect(onChange).toHaveBeenCalledTimes(1);
-  expect(onChange).toHaveBeenCalledWith(`Example Value B`);
-});
+  expect(onChange).toHaveBeenCalledTimes(1)
+  expect(onChange).toHaveBeenCalledWith('Example Value B')
+})
 
-test(`excludes null`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('excludes null', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -24040,124 +24032,124 @@ test(`excludes null`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -24172,39 +24164,39 @@ test(`excludes null`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 12,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             margin: -5,
             marginRight: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -24214,23 +24206,23 @@ test(`excludes null`, () => {
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 29,
             borderBottomWidth: 29,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             marginVertical: -22,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -24240,48 +24232,48 @@ test(`excludes null`, () => {
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 8,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             margin: -1,
             marginLeft: 0,
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`throws the expected error when a non-element is present`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('throws the expected error when a non-element is present', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -24289,124 +24281,124 @@ test(`throws the expected error when a non-element is present`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -24421,24 +24413,24 @@ test(`throws the expected error when a non-element is present`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(() => {
-    unwrapRenderedFunctionComponent(rendered);
-  }).toThrowError(`Unexpected child in split button.`);
+    unwrapRenderedFunctionComponent(rendered)
+  }).toThrowError('Unexpected child in split button.')
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`throws the expected error when an unexpected element is present`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('throws the expected error when an unexpected element is present', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -24446,124 +24438,124 @@ test(`throws the expected error when an unexpected element is present`, () => {
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 8,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -24578,24 +24570,24 @@ test(`throws the expected error when an unexpected element is present`, () => {
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(() => {
-    unwrapRenderedFunctionComponent(rendered);
-  }).toThrowError(`Unexpected child in split button.`);
+    unwrapRenderedFunctionComponent(rendered)
+  }).toThrowError('Unexpected child in split button.')
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with one inactive button which does not require margin`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with one inactive button which does not require margin', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -24603,122 +24595,122 @@ test(`renders as expected with one inactive button which does not require margin
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 12,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 7,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 29,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentB = Component.segments[`exampleTypeB`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -24726,57 +24718,57 @@ test(`renders as expected with one inactive button which does not require margin
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 7,
             borderRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with three inactive buttons which do not require margin`, () => {
-  type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
+test('renders as expected with three inactive buttons which do not require margin', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
   type ExampleValue =
-    | `Example Value A`
-    | `Example Value B`
-    | `Example Value C`
-    | `Example Value D`;
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
   const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
     verticalPadding: 32,
@@ -24784,124 +24776,124 @@ test(`renders as expected with three inactive buttons which do not require margi
     types: {
       exampleTypeA: {
         inactiveEnabled: {
-          backgroundColor: `red`,
-          color: `blue`,
+          backgroundColor: 'red',
+          color: 'blue',
           radius: 10,
           border: {
             width: 7,
-            color: `orange`,
-          },
+            color: 'orange'
+          }
         },
         activeEnabled: {
-          backgroundColor: `oldlace`,
-          color: `mediumorchid`,
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
           radius: 52,
           border: {
             width: 76,
-            color: `olivedrab`,
-          },
+            color: 'olivedrab'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `wheat`,
-          color: `lightgreen`,
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
           radius: 34,
           border: {
             width: 2,
-            color: `magenta`,
-          },
+            color: 'magenta'
+          }
         },
         activeDisabled: {
-          backgroundColor: `mintcream`,
-          color: `rebeccapurple`,
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
           radius: 9,
           border: {
             width: 48,
-            color: `peachpuff`,
-          },
-        },
+            color: 'peachpuff'
+          }
+        }
       },
       exampleTypeB: {
         inactiveEnabled: {
-          backgroundColor: `crimson`,
-          color: `darkgoldenrod`,
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
           radius: 15,
           border: {
             width: 7,
-            color: `darkgrey`,
-          },
+            color: 'darkgrey'
+          }
         },
         activeEnabled: {
-          backgroundColor: `darkmagenta`,
-          color: `darkolivegreen`,
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
           radius: 23,
           border: {
             width: 4,
-            color: `darkorange`,
-          },
+            color: 'darkorange'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `darkorchid`,
-          color: `darkred`,
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
           radius: 19,
           border: {
             width: 22,
-            color: `darksalmon`,
-          },
+            color: 'darksalmon'
+          }
         },
         activeDisabled: {
-          backgroundColor: `darkseagreen`,
-          color: `darkslateblue`,
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
           radius: 44,
           border: {
             width: 77,
-            color: `darkslategrey`,
-          },
-        },
+            color: 'darkslategrey'
+          }
+        }
       },
       exampleTypeC: {
         inactiveEnabled: {
-          backgroundColor: `turquoise`,
-          color: `whitesmoke`,
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
           radius: 47,
           border: {
             width: 7,
-            color: `yellowgreen`,
-          },
+            color: 'yellowgreen'
+          }
         },
         activeEnabled: {
-          backgroundColor: `seashell`,
-          color: `seagreen`,
+          backgroundColor: 'seashell',
+          color: 'seagreen',
           radius: 33,
           border: {
             width: 43,
-            color: `saddlebrown`,
-          },
+            color: 'saddlebrown'
+          }
         },
         inactiveDisabled: {
-          backgroundColor: `rosybrown`,
-          color: `sienna`,
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
           radius: 72,
           border: {
             width: 1,
-            color: `slategray`,
-          },
+            color: 'slategray'
+          }
         },
         activeDisabled: {
-          backgroundColor: `thistle`,
-          color: `teal`,
+          backgroundColor: 'thistle',
+          color: 'teal',
           radius: 7,
           border: {
             width: 9,
-            color: `tan`,
-          },
-        },
-      },
-    },
-  });
-  const onChange = jest.fn();
-  const SegmentA = Component.segments[`exampleTypeA`];
-  const SegmentB = Component.segments[`exampleTypeB`];
-  const SegmentC = Component.segments[`exampleTypeC`];
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
     <Component value="Example Value D" onChange={onChange}>
@@ -24915,37 +24907,37 @@ test(`renders as expected with three inactive buttons which do not require margi
         Example Label B
       </SegmentB>
     </Component>
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        alignItems: `stretch`,
-        flexDirection: `row`,
+        alignItems: 'stretch',
+        flexDirection: 'row'
       }}
     >
       {[
         <Hitbox
           key="Example Value A"
           style={{
-            backgroundColor: `red`,
+            backgroundColor: 'red',
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
             borderWidth: 7,
             borderRightWidth: 0,
-            borderColor: `orange`,
+            borderColor: 'orange',
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `blue`,
+              color: 'blue'
             }}
             numberOfLines={1}
           >
@@ -24955,22 +24947,22 @@ test(`renders as expected with three inactive buttons which do not require margi
         <Hitbox
           key="Example Value C"
           style={{
-            backgroundColor: `turquoise`,
+            backgroundColor: 'turquoise',
             borderTopWidth: 7,
             borderBottomWidth: 7,
-            borderColor: `yellowgreen`,
+            borderColor: 'yellowgreen',
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `whitesmoke`,
+              color: 'whitesmoke'
             }}
             numberOfLines={1}
           >
@@ -24980,33 +24972,33 @@ test(`renders as expected with three inactive buttons which do not require margi
         <Hitbox
           key="Example Value B"
           style={{
-            backgroundColor: `crimson`,
+            backgroundColor: 'crimson',
             borderWidth: 7,
             borderLeftWidth: 0,
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15,
-            borderColor: `darkgrey`,
+            borderColor: 'darkgrey',
             paddingHorizontal: 54,
-            paddingVertical: 32,
+            paddingVertical: 32
           }}
           disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
             style={{
-              fontFamily: `Example Font Family`,
+              fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: `darkgoldenrod`,
+              color: 'darkgoldenrod'
             }}
             numberOfLines={1}
           >
             Example Label B
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </View>
-  );
+  )
 
-  expect(onChange).not.toHaveBeenCalled();
-});
+  expect(onChange).not.toHaveBeenCalled()
+})

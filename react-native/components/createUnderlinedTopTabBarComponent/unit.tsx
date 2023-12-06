@@ -1,44 +1,44 @@
-import * as React from "react";
-import { Text } from "react-native";
+import * as React from 'react'
+import { Text } from 'react-native'
 import {
   createUnderlinedTopTabBarComponent,
   unwrapRenderedFunctionComponent,
   Hitbox,
-  HorizontallySymmetricalSafeAreaView,
-} from "../../..";
+  HorizontallySymmetricalSafeAreaView
+} from '../../..'
 
-test(`renders as expected without underlines or vertical padding`, () => {
+test('renders as expected without underlines or vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 0,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: null,
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: null
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: null,
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: null
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
-      style={{ backgroundColor: `red`, height: 28, flexDirection: `row` }}
+      style={{ backgroundColor: 'red', height: 28, flexDirection: 'row' }}
       left
       right
     >
@@ -48,18 +48,18 @@ test(`renders as expected without underlines or vertical padding`, () => {
           disabled={false}
           style={{
             flexBasis: 0,
-            flexGrow: 1,
+            flexGrow: 1
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -70,18 +70,18 @@ test(`renders as expected without underlines or vertical padding`, () => {
           disabled={false}
           style={{
             flexBasis: 0,
-            flexGrow: 1,
+            flexGrow: 1
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -93,18 +93,18 @@ test(`renders as expected without underlines or vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange'
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -115,61 +115,61 @@ test(`renders as expected without underlines or vertical padding`, () => {
           disabled={false}
           style={{
             flexBasis: 0,
-            flexGrow: 1,
+            flexGrow: 1
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected without underlines with vertical padding`, () => {
+test('renders as expected without underlines with vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 10,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: null,
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: null
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: null,
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: null
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
-      style={{ backgroundColor: `red`, height: 48, flexDirection: `row` }}
+      style={{ backgroundColor: 'red', height: 48, flexDirection: 'row' }}
       left
       right
     >
@@ -180,18 +180,18 @@ test(`renders as expected without underlines with vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -203,18 +203,18 @@ test(`renders as expected without underlines with vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -226,19 +226,19 @@ test(`renders as expected without underlines with vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
-            paddingTop: 10,
+            backgroundColor: 'orange',
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -250,66 +250,66 @@ test(`renders as expected without underlines with vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with underlined inactive without vertical padding`, () => {
+test('renders as expected with underlined inactive without vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 0,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: { width: 4, color: `blue` },
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: { width: 4, color: 'blue' }
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: null,
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: null
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
       style={{
-        backgroundColor: `red`,
+        backgroundColor: 'red',
         height: 28,
-        flexDirection: `row`,
-        borderBottomColor: `blue`,
-        borderBottomWidth: 4,
+        flexDirection: 'row',
+        borderBottomColor: 'blue',
+        borderBottomWidth: 4
       }}
       left
       right
@@ -321,18 +321,18 @@ test(`renders as expected with underlined inactive without vertical padding`, ()
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -4,
+            marginBottom: -4
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -344,18 +344,18 @@ test(`renders as expected with underlined inactive without vertical padding`, ()
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -4,
+            marginBottom: -4
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -367,19 +367,19 @@ test(`renders as expected with underlined inactive without vertical padding`, ()
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
-            marginBottom: -4,
+            backgroundColor: 'orange',
+            marginBottom: -4
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -391,66 +391,66 @@ test(`renders as expected with underlined inactive without vertical padding`, ()
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -4,
+            marginBottom: -4
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with underlined inactive and vertical padding`, () => {
+test('renders as expected with underlined inactive and vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 10,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: { width: 4, color: `blue` },
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: { width: 4, color: 'blue' }
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: null,
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: null
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
       style={{
-        backgroundColor: `red`,
+        backgroundColor: 'red',
         height: 48,
-        flexDirection: `row`,
-        borderBottomColor: `blue`,
-        borderBottomWidth: 4,
+        flexDirection: 'row',
+        borderBottomColor: 'blue',
+        borderBottomWidth: 4
       }}
       left
       right
@@ -463,18 +463,18 @@ test(`renders as expected with underlined inactive and vertical padding`, () => 
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -4,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -487,18 +487,18 @@ test(`renders as expected with underlined inactive and vertical padding`, () => 
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -4,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -510,20 +510,20 @@ test(`renders as expected with underlined inactive and vertical padding`, () => 
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange',
             marginBottom: -4,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -536,61 +536,61 @@ test(`renders as expected with underlined inactive and vertical padding`, () => 
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -4,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with underlined active without vertical padding`, () => {
+test('renders as expected with underlined active without vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 0,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: null,
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: null
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: { color: `blue`, width: 4 },
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: { color: 'blue', width: 4 }
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
-      style={{ backgroundColor: `red`, height: 28, flexDirection: `row` }}
+      style={{ backgroundColor: 'red', height: 28, flexDirection: 'row' }}
       left
       right
     >
@@ -600,18 +600,18 @@ test(`renders as expected with underlined active without vertical padding`, () =
           disabled={false}
           style={{
             flexBasis: 0,
-            flexGrow: 1,
+            flexGrow: 1
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -622,18 +622,18 @@ test(`renders as expected with underlined active without vertical padding`, () =
           disabled={false}
           style={{
             flexBasis: 0,
-            flexGrow: 1,
+            flexGrow: 1
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -645,20 +645,20 @@ test(`renders as expected with underlined active without vertical padding`, () =
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange',
             borderBottomWidth: 4,
-            borderBottomColor: `blue`,
+            borderBottomColor: 'blue'
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -669,61 +669,61 @@ test(`renders as expected with underlined active without vertical padding`, () =
           disabled={false}
           style={{
             flexBasis: 0,
-            flexGrow: 1,
+            flexGrow: 1
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with underlined active vertical padding`, () => {
+test('renders as expected with underlined active vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 10,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: null,
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: null
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: { color: `blue`, width: 4 },
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: { color: 'blue', width: 4 }
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
-      style={{ backgroundColor: `red`, height: 48, flexDirection: `row` }}
+      style={{ backgroundColor: 'red', height: 48, flexDirection: 'row' }}
       left
       right
     >
@@ -734,18 +734,18 @@ test(`renders as expected with underlined active vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -757,18 +757,18 @@ test(`renders as expected with underlined active vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -780,21 +780,21 @@ test(`renders as expected with underlined active vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange',
             borderBottomWidth: 4,
-            borderBottomColor: `blue`,
-            paddingTop: 10,
+            borderBottomColor: 'blue',
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -806,66 +806,66 @@ test(`renders as expected with underlined active vertical padding`, () => {
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with thinly underlined inactive without vertical padding`, () => {
+test('renders as expected with thinly underlined inactive without vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 0,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: { width: 4, color: `blue` },
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: { width: 4, color: 'blue' }
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: { width: 6, color: `purple` },
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: { width: 6, color: 'purple' }
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
       style={{
-        backgroundColor: `red`,
+        backgroundColor: 'red',
         height: 28,
-        flexDirection: `row`,
-        borderBottomColor: `blue`,
-        borderBottomWidth: 4,
+        flexDirection: 'row',
+        borderBottomColor: 'blue',
+        borderBottomWidth: 4
       }}
       left
       right
@@ -877,18 +877,18 @@ test(`renders as expected with thinly underlined inactive without vertical paddi
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -4,
+            marginBottom: -4
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -900,18 +900,18 @@ test(`renders as expected with thinly underlined inactive without vertical paddi
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -4,
+            marginBottom: -4
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -923,21 +923,21 @@ test(`renders as expected with thinly underlined inactive without vertical paddi
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange',
             marginBottom: -4,
             borderBottomWidth: 6,
-            borderBottomColor: `purple`,
+            borderBottomColor: 'purple'
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -949,66 +949,66 @@ test(`renders as expected with thinly underlined inactive without vertical paddi
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -4,
+            marginBottom: -4
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with thinly underlined inactive and vertical padding`, () => {
+test('renders as expected with thinly underlined inactive and vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 10,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: { width: 4, color: `blue` },
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: { width: 4, color: 'blue' }
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: { width: 6, color: `purple` },
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: { width: 6, color: 'purple' }
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
       style={{
-        backgroundColor: `red`,
+        backgroundColor: 'red',
         height: 48,
-        flexDirection: `row`,
-        borderBottomColor: `blue`,
-        borderBottomWidth: 4,
+        flexDirection: 'row',
+        borderBottomColor: 'blue',
+        borderBottomWidth: 4
       }}
       left
       right
@@ -1021,18 +1021,18 @@ test(`renders as expected with thinly underlined inactive and vertical padding`,
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -4,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -1045,18 +1045,18 @@ test(`renders as expected with thinly underlined inactive and vertical padding`,
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -4,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -1068,22 +1068,22 @@ test(`renders as expected with thinly underlined inactive and vertical padding`,
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange',
             marginBottom: -4,
             borderBottomWidth: 6,
-            borderBottomColor: `purple`,
-            paddingTop: 10,
+            borderBottomColor: 'purple',
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -1096,66 +1096,66 @@ test(`renders as expected with thinly underlined inactive and vertical padding`,
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -4,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with thinly underlined active without vertical padding`, () => {
+test('renders as expected with thinly underlined active without vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 0,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: { width: 6, color: `blue` },
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: { width: 6, color: 'blue' }
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: { width: 4, color: `purple` },
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: { width: 4, color: 'purple' }
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
       style={{
-        backgroundColor: `red`,
+        backgroundColor: 'red',
         height: 28,
-        flexDirection: `row`,
-        borderBottomColor: `blue`,
-        borderBottomWidth: 6,
+        flexDirection: 'row',
+        borderBottomColor: 'blue',
+        borderBottomWidth: 6
       }}
       left
       right
@@ -1167,18 +1167,18 @@ test(`renders as expected with thinly underlined active without vertical padding
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -6,
+            marginBottom: -6
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -1190,18 +1190,18 @@ test(`renders as expected with thinly underlined active without vertical padding
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -6,
+            marginBottom: -6
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -1213,21 +1213,21 @@ test(`renders as expected with thinly underlined active without vertical padding
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange',
             marginBottom: -6,
             borderBottomWidth: 4,
-            borderBottomColor: `purple`,
+            borderBottomColor: 'purple'
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -1239,66 +1239,66 @@ test(`renders as expected with thinly underlined active without vertical padding
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            marginBottom: -6,
+            marginBottom: -6
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`renders as expected with thinly underlined active and vertical padding`, () => {
+test('renders as expected with thinly underlined active and vertical padding', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 10,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: { width: 6, color: `blue` },
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: { width: 6, color: 'blue' }
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: { width: 4, color: `purple` },
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: { width: 4, color: 'purple' }
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
+  )
+  const setTab = jest.fn()
 
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <HorizontallySymmetricalSafeAreaView
       style={{
-        backgroundColor: `red`,
+        backgroundColor: 'red',
         height: 48,
-        flexDirection: `row`,
-        borderBottomColor: `blue`,
-        borderBottomWidth: 6,
+        flexDirection: 'row',
+        borderBottomColor: 'blue',
+        borderBottomWidth: 6
       }}
       left
       right
@@ -1311,18 +1311,18 @@ test(`renders as expected with thinly underlined active and vertical padding`, (
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -6,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab A Text
@@ -1335,18 +1335,18 @@ test(`renders as expected with thinly underlined active and vertical padding`, (
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -6,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab B Text
@@ -1358,22 +1358,22 @@ test(`renders as expected with thinly underlined active and vertical padding`, (
           style={{
             flexBasis: 0,
             flexGrow: 1,
-            backgroundColor: `orange`,
+            backgroundColor: 'orange',
             marginBottom: -6,
             borderBottomWidth: 4,
-            borderBottomColor: `purple`,
-            paddingTop: 10,
+            borderBottomColor: 'purple',
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `green`,
-              fontFamily: `Example Active Font Family`,
+              color: 'green',
+              fontFamily: 'Example Active Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab C Text
@@ -1386,61 +1386,59 @@ test(`renders as expected with thinly underlined active and vertical padding`, (
             flexBasis: 0,
             flexGrow: 1,
             marginBottom: -6,
-            paddingTop: 10,
+            paddingTop: 10
           }}
           onPress={expect.any(Function)}
         >
           <Text
             numberOfLines={1}
             style={{
-              color: `yellow`,
-              fontFamily: `Example Inactive Font Family`,
+              color: 'yellow',
+              fontFamily: 'Example Inactive Font Family',
               fontSize: 20,
               lineHeight: 28,
-              textAlign: `center`,
+              textAlign: 'center'
             }}
           >
             Example Tab D Text
           </Text>
-        </Hitbox>,
+        </Hitbox>
       ]}
     </HorizontallySymmetricalSafeAreaView>
-  );
-  expect(setTab).not.toHaveBeenCalled();
-});
+  )
+  expect(setTab).not.toHaveBeenCalled()
+})
 
-test(`calls setTab once when an inactive tab is pressed`, () => {
+test('calls setTab once when an inactive tab is pressed', () => {
   const Component = createUnderlinedTopTabBarComponent(
     {
       fontSize: 20,
       verticalPadding: 0,
       inactive: {
-        color: `yellow`,
-        fontFamily: `Example Inactive Font Family`,
-        backgroundColor: `red`,
-        underline: null,
+        color: 'yellow',
+        fontFamily: 'Example Inactive Font Family',
+        backgroundColor: 'red',
+        underline: null
       },
       active: {
-        color: `green`,
-        fontFamily: `Example Active Font Family`,
-        backgroundColor: `orange`,
-        underline: null,
-      },
+        color: 'green',
+        fontFamily: 'Example Active Font Family',
+        backgroundColor: 'orange',
+        underline: null
+      }
     },
     [
-      { tab: `exampleTabA`, text: `Example Tab A Text` },
-      { tab: `exampleTabB`, text: `Example Tab B Text` },
-      { tab: `exampleTabC`, text: `Example Tab C Text` },
-      { tab: `exampleTabD`, text: `Example Tab D Text` },
+      { tab: 'exampleTabA', text: 'Example Tab A Text' },
+      { tab: 'exampleTabB', text: 'Example Tab B Text' },
+      { tab: 'exampleTabC', text: 'Example Tab C Text' },
+      { tab: 'exampleTabD', text: 'Example Tab D Text' }
     ]
-  );
-  const setTab = jest.fn();
-  const rendered = <Component tab="exampleTabC" setTab={setTab} />;
+  )
+  const setTab = jest.fn()
+  const rendered = <Component tab="exampleTabC" setTab={setTab} />
 
-  unwrapRenderedFunctionComponent(rendered).props[
-    `children`
-  ][1].props.onPress();
+  unwrapRenderedFunctionComponent(rendered).props.children[1].props.onPress()
 
-  expect(setTab).toBeCalledTimes(1);
-  expect(setTab).toBeCalledWith(`exampleTabB`);
-});
+  expect(setTab).toBeCalledTimes(1)
+  expect(setTab).toBeCalledWith('exampleTabB')
+})

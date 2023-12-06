@@ -1,12 +1,12 @@
-import * as React from "react";
-import { Text } from "react-native";
-import * as TestRenderer from "react-test-renderer";
-import { createFlashMessageComponent } from "../../..";
-import { Hitbox } from "../Hitbox";
+import * as React from 'react'
+import { Text } from 'react-native'
+import * as TestRenderer from 'react-test-renderer'
+import { createFlashMessageComponent } from '../../..'
+import { Hitbox } from '../Hitbox'
 
-test(`can initially be hidden`, () => {
+test('can initially be hidden', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -14,44 +14,44 @@ test(`can initially be hidden`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
-  const renderer = TestRenderer.create(<Component state={null} />);
+  const renderer = TestRenderer.create(<Component state={null} />)
 
-  expect(renderer.toTree()?.rendered).toBeNull();
+  expect(renderer.toTree()?.rendered).toBeNull()
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`can initially be shown`, () => {
+test('can initially be shown', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -59,42 +59,42 @@ test(`can initially be shown`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -102,35 +102,35 @@ test(`can initially be shown`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`can change from hidden to visible`, () => {
+test('can change from hidden to visible', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -138,44 +138,44 @@ test(`can change from hidden to visible`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
-  const renderer = TestRenderer.create(<Component state={null} />);
+  const renderer = TestRenderer.create(<Component state={null} />)
 
   renderer.update(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -183,35 +183,35 @@ test(`can change from hidden to visible`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`can change to another message when initially shown`, () => {
+test('can change to another message when initially shown', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -219,51 +219,51 @@ test(`can change to another message when initially shown`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message A`,
+        type: 'exampleTypeB',
+        message: 'Example Message A'
       }}
     />
-  );
+  )
 
   renderer.update(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message B`,
+        type: 'exampleTypeB',
+        message: 'Example Message B'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -271,35 +271,35 @@ test(`can change to another message when initially shown`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message B`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message B'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`can change to another type when initially shown`, () => {
+test('can change to another type when initially shown', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -307,51 +307,51 @@ test(`can change to another type when initially shown`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeC`,
-        message: `Example Message`,
+        type: 'exampleTypeC',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   renderer.update(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -359,35 +359,35 @@ test(`can change to another type when initially shown`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`remains open if unchanged`, () => {
+test('remains open if unchanged', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -395,51 +395,51 @@ test(`remains open if unchanged`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   renderer.update(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -447,35 +447,35 @@ test(`remains open if unchanged`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`closes when pressed`, () => {
+test('closes when pressed', async () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -483,57 +483,57 @@ test(`closes when pressed`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
-  TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onPress`
-    ]();
-  });
+      'onPress'
+    ]()
+  })
 
-  expect(renderer.toTree()?.rendered).toBeNull();
+  expect(renderer.toTree()?.rendered).toBeNull()
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`remains closed when the state does not change`, () => {
+test('remains closed when the state does not change', async () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -541,66 +541,66 @@ test(`remains closed when the state does not change`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
-  TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onPress`
-    ]();
-  });
+      'onPress'
+    ]()
+  })
 
   renderer.update(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
-  expect(renderer.toTree()?.rendered).toBeNull();
+  expect(renderer.toTree()?.rendered).toBeNull()
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`shows again when the message changes`, () => {
+test('shows again when the message changes', async () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -608,57 +608,57 @@ test(`shows again when the message changes`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message A`,
+        type: 'exampleTypeB',
+        message: 'Example Message A'
       }}
     />
-  );
+  )
 
-  TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onPress`
-    ]();
-  });
+      'onPress'
+    ]()
+  })
 
   renderer.update(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message B`,
+        type: 'exampleTypeB',
+        message: 'Example Message B'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -666,35 +666,35 @@ test(`shows again when the message changes`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message B`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message B'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`shows again when the type changes`, () => {
+test('shows again when the type changes', async () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -702,57 +702,57 @@ test(`shows again when the type changes`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeC`,
-        message: `Example Message`,
+        type: 'exampleTypeC',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
-  TestRenderer.act(() => {
+  void TestRenderer.act(() => {
     (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree).props[
-      `onPress`
-    ]();
-  });
+      'onPress'
+    ]()
+  })
 
   renderer.update(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -760,35 +760,35 @@ test(`shows again when the type changes`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`closes when withdrawn`, () => {
+test('closes when withdrawn', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -796,53 +796,53 @@ test(`closes when withdrawn`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
-  renderer.update(<Component state={null} />);
+  renderer.update(<Component state={null} />)
 
-  expect(renderer.toTree()?.rendered).toBeNull();
+  expect(renderer.toTree()?.rendered).toBeNull()
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`renders as expected without border radius`, () => {
+test('renders as expected without border radius', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 0,
     horizontalPadding: 41,
@@ -850,42 +850,42 @@ test(`renders as expected without border radius`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -893,34 +893,34 @@ test(`renders as expected without border radius`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`renders as expected without horizontal padding`, () => {
+test('renders as expected without horizontal padding', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 0,
@@ -928,42 +928,42 @@ test(`renders as expected without horizontal padding`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -971,34 +971,34 @@ test(`renders as expected without horizontal padding`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`renders as expected without vertical padding`, () => {
+test('renders as expected without vertical padding', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -1006,42 +1006,42 @@ test(`renders as expected without vertical padding`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -1049,34 +1049,34 @@ test(`renders as expected without vertical padding`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`renders as expected without borders`, () => {
+test('renders as expected without borders', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -1084,39 +1084,39 @@ test(`renders as expected without borders`, () => {
     bottomMargin: 31,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
-        border: null,
+        backgroundColor: 'blue',
+        color: 'yellow',
+        border: null
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -1124,33 +1124,33 @@ test(`renders as expected without borders`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         paddingHorizontal: 41,
         paddingVertical: 57,
         borderRadius: 12,
-        marginBottom: 31,
+        marginBottom: 31
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})
 
-test(`renders as expected without bottom margin`, () => {
+test('renders as expected without bottom margin', () => {
   const Component = createFlashMessageComponent({
-    fontFamily: `Example Font Family`,
+    fontFamily: 'Example Font Family',
     fontSize: 25,
     radius: 12,
     horizontalPadding: 41,
@@ -1158,42 +1158,42 @@ test(`renders as expected without bottom margin`, () => {
     bottomMargin: 0,
     types: {
       exampleTypeA: {
-        backgroundColor: `red`,
-        color: `green`,
-        border: null,
+        backgroundColor: 'red',
+        color: 'green',
+        border: null
       },
       exampleTypeB: {
-        backgroundColor: `blue`,
-        color: `yellow`,
+        backgroundColor: 'blue',
+        color: 'yellow',
         border: {
           width: 15,
-          color: `orange`,
-        },
+          color: 'orange'
+        }
       },
       exampleTypeC: {
-        backgroundColor: `purple`,
-        color: `cyan`,
-        border: null,
+        backgroundColor: 'purple',
+        color: 'cyan',
+        border: null
       },
       exampleTypeD: {
-        backgroundColor: `magenta`,
-        color: `black`,
+        backgroundColor: 'magenta',
+        color: 'black',
         border: {
           width: 24,
-          color: `white`,
-        },
-      },
-    },
-  });
+          color: 'white'
+        }
+      }
+    }
+  })
 
   const renderer = TestRenderer.create(
     <Component
       state={{
-        type: `exampleTypeB`,
-        message: `Example Message`,
+        type: 'exampleTypeB',
+        message: 'Example Message'
       }}
     />
-  );
+  )
 
   expect(renderer.toTree()?.rendered).toMatchObject({
     type: Hitbox,
@@ -1201,27 +1201,27 @@ test(`renders as expected without bottom margin`, () => {
       onPress: expect.any(Function),
       disabled: false,
       style: {
-        backgroundColor: `blue`,
+        backgroundColor: 'blue',
         borderWidth: 15,
-        borderColor: `orange`,
+        borderColor: 'orange',
         paddingHorizontal: 41,
         paddingVertical: 57,
-        borderRadius: 12,
+        borderRadius: 12
       },
       children: expect.objectContaining({
         type: Text,
         props: {
           style: {
-            fontFamily: `Example Font Family`,
+            fontFamily: 'Example Font Family',
             fontSize: 25,
             lineHeight: 35,
-            color: `yellow`,
+            color: 'yellow'
           },
-          children: `Example Message`,
-        },
-      }),
-    },
-  });
+          children: 'Example Message'
+        }
+      })
+    }
+  })
 
-  renderer.unmount();
-});
+  renderer.unmount()
+})

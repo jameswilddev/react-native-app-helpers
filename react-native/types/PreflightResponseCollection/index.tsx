@@ -1,5 +1,5 @@
-import type { Json } from "../Json";
-import type { PreflightResponseCollectionItem } from "../PreflightResponseCollectionItem";
+import type { Json } from '../Json'
+import type { PreflightResponseCollectionItem } from '../PreflightResponseCollectionItem'
 
 /**
  * A collection within a response to a successful preflight request.
@@ -7,13 +7,4 @@ import type { PreflightResponseCollectionItem } from "../PreflightResponseCollec
  *                                         should be held against a collection
  *                                         item, e.g. strings for progress bars.
  */
-export type PreflightResponseCollection<
-  TAdditionalCollectionItemData extends Record<string, Json>
-> = {
-  /**
-   * The items within the collection.
-   */
-  readonly [
-    uuid: string
-  ]: PreflightResponseCollectionItem<TAdditionalCollectionItemData>;
-};
+export type PreflightResponseCollection<TAdditionalCollectionItemData extends Record<string, Json>> = Readonly<Record<string, PreflightResponseCollectionItem<TAdditionalCollectionItemData>>>

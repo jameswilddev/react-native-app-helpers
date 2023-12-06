@@ -1,8 +1,9 @@
-import * as React from "react";
-import type { SvgIcon } from "../../types/SvgIcon";
-import type { ControlStyle } from "../../types/ControlStyle";
-import { createFullHeightPopoverComponent } from "../createFullHeightPopoverComponent";
-import { createSearchableMultiSelectChildrenComponent } from "./createSearchableMultiSelectChildrenComponent";
+import * as React from 'react'
+import type { SvgIcon } from '../../types/SvgIcon'
+import type { ControlStyle } from '../../types/ControlStyle'
+import { createFullHeightPopoverComponent } from '../createFullHeightPopoverComponent'
+import { createSearchableMultiSelectChildrenComponent } from './createSearchableMultiSelectChildrenComponent'
+import type { SearchableMultiSelectProps } from '../../types/SearchableMultiSelectProps'
 
 /**
  * Creates a new React component which provides a searchable list of options
@@ -15,95 +16,51 @@ import { createSearchableMultiSelectChildrenComponent } from "./createSearchable
  */
 export function createSearchableMultiSelectComponent<
   T extends null | number | string
->(
+> (
   controlStyle: ControlStyle,
   rightIcon: null | SvgIcon
-): React.FunctionComponent<{
-  /**
-   * When true, it will not be possible to select an option.  It will otherwise
-   * be possible to do so.
-   */
-  readonly disabled?: undefined | boolean;
-
-  /**
-   * Text to be shown on the button when no value has been selected.
-   */
-  readonly placeholder: string;
-
-  /**
-   * The current values.
-   */
-  readonly values: ReadonlyArray<T>;
-
-  /**
-   * Invoked when the current values change.
-   * @param to The values which were selected.
-   */
-  onChange(to: ReadonlyArray<T>): void;
-
-  /**
-   * The options displayed.
-   */
-  readonly options: ReadonlyArray<{
-    /**
-     * The label to show to the user (also used for searching).
-     */
-    readonly label: string;
-
-    /**
-     * The value which can be selected.
-     */
-    readonly value: T;
-  }>;
-
-  /**
-   * Text which is displayed when no options match the user's input.
-   */
-  readonly noMatchesText: string;
-
-  /**
-   * The icon to show on the right side of the button.
-   */
-  readonly rightIcon?: SvgIcon;
-}> {
+): React.FunctionComponent<SearchableMultiSelectProps<T>> {
   const FullHeightPopover = createFullHeightPopoverComponent(
     controlStyle,
     rightIcon
-  );
+  )
   const ContentComponent =
-    createSearchableMultiSelectChildrenComponent<T>(controlStyle);
+    createSearchableMultiSelectChildrenComponent<T>(controlStyle)
 
-  return ({
+  const SearchableMultiSelect: React.FunctionComponent<SearchableMultiSelectProps<T>> = ({
     disabled,
     placeholder,
     values,
     onChange,
     options,
-    noMatchesText,
+    noMatchesText
   }) => {
     const selectedOptionLabels = options
       .filter((option) => values.includes(option.value))
       .map((option) => option.label)
       .sort()
-      .join(`, `);
+      .join(', ')
 
     return (
       <FullHeightPopover
-        disabled={disabled || options.length === 0}
+        disabled={disabled === true || options.length === 0}
         valid
-        label={selectedOptionLabels || null}
+        label={selectedOptionLabels === '' ? null : selectedOptionLabels}
         placeholder={placeholder}
-        children={(close) => (
+      >
+        {(close) => (
           <ContentComponent
             options={options}
             values={values}
             onChange={onChange}
-            placeholder={selectedOptionLabels || placeholder}
+            placeholder={selectedOptionLabels === '' ? placeholder : selectedOptionLabels}
             close={close}
             noMatchesText={noMatchesText}
           />
         )}
-      />
-    );
-  };
+      </FullHeightPopover>
+    )
+  }
+
+  return SearchableMultiSelect
 }

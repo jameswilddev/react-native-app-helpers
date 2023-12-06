@@ -6,5 +6,5 @@ export type Json =
   | boolean
   | number
   | string
-  | ReadonlyArray<Json>
-  | { readonly [key: string]: Json };
+  | readonly Json[]
+  | { readonly [key: string]: Json }

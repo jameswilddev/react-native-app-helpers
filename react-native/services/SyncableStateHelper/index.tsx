@@ -1,7 +1,7 @@
-import type { SyncableStateCollectionItem } from "../../types/SyncableStateCollectionItem";
-import type { SyncableSchema } from "../../types/SyncableSchema";
-import type { SyncableState } from "../../types/SyncableState";
-import type { SyncConfiguration } from "../../types/SyncConfiguration";
+import type { SyncableStateCollectionItem } from '../../types/SyncableStateCollectionItem'
+import type { SyncableSchema } from '../../types/SyncableSchema'
+import type { SyncableState } from '../../types/SyncableState'
+import type { SyncConfiguration } from '../../types/SyncConfiguration'
 
 /**
  * Provides helpers for working with states which can be synced.
@@ -17,10 +17,10 @@ export class SyncableStateHelper<
   /**
    * @param syncConfiguration The sync configuration to use.
    */
-  constructor(
+  constructor (
     private readonly syncConfiguration: SyncConfiguration<
-      TSchema,
-      TAdditionalCollectionData
+    TSchema,
+    TAdditionalCollectionData
     >
   ) {}
 
@@ -33,38 +33,38 @@ export class SyncableStateHelper<
    * @param data          The data of the collection item to insert or update.
    * @param setState      Called when the next state has been computed.
    */
-  upsertCollection<T extends keyof TSchema[`collections`]>(
+  upsertCollection<T extends keyof TSchema['collections']>(
     state: SyncableState<TSchema>,
     collectionKey: T,
     uuid: string,
-    data: TSchema[`collections`][T],
+    data: TSchema['collections'][T],
     setState: (to: SyncableState<TSchema>) => void
   ): void {
     const syncConfigurationCollection =
-      this.syncConfiguration.collections[collectionKey];
+      this.syncConfiguration.collections[collectionKey]
     const nextFileUuids = syncConfigurationCollection
       .listFiles(uuid, data)
-      .map((file) => file.uuid);
+      .map((file) => file.uuid)
 
-    const collection = state.collections[collectionKey];
+    const collection = state.collections[collectionKey]
 
     if (Object.prototype.hasOwnProperty.call(collection, uuid)) {
       const previousItem = collection[uuid] as SyncableStateCollectionItem<
-        TSchema[`collections`][T]
-      >;
+      TSchema['collections'][T]
+      >
 
       const previousFiles = syncConfigurationCollection.listFiles(
         uuid,
         previousItem.data
-      );
+      )
 
-      const previousFileUuids = previousFiles.map((file) => file.uuid);
+      const previousFileUuids = previousFiles.map((file) => file.uuid)
 
       const deletedFiles = previousFiles.filter(
         (previousFile) => !nextFileUuids.includes(previousFile.uuid)
-      );
+      )
 
-      const deletedFileUuids = deletedFiles.map((file) => file.uuid);
+      const deletedFileUuids = deletedFiles.map((file) => file.uuid)
 
       setState({
         ...state,
@@ -73,10 +73,10 @@ export class SyncableStateHelper<
           [collectionKey]: {
             ...collection,
             [uuid]: {
-              status: `awaitingPush`,
-              data,
-            },
-          },
+              status: 'awaitingPush',
+              data
+            }
+          }
         },
         addedFileUuids: [
           ...state.addedFileUuids.filter(
@@ -84,13 +84,13 @@ export class SyncableStateHelper<
           ),
           ...nextFileUuids.filter(
             (fileUuid) => !previousFileUuids.includes(fileUuid)
-          ),
+          )
         ],
         deletedFileRoutes: [
           ...state.deletedFileRoutes,
-          ...deletedFiles.map((file) => file.route),
-        ],
-      });
+          ...deletedFiles.map((file) => file.route)
+        ]
+      })
     } else {
       setState({
         ...state,
@@ -99,13 +99,13 @@ export class SyncableStateHelper<
           [collectionKey]: {
             ...collection,
             [uuid]: {
-              status: `awaitingPush`,
-              data,
-            },
-          },
+              status: 'awaitingPush',
+              data
+            }
+          }
         },
-        addedFileUuids: [...state.addedFileUuids, ...nextFileUuids],
-      });
+        addedFileUuids: [...state.addedFileUuids, ...nextFileUuids]
+      })
     }
   }
 }

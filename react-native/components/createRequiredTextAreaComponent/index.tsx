@@ -1,6 +1,7 @@
-import * as React from "react";
-import type { ControlStyle } from "../../..";
-import { createInputComponent } from "../createInputComponent";
+import * as React from 'react'
+import type { ControlStyle } from '../../..'
+import { createInputComponent } from '../createInputComponent'
+import type { RequiredTextAreaProps } from '../../types/RequiredTextAreaProps'
 
 /**
  * Creates a new input component pre-configured as a required text area.
@@ -19,70 +20,46 @@ export const createRequiredTextAreaComponent = (
   rightIcon: null | React.ReactNode | JSX.Element,
   minimumLength: null | number,
   maximumLength: null | number
-): React.FunctionComponent<{
-  /**
-   * The value to edit.  When undefined, it is treated as an invalid empty
-   * string.
-   */
-  readonly value: undefined | string;
-
-  /**
-   * Invoked when the user edits the text in the box.
-   * @param parsed   The value parsed, or undefined should it not be parseable.
-   * @param complete True when the user has finished editing, otherwise, false.
-   */
-  onChange(parsed: undefined | string, complete: boolean): void;
-
-  /**
-   * When true, the text box is rendered semi-transparently and does not accept
-   * focus or input.
-   */
-  readonly disabled?: undefined | boolean;
-
-  /**
-   * Text to be shown when no value has been entered.
-   */
-  readonly placeholder: string;
-}> => {
+): React.FunctionComponent<RequiredTextAreaProps> => {
   const RequiredTextInputComponent = createInputComponent<string, null>(
     (value) =>
       value
         .trim()
-        .replace(`\r\n`, `\n`) // Normalize CRLF -> LF.
-        .replace(`\r`, `\n`) // Normalize CR -> LF.
-        .replace(/[^\S\n]*\n[^\S\n]*/g, `\n`) // Remove white space before or after new lines.
-        .replace(/\n\n\n+/g, `\n\n`), // Limit to two LFs in a row.
+        .replace('\r\n', '\n') // Normalize CRLF -> LF.
+        .replace('\r', '\n') // Normalize CR -> LF.
+        .replace(/[^\S\n]*\n[^\S\n]*/g, '\n') // Remove white space before or after new lines.
+        .replace(/\n\n\n+/g, '\n\n'), // Limit to two LFs in a row.
     (unparsed) => {
-      if (unparsed.trim() === ``) {
-        return undefined;
+      if (unparsed.trim() === '') {
+        return undefined
       } else {
         const parsed = unparsed
           .trim()
-          .replace(`\r\n`, `\n`) // Normalize CRLF -> LF.
-          .replace(`\r`, `\n`) // Normalize CR -> LF.
-          .replace(/[^\S\n]*\n[^\S\n]*/g, `\n`) // Remove white space before or after new lines.
-          .replace(/\n\n\n+/g, `\n\n`); // Limit to two LFs in a row.
+          .replace('\r\n', '\n') // Normalize CRLF -> LF.
+          .replace('\r', '\n') // Normalize CR -> LF.
+          .replace(/[^\S\n]*\n[^\S\n]*/g, '\n') // Remove white space before or after new lines.
+          .replace(/\n\n\n+/g, '\n\n') // Limit to two LFs in a row.
 
         if (minimumLength !== null && parsed.length < minimumLength) {
-          return undefined;
+          return undefined
         } else if (maximumLength !== null && parsed.length > maximumLength) {
-          return undefined;
+          return undefined
         } else {
-          return parsed;
+          return parsed
         }
       }
     },
     controlStyle,
     true,
-    `off`,
-    `default`,
-    `sentences`,
+    'off',
+    'default',
+    'sentences',
     false,
     true,
-    `left`
-  );
+    'left'
+  )
 
-  return ({ value, onChange, disabled, placeholder }) => (
+  const RequiredTextArea: React.FunctionComponent<RequiredTextAreaProps> = ({ value, onChange, disabled, placeholder }) => (
     <RequiredTextInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -96,5 +73,7 @@ export const createRequiredTextAreaComponent = (
         /* No-op. */
       }}
     />
-  );
-};
+  )
+
+  return RequiredTextArea
+}

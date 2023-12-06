@@ -2,41 +2,41 @@
 (global as unknown as { fail: (text: string) => void }).fail = (
   text: string
 ) => {
-  expect(text).toBeNull();
+  expect(text).toBeNull()
 };
 
-(global as unknown as { __DEV__: boolean }).__DEV__ = false;
+(global as unknown as { __DEV__: boolean }).__DEV__ = false
 
 class AbortSignalMock {
-  private readonly callbacks: (() => void)[] = [];
+  private readonly callbacks: Array<() => void> = []
 
-  addEventListener(type: string, listener: () => void): void {
-    if (type !== `abort`) {
-      throw new Error(`Invalid type "${type}".`);
+  addEventListener (type: string, listener: () => void): void {
+    if (type !== 'abort') {
+      throw new Error(`Invalid type "${type}".`)
     } else if (this.callbacks.includes(listener)) {
-      throw new Error(`Duplicate event listener.`);
+      throw new Error('Duplicate event listener.')
     } else {
-      this.callbacks.push(listener);
+      this.callbacks.push(listener)
     }
   }
 
-  removeEventListener(type: string, listener: () => void): void {
-    if (type !== `abort`) {
-      throw new Error(`Invalid type "${type}".`);
+  removeEventListener (type: string, listener: () => void): void {
+    if (type !== 'abort') {
+      throw new Error(`Invalid type "${type}".`)
     } else {
-      const index = this.callbacks.indexOf(listener);
+      const index = this.callbacks.indexOf(listener)
 
       if (index === -1) {
-        throw new Error(`Missing event listener.`);
+        throw new Error('Missing event listener.')
       } else {
-        this.callbacks.splice(index, 1);
+        this.callbacks.splice(index, 1)
       }
     }
   }
 
-  raise() {
+  raise (): void {
     for (const callback of [...this.callbacks]) {
-      callback();
+      callback()
     }
   }
 }
@@ -44,246 +44,245 @@ class AbortSignalMock {
 (
   global as unknown as { AbortController: unknown }
 ).AbortController = class AbortController {
-  readonly signal = new AbortSignalMock();
+  readonly signal = new AbortSignalMock()
 
-  abort() {
-    this.signal.raise();
+  abort (): void {
+    this.signal.raise()
   }
 };
 
-(global as unknown as { AbortSignal: unknown }).AbortSignal = AbortSignalMock;
+(global as unknown as { AbortSignal: unknown }).AbortSignal = AbortSignalMock
 
-jest.mock(`react-native/Libraries/Utilities/BackHandler`, () =>
-  jest.requireActual(`react-native/Libraries/Utilities/__mocks__/BackHandler`)
-);
+jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
+  jest.requireActual('react-native/Libraries/Utilities/__mocks__/BackHandler')
+)
 
-jest.mock(`react-native/Libraries/Linking/Linking`, () => ({
-  openURL: jest.fn(),
-}));
+jest.mock('react-native/Libraries/Linking/Linking', () => ({
+  openURL: jest.fn()
+}))
 
-jest.mock(`expo-permissions`, () => {
+jest.mock('expo-permissions', () => {
   return {
     askAsync: jest.fn(),
-    MEDIA_LIBRARY: `Example Media Library`,
-    CAMERA: `Example Camera`,
-  };
-});
+    MEDIA_LIBRARY: 'Example Media Library',
+    CAMERA: 'Example Camera'
+  }
+})
 
-jest.mock(`react-native-gesture-handler`, () => ({
-  Swipeable: class Swipeable extends jest.requireActual(`react`).Component {
-    close = jest.fn();
-    render() {
-      return null;
+jest.mock('react-native-gesture-handler', () => ({
+  Swipeable: class Swipeable extends jest.requireActual('react').Component {
+    close = jest.fn()
+    render (): React.ReactNode {
+      return null
     }
-  },
-}));
+  }
+}))
 
-jest.mock(`expo-intent-launcher`, () => {
+jest.mock('expo-intent-launcher', () => {
   return {
     startActivityAsync: jest.fn(),
     ActivityAction: {
-      APPLICATION_DETAILS_SETTINGS: `Example Application Details Settings`,
-      APPLICATION_SETTINGS: `Example Application Settings`,
-    },
-  };
-});
+      APPLICATION_DETAILS_SETTINGS: 'Example Application Details Settings',
+      APPLICATION_SETTINGS: 'Example Application Settings'
+    }
+  }
+})
 
-jest.mock(`expo-constants`, () => {
-  return {};
-});
+jest.mock('expo-constants', () => {
+  return {}
+})
 
-jest.mock(`expo-media-library`, () => {
+jest.mock('expo-media-library', () => {
   return {
-    saveToLibraryAsync: jest.fn(),
-  };
-});
+    saveToLibraryAsync: jest.fn()
+  }
+})
 
-jest.mock(`expo-image-picker`, () => {
+jest.mock('expo-image-picker', () => {
   return {
     launchCameraAsync: jest.fn(),
     launchImageLibraryAsync: jest.fn(),
     MediaTypeOptions: {
-      Images: `Example Images`,
-    },
-  };
-});
+      Images: 'Example Images'
+    }
+  }
+})
 
-jest.mock(`expo-file-system`, () => {
-  const uuid = jest.requireActual(`uuid`);
-  const fs = jest.requireActual(`fs`);
-  const os = jest.requireActual(`os`);
-  const path = jest.requireActual(`path`);
+jest.mock('expo-crypto', () => {
+  const crypto = jest.requireActual('crypto')
 
-  const documentDirectory = path.join(os.tmpdir(), uuid.v4());
+  return {
+    randomUUID: () => crypto.randomUUID().toUpperCase()
+  }
+})
 
-  function isError(error: unknown): error is NodeJS.ErrnoException {
+jest.mock('expo-file-system', () => {
+  const crypto = jest.requireActual('crypto')
+  const fs = jest.requireActual('fs')
+  const os = jest.requireActual('os')
+  const path = jest.requireActual('path')
+
+  const documentDirectory = path.join(os.tmpdir(), crypto.randomUUID().toLowerCase())
+
+  function isError (error: unknown): error is NodeJS.ErrnoException {
     return (
-      Object.prototype.hasOwnProperty.call(error, `code`) &&
-      typeof (error as { readonly code: unknown }).code === `string`
-    );
+      Object.prototype.hasOwnProperty.call(error, 'code') &&
+      typeof (error as { readonly code: unknown }).code === 'string'
+    )
   }
 
   return {
     documentDirectory,
-    async makeDirectoryAsync(
+    async makeDirectoryAsync (
       fileUri: string,
       options?: {
-        intermediates?: boolean;
+        intermediates?: boolean
       }
     ): Promise<void> {
-      await fs.promises.mkdir(fileUri, { recursive: !!options?.intermediates });
+      await fs.promises.mkdir(fileUri, { recursive: options?.intermediates === true })
     },
-    async getInfoAsync(
+    async getInfoAsync (
       fileUri: string,
       options?: unknown
     ): Promise<
       | {
-          exists: true;
-          uri: string;
-          size: number;
-          isDirectory: boolean;
-          modificationTime: number;
-          md5?: string;
-        }
+        exists: true
+        uri: string
+        size: number
+        isDirectory: boolean
+        modificationTime: number
+        md5?: string
+      }
       | {
-          exists: false;
-          uri: string;
-          size: undefined;
-          isDirectory: false;
-          modificationTime: undefined;
-          md5: undefined;
-        }
-    > {
+        exists: false
+        uri: string
+        size: undefined
+        isDirectory: false
+        modificationTime: undefined
+        md5: undefined
+      }
+      > {
       if (options === undefined) {
         try {
-          const stats = await fs.promises.stat(fileUri);
+          const stats = await fs.promises.stat(fileUri)
 
           return {
             exists: true,
             uri: fileUri,
             size: stats.size,
             isDirectory: stats.isDirectory(),
-            modificationTime: stats.mtimeMs,
-          };
+            modificationTime: stats.mtimeMs
+          }
         } catch (error) {
-          if (isError(error) && error.code === `ENOENT`) {
+          if (isError(error) && error.code === 'ENOENT') {
             return {
               exists: false,
               uri: fileUri,
               size: undefined,
               isDirectory: false,
               modificationTime: undefined,
-              md5: undefined,
-            };
+              md5: undefined
+            }
           } else {
-            throw error;
+            throw error
           }
         }
       } else {
         throw new Error(
-          `expo-file-system.getInfoAsync's mock does not support options.`
-        );
+          'expo-file-system.getInfoAsync\'s mock does not support options.'
+        )
       }
     },
-    async writeAsStringAsync(
+    async writeAsStringAsync (
       fileUri: string,
       contents: string,
       options?: unknown
     ): Promise<void> {
       if (options === undefined) {
-        await fs.promises.writeFile(fileUri, contents, `utf8`);
+        await fs.promises.writeFile(fileUri, contents, 'utf8')
       } else {
         throw new Error(
-          `expo-file-system.writeAsFileAsync's mock does not support options.`
-        );
+          'expo-file-system.writeAsFileAsync\'s mock does not support options.'
+        )
       }
     },
-    async readAsStringAsync(
+    async readAsStringAsync (
       fileUri: string,
       options?: unknown
     ): Promise<string> {
       if (options === undefined) {
-        return await fs.promises.readFile(fileUri, `utf8`);
+        return fs.promises.readFile(fileUri, 'utf8')
       } else {
         throw new Error(
-          `expo-file-system.readAsStringAsync's mock does not support options.`
-        );
+          'expo-file-system.readAsStringAsync\'s mock does not support options.'
+        )
       }
     },
     createUploadTask: jest.fn(),
     downloadAsync: jest.fn(),
     deleteAsync: jest.fn(),
     FileSystemUploadType: {
-      BINARY_CONTENT: `Test Binary Content`,
-    },
-  };
-});
+      BINARY_CONTENT: 'Test Binary Content'
+    }
+  }
+})
 
-jest.mock(`expo-secure-store`, () => {
-  const encryptedStorage = new Map<string, string>();
+jest.mock('expo-secure-store', () => {
+  const encryptedStorage = new Map<string, string>()
 
   return {
-    async getItemAsync(key: string, options?: unknown): Promise<null | string> {
+    async getItemAsync (key: string, options?: unknown): Promise<null | string> {
       if (options === undefined) {
-        await new Promise<void>((resolve) => setTimeout(resolve, 50));
-        return encryptedStorage.get(key) ?? null;
+        await new Promise<void>((resolve) => setTimeout(resolve, 50))
+        return encryptedStorage.get(key) ?? null
       } else {
         throw new Error(
-          `expo-secure-store.getItemAsync's mock does not support options.`
-        );
+          'expo-secure-store.getItemAsync\'s mock does not support options.'
+        )
       }
     },
-    async setItemAsync(
+    async setItemAsync (
       key: string,
       value: string,
       options?: unknown
     ): Promise<void> {
       if (options === undefined) {
-        await new Promise<void>((resolve) => setTimeout(resolve, 50));
-        encryptedStorage.set(key, value);
+        await new Promise<void>((resolve) => setTimeout(resolve, 50))
+        encryptedStorage.set(key, value)
       } else {
         throw new Error(
-          `expo-secure-store.setItemAsync's mock does not support options.`
-        );
+          'expo-secure-store.setItemAsync\'s mock does not support options.'
+        )
       }
-    },
-  };
-});
+    }
+  }
+})
 
 expect.extend({
-  toBeAFunctionWithTheStaticProperties(received, expected) {
+  toBeAFunctionWithTheStaticProperties (received, expected) {
     if (
       received instanceof Function &&
-      Object.prototype.hasOwnProperty.call(received, `arguments`)
+      Object.prototype.hasOwnProperty.call(received, 'arguments')
     ) {
-      const asObject: Record<string, unknown> = {};
+      const asObject: Record<string, unknown> = {}
 
       for (const key in received) {
-        asObject[key] = received[key];
+        asObject[key] = received[key]
       }
 
-      expect(asObject).toMatchObject(expected);
+      expect(asObject).toMatchObject(expected)
 
       return {
         pass: true,
         message: () =>
-          `Expected ${received} to be a Function with properties ${expected}`,
-      };
+          `Expected ${received} to be a Function with properties ${expected}`
+      }
     } else {
       return {
         pass: false,
         message: () =>
-          `Expected ${received} to be a Function with properties ${expected}`,
-      };
+          `Expected ${received} to be a Function with properties ${expected}`
+      }
     }
-  },
-});
-
-// eslint-disable-next-line @typescript-eslint/no-namespace
-declare namespace jest {
-  interface Matchers<R> {
-    toBeAFunctionWithTheStaticProperties(
-      properties: Record<string, unknown>
-    ): R;
   }
-}
+})

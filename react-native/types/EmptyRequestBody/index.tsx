@@ -1,9 +1,9 @@
 /**
  * A request body is to be empty.
  */
-export type EmptyRequestBody = {
+export interface EmptyRequestBody {
   /**
    * Indicates the type of request body.
    */
-  readonly type: `empty`;
-};
+  readonly type: 'empty'
+}

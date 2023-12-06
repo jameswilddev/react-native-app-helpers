@@ -9,10 +9,10 @@ export const unwrapRenderedFunctionComponent = (
 ): JSX.Element => {
   if (
     element.type instanceof Function &&
-    Object.prototype.hasOwnProperty.call(element.type, `arguments`)
+    Object.prototype.hasOwnProperty.call(element.type, 'arguments')
   ) {
-    return element.type(element.props);
+    return element.type(element.props)
   } else {
-    throw new Error(`Can only unwrap rendered function components.`);
+    throw new Error('Can only unwrap rendered function components.')
   }
-};
+}

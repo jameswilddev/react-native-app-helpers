@@ -1,27 +1,27 @@
-import * as React from "react";
-import type { FunctionComponent } from "react";
-import type { RouteParameters } from "../../types/RouteParameters";
-import type { StackRouterState } from "../../types/StackRouterState";
-import { StyleSheet, View, ViewStyle } from "react-native";
-import type { StackRouteTable } from "../../types/StackRouteTable";
-import { useBackButton } from "../../hooks/useBackButton";
-import { Card } from "./Card";
+import * as React from 'react'
+import type { FunctionComponent } from 'react'
+import type { RouteParameters } from '../../types/RouteParameters'
+import { StyleSheet, View, type ViewStyle } from 'react-native'
+import type { StackRouteTable } from '../../types/StackRouteTable'
+import { useBackButton } from '../../hooks/useBackButton'
+import { Card } from './Card'
+import type { StackRoutingProps } from '../../types/StackRoutingProps'
 
 const viewBase: ViewStyle = {
-  position: `absolute`,
-  height: `100%`,
-  width: `100%`,
-};
+  position: 'absolute',
+  height: '100%',
+  width: '100%'
+}
 
 const styles = StyleSheet.create({
   activeView: {
-    ...viewBase,
+    ...viewBase
   },
   inactiveView: {
     ...viewBase,
-    display: `none`,
-  },
-});
+    display: 'none'
+  }
+})
 
 /**
  * Creates a React component which displays the top of a stack of routes (though
@@ -34,45 +34,30 @@ const styles = StyleSheet.create({
  */
 export const createStackRoutingComponent = <
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 >(
-  routeTable: StackRouteTable<TRouteParameters, TOtherProps>
-): FunctionComponent<
-  {
-    readonly routeState: StackRouterState<TRouteParameters>;
-    readonly setRouteState: (to: StackRouterState<TRouteParameters>) => void;
-
-    /**
-     * Called when the user makes a gesture to go back, e.g. swiping from the
-     * left or pressing the hardware "back" button.
-     * @param pop    Call to proceed, popping the current card from the top of
-     *               the stack.
-     * @param cancel Call to cancel; for a swipe gesture, this will unswipe the
-     *               top card.
-     */
-    onBack(pop: () => void, cancel: () => void): void;
-  } & TOtherProps
-> => {
-  return (props) => {
+    routeTable: StackRouteTable<TRouteParameters, TOtherProps>
+  ): FunctionComponent<StackRoutingProps<TRouteParameters, TOtherProps>> => {
+  const StackRouting: FunctionComponent<StackRoutingProps<TRouteParameters, TOtherProps>> = (props) => {
     useBackButton(() => {
       if (props.routeState.length > 1) {
         props.onBack(
           () => {
-            const popped = [...props.routeState];
-            popped.pop();
+            const popped = [...props.routeState]
+            popped.pop()
 
-            props.setRouteState(popped);
+            props.setRouteState(popped)
           },
           () => {
             // No swipe to cancel.
           }
-        );
+        )
 
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
-    });
+    })
 
     return (
       <React.Fragment>
@@ -86,15 +71,15 @@ export const createStackRoutingComponent = <
                   : styles.inactiveView
               }
               pointerEvents={
-                index === props.routeState.length - 1 ? `auto` : `none`
+                index === props.routeState.length - 1 ? 'auto' : 'none'
               }
             >
               <Card
                 pop={() => {
-                  const popped = [...props.routeState];
-                  popped.pop();
+                  const popped = [...props.routeState]
+                  popped.pop()
 
-                  props.setRouteState(popped);
+                  props.setRouteState(popped)
                 }}
                 onBack={props.onBack}
                 allowsSwiping={
@@ -106,50 +91,52 @@ export const createStackRoutingComponent = <
                 {React.createElement(routeTable[item.key].component, {
                   parameters: item.parameters,
                   push: (...itemsToAdd) => {
-                    props.setRouteState([...props.routeState, ...itemsToAdd]);
+                    props.setRouteState([...props.routeState, ...itemsToAdd])
                   },
                   pop: (numberOfItemsToRemove) => {
-                    const popped = [...props.routeState];
+                    const popped = [...props.routeState]
 
                     for (let i = 0; i < (numberOfItemsToRemove ?? 1); i++) {
-                      popped.pop();
+                      popped.pop()
                     }
 
-                    props.setRouteState(popped);
+                    props.setRouteState(popped)
                   },
                   replace: (numberOfItemsToRemove, ...itemsToAdd) => {
-                    const popped = [...props.routeState];
+                    const popped = [...props.routeState]
 
                     for (let i = 0; i < numberOfItemsToRemove; i++) {
-                      popped.pop();
+                      popped.pop()
                     }
 
-                    popped.push(...itemsToAdd);
+                    popped.push(...itemsToAdd)
 
-                    props.setRouteState(popped);
+                    props.setRouteState(popped)
                   },
                   reset: (...replacementItems) => {
-                    props.setRouteState(replacementItems);
+                    props.setRouteState(replacementItems)
                   },
                   setParameters: (parameters) => {
-                    const routeStateCopy = [...props.routeState];
+                    const routeStateCopy = [...props.routeState]
 
                     routeStateCopy.splice(index, 1, {
                       ...item,
-                      parameters,
-                    });
+                      parameters
+                    })
 
-                    props.setRouteState(routeStateCopy);
+                    props.setRouteState(routeStateCopy)
                   },
                   bottom: index === 0,
                   top: index === props.routeState.length - 1,
-                  ...props,
+                  ...props
                 })}
               </Card>
             </View>
-          );
+          )
         })}
       </React.Fragment>
-    );
-  };
-};
+    )
+  }
+
+  return StackRouting
+}

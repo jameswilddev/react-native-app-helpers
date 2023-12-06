@@ -1,5 +1,5 @@
-import * as React from "react";
-import { BackHandler } from "react-native";
+import * as React from 'react'
+import { BackHandler } from 'react-native'
 
 /**
  * A React hook which executes a given callback when the hardware back button is
@@ -12,12 +12,12 @@ export const useBackButton = (
 ): void => {
   React.useEffect(() => {
     const subscription = BackHandler.addEventListener(
-      `hardwareBackPress`,
+      'hardwareBackPress',
       callback
-    );
+    )
 
     return () => {
-      subscription.remove();
-    };
-  }, [callback]);
-};
+      subscription.remove()
+    }
+  }, [callback])
+}

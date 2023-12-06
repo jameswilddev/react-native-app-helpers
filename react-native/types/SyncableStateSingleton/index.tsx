@@ -1,6 +1,6 @@
-import type { AbsentSyncableStateSingleton } from "../AbsentSyncableStateSingleton";
-import type { Json } from "../Json";
-import type { UpToDateSyncableStateSingleton } from "../UpToDateSyncableStateSingleton";
+import type { AbsentSyncableStateSingleton } from '../AbsentSyncableStateSingleton'
+import type { Json } from '../Json'
+import type { UpToDateSyncableStateSingleton } from '../UpToDateSyncableStateSingleton'
 
 /**
  * Represents a singleton which can be synced.
@@ -8,4 +8,4 @@ import type { UpToDateSyncableStateSingleton } from "../UpToDateSyncableStateSin
  */
 export type SyncableStateSingleton<TData extends Json> =
   | AbsentSyncableStateSingleton
-  | UpToDateSyncableStateSingleton<TData>;
+  | UpToDateSyncableStateSingleton<TData>

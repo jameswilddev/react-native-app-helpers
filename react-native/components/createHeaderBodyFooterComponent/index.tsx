@@ -1,35 +1,37 @@
-import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import * as React from 'react'
+import { View, StyleSheet } from 'react-native'
+import { isRenderedByReact } from '../../utilities/isRenderedByReact'
+import type { HeaderBodyFooterProps } from '../../types/HeaderBodyFooterProps'
 
-const wrappingViewBase = {
-  width: `100%`,
-  height: `100%`,
-};
+const wrappingViewBase: { readonly width: '100%', readonly height: '100%' } = {
+  width: '100%',
+  height: '100%'
+}
 
 const globalStyles = StyleSheet.create({
   emptyWrappingView: {
-    ...wrappingViewBase,
+    ...wrappingViewBase
   },
   wrappingView: {
     ...wrappingViewBase,
-    flex: 1,
+    flex: 1
   },
   wrappingViewWithoutBody: {
     ...wrappingViewBase,
     flex: 1,
-    justifyContent: `space-between`,
+    justifyContent: 'space-between'
   },
   wrappingViewWithOnlyFooter: {
     ...wrappingViewBase,
     flex: 1,
-    justifyContent: `flex-end`,
+    justifyContent: 'flex-end'
   },
   bodyView: {
     flexShrink: 1,
     flexGrow: 1,
-    overflow: `hidden`,
-  },
-});
+    overflow: 'hidden'
+  }
+})
 
 /**
  * Creates a new React component which displays a header above and a footer
@@ -43,31 +45,27 @@ const globalStyles = StyleSheet.create({
 export const createHeaderBodyFooterComponent = (
   headerBodySpacing: number,
   bodyFooterSpacing: number
-): React.FunctionComponent<{
-  readonly header?: null | React.ReactNode | JSX.Element;
-  readonly body?: null | React.ReactNode | JSX.Element;
-  readonly footer?: null | React.ReactNode | JSX.Element;
-}> => {
+): React.FunctionComponent<HeaderBodyFooterProps> => {
   const localStyles = StyleSheet.create({
     headerView: {
-      marginBottom: headerBodySpacing,
+      marginBottom: headerBodySpacing
     },
     footerView: {
-      marginTop: bodyFooterSpacing,
-    },
-  });
+      marginTop: bodyFooterSpacing
+    }
+  })
 
-  return ({ header, body, footer }) => {
-    if (header) {
-      if (body) {
-        if (footer) {
+  const HeaderBodyFooter: React.FunctionComponent<HeaderBodyFooterProps> = ({ header, body, footer }) => {
+    if (isRenderedByReact(header)) {
+      if (isRenderedByReact(body)) {
+        if (isRenderedByReact(footer)) {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View
                 pointerEvents="box-none"
-                {...(headerBodySpacing
-                  ? { style: localStyles.headerView }
-                  : {})}
+                {...(headerBodySpacing === 0
+                  ? {}
+                  : { style: localStyles.headerView })}
               >
                 {header}
               </View>
@@ -76,22 +74,24 @@ export const createHeaderBodyFooterComponent = (
               </View>
               <View
                 pointerEvents="box-none"
-                {...(bodyFooterSpacing
-                  ? { style: localStyles.footerView }
-                  : {})}
+                {...(bodyFooterSpacing === 0
+                  ? {}
+                  : { style: localStyles.footerView }
+                  )}
               >
                 {footer}
               </View>
             </View>
-          );
+          )
         } else {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View
                 pointerEvents="box-none"
-                {...(headerBodySpacing
-                  ? { style: localStyles.headerView }
-                  : {})}
+                {...(headerBodySpacing === 0
+                  ? {}
+                  : { style: localStyles.headerView }
+                  )}
               >
                 {header}
               </View>
@@ -99,10 +99,10 @@ export const createHeaderBodyFooterComponent = (
                 {body}
               </View>
             </View>
-          );
+          )
         }
       } else {
-        if (footer) {
+        if (isRenderedByReact(footer)) {
           return (
             <View
               pointerEvents="box-none"
@@ -111,18 +111,18 @@ export const createHeaderBodyFooterComponent = (
               <View pointerEvents="box-none">{header}</View>
               <View pointerEvents="box-none">{footer}</View>
             </View>
-          );
+          )
         } else {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View pointerEvents="box-none">{header}</View>
             </View>
-          );
+          )
         }
       }
     } else {
-      if (body) {
-        if (footer) {
+      if (isRenderedByReact(body)) {
+        if (isRenderedByReact(footer)) {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
               <View style={globalStyles.bodyView} pointerEvents="box-none">
@@ -130,14 +130,15 @@ export const createHeaderBodyFooterComponent = (
               </View>
               <View
                 pointerEvents="box-none"
-                {...(bodyFooterSpacing
-                  ? { style: localStyles.footerView }
-                  : {})}
+                {...(bodyFooterSpacing === 0
+                  ? {}
+                  : { style: localStyles.footerView }
+                  )}
               >
                 {footer}
               </View>
             </View>
-          );
+          )
         } else {
           return (
             <View pointerEvents="box-none" style={globalStyles.wrappingView}>
@@ -145,10 +146,10 @@ export const createHeaderBodyFooterComponent = (
                 {body}
               </View>
             </View>
-          );
+          )
         }
       } else {
-        if (footer) {
+        if (isRenderedByReact(footer)) {
           return (
             <View
               pointerEvents="box-none"
@@ -156,16 +157,18 @@ export const createHeaderBodyFooterComponent = (
             >
               <View pointerEvents="box-none">{footer}</View>
             </View>
-          );
+          )
         } else {
           return (
             <View
               pointerEvents="box-none"
               style={globalStyles.emptyWrappingView}
             />
-          );
+          )
         }
       }
     }
-  };
-};
+  }
+
+  return HeaderBodyFooter
+}

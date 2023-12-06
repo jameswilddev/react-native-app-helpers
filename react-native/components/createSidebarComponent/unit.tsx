@@ -1,99 +1,99 @@
-import * as React from "react";
-import { View, Text } from "react-native";
-import { createSidebarComponent } from "../../..";
-import { unwrapRenderedFunctionComponent } from "../../utilities/unwrapRenderedFunctionComponent";
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import { createSidebarComponent } from '../../..'
+import { unwrapRenderedFunctionComponent } from '../../utilities/unwrapRenderedFunctionComponent'
 
-test(`renders without spacings without a left sidebar body or right sidebar`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings without a left sidebar body or right sidebar', () => {
+  const Component = createSidebarComponent(0, 0)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%` }}
+      style={{ width: '100%', height: '100%' }}
       pointerEvents="box-none"
     ></View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a left sidebar`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings with only a left sidebar', () => {
+  const Component = createSidebarComponent(0, 0)
 
-  const rendered = <Component left={<Text>Example Left</Text>} />;
+  const rendered = <Component left={<Text>Example Left</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a body`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings with only a body', () => {
+  const Component = createSidebarComponent(0, 0)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a left sidebar and body`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings with only a left sidebar and body', () => {
+  const Component = createSidebarComponent(0, 0)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a right sidebar`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings with only a right sidebar', () => {
+  const Component = createSidebarComponent(0, 0)
 
-  const rendered = <Component right={<Text>Example Right</Text>} />;
+  const rendered = <Component right={<Text>Example Right</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -101,27 +101,27 @@ test(`renders without spacings with only a right sidebar`, () => {
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a left sidebar and right sidebar`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings with only a left sidebar and right sidebar', () => {
+  const Component = createSidebarComponent(0, 0)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -132,26 +132,26 @@ test(`renders without spacings with only a left sidebar and right sidebar`, () =
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with only a body and right sidebar`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings with only a body and right sidebar', () => {
+  const Component = createSidebarComponent(0, 0)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -160,11 +160,11 @@ test(`renders without spacings with only a body and right sidebar`, () => {
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders without spacings with a left sidebar body and right sidebar`, () => {
-  const Component = createSidebarComponent(0, 0);
+test('renders without spacings with a left sidebar body and right sidebar', () => {
+  const Component = createSidebarComponent(0, 0)
 
   const rendered = (
     <Component
@@ -172,18 +172,18 @@ test(`renders without spacings with a left sidebar body and right sidebar`, () =
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -192,97 +192,97 @@ test(`renders without spacings with a left sidebar body and right sidebar`, () =
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing without a left sidebar body or right sidebar`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing without a left sidebar body or right sidebar', () => {
+  const Component = createSidebarComponent(53, 0)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing with only a left sidebar`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing with only a left sidebar', () => {
+  const Component = createSidebarComponent(53, 0)
 
-  const rendered = <Component left={<Text>Example Left</Text>} />;
+  const rendered = <Component left={<Text>Example Left</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing with only a body`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing with only a body', () => {
+  const Component = createSidebarComponent(53, 0)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing with only a left sidebar and body`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing with only a left sidebar and body', () => {
+  const Component = createSidebarComponent(53, 0)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View style={{ marginRight: 53 }} pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing with only a right sidebar`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing with only a right sidebar', () => {
+  const Component = createSidebarComponent(53, 0)
 
-  const rendered = <Component right={<Text>Example Right</Text>} />;
+  const rendered = <Component right={<Text>Example Right</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -290,27 +290,27 @@ test(`renders with only a positive left sidebar-body spacing with only a right s
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing with only a left sidebar and right sidebar`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing with only a left sidebar and right sidebar', () => {
+  const Component = createSidebarComponent(53, 0)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -321,26 +321,26 @@ test(`renders with only a positive left sidebar-body spacing with only a left si
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing with only a body and right sidebar`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing with only a body and right sidebar', () => {
+  const Component = createSidebarComponent(53, 0)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -349,11 +349,11 @@ test(`renders with only a positive left sidebar-body spacing with only a body an
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive left sidebar-body spacing with a left sidebar body and right sidebar`, () => {
-  const Component = createSidebarComponent(53, 0);
+test('renders with only a positive left sidebar-body spacing with a left sidebar body and right sidebar', () => {
+  const Component = createSidebarComponent(53, 0)
 
   const rendered = (
     <Component
@@ -361,18 +361,18 @@ test(`renders with only a positive left sidebar-body spacing with a left sidebar
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View style={{ marginRight: 53 }} pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -381,97 +381,97 @@ test(`renders with only a positive left sidebar-body spacing with a left sidebar
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing without a left sidebar body or right sidebar`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing without a left sidebar body or right sidebar', () => {
+  const Component = createSidebarComponent(-53, 0)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing with only a left sidebar`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing with only a left sidebar', () => {
+  const Component = createSidebarComponent(-53, 0)
 
-  const rendered = <Component left={<Text>Example Left</Text>} />;
+  const rendered = <Component left={<Text>Example Left</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing with only a body`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing with only a body', () => {
+  const Component = createSidebarComponent(-53, 0)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing with only a left sidebar and body`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing with only a left sidebar and body', () => {
+  const Component = createSidebarComponent(-53, 0)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View style={{ marginRight: -53 }} pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing with only a right sidebar`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing with only a right sidebar', () => {
+  const Component = createSidebarComponent(-53, 0)
 
-  const rendered = <Component right={<Text>Example Right</Text>} />;
+  const rendered = <Component right={<Text>Example Right</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -479,27 +479,27 @@ test(`renders with only a negative left sidebar-body spacing with only a right s
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing with only a left sidebar and right sidebar`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing with only a left sidebar and right sidebar', () => {
+  const Component = createSidebarComponent(-53, 0)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -510,26 +510,26 @@ test(`renders with only a negative left sidebar-body spacing with only a left si
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing with only a body and right sidebar`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing with only a body and right sidebar', () => {
+  const Component = createSidebarComponent(-53, 0)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -538,11 +538,11 @@ test(`renders with only a negative left sidebar-body spacing with only a body an
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative left sidebar-body spacing with a left sidebar body and right sidebar`, () => {
-  const Component = createSidebarComponent(-53, 0);
+test('renders with only a negative left sidebar-body spacing with a left sidebar body and right sidebar', () => {
+  const Component = createSidebarComponent(-53, 0)
 
   const rendered = (
     <Component
@@ -550,18 +550,18 @@ test(`renders with only a negative left sidebar-body spacing with a left sidebar
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View style={{ marginRight: -53 }} pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -570,97 +570,97 @@ test(`renders with only a negative left sidebar-body spacing with a left sidebar
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing without a left sidebar body or right sidebar`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing without a left sidebar body or right sidebar', () => {
+  const Component = createSidebarComponent(0, 53)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing with only a left sidebar`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing with only a left sidebar', () => {
+  const Component = createSidebarComponent(0, 53)
 
-  const rendered = <Component left={<Text>Example Left</Text>} />;
+  const rendered = <Component left={<Text>Example Left</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing with only a body`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing with only a body', () => {
+  const Component = createSidebarComponent(0, 53)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing with only a left sidebar and body`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing with only a left sidebar and body', () => {
+  const Component = createSidebarComponent(0, 53)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing with only a right sidebar`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing with only a right sidebar', () => {
+  const Component = createSidebarComponent(0, 53)
 
-  const rendered = <Component right={<Text>Example Right</Text>} />;
+  const rendered = <Component right={<Text>Example Right</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -668,27 +668,27 @@ test(`renders with only a positive body-right sidebar spacing with only a right 
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing with only a left sidebar and right sidebar`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing with only a left sidebar and right sidebar', () => {
+  const Component = createSidebarComponent(0, 53)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -699,26 +699,26 @@ test(`renders with only a positive body-right sidebar spacing with only a left s
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing with only a body and right sidebar`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing with only a body and right sidebar', () => {
+  const Component = createSidebarComponent(0, 53)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -727,11 +727,11 @@ test(`renders with only a positive body-right sidebar spacing with only a body a
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a positive body-right sidebar spacing with a left sidebar body and right sidebar`, () => {
-  const Component = createSidebarComponent(0, 53);
+test('renders with only a positive body-right sidebar spacing with a left sidebar body and right sidebar', () => {
+  const Component = createSidebarComponent(0, 53)
 
   const rendered = (
     <Component
@@ -739,18 +739,18 @@ test(`renders with only a positive body-right sidebar spacing with a left sideba
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -759,97 +759,97 @@ test(`renders with only a positive body-right sidebar spacing with a left sideba
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing without a left sidebar body or right sidebar`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing without a left sidebar body or right sidebar', () => {
+  const Component = createSidebarComponent(0, -53)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing with only a left sidebar`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing with only a left sidebar', () => {
+  const Component = createSidebarComponent(0, -53)
 
-  const rendered = <Component left={<Text>Example Left</Text>} />;
+  const rendered = <Component left={<Text>Example Left</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing with only a body`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing with only a body', () => {
+  const Component = createSidebarComponent(0, -53)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing with only a left sidebar and body`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing with only a left sidebar and body', () => {
+  const Component = createSidebarComponent(0, -53)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing with only a right sidebar`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing with only a right sidebar', () => {
+  const Component = createSidebarComponent(0, -53)
 
-  const rendered = <Component right={<Text>Example Right</Text>} />;
+  const rendered = <Component right={<Text>Example Right</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -857,27 +857,27 @@ test(`renders with only a negative body-right sidebar spacing with only a right 
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing with only a left sidebar and right sidebar`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing with only a left sidebar and right sidebar', () => {
+  const Component = createSidebarComponent(0, -53)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -888,26 +888,26 @@ test(`renders with only a negative body-right sidebar spacing with only a left s
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing with only a body and right sidebar`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing with only a body and right sidebar', () => {
+  const Component = createSidebarComponent(0, -53)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -916,11 +916,11 @@ test(`renders with only a negative body-right sidebar spacing with only a body a
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with only a negative body-right sidebar spacing with a left sidebar body and right sidebar`, () => {
-  const Component = createSidebarComponent(0, -53);
+test('renders with only a negative body-right sidebar spacing with a left sidebar body and right sidebar', () => {
+  const Component = createSidebarComponent(0, -53)
 
   const rendered = (
     <Component
@@ -928,18 +928,18 @@ test(`renders with only a negative body-right sidebar spacing with a left sideba
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -948,97 +948,97 @@ test(`renders with only a negative body-right sidebar spacing with a left sideba
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings without a left sidebar body or right sidebar`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings without a left sidebar body or right sidebar', () => {
+  const Component = createSidebarComponent(27, 53)
 
-  const rendered = <Component />;
+  const rendered = <Component />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
-    <View style={{ width: `100%`, height: `100%` }} pointerEvents="box-none" />
-  );
-});
+    <View style={{ width: '100%', height: '100%' }} pointerEvents="box-none" />
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings with only a left sidebar`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings with only a left sidebar', () => {
+  const Component = createSidebarComponent(27, 53)
 
-  const rendered = <Component left={<Text>Example Left</Text>} />;
+  const rendered = <Component left={<Text>Example Left</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings with only a body`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings with only a body', () => {
+  const Component = createSidebarComponent(27, 53)
 
-  const rendered = <Component body={<Text>Example Body</Text>} />;
+  const rendered = <Component body={<Text>Example Body</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings with only a left sidebar and body`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings with only a left sidebar and body', () => {
+  const Component = createSidebarComponent(27, 53)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       body={<Text>Example Body</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View style={{ marginRight: 27 }} pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings with only a right sidebar`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings with only a right sidebar', () => {
+  const Component = createSidebarComponent(27, 53)
 
-  const rendered = <Component right={<Text>Example Right</Text>} />;
+  const rendered = <Component right={<Text>Example Right</Text>} />
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `flex-end`,
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
       }}
       pointerEvents="box-none"
     >
@@ -1046,27 +1046,27 @@ test(`renders with with both left sidebar-body and body-right sidebar spacings w
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings with only a left sidebar and right sidebar`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings with only a left sidebar and right sidebar', () => {
+  const Component = createSidebarComponent(27, 53)
 
   const rendered = (
     <Component
       left={<Text>Example Left</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: `100%`,
-        height: `100%`,
+        width: '100%',
+        height: '100%',
         flex: 1,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}
       pointerEvents="box-none"
     >
@@ -1077,26 +1077,26 @@ test(`renders with with both left sidebar-body and body-right sidebar spacings w
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings with only a body and right sidebar`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings with only a body and right sidebar', () => {
+  const Component = createSidebarComponent(27, 53)
 
   const rendered = (
     <Component
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -1105,11 +1105,11 @@ test(`renders with with both left sidebar-body and body-right sidebar spacings w
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})
 
-test(`renders with with both left sidebar-body and body-right sidebar spacings with a left sidebar body and right sidebar`, () => {
-  const Component = createSidebarComponent(27, 53);
+test('renders with with both left sidebar-body and body-right sidebar spacings with a left sidebar body and right sidebar', () => {
+  const Component = createSidebarComponent(27, 53)
 
   const rendered = (
     <Component
@@ -1117,18 +1117,18 @@ test(`renders with with both left sidebar-body and body-right sidebar spacings w
       body={<Text>Example Body</Text>}
       right={<Text>Example Right</Text>}
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
-      style={{ width: `100%`, height: `100%`, flex: 1, flexDirection: `row` }}
+      style={{ width: '100%', height: '100%', flex: 1, flexDirection: 'row' }}
       pointerEvents="box-none"
     >
       <View style={{ marginRight: 27 }} pointerEvents="box-none">
         <Text>Example Left</Text>
       </View>
       <View
-        style={{ flexGrow: 1, flexShrink: 1, overflow: `hidden` }}
+        style={{ flexGrow: 1, flexShrink: 1, overflow: 'hidden' }}
         pointerEvents="box-none"
       >
         <Text>Example Body</Text>
@@ -1137,5 +1137,5 @@ test(`renders with with both left sidebar-body and body-right sidebar spacings w
         <Text>Example Right</Text>
       </View>
     </View>
-  );
-});
+  )
+})

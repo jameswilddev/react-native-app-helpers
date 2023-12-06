@@ -50,8 +50,9 @@ const ExampleScreen = () => (
         alert(`The button has been pressed.`);
       }}
       disabled={false}
-      children={(color) => <Text style={{ color }}>This is shown in the center.</Text>}
-    />
+    >
+      {(color) => <Text style={{ color }}>This is shown in the center.</Text>}
+    </ExampleButton>
   </React.Fragment>
 );
 ```

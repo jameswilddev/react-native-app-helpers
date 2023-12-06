@@ -1,5 +1,5 @@
-import type { KeyableTableCell } from "../KeyableTableCell";
-import type { NonKeyableTableCell } from "../NonKeyableTableCell";
+import type { KeyableTableCell } from '../KeyableTableCell'
+import type { NonKeyableTableCell } from '../NonKeyableTableCell'
 
 /**
  * A row of data within a table.
@@ -12,6 +12,6 @@ export type TableRow<
   TNonKeyableColumnKey extends string
 > = { readonly [TKey in TKeyableColumnKey]: KeyableTableCell } & {
   readonly [TKey in TNonKeyableColumnKey]:
-    | KeyableTableCell
-    | NonKeyableTableCell;
-};
+  | KeyableTableCell
+  | NonKeyableTableCell;
+}

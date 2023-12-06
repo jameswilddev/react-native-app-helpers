@@ -1,5 +1,6 @@
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import * as React from 'react'
+import { StyleSheet, View } from 'react-native'
+import type { FixedWidthProps } from '../../types/FixedWidthProps'
 
 /**
  * Creates a React component which has a fixed width.
@@ -8,30 +9,27 @@ import { StyleSheet, View } from "react-native";
  */
 export const createFixedWidthComponent = (
   width: number
-): React.FunctionComponent<
-  React.PropsWithChildren<{
-    /** Determines how the column is to be sized vertically. */
-    readonly height: `fillsContainer` | `fitsContent`;
-  }>
-> => {
+): React.FunctionComponent<FixedWidthProps> => {
   const styles = StyleSheet.create({
     fillsContainer: {
       width,
-      height: `100%`,
+      height: '100%'
     },
     fitsContent: {
-      width,
-    },
-  });
+      width
+    }
+  })
 
-  return ({ children, height }) => (
+  const FixedWidth: React.FunctionComponent<FixedWidthProps> = ({ children, height }) => (
     <View
       style={
-        height === `fillsContainer` ? styles.fillsContainer : styles.fitsContent
+        height === 'fillsContainer' ? styles.fillsContainer : styles.fitsContent
       }
       pointerEvents="box-none"
     >
       {children}
     </View>
-  );
-};
+  )
+
+  return FixedWidth
+}

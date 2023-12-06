@@ -75,30 +75,53 @@ const ExampleTable = createOfflineTableComponent<
       {
         type: `basic`,
         label: `Example Column B Label`,
-        width: 22,
+        width: 11,
         key: `columnB`,
       },
       {
-        type: `custom`,
-        label: `Example Column C Label`,
+        type: `customText`,
+        label: `Example Column C A Label`,
         width: 11,
-        render(row) {
+        render(row, context) {
           switch (row.columnC) {
             case 0:
-              return <Text>Example Column C Value A</Text>;
+              return "Example Column C A Value A";
 
             case 1:
-              return <Text>Example Column C Value B</Text>;
+              return "Example Column C A Value B";
 
             case 2:
-              return <Text>Example Column C Value C</Text>;
+              return "Example Column C A Value C";
 
             case 3:
-              return <Text>Example Column C Value D</Text>;
+              return "Example Column C A Value D";
           }
         },
-        containsSearchTerm(row, filter) {
-          return filter === `example filter text` && row.columnC === 3;
+        containsSearchTerm(row, filter, context) {
+          return filter === `example filter a text` && row.columnC === 2;
+        },
+      },
+      {
+        type: `customElement`,
+        label: `Example Column C B Label`,
+        width: 11,
+        render(row, context) {
+          switch (row.columnC) {
+            case 0:
+              return <Text>Example Column C B Value A</Text>;
+
+            case 1:
+              return <Text>Example Column C B Value B</Text>;
+
+            case 2:
+              return <Text>Example Column C B Value C</Text>;
+
+            case 3:
+              return <Text>Example Column C B Value D</Text>;
+          }
+        },
+        containsSearchTerm(row, filter, context) {
+          return filter === `example filter b text` && row.columnC === 3;
         },
       },
       {
@@ -160,6 +183,10 @@ const ExampleScreen = () => {
         }}
         filter={filter}
         whenEmpty="No matching rows found."
+        context="Example Context"
+        onPressRow={(row: TableRow): void => {
+          console.log(row);
+        }}
       />
     </React.Fragment>
   )

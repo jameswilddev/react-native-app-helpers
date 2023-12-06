@@ -1,71 +1,71 @@
-import * as React from "react";
-import { StyleSheet, View, ViewStyle } from "react-native";
+import * as React from 'react'
+import { StyleSheet, View, type ViewStyle } from 'react-native'
 
-const styles: { [key: string]: ViewStyle } = {};
+const styles: Record<string, ViewStyle> = {}
 
 /**
  * A React component which fills the container horizontally and applies a flex
  * row to its children.
  */
 export const Row: React.FunctionComponent<
-  React.PropsWithChildren<{
-    readonly height: `fitsContent` | `fillsContainer`;
-    readonly horizontalDistribution:
-      | `left`
-      | `centered`
-      | `right`
-      | `spaced`
-      | `spacedTouchingEnds`;
-    readonly verticalAlignment: `top` | `centered` | `bottom` | `stretched`;
-  }>
+React.PropsWithChildren<{
+  readonly height: 'fitsContent' | 'fillsContainer'
+  readonly horizontalDistribution:
+  | 'left'
+  | 'centered'
+  | 'right'
+  | 'spaced'
+  | 'spacedTouchingEnds'
+  readonly verticalAlignment: 'top' | 'centered' | 'bottom' | 'stretched'
+}>
 > = ({ height, horizontalDistribution, verticalAlignment, children }) => {
-  const styleKey = `${height}-${horizontalDistribution}-${verticalAlignment}`;
+  const styleKey = `${height}-${horizontalDistribution}-${verticalAlignment}`
 
   if (!(styleKey in styles)) {
-    const view: ViewStyle = { width: "100%", flexDirection: `row` };
+    const view: ViewStyle = { width: '100%', flexDirection: 'row' }
 
-    if (height === `fillsContainer`) {
-      view.height = `100%`;
+    if (height === 'fillsContainer') {
+      view.height = '100%'
     }
 
     switch (horizontalDistribution) {
-      case `centered`:
-        view.justifyContent = `center`;
-        break;
+      case 'centered':
+        view.justifyContent = 'center'
+        break
 
-      case `right`:
-        view.justifyContent = `flex-end`;
-        break;
+      case 'right':
+        view.justifyContent = 'flex-end'
+        break
 
-      case `spaced`:
-        view.justifyContent = `space-evenly`;
-        break;
+      case 'spaced':
+        view.justifyContent = 'space-evenly'
+        break
 
-      case `spacedTouchingEnds`:
-        view.justifyContent = `space-between`;
-        break;
+      case 'spacedTouchingEnds':
+        view.justifyContent = 'space-between'
+        break
     }
 
     switch (verticalAlignment) {
-      case `top`:
-        view.alignItems = `flex-start`;
-        break;
+      case 'top':
+        view.alignItems = 'flex-start'
+        break
 
-      case `centered`:
-        view.alignItems = `center`;
-        break;
+      case 'centered':
+        view.alignItems = 'center'
+        break
 
-      case `bottom`:
-        view.alignItems = `flex-end`;
-        break;
+      case 'bottom':
+        view.alignItems = 'flex-end'
+        break
     }
 
-    styles[styleKey] = StyleSheet.create({ view }).view;
+    styles[styleKey] = StyleSheet.create({ view }).view
   }
 
   return (
     <View style={styles[styleKey]} pointerEvents="box-none">
       {children}
     </View>
-  );
-};
+  )
+}

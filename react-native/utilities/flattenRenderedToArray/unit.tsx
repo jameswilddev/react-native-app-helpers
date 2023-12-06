@@ -1,8 +1,8 @@
-import * as React from "react";
-import { View, Text } from "react-native";
-import { flattenRenderedToArray } from "../../..";
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import { flattenRenderedToArray } from '../../..'
 
-test(`flattens elements`, () => {
+test('flattens elements', () => {
   const rendered: JSX.Element = (
     <React.Fragment>
       <div>Example Content A</div>
@@ -12,7 +12,7 @@ test(`flattens elements`, () => {
         {[
           <Text key="x">Example Content C</Text>,
           <Text key="y">Example Content D</Text>,
-          <Text key="z">Example Content E</Text>,
+          <Text key="z">Example Content E</Text>
         ]}
       </View>
       <React.Fragment />
@@ -27,10 +27,10 @@ test(`flattens elements`, () => {
         [
           <Text key="x">Example Content H</Text>,
           <Text key="y">Example Content I</Text>,
-          <Text key="z">Example Content J</Text>,
+          <Text key="z">Example Content J</Text>
         ],
         null,
-        <div key="c">Example Content K</div>,
+        <div key="c">Example Content K</div>
       ]}
       <div>
         <Text>Example Content L</Text>
@@ -38,16 +38,16 @@ test(`flattens elements`, () => {
         {[
           <Text key="x">Example Content M</Text>,
           <Text key="y">Example Content N</Text>,
-          <Text key="z">Example Content O</Text>,
+          <Text key="z">Example Content O</Text>
         ]}
       </div>
       <React.Fragment>
         <Text>Example Content P</Text>
       </React.Fragment>
     </React.Fragment>
-  );
+  )
 
-  const flattened = flattenRenderedToArray(rendered);
+  const flattened = flattenRenderedToArray(rendered)
 
   expect(flattened).toEqual([
     <div key={0}>Example Content A</div>,
@@ -57,7 +57,7 @@ test(`flattens elements`, () => {
       {[
         <Text key="x">Example Content C</Text>,
         <Text key="y">Example Content D</Text>,
-        <Text key="z">Example Content E</Text>,
+        <Text key="z">Example Content E</Text>
       ]}
     </View>,
     3,
@@ -75,9 +75,9 @@ test(`flattens elements`, () => {
       {[
         <Text key="x">Example Content M</Text>,
         <Text key="y">Example Content N</Text>,
-        <Text key="z">Example Content O</Text>,
+        <Text key="z">Example Content O</Text>
       ]}
     </div>,
-    <Text key="12">Example Content P</Text>,
-  ]);
-});
+    <Text key="12">Example Content P</Text>
+  ])
+})

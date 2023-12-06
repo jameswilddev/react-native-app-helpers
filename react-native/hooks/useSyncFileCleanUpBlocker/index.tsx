@@ -1,7 +1,7 @@
-import * as React from "react";
-import type { Json } from "../../types/Json";
-import type { SyncInterface } from "../../types/SyncInterface";
-import type { SyncableSchema } from "../../types/SyncableSchema";
+import * as React from 'react'
+import type { Json } from '../../types/Json'
+import type { SyncInterface } from '../../types/SyncInterface'
+import type { SyncableSchema } from '../../types/SyncableSchema'
 
 /**
  * A React hook which blocks sync file clean-up; this should be added to screens
@@ -20,18 +20,18 @@ export function useSyncFileCleanUpBlocker<
   TSchema extends SyncableSchema,
   TAdditionalCollectionData extends Record<string, unknown>,
   TAdditionalCollectionItemData extends Record<string, Json>
->(
+> (
   sync: SyncInterface<
-    TSchema,
-    TAdditionalCollectionData,
-    TAdditionalCollectionItemData
+  TSchema,
+  TAdditionalCollectionData,
+  TAdditionalCollectionItemData
   >
 ): void {
   React.useEffect(() => {
-    sync.fileCleanUpBlockers++;
+    sync.fileCleanUpBlockers++
 
     return () => {
-      sync.fileCleanUpBlockers--;
-    };
-  }, []);
+      sync.fileCleanUpBlockers--
+    }
+  }, [])
 }

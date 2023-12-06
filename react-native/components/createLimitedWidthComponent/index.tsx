@@ -1,5 +1,6 @@
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import * as React from 'react'
+import { StyleSheet, View } from 'react-native'
+import type { LimitedWidthProps } from '../../types/LimitedWidthProps'
 
 /**
  * Creates a React component which has a maximum width.
@@ -8,30 +9,27 @@ import { StyleSheet, View } from "react-native";
  */
 export const createLimitedWidthComponent = (
   maximumWidth: number
-): React.FunctionComponent<
-  React.PropsWithChildren<{
-    /** Determines how the column is to be sized vertically. */
-    readonly height: `fillsContainer` | `fitsContent`;
-  }>
-> => {
+): React.FunctionComponent<LimitedWidthProps> => {
   const styles = StyleSheet.create({
     fillsContainer: {
       maxWidth: maximumWidth,
-      height: `100%`,
+      height: '100%'
     },
     fitsContent: {
-      maxWidth: maximumWidth,
-    },
-  });
+      maxWidth: maximumWidth
+    }
+  })
 
-  return ({ children, height }) => (
+  const LimitedWidth: React.FunctionComponent<LimitedWidthProps> = ({ children, height }) => (
     <View
       style={
-        height === `fillsContainer` ? styles.fillsContainer : styles.fitsContent
+        height === 'fillsContainer' ? styles.fillsContainer : styles.fitsContent
       }
       pointerEvents="box-none"
     >
       {children}
     </View>
-  );
-};
+  )
+
+  return LimitedWidth
+}

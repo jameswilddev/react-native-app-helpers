@@ -7,25 +7,25 @@
  * @template TContext The type of the context in which the table is being
  *                    rendered.
  */
-export type CustomTextTableColumn<
+export interface CustomTextTableColumn<
   TKey extends string,
   TRow extends { readonly [TKeyItem in TKey]: null | number | string },
   TContext
-> = {
+> {
   /**
    * Describes the type of column.
    */
-  readonly type: `customText`;
+  readonly type: 'customText'
 
   /**
    * The label shown on the column's header.
    */
-  readonly label: string;
+  readonly label: string
 
   /**
    * The width of the column.  This is a proportion.
    */
-  readonly width: number;
+  readonly width: number
 
   /**
    * Renders the visible and filterable content of the column for a specified
@@ -34,18 +34,18 @@ export type CustomTextTableColumn<
    * @param context The context in which the table is being rendered.
    * @returns       The rendered column content.
    */
-  render(
+  render: (
     value: TRow[TKey],
     context: TContext
-  ): null | boolean | number | string;
+  ) => null | boolean | number | string
 
   /**
    * The key in the corresponding TableRow which the column represents.
    */
-  readonly key: TKey;
+  readonly key: TKey
 
   /**
    * The horizontal alignment of the column's content.
    */
-  readonly alignment: `left` | `middle` | `right`;
-};
+  readonly alignment: 'left' | 'middle' | 'right'
+}

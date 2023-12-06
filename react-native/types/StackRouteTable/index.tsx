@@ -1,5 +1,5 @@
-import type { RouteParameters } from "../RouteParameters";
-import type { StackRoute } from "../StackRoute";
+import type { RouteParameters } from '../RouteParameters'
+import type { StackRoute } from '../StackRoute'
 
 /**
  * A table which maps route keys to React components for a stack router.
@@ -8,11 +8,11 @@ import type { StackRoute } from "../StackRoute";
  */
 export type StackRouteTable<
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 > = {
   readonly [TKey in keyof TRouteParameters]: StackRoute<
-    TRouteParameters,
-    TKey,
-    TOtherProps
+  TRouteParameters,
+  TKey,
+  TOtherProps
   >;
-};
+}

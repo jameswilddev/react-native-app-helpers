@@ -1,30 +1,30 @@
-import * as React from "react";
-import { Text } from "react-native";
-import { unwrapRenderedFunctionComponent } from "../../..";
+import * as React from 'react'
+import { Text } from 'react-native'
+import { unwrapRenderedFunctionComponent } from '../../..'
 
-test(`unwraps a wrapped element`, () => {
+test('unwraps a wrapped element', () => {
   const Component: React.FunctionComponent<
-    React.PropsWithChildren<Record<never, never>>
-  > = ({ children }) => <Text>{children}</Text>;
-  const rendered = <Component>Test Content</Component>;
+  React.PropsWithChildren<Record<never, never>>
+  > = ({ children }) => <Text>{children}</Text>
+  const rendered = <Component>Test Content</Component>
 
-  const unwrapped = unwrapRenderedFunctionComponent(rendered);
+  const unwrapped = unwrapRenderedFunctionComponent(rendered)
 
-  expect(unwrapped).toEqual(<Text>Test Content</Text>);
-});
+  expect(unwrapped).toEqual(<Text>Test Content</Text>)
+})
 
-test(`throws when given a class-typed element`, () => {
-  const rendered = <Text>Test Content</Text>;
+test('throws when given a class-typed element', () => {
+  const rendered = <Text>Test Content</Text>
 
-  const act = () => unwrapRenderedFunctionComponent(rendered);
+  const act = (): JSX.Element => unwrapRenderedFunctionComponent(rendered)
 
-  expect(act).toThrowError(`Can only unwrap rendered function components.`);
-});
+  expect(act).toThrowError('Can only unwrap rendered function components.')
+})
 
-test(`throws when given a string-typed element`, () => {
-  const rendered = <div>Test Content</div>;
+test('throws when given a string-typed element', () => {
+  const rendered = <div>Test Content</div>
 
-  const act = () => unwrapRenderedFunctionComponent(rendered);
+  const act = (): JSX.Element => unwrapRenderedFunctionComponent(rendered)
 
-  expect(act).toThrowError(`Can only unwrap rendered function components.`);
-});
+  expect(act).toThrowError('Can only unwrap rendered function components.')
+})

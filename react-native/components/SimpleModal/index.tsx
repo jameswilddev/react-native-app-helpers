@@ -1,47 +1,47 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   StyleSheet,
   Modal,
   Platform,
   TouchableWithoutFeedback,
   View,
-  ViewStyle,
-} from "react-native";
+  type ViewStyle
+} from 'react-native'
 
-let nonWebStyles: null | { readonly view: ViewStyle } = null;
+let nonWebStyles: null | { readonly view: ViewStyle } = null
 let webStyles: null | {
-  readonly shadeView: ViewStyle;
-  childrenWrapperView: ViewStyle;
-} = null;
+  readonly shadeView: ViewStyle
+  childrenWrapperView: ViewStyle
+} = null
 
 /**
  * A replacement for the React Native `Modal` component which supports web
  * browsers as a target.
  */
 export const SimpleModal: React.FunctionComponent<
-  React.PropsWithChildren<{
-    /**
+React.PropsWithChildren<{
+  /**
      * Called when the back button is pressed or the background is clicked or
      * touched.
      */
-    readonly onClose: () => void;
-  }>
+  readonly onClose: () => void
+}>
 > = ({ onClose, children }) => {
   switch (Platform.OS) {
-    case `android`:
-    case `ios`:
-    case `macos`:
-    case `windows`:
+    case 'android':
+    case 'ios':
+    case 'macos':
+    case 'windows':
       if (nonWebStyles === null) {
         nonWebStyles = StyleSheet.create({
           view: {
-            position: `absolute`,
+            position: 'absolute',
             left: 0,
             top: 0,
             right: 0,
-            bottom: 0,
-          },
-        });
+            bottom: 0
+          }
+        })
       }
 
       return (
@@ -53,28 +53,28 @@ export const SimpleModal: React.FunctionComponent<
             {children}
           </React.Fragment>
         </Modal>
-      );
+      )
 
-    case `web`:
+    case 'web':
       if (webStyles === null) {
         webStyles = StyleSheet.create({
           shadeView: {
-            position: `fixed` as unknown as undefined,
+            position: 'fixed' as unknown as undefined,
             left: 0,
             right: 0,
             top: 0,
             bottom: 0,
-            zIndex: 9998,
+            zIndex: 9998
           },
           childrenWrapperView: {
-            position: `fixed` as unknown as undefined,
+            position: 'fixed' as unknown as undefined,
             left: 0,
             right: 0,
             top: 0,
             bottom: 0,
-            zIndex: 9999,
-          },
-        });
+            zIndex: 9999
+          }
+        })
       }
 
       return (
@@ -86,6 +86,6 @@ export const SimpleModal: React.FunctionComponent<
             {children}
           </View>
         </React.Fragment>
-      );
+      )
   }
-};
+}

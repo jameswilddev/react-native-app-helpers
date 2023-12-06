@@ -1,65 +1,65 @@
-import * as React from "react";
-import { View, ViewStyle, StyleSheet } from "react-native";
-import type { ControlStyle } from "../../types/ControlStyle";
-import { useRefresh } from "../../hooks/useRefresh";
-import { SimpleModal } from "../SimpleModal";
+import * as React from 'react'
+import { View, type ViewStyle, StyleSheet } from 'react-native'
+import type { ControlStyle } from '../../types/ControlStyle'
+import { useRefresh } from '../../hooks/useRefresh'
+import { SimpleModal } from '../SimpleModal'
 import {
   createControlStateStyleInstance,
   createControlStyleInstance,
   createControlTextStyleInstance,
-  createFullHeightPopoverStateStyleInstance,
-} from "../helpers";
-import { ContainerFillingKeyboardAvoidingView } from "../ContainerFillingKeyboardAvoidingView";
-import { SizedHorizontallySymmetricalSafeAreaView } from "../SizedHorizontallySymmetricalSafeAreaView";
-import { createPickerButtonComponent } from "../createPickerButtonComponent";
-import type { SvgIcon } from "../../..";
+  createFullHeightPopoverStateStyleInstance
+} from '../helpers'
+import { ContainerFillingKeyboardAvoidingView } from '../ContainerFillingKeyboardAvoidingView'
+import { SizedHorizontallySymmetricalSafeAreaView } from '../SizedHorizontallySymmetricalSafeAreaView'
+import { createPickerButtonComponent } from '../createPickerButtonComponent'
+import type { SvgIcon } from '../../..'
 
 type Instance = React.FunctionComponent<{
   /**
    * The text shown in the button.  When null, the placeholder is shown instead.
    */
-  readonly label: null | string;
+  readonly label: null | string
 
   /**
    * The placeholder text shown in the button when there is no text.
    */
-  readonly placeholder: string;
+  readonly placeholder: string
 
   /**
    * When true, the button cannot be pressed and the body is not shown.
    */
-  readonly disabled: undefined | boolean;
+  readonly disabled: undefined | boolean
 
   /**
    * When true, the control is styled as though it is valid.  It is otherwise
    * styles as though it is invalid.
    */
-  readonly valid: boolean;
+  readonly valid: boolean
 
   /**
    * Describes the contents of the pop-over.
    * @param close Invoke to close the pop-over.
    * @returns     The contents of the pop-over.
    */
-  children(close: () => void): null | JSX.Element;
-}>;
+  children: (close: () => void) => null | JSX.Element
+}>
 
 /**
  * The arguments used to create a full-height pop-over component; for testing
  * higher-order components.
  */
-type Introspection = {
+interface Introspection {
   /**
    * The styling to use.
    */
-  readonly controlStyle: ControlStyle;
+  readonly controlStyle: ControlStyle
 
   /**
    * When null, no icon is to be placed on the right side of the button.
    * Otherwise, the icon to show there.
    */
-  readonly rightIcon: null | SvgIcon;
-};
+  readonly rightIcon: null | SvgIcon
+}
 
 /**
  * Creates a new React component which displays a button which can be pressed to
@@ -93,80 +93,75 @@ export const createFullHeightPopoverComponent = (
     disabledValidText: createControlTextStyleInstance(
       controlStyle,
       controlStyle.disabledValid,
-      `left`
+      'left'
     ),
     disabledInvalidText: createControlTextStyleInstance(
       controlStyle,
       controlStyle.disabledInvalid,
-      `left`
+      'left'
     ),
     validText: createControlTextStyleInstance(
       controlStyle,
       controlStyle.blurredValid,
-      `left`
+      'left'
     ),
     invalidText: createControlTextStyleInstance(
       controlStyle,
       controlStyle.blurredInvalid,
-      `left`
+      'left'
     ),
     validView: createFullHeightPopoverStateStyleInstance(
       controlStyle.focusedValid
     ),
     invalidView: createFullHeightPopoverStateStyleInstance(
       controlStyle.focusedInvalid
-    ),
-  });
+    )
+  })
 
-  const PickerButton = createPickerButtonComponent(controlStyle);
+  const PickerButton = createPickerButtonComponent(controlStyle)
 
   const FullHeightPopOver: Instance & { fullHeightPopover?: Introspection } = ({
     label,
     placeholder,
     disabled,
     valid,
-    children,
+    children
   }) => {
-    disabled = disabled ?? false;
+    disabled = disabled ?? false
 
-    const refresh = useRefresh();
+    const refresh = useRefresh()
 
     const state = React.useRef<{
-      open: boolean;
+      open: boolean
       layout: null | {
-        readonly pageX: number;
-        readonly width: number;
-      };
+        readonly pageX: number
+        readonly width: number
+      }
     }>({
       open: false,
-      layout: null,
-    });
+      layout: null
+    })
 
     // Ensure that the drop-down does not re-open itself if it is disabled while
     // open, then re-enabled.
     if (disabled) {
-      state.current.open = false;
+      state.current.open = false
     }
 
-    let additionalModalViewStyle: null | ViewStyle;
+    let additionalModalViewStyle: null | ViewStyle
 
     if (!disabled && state.current.open && state.current.layout !== null) {
       additionalModalViewStyle = {
         left: state.current.layout.pageX,
-        width: state.current.layout.width,
-      };
+        width: state.current.layout.width
+      }
     } else {
-      additionalModalViewStyle = null;
+      additionalModalViewStyle = null
     }
 
     const inline = (
       <PickerButton
-        onMeasure={(x, y, width, height, pageX, pageY) => {
-          x;
-          y;
-          height;
-          pageY;
-
+        onMeasure={(_x, _y, width, _height, pageX, _pageY) => {
           if (
             state.current.layout === null ||
             pageX !== state.current.layout.pageX ||
@@ -174,16 +169,16 @@ export const createFullHeightPopoverComponent = (
           ) {
             state.current.layout = {
               pageX,
-              width,
-            };
+              width
+            }
 
-            refresh();
+            refresh()
           }
         }}
         onPress={() => {
-          state.current.open = true;
+          state.current.open = true
 
-          refresh();
+          refresh()
         }}
         disabled={disabled}
         label={label}
@@ -191,16 +186,16 @@ export const createFullHeightPopoverComponent = (
         valid={valid}
         {...(rightIcon === null ? {} : { rightIcon })}
       />
-    );
+    )
 
     if (additionalModalViewStyle === null) {
-      return inline;
+      return inline
     } else {
-      const onClose = () => {
-        state.current.open = false;
+      const onClose = (): void => {
+        state.current.open = false
 
-        refresh();
-      };
+        refresh()
+      }
 
       return (
         <React.Fragment>
@@ -209,7 +204,7 @@ export const createFullHeightPopoverComponent = (
             <View
               style={[
                 valid ? styles.validView : styles.invalidView,
-                additionalModalViewStyle,
+                additionalModalViewStyle
               ]}
             >
               <SizedHorizontallySymmetricalSafeAreaView
@@ -227,13 +222,13 @@ export const createFullHeightPopoverComponent = (
             </View>
           </SimpleModal>
         </React.Fragment>
-      );
+      )
     }
-  };
+  }
 
-  FullHeightPopOver.fullHeightPopover = { controlStyle, rightIcon };
+  FullHeightPopOver.fullHeightPopover = { controlStyle, rightIcon }
 
   return FullHeightPopOver as Instance & {
-    readonly fullHeightPopover: Introspection;
-  };
-};
+    readonly fullHeightPopover: Introspection
+  }
+}

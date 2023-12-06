@@ -1,6 +1,6 @@
-import * as SecureStore from "expo-secure-store";
-import { EventEmitter } from "events";
-import type { Json } from "../../types/Json";
+import * as SecureStore from 'expo-secure-store'
+import { EventEmitter } from 'events'
+import type { Json } from '../../types/Json'
 
 /**
  * A wrapper around expo-secure-store which adds:
@@ -11,12 +11,12 @@ import type { Json } from "../../types/Json";
  * @template T The type of JSON stored.
  */
 export class SessionStore<T extends Json> {
-  private unloaded = true;
-  private value: undefined | T = undefined;
-  private writeQueueLength: 0 | 1 | 2 = 0;
-  private resolveOnUnload: null | (() => void) = null;
+  private unloaded = true
+  private value: undefined | T = undefined
+  private writeQueueLength: 0 | 1 | 2 = 0
+  private resolveOnUnload: null | (() => void) = null
 
-  private readonly eventEmitter = new EventEmitter();
+  private readonly eventEmitter = new EventEmitter()
 
   /**
    * @param initial          The value to use when no such record exists in the
@@ -24,7 +24,7 @@ export class SessionStore<T extends Json> {
    * @param secureStorageKey The key of the record to read from/write to
    *                         expo-secure-store.
    */
-  constructor(
+  constructor (
     private readonly initial: T,
     private readonly secureStorageKey: string
   ) {}
@@ -34,8 +34,8 @@ export class SessionStore<T extends Json> {
    * @param eventType The type of the event to listen for.
    * @param listener  The callback to execute when the event is emitted.
    */
-  addListener(eventType: `set`, listener: () => void): void {
-    this.eventEmitter.addListener(eventType, listener);
+  addListener (eventType: 'set', listener: () => void): void {
+    this.eventEmitter.addListener(eventType, listener)
   }
 
   /**
@@ -44,8 +44,8 @@ export class SessionStore<T extends Json> {
    * @param listener  The callback to no longer execute when the event is
    *                  emitted.
    */
-  removeListener(eventType: `set`, listener: () => void): void {
-    this.eventEmitter.removeListener(eventType, listener);
+  removeListener (eventType: 'set', listener: () => void): void {
+    this.eventEmitter.removeListener(eventType, listener)
   }
 
   /**
@@ -54,22 +54,22 @@ export class SessionStore<T extends Json> {
    * @throws When the session store is already loaded.
    * @throws When the session store is currently unloading.
    */
-  async load(): Promise<void> {
+  async load (): Promise<void> {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The session store is currently unloading.`);
+      throw new Error('The session store is currently unloading.')
     } else if (this.value !== undefined) {
-      throw new Error(`The session store is already loaded.`);
+      throw new Error('The session store is already loaded.')
     } else if (!this.unloaded) {
-      throw new Error(`The session store is already loading.`);
+      throw new Error('The session store is already loading.')
     } else {
-      this.unloaded = false;
+      this.unloaded = false
 
-      const raw = await SecureStore.getItemAsync(this.secureStorageKey);
+      const raw = await SecureStore.getItemAsync(this.secureStorageKey)
 
       if (raw === null) {
-        this.value = this.initial;
+        this.value = this.initial
       } else {
-        this.value = JSON.parse(raw);
+        this.value = JSON.parse(raw)
       }
     }
   }
@@ -81,37 +81,37 @@ export class SessionStore<T extends Json> {
    * @throws When the session store is currently loading.
    * @throws When the session store is currently unloading.
    */
-  get(): T {
+  get (): T {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The session store is currently unloading.`);
+      throw new Error('The session store is currently unloading.')
     } else if (this.unloaded) {
-      throw new Error(`The session store is not loaded.`);
+      throw new Error('The session store is not loaded.')
     } else if (this.value === undefined) {
-      throw new Error(`The session store is currently loading.`);
+      throw new Error('The session store is currently loading.')
     } else {
-      return this.value;
+      return this.value
     }
   }
 
-  private startWrite(): void {
-    (async () => {
+  private startWrite (): void {
+    void (async () => {
       await SecureStore.setItemAsync(
         this.secureStorageKey,
         JSON.stringify(this.value as T)
-      );
+      )
 
-      this.writeQueueLength--;
+      this.writeQueueLength--
 
       if (this.writeQueueLength > 0) {
-        this.startWrite();
+        this.startWrite()
       } else if (this.resolveOnUnload !== null) {
-        const resolveOnUnload = this.resolveOnUnload;
-        this.unloaded = true;
-        this.value = undefined;
-        this.resolveOnUnload = null;
-        resolveOnUnload();
+        const resolveOnUnload = this.resolveOnUnload
+        this.unloaded = true
+        this.value = undefined
+        this.resolveOnUnload = null
+        resolveOnUnload()
       }
-    })();
+    })()
   }
 
   /**
@@ -122,44 +122,44 @@ export class SessionStore<T extends Json> {
    * @throws When the session store is currently loading.
    * @throws When the session store is currently unloading.
    */
-  set(to: T): void {
+  set (to: T): void {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The session store is currently unloading.`);
+      throw new Error('The session store is currently unloading.')
     } else if (this.unloaded) {
-      throw new Error(`The session store is not loaded.`);
+      throw new Error('The session store is not loaded.')
     } else if (this.value === undefined) {
-      throw new Error(`The session store is currently loading.`);
+      throw new Error('The session store is currently loading.')
     } else {
-      this.value = to;
+      this.value = to
 
       if (this.writeQueueLength === 0) {
-        this.writeQueueLength = 1;
-        this.startWrite();
+        this.writeQueueLength = 1
+        this.startWrite()
       } else {
-        this.writeQueueLength = 2;
+        this.writeQueueLength = 2
       }
 
-      this.eventEmitter.emit(`set`);
+      this.eventEmitter.emit('set')
     }
   }
 
   /**
    * Awaits any queued writes and unloads the current record from memory.
    */
-  async unload(): Promise<void> {
+  async unload (): Promise<void> {
     if (this.resolveOnUnload !== null) {
-      throw new Error(`The session store is already unloading.`);
+      throw new Error('The session store is already unloading.')
     } else if (this.unloaded) {
-      throw new Error(`The session store is not loaded.`);
+      throw new Error('The session store is not loaded.')
     } else if (this.value === undefined) {
-      throw new Error(`The session store is currently loading.`);
+      throw new Error('The session store is currently loading.')
     } else if (this.writeQueueLength > 0) {
       await new Promise<void>((resolve) => {
-        this.resolveOnUnload = resolve;
-      });
+        this.resolveOnUnload = resolve
+      })
     } else {
-      this.unloaded = true;
-      this.value = undefined;
+      this.unloaded = true
+      this.value = undefined
     }
   }
 }

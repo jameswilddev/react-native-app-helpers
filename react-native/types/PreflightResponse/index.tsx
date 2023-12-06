@@ -1,7 +1,7 @@
-import type { Json } from "../Json";
-import type { PreflightResponseCollection } from "../PreflightResponseCollection";
-import type { PreflightResponseSingleton } from "../PreflightResponseSingleton";
-import type { SyncableSchema } from "../SyncableSchema";
+import type { Json } from '../Json'
+import type { PreflightResponseCollection } from '../PreflightResponseCollection'
+import type { PreflightResponseSingleton } from '../PreflightResponseSingleton'
+import type { SyncableSchema } from '../SyncableSchema'
 
 /**
  * The response to a successful preflight request.
@@ -11,6 +11,7 @@ import type { SyncableSchema } from "../SyncableSchema";
  *                                         should be held against a collection
  *                                         item, e.g. strings for progress bars.
  */
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type PreflightResponse<
   TSchema extends SyncableSchema,
   TAdditionalCollectionItemData extends Record<string, Json>
@@ -19,13 +20,13 @@ export type PreflightResponse<
    * The singletons available to be synced.
    */
   readonly singletons: {
-    readonly [TKey in keyof TSchema[`singletons`]]: PreflightResponseSingleton;
-  };
+    readonly [TKey in keyof TSchema['singletons']]: PreflightResponseSingleton;
+  }
 
   /**
    * The collections available to be synced.
    */
   readonly collections: {
-    readonly [TKey in keyof TSchema[`collections`]]: PreflightResponseCollection<TAdditionalCollectionItemData>;
-  };
-};
+    readonly [TKey in keyof TSchema['collections']]: PreflightResponseCollection<TAdditionalCollectionItemData>;
+  }
+}

@@ -1,5 +1,5 @@
-import { flattenRenderedToArray } from "../flattenRenderedToArray";
-import { setRenderedKey } from "../setRenderedKey";
+import { flattenRenderedToArray } from '../flattenRenderedToArray'
+import { setRenderedKey } from '../setRenderedKey'
 
 /**
  * Inserts instances of a React component between the contents of a rendered JSX
@@ -14,18 +14,18 @@ export const intercalateRendered = (
   separator: React.ReactNode | JSX.Element,
   between: undefined | React.ReactNode | JSX.Element
 ): ReadonlyArray<React.ReactNode | JSX.Element> => {
-  const flattenedBetween = flattenRenderedToArray(between);
+  const flattenedBetween = flattenRenderedToArray(between)
 
   if (flattenedBetween.length === 0) {
-    return [];
+    return []
   } else {
     const output = flattenedBetween.flatMap((element, i) => [
       setRenderedKey(separator, `separator${i - 1}`),
-      element,
-    ]);
+      element
+    ])
 
-    output.shift();
+    output.shift()
 
-    return output;
+    return output
   }
-};
+}

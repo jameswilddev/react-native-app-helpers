@@ -1,66 +1,66 @@
-import * as React from "react";
-import { StyleSheet, TextInput, TextStyle, View } from "react-native";
-import { useRefresh } from "../../hooks/useRefresh";
-import type { ControlStyle } from "../../types/ControlStyle";
+import * as React from 'react'
+import { StyleSheet, TextInput, type TextStyle, View } from 'react-native'
+import { useRefresh } from '../../hooks/useRefresh'
+import type { ControlStyle } from '../../types/ControlStyle'
 import {
   createControlStateStyleInstance,
   createControlStyleInstance,
-  createControlTextStyleInstance,
-} from "../helpers";
+  createControlTextStyleInstance
+} from '../helpers'
 
 type Instance<TValue, TContext> = React.FunctionComponent<{
   /**
    * The icon to show on the left side, if any, else, null.
    */
-  readonly leftIcon: null | React.ReactNode | JSX.Element;
+  readonly leftIcon: null | React.ReactNode | JSX.Element
 
   /**
    * The icon to show on the right side, if any, else, null.
    */
-  readonly rightIcon: null | React.ReactNode | JSX.Element;
+  readonly rightIcon: null | React.ReactNode | JSX.Element
 
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty
    * string.
    */
-  readonly value: undefined | TValue;
+  readonly value: undefined | TValue
 
   /**
    * Invoked when the user edits the text in the box.
    * @param parsed   The value parsed, or undefined should it not be parseable.
    * @param complete True when the user has finished editing, otherwise, false.
    */
-  onChange(parsed: undefined | TValue, complete: boolean): void;
+  onChange: (parsed: undefined | TValue, complete: boolean) => void
 
   /**
    * When true, the text value is starred out rather than being rendered (for
    * password fields).
    */
-  readonly secureTextEntry: boolean;
+  readonly secureTextEntry: boolean
 
   /**
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled: undefined | boolean;
+  readonly disabled: undefined | boolean
 
   /**
    * Text to be shown when no value has been entered.
    */
-  readonly placeholder: string;
+  readonly placeholder: string
 
   /**
    * Invoked when the content of the text box is valid and the enter key is
    * pressed.
    * @param parsed The parsed value.
    */
-  onSubmit(parsed: TValue): void;
+  onSubmit: (parsed: TValue) => void
 
   /**
    * The context under which validation is performed.
    */
-  readonly context: TContext;
-}>;
+  readonly context: TContext
+}>
 
 /**
  * The arguments used to create an input component; for testing higher-order
@@ -69,7 +69,7 @@ type Instance<TValue, TContext> = React.FunctionComponent<{
  * @template TContext The type of any contextual data used to validate the
  *                    input's value.
  */
-type Introspection<TValue, TContext> = {
+interface Introspection<TValue, TContext> {
   /**
    * A function which takes the value passed into the component and transforms
    * it into raw text for editing.
@@ -77,7 +77,7 @@ type Introspection<TValue, TContext> = {
    * @param context The context of the value being stringified.
    * @returns       The stringified value.
    */
-  stringify: (value: TValue, context: TContext) => string;
+  stringify: (value: TValue, context: TContext) => string
 
   /**
    * A function which attempts to convert raw text back into a value to output,
@@ -86,51 +86,51 @@ type Introspection<TValue, TContext> = {
    * @param context The context of the value which is being parsed.
    * @returns       The parsed value, or, undefined should it not be parsable.
    */
-  tryParse: (value: string, context: TContext) => undefined | TValue;
+  tryParse: (value: string, context: TContext) => undefined | TValue
 
   /**
    * The styling to use.
    */
-  readonly controlStyle: ControlStyle;
+  readonly controlStyle: ControlStyle
 
   /**
    * When true, the text may wrap onto multiple lines.  It will otherwise scroll
    * one line horizontally.
    */
-  readonly multiLine: boolean;
+  readonly multiLine: boolean
 
   /**
    * The type of auto-complete suggestions to provide.
    */
-  readonly autoComplete: `off` | `email` | `password`;
+  readonly autoComplete: 'off' | 'email' | 'password'
 
   /**
    * The type of keyboard to show.
    */
-  readonly keyboardType: `default` | `email-address` | `numeric`;
+  readonly keyboardType: 'default' | 'email-address' | 'numeric'
 
   /**
    * The capitalization behavior to use.
    */
-  readonly autoCapitalize: `none` | `sentences` | `words` | `characters`;
+  readonly autoCapitalize: 'none' | 'sentences' | 'words' | 'characters'
 
   /**
    * When true, the text input will steal focus on mount.  It will otherwise
    * wait for the user to interact with it.
    */
-  readonly autoFocus: boolean;
+  readonly autoFocus: boolean
 
   /**
    * When true, the text input will keep focus on submit.  It will otherwise
    * blur.
    */
-  readonly keepFocusOnSubmit: boolean;
+  readonly keepFocusOnSubmit: boolean
 
   /**
    * The alignment of the text within the input.
    */
-  readonly alignment: `left` | `middle` | `right`;
-};
+  readonly alignment: 'left' | 'middle' | 'right'
+}
 
 /**
  * Creates a React component which allows for the editing of text.
@@ -159,35 +159,35 @@ type Introspection<TValue, TContext> = {
  * @returns                 A React component which allows for the editing of
  *                          text.
  */
-export function createInputComponent<TValue, TContext>(
+export function createInputComponent<TValue, TContext> (
   stringify: (value: TValue, context: TContext) => string,
   tryParse: (value: string, context: TContext) => undefined | TValue,
   controlStyle: ControlStyle,
   multiLine: boolean,
-  autoComplete: `off` | `email` | `password`,
-  keyboardType: `default` | `email-address` | `numeric`,
-  autoCapitalize: `none` | `sentences` | `words` | `characters`,
+  autoComplete: 'off' | 'email' | 'password',
+  keyboardType: 'default' | 'email-address' | 'numeric',
+  autoCapitalize: 'none' | 'sentences' | 'words' | 'characters',
   autoFocus: boolean,
   keepFocusOnSubmit: boolean,
-  alignment: `left` | `middle` | `right`
+  alignment: 'left' | 'middle' | 'right'
 ): Instance<TValue, TContext> & {
   /**
    * The arguments used to create this input component; for testing higher-order
    * components.
    */
-  readonly inputComponent: Introspection<TValue, TContext>;
-} {
-  const withLeftIcon: TextStyle = controlStyle.paddingHorizontal
-    ? { paddingLeft: controlStyle.paddingHorizontal }
-    : {};
+    readonly inputComponent: Introspection<TValue, TContext>
+  } {
+  const withLeftIcon: TextStyle = controlStyle.paddingHorizontal === 0
+    ? {}
+    : { paddingLeft: controlStyle.paddingHorizontal }
 
-  const withRightIcon: TextStyle = controlStyle.paddingHorizontal
-    ? { paddingRight: controlStyle.paddingHorizontal }
-    : {};
+  const withRightIcon: TextStyle = controlStyle.paddingHorizontal === 0
+    ? {}
+    : { paddingRight: controlStyle.paddingHorizontal }
 
-  const withLeftAndRightIcons: TextStyle = controlStyle.paddingHorizontal
-    ? { paddingHorizontal: controlStyle.paddingHorizontal }
-    : {};
+  const withLeftAndRightIcons: TextStyle = controlStyle.paddingHorizontal === 0
+    ? {}
+    : { paddingHorizontal: controlStyle.paddingHorizontal }
 
   const styles = StyleSheet.create({
     blurredValidView: createControlStyleInstance(
@@ -250,7 +250,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.disabledValid,
         alignment
       ),
-      ...withLeftIcon,
+      ...withLeftIcon
     },
     disabledInvalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
@@ -258,7 +258,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.disabledInvalid,
         alignment
       ),
-      ...withLeftIcon,
+      ...withLeftIcon
     },
     blurredValidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
@@ -266,7 +266,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.blurredValid,
         alignment
       ),
-      ...withLeftIcon,
+      ...withLeftIcon
     },
     blurredInvalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
@@ -274,7 +274,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.blurredInvalid,
         alignment
       ),
-      ...withLeftIcon,
+      ...withLeftIcon
     },
     focusedValidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
@@ -282,7 +282,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.focusedValid,
         alignment
       ),
-      ...withLeftIcon,
+      ...withLeftIcon
     },
     focusedInvalidTextInputWithLeftIcon: {
       ...createControlTextStyleInstance(
@@ -290,7 +290,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.focusedInvalid,
         alignment
       ),
-      ...withLeftIcon,
+      ...withLeftIcon
     },
     disabledValidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
@@ -298,7 +298,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.disabledValid,
         alignment
       ),
-      ...withRightIcon,
+      ...withRightIcon
     },
     disabledInvalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
@@ -306,7 +306,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.disabledInvalid,
         alignment
       ),
-      ...withRightIcon,
+      ...withRightIcon
     },
     blurredValidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
@@ -314,7 +314,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.blurredValid,
         alignment
       ),
-      ...withRightIcon,
+      ...withRightIcon
     },
     blurredInvalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
@@ -322,7 +322,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.blurredInvalid,
         alignment
       ),
-      ...withRightIcon,
+      ...withRightIcon
     },
     focusedValidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
@@ -330,7 +330,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.focusedValid,
         alignment
       ),
-      ...withRightIcon,
+      ...withRightIcon
     },
     focusedInvalidTextInputWithRightIcon: {
       ...createControlTextStyleInstance(
@@ -338,7 +338,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.focusedInvalid,
         alignment
       ),
-      ...withRightIcon,
+      ...withRightIcon
     },
     disabledValidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
@@ -346,7 +346,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.disabledValid,
         alignment
       ),
-      ...withLeftAndRightIcons,
+      ...withLeftAndRightIcons
     },
     disabledInvalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
@@ -354,7 +354,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.disabledInvalid,
         alignment
       ),
-      ...withLeftAndRightIcons,
+      ...withLeftAndRightIcons
     },
     blurredValidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
@@ -362,7 +362,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.blurredValid,
         alignment
       ),
-      ...withLeftAndRightIcons,
+      ...withLeftAndRightIcons
     },
     blurredInvalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
@@ -370,7 +370,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.blurredInvalid,
         alignment
       ),
-      ...withLeftAndRightIcons,
+      ...withLeftAndRightIcons
     },
     focusedValidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
@@ -378,7 +378,7 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.focusedValid,
         alignment
       ),
-      ...withLeftAndRightIcons,
+      ...withLeftAndRightIcons
     },
     focusedInvalidTextInputWithLeftAndRightIcons: {
       ...createControlTextStyleInstance(
@@ -386,12 +386,12 @@ export function createInputComponent<TValue, TContext>(
         controlStyle.focusedInvalid,
         alignment
       ),
-      ...withLeftAndRightIcons,
-    },
-  });
+      ...withLeftAndRightIcons
+    }
+  })
 
   const Input: Instance<TValue, TContext> & {
-    inputComponent?: Introspection<TValue, TContext>;
+    inputComponent?: Introspection<TValue, TContext>
   } = ({
     leftIcon,
     rightIcon,
@@ -401,23 +401,23 @@ export function createInputComponent<TValue, TContext>(
     disabled,
     placeholder,
     onSubmit,
-    context,
+    context
   }) => {
-    disabled = disabled ?? false;
+    disabled = disabled ?? false
 
-    const refresh = useRefresh();
+    const refresh = useRefresh()
 
     const stringifiedValue =
-      value === undefined ? `` : stringify(value, context);
+      value === undefined ? '' : stringify(value, context)
 
-    const editing = React.useRef(stringifiedValue);
+    const editing = React.useRef(stringifiedValue)
 
-    const previousStringifiedValue = React.useRef(stringifiedValue);
+    const previousStringifiedValue = React.useRef(stringifiedValue)
 
-    const focused = React.useRef(false);
+    const focused = React.useRef(false)
 
     if (disabled) {
-      focused.current = false;
+      focused.current = false
     }
 
     if (
@@ -425,14 +425,14 @@ export function createInputComponent<TValue, TContext>(
         !focused.current) ||
       disabled
     ) {
-      editing.current = stringifiedValue;
-      previousStringifiedValue.current = stringifiedValue;
+      editing.current = stringifiedValue
+      previousStringifiedValue.current = stringifiedValue
     }
 
-    const valid = tryParse(editing.current, context) !== undefined;
+    const valid = tryParse(editing.current, context) !== undefined
 
-    const ref = React.useRef<null | TextInput>(null);
-    const firstLayout = React.useRef(true);
+    const ref = React.useRef<null | TextInput>(null)
+    const firstLayout = React.useRef(true)
 
     return (
       <View
@@ -442,12 +442,12 @@ export function createInputComponent<TValue, TContext>(
               ? styles.disabledValidView
               : styles.disabledInvalidView
             : focused.current
-            ? valid
-              ? styles.focusedValidView
-              : styles.focusedInvalidView
-            : valid
-            ? styles.blurredValidView
-            : styles.blurredInvalidView
+              ? valid
+                ? styles.focusedValidView
+                : styles.focusedInvalidView
+              : valid
+                ? styles.blurredValidView
+                : styles.blurredInvalidView
         }
       >
         {leftIcon}
@@ -455,12 +455,12 @@ export function createInputComponent<TValue, TContext>(
           {...(autoFocus
             ? {
                 ref,
-                onLayout() {
+                onLayout () {
                   if (firstLayout.current) {
-                    firstLayout.current = false;
-                    ref.current?.focus();
+                    firstLayout.current = false
+                    ref.current?.focus()
                   }
-                },
+                }
               }
             : {})}
           style={
@@ -471,46 +471,46 @@ export function createInputComponent<TValue, TContext>(
                     ? styles.disabledValidTextInput
                     : styles.disabledValidTextInputWithRightIcon
                   : rightIcon === null
-                  ? styles.disabledValidTextInputWithLeftIcon
-                  : styles.disabledValidTextInputWithLeftAndRightIcons
+                    ? styles.disabledValidTextInputWithLeftIcon
+                    : styles.disabledValidTextInputWithLeftAndRightIcons
                 : leftIcon === null
-                ? rightIcon === null
-                  ? styles.disabledInvalidTextInput
-                  : styles.disabledInvalidTextInputWithRightIcon
-                : rightIcon === null
-                ? styles.disabledInvalidTextInputWithLeftIcon
-                : styles.disabledInvalidTextInputWithLeftAndRightIcons
-              : focused.current
-              ? valid
-                ? leftIcon === null
                   ? rightIcon === null
-                    ? styles.focusedValidTextInput
-                    : styles.focusedValidTextInputWithRightIcon
+                    ? styles.disabledInvalidTextInput
+                    : styles.disabledInvalidTextInputWithRightIcon
                   : rightIcon === null
-                  ? styles.focusedValidTextInputWithLeftIcon
-                  : styles.focusedValidTextInputWithLeftAndRightIcons
-                : leftIcon === null
-                ? rightIcon === null
-                  ? styles.focusedInvalidTextInput
-                  : styles.focusedInvalidTextInputWithRightIcon
-                : rightIcon === null
-                ? styles.focusedInvalidTextInputWithLeftIcon
-                : styles.focusedInvalidTextInputWithLeftAndRightIcons
-              : valid
-              ? leftIcon === null
-                ? rightIcon === null
-                  ? styles.blurredValidTextInput
-                  : styles.blurredValidTextInputWithRightIcon
-                : rightIcon === null
-                ? styles.blurredValidTextInputWithLeftIcon
-                : styles.blurredValidTextInputWithLeftAndRightIcons
-              : leftIcon === null
-              ? rightIcon === null
-                ? styles.blurredInvalidTextInput
-                : styles.blurredInvalidTextInputWithRightIcon
-              : rightIcon === null
-              ? styles.blurredInvalidTextInputWithLeftIcon
-              : styles.blurredInvalidTextInputWithLeftAndRightIcons
+                    ? styles.disabledInvalidTextInputWithLeftIcon
+                    : styles.disabledInvalidTextInputWithLeftAndRightIcons
+              : focused.current
+                ? valid
+                  ? leftIcon === null
+                    ? rightIcon === null
+                      ? styles.focusedValidTextInput
+                      : styles.focusedValidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.focusedValidTextInputWithLeftIcon
+                      : styles.focusedValidTextInputWithLeftAndRightIcons
+                  : leftIcon === null
+                    ? rightIcon === null
+                      ? styles.focusedInvalidTextInput
+                      : styles.focusedInvalidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.focusedInvalidTextInputWithLeftIcon
+                      : styles.focusedInvalidTextInputWithLeftAndRightIcons
+                : valid
+                  ? leftIcon === null
+                    ? rightIcon === null
+                      ? styles.blurredValidTextInput
+                      : styles.blurredValidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.blurredValidTextInputWithLeftIcon
+                      : styles.blurredValidTextInputWithLeftAndRightIcons
+                  : leftIcon === null
+                    ? rightIcon === null
+                      ? styles.blurredInvalidTextInput
+                      : styles.blurredInvalidTextInputWithRightIcon
+                    : rightIcon === null
+                      ? styles.blurredInvalidTextInputWithLeftIcon
+                      : styles.blurredInvalidTextInputWithLeftAndRightIcons
           }
           value={editing.current}
           multiline={multiLine}
@@ -527,58 +527,58 @@ export function createInputComponent<TValue, TContext>(
                 ? controlStyle.disabledValid.placeholderColor
                 : controlStyle.disabledInvalid.placeholderColor
               : focused.current
-              ? valid
-                ? controlStyle.focusedValid.placeholderColor
-                : controlStyle.focusedInvalid.placeholderColor
-              : valid
-              ? controlStyle.blurredValid.placeholderColor
-              : controlStyle.blurredInvalid.placeholderColor
+                ? valid
+                  ? controlStyle.focusedValid.placeholderColor
+                  : controlStyle.focusedInvalid.placeholderColor
+                : valid
+                  ? controlStyle.blurredValid.placeholderColor
+                  : controlStyle.blurredInvalid.placeholderColor
           }
           onChangeText={(to) => {
-            editing.current = to;
-            refresh();
+            editing.current = to
+            refresh()
 
-            onChange(tryParse(to, context), false);
+            onChange(tryParse(to, context), false)
           }}
           onEndEditing={(e) => {
-            const parsed = tryParse(e.nativeEvent.text, context);
+            const parsed = tryParse(e.nativeEvent.text, context)
 
             if (parsed === undefined) {
-              editing.current = e.nativeEvent.text;
+              editing.current = e.nativeEvent.text
             } else {
-              editing.current = stringify(parsed, context);
+              editing.current = stringify(parsed, context)
             }
 
-            refresh();
+            refresh()
 
-            onChange(parsed, true);
+            onChange(parsed, true)
           }}
           onFocus={() => {
-            focused.current = true;
-            refresh();
+            focused.current = true
+            refresh()
           }}
           onBlur={() => {
-            focused.current = false;
-            refresh();
+            focused.current = false
+            refresh()
           }}
           blurOnSubmit={valid && !keepFocusOnSubmit}
           onSubmitEditing={(e) => {
-            const parsed = tryParse(e.nativeEvent.text, context);
+            const parsed = tryParse(e.nativeEvent.text, context)
 
             if (parsed === undefined) {
-              editing.current = e.nativeEvent.text;
-              refresh();
+              editing.current = e.nativeEvent.text
+              refresh()
             } else {
-              editing.current = stringify(parsed, context);
-              refresh();
-              onSubmit(parsed);
+              editing.current = stringify(parsed, context)
+              refresh()
+              onSubmit(parsed)
             }
           }}
         />
         {rightIcon}
       </View>
-    );
-  };
+    )
+  }
 
   Input.inputComponent = {
     stringify,
@@ -590,10 +590,10 @@ export function createInputComponent<TValue, TContext>(
     autoCapitalize,
     autoFocus,
     keepFocusOnSubmit,
-    alignment,
-  };
+    alignment
+  }
 
   return Input as Instance<TValue, TContext> & {
-    readonly inputComponent: Introspection<TValue, TContext>;
-  };
+    readonly inputComponent: Introspection<TValue, TContext>
+  }
 }

@@ -1,4 +1,4 @@
-import type { Json } from "../Json";
+import type { Json } from '../Json'
 
 /**
  * Describes implementation details of a collection during a sync process.
@@ -17,18 +17,18 @@ export type SyncConfigurationCollection<
    * @param data The data of the item from which to list files.
    * @returns    A description of the files referenced by this item.
    */
-  listFiles(
+  listFiles: (
     uuid: string,
     data: TData
-  ): ReadonlyArray<{
+  ) => ReadonlyArray<{
     /**
      * The request route at which the file can be GET, PUT or DELETEd.
      */
-    readonly route: string;
+    readonly route: string
 
     /**
      * A unique identifier for the file.
      */
-    readonly uuid: string;
-  }>;
-} & TAdditionalCollectionData;
+    readonly uuid: string
+  }>
+} & TAdditionalCollectionData

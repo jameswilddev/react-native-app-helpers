@@ -1,90 +1,92 @@
-import * as React from "react";
-import { Text } from "react-native";
+import * as React from 'react'
+import { Text } from 'react-native'
 import {
-  Route,
+  type Route,
   unwrapRenderedFunctionComponent,
   createFiniteStateMachineRoutingComponent,
-  FiniteStateMachineRouterState,
-  RouteTable,
-} from "../../..";
+  type FiniteStateMachineRouterState,
+  type RouteTable
+} from '../../..'
 
-test(`passes through to the appropriate route`, () => {
-  type ParametersB = {
-    readonly testRouteBParameterKey: `Test Route B Parameter Value`;
-  };
+test('passes through to the appropriate route', () => {
+  interface ParametersB {
+    readonly testRouteBParameterKey: 'Test Route B Parameter Value'
+  }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   type Parameters = {
     testRouteAKey: {
-      readonly testRouteAParameterKey: `Test Route A Parameter Value`;
-    };
-    testRouteBKey: ParametersB;
+      readonly testRouteAParameterKey: 'Test Route A Parameter Value'
+    }
+    testRouteBKey: ParametersB
     testRouteCKey: {
-      readonly testRouteCParameterKey: `Test Route C Parameter Value`;
-    };
-  };
+      readonly testRouteCParameterKey: 'Test Route C Parameter Value'
+    }
+  }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   type OtherProps = {
-    exampleOtherPropKey: `Example Other Prop Value`;
-  };
+    exampleOtherPropKey: 'Example Other Prop Value'
+  }
 
   const RouteB: Route<ParametersB, OtherProps> = ({
     routeState: {
-      parameters: { testRouteBParameterKey },
+      parameters: { testRouteBParameterKey }
     },
-    exampleOtherPropKey,
+    exampleOtherPropKey
   }) => (
     <Text>
-      Example Route B with parameter {testRouteBParameterKey}{" "}
+      Example Route B with parameter {testRouteBParameterKey}{' '}
       {exampleOtherPropKey}
     </Text>
-  );
+  )
 
   const routeTable: RouteTable<Parameters, OtherProps> = {
     testRouteAKey: ({
       routeState: {
-        parameters: { testRouteAParameterKey },
+        parameters: { testRouteAParameterKey }
       },
-      exampleOtherPropKey,
+      exampleOtherPropKey
     }) => (
       <Text>
-        Example Route A with parameter {testRouteAParameterKey}{" "}
+        Example Route A with parameter {testRouteAParameterKey}{' '}
         {exampleOtherPropKey}
       </Text>
     ),
     testRouteBKey: RouteB,
     testRouteCKey: ({
       routeState: {
-        parameters: { testRouteCParameterKey },
+        parameters: { testRouteCParameterKey }
       },
-      exampleOtherPropKey,
+      exampleOtherPropKey
     }) => (
       <Text>
-        Example Route C with parameter {testRouteCParameterKey}{" "}
+        Example Route C with parameter {testRouteCParameterKey}{' '}
         {exampleOtherPropKey}
       </Text>
-    ),
-  };
+    )
+  }
 
   const routeState: FiniteStateMachineRouterState<Parameters> = {
-    key: `testRouteBKey`,
+    key: 'testRouteBKey',
     parameters: {
-      testRouteBParameterKey: `Test Route B Parameter Value`,
-    },
-  };
+      testRouteBParameterKey: 'Test Route B Parameter Value'
+    }
+  }
 
-  const Component = createFiniteStateMachineRoutingComponent(routeTable);
+  const Component = createFiniteStateMachineRoutingComponent(routeTable)
 
   const rendered = (
     <Component
       routeState={routeState}
       exampleOtherPropKey="Example Other Prop Value"
     />
-  );
+  )
 
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <RouteB
       routeState={routeState}
       exampleOtherPropKey="Example Other Prop Value"
     />
-  );
-});
+  )
+})

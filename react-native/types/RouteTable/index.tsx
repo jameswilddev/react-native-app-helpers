@@ -1,5 +1,5 @@
-import type { Route } from "../Route";
-import type { RouteParameters } from "../RouteParameters";
+import type { Route } from '../Route'
+import type { RouteParameters } from '../RouteParameters'
 
 /**
  * A table which maps route keys to React components.
@@ -8,10 +8,10 @@ import type { RouteParameters } from "../RouteParameters";
  */
 export type RouteTable<
   TRouteParameters extends RouteParameters,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 > = {
   readonly [TKey in keyof TRouteParameters]: Route<
-    TRouteParameters[TKey],
-    TOtherProps
+  TRouteParameters[TKey],
+  TOtherProps
   >;
-};
+}

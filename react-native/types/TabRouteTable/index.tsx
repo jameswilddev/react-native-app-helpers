@@ -1,4 +1,4 @@
-import type { TabRoute } from "../TabRoute";
+import type { TabRoute } from '../TabRoute'
 
 /**
  * A table which maps route keys to React components.
@@ -7,7 +7,7 @@ import type { TabRoute } from "../TabRoute";
  */
 export type TabRouteTable<
   TRoute extends string,
-  TOtherProps extends { readonly [key: string]: unknown }
+  TOtherProps extends Readonly<Record<string, unknown>>
 > = {
   readonly [TRouteKey in TRoute]: TabRoute<TOtherProps>;
-};
+}

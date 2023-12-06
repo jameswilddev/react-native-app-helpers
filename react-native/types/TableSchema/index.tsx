@@ -1,5 +1,5 @@
-import type { TableColumn } from "../TableColumn";
-import type { TableRow } from "../TableRow";
+import type { TableColumn } from '../TableColumn'
+import type { TableRow } from '../TableRow'
 
 /**
  * Describes the schema of a table.
@@ -11,22 +11,22 @@ import type { TableRow } from "../TableRow";
  * @template TContext             The type of the context in which the table is
  *                                being rendered.
  */
-export type TableSchema<
+export interface TableSchema<
   TKeyableColumnKey extends string,
   TNonKeyableColumnKey extends string,
   TRow extends TableRow<TKeyableColumnKey, TNonKeyableColumnKey>,
   TContext
-> = {
+> {
   /**
    * The key of the column which is used to uniquely identify rows within the
    * table.
    */
-  readonly key: TKeyableColumnKey;
+  readonly key: TKeyableColumnKey
 
   /**
    * The column headers shown within the table.
    */
   readonly columns: ReadonlyArray<
-    TableColumn<TKeyableColumnKey, TNonKeyableColumnKey, TRow, TContext>
-  >;
-};
+  TableColumn<TKeyableColumnKey, TNonKeyableColumnKey, TRow, TContext>
+  >
+}

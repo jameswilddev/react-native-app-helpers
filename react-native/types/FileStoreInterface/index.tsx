@@ -10,7 +10,7 @@ export interface FileStoreInterface {
    * @throws                 When the file store is already loaded.
    * @throws                 When the file store is loading.
    */
-  load(subdirectoryName: string): Promise<void>;
+  load: (subdirectoryName: string) => Promise<void>
 
   /**
    * Generates a path to a file.
@@ -20,7 +20,7 @@ export interface FileStoreInterface {
    * @throws     When the file store is not loaded.
    * @throws     When the file store is loading.
    */
-  generatePath(uuid: string): string;
+  generatePath: (uuid: string) => string
 
   /**
    * Lists the UUIDs of all files which exist under the current subdirectory.
@@ -28,7 +28,7 @@ export interface FileStoreInterface {
    * @throws  When the file store is not loaded.
    * @throws  When the file store is loading.
    */
-  list(): Promise<ReadonlyArray<string>>;
+  list: () => Promise<readonly string[]>
 
   /**
    * Deletes the specified file if it exists (and does nothing if it does not).
@@ -36,7 +36,7 @@ export interface FileStoreInterface {
    * @throws  When the file store is not loaded.
    * @throws  When the file store is loading.
    */
-  delete(uuid: string): Promise<void>;
+  delete: (uuid: string) => Promise<void>
 
   /**
    * Unloads the currently loaded subdirectory.
@@ -44,7 +44,7 @@ export interface FileStoreInterface {
    * @throws When the file store is loading.
    * @throws When one or more operations are in progress.
    */
-  unload(): void;
+  unload: () => void
 
   /**
    * Moves a file from a temporary location to the file store and returns its
@@ -52,5 +52,5 @@ export interface FileStoreInterface {
    * @param fileUri The file to move.
    * @returns       The UUID of the imported file.
    */
-  import(fileUri: string): Promise<string>;
+  import: (fileUri: string) => Promise<string>
 }

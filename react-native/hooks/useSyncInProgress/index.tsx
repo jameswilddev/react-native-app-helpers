@@ -1,8 +1,8 @@
-import * as React from "react";
-import type { Json } from "../../types/Json";
-import type { SyncInterface } from "../../types/SyncInterface";
-import type { SyncableSchema } from "../../types/SyncableSchema";
-import { useRefresh } from "../useRefresh";
+import * as React from 'react'
+import type { Json } from '../../types/Json'
+import type { SyncInterface } from '../../types/SyncInterface'
+import type { SyncableSchema } from '../../types/SyncableSchema'
+import { useRefresh } from '../useRefresh'
 
 /**
  * A React hook which determines whether a sync is in progress and triggers a
@@ -21,33 +21,33 @@ export function useSyncInProgress<
   TSchema extends SyncableSchema,
   TAdditionalCollectionData extends Record<string, unknown>,
   TAdditionalCollectionItemData extends Record<string, Json>
->(
+> (
   sync: SyncInterface<
-    TSchema,
-    TAdditionalCollectionData,
-    TAdditionalCollectionItemData
+  TSchema,
+  TAdditionalCollectionData,
+  TAdditionalCollectionItemData
   >
 ): boolean {
-  const refresh = useRefresh();
+  const refresh = useRefresh()
 
   React.useEffect(() => {
-    let syncPreviouslyInProgress = sync.getState().type !== `notRunning`;
+    let syncPreviouslyInProgress = sync.getState().type !== 'notRunning'
 
-    const listener = () => {
-      const syncInProgress = sync.getState().type !== `notRunning`;
+    const listener = (): void => {
+      const syncInProgress = sync.getState().type !== 'notRunning'
 
       if (syncInProgress !== syncPreviouslyInProgress) {
-        syncPreviouslyInProgress = syncInProgress;
-        refresh();
+        syncPreviouslyInProgress = syncInProgress
+        refresh()
       }
-    };
+    }
 
-    sync.addListener(`stateChange`, listener);
+    sync.addListener('stateChange', listener)
 
     return () => {
-      sync.removeListener(`stateChange`, listener);
-    };
-  }, []);
+      sync.removeListener('stateChange', listener)
+    }
+  }, [])
 
-  return sync.getState().type !== `notRunning`;
+  return sync.getState().type !== 'notRunning'
 }

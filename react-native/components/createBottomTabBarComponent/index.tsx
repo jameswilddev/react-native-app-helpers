@@ -1,9 +1,10 @@
-import * as React from "react";
-import { StyleSheet, Text, TextStyle, ViewStyle } from "react-native";
-import type { BottomTab } from "../../types/BottomTab";
-import type { BottomTabBarStyle } from "../../types/BottomTabBarStyle";
-import { Hitbox } from "../Hitbox";
-import { HorizontallySymmetricalSafeAreaView } from "../HorizontallySymmetricalSafeAreaView";
+import * as React from 'react'
+import { StyleSheet, Text, type TextStyle, type ViewStyle } from 'react-native'
+import type { BottomTab } from '../../types/BottomTab'
+import type { BottomTabBarStyle } from '../../types/BottomTabBarStyle'
+import { Hitbox } from '../Hitbox'
+import { HorizontallySymmetricalSafeAreaView } from '../HorizontallySymmetricalSafeAreaView'
+import type { BottomTabBarProps } from '../../types/BottomTabBarProps'
 
 /**
  * Creates a new React component which can be used to render a bottom tab bar.
@@ -14,99 +15,81 @@ import { HorizontallySymmetricalSafeAreaView } from "../HorizontallySymmetricalS
  */
 export function createBottomTabBarComponent<
   TTab extends string | number | null | undefined
->(
+> (
   bottomTabBarStyle: BottomTabBarStyle,
   bottomTabs: ReadonlyArray<BottomTab<TTab>>
-): React.FunctionComponent<{
-  /**
-   * The selected tab.
-   */
-  readonly tab: TTab;
-
-  /**
-   * Called when the user presses an inactive tab.
-   * @param to The tab which the user pressed.
-   */
-  setTab(to: TTab): void;
-
-  /**
-   * Called when the user presses the active tab; this should return to the
-   * "home" route of the active tab, e.g. return to the list of records if
-   * currently viewing a particular record.
-   */
-  resetActiveTab(): void;
-}> {
+): React.FunctionComponent<BottomTabBarProps<TTab>> {
   const textBase: TextStyle = {
     fontSize: bottomTabBarStyle.fontSize,
-    lineHeight: bottomTabBarStyle.fontSize * 1.4,
-  };
+    lineHeight: bottomTabBarStyle.fontSize * 1.4
+  }
 
   if (bottomTabBarStyle.iconTextSpacing > 0) {
-    textBase.paddingTop = bottomTabBarStyle.iconTextSpacing;
+    textBase.paddingTop = bottomTabBarStyle.iconTextSpacing
   }
 
   const hitboxBase: ViewStyle = {
     flexBasis: 0,
-    flexGrow: 1,
-  };
+    flexGrow: 1
+  }
 
   const innerHorizontallySymmetricalSafeAreaView: ViewStyle = {
-    alignItems: "center",
-  };
+    alignItems: 'center'
+  }
 
   if (bottomTabBarStyle.topPadding > 0) {
     innerHorizontallySymmetricalSafeAreaView.paddingTop =
-      bottomTabBarStyle.topPadding;
+      bottomTabBarStyle.topPadding
   }
 
   if (bottomTabBarStyle.bottomPadding > 0) {
     innerHorizontallySymmetricalSafeAreaView.paddingBottom =
-      bottomTabBarStyle.bottomPadding;
+      bottomTabBarStyle.bottomPadding
   }
 
   const styles = StyleSheet.create({
     outerHorizontallySymmetricalSafeAreaView: {
-      width: "100%",
-      flexDirection: "row",
-      backgroundColor: bottomTabBarStyle.inactive.background,
+      width: '100%',
+      flexDirection: 'row',
+      backgroundColor: bottomTabBarStyle.inactive.background
     },
     innerHorizontallySymmetricalSafeAreaView,
     inactiveHitbox: {
       ...hitboxBase,
-      backgroundColor: bottomTabBarStyle.inactive.background,
+      backgroundColor: bottomTabBarStyle.inactive.background
     },
     activeHitbox: {
       ...hitboxBase,
-      backgroundColor: bottomTabBarStyle.active.background,
+      backgroundColor: bottomTabBarStyle.active.background
     },
     inactiveText: {
       ...textBase,
       color: bottomTabBarStyle.inactive.color,
-      fontFamily: bottomTabBarStyle.inactive.fontFamily,
+      fontFamily: bottomTabBarStyle.inactive.fontFamily
     },
     activeText: {
       ...textBase,
       color: bottomTabBarStyle.active.color,
-      fontFamily: bottomTabBarStyle.active.fontFamily,
-    },
-  });
+      fontFamily: bottomTabBarStyle.active.fontFamily
+    }
+  })
 
-  return ({ tab, setTab, resetActiveTab }) => (
+  const BottomTabBar: React.FunctionComponent<BottomTabBarProps<TTab>> = ({ tab, setTab, resetActiveTab }) => (
     <HorizontallySymmetricalSafeAreaView
       left
       right
       style={styles.outerHorizontallySymmetricalSafeAreaView}
     >
       {bottomTabs.map((bottomTab) => {
-        const isActive = bottomTab.tab === tab;
+        const isActive = bottomTab.tab === tab
 
         return (
           <Hitbox
             onPress={() => {
               if (isActive) {
-                resetActiveTab();
+                resetActiveTab()
               } else {
-                setTab(bottomTab.tab);
+                setTab(bottomTab.tab)
               }
             }}
             key={bottomTab.tab}
@@ -119,7 +102,7 @@ export function createBottomTabBarComponent<
               {React.createElement(bottomTab.icon, {
                 fill: isActive
                   ? bottomTabBarStyle.active.iconFill
-                  : bottomTabBarStyle.inactive.iconFill,
+                  : bottomTabBarStyle.inactive.iconFill
               })}
               <Text
                 style={isActive ? styles.activeText : styles.inactiveText}
@@ -129,8 +112,10 @@ export function createBottomTabBarComponent<
               </Text>
             </HorizontallySymmetricalSafeAreaView>
           </Hitbox>
-        );
+        )
       })}
     </HorizontallySymmetricalSafeAreaView>
-  );
+  )
+
+  return BottomTabBar
 }

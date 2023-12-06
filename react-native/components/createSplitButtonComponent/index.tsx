@@ -1,50 +1,48 @@
-import * as React from "react";
-import { StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
-import {
-  flattenRenderedToArray,
-  SplitButtonStyle,
-  SplitButtonStateStyle,
-} from "../../..";
-import { Hitbox } from "../Hitbox";
+import * as React from 'react'
+import { StyleSheet, Text, type TextStyle, View, type ViewStyle } from 'react-native'
+import { flattenRenderedToArray } from '../../utilities/flattenRenderedToArray'
+import type { SplitButtonStyle } from '../../types/SplitButtonStyle'
+import type { SplitButtonStateStyle } from '../../types/SplitButtonStateStyle'
+import { Hitbox } from '../Hitbox'
 
 const createSingleButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
   splitButtonStateStyle: SplitButtonStateStyle
 ): ViewStyle => {
   const output: ViewStyle = {
-    backgroundColor: splitButtonStateStyle.backgroundColor,
-  };
+    backgroundColor: splitButtonStateStyle.backgroundColor
+  }
 
   if (splitButtonStyle.horizontalPadding !== 0) {
-    output.paddingHorizontal = splitButtonStyle.horizontalPadding;
+    output.paddingHorizontal = splitButtonStyle.horizontalPadding
   }
 
   if (splitButtonStyle.verticalPadding !== 0) {
-    output.paddingVertical = splitButtonStyle.verticalPadding;
+    output.paddingVertical = splitButtonStyle.verticalPadding
   }
 
   if (splitButtonStateStyle.radius !== 0) {
-    output.borderRadius = splitButtonStateStyle.radius;
+    output.borderRadius = splitButtonStateStyle.radius
   }
 
   if (splitButtonStateStyle.border !== null) {
-    output.borderWidth = splitButtonStateStyle.border.width;
-    output.borderColor = splitButtonStateStyle.border.color;
+    output.borderWidth = splitButtonStateStyle.border.width
+    output.borderColor = splitButtonStateStyle.border.color
   }
 
   const effectiveBorderWidth =
     splitButtonStateStyle.border === null
       ? 0
-      : splitButtonStateStyle.border.width;
+      : splitButtonStateStyle.border.width
 
-  const margin = splitButtonStyle.neutralBorderWidth - effectiveBorderWidth;
+  const margin = splitButtonStyle.neutralBorderWidth - effectiveBorderWidth
 
   if (margin !== 0) {
-    output.margin = margin;
+    output.margin = margin
   }
 
-  return output;
-};
+  return output
+}
 
 const createLeftButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
@@ -53,24 +51,24 @@ const createLeftButtonHitboxStyleInstance = (
   const output = createSingleButtonHitboxStyleInstance(
     splitButtonStyle,
     splitButtonStateStyle
-  );
+  )
 
-  if (output.borderWidth) {
-    output.borderRightWidth = 0;
+  if (output.borderWidth !== undefined) {
+    output.borderRightWidth = 0
   }
 
-  if (output.borderRadius) {
-    output.borderTopLeftRadius = output.borderRadius;
-    output.borderBottomLeftRadius = output.borderRadius;
-    delete output.borderRadius;
+  if (output.borderRadius !== undefined) {
+    output.borderTopLeftRadius = output.borderRadius
+    output.borderBottomLeftRadius = output.borderRadius
+    delete output.borderRadius
   }
 
-  if (output.margin) {
-    output.marginRight = 0;
+  if (output.margin !== undefined) {
+    output.marginRight = 0
   }
 
-  return output;
-};
+  return output
+}
 
 const createMiddleButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
@@ -79,23 +77,23 @@ const createMiddleButtonHitboxStyleInstance = (
   const output = createSingleButtonHitboxStyleInstance(
     splitButtonStyle,
     splitButtonStateStyle
-  );
+  )
 
-  if (output.borderWidth) {
-    output.borderTopWidth = output.borderWidth;
-    output.borderBottomWidth = output.borderWidth;
-    delete output.borderWidth;
+  if (output.borderWidth !== undefined) {
+    output.borderTopWidth = output.borderWidth
+    output.borderBottomWidth = output.borderWidth
+    delete output.borderWidth
   }
 
-  if (output.margin) {
-    output.marginVertical = output.margin;
-    delete output.margin;
+  if (output.margin !== undefined) {
+    output.marginVertical = output.margin
+    delete output.margin
   }
 
-  delete output.borderRadius;
+  delete output.borderRadius
 
-  return output;
-};
+  return output
+}
 
 const createRightButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
@@ -104,24 +102,24 @@ const createRightButtonHitboxStyleInstance = (
   const output = createSingleButtonHitboxStyleInstance(
     splitButtonStyle,
     splitButtonStateStyle
-  );
+  )
 
-  if (output.borderWidth) {
-    output.borderLeftWidth = 0;
+  if (output.borderWidth !== undefined) {
+    output.borderLeftWidth = 0
   }
 
-  if (output.borderRadius) {
-    output.borderTopRightRadius = output.borderRadius;
-    output.borderBottomRightRadius = output.borderRadius;
-    delete output.borderRadius;
+  if (output.borderRadius !== undefined) {
+    output.borderTopRightRadius = output.borderRadius
+    output.borderBottomRightRadius = output.borderRadius
+    delete output.borderRadius
   }
 
-  if (output.margin) {
-    output.marginLeft = 0;
+  if (output.margin !== undefined) {
+    output.marginLeft = 0
   }
 
-  return output;
-};
+  return output
+}
 
 const createButtonTextStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
@@ -131,31 +129,31 @@ const createButtonTextStyleInstance = (
     fontFamily: splitButtonStyle.fontFamily,
     fontSize: splitButtonStyle.fontSize,
     lineHeight: splitButtonStyle.fontSize * 1.4,
-    color: splitButtonStateStyle.color,
-  };
-};
+    color: splitButtonStateStyle.color
+  }
+}
 
 type Instance<TValue extends null | number | string> = React.FunctionComponent<
-  React.PropsWithChildren<{
-    /**
+React.PropsWithChildren<{
+  /**
      * The currently selected value.
      */
-    readonly value: TValue;
+  readonly value: TValue
 
-    /**
+  /**
      * Invoked when the selected value changes.
      * @param to The newly selected value.
      */
-    onChange(to: TValue): void;
-  }>
->;
+  onChange: (to: TValue) => void
+}>
+>
 
 type SegmentInstance<TValue extends null | number | string> =
   React.FunctionComponent<{
     /**
      * The value of the segment.
      */
-    readonly value: TValue;
+    readonly value: TValue
 
     /**
      * When true, the segment will style itself to appear disabled, and will not
@@ -163,13 +161,13 @@ type SegmentInstance<TValue extends null | number | string> =
      * will select the segment's value on press (assuming it is not already
      * selected).
      */
-    readonly disabled: boolean;
+    readonly disabled: boolean
 
     /**
      * The text to display within the segment.
      */
-    readonly children: string;
-  }>;
+    readonly children: string
+  }>
 
 /**
  * Creates a new React component representing a split button.
@@ -182,36 +180,36 @@ export const createSplitButtonComponent = <
   TType extends string,
   TValue extends null | number | string
 >(
-  splitButtonStyle: SplitButtonStyle<TType>
-): Instance<TValue> & {
-  readonly segments: {
-    readonly [TTypeItem in TType]: SegmentInstance<TValue>;
-  };
-} => {
+    splitButtonStyle: SplitButtonStyle<TType>
+  ): Instance<TValue> & {
+    readonly segments: {
+      readonly [TTypeItem in TType]: SegmentInstance<TValue>;
+    }
+  } => {
   const styles = StyleSheet.create({
     view: {
-      flexDirection: `row`,
-      alignItems: `stretch`,
-    },
-  });
+      flexDirection: 'row',
+      alignItems: 'stretch'
+    }
+  })
 
   const partialSegments: {
     [TTypeItem in TType]?: SegmentInstance<TValue>;
-  } = {};
+  } = {}
 
   const partialButtonFactories: {
     [TTypeItem in TType]?: (
       value: TValue,
       onChange: (to: TValue) => void,
-      buttonPosition: `single` | `left` | `middle` | `right`,
+      buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
       buttonDisabled: boolean
     ) => JSX.Element;
-  } = {};
+  } = {}
 
   for (const typeKey in splitButtonStyle.types) {
-    const typeValue = splitButtonStyle.types[typeKey];
+    const typeValue = splitButtonStyle.types[typeKey]
 
     const typeStyles = StyleSheet.create({
       inactiveEnabledSingleHitbox: createSingleButtonHitboxStyleInstance(
@@ -293,11 +291,11 @@ export const createSplitButtonComponent = <
       activeDisabledText: createButtonTextStyleInstance(
         splitButtonStyle,
         typeValue.activeDisabled
-      ),
-    });
+      )
+    })
 
     /* istanbul ignore next */
-    partialSegments[typeKey] = () => null;
+    partialSegments[typeKey] = () => null
 
     partialButtonFactories[typeKey] = (
       value,
@@ -307,92 +305,92 @@ export const createSplitButtonComponent = <
       buttonLabel,
       buttonDisabled
     ) => {
-      let hitboxStyle: ViewStyle;
-      let textStyle: TextStyle;
+      let hitboxStyle: ViewStyle
+      let textStyle: TextStyle
 
       if (buttonValue === value) {
         if (buttonDisabled) {
           switch (buttonPosition) {
-            case `single`:
-              hitboxStyle = typeStyles.activeDisabledSingleHitbox;
-              break;
+            case 'single':
+              hitboxStyle = typeStyles.activeDisabledSingleHitbox
+              break
 
-            case `left`:
-              hitboxStyle = typeStyles.activeDisabledLeftHitbox;
-              break;
+            case 'left':
+              hitboxStyle = typeStyles.activeDisabledLeftHitbox
+              break
 
-            case `middle`:
-              hitboxStyle = typeStyles.activeDisabledMiddleHitbox;
-              break;
+            case 'middle':
+              hitboxStyle = typeStyles.activeDisabledMiddleHitbox
+              break
 
-            case `right`:
-              hitboxStyle = typeStyles.activeDisabledRightHitbox;
-              break;
+            case 'right':
+              hitboxStyle = typeStyles.activeDisabledRightHitbox
+              break
           }
 
-          textStyle = typeStyles.activeDisabledText;
+          textStyle = typeStyles.activeDisabledText
         } else {
           switch (buttonPosition) {
-            case `single`:
-              hitboxStyle = typeStyles.activeEnabledSingleHitbox;
-              break;
+            case 'single':
+              hitboxStyle = typeStyles.activeEnabledSingleHitbox
+              break
 
-            case `left`:
-              hitboxStyle = typeStyles.activeEnabledLeftHitbox;
-              break;
+            case 'left':
+              hitboxStyle = typeStyles.activeEnabledLeftHitbox
+              break
 
-            case `middle`:
-              hitboxStyle = typeStyles.activeEnabledMiddleHitbox;
-              break;
+            case 'middle':
+              hitboxStyle = typeStyles.activeEnabledMiddleHitbox
+              break
 
-            case `right`:
-              hitboxStyle = typeStyles.activeEnabledRightHitbox;
-              break;
+            case 'right':
+              hitboxStyle = typeStyles.activeEnabledRightHitbox
+              break
           }
 
-          textStyle = typeStyles.activeEnabledText;
+          textStyle = typeStyles.activeEnabledText
         }
       } else {
         if (buttonDisabled) {
           switch (buttonPosition) {
-            case `single`:
-              hitboxStyle = typeStyles.inactiveDisabledSingleHitbox;
-              break;
+            case 'single':
+              hitboxStyle = typeStyles.inactiveDisabledSingleHitbox
+              break
 
-            case `left`:
-              hitboxStyle = typeStyles.inactiveDisabledLeftHitbox;
-              break;
+            case 'left':
+              hitboxStyle = typeStyles.inactiveDisabledLeftHitbox
+              break
 
-            case `middle`:
-              hitboxStyle = typeStyles.inactiveDisabledMiddleHitbox;
-              break;
+            case 'middle':
+              hitboxStyle = typeStyles.inactiveDisabledMiddleHitbox
+              break
 
-            case `right`:
-              hitboxStyle = typeStyles.inactiveDisabledRightHitbox;
-              break;
+            case 'right':
+              hitboxStyle = typeStyles.inactiveDisabledRightHitbox
+              break
           }
 
-          textStyle = typeStyles.inactiveDisabledText;
+          textStyle = typeStyles.inactiveDisabledText
         } else {
           switch (buttonPosition) {
-            case `single`:
-              hitboxStyle = typeStyles.inactiveEnabledSingleHitbox;
-              break;
+            case 'single':
+              hitboxStyle = typeStyles.inactiveEnabledSingleHitbox
+              break
 
-            case `left`:
-              hitboxStyle = typeStyles.inactiveEnabledLeftHitbox;
-              break;
+            case 'left':
+              hitboxStyle = typeStyles.inactiveEnabledLeftHitbox
+              break
 
-            case `middle`:
-              hitboxStyle = typeStyles.inactiveEnabledMiddleHitbox;
-              break;
+            case 'middle':
+              hitboxStyle = typeStyles.inactiveEnabledMiddleHitbox
+              break
 
-            case `right`:
-              hitboxStyle = typeStyles.inactiveEnabledRightHitbox;
-              break;
+            case 'right':
+              hitboxStyle = typeStyles.inactiveEnabledRightHitbox
+              break
           }
 
-          textStyle = typeStyles.inactiveEnabledText;
+          textStyle = typeStyles.inactiveEnabledText
         }
       }
 
@@ -402,26 +400,26 @@ export const createSplitButtonComponent = <
           style={hitboxStyle}
           disabled={buttonDisabled || buttonValue === value}
           onPress={() => {
-            onChange(buttonValue);
+            onChange(buttonValue)
           }}
         >
           <Text style={textStyle} numberOfLines={1}>
             {buttonLabel}
           </Text>
         </Hitbox>
-      );
-    };
+      )
+    }
   }
 
   const segments = partialSegments as {
     readonly [TTypeItem in TType]: SegmentInstance<TValue>;
-  };
+  }
 
   const buttonFactories: {
     readonly [TTypeItem in TType]: (
       value: TValue,
       onChange: (to: TValue) => void,
-      buttonPosition: `single` | `left` | `middle` | `right`,
+      buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
       buttonDisabled: boolean
@@ -430,57 +428,57 @@ export const createSplitButtonComponent = <
     [TTypeItem in TType]: (
       value: TValue,
       onChange: (to: TValue) => void,
-      buttonPosition: `single` | `left` | `middle` | `right`,
+      buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
       buttonDisabled: boolean
     ) => JSX.Element;
-  };
+  }
 
   const SplitButton: Instance<TValue> & {
     segments?: {
       readonly [TTypeItem in TType]: SegmentInstance<TValue>;
-    };
+    }
   } = ({ value, onChange, children }) => {
-    const childrenArray = flattenRenderedToArray(children);
+    const childrenArray = flattenRenderedToArray(children)
 
     return (
       <View style={styles.view}>
         {childrenArray
           .filter((element): element is JSX.Element => element !== null)
           .map((element, i) => {
-            if (typeof element === `object` && `type` in element) {
+            if (typeof element === 'object' && 'type' in element) {
               for (const typeKey in segments) {
                 if (segments[typeKey] === element.type) {
                   return buttonFactories[typeKey](
                     value,
                     onChange,
                     childrenArray.length === 1
-                      ? `single`
+                      ? 'single'
                       : i === 0
-                      ? `left`
-                      : i === childrenArray.length - 1
-                      ? `right`
-                      : `middle`,
-                    element.props[`value`],
-                    element.props[`children`],
-                    element.props[`disabled`]
-                  );
+                        ? 'left'
+                        : i === childrenArray.length - 1
+                          ? 'right'
+                          : 'middle',
+                    element.props.value,
+                    element.props.children,
+                    element.props.disabled
+                  )
                 }
               }
             }
 
-            throw new Error(`Unexpected child in split button.`);
+            throw new Error('Unexpected child in split button.')
           })}
       </View>
-    );
-  };
+    )
+  }
 
-  SplitButton.segments = segments;
+  SplitButton.segments = segments
 
   return SplitButton as Instance<TValue> & {
     readonly segments: {
       readonly [TTypeItem in TType]: SegmentInstance<TValue>;
-    };
-  };
-};
+    }
+  }
+}
