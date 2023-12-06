@@ -28,5 +28,8 @@
     "test_results": true,
     ".phpunit.cache": true
   },
-  "typescript.tsdk": "./node_modules/typescript.lib"
+  "typescript.tsdk": "./node_modules/typescript.lib",
+  "editor.rulers": [
+    80
+  ]
 }
