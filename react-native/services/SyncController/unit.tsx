@@ -236,7 +236,7 @@ test('throws when requesting the cancellation of a paused sync controller', () =
 
   const syncController = new SyncController(sync, logger, errorReporter)
 
-  expect(() => syncController.requestCancel()).toThrowError('Unable to cancel a paused sync controller.')
+  expect(() => { syncController.requestCancel() }).toThrowError('Unable to cancel a paused sync controller.')
 
   expect(sync.fileCleanUpBlockers).toEqual(1234)
   expect(sync.addListener).not.toHaveBeenCalled()
@@ -283,7 +283,7 @@ test('throws when requesting the cancellation of a pausing sync controller', asy
 
   const pausePromise = syncController.pause()
 
-  expect(() => syncController.requestCancel()).toThrowError('Unable to cancel a pausing sync controller.')
+  expect(() => { syncController.requestCancel() }).toThrowError('Unable to cancel a pausing sync controller.')
 
   let resolved = false
   let rejected = false
@@ -2446,7 +2446,7 @@ test('throws when resuming during a pause', async () => {
   const pausePromise = syncController.pause();
 
   (logger.information as jest.Mock).mockReset()
-  expect(() => syncController.resume()).toThrowError('Unable to resume a pausing sync controller.')
+  expect(() => { syncController.resume() }).toThrowError('Unable to resume a pausing sync controller.')
 
   let resolved = false
   let rejected = false
