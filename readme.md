@@ -84,6 +84,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 #### Services
 
+- [errorReporter](./react-native/services/errorReporter/readme.md)
 - [FileStore](./react-native/services/FileStore/readme.md)
 - [logger](./react-native/services/logger/readme.md)
 - [PermissionHelper](./react-native/services/PermissionHelper/readme.md)
@@ -93,6 +94,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [StateStore](./react-native/services/StateStore/readme.md)
 - [Sync](./react-native/services/Sync/readme.md)
 - [SyncableStateHelper](./react-native/services/SyncableStateHelper/readme.md)
+- [SyncController](./react-native/services/SyncController/readme.md)
 - [UuidGenerator](./react-native/services/UuidGenerator/readme.md)
 
 #### Types
@@ -201,6 +203,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [UnderlinedTopTabBarStyleState](./react-native/types/UnderlinedTopTabBarStyleState/readme.md)
 - [UpToDateSyncableStateCollectionItem](./react-native/types/UpToDateSyncableStateCollectionItem/readme.md)
 - [UpToDateSyncableStateSingleton](./react-native/types/UpToDateSyncableStateSingleton/readme.md)
+- ErrorReporterInterface
 - FileStoreInterface
 - LoggerInterface
 - PermissionHelperInterface

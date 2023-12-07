@@ -35,10 +35,13 @@ class AbortSignalMock {
   }
 
   raise (): void {
+    this.raised = true
     for (const callback of [...this.callbacks]) {
       callback()
     }
   }
+
+  raised = false
 }
 
 (
@@ -66,6 +69,14 @@ jest.mock('expo-permissions', () => {
     askAsync: jest.fn(),
     MEDIA_LIBRARY: 'Example Media Library',
     CAMERA: 'Example Camera'
+  }
+})
+
+jest.mock('sentry-expo', () => {
+  return {
+    Native: {
+      captureException: jest.fn()
+    }
   }
 })
 
