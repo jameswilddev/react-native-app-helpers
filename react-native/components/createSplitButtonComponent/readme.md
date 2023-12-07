@@ -138,8 +138,9 @@ const ExampleSplitButton = createSplitButtonComponent<ExampleType, ExampleValue>
 const ExampleScreen = () => {
   const [value, setValue] = React.useState<ExampleValue>(`a`);
 
+  // Also supports width="fillsContainer" and distribution="even".
   return (
-    <ExampleSplitButton value={value} onChange={setValue}>
+    <ExampleSplitButton value={value} onChange={setValue} width="fitsContent" distibution="proportional">
       <ExampleSplitButton.segment.SegmentA value="a" disabled={false}>
         Example Label A
       </ExampleSplitButton.segment.SegmentA>

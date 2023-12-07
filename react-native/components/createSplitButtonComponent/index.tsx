@@ -7,10 +7,21 @@ import { Hitbox } from '../Hitbox'
 
 const createSingleButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
-  splitButtonStateStyle: SplitButtonStateStyle
+  splitButtonStateStyle: SplitButtonStateStyle,
+  width: 'fitsContent' | 'fillsContainer',
+  distribution: 'even' | 'proportional'
 ): ViewStyle => {
   const output: ViewStyle = {
     backgroundColor: splitButtonStateStyle.backgroundColor
+  }
+
+  if (width === 'fillsContainer') {
+    output.flexGrow = 1
+    output.flexShrink = 1
+  }
+
+  if (distribution === 'even') {
+    output.flexBasis = 0
   }
 
   if (splitButtonStyle.horizontalPadding !== 0) {
@@ -46,11 +57,15 @@ const createSingleButtonHitboxStyleInstance = (
 
 const createLeftButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
-  splitButtonStateStyle: SplitButtonStateStyle
+  splitButtonStateStyle: SplitButtonStateStyle,
+  width: 'fitsContent' | 'fillsContainer',
+  distribution: 'even' | 'proportional'
 ): ViewStyle => {
   const output = createSingleButtonHitboxStyleInstance(
     splitButtonStyle,
-    splitButtonStateStyle
+    splitButtonStateStyle,
+    width,
+    distribution
   )
 
   if (output.borderWidth !== undefined) {
@@ -72,11 +87,15 @@ const createLeftButtonHitboxStyleInstance = (
 
 const createMiddleButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
-  splitButtonStateStyle: SplitButtonStateStyle
+  splitButtonStateStyle: SplitButtonStateStyle,
+  width: 'fitsContent' | 'fillsContainer',
+  distribution: 'even' | 'proportional'
 ): ViewStyle => {
   const output = createSingleButtonHitboxStyleInstance(
     splitButtonStyle,
-    splitButtonStateStyle
+    splitButtonStateStyle,
+    width,
+    distribution
   )
 
   if (output.borderWidth !== undefined) {
@@ -97,11 +116,15 @@ const createMiddleButtonHitboxStyleInstance = (
 
 const createRightButtonHitboxStyleInstance = (
   splitButtonStyle: SplitButtonStyle<string>,
-  splitButtonStateStyle: SplitButtonStateStyle
+  splitButtonStateStyle: SplitButtonStateStyle,
+  width: 'fitsContent' | 'fillsContainer',
+  distribution: 'even' | 'proportional'
 ): ViewStyle => {
   const output = createSingleButtonHitboxStyleInstance(
     splitButtonStyle,
-    splitButtonStateStyle
+    splitButtonStateStyle,
+    width,
+    distribution
   )
 
   if (output.borderWidth !== undefined) {
@@ -146,7 +169,28 @@ React.PropsWithChildren<{
      * @param to The newly selected value.
      */
   onChange: (to: TValue) => void
-}>
+
+} & ({
+  /**
+   * Describes how the split button should be sized.
+   */
+  readonly width: 'fitsContent'
+
+  /**
+   * Describes how the width of the split button should be divided up.
+   */
+  readonly distribution: 'proportional'
+} | {
+  /**
+   * Describes how the split button should be sized.
+   */
+  readonly width: 'fillsContainer'
+
+  /**
+     * Describes how the width of the split button should be divided up.
+     */
+  readonly distribution: 'even' | 'proportional'
+})>
 >
 
 type SegmentInstance<TValue extends null | number | string> =
@@ -205,7 +249,9 @@ export const createSplitButtonComponent = <
       buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
-      buttonDisabled: boolean
+      buttonDisabled: boolean,
+      width: 'fitsContent' | 'fillsContainer',
+      distribution: 'even' | 'proportional'
     ) => JSX.Element;
   } = {}
 
@@ -213,81 +259,314 @@ export const createSplitButtonComponent = <
     const typeValue = splitButtonStyle.types[typeKey]
 
     const typeStyles = StyleSheet.create({
-      inactiveEnabledSingleHitbox: createSingleButtonHitboxStyleInstance(
+      inactiveEnabledSingleHitboxFitsContent: createSingleButtonHitboxStyleInstance(
         splitButtonStyle,
-        typeValue.inactiveEnabled
+        typeValue.inactiveEnabled,
+        'fitsContent',
+        'proportional'
       ),
-      inactiveEnabledLeftHitbox: createLeftButtonHitboxStyleInstance(
+      inactiveEnabledLeftHitboxFitsContent: createLeftButtonHitboxStyleInstance(
         splitButtonStyle,
-        typeValue.inactiveEnabled
+        typeValue.inactiveEnabled,
+        'fitsContent',
+        'proportional'
       ),
-      inactiveEnabledMiddleHitbox: createMiddleButtonHitboxStyleInstance(
+      inactiveEnabledMiddleHitboxFitsContent: createMiddleButtonHitboxStyleInstance(
         splitButtonStyle,
-        typeValue.inactiveEnabled
+        typeValue.inactiveEnabled,
+        'fitsContent',
+        'proportional'
       ),
-      inactiveEnabledRightHitbox: createRightButtonHitboxStyleInstance(
+      inactiveEnabledRightHitboxFitsContent: createRightButtonHitboxStyleInstance(
         splitButtonStyle,
-        typeValue.inactiveEnabled
+        typeValue.inactiveEnabled,
+        'fitsContent',
+        'proportional'
       ),
+      inactiveDisabledSingleHitboxFitsContent: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+      inactiveDisabledLeftHitboxFitsContent: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+      inactiveDisabledMiddleHitboxFitsContent: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+      inactiveDisabledRightHitboxFitsContent: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+
+      activeEnabledSingleHitboxFitsContent: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fitsContent',
+        'proportional'
+      ),
+      activeEnabledLeftHitboxFitsContent: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fitsContent',
+        'proportional'
+      ),
+      activeEnabledMiddleHitboxFitsContent: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fitsContent',
+        'proportional'
+      ),
+      activeEnabledRightHitboxFitsContent: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fitsContent',
+        'proportional'
+      ),
+
+      activeDisabledSingleHitboxFitsContent: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+      activeDisabledLeftHitboxFitsContent: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+      activeDisabledMiddleHitboxFitsContent: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+      activeDisabledRightHitboxFitsContent: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fitsContent',
+        'proportional'
+      ),
+
+      inactiveEnabledSingleHitboxFillsContainerEven: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'even'
+      ),
+      inactiveEnabledLeftHitboxFillsContainerEven: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'even'
+      ),
+      inactiveEnabledMiddleHitboxFillsContainerEven: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'even'
+      ),
+      inactiveEnabledRightHitboxFillsContainerEven: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'even'
+      ),
+      inactiveDisabledSingleHitboxFillsContainerEven: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'even'
+      ),
+      inactiveDisabledLeftHitboxFillsContainerEven: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'even'
+      ),
+      inactiveDisabledMiddleHitboxFillsContainerEven: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'even'
+      ),
+      inactiveDisabledRightHitboxFillsContainerEven: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'even'
+      ),
+
+      activeEnabledSingleHitboxFillsContainerEven: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'even'
+      ),
+      activeEnabledLeftHitboxFillsContainerEven: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'even'
+      ),
+      activeEnabledMiddleHitboxFillsContainerEven: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'even'
+      ),
+      activeEnabledRightHitboxFillsContainerEven: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'even'
+      ),
+
+      activeDisabledSingleHitboxFillsContainerEven: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'even'
+      ),
+      activeDisabledLeftHitboxFillsContainerEven: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'even'
+      ),
+      activeDisabledMiddleHitboxFillsContainerEven: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'even'
+      ),
+      activeDisabledRightHitboxFillsContainerEven: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'even'
+      ),
+
+      inactiveEnabledSingleHitboxFillsContainerProportional: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      inactiveEnabledLeftHitboxFillsContainerProportional: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      inactiveEnabledMiddleHitboxFillsContainerProportional: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      inactiveEnabledRightHitboxFillsContainerProportional: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      inactiveDisabledSingleHitboxFillsContainerProportional: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      inactiveDisabledLeftHitboxFillsContainerProportional: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      inactiveDisabledMiddleHitboxFillsContainerProportional: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      inactiveDisabledRightHitboxFillsContainerProportional: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.inactiveDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+
+      activeEnabledSingleHitboxFillsContainerProportional: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      activeEnabledLeftHitboxFillsContainerProportional: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      activeEnabledMiddleHitboxFillsContainerProportional: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      activeEnabledRightHitboxFillsContainerProportional: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeEnabled,
+        'fillsContainer',
+        'proportional'
+      ),
+
+      activeDisabledSingleHitboxFillsContainerProportional: createSingleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      activeDisabledLeftHitboxFillsContainerProportional: createLeftButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      activeDisabledMiddleHitboxFillsContainerProportional: createMiddleButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+      activeDisabledRightHitboxFillsContainerProportional: createRightButtonHitboxStyleInstance(
+        splitButtonStyle,
+        typeValue.activeDisabled,
+        'fillsContainer',
+        'proportional'
+      ),
+
       inactiveEnabledText: createButtonTextStyleInstance(
         splitButtonStyle,
         typeValue.inactiveEnabled
-      ),
-      inactiveDisabledSingleHitbox: createSingleButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.inactiveDisabled
-      ),
-      inactiveDisabledLeftHitbox: createLeftButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.inactiveDisabled
-      ),
-      inactiveDisabledMiddleHitbox: createMiddleButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.inactiveDisabled
-      ),
-      inactiveDisabledRightHitbox: createRightButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.inactiveDisabled
       ),
       inactiveDisabledText: createButtonTextStyleInstance(
         splitButtonStyle,
         typeValue.inactiveDisabled
       ),
-      activeEnabledSingleHitbox: createSingleButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeEnabled
-      ),
-      activeEnabledLeftHitbox: createLeftButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeEnabled
-      ),
-      activeEnabledMiddleHitbox: createMiddleButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeEnabled
-      ),
-      activeEnabledRightHitbox: createRightButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeEnabled
-      ),
       activeEnabledText: createButtonTextStyleInstance(
         splitButtonStyle,
         typeValue.activeEnabled
-      ),
-      activeDisabledSingleHitbox: createSingleButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeDisabled
-      ),
-      activeDisabledLeftHitbox: createLeftButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeDisabled
-      ),
-      activeDisabledMiddleHitbox: createMiddleButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeDisabled
-      ),
-      activeDisabledRightHitbox: createRightButtonHitboxStyleInstance(
-        splitButtonStyle,
-        typeValue.activeDisabled
       ),
       activeDisabledText: createButtonTextStyleInstance(
         splitButtonStyle,
@@ -304,7 +583,9 @@ export const createSplitButtonComponent = <
       buttonPosition,
       buttonValue,
       buttonLabel,
-      buttonDisabled
+      buttonDisabled,
+      width,
+      distribution
     ) => {
       let hitboxStyle: ViewStyle
       let textStyle: TextStyle
@@ -313,19 +594,75 @@ export const createSplitButtonComponent = <
         if (buttonDisabled) {
           switch (buttonPosition) {
             case 'single':
-              hitboxStyle = typeStyles.activeDisabledSingleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeDisabledSingleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeDisabledSingleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeDisabledSingleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'left':
-              hitboxStyle = typeStyles.activeDisabledLeftHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeDisabledLeftHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeDisabledLeftHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeDisabledLeftHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'middle':
-              hitboxStyle = typeStyles.activeDisabledMiddleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeDisabledMiddleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeDisabledMiddleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeDisabledMiddleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'right':
-              hitboxStyle = typeStyles.activeDisabledRightHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeDisabledRightHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeDisabledRightHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeDisabledRightHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
           }
 
@@ -333,19 +670,75 @@ export const createSplitButtonComponent = <
         } else {
           switch (buttonPosition) {
             case 'single':
-              hitboxStyle = typeStyles.activeEnabledSingleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeEnabledSingleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeEnabledSingleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeEnabledSingleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'left':
-              hitboxStyle = typeStyles.activeEnabledLeftHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeEnabledLeftHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeEnabledLeftHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeEnabledLeftHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'middle':
-              hitboxStyle = typeStyles.activeEnabledMiddleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeEnabledMiddleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeEnabledMiddleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeEnabledMiddleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'right':
-              hitboxStyle = typeStyles.activeEnabledRightHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.activeEnabledRightHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.activeEnabledRightHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.activeEnabledRightHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
           }
 
@@ -355,19 +748,75 @@ export const createSplitButtonComponent = <
         if (buttonDisabled) {
           switch (buttonPosition) {
             case 'single':
-              hitboxStyle = typeStyles.inactiveDisabledSingleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveDisabledSingleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveDisabledSingleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveDisabledSingleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'left':
-              hitboxStyle = typeStyles.inactiveDisabledLeftHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveDisabledLeftHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveDisabledLeftHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveDisabledLeftHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'middle':
-              hitboxStyle = typeStyles.inactiveDisabledMiddleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveDisabledMiddleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveDisabledMiddleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveDisabledMiddleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'right':
-              hitboxStyle = typeStyles.inactiveDisabledRightHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveDisabledRightHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveDisabledRightHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveDisabledRightHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
           }
 
@@ -375,19 +824,75 @@ export const createSplitButtonComponent = <
         } else {
           switch (buttonPosition) {
             case 'single':
-              hitboxStyle = typeStyles.inactiveEnabledSingleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveEnabledSingleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveEnabledSingleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveEnabledSingleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'left':
-              hitboxStyle = typeStyles.inactiveEnabledLeftHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveEnabledLeftHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveEnabledLeftHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveEnabledLeftHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'middle':
-              hitboxStyle = typeStyles.inactiveEnabledMiddleHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveEnabledMiddleHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveEnabledMiddleHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveEnabledMiddleHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
 
             case 'right':
-              hitboxStyle = typeStyles.inactiveEnabledRightHitbox
+              switch (width) {
+                case 'fitsContent':
+                  hitboxStyle = typeStyles.inactiveEnabledRightHitboxFitsContent
+                  break
+                case 'fillsContainer':
+                  switch (distribution) {
+                    case 'even':
+                      hitboxStyle = typeStyles.inactiveEnabledRightHitboxFillsContainerEven
+                      break
+                    case 'proportional':
+                      hitboxStyle = typeStyles.inactiveEnabledRightHitboxFillsContainerProportional
+                      break
+                  }
+                  break
+              }
               break
           }
 
@@ -423,7 +928,9 @@ export const createSplitButtonComponent = <
       buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
-      buttonDisabled: boolean
+      buttonDisabled: boolean,
+      width: 'fitsContent' | 'fillsContainer',
+      distribution: 'even' | 'proportional'
     ) => JSX.Element;
   } = partialButtonFactories as {
     [TTypeItem in TType]: (
@@ -432,7 +939,9 @@ export const createSplitButtonComponent = <
       buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
-      buttonDisabled: boolean
+      buttonDisabled: boolean,
+      width: 'fitsContent' | 'fillsContainer',
+      distribution: 'even' | 'proportional'
     ) => JSX.Element;
   }
 
@@ -440,7 +949,7 @@ export const createSplitButtonComponent = <
     segments?: {
       readonly [TTypeItem in TType]: SegmentInstance<TValue>;
     }
-  } = ({ value, onChange, children }) => {
+  } = ({ value, onChange, children, width, distribution }) => {
     const childrenArray = flattenRenderedToArray(children)
 
     return (
@@ -463,7 +972,9 @@ export const createSplitButtonComponent = <
                           : 'middle',
                     element.props.value,
                     element.props.children,
-                    element.props.disabled
+                    element.props.disabled,
+                    width,
+                    distribution
                   )
                 }
               }
