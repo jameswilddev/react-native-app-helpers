@@ -174,7 +174,8 @@ test('renders as expected with one inactive button', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -503,7 +504,8 @@ test('renders as expected with one active button', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -685,7 +687,8 @@ test('renders as expected with one disabled button', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -867,7 +870,8 @@ test('renders as expected with one disabled and active button', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -1048,7 +1052,8 @@ test('renders as expected with one inactive button without horizontal padding', 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -1229,7 +1234,8 @@ test('renders as expected with one active button without horizontal padding', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -1410,7 +1416,8 @@ test('renders as expected with one disabled button without horizontal padding', 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -1591,7 +1598,8 @@ test('renders as expected with one disabled and active button without horizontal
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -1772,7 +1780,8 @@ test('renders as expected with one inactive button without vertical padding', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -1953,7 +1962,8 @@ test('renders as expected with one active button without vertical padding', () =
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -2134,7 +2144,8 @@ test('renders as expected with one disabled button without vertical padding', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -2315,7 +2326,8 @@ test('renders as expected with one disabled and active button without vertical p
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -2496,7 +2508,8 @@ test('renders as expected with one inactive button without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -2677,7 +2690,8 @@ test('renders as expected with one active button without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -2858,7 +2872,8 @@ test('renders as expected with one disabled button without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -3039,7 +3054,8 @@ test('renders as expected with one disabled and active button without radius', (
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -3216,7 +3232,8 @@ test('renders as expected with one inactive button without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -3393,7 +3410,8 @@ test('renders as expected with one active button without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -3570,7 +3588,8 @@ test('renders as expected with one disabled button without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -3747,7 +3766,8 @@ test('renders as expected with one disabled and active button without borders', 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -3936,7 +3956,8 @@ test('renders as expected with two inactive buttons', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -3965,7 +3986,8 @@ test('renders as expected with two inactive buttons', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4154,7 +4176,8 @@ test('renders as expected with two buttons, the left of which is active', () => 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4183,7 +4206,8 @@ test('renders as expected with two buttons, the left of which is active', () => 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4372,7 +4396,8 @@ test('renders as expected with two buttons, the left of which is disabled', () =
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4401,7 +4426,8 @@ test('renders as expected with two buttons, the left of which is disabled', () =
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4590,7 +4616,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4619,7 +4646,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4808,7 +4836,8 @@ test('renders as expected with two buttons, the right of which is active', () =>
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -4837,7 +4866,8 @@ test('renders as expected with two buttons, the right of which is active', () =>
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5026,7 +5056,8 @@ test('renders as expected with two buttons, the right of which is disabled', () 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5055,7 +5086,8 @@ test('renders as expected with two buttons, the right of which is disabled', () 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5244,7 +5276,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5273,7 +5306,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5461,7 +5495,8 @@ test('renders as expected with two inactive buttons without horizontal padding',
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5489,7 +5524,8 @@ test('renders as expected with two inactive buttons without horizontal padding',
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5677,7 +5713,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5705,7 +5742,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5893,7 +5931,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -5921,7 +5960,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6109,7 +6149,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6137,7 +6178,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6325,7 +6367,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6353,7 +6396,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6541,7 +6585,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6569,7 +6614,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6757,7 +6803,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6785,7 +6832,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -6973,7 +7021,8 @@ test('renders as expected with two inactive buttons without vertical padding', (
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7001,7 +7050,8 @@ test('renders as expected with two inactive buttons without vertical padding', (
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7189,7 +7239,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7217,7 +7268,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7405,7 +7457,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7433,7 +7486,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7621,7 +7675,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7649,7 +7704,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7837,7 +7893,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -7865,7 +7922,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8053,7 +8111,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8081,7 +8140,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8269,7 +8329,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8297,7 +8358,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8484,7 +8546,8 @@ test('renders as expected with two inactive buttons without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8511,7 +8574,8 @@ test('renders as expected with two inactive buttons without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8698,7 +8762,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8727,7 +8792,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8914,7 +8980,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -8943,7 +9010,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9130,7 +9198,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9159,7 +9228,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9348,7 +9418,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9375,7 +9446,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9564,7 +9636,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9591,7 +9664,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9780,7 +9854,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9807,7 +9882,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -9987,7 +10063,8 @@ test('renders as expected with two inactive buttons without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10013,7 +10090,8 @@ test('renders as expected with two inactive buttons without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10196,7 +10274,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10225,7 +10304,8 @@ test('renders as expected with two buttons, the left of which is active, without
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10408,7 +10488,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10437,7 +10518,8 @@ test('renders as expected with two buttons, the left of which is disabled, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10620,7 +10702,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10649,7 +10732,8 @@ test('renders as expected with two buttons, the left of which is disabled and ac
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10835,7 +10919,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -10861,7 +10946,8 @@ test('renders as expected with two buttons, the right of which is active, withou
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11047,7 +11133,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11073,7 +11160,8 @@ test('renders as expected with two buttons, the right of which is disabled, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11259,7 +11347,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11285,7 +11374,8 @@ test('renders as expected with two buttons, the right of which is disabled and a
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11478,7 +11568,8 @@ test('renders as expected with three inactive buttons', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11504,7 +11595,8 @@ test('renders as expected with three inactive buttons', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11533,7 +11625,8 @@ test('renders as expected with three inactive buttons', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11726,7 +11819,8 @@ test('renders as expected with three buttons, the left of which is active', () =
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11752,7 +11846,8 @@ test('renders as expected with three buttons, the left of which is active', () =
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11781,7 +11876,8 @@ test('renders as expected with three buttons, the left of which is active', () =
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -11974,7 +12070,8 @@ test('renders as expected with three buttons, the left of which is disabled', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12000,7 +12097,8 @@ test('renders as expected with three buttons, the left of which is disabled', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12029,7 +12127,8 @@ test('renders as expected with three buttons, the left of which is disabled', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12222,7 +12321,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12248,7 +12348,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12277,7 +12378,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12470,7 +12572,8 @@ test('renders as expected with three buttons, the middle of which is active', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12496,7 +12599,8 @@ test('renders as expected with three buttons, the middle of which is active', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12525,7 +12629,8 @@ test('renders as expected with three buttons, the middle of which is active', ()
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12718,7 +12823,8 @@ test('renders as expected with three buttons, the middle of which is disabled', 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12744,7 +12850,8 @@ test('renders as expected with three buttons, the middle of which is disabled', 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12773,7 +12880,8 @@ test('renders as expected with three buttons, the middle of which is disabled', 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12966,7 +13074,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -12992,7 +13101,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13021,7 +13131,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13214,7 +13325,8 @@ test('renders as expected with three buttons, the right of which is active', () 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13240,7 +13352,8 @@ test('renders as expected with three buttons, the right of which is active', () 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13269,7 +13382,8 @@ test('renders as expected with three buttons, the right of which is active', () 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13462,7 +13576,8 @@ test('renders as expected with three buttons, the right of which is disabled', (
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13488,7 +13603,8 @@ test('renders as expected with three buttons, the right of which is disabled', (
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13517,7 +13633,8 @@ test('renders as expected with three buttons, the right of which is disabled', (
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13710,7 +13827,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13736,7 +13854,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13765,7 +13884,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13957,7 +14077,8 @@ test('renders as expected with three inactive buttons without horizontal padding
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -13982,7 +14103,8 @@ test('renders as expected with three inactive buttons without horizontal padding
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14010,7 +14132,8 @@ test('renders as expected with three inactive buttons without horizontal padding
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14202,7 +14325,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14227,7 +14351,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14255,7 +14380,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14447,7 +14573,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14472,7 +14599,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14500,7 +14628,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14692,7 +14821,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14717,7 +14847,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14745,7 +14876,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14937,7 +15069,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14962,7 +15095,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -14990,7 +15124,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15182,7 +15317,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15207,7 +15343,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15235,7 +15372,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15427,7 +15565,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15452,7 +15591,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15480,7 +15620,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15672,7 +15813,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15697,7 +15839,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15725,7 +15868,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15917,7 +16061,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15942,7 +16087,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -15970,7 +16116,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16162,7 +16309,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16187,7 +16335,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16215,7 +16364,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16407,7 +16557,8 @@ test('renders as expected with three inactive buttons without vertical padding',
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16432,7 +16583,8 @@ test('renders as expected with three inactive buttons without vertical padding',
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16460,7 +16612,8 @@ test('renders as expected with three inactive buttons without vertical padding',
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16652,7 +16805,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16677,7 +16831,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16705,7 +16860,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16897,7 +17053,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16922,7 +17079,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -16950,7 +17108,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17142,7 +17301,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17167,7 +17327,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17195,7 +17356,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17387,7 +17549,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17412,7 +17575,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17440,7 +17604,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17632,7 +17797,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17657,7 +17823,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17685,7 +17852,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17877,7 +18045,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17902,7 +18071,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -17930,7 +18100,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18122,7 +18293,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18147,7 +18319,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18175,7 +18348,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18367,7 +18541,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18392,7 +18567,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18420,7 +18596,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18612,7 +18789,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18637,7 +18815,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18665,7 +18844,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18856,7 +19036,8 @@ test('renders as expected with three inactive buttons without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18882,7 +19063,8 @@ test('renders as expected with three inactive buttons without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -18909,7 +19091,8 @@ test('renders as expected with three inactive buttons without radius', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19100,7 +19283,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19126,7 +19310,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19155,7 +19340,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19346,7 +19532,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19372,7 +19559,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19401,7 +19589,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19592,7 +19781,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19618,7 +19808,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19647,7 +19838,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19840,7 +20032,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19866,7 +20059,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -19895,7 +20089,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20088,7 +20283,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20114,7 +20310,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20143,7 +20340,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20336,7 +20534,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20362,7 +20561,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20391,7 +20591,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20584,7 +20785,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20610,7 +20812,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20637,7 +20840,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20830,7 +21034,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20856,7 +21061,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -20883,7 +21089,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21076,7 +21283,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21102,7 +21310,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21129,7 +21338,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21310,7 +21520,8 @@ test('renders as expected with three inactive buttons without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21333,7 +21544,8 @@ test('renders as expected with three inactive buttons without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21359,7 +21571,8 @@ test('renders as expected with three inactive buttons without borders', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21546,7 +21759,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'mediumorchid'
+              color: 'mediumorchid',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21572,7 +21786,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21601,7 +21816,8 @@ test('renders as expected with three buttons, the left of which is active, witho
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21788,7 +22004,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'lightgreen'
+              color: 'lightgreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21814,7 +22031,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -21843,7 +22061,8 @@ test('renders as expected with three buttons, the left of which is disabled, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22030,7 +22249,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'rebeccapurple'
+              color: 'rebeccapurple',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22056,7 +22276,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22085,7 +22306,8 @@ test('renders as expected with three buttons, the left of which is disabled and 
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22275,7 +22497,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22298,7 +22521,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'seagreen'
+              color: 'seagreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22327,7 +22551,8 @@ test('renders as expected with three buttons, the middle of which is active, wit
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22517,7 +22742,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22540,7 +22766,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'sienna'
+              color: 'sienna',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22569,7 +22796,8 @@ test('renders as expected with three buttons, the middle of which is disabled, w
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22759,7 +22987,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22782,7 +23011,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'teal'
+              color: 'teal',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -22811,7 +23041,8 @@ test('renders as expected with three buttons, the middle of which is disabled an
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23001,7 +23232,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23027,7 +23259,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23053,7 +23286,8 @@ test('renders as expected with three buttons, the right of which is active, with
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkolivegreen'
+              color: 'darkolivegreen',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23243,7 +23477,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23269,7 +23504,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23295,7 +23531,8 @@ test('renders as expected with three buttons, the right of which is disabled, wi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkred'
+              color: 'darkred',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23485,7 +23722,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23511,7 +23749,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -23537,7 +23776,8 @@ test('renders as expected with three buttons, the right of which is disabled and
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkslateblue'
+              color: 'darkslateblue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -24196,7 +24436,8 @@ test('excludes null', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -24222,7 +24463,8 @@ test('excludes null', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -24251,7 +24493,8 @@ test('excludes null', () => {
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -24746,7 +24989,8 @@ test('renders as expected with one inactive button which does not require margin
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -24937,7 +25181,8 @@ test('renders as expected with three inactive buttons which do not require margi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'blue'
+              color: 'blue',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -24962,7 +25207,8 @@ test('renders as expected with three inactive buttons which do not require margi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'whitesmoke'
+              color: 'whitesmoke',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >
@@ -24989,7 +25235,8 @@ test('renders as expected with three inactive buttons which do not require margi
               fontFamily: 'Example Font Family',
               fontSize: 44,
               lineHeight: 61.599999999999994,
-              color: 'darkgoldenrod'
+              color: 'darkgoldenrod',
+              textAlign: 'center'
             }}
             numberOfLines={1}
           >

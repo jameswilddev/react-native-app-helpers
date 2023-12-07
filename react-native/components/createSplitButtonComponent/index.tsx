@@ -129,7 +129,8 @@ const createButtonTextStyleInstance = (
     fontFamily: splitButtonStyle.fontFamily,
     fontSize: splitButtonStyle.fontSize,
     lineHeight: splitButtonStyle.fontSize * 1.4,
-    color: splitButtonStateStyle.color
+    color: splitButtonStateStyle.color,
+    textAlign: 'center'
   }
 }
 
