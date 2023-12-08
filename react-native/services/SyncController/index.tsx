@@ -1,12 +1,12 @@
 import type { ErrorReporterInterface } from '../../types/ErrorReporterInterface'
 import type { Json } from '../../types/Json'
 import type { LoggerInterface } from '../../types/LoggerInterface'
+import type { SyncControllerInterface } from '../../types/SyncControllerInterface'
 import type { SyncInterface } from '../../types/SyncInterface'
 import type { SyncableSchema } from '../../types/SyncableSchema'
 
 type Outcome =
     | 'noChangesMade'
-    | 'needsToRunAgain'
     | 'atLeastOneChangeMade'
     | 'failed'
 
@@ -44,9 +44,14 @@ export class SyncController<
     TSchema extends SyncableSchema,
     TAdditionalCollectionData extends Record<string, unknown>,
     TAdditionalCollectionItemData extends Record<string, Json>
-> {
+> implements SyncControllerInterface {
   private state: State = { type: 'paused' }
 
+  /**
+   * @param sync The sync service to control.
+   * @param logger Used to log messages when the sync controller's state changes.
+   * @param errorReporter Used to report errors which occur during sync.
+   */
   constructor (
     private readonly sync: SyncInterface<
     TSchema,
@@ -57,12 +62,6 @@ export class SyncController<
     private readonly errorReporter: ErrorReporterInterface
   ) {}
 
-  /**
-     * The controller starts in a "paused" state, in which it is not possible to
-     * start sync (run() will just return `noChangesMade`).  Call resume() to
-     * allow sync to start.  Does nothing in any other state.
-     * @throws When pausing.
-     */
   resume (): void {
     switch (this.state.type) {
       case 'paused':
@@ -75,12 +74,6 @@ export class SyncController<
     }
   }
 
-  /**
-     * Requests that the current sync be cancelled, if any.  Does not wait for
-     * the change to be applied.
-     * @throws When paused.
-     * @throws When pausing.
-     */
   requestCancel (): void {
     switch (this.state.type) {
       case 'paused':
@@ -122,15 +115,6 @@ export class SyncController<
     }
   }
 
-  /**
-     * Requests that a sync start.
-     * - If idle, sync starts.
-     * - If running, the current sync is cancelled and started again.
-     * - If cancelling, the current sync is allowed to cancel and is then
-     *   started again.
-     * - If paused or pausing, returns no changes made.
-     * @returns The outcome of the run.
-     */
   async run (): Promise<Outcome> {
     switch (this.state.type) {
       case 'paused':
@@ -157,7 +141,7 @@ export class SyncController<
           promise
         }
 
-        let outcome: Outcome
+        let outcome: Outcome | 'needsToRunAgain'
 
         try {
           outcome = await this.sync.run(abortController.signal)
