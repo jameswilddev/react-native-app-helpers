@@ -108,4 +108,37 @@ export class SyncableStateHelper<
       })
     }
   }
+
+  /**
+   * Inserts or updates a collection item.  Does NOT manage changes to files.  You likely want "upsertCollection", not this.
+   * This has one known use case: that you are soft-deleting a child record of the item, and that the sync system should NOT attempt to delete its associated media.
+   * @param state         The current state.
+   * @param collectionKey The key of the collection in which to make changes.
+   * @param uuid          The UUID of the collection item to insert or update.
+   * @param data          The data of the collection item to insert or update.
+   * @param setState      Called when the next state has been computed.
+   */
+  upsertCollectionWithoutAmendingFiles<T extends keyof TSchema['collections']>(
+    state: SyncableState<TSchema>,
+    collectionKey: T,
+    uuid: string,
+    data: TSchema['collections'][T],
+    setState: (to: SyncableState<TSchema>) => void
+  ): void {
+    const collection = state.collections[collectionKey]
+
+    setState({
+      ...state,
+      collections: {
+        ...state.collections,
+        [collectionKey]: {
+          ...collection,
+          [uuid]: {
+            status: 'awaitingPush',
+            data
+          }
+        }
+      }
+    })
+  }
 }
