@@ -6,9 +6,9 @@ document directory and provides a mockable interface.
 ## Usage
 
 ```tsx
-import type { FileStore } from "react-native-app-helpers";
+import type { UuidGenerator, FileStore } from "react-native-app-helpers";
 
-const fileStore = new FileStore();
+const fileStore = new FileStore(new UuidGenerator());
 
 await fileStore.load(`example-subdirectory-name`);
 
@@ -23,6 +23,9 @@ fileStore.generatePath(`9dd60263-682d-41b9-bf39-c3a1183da1b1`);
 
 // `9dd60263-682d-41b9-bf39-c3a1183da1b1`
 await fileStore.import(`example-file-uri`);
+
+// `9dd60263-682d-41b9-bf39-c3a1183da1b1`
+await fileStore.importPreservingOriginal(`example-file-uri`);
 
 fileStore.unload();
 ```

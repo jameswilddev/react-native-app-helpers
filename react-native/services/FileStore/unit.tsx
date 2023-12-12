@@ -7,17 +7,20 @@ test('creates a directory on load', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
 
   const promise = fileStore.load('Example Subdirectory Name')
 
@@ -44,6 +47,8 @@ test('creates a directory on load', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('resolves load when creating the directory succeeds', async () => {
@@ -53,17 +58,20 @@ test('resolves load when creating the directory succeeds', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
 
   await fileStore.load('Example Subdirectory Name')
 
@@ -75,6 +83,8 @@ test('resolves load when creating the directory succeeds', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when loading while loading', async () => {
@@ -86,17 +96,20 @@ test('throws when loading while loading', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   const firstPromise = fileStore.load('Example First Subdirectory Name')
 
   const secondPromise = fileStore.load('Example Second Subdirectory Name')
@@ -127,6 +140,8 @@ test('throws when loading while loading', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when loading while loaded', async () => {
@@ -136,17 +151,20 @@ test('throws when loading while loaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example First Subdirectory Name')
 
   const promise = fileStore.load('Example Second Subdirectory Name')
@@ -162,6 +180,8 @@ test('throws when loading while loaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when generating a path when not loaded', () => {
@@ -169,17 +189,20 @@ test('throws when generating a path when not loaded', () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
 
   expect(() => {
     fileStore.generatePath('5d515bcf-f201-463f-923f-7c6ab54e8ebf')
@@ -189,6 +212,8 @@ test('throws when generating a path when not loaded', () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when generating a path while loading', () => {
@@ -200,17 +225,20 @@ test('throws when generating a path while loading', () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   fileStore.load('Example Subdirectory Name')
 
   expect(() => {
@@ -225,6 +253,8 @@ test('throws when generating a path while loading', () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when generating a path once unloaded', async () => {
@@ -234,17 +264,20 @@ test('throws when generating a path once unloaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.unload()
 
@@ -260,6 +293,8 @@ test('throws when generating a path once unloaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('can generate paths', async () => {
@@ -269,17 +304,20 @@ test('can generate paths', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
 
   const actual = fileStore.generatePath('5d515bcf-f201-463f-923f-7c6ab54e8ebf')
@@ -295,6 +333,8 @@ test('can generate paths', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when listing when not loaded', async () => {
@@ -302,17 +342,20 @@ test('throws when listing when not loaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
 
   const promise = fileStore.list()
 
@@ -323,6 +366,8 @@ test('throws when listing when not loaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when listing while loading', async () => {
@@ -334,17 +379,20 @@ test('throws when listing while loading', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   fileStore.load('Example Subdirectory Name')
 
   const promise = fileStore.list()
@@ -360,6 +408,8 @@ test('throws when listing while loading', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when listing once unloaded', async () => {
@@ -369,17 +419,20 @@ test('throws when listing once unloaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.unload()
 
@@ -396,6 +449,8 @@ test('throws when listing once unloaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('can list files', async () => {
@@ -411,17 +466,20 @@ test('can list files', async () => {
     ])
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
 
   const files = await fileStore.list()
@@ -442,6 +500,8 @@ test('can list files', async () => {
   )
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when deleting when not loaded', async () => {
@@ -449,17 +509,20 @@ test('throws when deleting when not loaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
 
   const promise = fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
 
@@ -470,6 +533,8 @@ test('throws when deleting when not loaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when deleting while loading', async () => {
@@ -481,17 +546,20 @@ test('throws when deleting while loading', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   fileStore.load('Example Subdirectory Name')
 
   const promise = fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
@@ -507,6 +575,8 @@ test('throws when deleting while loading', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when deleting once unloaded', async () => {
@@ -516,17 +586,20 @@ test('throws when deleting once unloaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.unload()
 
@@ -543,6 +616,8 @@ test('throws when deleting once unloaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('does not resolve the promise returned by deleting until deletion succeeds', async () => {
@@ -556,17 +631,20 @@ test('does not resolve the promise returned by deleting until deletion succeeds'
     })
   )
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
 
   const promise = fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
@@ -597,6 +675,8 @@ test('does not resolve the promise returned by deleting until deletion succeeds'
     'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2'
   )
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('can delete files', async () => {
@@ -608,17 +688,20 @@ test('can delete files', async () => {
     // Empty.
   })
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
 
   await fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
@@ -634,6 +717,8 @@ test('can delete files', async () => {
     'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2'
   )
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when importing when not loaded', async () => {
@@ -641,17 +726,20 @@ test('throws when importing when not loaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
 
   const promise = fileStore.import('Example File Uri')
 
@@ -662,6 +750,8 @@ test('throws when importing when not loaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when importing while loading', async () => {
@@ -673,17 +763,20 @@ test('throws when importing while loading', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   fileStore.load('Example Subdirectory Name')
 
   const promise = fileStore.import('Example File Uri')
@@ -699,6 +792,8 @@ test('throws when importing while loading', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when importing once unloaded', async () => {
@@ -708,17 +803,20 @@ test('throws when importing once unloaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.unload()
 
@@ -735,6 +833,8 @@ test('throws when importing once unloaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('does not resolve the promise returned by importing until moving succeeds', async () => {
@@ -748,17 +848,20 @@ test('does not resolve the promise returned by importing until moving succeeds',
       // Empty.
     })
   )
+  const copyAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
 
   const promise = fileStore.import('Example File Uri')
@@ -788,10 +891,10 @@ test('does not resolve the promise returned by importing until moving succeeds',
   expect(moveAsync).toBeCalledTimes(1)
   expect(moveAsync).toHaveBeenCalledWith({
     from: 'Example File Uri',
-    to: expect.stringMatching(
-      /^Example Document Directory\/react-native-app-helpers\/file-store\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
-    )
+    to: 'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/46552625-c172-4365-aa65-9baa6bdca8fb'
   })
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
 })
 
 test('can import files', async () => {
@@ -803,17 +906,20 @@ test('can import files', async () => {
   const moveAsync = jest.fn(async () => {
     // Empty.
   })
+  const copyAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
 
   const uuid = await fileStore.import('Example File Uri')
@@ -830,6 +936,9 @@ test('can import files', async () => {
     from: 'Example File Uri',
     to: `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/${uuid}`
   })
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
+  expect(uuid).toEqual('46552625-c172-4365-aa65-9baa6bdca8fb')
 })
 
 test('throws when unloading when not loaded', () => {
@@ -837,17 +946,20 @@ test('throws when unloading when not loaded', () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
 
   expect(() => {
     fileStore.unload()
@@ -857,6 +969,8 @@ test('throws when unloading when not loaded', () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when unloading while loading', () => {
@@ -868,17 +982,20 @@ test('throws when unloading while loading', () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   fileStore.load('Example Subdirectory Name')
 
   expect(() => {
@@ -893,6 +1010,8 @@ test('throws when unloading while loading', () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when unloading once unloaded', async () => {
@@ -902,17 +1021,20 @@ test('throws when unloading once unloaded', async () => {
   const readDirectoryAsync = jest.fn()
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.unload()
 
@@ -928,6 +1050,8 @@ test('throws when unloading once unloaded', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when unloading while listing files', async () => {
@@ -941,17 +1065,20 @@ test('throws when unloading while listing files', async () => {
   )
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.list()
 
@@ -972,6 +1099,8 @@ test('throws when unloading while listing files', async () => {
   )
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when unloading while deleting files', async () => {
@@ -985,17 +1114,20 @@ test('throws when unloading while deleting files', async () => {
     })
   )
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
 
@@ -1016,6 +1148,8 @@ test('throws when unloading while deleting files', async () => {
     'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2'
   )
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('throws when unloading while importing files', async () => {
@@ -1029,17 +1163,20 @@ test('throws when unloading while importing files', async () => {
       // Empty.
     })
   )
+  const copyAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   fileStore.import('Example File Uri')
 
@@ -1059,10 +1196,11 @@ test('throws when unloading while importing files', async () => {
   expect(moveAsync).toBeCalledTimes(1)
   expect(moveAsync).toHaveBeenCalledWith({
     from: 'Example File Uri',
-    to: expect.stringMatching(
-      /^Example Document Directory\/react-native-app-helpers\/file-store\/Example Subdirectory Name\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
-    )
+    to: 'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/46552625-c172-4365-aa65-9baa6bdca8fb'
   })
+
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
 })
 
 test('can unload before any file store operations occur', async () => {
@@ -1072,17 +1210,20 @@ test('can unload before any file store operations occur', async () => {
   const moveAsync = jest.fn(async () => {
     // Empty.
   })
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
 
   fileStore.unload()
@@ -1095,6 +1236,8 @@ test('can unload before any file store operations occur', async () => {
   expect(readDirectoryAsync).not.toHaveBeenCalled()
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('can unload once listing files completes', async () => {
@@ -1110,17 +1253,20 @@ test('can unload once listing files completes', async () => {
     ])
   const deleteAsync = jest.fn()
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   await fileStore.list()
 
@@ -1137,6 +1283,8 @@ test('can unload once listing files completes', async () => {
   )
   expect(deleteAsync).not.toHaveBeenCalled()
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('can unload once deleting files completes', async () => {
@@ -1148,17 +1296,20 @@ test('can unload once deleting files completes', async () => {
     // Empty.
   })
   const moveAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const generate = jest.fn()
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   await fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
 
@@ -1175,6 +1326,8 @@ test('can unload once deleting files completes', async () => {
     'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2'
   )
   expect(moveAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
 })
 
 test('can unload once importing files completes', async () => {
@@ -1186,17 +1339,20 @@ test('can unload once importing files completes', async () => {
   const moveAsync = jest.fn(async () => {
     // Empty.
   })
+  const copyAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
   jest.resetModules()
   jest.setMock('expo-file-system', {
     documentDirectory: 'Example Document Directory',
     makeDirectoryAsync,
     readDirectoryAsync,
     deleteAsync,
-    moveAsync
+    moveAsync,
+    copyAsync
   })
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { FileStore } = require('../../..')
-  const fileStore = new FileStore()
+  const fileStore = new FileStore({ generate })
   await fileStore.load('Example Subdirectory Name')
   const uuid = await fileStore.import('Example File Uri')
 
@@ -1214,4 +1370,661 @@ test('can unload once importing files completes', async () => {
     from: 'Example File Uri',
     to: `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/${uuid}`
   })
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
+  expect(uuid).toEqual('46552625-c172-4365-aa65-9baa6bdca8fb')
+})
+
+test('throws when importing preserving original when not loaded', async () => {
+  const makeDirectoryAsync = jest.fn()
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+
+  const promise = fileStore.importPreservingOriginal('Example File Uri')
+
+  await expect(promise).rejects.toEqual(
+    new Error('The file store is not loaded.')
+  )
+  expect(makeDirectoryAsync).not.toBeCalled()
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('throws when importing preserving original while loading', async () => {
+  const makeDirectoryAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  )
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  fileStore.load('Example Subdirectory Name')
+
+  const promise = fileStore.importPreservingOriginal('Example File Uri')
+
+  await expect(promise).rejects.toEqual(
+    new Error('The file store is currently loading.')
+  )
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('throws when importing preserving original once unloaded', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  fileStore.unload()
+
+  const promise = fileStore.importPreservingOriginal('Example File Uri')
+
+  await expect(promise).rejects.toEqual(
+    new Error('The file store is not loaded.')
+  )
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('does not resolve the promise returned by importing preserving original until moving succeeds', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  )
+  const moveAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+
+  const promise = fileStore.importPreservingOriginal('Example File Uri')
+
+  let resolved = false
+  let rejected = false
+  promise.then(
+    () => {
+      resolved = true
+    },
+    () => {
+      rejected = true
+    }
+  )
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 100)
+  })
+  expect(resolved).toBeFalsy()
+  expect(rejected).toBeFalsy()
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).toBeCalledTimes(1)
+  expect(copyAsync).toHaveBeenCalledWith({
+    from: 'Example File Uri',
+    to: 'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/46552625-c172-4365-aa65-9baa6bdca8fb'
+  })
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
+})
+
+test('can import files preserving original', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const moveAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+
+  const uuid = await fileStore.importPreservingOriginal('Example File Uri')
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).toBeCalledTimes(1)
+  expect(copyAsync).toHaveBeenCalledWith({
+    from: 'Example File Uri',
+    to: `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/${uuid}`
+  })
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
+  expect(uuid).toEqual('46552625-c172-4365-aa65-9baa6bdca8fb')
+})
+
+test('throws when unloading when not loaded', () => {
+  const makeDirectoryAsync = jest.fn()
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+
+  expect(() => {
+    fileStore.unload()
+  }).toThrowError('The file store is not loaded.')
+
+  expect(makeDirectoryAsync).not.toBeCalled()
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('throws when unloading while loading', () => {
+  const makeDirectoryAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  )
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  fileStore.load('Example Subdirectory Name')
+
+  expect(() => {
+    fileStore.unload()
+  }).toThrowError('The file store is currently loading.')
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('throws when unloading once unloaded', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  fileStore.unload()
+
+  expect(() => {
+    fileStore.unload()
+  }).toThrowError('The file store is not loaded.')
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('throws when unloading while listing files', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  )
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  fileStore.list()
+
+  expect(() => {
+    fileStore.unload()
+  }).toThrowError(
+    'One or more file store operations are currently in progress.'
+  )
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).toBeCalledTimes(1)
+  expect(readDirectoryAsync).toHaveBeenCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name'
+  )
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('throws when unloading while deleting files', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  )
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
+
+  expect(() => {
+    fileStore.unload()
+  }).toThrowError(
+    'One or more file store operations are currently in progress.'
+  )
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).toBeCalledTimes(1)
+  expect(deleteAsync).toHaveBeenCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2'
+  )
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('throws when unloading while importing files preserving original', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn().mockReturnValue(
+    new Promise<void>(() => {
+      // Empty.
+    })
+  )
+  const moveAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  fileStore.importPreservingOriginal('Example File Uri')
+
+  expect(() => {
+    fileStore.unload()
+  }).toThrowError(
+    'One or more file store operations are currently in progress.'
+  )
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).toBeCalledTimes(1)
+  expect(copyAsync).toHaveBeenCalledWith({
+    from: 'Example File Uri',
+    to: 'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/46552625-c172-4365-aa65-9baa6bdca8fb'
+  })
+
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
+})
+
+test('can unload before any file store operations occur', async () => {
+  const makeDirectoryAsync = jest.fn()
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+
+  fileStore.unload()
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('can unload once listing files completes', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest
+    .fn()
+    .mockResolvedValue([
+      'a84f5f9e-4350-49ee-8871-c034f0038556',
+      'ac998c2c-7dc0-43b5-af07-8bf11e658baa',
+      '5e64ed2a-aa72-46e9-867c-8dd45ae867cc'
+    ])
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  await fileStore.list()
+
+  fileStore.unload()
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).toBeCalledTimes(1)
+  expect(readDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name'
+  )
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('can unload once deleting files completes', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const copyAsync = jest.fn()
+  const moveAsync = jest.fn()
+  const generate = jest.fn()
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  await fileStore.delete('1527b17e-08e7-49b5-9bff-09a1945f25f2')
+
+  fileStore.unload()
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).toBeCalledTimes(1)
+  expect(deleteAsync).toHaveBeenCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/1527b17e-08e7-49b5-9bff-09a1945f25f2'
+  )
+  expect(copyAsync).not.toHaveBeenCalled()
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).not.toHaveBeenCalled()
+})
+
+test('can unload once importing files completes preserving original', async () => {
+  const makeDirectoryAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const readDirectoryAsync = jest.fn()
+  const deleteAsync = jest.fn()
+  const copyAsync = jest.fn(async () => {
+    // Empty.
+  })
+  const moveAsync = jest.fn()
+  const generate = jest.fn().mockReturnValue('46552625-c172-4365-aa65-9baa6bdca8fb')
+  jest.resetModules()
+  jest.setMock('expo-file-system', {
+    documentDirectory: 'Example Document Directory',
+    makeDirectoryAsync,
+    readDirectoryAsync,
+    deleteAsync,
+    copyAsync,
+    moveAsync
+  })
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { FileStore } = require('../../..')
+  const fileStore = new FileStore({ generate })
+  await fileStore.load('Example Subdirectory Name')
+  const uuid = await fileStore.importPreservingOriginal('Example File Uri')
+
+  fileStore.unload()
+
+  expect(makeDirectoryAsync).toBeCalledTimes(1)
+  expect(makeDirectoryAsync).toBeCalledWith(
+    'Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name',
+    { intermediates: true }
+  )
+  expect(readDirectoryAsync).not.toHaveBeenCalled()
+  expect(deleteAsync).not.toHaveBeenCalled()
+  expect(copyAsync).toBeCalledTimes(1)
+  expect(copyAsync).toHaveBeenCalledWith({
+    from: 'Example File Uri',
+    to: `Example Document Directory/react-native-app-helpers/file-store/Example Subdirectory Name/${uuid}`
+  })
+  expect(moveAsync).not.toHaveBeenCalled()
+  expect(generate).toHaveBeenCalledTimes(1)
+  expect(uuid).toEqual('46552625-c172-4365-aa65-9baa6bdca8fb')
 })

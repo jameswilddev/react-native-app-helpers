@@ -1,12 +1,14 @@
-import * as Crypto from 'expo-crypto'
 import * as FileSystem from 'expo-file-system'
 import type { FileStoreInterface } from '../../types/FileStoreInterface'
+import type { UuidGenerator } from '../UuidGenerator'
 
 /**
  * A wrapper around expo-file-system which stores files in a subdirectory of the
  * document directory and provides a mockable interface.
  */
 export class FileStore implements FileStoreInterface {
+  constructor (private readonly uuidGenerator: UuidGenerator) {}
+
   private subdirectoryName: null | string = null
   private loading = false
   private operationsInProgress = 0
@@ -99,9 +101,32 @@ export class FileStore implements FileStoreInterface {
       try {
         this.operationsInProgress++
 
-        const output = Crypto.randomUUID().toLowerCase()
+        const output = this.uuidGenerator.generate()
 
         await FileSystem.moveAsync({
+          from: fileUri,
+          to: this.generatePath(output)
+        })
+
+        return output
+      } finally {
+        this.operationsInProgress--
+      }
+    }
+  }
+
+  async importPreservingOriginal (fileUri: string): Promise<string> {
+    if (this.loading) {
+      throw new Error('The file store is currently loading.')
+    } else if (this.subdirectoryName === null) {
+      throw new Error('The file store is not loaded.')
+    } else {
+      try {
+        this.operationsInProgress++
+
+        const output = this.uuidGenerator.generate()
+
+        await FileSystem.copyAsync({
           from: fileUri,
           to: this.generatePath(output)
         })
