@@ -1,4 +1,5 @@
 export { Aligned } from './react-native/components/Aligned'
+export { Column } from './react-native/components/Column'
 export { ContainerFillingKeyboardAvoidingView } from './react-native/components/ContainerFillingKeyboardAvoidingView'
 export { ContainerFillingScrollView } from './react-native/components/ContainerFillingScrollView'
 export { createBottomTabBarComponent } from './react-native/components/createBottomTabBarComponent'

@@ -16,7 +16,7 @@ const ExampleScreen = () => (
   >
     <Text>These example items are aligned to the top left.</Text>
     <Text>
-      The container is as short as possible while containing their height.
+      The container is as short as possible while containing its height.
     </Text>
   </Row>
 );
@@ -48,7 +48,7 @@ const ExampleScreen = () => (
   >
     <Text>These example items are aligned to the bottom right.</Text>
     <Text>
-      The container is as short as possible while containing their height.
+      The container is as short as possible while containing its height.
     </Text>
   </Row>
 );
@@ -68,7 +68,7 @@ const ExampleScreen = () => (
       the container vertically.
     </Text>
     <Text>
-      The container is as short as possible while containing their height.
+      The container is as short as possible while containing its height.
     </Text>
   </Row>
 );
@@ -88,7 +88,7 @@ const ExampleScreen = () => (
       container, and are stretched to fill the container vertically.
     </Text>
     <Text>
-      The container is as short as possible while containing their height.
+      The container is as short as possible while containing its height.
     </Text>
   </Row>
 );

@@ -19,6 +19,7 @@ import { createTextComponent } from "react-native-app-helpers";
 #### Components
 
 - [Aligned](./react-native/components/Aligned/readme.md)
+- [Column](./react-native/components/Column/readme.md)
 - [ContainerFillingKeyboardAvoidingView](./react-native/components/ContainerFillingKeyboardAvoidingView/readme.md)
 - [ContainerFillingScrollView](./react-native/components/ContainerFillingScrollView/readme.md)
 - [createBottomTabBarComponent](./react-native/components/createBottomTabBarComponent/readme.md)
