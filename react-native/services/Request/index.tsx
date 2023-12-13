@@ -211,7 +211,8 @@ export class Request implements RequestInterface {
 
             const result = await task.uploadAsync()
 
-            if (result === undefined) {
+            // NOTE: According to Expo's documentation, this should only return a value or undefined, but it has been observed to return null when the task is aborted.
+            if (result === undefined || result === null) {
               throw new AbortError()
             } else {
               response = result

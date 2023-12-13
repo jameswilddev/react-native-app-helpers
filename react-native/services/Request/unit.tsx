@@ -1097,6 +1097,70 @@ test('get request file response empty external abort', async () => {
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
 })
 
+test('get request file response empty external abort null', async () => {
+  const fetch = jest.fn();
+  (global as unknown as { fetch: unknown }).fetch = fetch
+  let resolve: (value: null) => void
+  const cancelAsync = jest.fn(() => {
+    resolve(null)
+  })
+  const uploadAsync = jest.fn(async () => {
+    await new Promise<null>((_resolve) => {
+      resolve = _resolve
+    })
+  });
+  (
+    FileSystem.createUploadTask as unknown as {
+      mockReturnValue: (value: unknown) => void
+    }
+  ).mockReturnValue({
+    cancelAsync,
+    uploadAsync
+  })
+  const request = new Request(
+    'https://example-base-url.com/example/sub/path/',
+    1000,
+    () => 'Example Authorization Header'
+  )
+  const abortController = new AbortController()
+  const promise = request.withoutResponse(
+    'PUT',
+    'example/route',
+    { type: 'file', fileUri: 'Example File Uri' },
+    {
+      'Example Query Parameter A Key': 'Example Query Parameter A Value',
+      'Example Query Parameter B Key': 12.34,
+      'Example Query Parameter C Key': false,
+      'Example Query Parameter D Key': true
+    },
+    abortController.signal,
+    ['244', '123', '89']
+  )
+
+  abortController.abort()
+
+  await expect(promise).rejects.toEqual(new AbortError())
+
+  expect(FileSystem.createUploadTask).toBeCalledTimes(1)
+  expect(FileSystem.createUploadTask).toBeCalledWith(
+    'https://example-base-url.com/example/sub/path/example/route?Example%20Query%20Parameter%20A%20Key=Example%20Query%20Parameter%20A%20Value&Example%20Query%20Parameter%20B%20Key=12.34&Example%20Query%20Parameter%20D%20Key',
+    'Example File Uri',
+    {
+      uploadType: 'Test Binary Content',
+      headers: {
+        Authorization: 'Example Authorization Header',
+        Accept: 'application/json'
+      }
+    }
+  )
+  expect(cancelAsync).toBeCalledTimes(1)
+  expect(uploadAsync).toBeCalledTimes(1)
+
+  expect(fetch).not.toHaveBeenCalled()
+  expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
+  expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+})
+
 test('get request empty response json', async () => {
   const fetch = jest.fn().mockResolvedValue({
     status: 123,
