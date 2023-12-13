@@ -31,10 +31,10 @@ export function useSyncInProgress<
   const refresh = useRefresh()
 
   React.useEffect(() => {
-    let syncPreviouslyInProgress = sync.getState().type !== 'notRunning'
+    let syncPreviouslyInProgress = sync.getState().running
 
     const listener = (): void => {
-      const syncInProgress = sync.getState().type !== 'notRunning'
+      const syncInProgress = sync.getState().running
 
       if (syncInProgress !== syncPreviouslyInProgress) {
         syncPreviouslyInProgress = syncInProgress
@@ -49,5 +49,5 @@ export function useSyncInProgress<
     }
   }, [])
 
-  return sync.getState().type !== 'notRunning'
+  return sync.getState().running
 }

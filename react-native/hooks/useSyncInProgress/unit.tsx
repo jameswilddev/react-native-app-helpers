@@ -16,7 +16,7 @@ test('returns true when a sync is in progress', async () => {
   SyncableSchema,
   Record<string, unknown>,
   Record<string, Json>
-  > = { type: 'checkingForChangesToPull' }
+  > = { type: 'checkingForChangesToPull', running: true }
   const sync: SyncInterface<
   SyncableSchema,
   Record<string, unknown>,
@@ -62,7 +62,7 @@ test('returns false when a sync is not in progress', async () => {
   SyncableSchema,
   Record<string, unknown>,
   Record<string, Json>
-  > = { type: 'notRunning' }
+  > = { type: 'notStarted', running: false }
   const sync: SyncInterface<
   SyncableSchema,
   Record<string, unknown>,
@@ -108,7 +108,7 @@ test('re-renders returning true when a sync starts', async () => {
   SyncableSchema,
   Record<string, unknown>,
   Record<string, Json>
-  > = { type: 'notRunning' }
+  > = { type: 'failed', running: false }
   const sync: SyncInterface<
   SyncableSchema,
   Record<string, unknown>,
@@ -135,7 +135,7 @@ test('re-renders returning true when a sync starts', async () => {
     setTimeout(resolve, 10)
   })
 
-  state = { type: 'checkingForChangesToPull' }
+  state = { type: 'checkingForChangesToPull', running: true }
   eventEmitter.emit('stateChange')
 
   await new Promise<void>((resolve) => {
@@ -161,7 +161,7 @@ test('re-renders returning false when a sync ends', async () => {
   SyncableSchema,
   Record<string, unknown>,
   Record<string, Json>
-  > = { type: 'checkingForChangesToPull' }
+  > = { type: 'checkingForChangesToPull', running: true }
   const sync: SyncInterface<
   SyncableSchema,
   Record<string, unknown>,
@@ -188,7 +188,7 @@ test('re-renders returning false when a sync ends', async () => {
     setTimeout(resolve, 10)
   })
 
-  state = { type: 'notRunning' }
+  state = { type: 'failed', running: false }
   eventEmitter.emit('stateChange')
 
   await new Promise<void>((resolve) => {
@@ -214,7 +214,7 @@ test('continues to return false when sync does not start', async () => {
   SyncableSchema,
   Record<string, unknown>,
   Record<string, Json>
-  > = { type: 'notRunning' }
+  > = { type: 'succeeded', running: false }
   const sync: SyncInterface<
   SyncableSchema,
   Record<string, unknown>,
@@ -241,7 +241,7 @@ test('continues to return false when sync does not start', async () => {
     setTimeout(resolve, 10)
   })
 
-  state = { type: 'notRunning' }
+  state = { type: 'failed', running: false }
   eventEmitter.emit('stateChange')
 
   await new Promise<void>((resolve) => {
@@ -267,7 +267,7 @@ test('continues to return true when sync does not end', async () => {
   SyncableSchema,
   Record<string, unknown>,
   Record<string, Json>
-  > = { type: 'checkingForChangesToPull' }
+  > = { type: 'checkingForChangesToPull', running: true }
   const sync: SyncInterface<
   SyncableSchema,
   Record<string, unknown>,
@@ -294,7 +294,7 @@ test('continues to return true when sync does not end', async () => {
     setTimeout(resolve, 10)
   })
 
-  state = { type: 'checkingForChangesToPush' }
+  state = { type: 'checkingForChangesToPush', running: true }
   eventEmitter.emit('stateChange')
 
   await new Promise<void>((resolve) => {

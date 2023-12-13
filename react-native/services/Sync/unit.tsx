@@ -78,6 +78,15 @@ interface PushStep {
   readonly statusCode: string
 }
 
+interface PushFailureStep {
+  readonly type: 'pushFailure'
+  readonly method: string
+  readonly route: string
+  readonly requestBody: EmptyRequestBody | JsonRequestBody | FileRequestBody
+  readonly queryParameters: QueryParameters
+  readonly expectedStatusCodes: readonly string[]
+}
+
 interface SetStateStep {
   readonly type: 'setState'
   readonly to: SyncableState<TestSchema>
@@ -119,6 +128,7 @@ type Step =
     readonly changedExternally: boolean
   }
   | PushStep
+  | PushFailureStep
   | SetStateStep
   | PullJsonStep
   | PullFileStep
@@ -326,7 +336,8 @@ function scenario (
   description: string,
   initialState: SyncableState<TestSchema>,
   expectedSteps: readonly Step[],
-  returns: 'noChangesMade' | 'needsToRunAgain' | 'atLeastOneChangeMade'
+  returns: 'noChangesMade' | 'needsToRunAgain' | 'atLeastOneChangeMade' | 'error',
+  finalState: 'notStarted' | 'failed' | 'succeeded'
 ): void {
   test(description, async () => {
     let currentState = initialState
@@ -376,22 +387,51 @@ function scenario (
         ) => {
           const expectedStep = expectedSteps[actualSteps.length]
 
-          actualSteps.push({
-            type: 'push',
-            method,
-            route,
-            requestBody,
-            queryParameters,
-            expectedStatusCodes,
-            statusCode: expect.anything()
-          })
-
-          expect(abortSignal).toBe(abortSignal)
-
-          if (expectedStep === undefined || expectedStep.type !== 'push') {
+          if (expectedStep === undefined) {
             fail('Unexpected request.withoutResponse()')
           } else {
-            return expectedStep.statusCode
+            switch (expectedStep.type) {
+              case 'push':
+                actualSteps.push({
+                  type: 'push',
+                  method,
+                  route,
+                  requestBody,
+                  queryParameters,
+                  expectedStatusCodes,
+                  statusCode: expect.anything()
+                })
+
+                expect(abortSignal).toBe(abortSignal)
+                return expectedStep.statusCode
+
+              case 'pushFailure':
+                actualSteps.push({
+                  type: 'pushFailure',
+                  method,
+                  route,
+                  requestBody,
+                  queryParameters,
+                  expectedStatusCodes
+                })
+
+                expect(abortSignal).toBe(abortSignal)
+                throw new Error('Test Error')
+
+              default:
+                actualSteps.push({
+                  type: 'push',
+                  method,
+                  route,
+                  requestBody,
+                  queryParameters,
+                  expectedStatusCodes,
+                  statusCode: expect.anything()
+                })
+
+                expect(abortSignal).toBe(abortSignal)
+                fail('Unexpected request.withoutResponse()')
+            }
           }
         }
       ) as RequestInterface['withoutResponse'],
@@ -599,12 +639,16 @@ function scenario (
 
     sync.removeListener('stateChange', eventHandlerB)
 
-    expect(sync.getState()).toEqual({ type: 'notRunning' })
+    expect(sync.getState()).toEqual({ type: 'notStarted', running: false })
 
     try {
-      const actual = await sync.run(abortSignal)
+      if (returns === 'error') {
+        await expect(sync.run(abortSignal)).rejects.toThrowError('Test Error')
+      } else {
+        const actual = await sync.run(abortSignal)
 
-      expect(actual).toEqual(returns)
+        expect(actual).toEqual(returns)
+      }
     } finally {
       expect(actualSteps).toEqual(expectedSteps)
     }
@@ -618,7 +662,7 @@ function scenario (
     expect(fileStore.unload).not.toHaveBeenCalled()
     expect(fileStore.import).not.toHaveBeenCalled()
 
-    expect(sync.getState()).toEqual({ type: 'notRunning' })
+    expect(sync.getState()).toEqual({ type: finalState, running: false })
 
     expect(eventHandlerB).not.toHaveBeenCalled()
   })
@@ -703,12 +747,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -753,12 +797,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -919,15 +963,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'noChangesMade'
+  'noChangesMade',
+  'succeeded'
 )
 
 scenario(
@@ -1008,12 +1053,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -1060,6 +1105,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -1075,6 +1121,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -1159,12 +1206,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -1292,6 +1339,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -1309,6 +1357,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -1435,15 +1484,196 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
+)
+
+scenario(
+  'with a change which fails to push',
+  {
+    singletons: {
+      testSingletonAKey: {
+        type: 'upToDate',
+        version: 'Test Singleton A Version A',
+        value: 'Test Singleton A Value A'
+      },
+      testSingletonBKey: {
+        type: 'upToDate',
+        version: 'Test Singleton B Version A',
+        value: 'Test Singleton B Value A'
+      },
+      testSingletonCKey: {
+        type: 'upToDate',
+        version: 'Test Singleton C Version A',
+        value: 'Test Singleton C Value A'
+      }
+    },
+    collections: {
+      testCollectionAKey: {
+        '499b4447-2f9a-49a7-b636-909ace319cd8': {
+          status: 'upToDate',
+          version: 'Test Collection A A Version A',
+          data: 'Test Collection A Value A'
+        }
+      },
+      testCollectionBKey: {
+        '47fe4216-a7db-43e0-8039-fced83de97cc': {
+          status: 'upToDate',
+          version: 'Test Collection B A Version A',
+          data: 'Test Collection B Value A'
+        },
+        '8dde71a5-6106-4ebb-b2da-7c7d129a1ba6': {
+          status: 'awaitingPush',
+          data: 'Test Collection B Value B'
+        }
+      },
+      testCollectionCKey: {
+        'c2bf5c63-85dc-4797-82db-6136081b1562': {
+          status: 'upToDate',
+          version: 'Test Collection C A Version A',
+          data: 'Test Collection C Value A'
+        }
+      }
+    },
+    addedFileUuids: [],
+    deletedFileRoutes: []
+  },
+  [
+    {
+      type: 'log',
+      severity: 'information',
+      text: 'Sync is starting...'
+    },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'Listing existing files...'
+    },
+    {
+      type: 'listFiles',
+      uuids: [
+        'f81d2428-9bde-4b1c-823c-86b349c99363',
+        'a62a2fc4-6d1b-4289-94e1-373d4ebf5cd2',
+        '52219b25-ac88-4440-bf31-a47df684bdd7'
+      ]
+    },
+    { type: 'getState', changedExternally: false },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'Searching for changes to push...'
+    },
+    {
+      type: 'stateChange',
+      eventHandler: 'a',
+      to: { type: 'checkingForChangesToPush', running: true }
+    },
+    {
+      type: 'stateChange',
+      eventHandler: 'c',
+      to: { type: 'checkingForChangesToPush', running: true }
+    },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'Searching for changes to push in collection "testCollectionBKey"...'
+    },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'No changes to push for "testCollectionBKey" "47fe4216-a7db-43e0-8039-fced83de97cc".'
+    },
+    {
+      type: 'log',
+      severity: 'information',
+      text: 'Change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6" will be pushed.'
+    },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'Searching for changes to push in collection "testCollectionCKey"...'
+    },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'No changes to push for "testCollectionCKey" "c2bf5c63-85dc-4797-82db-6136081b1562".'
+    },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'Searching for changes to push in collection "testCollectionAKey"...'
+    },
+    {
+      type: 'log',
+      severity: 'debug',
+      text: 'No changes to push for "testCollectionAKey" "499b4447-2f9a-49a7-b636-909ace319cd8".'
+    },
+    {
+      type: 'log',
+      severity: 'information',
+      text: 'Pushing change of "testCollectionBKey" "8dde71a5-6106-4ebb-b2da-7c7d129a1ba6"...'
+    },
+    {
+      type: 'stateChange',
+      eventHandler: 'a',
+      to: {
+        type: 'pushing',
+        running: true,
+        completedSteps: 0,
+        totalSteps: 1,
+        completedFiles: null,
+        totalFiles: 0,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
+      }
+    },
+    {
+      type: 'stateChange',
+      eventHandler: 'c',
+      to: {
+        type: 'pushing',
+        running: true,
+        completedSteps: 0,
+        totalSteps: 1,
+        completedFiles: null,
+        totalFiles: 0,
+        syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
+        TestSchema['collections'][keyof TestSchema['collections']],
+        TestAdditionalCollectionData
+        >
+      }
+    },
+    {
+      type: 'pushFailure',
+      method: 'PUT',
+      route: 'sync/test-collection-b-key/8dde71a5-6106-4ebb-b2da-7c7d129a1ba6',
+      requestBody: { type: 'json', value: 'Test Collection B Value B' },
+      queryParameters: {},
+      expectedStatusCodes: ['200', '404', '403']
+    },
+    {
+      type: 'stateChange',
+      eventHandler: 'a',
+      to: { type: 'failed', running: false }
+    },
+    {
+      type: 'stateChange',
+      eventHandler: 'c',
+      to: { type: 'failed', running: false }
+    }
+  ],
+  'error',
+  'failed'
 )
 
 scenario(
@@ -1524,12 +1754,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -1581,6 +1811,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -1596,6 +1827,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -1682,6 +1914,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -1697,6 +1930,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -1784,12 +2018,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -1917,6 +2151,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -1934,6 +2169,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -2060,15 +2296,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -2149,12 +2386,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -2201,6 +2438,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -2216,6 +2454,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -2300,12 +2539,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -2433,6 +2672,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -2450,6 +2690,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -2576,15 +2817,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -2665,12 +2907,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -2722,6 +2964,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -2737,6 +2980,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -2823,6 +3067,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -2838,6 +3083,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -2925,12 +3171,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -3058,6 +3304,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -3075,6 +3322,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -3201,15 +3449,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -3290,12 +3539,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -3340,12 +3589,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -3563,15 +3812,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -3652,12 +3902,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -3714,6 +3964,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -3729,6 +3980,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -3816,12 +4068,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -4039,15 +4291,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -4128,12 +4381,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -4178,12 +4431,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -4311,6 +4564,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -4328,6 +4582,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -4454,15 +4709,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -4543,12 +4799,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -4605,6 +4861,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -4620,6 +4877,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -4707,12 +4965,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -4840,6 +5098,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -4857,6 +5116,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -4983,15 +5243,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -5073,12 +5334,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -5123,12 +5384,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -5265,6 +5526,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -5282,6 +5544,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -5413,15 +5676,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -5503,12 +5767,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -5553,12 +5817,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -5695,6 +5959,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -5712,6 +5977,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -5747,6 +6013,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -5766,6 +6033,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -5806,6 +6074,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 1,
@@ -5825,6 +6094,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 1,
@@ -5961,15 +6231,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -6051,12 +6322,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -6101,12 +6372,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -6234,6 +6505,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -6251,6 +6523,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -6377,15 +6650,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -6467,12 +6741,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -6517,12 +6791,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -6650,6 +6924,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -6667,6 +6942,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -6702,6 +6978,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -6721,6 +6998,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -6761,6 +7039,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 1,
@@ -6780,6 +7059,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 1,
@@ -6911,15 +7191,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -7001,12 +7282,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -7051,12 +7332,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -7184,6 +7465,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -7201,6 +7483,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -7331,15 +7614,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -7448,12 +7732,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -7530,6 +7814,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 4,
         completedFiles: null,
@@ -7545,6 +7830,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 4,
         completedFiles: null,
@@ -7659,6 +7945,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 4,
         completedFiles: 0,
@@ -7674,6 +7961,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 4,
         completedFiles: 0,
@@ -7788,6 +8076,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 2,
         totalSteps: 4,
         completedFiles: 1,
@@ -7803,6 +8092,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 2,
         totalSteps: 4,
         completedFiles: 1,
@@ -7917,6 +8207,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 3,
         totalSteps: 4,
         completedFiles: null,
@@ -7932,6 +8223,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 3,
         totalSteps: 4,
         completedFiles: null,
@@ -8041,12 +8333,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -8198,6 +8490,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -8215,6 +8508,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -8338,6 +8632,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 1,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -8355,6 +8650,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 1,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -8390,6 +8686,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 1,
         totalSteps: 7,
         completedFiles: 0,
@@ -8409,6 +8706,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 1,
         totalSteps: 7,
         completedFiles: 0,
@@ -8538,6 +8836,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 2,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -8555,6 +8854,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 2,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -8679,6 +8979,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 3,
         totalSteps: 7
       }
@@ -8688,6 +8989,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 3,
         totalSteps: 7
       }
@@ -8806,6 +9108,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 4,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionC as SyncConfigurationCollection<
@@ -8823,6 +9126,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 4,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionC as SyncConfigurationCollection<
@@ -8951,6 +9255,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 5,
         totalSteps: 7
       }
@@ -8960,6 +9265,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 5,
         totalSteps: 7
       }
@@ -9079,6 +9385,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 6,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
@@ -9096,6 +9403,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 6,
         totalSteps: 7,
         syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
@@ -9353,15 +9661,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -9443,12 +9752,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -9493,12 +9802,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -9635,6 +9944,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -9652,6 +9962,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -9685,15 +9996,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -9775,12 +10087,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -9825,12 +10137,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -9958,6 +10270,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -9975,6 +10288,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -10008,15 +10322,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -10097,12 +10412,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -10154,6 +10469,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10169,6 +10485,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10197,15 +10514,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -10286,12 +10604,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -10343,6 +10661,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10358,6 +10677,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10444,6 +10764,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -10459,6 +10780,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -10490,15 +10812,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -10579,12 +10902,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -10636,6 +10959,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10651,6 +10975,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10679,15 +11004,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -10768,12 +11094,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -10825,6 +11151,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10840,6 +11167,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -10926,6 +11254,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -10941,6 +11270,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -10972,15 +11302,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -11061,12 +11392,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -11123,6 +11454,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -11138,6 +11470,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -11169,15 +11502,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -11263,12 +11597,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -11313,12 +11647,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -11398,12 +11732,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -11480,12 +11814,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 2, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 2, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 2, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 2, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -11562,12 +11896,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -11728,15 +12062,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -11822,12 +12157,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -11872,12 +12207,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -11957,12 +12292,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -11982,15 +12317,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -12072,12 +12408,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -12122,12 +12458,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -12270,6 +12606,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -12287,6 +12624,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -12321,15 +12659,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -12411,12 +12750,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -12461,12 +12800,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -12600,6 +12939,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -12617,6 +12957,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -12651,15 +12992,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -12740,12 +13082,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -12792,6 +13134,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -12807,6 +13150,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -12891,12 +13235,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -13024,6 +13368,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -13041,6 +13386,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -13075,15 +13421,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -13164,12 +13511,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -13216,6 +13563,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -13231,6 +13579,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -13315,12 +13664,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -13448,6 +13797,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -13465,6 +13815,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -13499,15 +13850,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -13588,12 +13940,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -13638,12 +13990,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -13771,6 +14123,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -13788,6 +14141,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -13822,15 +14176,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -13912,12 +14267,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -13962,12 +14317,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -14110,15 +14465,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -14199,12 +14555,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -14251,6 +14607,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -14266,6 +14623,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -14350,12 +14708,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -14498,15 +14856,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -14587,12 +14946,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -14639,6 +14998,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -14654,6 +15014,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -14738,12 +15099,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -14886,15 +15247,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -14975,12 +15337,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -15025,12 +15387,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -15173,15 +15535,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 test('throws an error when already running', async () => {
@@ -15563,12 +15926,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -15615,6 +15978,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -15630,6 +15994,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -15714,12 +16079,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -15937,15 +16302,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -16026,12 +16392,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -16078,6 +16444,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -16093,6 +16460,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: null,
@@ -16177,12 +16545,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -16400,15 +16768,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -16490,12 +16859,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -16540,12 +16909,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -16763,15 +17132,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -16857,12 +17227,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -16907,12 +17277,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -16992,12 +17362,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -17074,12 +17444,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 2, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 2, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 2, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 2, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -17156,12 +17526,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -17322,15 +17692,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -17414,12 +17785,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -17464,12 +17835,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -17631,15 +18002,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'noChangesMade'
+  'noChangesMade',
+  'succeeded'
 )
 
 scenario(
@@ -17785,12 +18157,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -17842,6 +18214,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -17857,6 +18230,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -17943,6 +18317,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -17958,6 +18333,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -18045,12 +18421,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -18178,6 +18554,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
@@ -18195,6 +18572,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionA as SyncConfigurationCollection<
@@ -18321,15 +18699,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -18411,12 +18790,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -18461,12 +18840,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -18603,6 +18982,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -18620,6 +19000,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -18650,15 +19031,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -18740,12 +19122,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -18790,12 +19172,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -18923,6 +19305,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -18940,6 +19323,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -18970,15 +19354,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -19060,12 +19445,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -19110,12 +19495,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -19252,6 +19637,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -19269,6 +19655,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -19304,6 +19691,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -19323,6 +19711,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -19356,15 +19745,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -19446,12 +19836,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -19496,12 +19886,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -19629,6 +20019,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -19646,6 +20037,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -19681,6 +20073,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -19700,6 +20093,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingFile',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         completedFiles: 0,
@@ -19733,15 +20127,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -19822,12 +20217,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -19879,6 +20274,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -19894,6 +20290,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -19974,12 +20371,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -20144,15 +20541,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -20233,12 +20631,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -20290,6 +20688,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -20305,6 +20704,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 0,
         totalSteps: 2,
         completedFiles: null,
@@ -20391,6 +20791,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -20406,6 +20807,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pushing',
+        running: true,
         completedSteps: 1,
         totalSteps: 2,
         completedFiles: 0,
@@ -20493,12 +20895,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -20626,6 +21028,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -20643,6 +21046,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingCollectionItem',
+        running: true,
         completedSteps: 0,
         totalSteps: 1,
         syncConfigurationCollection: syncConfigurationCollectionB as SyncConfigurationCollection<
@@ -20769,15 +21173,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -20863,12 +21268,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -20913,12 +21318,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 0, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 0, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -20998,12 +21403,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 1, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 1, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -21080,12 +21485,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'deleting', completedSteps: 2, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 2, totalSteps: 3 }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'deleting', completedSteps: 2, totalSteps: 3 }
+      to: { type: 'deleting', running: true, completedSteps: 2, totalSteps: 3 }
     },
     {
       type: 'push',
@@ -21162,12 +21567,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -21328,15 +21733,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -21416,12 +21822,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -21466,12 +21872,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -21599,6 +22005,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -21608,6 +22015,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -21729,15 +22137,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -21817,12 +22226,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -21867,12 +22276,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -22000,6 +22409,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -22009,6 +22419,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -22038,15 +22449,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -22126,12 +22538,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -22176,12 +22588,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -22309,6 +22721,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -22318,6 +22731,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -22343,15 +22757,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -22433,12 +22848,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -22483,12 +22898,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -22616,6 +23031,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -22625,6 +23041,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -22746,15 +23163,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'succeeded', running: false }
     }
   ],
-  'atLeastOneChangeMade'
+  'atLeastOneChangeMade',
+  'succeeded'
 )
 
 scenario(
@@ -22836,12 +23254,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -22886,12 +23304,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -23019,6 +23437,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -23028,6 +23447,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -23053,15 +23473,16 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )
 
 scenario(
@@ -23143,12 +23564,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPush' }
+      to: { type: 'checkingForChangesToPush', running: true }
     },
     {
       type: 'log',
@@ -23193,12 +23614,12 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'checkingForChangesToPull' }
+      to: { type: 'checkingForChangesToPull', running: true }
     },
     {
       type: 'pullJson',
@@ -23326,6 +23747,7 @@ scenario(
       eventHandler: 'a',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -23335,6 +23757,7 @@ scenario(
       eventHandler: 'c',
       to: {
         type: 'pullingSingleton',
+        running: true,
         completedSteps: 0,
         totalSteps: 1
       }
@@ -23364,13 +23787,14 @@ scenario(
     {
       type: 'stateChange',
       eventHandler: 'a',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     },
     {
       type: 'stateChange',
       eventHandler: 'c',
-      to: { type: 'notRunning' }
+      to: { type: 'failed', running: false }
     }
   ],
-  'needsToRunAgain'
+  'needsToRunAgain',
+  'failed'
 )

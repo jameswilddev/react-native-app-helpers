@@ -76,7 +76,8 @@ export class Sync<
   TAdditionalCollectionData,
   TAdditionalCollectionItemData
   > = {
-      type: 'notRunning'
+      type: 'notStarted',
+      running: false
     }
 
   getState (): SyncState<
@@ -102,7 +103,7 @@ export class Sync<
   async run (
     abortSignal: null | AbortSignal
   ): Promise<'noChangesMade' | 'needsToRunAgain' | 'atLeastOneChangeMade'> {
-    if (this.currentState.type !== 'notRunning') {
+    if (this.currentState.running) {
       throw new Error('Sync is already running.')
     } else {
       try {
@@ -138,7 +139,7 @@ export class Sync<
 
         this.logger.debug('Searching for changes to push...')
 
-        this.setState({ type: 'checkingForChangesToPush' })
+        this.setState({ type: 'checkingForChangesToPush', running: true })
 
         const pushesAndDeletions: Array< | {
           type: 'push'
@@ -465,6 +466,7 @@ export class Sync<
             if (pushOrDeletion.type === 'push') {
               this.setState({
                 type: 'pushing',
+                running: true,
                 completedSteps: completedPushesAndDeletions,
                 totalSteps: pushesAndDeletions.length,
                 completedFiles: pushOrDeletion.completedFiles,
@@ -475,12 +477,14 @@ export class Sync<
             } else {
               this.setState({
                 type: 'deleting',
+                running: true,
                 completedSteps: completedPushesAndDeletions,
                 totalSteps: pushesAndDeletions.length
               })
             }
 
             if (!(await pushOrDeletion.execute())) {
+              this.setState({ type: 'failed', running: false })
               return 'needsToRunAgain'
             } else {
               completedPushesAndDeletions++
@@ -490,7 +494,7 @@ export class Sync<
 
         this.logger.debug('Fetching preflight...')
 
-        this.setState({ type: 'checkingForChangesToPull' })
+        this.setState({ type: 'checkingForChangesToPull', running: true })
 
         const preflightResponse = await this.request.returningJson<{
           readonly '200': PreflightResponse<
@@ -706,6 +710,7 @@ export class Sync<
 
                   this.setState({
                     type: 'pullingFile',
+                    running: true,
                     syncConfigurationCollection,
                     completedSteps: completedPulls,
                     totalSteps: pulls.length,
@@ -993,6 +998,7 @@ export class Sync<
             case 'singleton':
               this.setState({
                 type: 'pullingSingleton',
+                running: true,
                 completedSteps: completedPulls,
                 totalSteps: pulls.length
               })
@@ -1001,6 +1007,7 @@ export class Sync<
             case 'collectionItem':
               this.setState({
                 type: 'pullingCollectionItem',
+                running: true,
                 completedSteps: completedPulls,
                 totalSteps: pulls.length,
                 syncConfigurationCollection: pull.syncConfigurationCollection,
@@ -1011,6 +1018,7 @@ export class Sync<
           }
 
           if (!(await pull.execute())) {
+            this.setState({ type: 'failed', running: false })
             return 'needsToRunAgain'
           } else {
             completedPulls++
@@ -1076,6 +1084,7 @@ export class Sync<
             'The state store changed before deletions could be applied; sync has been interrupted and will need to run again.'
           )
 
+          this.setState({ type: 'failed', running: false })
           return 'needsToRunAgain'
         } else {
           this.stateStore.set(state)
@@ -1142,16 +1151,19 @@ export class Sync<
             'Sync completed successfully; at least one change was made.'
           )
 
+          this.setState({ type: 'succeeded', running: false })
           return 'atLeastOneChangeMade'
         } else {
           this.logger.information(
             'Sync completed successfully; no changes were made.'
           )
 
+          this.setState({ type: 'succeeded', running: false })
           return 'noChangesMade'
         }
-      } finally {
-        this.setState({ type: 'notRunning' })
+      } catch (e) {
+        this.setState({ type: 'failed', running: false })
+        throw e
       }
     }
   }

@@ -22,19 +22,56 @@ export type SyncState<
     /**
        * Indicates the type of sync status.
        */
-    readonly type: 'notRunning'
+    readonly type: 'notStarted'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: false
+  }
+  | {
+    /**
+       * Indicates the type of sync status.
+       */
+    readonly type: 'failed'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: false
+  }
+  | {
+    /**
+       * Indicates the type of sync status.
+       */
+    readonly type: 'succeeded'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: false
   }
   | {
     /**
        * Indicates the type of sync status.
        */
     readonly type: 'checkingForChangesToPush'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: true
   }
   | {
     /**
        * Indicates the type of sync status.
        */
     readonly type: 'pushing'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: true
 
     /**
        * The number of push/delete steps executed so far (not including the item
@@ -75,6 +112,11 @@ export type SyncState<
     readonly type: 'deleting'
 
     /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: true
+
+    /**
        * The number of push/delete steps executed so far (not including the item
        * in progress).
        */
@@ -91,12 +133,22 @@ export type SyncState<
        * Indicates the type of sync status.
        */
     readonly type: 'checkingForChangesToPull'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: true
   }
   | {
     /**
        * Indicates the type of sync status.
        */
     readonly type: 'pullingSingleton'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: true
 
     /**
        * The number of items pulled so far (not including the item in progress).
@@ -113,6 +165,11 @@ export type SyncState<
        * Indicates the type of sync status.
        */
     readonly type: 'pullingCollectionItem'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: true
 
     /**
        * The number of items pulled so far (not including the item in progress).
@@ -143,6 +200,11 @@ export type SyncState<
        * Indicates the type of sync status.
        */
     readonly type: 'pullingFile'
+
+    /**
+     * Indicates whether this status is actively syncing.
+     */
+    readonly running: true
 
     /**
        * The number of items pulled so far (not including the item in progress).
