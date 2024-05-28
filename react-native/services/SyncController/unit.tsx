@@ -1,4 +1,4 @@
-import { SyncController, type LoggerInterface, type SyncInterface, type ErrorReporterInterface } from '../../..'
+import { SyncController, type LoggerInterface, type SyncInterface, type ErrorReporterInterface, type AbortControllerFactoryInterface } from '../../..'
 
 interface TestSchema {
   readonly singletons: Record<never, never>
@@ -35,14 +35,19 @@ test('does nothing', () => {
     report: jest.fn()
   }
 
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
   // eslint-disable-next-line no-new
-  new SyncController(sync, logger, errorReporter)
+  new SyncController(sync, logger, errorReporter, abortControllerFactory)
 
   expect(sync.fileCleanUpBlockers).toEqual(1234)
   expect(sync.addListener).not.toHaveBeenCalled()
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -72,7 +77,11 @@ test('does nothing after resume', () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
 
   syncController.resume()
 
@@ -81,6 +90,7 @@ test('does nothing after resume', () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -111,7 +121,11 @@ test('can be paused after resuming', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
 
   syncController.resume();
 
@@ -124,6 +138,7 @@ test('can be paused after resuming', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -154,7 +169,11 @@ test('does nothing after resuming twice', () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
 
   syncController.resume()
   syncController.resume()
@@ -164,6 +183,7 @@ test('does nothing after resuming twice', () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -194,7 +214,11 @@ test('does nothing when running without resuming', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
 
   const promise = syncController.run()
 
@@ -203,6 +227,7 @@ test('does nothing when running without resuming', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -234,7 +259,11 @@ test('throws when requesting the cancellation of a paused sync controller', () =
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
 
   expect(() => { syncController.requestCancel() }).toThrowError('Unable to cancel a paused sync controller.')
 
@@ -243,6 +272,7 @@ test('throws when requesting the cancellation of a paused sync controller', () =
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -276,7 +306,16 @@ test('throws when requesting the cancellation of a pausing sync controller', asy
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run();
   (logger.information as jest.Mock).mockReset()
@@ -312,7 +351,9 @@ test('throws when requesting the cancellation of a pausing sync controller', asy
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -350,7 +391,16 @@ test('can start pausing while running', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run();
   (logger.information as jest.Mock).mockReset()
@@ -384,7 +434,9 @@ test('can start pausing while running', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -422,7 +474,16 @@ test('can complete pausing after a successful run where no changes were made', a
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run()
   const pausePromise = syncController.pause();
@@ -440,7 +501,9 @@ test('can complete pausing after a successful run where no changes were made', a
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -479,7 +542,16 @@ test('can complete pausing after a successful run where another run was required
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run()
   const pausePromise = syncController.pause();
@@ -497,7 +569,9 @@ test('can complete pausing after a successful run where another run was required
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -536,7 +610,16 @@ test('can complete pausing after a successful run where at least one change was 
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run()
   const pausePromise = syncController.pause();
@@ -554,7 +637,9 @@ test('can complete pausing after a successful run where at least one change was 
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -593,7 +678,16 @@ test('can complete pausing after an unsuccessful run', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run()
   const pausePromise = syncController.pause();
@@ -611,7 +705,9 @@ test('can complete pausing after an unsuccessful run', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -651,7 +747,16 @@ test('can start running once resumed', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume();
   (logger.information as jest.Mock).mockReset()
 
@@ -676,7 +781,9 @@ test('can start running once resumed', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -710,7 +817,16 @@ test('can fail to run once resumed', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume();
   (logger.information as jest.Mock).mockReset()
 
@@ -721,7 +837,9 @@ test('can fail to run once resumed', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -754,7 +872,16 @@ test('can successfully run with no changes made once resumed', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume();
   (logger.information as jest.Mock).mockReset()
 
@@ -765,7 +892,9 @@ test('can successfully run with no changes made once resumed', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -816,7 +945,21 @@ test('can successfully run and need to run again once resumed', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const firstAbortSignal = {}
+  const firstAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const secondAbortSignal = {}
+  const secondAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValueOnce(firstAbortController).mockReturnValueOnce(secondAbortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
 
   const promise = syncController.run()
@@ -849,8 +992,11 @@ test('can successfully run and need to run again once resumed', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(2)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeFalsy()
-  expect(((sync.run as jest.Mock).mock.calls[1][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(firstAbortSignal)
+  expect(firstAbortController.abort).not.toHaveBeenCalled()
+  expect(secondAbortController.abort).not.toHaveBeenCalled()
+  expect(sync.run).toHaveBeenCalledWith(secondAbortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(2)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -908,7 +1054,21 @@ test('can successfully run and need to run again to completion once resumed', as
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const firstAbortSignal = {}
+  const firstAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const secondAbortSignal = {}
+  const secondAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValueOnce(firstAbortController).mockReturnValueOnce(secondAbortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
 
   const promise = syncController.run()
@@ -938,8 +1098,11 @@ test('can successfully run and need to run again to completion once resumed', as
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(2)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeFalsy()
-  expect(((sync.run as jest.Mock).mock.calls[1][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(firstAbortSignal)
+  expect(firstAbortController.abort).not.toHaveBeenCalled()
+  expect(secondAbortController.abort).not.toHaveBeenCalled()
+  expect(sync.run).toHaveBeenCalledWith(secondAbortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(2)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -972,7 +1135,16 @@ test('can successfully run with at least one change made once resumed', async ()
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume();
   (logger.information as jest.Mock).mockReset()
 
@@ -983,7 +1155,9 @@ test('can successfully run with at least one change made once resumed', async ()
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1016,7 +1190,11 @@ test('does nothing after requesting cancellation', () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume();
   (logger.information as jest.Mock).mockReset()
 
@@ -1027,6 +1205,7 @@ test('does nothing after requesting cancellation', () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1061,7 +1240,16 @@ test('throws when requesting the pause of a pausing sync controller', async () =
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run();
   (logger.information as jest.Mock).mockReset()
@@ -1097,7 +1285,9 @@ test('throws when requesting the pause of a pausing sync controller', async () =
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1135,7 +1325,11 @@ test('throws when requesting the pause of a paused sync controller', async () =>
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn()
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
 
   await expect(syncController.pause()).rejects.toThrowError('Unable to pause a paused sync controller.')
 
@@ -1144,6 +1338,7 @@ test('throws when requesting the pause of a paused sync controller', async () =>
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).not.toHaveBeenCalled()
+  expect(abortControllerFactory.create).not.toHaveBeenCalled()
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1177,7 +1372,16 @@ test('can start pausing while running', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run();
   (logger.information as jest.Mock).mockReset()
@@ -1211,7 +1415,9 @@ test('can start pausing while running', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1249,7 +1455,16 @@ test('can start cancelling while running', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run();
   (logger.information as jest.Mock).mockReset()
@@ -1275,7 +1490,9 @@ test('can start cancelling while running', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1313,7 +1530,16 @@ test('can restart while cancelling', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
 
@@ -1350,7 +1576,9 @@ test('can restart while cancelling', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1388,7 +1616,16 @@ test('can queue a restart', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run();
 
@@ -1423,7 +1660,9 @@ test('can queue a restart', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1461,7 +1700,16 @@ test('can queue multiple restarts', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run();
@@ -1505,7 +1753,9 @@ test('can queue multiple restarts', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1557,7 +1807,21 @@ test('can begin a restart', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const firstAbortSignal = {}
+  const firstAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const secondAbortSignal = {}
+  const secondAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValueOnce(firstAbortController).mockReturnValueOnce(secondAbortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run();
@@ -1594,8 +1858,11 @@ test('can begin a restart', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(2)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
-  expect(((sync.run as jest.Mock).mock.calls[1][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(firstAbortSignal)
+  expect(firstAbortController.abort).toBeCalledTimes(1)
+  expect(secondAbortController.abort).not.toHaveBeenCalled()
+  expect(sync.run).toHaveBeenCalledWith(secondAbortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(2)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1653,7 +1920,21 @@ test('can complete a restart', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const firstAbortSignal = {}
+  const firstAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const secondAbortSignal = {}
+  const secondAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValueOnce(firstAbortController).mockReturnValueOnce(secondAbortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run()
@@ -1679,8 +1960,11 @@ test('can complete a restart', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(2)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
-  expect(((sync.run as jest.Mock).mock.calls[1][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(firstAbortSignal)
+  expect(firstAbortController.abort).toBeCalledTimes(1)
+  expect(secondAbortController.abort).not.toHaveBeenCalled()
+  expect(sync.run).toHaveBeenCalledWith(secondAbortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(2)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1732,7 +2016,21 @@ test('can begin multiple restarts', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const firstAbortSignal = {}
+  const firstAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const secondAbortSignal = {}
+  const secondAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValueOnce(firstAbortController).mockReturnValueOnce(secondAbortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run()
@@ -1778,8 +2076,11 @@ test('can begin multiple restarts', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(2)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
-  expect(((sync.run as jest.Mock).mock.calls[1][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(firstAbortSignal)
+  expect(firstAbortController.abort).toBeCalledTimes(1)
+  expect(secondAbortController.abort).not.toHaveBeenCalled()
+  expect(sync.run).toHaveBeenCalledWith(secondAbortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(2)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1837,7 +2138,21 @@ test('can complete multiple restarts', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const firstAbortSignal = {}
+  const firstAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const secondAbortSignal = {}
+  const secondAbortController = {
+    signal: firstAbortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValueOnce(firstAbortController).mockReturnValueOnce(secondAbortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run()
@@ -1864,8 +2179,11 @@ test('can complete multiple restarts', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(2)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
-  expect(((sync.run as jest.Mock).mock.calls[1][0] as AbortSignalMock).raised).toBeFalsy()
+  expect(sync.run).toHaveBeenCalledWith(firstAbortSignal)
+  expect(firstAbortController.abort).toBeCalledTimes(1)
+  expect(secondAbortController.abort).not.toHaveBeenCalled()
+  expect(sync.run).toHaveBeenCalledWith(secondAbortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(2)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1904,7 +2222,16 @@ test('can queue a restart then request cancellation', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run();
@@ -1940,7 +2267,9 @@ test('can queue a restart then request cancellation', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -1979,7 +2308,16 @@ test('can complete a cancellation', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run()
@@ -1999,7 +2337,9 @@ test('can complete a cancellation', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -2038,7 +2378,16 @@ test('can complete a cancellation of a restart', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run()
@@ -2058,7 +2407,9 @@ test('can complete a cancellation of a restart', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -2096,7 +2447,16 @@ test('ignores duplicate cancellations', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const promise = syncController.run()
 
@@ -2124,7 +2484,9 @@ test('ignores duplicate cancellations', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -2162,7 +2524,16 @@ test('can start pausing a restart', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run();
@@ -2206,7 +2577,9 @@ test('can start pausing a restart', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -2245,7 +2618,16 @@ test('can complete a pause during a restart', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   const secondPromise = syncController.run()
@@ -2265,7 +2647,9 @@ test('can complete a pause during a restart', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -2305,7 +2689,16 @@ test('can start pausing a cancellation', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   syncController.requestCancel();
@@ -2341,7 +2734,9 @@ test('can start pausing a cancellation', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -2380,7 +2775,16 @@ test('can complete a pause during a cancellation', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   syncController.requestCancel()
@@ -2400,7 +2804,9 @@ test('can complete a pause during a cancellation', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()
@@ -2439,7 +2845,16 @@ test('throws when resuming during a pause', async () => {
     report: jest.fn()
   }
 
-  const syncController = new SyncController(sync, logger, errorReporter)
+  const abortSignal = {}
+  const abortController = {
+    signal: abortSignal,
+    abort: jest.fn()
+  }
+  const abortControllerFactory: AbortControllerFactoryInterface = {
+    create: jest.fn().mockReturnValue(abortController)
+  }
+
+  const syncController = new SyncController(sync, logger, errorReporter, abortControllerFactory)
   syncController.resume()
   const firstPromise = syncController.run()
   syncController.requestCancel()
@@ -2475,7 +2890,9 @@ test('throws when resuming during a pause', async () => {
   expect(sync.removeListener).not.toHaveBeenCalled()
   expect(sync.getState).not.toHaveBeenCalled()
   expect(sync.run).toHaveBeenCalledTimes(1)
-  expect(((sync.run as jest.Mock).mock.calls[0][0] as AbortSignalMock).raised).toBeTruthy()
+  expect(sync.run).toHaveBeenCalledWith(abortSignal)
+  expect(abortControllerFactory.create).toBeCalledTimes(1)
+  expect(abortController.abort).toHaveBeenCalledTimes(1)
 
   expect(logger.error).not.toHaveBeenCalled()
   expect(logger.warning).not.toHaveBeenCalled()

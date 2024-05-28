@@ -1,3 +1,4 @@
+import type { AbortControllerFactoryInterface } from '../../types/AbortControllerFactoryInterface'
 import type { ErrorReporterInterface } from '../../types/ErrorReporterInterface'
 import type { Json } from '../../types/Json'
 import type { LoggerInterface } from '../../types/LoggerInterface'
@@ -51,6 +52,8 @@ export class SyncController<
    * @param sync The sync service to control.
    * @param logger Used to log messages when the sync controller's state changes.
    * @param errorReporter Used to report errors which occur during sync.
+   * @param abortControllerFactory Used to create abort controllers to cancel
+   *                               pending requests.
    */
   constructor (
     private readonly sync: SyncInterface<
@@ -59,7 +62,8 @@ export class SyncController<
     TAdditionalCollectionItemData
     >,
     private readonly logger: LoggerInterface,
-    private readonly errorReporter: ErrorReporterInterface
+    private readonly errorReporter: ErrorReporterInterface,
+    private readonly abortControllerFactory: AbortControllerFactoryInterface
   ) {}
 
   resume (): void {
@@ -126,7 +130,7 @@ export class SyncController<
           'Sync controller is starting a new sync.'
         )
 
-        const abortController = new AbortController()
+        const abortController = this.abortControllerFactory.create()
         let resolve: (as: Outcome) => void
         const promise = new Promise<Outcome>((_resolve) => {
           resolve = _resolve

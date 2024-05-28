@@ -87,6 +87,7 @@ import { createTextComponent } from "react-native-app-helpers";
 
 #### Services
 
+- [abortControllerFactory](./react-native/abortControllerFactory/logger/readme.md)
 - [errorReporter](./react-native/services/errorReporter/readme.md)
 - [FileStore](./react-native/services/FileStore/readme.md)
 - [logger](./react-native/services/logger/readme.md)
@@ -209,6 +210,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [UnderlinedTopTabBarStyleState](./react-native/types/UnderlinedTopTabBarStyleState/readme.md)
 - [UpToDateSyncableStateCollectionItem](./react-native/types/UpToDateSyncableStateCollectionItem/readme.md)
 - [UpToDateSyncableStateSingleton](./react-native/types/UpToDateSyncableStateSingleton/readme.md)
+- AbortControllerFactoryInterface
 - ErrorReporterInterface
 - FileStoreInterface
 - LoggerInterface
