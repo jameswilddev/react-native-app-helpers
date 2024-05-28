@@ -58,11 +58,10 @@ export const createRequiredEmailInputComponent = (
     'email-address',
     'none',
     false,
-    false,
     'left'
   )
 
-  const RequiredEmailInput: React.FunctionComponent<RequiredEmailInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
+  const RequiredEmailInput: React.FunctionComponent<RequiredEmailInputProps> = ({ value, onChange, disabled, placeholder, unique, autoFocus }) => (
     <RequiredEmailInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -75,6 +74,7 @@ export const createRequiredEmailInputComponent = (
       onSubmit={() => {
         /* No-op. */
       }}
+      autoFocus={autoFocus}
     />
   )
 

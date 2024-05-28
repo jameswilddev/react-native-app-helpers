@@ -7,7 +7,7 @@ export interface CreatableSelectProps<T extends null | number | string> {
    * When true, it will not be possible to select an option.  It will otherwise
    * be possible to do so.
    */
-  readonly disabled?: undefined | boolean
+  readonly disabled: boolean
 
   /**
  * Text to be shown on the button when no value has been selected.

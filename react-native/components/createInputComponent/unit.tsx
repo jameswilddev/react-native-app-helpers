@@ -94,7 +94,6 @@ test('renders as expected with a value', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -107,6 +106,7 @@ test('renders as expected with a value', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -262,7 +262,6 @@ test('renders as expected without a value', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -275,6 +274,7 @@ test('renders as expected without a value', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -431,7 +431,6 @@ test('renders as expected when disabled with a value', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -444,6 +443,7 @@ test('renders as expected when disabled with a value', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -600,7 +600,6 @@ test('renders as expected when disabled without a value', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -613,6 +612,7 @@ test('renders as expected when disabled without a value', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -769,7 +769,6 @@ test('can be focused when valid', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -782,6 +781,7 @@ test('can be focused when valid', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -949,7 +949,6 @@ test('can be focused when invalid', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -962,6 +961,7 @@ test('can be focused when invalid', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1129,7 +1129,6 @@ test('can be blurred', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -1142,6 +1141,7 @@ test('can be blurred', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1319,7 +1319,6 @@ test('can be disabled during edit', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -1332,6 +1331,7 @@ test('can be disabled during edit', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1371,6 +1371,7 @@ test('can be disabled during edit', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1528,7 +1529,6 @@ test('can be disabled during edit when starting invalid', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -1541,6 +1541,7 @@ test('can be disabled during edit when starting invalid', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1580,6 +1581,7 @@ test('can be disabled during edit when starting invalid', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1737,7 +1739,6 @@ test('can be re-enabled following edit', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -1750,6 +1751,7 @@ test('can be re-enabled following edit', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1789,6 +1791,7 @@ test('can be re-enabled following edit', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1806,6 +1809,7 @@ test('can be re-enabled following edit', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -1962,7 +1966,6 @@ test('does not lose pending changes on update', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -1975,6 +1978,7 @@ test('does not lose pending changes on update', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2014,6 +2018,7 @@ test('does not lose pending changes on update', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Updated Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2171,7 +2176,6 @@ test('resets the value on external changes', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -2184,6 +2188,7 @@ test('resets the value on external changes', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2201,6 +2206,7 @@ test('resets the value on external changes', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2356,7 +2362,6 @@ test('ignores external changes to the value when an edit is in progress', async 
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -2369,6 +2374,7 @@ test('ignores external changes to the value when an edit is in progress', async 
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2408,6 +2414,7 @@ test('ignores external changes to the value when an edit is in progress', async 
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2565,7 +2572,6 @@ test('allows valid incomplete edits', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -2578,6 +2584,7 @@ test('allows valid incomplete edits', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2757,7 +2764,6 @@ test('allows valid incomplete edits', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -2770,6 +2776,7 @@ test('allows valid incomplete edits', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -2953,7 +2960,6 @@ test('allows valid incomplete edits', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -2966,6 +2972,7 @@ test('allows valid incomplete edits', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -3149,7 +3156,6 @@ test('allows invalid incomplete edits', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -3162,6 +3168,7 @@ test('allows invalid incomplete edits', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -3341,7 +3348,6 @@ test('allows invalid incomplete edits', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -3354,6 +3360,7 @@ test('allows invalid incomplete edits', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -3537,7 +3544,6 @@ test('allows invalid incomplete edits', async () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -3550,6 +3556,7 @@ test('allows invalid incomplete edits', async () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -3732,7 +3739,6 @@ test('renders as expected when the border width does not change', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -3745,6 +3751,7 @@ test('renders as expected when the border width does not change', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -3900,7 +3907,6 @@ test('passes down secureTextEntry', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -3913,6 +3919,7 @@ test('passes down secureTextEntry', () => {
       onSubmit={onSubmit}
       secureTextEntry
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -4068,7 +4075,6 @@ test('renders with a left icon', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -4081,6 +4087,7 @@ test('renders with a left icon', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
@@ -4244,7 +4251,6 @@ test('renders with a right icon', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -4257,6 +4263,7 @@ test('renders with a right icon', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
@@ -4420,7 +4427,6 @@ test('renders with left and right icons', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -4433,6 +4439,7 @@ test('renders with left and right icons', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
@@ -4603,7 +4610,6 @@ test('renders as expected with a left icon without a value', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -4616,6 +4622,7 @@ test('renders as expected with a left icon without a value', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
@@ -4780,7 +4787,6 @@ test('renders as expected with a left icon without a value', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -4793,6 +4799,7 @@ test('renders as expected with a left icon without a value', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
@@ -4957,7 +4964,6 @@ test('renders as expected with left and right icons without a value', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -4970,6 +4976,7 @@ test('renders as expected with left and right icons without a value', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
@@ -5141,7 +5148,6 @@ test('renders as expected with a left icon when focused and valid', async () => 
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -5154,6 +5160,7 @@ test('renders as expected with a left icon when focused and valid', async () => 
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
@@ -5329,7 +5336,6 @@ test('renders as expected with a right icon when focused and valid', async () =>
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -5342,6 +5348,7 @@ test('renders as expected with a right icon when focused and valid', async () =>
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
@@ -5517,7 +5524,6 @@ test('renders as expected with a right icon when focused and valid', async () =>
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -5530,6 +5536,7 @@ test('renders as expected with a right icon when focused and valid', async () =>
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
@@ -5712,7 +5719,6 @@ test('renders as expected with a left icon when focused and invalid', async () =
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -5725,6 +5731,7 @@ test('renders as expected with a left icon when focused and invalid', async () =
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
@@ -5900,7 +5907,6 @@ test('renders as expected with a right icon when focused and invalid', async () 
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -5913,6 +5919,7 @@ test('renders as expected with a right icon when focused and invalid', async () 
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
@@ -6088,7 +6095,6 @@ test('renders as expected with left and right icons when focused and invalid', a
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -6101,6 +6107,7 @@ test('renders as expected with left and right icons when focused and invalid', a
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
@@ -6283,7 +6290,6 @@ test('renders without horizontal padding', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -6296,6 +6302,7 @@ test('renders without horizontal padding', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -6450,7 +6457,6 @@ test('renders with a left icon without horizontal padding', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -6463,6 +6469,7 @@ test('renders with a left icon without horizontal padding', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
@@ -6624,7 +6631,6 @@ test('renders with a right icon without horizontal padding', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -6637,6 +6643,7 @@ test('renders with a right icon without horizontal padding', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
@@ -6798,7 +6805,6 @@ test('renders with left and right icons without horizontal padding', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -6811,6 +6817,7 @@ test('renders with left and right icons without horizontal padding', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
@@ -6979,7 +6986,6 @@ test('renders as expected without vertical padding', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -6992,6 +6998,7 @@ test('renders as expected without vertical padding', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -7134,7 +7141,6 @@ test('renders as expected without borders', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -7147,6 +7153,7 @@ test('renders as expected without borders', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -7300,7 +7307,6 @@ test('renders as expected when a state does not alter border thickness', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -7313,6 +7319,7 @@ test('renders as expected when a state does not alter border thickness', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -7468,7 +7475,6 @@ test('renders as expected without a radius', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -7481,6 +7487,7 @@ test('renders as expected without a radius', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -7635,7 +7642,6 @@ test('renders when disabled with a left icon', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -7648,6 +7654,7 @@ test('renders when disabled with a left icon', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
@@ -7812,7 +7819,6 @@ test('renders when disabled with a right icon', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -7825,6 +7831,7 @@ test('renders when disabled with a right icon', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
@@ -7989,7 +7996,6 @@ test('renders when disabled with left and right icons', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -8002,6 +8008,7 @@ test('renders when disabled with left and right icons', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
@@ -8173,7 +8180,6 @@ test('renders as expected when disabled with a left icon without a value', () =>
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -8186,6 +8192,7 @@ test('renders as expected when disabled with a left icon without a value', () =>
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={null}
@@ -8350,7 +8357,6 @@ test('renders as expected when disabled with a right icon without a value', () =
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -8363,6 +8369,7 @@ test('renders as expected when disabled with a right icon without a value', () =
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={<Text>Right Icon</Text>}
@@ -8527,7 +8534,6 @@ test('renders as expected when disabled with left and right icons without a valu
     'numeric',
     'sentences',
     false,
-    false,
     'left'
   )
   const onChange = jest.fn()
@@ -8540,6 +8546,7 @@ test('renders as expected when disabled with left and right icons without a valu
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={<Text>Left Icon</Text>}
       rightIcon={<Text>Right Icon</Text>}
@@ -8710,7 +8717,6 @@ test('allows introspection when used in a higher-order component', () => {
     'email',
     'numeric',
     'sentences',
-    true,
     false,
     'left'
   )
@@ -8723,6 +8729,7 @@ test('allows introspection when used in a higher-order component', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={true}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -8746,7 +8753,6 @@ test('allows introspection when used in a higher-order component', () => {
       autoComplete: 'email',
       keyboardType: 'numeric',
       autoCapitalize: 'sentences',
-      autoFocus: true,
       keepFocusOnSubmit: false,
       alignment: 'left'
     }
@@ -8840,7 +8846,6 @@ test('does nothing when auto-focus is enabled', () => {
     'email',
     'numeric',
     'sentences',
-    true,
     false,
     'left'
   )
@@ -8854,6 +8859,7 @@ test('does nothing when auto-focus is enabled', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={true}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -9009,7 +9015,6 @@ test('focuses the text input on layout when the ref is ready', () => {
     'email',
     'numeric',
     'sentences',
-    true,
     false,
     'left'
   )
@@ -9023,6 +9028,7 @@ test('focuses the text input on layout when the ref is ready', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={true}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -9142,7 +9148,6 @@ test('does not focus the text input a second time', () => {
     'email',
     'numeric',
     'sentences',
-    true,
     false,
     'left'
   )
@@ -9156,6 +9161,7 @@ test('does not focus the text input a second time', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={true}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -9282,7 +9288,6 @@ test('renders as expected with a value when focus is to be retained', () => {
     'email',
     'numeric',
     'sentences',
-    false,
     true,
     'left'
   )
@@ -9296,6 +9301,7 @@ test('renders as expected with a value when focus is to be retained', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -9450,7 +9456,6 @@ test('renders as expected without a value when focus is to be retained', () => {
     'email',
     'numeric',
     'sentences',
-    false,
     true,
     'left'
   )
@@ -9464,6 +9469,7 @@ test('renders as expected without a value when focus is to be retained', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -9518,174 +9524,6 @@ test('renders as expected without a value when focus is to be retained', () => {
               onFocus: expect.any(Function),
               onBlur: expect.any(Function),
               blurOnSubmit: false,
-              onSubmitEditing: expect.any(Function)
-            }
-          })
-        ]
-      })
-    })
-  )
-
-  renderer.unmount()
-
-  expect(onChange).not.toHaveBeenCalled()
-  expect(onSubmit).not.toHaveBeenCalled()
-})
-
-test('treats disabled undefined as disabled false', () => {
-  interface ExampleContext {
-    readonly character: string
-    readonly regex: RegExp
-  }
-  const Component = createInputComponent<number, ExampleContext>(
-    (value, context) => context.character.repeat(value),
-    (value, context) =>
-      context.regex.test(value) || value === ''
-        ? undefined
-        : value.split(context.character).length - 1,
-    {
-      fontFamily: 'Example Font Family',
-      fontSize: 37,
-      paddingVertical: 12,
-      paddingHorizontal: 29,
-      blurredValid: {
-        textColor: '#FFEE00',
-        placeholderColor: '#E7AA32',
-        backgroundColor: '#32AE12',
-        radius: 5,
-        border: {
-          width: 4,
-          color: '#FF00FF'
-        },
-        iconColor: '#43AE21'
-      },
-      blurredInvalid: {
-        textColor: '#99FE88',
-        placeholderColor: '#CACA3A',
-        backgroundColor: '#259284',
-        radius: 10,
-        border: {
-          width: 6,
-          color: '#9A9A8E'
-        },
-        iconColor: '#985E00'
-      },
-      focusedValid: {
-        textColor: '#55EA13',
-        placeholderColor: '#273346',
-        backgroundColor: '#CABA99',
-        radius: 3,
-        border: {
-          width: 5,
-          color: '#646464'
-        },
-        iconColor: '#789521'
-      },
-      focusedInvalid: {
-        textColor: '#ABAADE',
-        placeholderColor: '#47ADAD',
-        backgroundColor: '#32AA88',
-        radius: 47,
-        border: {
-          width: 12,
-          color: '#98ADAA'
-        },
-        iconColor: '#449438'
-      },
-      disabledValid: {
-        textColor: '#AE2195',
-        placeholderColor: '#FFAAEE',
-        backgroundColor: '#772728',
-        radius: 100,
-        border: {
-          width: 14,
-          color: '#5E5E5E'
-        },
-        iconColor: '#ADAADA'
-      },
-      disabledInvalid: {
-        textColor: '#340297',
-        placeholderColor: '#233832',
-        backgroundColor: '#938837',
-        radius: 2,
-        border: {
-          width: 19,
-          color: '#573829'
-        },
-        iconColor: '#709709'
-      }
-    },
-    false,
-    'email',
-    'numeric',
-    'sentences',
-    false,
-    false,
-    'left'
-  )
-  const onChange = jest.fn()
-  const onSubmit = jest.fn()
-
-  const renderer = TestRenderer.create(
-    <Component
-      value={6}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      secureTextEntry={false}
-      disabled={undefined}
-      placeholder="Test Placeholder"
-      leftIcon={null}
-      rightIcon={null}
-      context={{
-        regex: /[^G]/,
-        character: 'G'
-      }}
-    />
-  )
-
-  expect(renderer.toTree()?.rendered).toEqual(
-    expect.objectContaining({
-      nodeType: 'component',
-      type: View,
-      props: expect.objectContaining({
-        style: {
-          backgroundColor: '#32AE12',
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingHorizontal: 29,
-          borderWidth: 4,
-          borderColor: '#FF00FF',
-          borderRadius: 5
-        }
-      }),
-      rendered: expect.objectContaining({
-        rendered: [
-          expect.objectContaining({
-            nodeType: 'component',
-            type: TextInput,
-            props: {
-              style: {
-                flexGrow: 1,
-                color: '#FFEE00',
-                paddingVertical: 12,
-                fontFamily: 'Example Font Family',
-                fontSize: 37
-              },
-              value: 'GGGGGG',
-              multiline: false,
-              scrollEnabled: false,
-              autoComplete: 'email',
-              secureTextEntry: false,
-              keyboardType: 'numeric',
-              autoCapitalize: 'sentences',
-              editable: true,
-              placeholder: 'Test Placeholder',
-              placeholderTextColor: '#E7AA32',
-              onChangeText: expect.any(Function),
-              onEndEditing: expect.any(Function),
-              onFocus: expect.any(Function),
-              onBlur: expect.any(Function),
-              blurOnSubmit: true,
               onSubmitEditing: expect.any(Function)
             }
           })
@@ -9788,7 +9626,6 @@ test('renders as expected when middle-aligned', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'middle'
   )
   const onChange = jest.fn()
@@ -9801,6 +9638,7 @@ test('renders as expected when middle-aligned', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -9957,7 +9795,6 @@ test('renders as expected when right-aligned', () => {
     'numeric',
     'sentences',
     false,
-    false,
     'right'
   )
   const onChange = jest.fn()
@@ -9970,6 +9807,7 @@ test('renders as expected when right-aligned', () => {
       onSubmit={onSubmit}
       secureTextEntry={false}
       disabled={false}
+      autoFocus={false}
       placeholder="Test Placeholder"
       leftIcon={null}
       rightIcon={null}
@@ -10031,6 +9869,182 @@ test('renders as expected when right-aligned', () => {
       })
     })
   )
+
+  renderer.unmount()
+
+  expect(onChange).not.toHaveBeenCalled()
+  expect(onSubmit).not.toHaveBeenCalled()
+})
+
+test('handles a change from auto focus to non-auto focus to auto focus', () => {
+  interface ExampleContext {
+    readonly character: string
+    readonly regex: RegExp
+  }
+  const Component = createInputComponent<number, ExampleContext>(
+    (value, context) => context.character.repeat(value),
+    (value, context) =>
+      context.regex.test(value) || value === ''
+        ? undefined
+        : value.split(context.character).length - 1,
+    {
+      fontFamily: 'Example Font Family',
+      fontSize: 37,
+      paddingVertical: 12,
+      paddingHorizontal: 29,
+      blurredValid: {
+        textColor: '#FFEE00',
+        placeholderColor: '#E7AA32',
+        backgroundColor: '#32AE12',
+        radius: 5,
+        border: {
+          width: 4,
+          color: '#FF00FF'
+        },
+        iconColor: '#43AE21'
+      },
+      blurredInvalid: {
+        textColor: '#99FE88',
+        placeholderColor: '#CACA3A',
+        backgroundColor: '#259284',
+        radius: 10,
+        border: {
+          width: 6,
+          color: '#9A9A8E'
+        },
+        iconColor: '#985E00'
+      },
+      focusedValid: {
+        textColor: '#55EA13',
+        placeholderColor: '#273346',
+        backgroundColor: '#CABA99',
+        radius: 3,
+        border: {
+          width: 5,
+          color: '#646464'
+        },
+        iconColor: '#789521'
+      },
+      focusedInvalid: {
+        textColor: '#ABAADE',
+        placeholderColor: '#47ADAD',
+        backgroundColor: '#32AA88',
+        radius: 47,
+        border: {
+          width: 12,
+          color: '#98ADAA'
+        },
+        iconColor: '#449438'
+      },
+      disabledValid: {
+        textColor: '#AE2195',
+        placeholderColor: '#FFAAEE',
+        backgroundColor: '#772728',
+        radius: 100,
+        border: {
+          width: 14,
+          color: '#5E5E5E'
+        },
+        iconColor: '#ADAADA'
+      },
+      disabledInvalid: {
+        textColor: '#340297',
+        placeholderColor: '#233832',
+        backgroundColor: '#938837',
+        radius: 2,
+        border: {
+          width: 19,
+          color: '#573829'
+        },
+        iconColor: '#709709'
+      }
+    },
+    false,
+    'email',
+    'numeric',
+    'sentences',
+    false,
+    'left'
+  )
+  const onChange = jest.fn()
+  const onSubmit = jest.fn()
+
+  const renderer = TestRenderer.create(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      autoFocus={true}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: 'G'
+      }}
+    />
+  );
+
+  (
+    (
+      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+        .rendered as TestRenderer.ReactTestRendererTree
+    ).rendered as readonly TestRenderer.ReactTestRendererTree[]
+  )[0]?.props['onLayout']()
+
+  renderer.update(
+    <Component
+    value={6}
+    onChange={onChange}
+    onSubmit={onSubmit}
+    secureTextEntry={false}
+    disabled={false}
+    autoFocus={false}
+    placeholder="Test Placeholder"
+    leftIcon={null}
+    rightIcon={null}
+    context={{
+      regex: /[^G]/,
+      character: 'G'
+    }}
+  />
+  )
+
+  renderer.update(
+    <Component
+    value={6}
+    onChange={onChange}
+    onSubmit={onSubmit}
+    secureTextEntry={false}
+    disabled={false}
+    autoFocus={true}
+    placeholder="Test Placeholder"
+    leftIcon={null}
+    rightIcon={null}
+    context={{
+      regex: /[^G]/,
+      character: 'G'
+    }}
+  />
+  );
+
+  (
+    (
+      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+        .rendered as TestRenderer.ReactTestRendererTree
+    ).rendered as readonly TestRenderer.ReactTestRendererTree[]
+  )[0]?.props['onLayout']()
+
+  expect(
+    (
+      (
+        (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
+          .rendered as TestRenderer.ReactTestRendererTree
+      ).rendered as readonly TestRenderer.ReactTestRendererTree[]
+    )[0]?.instance.focus
+  ).toHaveBeenCalledTimes(2)
 
   renderer.unmount()
 

@@ -53,7 +53,7 @@ test('renders as expected when enabled', () => {
   renderer.unmount()
 })
 
-test('renders as expected when enabled by not disabling', () => {
+test('renders as expected when enabled', () => {
   const onPress = jest.fn()
   const onMeasure = jest.fn()
 
@@ -62,52 +62,7 @@ test('renders as expected when enabled by not disabling', () => {
       style={{ backgroundColor: 'red' }}
       onPress={onPress}
       onMeasure={onMeasure}
-    >
-      <Text>Test Children</Text>
-    </Hitbox>
-  )
-
-  expect(renderer.toTree()?.rendered).toEqual(
-    expect.objectContaining({
-      nodeType: 'component',
-      props: expect.objectContaining({
-        disabled: false,
-        style: { backgroundColor: 'red' },
-        hostRef: expect.any(Function),
-        onLayout: expect.any(Function),
-        onPress: expect.any(Function),
-        children: expect.objectContaining({
-          type: Text,
-          props: {
-            children: 'Test Children'
-          }
-        })
-      })
-    })
-  )
-  expect(
-    (
-      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-        .type as unknown as () => void
-    ).name
-  ).toEqual('TouchableOpacity')
-
-  expect(onPress).not.toHaveBeenCalled()
-  expect(onMeasure).not.toHaveBeenCalled()
-
-  renderer.unmount()
-})
-
-test('renders as expected when enabled by disabled being undefined', () => {
-  const onPress = jest.fn()
-  const onMeasure = jest.fn()
-
-  const renderer = TestRenderer.create(
-    <Hitbox
-      style={{ backgroundColor: 'red' }}
-      onPress={onPress}
-      onMeasure={onMeasure}
-      disabled={undefined}
+      disabled={false}
     >
       <Text>Test Children</Text>
     </Hitbox>

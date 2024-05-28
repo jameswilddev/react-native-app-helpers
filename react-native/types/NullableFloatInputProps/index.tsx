@@ -19,7 +19,13 @@ export interface NullableFloatInputProps {
  * When true, the text box is rendered semi-transparently and does not accept
  * focus or input.
  */
-  readonly disabled?: undefined | boolean
+  readonly disabled: boolean
+
+  /**
+   * When true, the text input will steal focus on mount.  It will otherwise
+   * wait for the user to interact with it.
+   */
+  readonly autoFocus: boolean
 
   /**
  * Text to be shown when no value has been entered.

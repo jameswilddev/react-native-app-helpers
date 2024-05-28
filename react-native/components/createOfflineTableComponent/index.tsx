@@ -396,6 +396,7 @@ export const createOfflineTableComponent = <
                           : 'ascending'
                       )
                     }}
+                    disabled={false}
                   >
                     <Text
                       style={
@@ -586,6 +587,7 @@ export const createOfflineTableComponent = <
                   onPress={() => {
                     onPressRow(row)
                   }}
+                  disabled={false}
                 >
                   {cells}
                 </Hitbox>

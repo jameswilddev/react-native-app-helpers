@@ -28,7 +28,7 @@ type Instance = React.FunctionComponent<{
   /**
    * When true, the button cannot be pressed and the body is not shown.
    */
-  readonly disabled: undefined | boolean
+  readonly disabled: boolean
 
   /**
    * When true, the control is styled as though it is valid.  It is otherwise
@@ -127,8 +127,6 @@ export const createFullHeightPopoverComponent = (
     valid,
     children
   }) => {
-    disabled = disabled ?? false
-
     const refresh = useRefresh()
 
     const state = React.useRef<{

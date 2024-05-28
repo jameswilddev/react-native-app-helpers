@@ -57,11 +57,10 @@ export const createRequiredTextInputComponent = (
     'default',
     autoCapitalize,
     false,
-    false,
     'left'
   )
 
-  const RequiredTextInput: React.FunctionComponent<RequiredTextInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
+  const RequiredTextInput: React.FunctionComponent<RequiredTextInputProps> = ({ value, onChange, disabled, placeholder, unique, autoFocus }) => (
     <RequiredTextInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -74,6 +73,7 @@ export const createRequiredTextInputComponent = (
       onSubmit={() => {
         /* No-op. */
       }}
+      autoFocus={autoFocus}
     />
   )
 

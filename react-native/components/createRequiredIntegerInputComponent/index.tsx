@@ -61,11 +61,10 @@ export const createRequiredIntegerInputComponent = (
     'numeric',
     'none',
     false,
-    false,
     alignment
   )
 
-  const RequiredIntegerInput: React.FunctionComponent<RequiredIntegerInputProps> = ({ value, onChange, disabled, placeholder }) => (
+  const RequiredIntegerInput: React.FunctionComponent<RequiredIntegerInputProps> = ({ value, onChange, disabled, placeholder, autoFocus }) => (
     <RequiredIntegerInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -78,6 +77,7 @@ export const createRequiredIntegerInputComponent = (
       onSubmit={() => {
         /* No-op. */
       }}
+      autoFocus={autoFocus}
     />
   )
 

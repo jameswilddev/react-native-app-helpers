@@ -45,11 +45,10 @@ export const createRequiredPasswordInputComponent = (
     'default',
     'sentences',
     false,
-    false,
     'left'
   )
 
-  const RequiredPasswordInput: React.FunctionComponent<RequiredPasswordInputProps> = ({ value, onChange, disabled, placeholder, match }) => (
+  const RequiredPasswordInput: React.FunctionComponent<RequiredPasswordInputProps> = ({ value, onChange, disabled, placeholder, match, autoFocus }) => (
     <RequiredPasswordInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -62,6 +61,7 @@ export const createRequiredPasswordInputComponent = (
       onSubmit={() => {
         /* No-op. */
       }}
+      autoFocus={autoFocus}
     />
   )
 

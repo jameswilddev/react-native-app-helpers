@@ -198,7 +198,8 @@ test('renders as expected without a filter', async () => {
             disabled: false,
             placeholder: 'Example Placeholder',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -376,7 +377,6 @@ test('renders as expected without a filter', async () => {
       multiLine: false,
       autoComplete: 'off',
       keyboardType: 'default',
-      autoFocus: true,
       keepFocusOnSubmit: true
     }
   })
@@ -576,7 +576,8 @@ test('filters the list down to only those matching the user\'s input', async () 
             disabled: false,
             placeholder: 'Example Placeholder',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -1584,7 +1585,8 @@ test('renders as expected without horizontal padding', () => {
             disabled: false,
             placeholder: 'Example Placeholder',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -1759,7 +1761,6 @@ test('renders as expected without horizontal padding', () => {
       multiLine: false,
       autoComplete: 'off',
       keyboardType: 'default',
-      autoFocus: true,
       keepFocusOnSubmit: true
     }
   })
@@ -1968,7 +1969,8 @@ test('renders as expected without vertical padding', () => {
             disabled: false,
             placeholder: 'Example Placeholder',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -2143,7 +2145,6 @@ test('renders as expected without vertical padding', () => {
       multiLine: false,
       autoComplete: 'off',
       keyboardType: 'default',
-      autoFocus: true,
       keepFocusOnSubmit: true
     }
   })

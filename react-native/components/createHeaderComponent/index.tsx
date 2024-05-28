@@ -80,6 +80,7 @@ export const createHeaderComponent = (
             key={String(index)}
             onPress={icon.onPress}
             style={styles.hitbox}
+            disabled={false}
           >
             {React.createElement(icon.icon, { fill: headerStyle.textColor })}
           </Hitbox>
@@ -94,6 +95,7 @@ export const createHeaderComponent = (
             key={String(index)}
             onPress={icon.onPress}
             style={styles.hitbox}
+            disabled={false}
           >
             {React.createElement(icon.icon, { fill: headerStyle.textColor })}
           </Hitbox>

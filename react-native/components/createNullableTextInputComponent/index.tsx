@@ -55,11 +55,10 @@ export const createNullableTextInputComponent = (
     'default',
     'sentences',
     false,
-    false,
     'left'
   )
 
-  const NullableTextInput: React.FunctionComponent<NullableTextInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
+  const NullableTextInput: React.FunctionComponent<NullableTextInputProps> = ({ value, onChange, disabled, placeholder, unique, autoFocus }) => (
     <NullableTextInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -72,6 +71,7 @@ export const createNullableTextInputComponent = (
       onSubmit={() => {
         /* No-op. */
       }}
+      autoFocus={autoFocus}
     />
   )
 

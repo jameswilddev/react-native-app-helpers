@@ -69,7 +69,6 @@ export const createSearchableSelectChildrenComponent = <
     'off',
     'default',
     'sentences',
-    true,
     false,
     'left'
   )
@@ -199,6 +198,7 @@ export const createSearchableSelectChildrenComponent = <
             }
           }}
           context={null}
+          autoFocus
         />
       </View>
     )

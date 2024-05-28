@@ -41,7 +41,7 @@ export function createSearchableSelectComponent<
 
     return (
       <FullHeightPopover
-        disabled={disabled === true || options.length === 0}
+        disabled={disabled || options.length === 0}
         valid={!required || selectedOption !== null}
         label={selectedOption === null ? null : selectedOption.label}
         placeholder={placeholder}

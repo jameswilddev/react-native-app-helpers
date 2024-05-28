@@ -89,7 +89,7 @@ const ExampleInput = createInputComponent<number, null>(
     `email`,
     `numeric`,
     true,
-    true
+    `left`
 );
 
 const ExampleScreen = () => {
@@ -118,6 +118,7 @@ const ExampleScreen = () => {
         }}
         secureTextEntry={false}
         disabled={false}
+        autoFocus={false}
         placeholder="Shown when no text has been entered"
         leftIcon={<Text>Shown to the left</Text>}
         rightIcon={<Text>Shown to the right</Text>}

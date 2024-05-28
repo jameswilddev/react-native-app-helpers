@@ -98,6 +98,7 @@ test('renders as expected', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconAIcon fill="red" />
         </Hitbox>
@@ -108,6 +109,7 @@ test('renders as expected', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconBIcon fill="red" />
         </Hitbox>
@@ -118,6 +120,7 @@ test('renders as expected', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconCIcon fill="red" />
         </Hitbox>
@@ -128,6 +131,7 @@ test('renders as expected', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconDIcon fill="red" />
         </Hitbox>
@@ -160,6 +164,7 @@ test('renders as expected', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconAIcon fill="red" />
         </Hitbox>
@@ -170,6 +175,7 @@ test('renders as expected', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconBIcon fill="red" />
         </Hitbox>
@@ -180,6 +186,7 @@ test('renders as expected', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconCIcon fill="red" />
         </Hitbox>
@@ -285,6 +292,7 @@ test('renders as expected without vertical padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconAIcon fill="red" />
         </Hitbox>
@@ -295,6 +303,7 @@ test('renders as expected without vertical padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconBIcon fill="red" />
         </Hitbox>
@@ -305,6 +314,7 @@ test('renders as expected without vertical padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconCIcon fill="red" />
         </Hitbox>
@@ -315,6 +325,7 @@ test('renders as expected without vertical padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconDIcon fill="red" />
         </Hitbox>
@@ -346,6 +357,7 @@ test('renders as expected without vertical padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconAIcon fill="red" />
         </Hitbox>
@@ -356,6 +368,7 @@ test('renders as expected without vertical padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconBIcon fill="red" />
         </Hitbox>
@@ -366,6 +379,7 @@ test('renders as expected without vertical padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconCIcon fill="red" />
         </Hitbox>
@@ -470,6 +484,7 @@ test('renders as expected without inner horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconAIcon fill="red" />
         </Hitbox>
@@ -479,6 +494,7 @@ test('renders as expected without inner horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconBIcon fill="red" />
         </Hitbox>
@@ -488,6 +504,7 @@ test('renders as expected without inner horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconCIcon fill="red" />
         </Hitbox>
@@ -497,6 +514,7 @@ test('renders as expected without inner horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconDIcon fill="red" />
         </Hitbox>
@@ -528,6 +546,7 @@ test('renders as expected without inner horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconAIcon fill="red" />
         </Hitbox>
@@ -537,6 +556,7 @@ test('renders as expected without inner horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconBIcon fill="red" />
         </Hitbox>
@@ -546,6 +566,7 @@ test('renders as expected without inner horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconCIcon fill="red" />
         </Hitbox>
@@ -649,6 +670,7 @@ test('renders as expected without inner or outer horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconAIcon fill="red" />
         </Hitbox>
@@ -658,6 +680,7 @@ test('renders as expected without inner or outer horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconBIcon fill="red" />
         </Hitbox>
@@ -667,6 +690,7 @@ test('renders as expected without inner or outer horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconCIcon fill="red" />
         </Hitbox>
@@ -676,6 +700,7 @@ test('renders as expected without inner or outer horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleLeftIconDIcon fill="red" />
         </Hitbox>
@@ -706,6 +731,7 @@ test('renders as expected without inner or outer horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconAIcon fill="red" />
         </Hitbox>
@@ -715,6 +741,7 @@ test('renders as expected without inner or outer horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconBIcon fill="red" />
         </Hitbox>
@@ -724,6 +751,7 @@ test('renders as expected without inner or outer horizontal padding', () => {
             justifyContent: 'center'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           <ExampleRightIconCIcon fill="red" />
         </Hitbox>
@@ -828,6 +856,7 @@ test('renders as expected without vertical or inner horizontal padding', () => {
           style={{
             justifyContent: 'center'
           }}
+          disabled={false}
         >
           <ExampleLeftIconAIcon fill="red" />
         </Hitbox>
@@ -837,6 +866,7 @@ test('renders as expected without vertical or inner horizontal padding', () => {
           style={{
             justifyContent: 'center'
           }}
+          disabled={false}
         >
           <ExampleLeftIconBIcon fill="red" />
         </Hitbox>
@@ -846,6 +876,7 @@ test('renders as expected without vertical or inner horizontal padding', () => {
           style={{
             justifyContent: 'center'
           }}
+          disabled={false}
         >
           <ExampleLeftIconCIcon fill="red" />
         </Hitbox>
@@ -855,6 +886,7 @@ test('renders as expected without vertical or inner horizontal padding', () => {
           style={{
             justifyContent: 'center'
           }}
+          disabled={false}
         >
           <ExampleLeftIconDIcon fill="red" />
         </Hitbox>
@@ -885,6 +917,7 @@ test('renders as expected without vertical or inner horizontal padding', () => {
           style={{
             justifyContent: 'center'
           }}
+          disabled={false}
         >
           <ExampleRightIconAIcon fill="red" />
         </Hitbox>
@@ -894,6 +927,7 @@ test('renders as expected without vertical or inner horizontal padding', () => {
           style={{
             justifyContent: 'center'
           }}
+          disabled={false}
         >
           <ExampleRightIconBIcon fill="red" />
         </Hitbox>
@@ -903,6 +937,7 @@ test('renders as expected without vertical or inner horizontal padding', () => {
           style={{
             justifyContent: 'center'
           }}
+          disabled={false}
         >
           <ExampleRightIconCIcon fill="red" />
         </Hitbox>

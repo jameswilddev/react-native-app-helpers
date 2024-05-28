@@ -71,7 +71,6 @@ export const createCreatableSelectChildrenComponent = <
     'off',
     'default',
     'sentences',
-    true,
     false,
     'left'
   )
@@ -225,6 +224,7 @@ export const createCreatableSelectChildrenComponent = <
             }
           }}
           context={null}
+          autoFocus
         />
       </View>
     )

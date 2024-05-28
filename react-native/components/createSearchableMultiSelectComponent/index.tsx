@@ -43,7 +43,7 @@ export function createSearchableMultiSelectComponent<
 
     return (
       <FullHeightPopover
-        disabled={disabled === true || options.length === 0}
+        disabled={disabled || options.length === 0}
         valid
         label={selectedOptionLabels === '' ? null : selectedOptionLabels}
         placeholder={placeholder}

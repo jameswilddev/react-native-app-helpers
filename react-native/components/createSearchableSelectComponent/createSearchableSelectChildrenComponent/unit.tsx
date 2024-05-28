@@ -170,7 +170,8 @@ test('renders as expected with an absent selected value', () => {
             disabled: false,
             placeholder: 'Example Placeholder',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -292,8 +293,7 @@ test('renders as expected with an absent selected value', () => {
       },
       multiLine: false,
       autoComplete: 'off',
-      keyboardType: 'default',
-      autoFocus: true
+      keyboardType: 'default'
     }
   })
 
@@ -482,7 +482,8 @@ test('renders as expected with a present selected value', () => {
             disabled: false,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -632,8 +633,7 @@ test('renders as expected with a present selected value', () => {
       },
       multiLine: false,
       autoComplete: 'off',
-      keyboardType: 'default',
-      autoFocus: true
+      keyboardType: 'default'
     }
   })
 
@@ -823,7 +823,8 @@ test('renders as expected when matches are found for user input', async () => {
             disabled: false,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -993,7 +994,8 @@ test('renders as expected when matches are not found for user input', async () =
             disabled: false,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -1667,7 +1669,8 @@ test('renders as expected when horizontal padding is not present', () => {
             disabled: false,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -1815,8 +1818,7 @@ test('renders as expected when horizontal padding is not present', () => {
       },
       multiLine: false,
       autoComplete: 'off',
-      keyboardType: 'default',
-      autoFocus: true
+      keyboardType: 'default'
     }
   })
 
@@ -2003,7 +2005,8 @@ test('renders as expected when vertical padding is not present', () => {
             disabled: false,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
-            context: null
+            context: null,
+            autoFocus: true
           }
         })
       ]
@@ -2151,8 +2154,7 @@ test('renders as expected when vertical padding is not present', () => {
       },
       multiLine: false,
       autoComplete: 'off',
-      keyboardType: 'default',
-      autoFocus: true
+      keyboardType: 'default'
     }
   })
 

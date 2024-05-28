@@ -94,6 +94,7 @@ export function createBottomTabBarComponent<
             }}
             key={bottomTab.tab}
             style={isActive ? styles.activeHitbox : styles.inactiveHitbox}
+            disabled={false}
           >
             <HorizontallySymmetricalSafeAreaView
               style={styles.innerHorizontallySymmetricalSafeAreaView}

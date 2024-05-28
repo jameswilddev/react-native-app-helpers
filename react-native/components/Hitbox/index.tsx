@@ -15,7 +15,7 @@ React.PropsWithChildren<{
      * This will, of course, not apply until the next render.  To synchronously
      * disable all Hitboxes, use the "enabled" static property.
      */
-  readonly disabled?: undefined | boolean
+  readonly disabled: boolean
 
   /**
      * Passed down to TouchableOpacity.
@@ -60,7 +60,7 @@ export const Hitbox: Component & {
 
   return (
     <TouchableOpacity
-      disabled={disabled ?? false}
+      disabled={disabled}
       style={style}
       ref={ref}
       onLayout={onLayout}

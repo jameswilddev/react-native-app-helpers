@@ -13,6 +13,7 @@ const example: NullablePasswordInputProps = {
     console.log(`Value: ${value}, complete: ${complete ? "Yes" : "No"}`);
   }}
   disabled: false,
+  autoFocus: true,
   placeholder: "Shown when no text has been entered.",
   match: "Must match this when non-null.",
 };

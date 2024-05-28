@@ -13,6 +13,7 @@ const example: NullableEmailInputProps = {
     console.log(`Value: ${value}, complete: ${complete ? "Yes" : "No"}`);
   }}
   disabled: false,
+  autoFocus: true,
   placeholder: "Shown when no text has been entered",
   unique: [`Not`, `In`, `This`, `List`],
 };

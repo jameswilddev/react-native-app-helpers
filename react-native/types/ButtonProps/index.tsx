@@ -28,7 +28,7 @@ export interface ButtonProps {
    * When true, the button is disabled and does not accept input.
    * When false, the button is not disabled and accepts input.
    */
-  readonly disabled?: undefined | boolean
+  readonly disabled: boolean
 
   /**
    * The contents of the button.  This can be null (indicating no content), a

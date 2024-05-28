@@ -187,6 +187,7 @@ test('renders as expected', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -209,6 +210,7 @@ test('renders as expected', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -246,6 +248,7 @@ test('renders as expected', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -653,6 +656,7 @@ test('renders as expected with only one string column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -941,6 +945,7 @@ test('renders as expected without rows', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -962,6 +967,7 @@ test('renders as expected without rows', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -999,6 +1005,7 @@ test('renders as expected without rows', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1189,6 +1196,7 @@ test('renders as expected without rows without vertical padding', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1211,6 +1219,7 @@ test('renders as expected without rows without vertical padding', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1248,6 +1257,7 @@ test('renders as expected without rows without vertical padding', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1437,6 +1447,7 @@ test('renders as expected without rows without horizontal padding', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1458,6 +1469,7 @@ test('renders as expected without rows without horizontal padding', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1495,6 +1507,7 @@ test('renders as expected without rows without horizontal padding', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1679,6 +1692,7 @@ test('renders as expected without a header/first row separator', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1700,6 +1714,7 @@ test('renders as expected without a header/first row separator', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1737,6 +1752,7 @@ test('renders as expected without a header/first row separator', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1952,6 +1968,7 @@ test('renders as expected when filtering by a string column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -1974,6 +1991,7 @@ test('renders as expected when filtering by a string column', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2012,6 +2030,7 @@ test('renders as expected when filtering by a string column', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2277,6 +2296,7 @@ test('renders as expected when filtering by a numeric column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2298,6 +2318,7 @@ test('renders as expected when filtering by a numeric column', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2336,6 +2357,7 @@ test('renders as expected when filtering by a numeric column', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2604,6 +2626,7 @@ test('renders as expected when filtering by a custom column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2625,6 +2648,7 @@ test('renders as expected when filtering by a custom column', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2662,6 +2686,7 @@ test('renders as expected when filtering by a custom column', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2929,6 +2954,7 @@ test('renders as expected when everything is filtered out', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2950,6 +2976,7 @@ test('renders as expected when everything is filtered out', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -2987,6 +3014,7 @@ test('renders as expected when everything is filtered out', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -3202,6 +3230,7 @@ test('renders as expected when sorting by a string column, ascending', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -3223,6 +3252,7 @@ test('renders as expected when sorting by a string column, ascending', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -3260,6 +3290,7 @@ test('renders as expected when sorting by a string column, ascending', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -3720,6 +3751,7 @@ test('renders as expected when sorting by a boolean column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -3741,6 +3773,7 @@ test('renders as expected when sorting by a boolean column', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -3778,6 +3811,7 @@ test('renders as expected when sorting by a boolean column', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -4238,6 +4272,7 @@ test('renders as expected when sorting by a boolean column, descending', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -4259,6 +4294,7 @@ test('renders as expected when sorting by a boolean column, descending', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -4296,6 +4332,7 @@ test('renders as expected when sorting by a boolean column, descending', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -4756,6 +4793,7 @@ test('renders as expected when sorting by a numeric column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -4777,6 +4815,7 @@ test('renders as expected when sorting by a numeric column', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -4814,6 +4853,7 @@ test('renders as expected when sorting by a numeric column', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -5274,6 +5314,7 @@ test('renders as expected when sorting by a numeric column, descending', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -5295,6 +5336,7 @@ test('renders as expected when sorting by a numeric column, descending', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -5332,6 +5374,7 @@ test('renders as expected when sorting by a numeric column, descending', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -5790,6 +5833,7 @@ test('renders as expected without horizontal padding', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -5810,6 +5854,7 @@ test('renders as expected without horizontal padding', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -5844,6 +5889,7 @@ test('renders as expected without horizontal padding', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -6279,6 +6325,7 @@ test('renders as expected without vertical padding on the header', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -6299,6 +6346,7 @@ test('renders as expected without vertical padding on the header', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -6334,6 +6382,7 @@ test('renders as expected without vertical padding on the header', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -6794,6 +6843,7 @@ test('renders as expected without vertical padding on cells', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -6815,6 +6865,7 @@ test('renders as expected without vertical padding on cells', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -6852,6 +6903,7 @@ test('renders as expected without vertical padding on cells', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -7291,6 +7343,7 @@ test('renders as expected without header/row separators', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -7312,6 +7365,7 @@ test('renders as expected without header/row separators', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -7349,6 +7403,7 @@ test('renders as expected without header/row separators', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -7806,6 +7861,7 @@ test('renders as expected without row separators', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -7827,6 +7883,7 @@ test('renders as expected without row separators', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -7864,6 +7921,7 @@ test('renders as expected without row separators', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -8878,6 +8936,7 @@ test('styles correctly when the first and last columns are custom', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -9357,6 +9416,7 @@ test('styles correctly when the first column is a boolean', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -9378,6 +9438,7 @@ test('styles correctly when the first column is a boolean', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -9399,6 +9460,7 @@ test('styles correctly when the first column is a boolean', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -9875,6 +9937,7 @@ test('styles correctly when the last column is not custom and does not contain a
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -9911,6 +9974,7 @@ test('styles correctly when the last column is not custom and does not contain a
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -9933,6 +9997,7 @@ test('styles correctly when the last column is not custom and does not contain a
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -10350,6 +10415,7 @@ test('renders as expected with only one custom text column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -10615,6 +10681,7 @@ test('renders as expected with only one custom number column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -10880,6 +10947,7 @@ test('renders as expected with only one custom boolean column', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -11172,6 +11240,7 @@ test('renders as expected with multiple custom text columns', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -11193,6 +11262,7 @@ test('renders as expected with multiple custom text columns', () => {
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -11215,6 +11285,7 @@ test('renders as expected with multiple custom text columns', () => {
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -11635,6 +11706,7 @@ test('can sort by a custom text column descending', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -11656,6 +11728,7 @@ test('can sort by a custom text column descending', () => {
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -11678,6 +11751,7 @@ test('can sort by a custom text column descending', () => {
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -12098,6 +12172,7 @@ test('can sort by a custom text column ascending when it backs onto a boolean', 
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -12119,6 +12194,7 @@ test('can sort by a custom text column ascending when it backs onto a boolean', 
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -12141,6 +12217,7 @@ test('can sort by a custom text column ascending when it backs onto a boolean', 
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -12561,6 +12638,7 @@ test('can sort by a custom text column descending when it backs onto a boolean',
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -12582,6 +12660,7 @@ test('can sort by a custom text column descending when it backs onto a boolean',
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -12604,6 +12683,7 @@ test('can sort by a custom text column descending when it backs onto a boolean',
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -13024,6 +13104,7 @@ test('can sort by a custom text column ascending when it backs onto a number', (
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -13045,6 +13126,7 @@ test('can sort by a custom text column ascending when it backs onto a number', (
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -13067,6 +13149,7 @@ test('can sort by a custom text column ascending when it backs onto a number', (
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -13488,6 +13571,7 @@ test('can sort by a custom text column descending when it backs onto a number', 
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -13509,6 +13593,7 @@ test('can sort by a custom text column descending when it backs onto a number', 
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -13531,6 +13616,7 @@ test('can sort by a custom text column descending when it backs onto a number', 
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -14433,6 +14519,7 @@ test('renders as expected with custom text columns without horizontal padding', 
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -14453,6 +14540,7 @@ test('renders as expected with custom text columns without horizontal padding', 
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -14473,6 +14561,7 @@ test('renders as expected with custom text columns without horizontal padding', 
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -14873,6 +14962,7 @@ test('renders as expected with custom text columns without vertical padding', ()
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -14894,6 +14984,7 @@ test('renders as expected with custom text columns without vertical padding', ()
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -14916,6 +15007,7 @@ test('renders as expected with custom text columns without vertical padding', ()
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -15323,6 +15415,7 @@ test('renders as expected with custom text columns without horizontal padding in
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -15343,6 +15436,7 @@ test('renders as expected with custom text columns without horizontal padding in
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -15364,6 +15458,7 @@ test('renders as expected with custom text columns without horizontal padding in
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -15784,6 +15879,7 @@ test('can filter a custom text column rendered as a string', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -15805,6 +15901,7 @@ test('can filter a custom text column rendered as a string', () => {
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -15827,6 +15924,7 @@ test('can filter a custom text column rendered as a string', () => {
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -16079,6 +16177,7 @@ test('can filter a custom text column rendered as a number', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -16100,6 +16199,7 @@ test('can filter a custom text column rendered as a number', () => {
               flexGrow: 27
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -16122,6 +16222,7 @@ test('can filter a custom text column rendered as a number', () => {
               flexGrow: 64
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -16380,6 +16481,7 @@ test('renders as expected with a row press callback', () => {
               flexGrow: 44
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -16402,6 +16504,7 @@ test('renders as expected with a row press callback', () => {
               flexGrow: 22
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -16439,6 +16542,7 @@ test('renders as expected with a row press callback', () => {
               flexGrow: 33
             }}
             onPress={expect.any(Function)}
+            disabled={false}
           >
             <Text
               style={{
@@ -16463,6 +16567,7 @@ test('renders as expected with a row press callback', () => {
             width: '100%'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           {[
             <View
@@ -16529,6 +16634,7 @@ test('renders as expected with a row press callback', () => {
             width: '100%'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           {[
             <Text
@@ -16595,6 +16701,7 @@ test('renders as expected with a row press callback', () => {
             width: '100%'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           {[
             <Text
@@ -16665,6 +16772,7 @@ test('renders as expected with a row press callback', () => {
             width: '100%'
           }}
           onPress={expect.any(Function)}
+          disabled={false}
         >
           {[
             <Text

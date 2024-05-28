@@ -42,7 +42,13 @@ type Instance<TValue, TContext> = React.FunctionComponent<{
    * When true, the text box is rendered semi-transparently and does not accept
    * focus or input.
    */
-  readonly disabled: undefined | boolean
+  readonly disabled: boolean
+
+  /**
+   * When true, the text input will steal focus on mount.  It will otherwise
+   * wait for the user to interact with it.
+   */
+  readonly autoFocus: boolean
 
   /**
    * Text to be shown when no value has been entered.
@@ -115,12 +121,6 @@ interface Introspection<TValue, TContext> {
   readonly autoCapitalize: 'none' | 'sentences' | 'words' | 'characters'
 
   /**
-   * When true, the text input will steal focus on mount.  It will otherwise
-   * wait for the user to interact with it.
-   */
-  readonly autoFocus: boolean
-
-  /**
    * When true, the text input will keep focus on submit.  It will otherwise
    * blur.
    */
@@ -150,9 +150,6 @@ interface Introspection<TValue, TContext> {
  * @param autoComplete      The type of auto-complete suggestions to provide.
  * @param keyboardType      The type of keyboard to show.
  * @param autoCapitalize    The capitalization behavior to use.
- * @param autoFocus         When true, the text input will steal focus on mount.
- *                          It will otherwise wait for the user to interact with
- *                          it.
  * @param keepFocusOnSubmit When true, the text input will keep focus on submit.
  *                          It will otherwise blur.
  * @param alignment         The alignment of the text within the input.
@@ -167,7 +164,6 @@ export function createInputComponent<TValue, TContext> (
   autoComplete: 'off' | 'email' | 'password',
   keyboardType: 'default' | 'email-address' | 'numeric',
   autoCapitalize: 'none' | 'sentences' | 'words' | 'characters',
-  autoFocus: boolean,
   keepFocusOnSubmit: boolean,
   alignment: 'left' | 'middle' | 'right'
 ): Instance<TValue, TContext> & {
@@ -399,12 +395,11 @@ export function createInputComponent<TValue, TContext> (
     onChange,
     secureTextEntry,
     disabled,
+    autoFocus,
     placeholder,
     onSubmit,
     context
   }) => {
-    disabled = disabled ?? false
-
     const refresh = useRefresh()
 
     const stringifiedValue =
@@ -433,6 +428,10 @@ export function createInputComponent<TValue, TContext> (
 
     const ref = React.useRef<null | TextInput>(null)
     const firstLayout = React.useRef(true)
+
+    if (!autoFocus) {
+      firstLayout.current = true
+    }
 
     return (
       <View
@@ -588,7 +587,6 @@ export function createInputComponent<TValue, TContext> (
     autoComplete,
     keyboardType,
     autoCapitalize,
-    autoFocus,
     keepFocusOnSubmit,
     alignment
   }

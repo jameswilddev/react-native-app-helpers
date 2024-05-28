@@ -84,10 +84,11 @@ const ExamplePickerButton = createPickerButtonComponent(
 );
 
 const ExampleScreen = () => (
-  <ExampleFullHeightPopover
+  <ExamplePickerButton
     label="Example Label"
     placeholder="Example Placeholder"
     valid
+    disabled={false}
     onPress={() => {
       alert(`Pressed.`);
     }}

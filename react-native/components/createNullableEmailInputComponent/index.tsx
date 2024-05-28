@@ -58,17 +58,17 @@ export const createNullableEmailInputComponent = (
     'email-address',
     'none',
     false,
-    false,
     'left'
   )
 
-  const NullableEmailInput: React.FunctionComponent<NullableEmailInputProps> = ({ value, onChange, disabled, placeholder, unique }) => (
+  const NullableEmailInput: React.FunctionComponent<NullableEmailInputProps> = ({ value, onChange, disabled, placeholder, unique, autoFocus }) => (
     <NullableEmailInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       value={value}
       onChange={onChange}
       disabled={disabled}
+      autoFocus={autoFocus}
       placeholder={placeholder}
       context={unique}
       secureTextEntry={false}

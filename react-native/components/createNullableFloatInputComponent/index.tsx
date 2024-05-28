@@ -88,17 +88,17 @@ export const createNullableFloatInputComponent = (
     'numeric',
     'none',
     false,
-    false,
     alignment
   )
 
-  const NullableFloatInput: React.FunctionComponent<NullableFloatInputProps> = ({ value, onChange, disabled, placeholder }) => (
+  const NullableFloatInput: React.FunctionComponent<NullableFloatInputProps> = ({ value, onChange, disabled, placeholder, autoFocus }) => (
     <NullableFloatInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       value={value}
       onChange={onChange}
       disabled={disabled}
+      autoFocus={autoFocus}
       placeholder={placeholder}
       context={null}
       secureTextEntry={false}

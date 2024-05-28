@@ -160,8 +160,6 @@ export const createButtonComponent = (
   })
 
   const Button: React.FunctionComponent<ButtonProps> = ({ leftIcon, rightIcon, onPress, disabled, children }) => {
-    disabled = disabled ?? false
-
     const color = disabled
       ? buttonStyle.disabled.color
       : buttonStyle.default.color

@@ -86,6 +86,7 @@ test('renders as expected', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}
@@ -114,6 +115,7 @@ test('renders as expected', () => {
             flexGrow: 1,
             backgroundColor: 'purple'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}
@@ -142,6 +144,7 @@ test('renders as expected', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}
@@ -170,6 +173,7 @@ test('renders as expected', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}
@@ -275,6 +279,7 @@ test('renders as expected without top padding', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingBottom: 5 }}
@@ -303,6 +308,7 @@ test('renders as expected without top padding', () => {
             flexGrow: 1,
             backgroundColor: 'purple'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingBottom: 5 }}
@@ -331,6 +337,7 @@ test('renders as expected without top padding', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingBottom: 5 }}
@@ -359,6 +366,7 @@ test('renders as expected without top padding', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingBottom: 5 }}
@@ -464,6 +472,7 @@ test('renders as expected without bottom padding', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12 }}
@@ -492,6 +501,7 @@ test('renders as expected without bottom padding', () => {
             flexGrow: 1,
             backgroundColor: 'purple'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12 }}
@@ -520,6 +530,7 @@ test('renders as expected without bottom padding', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12 }}
@@ -548,6 +559,7 @@ test('renders as expected without bottom padding', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12 }}
@@ -653,6 +665,7 @@ test('renders as expected without icon-text spacing', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}
@@ -680,6 +693,7 @@ test('renders as expected without icon-text spacing', () => {
             flexGrow: 1,
             backgroundColor: 'purple'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}
@@ -707,6 +721,7 @@ test('renders as expected without icon-text spacing', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}
@@ -734,6 +749,7 @@ test('renders as expected without icon-text spacing', () => {
             flexGrow: 1,
             backgroundColor: 'yellow'
           }}
+          disabled={false}
         >
           <HorizontallySymmetricalSafeAreaView
             style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 5 }}

@@ -172,6 +172,7 @@ test('renders as expected with an absent selected value', () => {
             onChange: expect.any(Function),
             secureTextEntry: false,
             disabled: false,
+            autoFocus: true,
             placeholder: 'Example Placeholder',
             onSubmit: expect.any(Function),
             context: null
@@ -296,8 +297,7 @@ test('renders as expected with an absent selected value', () => {
       },
       multiLine: false,
       autoComplete: 'off',
-      keyboardType: 'default',
-      autoFocus: true
+      keyboardType: 'default'
     }
   })
 
@@ -489,6 +489,7 @@ test('renders as expected with a present selected value', () => {
             onChange: expect.any(Function),
             secureTextEntry: false,
             disabled: false,
+            autoFocus: true,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
             context: null
@@ -641,8 +642,7 @@ test('renders as expected with a present selected value', () => {
       },
       multiLine: false,
       autoComplete: 'off',
-      keyboardType: 'default',
-      autoFocus: true
+      keyboardType: 'default'
     }
   })
 
@@ -831,6 +831,7 @@ test('renders as expected when exact matches are found for user input', async ()
             onChange: expect.any(Function),
             secureTextEntry: false,
             disabled: false,
+            autoFocus: true,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
             context: null
@@ -1028,6 +1029,7 @@ test('renders as expected when partial matches are found for user input', async 
             onChange: expect.any(Function),
             secureTextEntry: false,
             disabled: false,
+            autoFocus: true,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
             context: null
@@ -1216,6 +1218,7 @@ test('renders as expected when matches are not found for user input', async () =
             onChange: expect.any(Function),
             secureTextEntry: false,
             disabled: false,
+            autoFocus: true,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
             context: null
@@ -2055,6 +2058,7 @@ test('renders as expected when horizontal padding is not present', async () => {
             onChange: expect.any(Function),
             secureTextEntry: false,
             disabled: false,
+            autoFocus: true,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
             context: null
@@ -2249,6 +2253,7 @@ test('renders as expected when vertical padding is not present', async () => {
             onChange: expect.any(Function),
             secureTextEntry: false,
             disabled: false,
+            autoFocus: true,
             placeholder: 'Example Option B Label',
             onSubmit: expect.any(Function),
             context: null

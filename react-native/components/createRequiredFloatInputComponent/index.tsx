@@ -82,11 +82,10 @@ export const createRequiredFloatInputComponent = (
     'numeric',
     'none',
     false,
-    false,
     alignment
   )
 
-  const RequiredFloatInput: React.FunctionComponent<RequiredFloatInputProps> = ({ value, onChange, disabled, placeholder }) => (
+  const RequiredFloatInput: React.FunctionComponent<RequiredFloatInputProps> = ({ value, onChange, disabled, placeholder, autoFocus }) => (
     <RequiredFloatInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
@@ -99,6 +98,7 @@ export const createRequiredFloatInputComponent = (
       onSubmit={() => {
         /* No-op. */
       }}
+      autoFocus={autoFocus}
     />
   )
 

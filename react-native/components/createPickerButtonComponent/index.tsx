@@ -29,7 +29,7 @@ type Instance = React.FunctionComponent<{
    * When true, the button cannot be pressed and is styled as though disabled.
    * The button is otherwise able to be pressed and is styled as though enabled.
    */
-  readonly disabled?: undefined | boolean
+  readonly disabled: boolean
 
   /**
    * When true, the control is styled as though it is valid.  It is otherwise
@@ -243,8 +243,6 @@ export const createPickerButtonComponent = (
     rightIcon,
     onMeasure
   }) => {
-    disabled = disabled ?? false
-
     const children: JSX.Element[] = []
 
     if (leftIcon !== undefined) {

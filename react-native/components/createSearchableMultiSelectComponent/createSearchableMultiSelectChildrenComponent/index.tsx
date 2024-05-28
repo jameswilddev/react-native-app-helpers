@@ -73,7 +73,6 @@ export const createSearchableMultiSelectChildrenComponent = <
     'default',
     'sentences',
     true,
-    true,
     'left'
   )
 
@@ -203,6 +202,7 @@ export const createSearchableMultiSelectChildrenComponent = <
           }}
           secureTextEntry={false}
           disabled={false}
+          autoFocus={true}
           placeholder={placeholder}
           onSubmit={(parsed) => {
             const normalizedParsed = normalize(parsed)
