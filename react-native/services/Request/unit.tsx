@@ -11,14 +11,14 @@ class AbortError extends Error {
 
 test('nothing happens', async () => {
   const authorizationHeaderFactory = jest.fn()
-  const fetch = jest.fn();
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  const fetch = jest.fn()
 
   // eslint-disable-next-line no-new
   new Request(
     'example-base-url.com/example/sub/path/',
     1000,
-    authorizationHeaderFactory
+    authorizationHeaderFactory,
+    fetch
   )
 
   expect(authorizationHeaderFactory).not.toBeCalled()
@@ -49,13 +49,13 @@ test('get request empty response empty missing protocol', async () => {
     }, 50)
 
     return await promise
-  });
+  })
 
-  (global as unknown as { fetch: unknown }).fetch = fetch
   const request = new Request(
     'example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -115,12 +115,12 @@ test('get request empty response empty missing trailing slash', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -180,12 +180,12 @@ test('get request empty response empty no authorization', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => null
+    () => null,
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -244,12 +244,12 @@ test('get request empty response empty no abort signal', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
 
   const promise = request.withoutResponse(
@@ -308,12 +308,12 @@ test('get request empty response empty no query parameters', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -368,12 +368,12 @@ test('get request empty response empty no retained query parameters', async () =
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -433,12 +433,12 @@ test('get request empty response empty first query parameter dropped', async () 
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -498,12 +498,12 @@ test('get request empty response empty invalid status code', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -559,12 +559,12 @@ test('get request empty response empty external abort', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -625,12 +625,12 @@ test('get request empty response before timeout', async () => {
     }, 950)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -680,12 +680,12 @@ test('get request empty response empty timeout', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -744,12 +744,12 @@ test('get request json response empty', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -800,12 +800,12 @@ test('get request json response empty external abort', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -859,12 +859,12 @@ test('get request json response empty timeout', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -924,12 +924,12 @@ test('get request json response empty invalid status code', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -974,8 +974,7 @@ test('get request json response empty invalid status code', async () => {
 })
 
 test('get request file response empty', async () => {
-  const fetch = jest.fn();
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  const fetch = jest.fn()
   const cancelAsync = jest.fn()
   const uploadAsync = jest.fn(async () => {
     await new Promise((resolve) => {
@@ -995,7 +994,8 @@ test('get request file response empty', async () => {
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -1034,8 +1034,7 @@ test('get request file response empty', async () => {
 })
 
 test('get request file response empty external abort', async () => {
-  const fetch = jest.fn();
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  const fetch = jest.fn()
   let resolve: () => void
   const cancelAsync = jest.fn(() => {
     resolve()
@@ -1056,7 +1055,8 @@ test('get request file response empty external abort', async () => {
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -1098,8 +1098,7 @@ test('get request file response empty external abort', async () => {
 })
 
 test('get request file response empty external abort null', async () => {
-  const fetch = jest.fn();
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  const fetch = jest.fn()
   let resolve: (value: null) => void
   const cancelAsync = jest.fn(() => {
     resolve(null)
@@ -1120,7 +1119,8 @@ test('get request file response empty external abort null', async () => {
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -1167,12 +1167,12 @@ test('get request empty response json', async () => {
     json: async () => ({
       example: ['json', 'response']
     })
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -1231,12 +1231,12 @@ test('get request empty response json external abort', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1295,12 +1295,12 @@ test('get request empty response json timeout', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1365,12 +1365,12 @@ test('get request empty response json invalid status code', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -1443,12 +1443,12 @@ test('get request json response json', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -1508,12 +1508,12 @@ test('get request json response json external abort', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1573,12 +1573,12 @@ test('get request json response json timeout', async () => {
     })
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1644,12 +1644,12 @@ test('get request json response json invalid status code', async () => {
     }, 50)
 
     return await promise
-  });
-  (global as unknown as { fetch: unknown }).fetch = fetch
+  })
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
   const abortController = new AbortController()
 
@@ -1701,7 +1701,6 @@ test('get request json response json invalid status code', async () => {
 
 test('get request empty response file', async () => {
   const fetch = jest.fn();
-  (global as unknown as { fetch: unknown }).fetch = fetch;
   (
     FileSystem.downloadAsync as unknown as {
       mockResolvedValue: (value: unknown) => void
@@ -1712,7 +1711,8 @@ test('get request empty response file', async () => {
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
 
   const response = await request.returningFile(
@@ -1749,7 +1749,6 @@ test('get request empty response file', async () => {
 
 test('get request empty response file failure status code', async () => {
   const fetch = jest.fn();
-  (global as unknown as { fetch: unknown }).fetch = fetch;
   (
     FileSystem.downloadAsync as unknown as {
       mockResolvedValue: (value: unknown) => void
@@ -1760,7 +1759,8 @@ test('get request empty response file failure status code', async () => {
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
 
   const response = await request.returningFile(
@@ -1801,7 +1801,6 @@ test('get request empty response file failure status code', async () => {
 
 test('get request empty response file invalid status code', async () => {
   const fetch = jest.fn();
-  (global as unknown as { fetch: unknown }).fetch = fetch;
   (
     FileSystem.downloadAsync as unknown as {
       mockResolvedValue: (value: unknown) => void
@@ -1812,7 +1811,8 @@ test('get request empty response file invalid status code', async () => {
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
-    () => 'Example Authorization Header'
+    () => 'Example Authorization Header',
+    fetch as unknown as GlobalFetch['fetch']
   )
 
   const promise = request.returningFile(

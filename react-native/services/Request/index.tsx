@@ -35,7 +35,8 @@ export class Request implements RequestInterface {
   constructor (
     baseUrl: string,
     private readonly timeoutMilliseconds: number,
-    private readonly authorizationHeaderFactory: () => null | string
+    private readonly authorizationHeaderFactory: () => null | string,
+    private readonly fetch: GlobalFetch['fetch']
   ) {
     if (!/^[a-z]+:\/\//.test(baseUrl)) {
       baseUrl = `https://${baseUrl}`
@@ -180,7 +181,7 @@ export class Request implements RequestInterface {
       switch (requestBody.type) {
         case 'empty':
         case 'json':
-          response = await fetch(url, {
+          response = await this.fetch(url, {
             signal,
             method,
             headers: {
@@ -250,7 +251,7 @@ export class Request implements RequestInterface {
     return await this.withTimeout(abortSignal, async (signal) => {
       const url = this.constructUrl(route, queryParameters)
 
-      const response = await fetch(url, {
+      const response = await this.fetch(url, {
         signal,
         method,
         headers: {

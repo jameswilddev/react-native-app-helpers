@@ -12,6 +12,7 @@ const request = new Request(
   30000,
   () => `BEARER your-authorization-header`,
   ["200"],
+  fetch
 );
 
 await request.withoutResponse(
