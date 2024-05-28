@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, TextInput, View } from 'react-native'
+import { TextInput, View, Text } from 'react-native'
 import * as TestRenderer from 'react-test-renderer'
 import {
   createInputComponent,
@@ -8891,7 +8891,6 @@ test('does nothing when auto-focus is enabled', () => {
             nodeType: 'component',
             type: TextInput,
             props: {
-              onLayout: expect.any(Function),
               style: {
                 flexGrow: 1,
                 color: '#FFEE00',
@@ -9022,29 +9021,22 @@ test('focuses the text input on layout when the ref is ready', () => {
   const onSubmit = jest.fn()
 
   const renderer = TestRenderer.create(
-    <Component
-      value={6}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      secureTextEntry={false}
-      disabled={false}
-      autoFocus={true}
-      placeholder="Test Placeholder"
-      leftIcon={null}
-      rightIcon={null}
-      context={{
-        regex: /[^G]/,
-        character: 'G'
-      }}
-    />
-  );
-
-  (
-    (
-      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-        .rendered as TestRenderer.ReactTestRendererTree
-    ).rendered as readonly TestRenderer.ReactTestRendererTree[]
-  )[0]?.props['onLayout']()
+      <Component
+        value={6}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        secureTextEntry={false}
+        disabled={false}
+        autoFocus={true}
+        placeholder="Test Placeholder"
+        leftIcon={null}
+        rightIcon={null}
+        context={{
+          regex: /[^G]/,
+          character: 'G'
+        }}
+      />
+  )
 
   expect(
     (
@@ -9170,21 +9162,25 @@ test('does not focus the text input a second time', () => {
         character: 'G'
       }}
     />
-  );
+  )
 
-  (
-    (
-      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-        .rendered as TestRenderer.ReactTestRendererTree
-    ).rendered as readonly TestRenderer.ReactTestRendererTree[]
-  )[0]?.props['onLayout']();
-
-  (
-    (
-      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-        .rendered as TestRenderer.ReactTestRendererTree
-    ).rendered as readonly TestRenderer.ReactTestRendererTree[]
-  )[0]?.props['onLayout']()
+  renderer.update(
+    <Component
+      value={6}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      secureTextEntry={false}
+      disabled={false}
+      autoFocus={true}
+      placeholder="Test Placeholder"
+      leftIcon={null}
+      rightIcon={null}
+      context={{
+        regex: /[^G]/,
+        character: 'G'
+      }}
+    />
+  )
 
   expect(
     (
@@ -9985,14 +9981,7 @@ test('handles a change from auto focus to non-auto focus to auto focus', () => {
         character: 'G'
       }}
     />
-  );
-
-  (
-    (
-      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-        .rendered as TestRenderer.ReactTestRendererTree
-    ).rendered as readonly TestRenderer.ReactTestRendererTree[]
-  )[0]?.props['onLayout']()
+  )
 
   renderer.update(
     <Component
@@ -10028,14 +10017,7 @@ test('handles a change from auto focus to non-auto focus to auto focus', () => {
       character: 'G'
     }}
   />
-  );
-
-  (
-    (
-      (renderer.toTree()?.rendered as TestRenderer.ReactTestRendererTree)
-        .rendered as TestRenderer.ReactTestRendererTree
-    ).rendered as readonly TestRenderer.ReactTestRendererTree[]
-  )[0]?.props['onLayout']()
+  )
 
   expect(
     (

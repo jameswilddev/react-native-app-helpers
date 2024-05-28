@@ -426,7 +426,6 @@ export function createInputComponent<TValue, TContext> (
 
     const valid = tryParse(editing.current, context) !== undefined
 
-    const ref = React.useRef<null | TextInput>(null)
     const firstLayout = React.useRef(true)
 
     if (!autoFocus) {
@@ -451,17 +450,19 @@ export function createInputComponent<TValue, TContext> (
       >
         {leftIcon}
         <TextInput
-          {...(autoFocus
-            ? {
-                ref,
-                onLayout () {
-                  if (firstLayout.current) {
-                    firstLayout.current = false
-                    ref.current?.focus()
-                  }
+          ref={(element) => {
+            if (element !== null) {
+              if (autoFocus) {
+                if (firstLayout.current) {
+                  console.error('a')
+                  element.focus()
+                  firstLayout.current = false
                 }
+              } else {
+                firstLayout.current = true
               }
-            : {})}
+            }
+          }}
           style={
             disabled
               ? valid
