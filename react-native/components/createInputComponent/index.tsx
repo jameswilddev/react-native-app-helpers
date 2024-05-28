@@ -454,7 +454,6 @@ export function createInputComponent<TValue, TContext> (
             if (element !== null) {
               if (autoFocus) {
                 if (firstLayout.current) {
-                  console.error('a')
                   element.focus()
                   firstLayout.current = false
                 }
