@@ -6,7 +6,6 @@ import {
 } from '../../..'
 const ImagePicker = jest.requireMock('expo-image-picker')
 const MediaLibrary = jest.requireMock('expo-media-library')
-const Permissions = jest.requireMock('expo-permissions')
 
 test('take picture without saving to media library permission denied', async () => {
   const fileStore: FileStoreInterface = {
@@ -53,7 +52,7 @@ test('take picture without saving to media library permission denied', async () 
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -104,7 +103,7 @@ test('take picture saving to media library permission denied', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -166,7 +165,7 @@ test('take picture without saving to media library cancelled', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -229,7 +228,7 @@ test('take picture without saving to media library none selected', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -291,7 +290,7 @@ test('take picture saving to media library cancelled', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -354,7 +353,7 @@ test('take picture saving to media library none selected', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -421,7 +420,7 @@ test('take picture without saving to media library successful', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -498,7 +497,7 @@ test('take picture saving to media library successful', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -552,7 +551,7 @@ test('select one picture from media library permission denied', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -614,7 +613,7 @@ test('select one picture from media library cancelled', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -677,7 +676,7 @@ test('select one picture from media library no assets', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -744,7 +743,7 @@ test('select one picture from media library successful', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -794,7 +793,7 @@ test('select multiple pictures from media library permission denied', async () =
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -856,7 +855,7 @@ test('select multiple pictures from media library cancelled', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )
@@ -941,7 +940,7 @@ test('select multiple pictures from media library successful', async () => {
   expect(fileStore.unload).not.toHaveBeenCalled()
   expect(permissionHelper.acquire).toBeCalledTimes(1)
   expect(permissionHelper.acquire).toBeCalledWith(
-    [Permissions.MEDIA_LIBRARY],
+    [ImagePicker.requestMediaLibraryPermissionsAsync],
     onPermissionDenied,
     expect.any(Function)
   )

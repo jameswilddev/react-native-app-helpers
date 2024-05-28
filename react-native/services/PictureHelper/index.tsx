@@ -1,4 +1,3 @@
-import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
 import type { FileStoreInterface } from '../../..'
@@ -26,7 +25,7 @@ export class PictureHelper implements PictureHelperInterface {
     onSuccess: (uuid: string) => Promise<void>
   ): Promise<void> {
     await this.permissionHelper.acquire(
-      [Permissions.CAMERA, Permissions.MEDIA_LIBRARY],
+      [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
       onPermissionDenied,
       async () => {
         const result = await ImagePicker.launchCameraAsync({
@@ -66,7 +65,7 @@ export class PictureHelper implements PictureHelperInterface {
     onSuccess: (uuid: string) => Promise<void>
   ): Promise<void> {
     await this.permissionHelper.acquire(
-      [Permissions.MEDIA_LIBRARY],
+      [ImagePicker.requestMediaLibraryPermissionsAsync],
       onPermissionDenied,
       async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
@@ -99,7 +98,7 @@ export class PictureHelper implements PictureHelperInterface {
     onSuccess: (uuids: readonly string[]) => Promise<void>
   ): Promise<void> {
     await this.permissionHelper.acquire(
-      [Permissions.MEDIA_LIBRARY],
+      [ImagePicker.requestMediaLibraryPermissionsAsync],
       onPermissionDenied,
       async () => {
         const result = await ImagePicker.launchImageLibraryAsync({

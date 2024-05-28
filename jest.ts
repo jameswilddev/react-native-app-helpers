@@ -15,14 +15,6 @@ jest.mock('react-native/Libraries/Linking/Linking', () => ({
   openURL: jest.fn()
 }))
 
-jest.mock('expo-permissions', () => {
-  return {
-    askAsync: jest.fn(),
-    MEDIA_LIBRARY: 'Example Media Library',
-    CAMERA: 'Example Camera'
-  }
-})
-
 jest.mock('sentry-expo', () => {
   return {
     Native: {

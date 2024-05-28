@@ -1,4 +1,4 @@
-import * as Permissions from 'expo-permissions'
+import type { PermissionResponse } from 'expo-modules-core'
 import type { PermissionHelperInterface } from '../../types/PermissionHelperInterface'
 import { showSettingsScreen } from '../../utilities/showSettingsScreen'
 
@@ -6,8 +6,6 @@ import { showSettingsScreen } from '../../utilities/showSettingsScreen'
  * Provides helpers for working with permissions.
  */
 export class PermissionHelper implements PermissionHelperInterface {
-  // TODO: this requires revision as expo-permissions is deprecated
-
   /**
    * Acquires one or more Expo permissions.
    * @param permissions The permission(s) to acquire.
@@ -19,16 +17,17 @@ export class PermissionHelper implements PermissionHelperInterface {
    *                    might only grant access to a small subset of resources.
    */
   async acquire (
-    permissions: readonly Permissions.PermissionType[],
+    permissions: ReadonlyArray<() => Promise<PermissionResponse>>,
     onFailure: (showSettingsScreen: () => Promise<void>) => Promise<void>,
     onSuccess: () => Promise<void>
   ): Promise<void> {
-    const result = await Permissions.askAsync(...permissions)
-
-    if (result.granted) {
-      await onSuccess()
-    } else {
-      await onFailure(showSettingsScreen)
+    for (const permission of permissions) {
+      if (!(await permission()).granted) {
+        await onFailure(showSettingsScreen)
+        return
+      }
     }
+
+    await onSuccess()
   }
 }

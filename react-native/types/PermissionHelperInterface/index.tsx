@@ -1,4 +1,4 @@
-import type * as Permissions from 'expo-permissions'
+import type { PermissionResponse } from 'expo-modules-core'
 
 /**
  * The methods made available by the PermissionHelper implementation.
@@ -15,7 +15,7 @@ export interface PermissionHelperInterface {
    *                    might only grant access to a small subset of resources.
    */
   acquire: (
-    permissions: readonly Permissions.PermissionType[],
+    permissions: ReadonlyArray<() => Promise<PermissionResponse>>,
     onFailure: (showSettingsScreen: () => Promise<void>) => Promise<void>,
     onSuccess: () => Promise<void>
   ) => Promise<void>
