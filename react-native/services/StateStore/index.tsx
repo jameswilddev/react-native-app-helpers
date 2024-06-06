@@ -52,7 +52,7 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
     } else if (this.fileUri !== null) {
       throw new Error('The state store is already loading.')
     } else {
-      const directoryUri = `${FileSystem.documentDirectory}/react-native-app-helpers/state-store`
+      const directoryUri = `${FileSystem.documentDirectory}react-native-app-helpers/state-store`
       const fileUri = `${directoryUri}/${key}`
 
       this.fileUri = fileUri

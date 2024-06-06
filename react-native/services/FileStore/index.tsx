@@ -21,7 +21,7 @@ export class FileStore implements FileStoreInterface {
         this.loading = true
 
         await FileSystem.makeDirectoryAsync(
-          `${FileSystem.documentDirectory}/react-native-app-helpers/file-store/${subdirectoryName}`,
+          `${FileSystem.documentDirectory}react-native-app-helpers/file-store/${subdirectoryName}`,
           { intermediates: true }
         )
 
@@ -40,7 +40,7 @@ export class FileStore implements FileStoreInterface {
     } else if (this.subdirectoryName === null) {
       throw new Error('The file store is not loaded.')
     } else {
-      return `${FileSystem.documentDirectory}/react-native-app-helpers/file-store/${this.subdirectoryName}/${uuid}`
+      return `${FileSystem.documentDirectory}react-native-app-helpers/file-store/${this.subdirectoryName}/${uuid}`
     }
   }
 
@@ -54,7 +54,7 @@ export class FileStore implements FileStoreInterface {
         this.operationsInProgress++
 
         return await FileSystem.readDirectoryAsync(
-          `${FileSystem.documentDirectory}/react-native-app-helpers/file-store/${this.subdirectoryName}`
+          `${FileSystem.documentDirectory}react-native-app-helpers/file-store/${this.subdirectoryName}`
         )
       } finally {
         this.operationsInProgress--
