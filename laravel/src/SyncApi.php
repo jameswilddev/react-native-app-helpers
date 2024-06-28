@@ -108,7 +108,8 @@ class SyncApi implements SyncApiInterface
         $key = $constant->generateCamelCasedName();
 
         $data = $constant->value;
-        $version = $enum->hashData($data);
+        ksort($data);
+        $version = hash('sha1', json_encode($data));
 
         $singletons[$key] = compact('version');
       }
