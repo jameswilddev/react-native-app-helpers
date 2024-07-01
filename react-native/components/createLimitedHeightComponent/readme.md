@@ -11,7 +11,7 @@ const ExampleComponent = createLimitedHeightComponent(243);
 
 const ExampleScreen = () => (
   <ExampleComponent width="fillsContainer">
-    <Text>This is up to 243 hight and fills its container horizontally.</Text>
+    <Text>This is up to 243 tall and fills its container horizontally.</Text>
   </ExampleComponent>
 );
 ```
@@ -23,7 +23,7 @@ const ExampleComponent = createLimitedHeightComponent(243);
 
 const ExampleScreen = () => (
   <ExampleComponent width="fitsContent">
-    <Text>This is up to 243 high and fits its content horizontally.</Text>
+    <Text>This is up to 243 tall and fits its content horizontally.</Text>
   </ExampleComponent>
 );
 ```
