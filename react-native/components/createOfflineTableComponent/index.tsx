@@ -201,14 +201,14 @@ export const createOfflineTableComponent = <
     switch (column?.alignment) {
       case 'middle':
         (customHeaderInput[key] as TextStyle).textAlign = 'center';
-        (customCellInput[key] as ViewStyle).justifyContent = 'center';
+        (customCellInput[key] as ViewStyle).alignItems = 'center';
         (oddRowCellInput[key] as TextStyle).textAlign = 'center';
         (evenRowCellInput[key] as TextStyle).textAlign = 'center'
         break
 
       case 'right':
         (customHeaderInput[key] as TextStyle).textAlign = 'right';
-        (customCellInput[key] as ViewStyle).justifyContent = 'flex-end';
+        (customCellInput[key] as ViewStyle).alignItems = 'flex-end';
         (oddRowCellInput[key] as TextStyle).textAlign = 'right';
         (evenRowCellInput[key] as TextStyle).textAlign = 'right'
         break

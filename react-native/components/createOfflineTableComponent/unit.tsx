@@ -282,7 +282,7 @@ test('renders as expected', () => {
                 paddingLeft: 56,
                 paddingRight: 28,
                 paddingVertical: 3,
-                justifyContent: 'flex-end'
+                alignItems: 'flex-end'
               }}
             >
               <Text>Example Null</Text>
@@ -321,7 +321,7 @@ test('renders as expected', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example False</Text>
@@ -386,7 +386,7 @@ test('renders as expected', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example True</Text>
@@ -455,7 +455,7 @@ test('renders as expected', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example Null</Text>
@@ -524,7 +524,7 @@ test('renders as expected', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example True</Text>
@@ -689,7 +689,7 @@ test('renders as expected with only one string column', () => {
                 flexGrow: 44,
                 paddingHorizontal: 56,
                 paddingVertical: 3,
-                justifyContent: 'flex-end'
+                alignItems: 'flex-end'
               }}
             >
               <Text>Example Null</Text>
@@ -2090,7 +2090,7 @@ test('renders as expected when filtering by a string column', () => {
                 flexGrow: 11,
                 paddingHorizontal: 28,
                 paddingVertical: 3,
-                justifyContent: 'flex-end'
+                alignItems: 'flex-end'
               }}
             >
               <Text>Example Column C Value A</Text>
@@ -2420,7 +2420,7 @@ test('renders as expected when filtering by a numeric column', () => {
                 flexGrow: 11,
                 paddingHorizontal: 28,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example Column C Value D</Text>
@@ -16578,7 +16578,7 @@ test('renders as expected with a row press callback', () => {
                 paddingLeft: 56,
                 paddingRight: 28,
                 paddingVertical: 3,
-                justifyContent: 'flex-end'
+                alignItems: 'flex-end'
               }}
             >
               <Text>Example Null</Text>
@@ -16617,7 +16617,7 @@ test('renders as expected with a row press callback', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example False</Text>
@@ -16684,7 +16684,7 @@ test('renders as expected with a row press callback', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example True</Text>
@@ -16755,7 +16755,7 @@ test('renders as expected with a row press callback', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example Null</Text>
@@ -16826,7 +16826,7 @@ test('renders as expected with a row press callback', () => {
                 paddingLeft: 28,
                 paddingRight: 56,
                 paddingVertical: 3,
-                justifyContent: 'center'
+                alignItems: 'center'
               }}
             >
               <Text>Example True</Text>
