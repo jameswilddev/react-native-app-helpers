@@ -21,12 +21,16 @@ const globalStyles = StyleSheet.create({
  *                        height, and as many will be fit on a row as possible
  *                        without tiles being smaller than this; they may be
  *                        larger to fill the container horizontally).
+ * @param aspectRatio     When null, the height of each tile is fluid (and rows
+ *                        are aligned to the top).  Otherwise, the desired
+ *                        aspect ratio of each tile (where 16/9 = 16:9).
  * @returns               The created React component.
  */
 export const createTiledComponent = (
   columnSpacing: number,
   rowSpacing: number,
-  minimumTileSize: number
+  minimumTileSize: number,
+  aspectRatio: null | number
 ): React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> => {
   const Tiled: React.FunctionComponent<React.PropsWithChildren<Record<never, never>>> = ({ children }) => {
     const [sizing, setSizing] = React.useState<null | {
@@ -75,10 +79,14 @@ export const createTiledComponent = (
           style.paddingLeft = columnSpacing
         }
 
-        if (transformedChildren.length < sizing.perRow || rowSpacing === 0) {
-          style.height = sizing.size
+        if (aspectRatio === null) {
+          if (transformedChildren.length >= sizing.perRow && rowSpacing !== 0) {
+            style.paddingTop = rowSpacing
+          }
+        } else if (transformedChildren.length < sizing.perRow || rowSpacing === 0) {
+          style.height = sizing.size / aspectRatio
         } else {
-          style.height = sizing.size + rowSpacing
+          style.height = sizing.size / aspectRatio + rowSpacing
           style.paddingTop = rowSpacing
         }
 

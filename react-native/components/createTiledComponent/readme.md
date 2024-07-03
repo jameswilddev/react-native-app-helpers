@@ -12,6 +12,7 @@ const ExampleTiledComponent = createTiledComponent(
   20, // Column spacing.
   50, // Row spacing.
   150, // Minimum tile size.
+  16 / 9, // Aspect ratio of each tile.  May be null for fluid height.
 );
 
 const ExampleScreen = () => (
