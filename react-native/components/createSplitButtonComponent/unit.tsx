@@ -140,7 +140,7 @@ test('renders as expected with one inactive button width fits content distributi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -323,7 +323,7 @@ test('raises the change event when a single button is pressed width fits content
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -333,7 +333,7 @@ test('raises the change event when a single button is pressed width fits content
   unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value B')
+  expect(onChange).toHaveBeenCalledWith(['Example Value B'])
 })
 
 test('renders as expected with one active button width fits content distribution proportional', () => {
@@ -470,7 +470,7 @@ test('renders as expected with one active button width fits content distribution
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -496,7 +496,7 @@ test('renders as expected with one active button width fits content distribution
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -653,7 +653,7 @@ test('renders as expected with one disabled button width fits content distributi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -836,7 +836,7 @@ test('renders as expected with one disabled and active button width fits content
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B" onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -1019,7 +1019,7 @@ test('renders as expected with one inactive button without horizontal padding wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D" onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -1201,7 +1201,7 @@ test('renders as expected with one active button without horizontal padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -1226,7 +1226,7 @@ test('renders as expected with one active button without horizontal padding widt
             margin: 3,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -1383,7 +1383,7 @@ test('renders as expected with one disabled button without horizontal padding wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -1565,7 +1565,7 @@ test('renders as expected with one disabled and active button without horizontal
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -1747,7 +1747,7 @@ test('renders as expected with one inactive button without vertical padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -1929,7 +1929,7 @@ test('renders as expected with one active button without vertical padding width 
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -1954,7 +1954,7 @@ test('renders as expected with one active button without vertical padding width 
             margin: 3,
             paddingHorizontal: 54
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -2111,7 +2111,7 @@ test('renders as expected with one disabled button without vertical padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -2293,7 +2293,7 @@ test('renders as expected with one disabled and active button without vertical p
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -2475,7 +2475,7 @@ test('renders as expected with one inactive button without radius width fits con
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -2657,7 +2657,7 @@ test('renders as expected with one active button without radius width fits conte
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -2682,7 +2682,7 @@ test('renders as expected with one active button without radius width fits conte
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -2839,7 +2839,7 @@ test('renders as expected with one disabled button without radius width fits con
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -3021,7 +3021,7 @@ test('renders as expected with one disabled and active button without radius wid
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -3200,7 +3200,7 @@ test('renders as expected with one inactive button without borders width fits co
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -3378,7 +3378,7 @@ test('renders as expected with one active button without borders width fits cont
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -3402,7 +3402,7 @@ test('renders as expected with one active button without borders width fits cont
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -3556,7 +3556,7 @@ test('renders as expected with one disabled button without borders width fits co
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -3734,7 +3734,7 @@ test('renders as expected with one disabled and active button without borders wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -3916,7 +3916,7 @@ test('renders as expected with two inactive buttons width fits content distribut
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -4136,7 +4136,7 @@ test('renders as expected with two buttons, the left of which is active width fi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -4168,7 +4168,7 @@ test('renders as expected with two buttons, the left of which is active width fi
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -4356,7 +4356,7 @@ test('renders as expected with two buttons, the left of which is disabled width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -4576,7 +4576,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -4796,7 +4796,7 @@ test('renders as expected with two buttons, the right of which is active width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -4858,7 +4858,7 @@ test('renders as expected with two buttons, the right of which is active width f
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -5016,7 +5016,7 @@ test('renders as expected with two buttons, the right of which is disabled width
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -5236,7 +5236,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -5456,7 +5456,7 @@ test('renders as expected with two inactive buttons without horizontal padding w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -5674,7 +5674,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -5705,7 +5705,7 @@ test('renders as expected with two buttons, the left of which is active, without
             marginRight: 0,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -5892,7 +5892,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -6110,7 +6110,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -6328,7 +6328,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -6388,7 +6388,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             marginLeft: 0,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -6546,7 +6546,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -6764,7 +6764,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -6982,7 +6982,7 @@ test('renders as expected with two inactive buttons without vertical padding wid
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -7200,7 +7200,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -7231,7 +7231,7 @@ test('renders as expected with two buttons, the left of which is active, without
             marginRight: 0,
             paddingHorizontal: 54
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -7418,7 +7418,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -7636,7 +7636,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -7854,7 +7854,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -7914,7 +7914,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             marginLeft: 0,
             paddingHorizontal: 54
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -8072,7 +8072,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -8290,7 +8290,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -8508,7 +8508,7 @@ test('renders as expected with two inactive buttons without radius width fits co
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -8724,7 +8724,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -8754,7 +8754,7 @@ test('renders as expected with two buttons, the left of which is active, without
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -8942,7 +8942,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -9160,7 +9160,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -9378,7 +9378,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -9438,7 +9438,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -9596,7 +9596,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -9814,7 +9814,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -10026,7 +10026,7 @@ test('renders as expected with two inactive buttons without borders width fits c
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -10237,7 +10237,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -10266,7 +10266,7 @@ test('renders as expected with two buttons, the left of which is active, without
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -10451,7 +10451,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -10665,7 +10665,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -10879,7 +10879,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -10938,7 +10938,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -11093,7 +11093,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -11307,7 +11307,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -11525,7 +11525,7 @@ test('renders as expected with three inactive buttons width fits content distrib
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -11776,7 +11776,7 @@ test('renders as expected with three buttons, the left of which is active width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -11811,7 +11811,7 @@ test('renders as expected with three buttons, the left of which is active width 
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -12027,7 +12027,7 @@ test('renders as expected with three buttons, the left of which is disabled widt
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -12278,7 +12278,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -12529,7 +12529,7 @@ test('renders as expected with three buttons, the middle of which is active widt
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -12591,7 +12591,7 @@ test('renders as expected with three buttons, the middle of which is active widt
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -12780,7 +12780,7 @@ test('renders as expected with three buttons, the middle of which is disabled wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -13031,7 +13031,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -13282,7 +13282,7 @@ test('renders as expected with three buttons, the right of which is active width
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -13374,7 +13374,7 @@ test('renders as expected with three buttons, the right of which is active width
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -13533,7 +13533,7 @@ test('renders as expected with three buttons, the right of which is disabled wid
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -13784,7 +13784,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -14035,7 +14035,7 @@ test('renders as expected with three inactive buttons without horizontal padding
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -14283,7 +14283,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -14317,7 +14317,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             marginRight: 0,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -14531,7 +14531,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -14779,7 +14779,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -15027,7 +15027,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -15087,7 +15087,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             marginVertical: -36,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -15275,7 +15275,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -15523,7 +15523,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -15771,7 +15771,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -15860,7 +15860,7 @@ test('renders as expected with three buttons, the right of which is active, with
             marginLeft: 0,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -16019,7 +16019,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -16267,7 +16267,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -16515,7 +16515,7 @@ test('renders as expected with three inactive buttons without vertical padding w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -16763,7 +16763,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -16797,7 +16797,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             marginRight: 0,
             paddingHorizontal: 54
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -17011,7 +17011,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -17259,7 +17259,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -17507,7 +17507,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -17567,7 +17567,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             marginVertical: -36,
             paddingHorizontal: 54
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -17755,7 +17755,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -18003,7 +18003,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -18251,7 +18251,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -18340,7 +18340,7 @@ test('renders as expected with three buttons, the right of which is active, with
             marginLeft: 0,
             paddingHorizontal: 54
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -18499,7 +18499,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -18747,7 +18747,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -18995,7 +18995,7 @@ test('renders as expected with three inactive buttons without radius width fits 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -19242,7 +19242,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -19275,7 +19275,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -19491,7 +19491,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -19740,7 +19740,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -19989,7 +19989,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -20051,7 +20051,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -20240,7 +20240,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -20491,7 +20491,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -20742,7 +20742,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -20832,7 +20832,7 @@ test('renders as expected with three buttons, the right of which is active, with
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -20991,7 +20991,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -21240,7 +21240,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -21480,7 +21480,7 @@ test('renders as expected with three inactive buttons without borders width fits
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -21719,7 +21719,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -21751,7 +21751,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -21964,7 +21964,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -22209,7 +22209,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -22454,7 +22454,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -22513,7 +22513,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -22699,7 +22699,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -22944,7 +22944,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -23189,7 +23189,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -23278,7 +23278,7 @@ test('renders as expected with three buttons, the right of which is active, with
             paddingHorizontal: 54,
             paddingVertical: 32
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -23434,7 +23434,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -23679,7 +23679,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -23927,7 +23927,7 @@ test('raises the change event when the first of three buttons is pressed width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -23943,7 +23943,7 @@ test('raises the change event when the first of three buttons is pressed width f
   unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value A')
+  expect(onChange).toHaveBeenCalledWith(['Example Value A'])
 })
 
 test('raises the change event when the second of three buttons is pressed width fits content distribution proportional', () => {
@@ -24082,7 +24082,7 @@ test('raises the change event when the second of three buttons is pressed width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -24098,7 +24098,7 @@ test('raises the change event when the second of three buttons is pressed width 
   unwrapRenderedFunctionComponent(rendered).props.children[1].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value C')
+  expect(onChange).toHaveBeenCalledWith(['Example Value C'])
 })
 
 test('raises the change event when the third of three buttons is pressed width fits content distribution proportional', () => {
@@ -24237,7 +24237,7 @@ test('raises the change event when the third of three buttons is pressed width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -24253,7 +24253,7 @@ test('raises the change event when the third of three buttons is pressed width f
   unwrapRenderedFunctionComponent(rendered).props.children[2].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value B')
+  expect(onChange).toHaveBeenCalledWith(['Example Value B'])
 })
 
 test('excludes null width fits content distribution proportional', () => {
@@ -24392,7 +24392,7 @@ test('excludes null width fits content distribution proportional', () => {
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -24644,7 +24644,7 @@ test('throws the expected error when a non-element is present width fits content
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -24801,7 +24801,7 @@ test('throws the expected error when an unexpected element is present width fits
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -24956,7 +24956,7 @@ test('renders as expected with one inactive button which does not require margin
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -25140,7 +25140,7 @@ test('renders as expected with three inactive buttons which do not require margi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fitsContent" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fitsContent" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -25384,7 +25384,7 @@ test('renders as expected with one inactive button width fills container distrib
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -25569,7 +25569,7 @@ test('raises the change event when a single button is pressed width fills contai
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -25579,7 +25579,7 @@ test('raises the change event when a single button is pressed width fills contai
   unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value B')
+  expect(onChange).toHaveBeenCalledWith(['Example Value B'])
 })
 
 test('renders as expected with one active button width fills container distribution proportional', () => {
@@ -25716,7 +25716,7 @@ test('renders as expected with one active button width fills container distribut
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -25744,7 +25744,7 @@ test('renders as expected with one active button width fills container distribut
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -25901,7 +25901,7 @@ test('renders as expected with one disabled button width fills container distrib
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -26086,7 +26086,7 @@ test('renders as expected with one disabled and active button width fills contai
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B" onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -26271,7 +26271,7 @@ test('renders as expected with one inactive button without horizontal padding wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D" onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -26455,7 +26455,7 @@ test('renders as expected with one active button without horizontal padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -26482,7 +26482,7 @@ test('renders as expected with one active button without horizontal padding widt
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -26639,7 +26639,7 @@ test('renders as expected with one disabled button without horizontal padding wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -26823,7 +26823,7 @@ test('renders as expected with one disabled and active button without horizontal
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -27007,7 +27007,7 @@ test('renders as expected with one inactive button without vertical padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -27191,7 +27191,7 @@ test('renders as expected with one active button without vertical padding width 
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -27218,7 +27218,7 @@ test('renders as expected with one active button without vertical padding width 
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -27375,7 +27375,7 @@ test('renders as expected with one disabled button without vertical padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -27559,7 +27559,7 @@ test('renders as expected with one disabled and active button without vertical p
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -27743,7 +27743,7 @@ test('renders as expected with one inactive button without radius width fills co
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -27927,7 +27927,7 @@ test('renders as expected with one active button without radius width fills cont
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -27954,7 +27954,7 @@ test('renders as expected with one active button without radius width fills cont
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -28111,7 +28111,7 @@ test('renders as expected with one disabled button without radius width fills co
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -28295,7 +28295,7 @@ test('renders as expected with one disabled and active button without radius wid
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -28476,7 +28476,7 @@ test('renders as expected with one inactive button without borders width fills c
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -28656,7 +28656,7 @@ test('renders as expected with one active button without borders width fills con
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -28682,7 +28682,7 @@ test('renders as expected with one active button without borders width fills con
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -28836,7 +28836,7 @@ test('renders as expected with one disabled button without borders width fills c
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -29016,7 +29016,7 @@ test('renders as expected with one disabled and active button without borders wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -29200,7 +29200,7 @@ test('renders as expected with two inactive buttons width fills container distri
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -29424,7 +29424,7 @@ test('renders as expected with two buttons, the left of which is active width fi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -29458,7 +29458,7 @@ test('renders as expected with two buttons, the left of which is active width fi
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -29648,7 +29648,7 @@ test('renders as expected with two buttons, the left of which is disabled width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -29872,7 +29872,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -30096,7 +30096,7 @@ test('renders as expected with two buttons, the right of which is active width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -30162,7 +30162,7 @@ test('renders as expected with two buttons, the right of which is active width f
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -30320,7 +30320,7 @@ test('renders as expected with two buttons, the right of which is disabled width
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -30544,7 +30544,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -30768,7 +30768,7 @@ test('renders as expected with two inactive buttons without horizontal padding w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -30990,7 +30990,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -31023,7 +31023,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -31212,7 +31212,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -31434,7 +31434,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -31656,7 +31656,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -31720,7 +31720,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -31878,7 +31878,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -32100,7 +32100,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -32322,7 +32322,7 @@ test('renders as expected with two inactive buttons without vertical padding wid
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -32544,7 +32544,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -32577,7 +32577,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -32766,7 +32766,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -32988,7 +32988,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -33210,7 +33210,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -33274,7 +33274,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -33432,7 +33432,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -33654,7 +33654,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -33876,7 +33876,7 @@ test('renders as expected with two inactive buttons without radius width fills c
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -34096,7 +34096,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -34128,7 +34128,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -34318,7 +34318,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -34540,7 +34540,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -34762,7 +34762,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -34826,7 +34826,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -34984,7 +34984,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -35206,7 +35206,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -35422,7 +35422,7 @@ test('renders as expected with two inactive buttons without borders width fills 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -35637,7 +35637,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -35668,7 +35668,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -35855,7 +35855,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -36073,7 +36073,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -36291,7 +36291,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -36354,7 +36354,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -36509,7 +36509,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -36727,7 +36727,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -36949,7 +36949,7 @@ test('renders as expected with three inactive buttons width fills container dist
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -37206,7 +37206,7 @@ test('renders as expected with three buttons, the left of which is active width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -37243,7 +37243,7 @@ test('renders as expected with three buttons, the left of which is active width 
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -37463,7 +37463,7 @@ test('renders as expected with three buttons, the left of which is disabled widt
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -37720,7 +37720,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -37977,7 +37977,7 @@ test('renders as expected with three buttons, the middle of which is active widt
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -38043,7 +38043,7 @@ test('renders as expected with three buttons, the middle of which is active widt
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -38234,7 +38234,7 @@ test('renders as expected with three buttons, the middle of which is disabled wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -38491,7 +38491,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -38748,7 +38748,7 @@ test('renders as expected with three buttons, the right of which is active width
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -38846,7 +38846,7 @@ test('renders as expected with three buttons, the right of which is active width
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -39005,7 +39005,7 @@ test('renders as expected with three buttons, the right of which is disabled wid
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -39262,7 +39262,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -39519,7 +39519,7 @@ test('renders as expected with three inactive buttons without horizontal padding
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -39773,7 +39773,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -39809,7 +39809,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -40027,7 +40027,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -40281,7 +40281,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -40535,7 +40535,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -40599,7 +40599,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -40789,7 +40789,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -41043,7 +41043,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -41297,7 +41297,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -41392,7 +41392,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -41551,7 +41551,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -41805,7 +41805,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -42059,7 +42059,7 @@ test('renders as expected with three inactive buttons without vertical padding w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -42313,7 +42313,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -42349,7 +42349,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -42567,7 +42567,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -42821,7 +42821,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -43075,7 +43075,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -43139,7 +43139,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -43329,7 +43329,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -43583,7 +43583,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -43837,7 +43837,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -43932,7 +43932,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -44091,7 +44091,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -44345,7 +44345,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -44599,7 +44599,7 @@ test('renders as expected with three inactive buttons without radius width fills
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -44852,7 +44852,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -44887,7 +44887,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -45107,7 +45107,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -45362,7 +45362,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -45617,7 +45617,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -45683,7 +45683,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -45874,7 +45874,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -46131,7 +46131,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -46388,7 +46388,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -46484,7 +46484,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -46643,7 +46643,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -46898,7 +46898,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -47144,7 +47144,7 @@ test('renders as expected with three inactive buttons without borders width fill
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -47389,7 +47389,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -47423,7 +47423,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -47640,7 +47640,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -47891,7 +47891,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -48142,7 +48142,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -48205,7 +48205,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -48393,7 +48393,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -48644,7 +48644,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -48895,7 +48895,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -48990,7 +48990,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexGrow: 1,
             flexShrink: 1
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -49146,7 +49146,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -49397,7 +49397,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -49651,7 +49651,7 @@ test('raises the change event when the first of three buttons is pressed width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -49667,7 +49667,7 @@ test('raises the change event when the first of three buttons is pressed width f
   unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value A')
+  expect(onChange).toHaveBeenCalledWith(['Example Value A'])
 })
 
 test('raises the change event when the second of three buttons is pressed width fills container distribution proportional', () => {
@@ -49806,7 +49806,7 @@ test('raises the change event when the second of three buttons is pressed width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -49822,7 +49822,7 @@ test('raises the change event when the second of three buttons is pressed width 
   unwrapRenderedFunctionComponent(rendered).props.children[1].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value C')
+  expect(onChange).toHaveBeenCalledWith(['Example Value C'])
 })
 
 test('raises the change event when the third of three buttons is pressed width fills container distribution proportional', () => {
@@ -49961,7 +49961,7 @@ test('raises the change event when the third of three buttons is pressed width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -49977,7 +49977,7 @@ test('raises the change event when the third of three buttons is pressed width f
   unwrapRenderedFunctionComponent(rendered).props.children[2].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value B')
+  expect(onChange).toHaveBeenCalledWith(['Example Value B'])
 })
 
 test('excludes null width fills container distribution proportional', () => {
@@ -50116,7 +50116,7 @@ test('excludes null width fills container distribution proportional', () => {
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -50374,7 +50374,7 @@ test('throws the expected error when a non-element is present width fills contai
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -50531,7 +50531,7 @@ test('throws the expected error when an unexpected element is present width fill
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -50686,7 +50686,7 @@ test('renders as expected with one inactive button which does not require margin
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -50872,7 +50872,7 @@ test('renders as expected with three inactive buttons which do not require margi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="proportional">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="proportional">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -51122,7 +51122,7 @@ test('renders as expected with one inactive button width fills container distrib
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -51308,7 +51308,7 @@ test('raises the change event when a single button is pressed width fills contai
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -51318,7 +51318,7 @@ test('raises the change event when a single button is pressed width fills contai
   unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value B')
+  expect(onChange).toHaveBeenCalledWith(['Example Value B'])
 })
 
 test('renders as expected with one active button width fills container distribution even', () => {
@@ -51455,7 +51455,7 @@ test('renders as expected with one active button width fills container distribut
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -51484,7 +51484,7 @@ test('renders as expected with one active button width fills container distribut
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -51641,7 +51641,7 @@ test('renders as expected with one disabled button width fills container distrib
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -51827,7 +51827,7 @@ test('renders as expected with one disabled and active button width fills contai
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B" onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -52013,7 +52013,7 @@ test('renders as expected with one inactive button without horizontal padding wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D" onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -52198,7 +52198,7 @@ test('renders as expected with one active button without horizontal padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -52226,7 +52226,7 @@ test('renders as expected with one active button without horizontal padding widt
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -52383,7 +52383,7 @@ test('renders as expected with one disabled button without horizontal padding wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -52568,7 +52568,7 @@ test('renders as expected with one disabled and active button without horizontal
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -52753,7 +52753,7 @@ test('renders as expected with one inactive button without vertical padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -52938,7 +52938,7 @@ test('renders as expected with one active button without vertical padding width 
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -52966,7 +52966,7 @@ test('renders as expected with one active button without vertical padding width 
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -53123,7 +53123,7 @@ test('renders as expected with one disabled button without vertical padding widt
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -53308,7 +53308,7 @@ test('renders as expected with one disabled and active button without vertical p
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -53493,7 +53493,7 @@ test('renders as expected with one inactive button without radius width fills co
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -53678,7 +53678,7 @@ test('renders as expected with one active button without radius width fills cont
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -53706,7 +53706,7 @@ test('renders as expected with one active button without radius width fills cont
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -53863,7 +53863,7 @@ test('renders as expected with one disabled button without radius width fills co
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -54048,7 +54048,7 @@ test('renders as expected with one disabled and active button without radius wid
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -54230,7 +54230,7 @@ test('renders as expected with one inactive button without borders width fills c
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -54411,7 +54411,7 @@ test('renders as expected with one active button without borders width fills con
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -54438,7 +54438,7 @@ test('renders as expected with one active button without borders width fills con
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -54592,7 +54592,7 @@ test('renders as expected with one disabled button without borders width fills c
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -54773,7 +54773,7 @@ test('renders as expected with one disabled and active button without borders wi
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled>
         Example Label B
       </SegmentB>
@@ -54958,7 +54958,7 @@ test('renders as expected with two inactive buttons width fills container distri
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -55184,7 +55184,7 @@ test('renders as expected with two buttons, the left of which is active width fi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -55219,7 +55219,7 @@ test('renders as expected with two buttons, the left of which is active width fi
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -55410,7 +55410,7 @@ test('renders as expected with two buttons, the left of which is disabled width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -55636,7 +55636,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -55862,7 +55862,7 @@ test('renders as expected with two buttons, the right of which is active width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -55930,7 +55930,7 @@ test('renders as expected with two buttons, the right of which is active width f
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -56088,7 +56088,7 @@ test('renders as expected with two buttons, the right of which is disabled width
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -56314,7 +56314,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -56540,7 +56540,7 @@ test('renders as expected with two inactive buttons without horizontal padding w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -56764,7 +56764,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -56798,7 +56798,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -56988,7 +56988,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -57212,7 +57212,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -57436,7 +57436,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -57502,7 +57502,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -57660,7 +57660,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -57884,7 +57884,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -58108,7 +58108,7 @@ test('renders as expected with two inactive buttons without vertical padding wid
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -58332,7 +58332,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -58366,7 +58366,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -58556,7 +58556,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -58780,7 +58780,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -59004,7 +59004,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -59070,7 +59070,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -59228,7 +59228,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -59452,7 +59452,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -59676,7 +59676,7 @@ test('renders as expected with two inactive buttons without radius width fills c
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -59898,7 +59898,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -59931,7 +59931,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -60122,7 +60122,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -60346,7 +60346,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -60570,7 +60570,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -60636,7 +60636,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -60794,7 +60794,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -61018,7 +61018,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -61236,7 +61236,7 @@ test('renders as expected with two inactive buttons without borders width fills 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -61453,7 +61453,7 @@ test('renders as expected with two buttons, the left of which is active, without
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -61485,7 +61485,7 @@ test('renders as expected with two buttons, the left of which is active, without
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -61673,7 +61673,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -61893,7 +61893,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled>
         Example Label C
       </SegmentC>
@@ -62113,7 +62113,7 @@ test('renders as expected with two buttons, the right of which is active, withou
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -62178,7 +62178,7 @@ test('renders as expected with two buttons, the right of which is active, withou
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -62333,7 +62333,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -62553,7 +62553,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentC value="Example Value C" disabled={false}>
         Example Label C
       </SegmentC>
@@ -62777,7 +62777,7 @@ test('renders as expected with three inactive buttons width fills container dist
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -63037,7 +63037,7 @@ test('renders as expected with three buttons, the left of which is active width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -63075,7 +63075,7 @@ test('renders as expected with three buttons, the left of which is active width 
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -63297,7 +63297,7 @@ test('renders as expected with three buttons, the left of which is disabled widt
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -63557,7 +63557,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -63817,7 +63817,7 @@ test('renders as expected with three buttons, the middle of which is active widt
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -63885,7 +63885,7 @@ test('renders as expected with three buttons, the middle of which is active widt
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -64077,7 +64077,7 @@ test('renders as expected with three buttons, the middle of which is disabled wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -64337,7 +64337,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -64597,7 +64597,7 @@ test('renders as expected with three buttons, the right of which is active width
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -64698,7 +64698,7 @@ test('renders as expected with three buttons, the right of which is active width
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -64857,7 +64857,7 @@ test('renders as expected with three buttons, the right of which is disabled wid
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -65117,7 +65117,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -65377,7 +65377,7 @@ test('renders as expected with three inactive buttons without horizontal padding
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -65634,7 +65634,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -65671,7 +65671,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -65891,7 +65891,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -66148,7 +66148,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -66405,7 +66405,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -66471,7 +66471,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -66662,7 +66662,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -66919,7 +66919,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -67176,7 +67176,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -67274,7 +67274,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -67433,7 +67433,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -67690,7 +67690,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -67947,7 +67947,7 @@ test('renders as expected with three inactive buttons without vertical padding w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -68204,7 +68204,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -68241,7 +68241,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -68461,7 +68461,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -68718,7 +68718,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -68975,7 +68975,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -69041,7 +69041,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -69232,7 +69232,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -69489,7 +69489,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -69746,7 +69746,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -69844,7 +69844,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -70003,7 +70003,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -70260,7 +70260,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -70517,7 +70517,7 @@ test('renders as expected with three inactive buttons without radius width fills
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -70773,7 +70773,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -70809,7 +70809,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -71031,7 +71031,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -71289,7 +71289,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -71547,7 +71547,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -71615,7 +71615,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -71807,7 +71807,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -72067,7 +72067,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -72327,7 +72327,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -72426,7 +72426,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -72585,7 +72585,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -72843,7 +72843,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -73092,7 +73092,7 @@ test('renders as expected with three inactive buttons without borders width fill
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -73340,7 +73340,7 @@ test('renders as expected with three buttons, the left of which is active, witho
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -73375,7 +73375,7 @@ test('renders as expected with three buttons, the left of which is active, witho
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -73594,7 +73594,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -73848,7 +73848,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value A"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value A']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled>
         Example Label A
       </SegmentA>
@@ -74102,7 +74102,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -74167,7 +74167,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -74356,7 +74356,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -74610,7 +74610,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value C"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value C']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -74864,7 +74864,7 @@ test('renders as expected with three buttons, the right of which is active, with
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -74962,7 +74962,7 @@ test('renders as expected with three buttons, the right of which is active, with
             flexShrink: 1,
             flexBasis: 0
           }}
-          disabled
+          disabled={false}
           onPress={expect.any(Function)}
         >
           <Text
@@ -75118,7 +75118,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -75372,7 +75372,7 @@ test('renders as expected with three buttons, the right of which is disabled and
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value B"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value B']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -75629,7 +75629,7 @@ test('raises the change event when the first of three buttons is pressed width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -75645,7 +75645,7 @@ test('raises the change event when the first of three buttons is pressed width f
   unwrapRenderedFunctionComponent(rendered).props.children[0].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value A')
+  expect(onChange).toHaveBeenCalledWith(['Example Value A'])
 })
 
 test('raises the change event when the second of three buttons is pressed width fills container distribution even', () => {
@@ -75784,7 +75784,7 @@ test('raises the change event when the second of three buttons is pressed width 
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -75800,7 +75800,7 @@ test('raises the change event when the second of three buttons is pressed width 
   unwrapRenderedFunctionComponent(rendered).props.children[1].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value C')
+  expect(onChange).toHaveBeenCalledWith(['Example Value C'])
 })
 
 test('raises the change event when the third of three buttons is pressed width fills container distribution even', () => {
@@ -75939,7 +75939,7 @@ test('raises the change event when the third of three buttons is pressed width f
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -75955,7 +75955,7 @@ test('raises the change event when the third of three buttons is pressed width f
   unwrapRenderedFunctionComponent(rendered).props.children[2].props.onPress()
 
   expect(onChange).toHaveBeenCalledTimes(1)
-  expect(onChange).toHaveBeenCalledWith('Example Value B')
+  expect(onChange).toHaveBeenCalledWith(['Example Value B'])
 })
 
 test('excludes null width fills container distribution even', () => {
@@ -76094,7 +76094,7 @@ test('excludes null width fills container distribution even', () => {
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -76355,7 +76355,7 @@ test('throws the expected error when a non-element is present width fills contai
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -76512,7 +76512,7 @@ test('throws the expected error when an unexpected element is present width fill
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -76667,7 +76667,7 @@ test('renders as expected with one inactive button which does not require margin
   const SegmentB = Component.segments.exampleTypeB
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentB value="Example Value B" disabled={false}>
         Example Label B
       </SegmentB>
@@ -76854,7 +76854,7 @@ test('renders as expected with three inactive buttons which do not require margi
   const SegmentC = Component.segments.exampleTypeC
 
   const rendered = (
-    <Component value="Example Value D"onChange={onChange} width="fillsContainer" distribution="even">
+    <Component value={['Example Value D']} onChange={onChange} width="fillsContainer" distribution="even">
       <SegmentA value="Example Value A" disabled={false}>
         Example Label A
       </SegmentA>
@@ -76971,4 +76971,643 @@ test('renders as expected with three inactive buttons which do not require margi
   )
 
   expect(onChange).not.toHaveBeenCalled()
+})
+
+test('renders as expected with multiple active buttons', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
+  type ExampleValue =
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
+    | 'Example Value E'
+    | 'Example Value F'
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: 'Example Font Family',
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: 'red',
+          color: 'blue',
+          radius: 10,
+          border: {
+            width: 12,
+            color: 'orange'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
+          radius: 52,
+          border: {
+            width: 76,
+            color: 'olivedrab'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
+          radius: 34,
+          border: {
+            width: 2,
+            color: 'magenta'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
+          radius: 9,
+          border: {
+            width: 48,
+            color: 'peachpuff'
+          }
+        }
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
+          radius: 15,
+          border: {
+            width: 8,
+            color: 'darkgrey'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
+          radius: 23,
+          border: {
+            width: 4,
+            color: 'darkorange'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
+          radius: 19,
+          border: {
+            width: 22,
+            color: 'darksalmon'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
+          radius: 44,
+          border: {
+            width: 77,
+            color: 'darkslategrey'
+          }
+        }
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
+          radius: 47,
+          border: {
+            width: 29,
+            color: 'yellowgreen'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'seashell',
+          color: 'seagreen',
+          radius: 33,
+          border: {
+            width: 43,
+            color: 'saddlebrown'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
+          radius: 72,
+          border: {
+            width: 1,
+            color: 'slategray'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'thistle',
+          color: 'teal',
+          radius: 7,
+          border: {
+            width: 9,
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
+
+  const rendered = (
+    <Component value={['Example Value C', 'Example Value F', 'Example Value A', 'Example Value E']} onChange={onChange} width="fitsContent" distribution="proportional">
+      <SegmentA value="Example Value A" disabled={false}>
+        Example Label A
+      </SegmentA>
+      <SegmentC value="Example Value C" disabled={false}>
+        Example Label C
+      </SegmentC>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+      <SegmentC value="Example Value D" disabled={false}>
+        Example Label D
+      </SegmentC>
+      <SegmentC value="Example Value E" disabled={false}>
+        Example Label E
+      </SegmentC>
+    </Component>
+  )
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <View
+      style={{
+        alignItems: 'stretch',
+        flexDirection: 'row'
+      }}
+    >
+      {[
+        <Hitbox
+          key="Example Value A"
+          style={{
+            backgroundColor: 'oldlace',
+            borderTopLeftRadius: 52,
+            borderBottomLeftRadius: 52,
+            borderWidth: 76,
+            borderRightWidth: 0,
+            borderColor: 'olivedrab',
+            margin: -69,
+            marginRight: 0,
+            paddingHorizontal: 54,
+            paddingVertical: 32
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: 'Example Font Family',
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: 'mediumorchid',
+              textAlign: 'center'
+            }}
+            numberOfLines={1}
+          >
+            Example Label A
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value C"
+          style={{
+            backgroundColor: 'seashell',
+            borderTopWidth: 43,
+            borderBottomWidth: 43,
+            borderColor: 'saddlebrown',
+            marginVertical: -36,
+            paddingHorizontal: 54,
+            paddingVertical: 32
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: 'Example Font Family',
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: 'seagreen',
+              textAlign: 'center'
+            }}
+            numberOfLines={1}
+          >
+            Example Label C
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value B"
+          style={{
+            backgroundColor: 'crimson',
+            borderTopWidth: 8,
+            borderBottomWidth: 8,
+            borderColor: 'darkgrey',
+            marginVertical: -1,
+            paddingHorizontal: 54,
+            paddingVertical: 32
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: 'Example Font Family',
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: 'darkgoldenrod',
+              textAlign: 'center'
+            }}
+            numberOfLines={1}
+          >
+            Example Label B
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value D"
+          style={{
+            backgroundColor: 'turquoise',
+            borderTopWidth: 29,
+            borderBottomWidth: 29,
+            borderColor: 'yellowgreen',
+            marginVertical: -22,
+            paddingHorizontal: 54,
+            paddingVertical: 32
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: 'Example Font Family',
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: 'whitesmoke',
+              textAlign: 'center'
+            }}
+            numberOfLines={1}
+          >
+            Example Label D
+          </Text>
+        </Hitbox>,
+        <Hitbox
+          key="Example Value E"
+          style={{
+            backgroundColor: 'seashell',
+            borderWidth: 43,
+            borderLeftWidth: 0,
+            borderTopRightRadius: 33,
+            borderBottomRightRadius: 33,
+            borderColor: 'saddlebrown',
+            margin: -36,
+            marginLeft: 0,
+            paddingHorizontal: 54,
+            paddingVertical: 32
+          }}
+          disabled={false}
+          onPress={expect.any(Function)}
+        >
+          <Text
+            style={{
+              fontFamily: 'Example Font Family',
+              fontSize: 44,
+              lineHeight: 61.599999999999994,
+              color: 'seagreen',
+              textAlign: 'center'
+            }}
+            numberOfLines={1}
+          >
+            Example Label E
+          </Text>
+        </Hitbox>
+      ]}
+    </View>
+  )
+
+  expect(onChange).not.toHaveBeenCalled()
+})
+
+test('raises the change event when an additional button is pressed', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
+  type ExampleValue =
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
+    | 'Example Value E'
+    | 'Example Value F'
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: 'Example Font Family',
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: 'red',
+          color: 'blue',
+          radius: 10,
+          border: {
+            width: 12,
+            color: 'orange'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
+          radius: 52,
+          border: {
+            width: 76,
+            color: 'olivedrab'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
+          radius: 34,
+          border: {
+            width: 2,
+            color: 'magenta'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
+          radius: 9,
+          border: {
+            width: 48,
+            color: 'peachpuff'
+          }
+        }
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
+          radius: 15,
+          border: {
+            width: 8,
+            color: 'darkgrey'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
+          radius: 23,
+          border: {
+            width: 4,
+            color: 'darkorange'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
+          radius: 19,
+          border: {
+            width: 22,
+            color: 'darksalmon'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
+          radius: 44,
+          border: {
+            width: 77,
+            color: 'darkslategrey'
+          }
+        }
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
+          radius: 47,
+          border: {
+            width: 29,
+            color: 'yellowgreen'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'seashell',
+          color: 'seagreen',
+          radius: 33,
+          border: {
+            width: 43,
+            color: 'saddlebrown'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
+          radius: 72,
+          border: {
+            width: 1,
+            color: 'slategray'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'thistle',
+          color: 'teal',
+          radius: 7,
+          border: {
+            width: 9,
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
+
+  const rendered = (
+    <Component value={['Example Value C', 'Example Value F', 'Example Value A', 'Example Value E']} onChange={onChange} width="fitsContent" distribution="proportional">
+      <SegmentA value="Example Value A" disabled={false}>
+        Example Label A
+      </SegmentA>
+      <SegmentC value="Example Value C" disabled={false}>
+        Example Label C
+      </SegmentC>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+      <SegmentC value="Example Value D" disabled={false}>
+        Example Label D
+      </SegmentC>
+      <SegmentC value="Example Value E" disabled={false}>
+        Example Label E
+      </SegmentC>
+    </Component>
+  )
+
+  unwrapRenderedFunctionComponent(rendered).props.children[2].props.onPress()
+
+  expect(onChange).toHaveBeenCalledTimes(1)
+  expect(onChange).toHaveBeenCalledWith(['Example Value C', 'Example Value A', 'Example Value E', 'Example Value B'])
+})
+
+test('raises the change event when a selected button is pressed', () => {
+  type ExampleType = 'exampleTypeA' | 'exampleTypeB' | 'exampleTypeC'
+  type ExampleValue =
+    | 'Example Value A'
+    | 'Example Value B'
+    | 'Example Value C'
+    | 'Example Value D'
+    | 'Example Value E'
+    | 'Example Value F'
+  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+    fontFamily: 'Example Font Family',
+    fontSize: 44,
+    horizontalPadding: 54,
+    verticalPadding: 32,
+    neutralBorderWidth: 7,
+    types: {
+      exampleTypeA: {
+        inactiveEnabled: {
+          backgroundColor: 'red',
+          color: 'blue',
+          radius: 10,
+          border: {
+            width: 12,
+            color: 'orange'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'oldlace',
+          color: 'mediumorchid',
+          radius: 52,
+          border: {
+            width: 76,
+            color: 'olivedrab'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'wheat',
+          color: 'lightgreen',
+          radius: 34,
+          border: {
+            width: 2,
+            color: 'magenta'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'mintcream',
+          color: 'rebeccapurple',
+          radius: 9,
+          border: {
+            width: 48,
+            color: 'peachpuff'
+          }
+        }
+      },
+      exampleTypeB: {
+        inactiveEnabled: {
+          backgroundColor: 'crimson',
+          color: 'darkgoldenrod',
+          radius: 15,
+          border: {
+            width: 8,
+            color: 'darkgrey'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'darkmagenta',
+          color: 'darkolivegreen',
+          radius: 23,
+          border: {
+            width: 4,
+            color: 'darkorange'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'darkorchid',
+          color: 'darkred',
+          radius: 19,
+          border: {
+            width: 22,
+            color: 'darksalmon'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'darkseagreen',
+          color: 'darkslateblue',
+          radius: 44,
+          border: {
+            width: 77,
+            color: 'darkslategrey'
+          }
+        }
+      },
+      exampleTypeC: {
+        inactiveEnabled: {
+          backgroundColor: 'turquoise',
+          color: 'whitesmoke',
+          radius: 47,
+          border: {
+            width: 29,
+            color: 'yellowgreen'
+          }
+        },
+        activeEnabled: {
+          backgroundColor: 'seashell',
+          color: 'seagreen',
+          radius: 33,
+          border: {
+            width: 43,
+            color: 'saddlebrown'
+          }
+        },
+        inactiveDisabled: {
+          backgroundColor: 'rosybrown',
+          color: 'sienna',
+          radius: 72,
+          border: {
+            width: 1,
+            color: 'slategray'
+          }
+        },
+        activeDisabled: {
+          backgroundColor: 'thistle',
+          color: 'teal',
+          radius: 7,
+          border: {
+            width: 9,
+            color: 'tan'
+          }
+        }
+      }
+    }
+  })
+  const onChange = jest.fn()
+  const SegmentA = Component.segments.exampleTypeA
+  const SegmentB = Component.segments.exampleTypeB
+  const SegmentC = Component.segments.exampleTypeC
+
+  const rendered = (
+    <Component value={['Example Value E', 'Example Value F', 'Example Value C', 'Example Value A']} onChange={onChange} width="fitsContent" distribution="proportional">
+      <SegmentA value="Example Value A" disabled={false}>
+        Example Label A
+      </SegmentA>
+      <SegmentC value="Example Value C" disabled={false}>
+        Example Label C
+      </SegmentC>
+      <SegmentB value="Example Value B" disabled={false}>
+        Example Label B
+      </SegmentB>
+      <SegmentC value="Example Value D" disabled={false}>
+        Example Label D
+      </SegmentC>
+      <SegmentC value="Example Value E" disabled={false}>
+        Example Label E
+      </SegmentC>
+    </Component>
+  )
+
+  unwrapRenderedFunctionComponent(rendered).props.children[1].props.onPress()
+
+  expect(onChange).toHaveBeenCalledTimes(1)
+  expect(onChange).toHaveBeenCalledWith(['Example Value E', 'Example Value A'])
 })

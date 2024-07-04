@@ -136,7 +136,7 @@ const ExampleSplitButton = createSplitButtonComponent<ExampleType, ExampleValue>
 });
 
 const ExampleScreen = () => {
-  const [value, setValue] = React.useState<ExampleValue>(`a`);
+  const [value, setValue] = React.useState<readonly ExampleValue[]>([`a`]);
 
   // Also supports width="fillsContainer" and distribution="even".
   return (

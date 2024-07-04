@@ -160,15 +160,15 @@ const createButtonTextStyleInstance = (
 type Instance<TValue extends null | boolean | number | string> = React.FunctionComponent<
 React.PropsWithChildren<{
   /**
-     * The currently selected value.
+     * The currently selected values.
      */
-  readonly value: TValue
+  readonly value: readonly TValue[]
 
   /**
      * Invoked when the selected value changes.
-     * @param to The newly selected value.
+     * @param to The newly selected values.
      */
-  onChange: (to: TValue) => void
+  onChange: (to: readonly TValue[]) => void
 
 } & ({
   /**
@@ -244,14 +244,15 @@ export const createSplitButtonComponent = <
 
   const partialButtonFactories: {
     [TTypeItem in TType]?: (
-      value: TValue,
-      onChange: (to: TValue) => void,
+      value: readonly TValue[],
+      onChange: (to: readonly TValue[]) => void,
       buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
       buttonDisabled: boolean,
       width: 'fitsContent' | 'fillsContainer',
-      distribution: 'even' | 'proportional'
+      distribution: 'even' | 'proportional',
+      allButtonValues: readonly TValue[]
     ) => JSX.Element;
   } = {}
 
@@ -585,12 +586,13 @@ export const createSplitButtonComponent = <
       buttonLabel,
       buttonDisabled,
       width,
-      distribution
+      distribution,
+      allButtonValues
     ) => {
       let hitboxStyle: ViewStyle
       let textStyle: TextStyle
 
-      if (buttonValue === value) {
+      if (value.includes(buttonValue)) {
         if (buttonDisabled) {
           switch (buttonPosition) {
             case 'single':
@@ -904,9 +906,13 @@ export const createSplitButtonComponent = <
         <Hitbox
           key={String(buttonValue)}
           style={hitboxStyle}
-          disabled={buttonDisabled || buttonValue === value}
+          disabled={buttonDisabled}
           onPress={() => {
-            onChange(buttonValue)
+            if (value.includes(buttonValue)) {
+              onChange(value.filter(item => allButtonValues.includes(item) && item !== buttonValue))
+            } else {
+              onChange([...value.filter(item => allButtonValues.includes(item)), buttonValue])
+            }
           }}
         >
           <Text style={textStyle} numberOfLines={1}>
@@ -923,25 +929,27 @@ export const createSplitButtonComponent = <
 
   const buttonFactories: {
     readonly [TTypeItem in TType]: (
-      value: TValue,
-      onChange: (to: TValue) => void,
+      value: readonly TValue[],
+      onChange: (to: readonly TValue[]) => void,
       buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
       buttonDisabled: boolean,
       width: 'fitsContent' | 'fillsContainer',
-      distribution: 'even' | 'proportional'
+      distribution: 'even' | 'proportional',
+      allButtonValues: readonly TValue[]
     ) => JSX.Element;
   } = partialButtonFactories as {
     [TTypeItem in TType]: (
-      value: TValue,
-      onChange: (to: TValue) => void,
+      value: readonly TValue[],
+      onChange: (to: readonly TValue[]) => void,
       buttonPosition: 'single' | 'left' | 'middle' | 'right',
       buttonValue: TValue,
       buttonLabel: string,
       buttonDisabled: boolean,
       width: 'fitsContent' | 'fillsContainer',
-      distribution: 'even' | 'proportional'
+      distribution: 'even' | 'proportional',
+      allButtonValues: readonly TValue[]
     ) => JSX.Element;
   }
 
@@ -952,6 +960,8 @@ export const createSplitButtonComponent = <
   } = ({ value, onChange, children, width, distribution }) => {
     const childrenArray = flattenRenderedToArray(children)
 
+    const allButtonValues: TValue[] = []
+
     return (
       <View style={styles.view}>
         {childrenArray
@@ -960,6 +970,8 @@ export const createSplitButtonComponent = <
             if (typeof element === 'object' && 'type' in element) {
               for (const typeKey in segments) {
                 if (segments[typeKey] === element.type) {
+                  allButtonValues.push(element.props.value)
+
                   return buttonFactories[typeKey](
                     value,
                     onChange,
@@ -974,7 +986,8 @@ export const createSplitButtonComponent = <
                     element.props.children,
                     element.props.disabled,
                     width,
-                    distribution
+                    distribution,
+                    allButtonValues
                   )
                 }
               }
