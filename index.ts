@@ -53,6 +53,7 @@ export { createTabRoutingComponent } from './react-native/components/createTabRo
 export { createTextComponent } from './react-native/components/createTextComponent'
 export { createTiledComponent } from './react-native/components/createTiledComponent'
 export { createUnderlinedTopTabBarComponent } from './react-native/components/createUnderlinedTopTabBarComponent'
+export { createVerticalSplitButtonComponent } from './react-native/components/createVerticalSplitButtonComponent'
 export { errorReporter } from './react-native/services/errorReporter'
 export { FileStore } from './react-native/services/FileStore'
 export { flattenRenderedToArray } from './react-native/utilities/flattenRenderedToArray'

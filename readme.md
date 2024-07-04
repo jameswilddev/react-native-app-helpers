@@ -72,6 +72,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createTextComponent](./react-native/components/createTextComponent/readme.md)
 - [createTiledComponent](./react-native/components/createTiledComponent/readme.md)
 - [createUnderlinedTopTabBarComponent](./react-native/components/createUnderlinedTopTabBarComponent/readme.md)
+- [createVerticalSplitButtonComponent](./react-native/components/createVerticalSplitButtonComponent/readme.md)
 - [Hitbox](./react-native/components/Hitbox/readme.md)
 - [HorizontallySymmetricalSafeAreaView](./react-native/components/HorizontallySymmetricalSafeAreaView/readme.md)
 - [Row](./react-native/components/Row/readme.md)
