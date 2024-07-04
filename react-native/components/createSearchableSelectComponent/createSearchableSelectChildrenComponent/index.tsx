@@ -11,7 +11,7 @@ import type { ControlStyle } from '../../../types/ControlStyle'
 import { createInputComponent } from '../../createInputComponent'
 import { Hitbox } from '../../Hitbox'
 
-type Instance<T extends null | number | string> = React.FunctionComponent<{
+type Instance<T extends null | boolean | number | string> = React.FunctionComponent<{
   readonly options: ReadonlyArray<{
     readonly value: T
     readonly label: string
@@ -37,7 +37,7 @@ const globalStyles = StyleSheet.create({
 })
 
 export const createSearchableSelectChildrenComponent = <
-  T extends null | number | string
+  T extends null | boolean | number | string
 >(
     controlStyle: ControlStyle
   ): Instance<T> & { readonly searchableSelectChildren: Introspection } => {

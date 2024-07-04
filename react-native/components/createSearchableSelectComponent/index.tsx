@@ -15,7 +15,7 @@ import type { SearchableSelectProps } from '../../types/SearchableSelectProps'
  * @returns            The created React component.
  */
 export function createSearchableSelectComponent<
-  T extends null | number | string
+  T extends null | boolean | number | string
 > (
   controlStyle: ControlStyle,
   rightIcon: null | SvgIcon

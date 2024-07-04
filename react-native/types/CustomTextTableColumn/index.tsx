@@ -9,7 +9,7 @@
  */
 export interface CustomTextTableColumn<
   TKey extends string,
-  TRow extends { readonly [TKeyItem in TKey]: null | number | string },
+  TRow extends { readonly [TKeyItem in TKey]: null | boolean | number | string },
   TContext
 > {
   /**

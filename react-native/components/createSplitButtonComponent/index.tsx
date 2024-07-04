@@ -157,7 +157,7 @@ const createButtonTextStyleInstance = (
   }
 }
 
-type Instance<TValue extends null | number | string> = React.FunctionComponent<
+type Instance<TValue extends null | boolean | number | string> = React.FunctionComponent<
 React.PropsWithChildren<{
   /**
      * The currently selected value.
@@ -193,7 +193,7 @@ React.PropsWithChildren<{
 })>
 >
 
-type SegmentInstance<TValue extends null | number | string> =
+type SegmentInstance<TValue extends null | boolean | number | string> =
   React.FunctionComponent<{
     /**
      * The value of the segment.
@@ -223,7 +223,7 @@ type SegmentInstance<TValue extends null | number | string> =
  */
 export const createSplitButtonComponent = <
   TType extends string,
-  TValue extends null | number | string
+  TValue extends null | boolean | number | string
 >(
     splitButtonStyle: SplitButtonStyle<TType>
   ): Instance<TValue> & {
