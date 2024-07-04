@@ -34,7 +34,7 @@
     "metro-react-native-babel-preset": "0.67.0",
     "npm-run-all": "^4.1.5",
     "react": "18.2.0",
-    "react-native": "0.74.2",
+    "react-native": "0.74.3",
     "react-test-renderer": "18.2.0",
     "typescript": "~5.3.3"
   },
@@ -63,7 +63,7 @@
     "expo-constants": "~16.0.2",
     "expo-crypto": "~13.0.2",
     "expo-file-system": "~17.0.1",
-    "expo-image-picker": "~15.0.6",
+    "expo-image-picker": "~15.0.7",
     "expo-intent-launcher": "~11.0.1",
     "expo-media-library": "~16.0.4",
     "expo-secure-store": "~13.0.2",
