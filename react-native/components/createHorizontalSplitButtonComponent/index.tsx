@@ -221,7 +221,7 @@ type SegmentInstance<TValue extends null | boolean | number | string> =
  * @param splitButtonStyle The style to apply to the split button.
  * @returns                The created React component.
  */
-export const createSplitButtonComponent = <
+export const createHorizontalSplitButtonComponent = <
   TType extends string,
   TValue extends null | boolean | number | string
 >(

@@ -1,17 +1,16 @@
-# `react-native-app-helpers/createSplitButtonComponent`
+# `react-native-app-helpers/createHorizontalSplitButtonComponent`
 
-Creates a new React component which displays sidebars to the left and right of a
-fluid-width body.
+Creates a new React component which displays a list of buttons grouped together.
 
 ## Usage
 
 ```tsx
-import { createSplitButtonComponent } from "react-native-app-helpers";
+import { createHorizontalSplitButtonComponent } from "react-native-app-helpers";
 
 type ExampleType = `exampleTypeA` | `exampleTypeB` | `exampleTypeC`;
 type ExampleValue = `a` | `b` | `c`;
 
-const ExampleSplitButton = createSplitButtonComponent<ExampleType, ExampleValue>({
+const ExampleSplitButton = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
   fontFamily: `Example Font Family`,
   fontSize: 44,
   horizontalPadding: 54,

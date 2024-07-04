@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Text, View } from 'react-native'
 import {
-  createSplitButtonComponent,
+  createHorizontalSplitButtonComponent,
   unwrapRenderedFunctionComponent
 } from '../../..'
 import { Hitbox } from '../Hitbox'
@@ -13,7 +13,7 @@ test('renders as expected with one inactive button width fits content distributi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -196,7 +196,7 @@ test('raises the change event when a single button is pressed width fits content
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -343,7 +343,7 @@ test('renders as expected with one active button width fits content distribution
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -526,7 +526,7 @@ test('renders as expected with one disabled button width fits content distributi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -709,7 +709,7 @@ test('renders as expected with one disabled and active button width fits content
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -892,7 +892,7 @@ test('renders as expected with one inactive button without horizontal padding wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -1074,7 +1074,7 @@ test('renders as expected with one active button without horizontal padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -1256,7 +1256,7 @@ test('renders as expected with one disabled button without horizontal padding wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -1438,7 +1438,7 @@ test('renders as expected with one disabled and active button without horizontal
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -1620,7 +1620,7 @@ test('renders as expected with one inactive button without vertical padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -1802,7 +1802,7 @@ test('renders as expected with one active button without vertical padding width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -1984,7 +1984,7 @@ test('renders as expected with one disabled button without vertical padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -2166,7 +2166,7 @@ test('renders as expected with one disabled and active button without vertical p
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -2348,7 +2348,7 @@ test('renders as expected with one inactive button without radius width fits con
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -2530,7 +2530,7 @@ test('renders as expected with one active button without radius width fits conte
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -2712,7 +2712,7 @@ test('renders as expected with one disabled button without radius width fits con
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -2894,7 +2894,7 @@ test('renders as expected with one disabled and active button without radius wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -3076,7 +3076,7 @@ test('renders as expected with one inactive button without borders width fits co
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -3254,7 +3254,7 @@ test('renders as expected with one active button without borders width fits cont
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -3432,7 +3432,7 @@ test('renders as expected with one disabled button without borders width fits co
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -3610,7 +3610,7 @@ test('renders as expected with one disabled and active button without borders wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -3788,7 +3788,7 @@ test('renders as expected with two inactive buttons width fits content distribut
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -4008,7 +4008,7 @@ test('renders as expected with two buttons, the left of which is active width fi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -4228,7 +4228,7 @@ test('renders as expected with two buttons, the left of which is disabled width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -4448,7 +4448,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -4668,7 +4668,7 @@ test('renders as expected with two buttons, the right of which is active width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -4888,7 +4888,7 @@ test('renders as expected with two buttons, the right of which is disabled width
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -5108,7 +5108,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -5328,7 +5328,7 @@ test('renders as expected with two inactive buttons without horizontal padding w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -5546,7 +5546,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -5764,7 +5764,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -5982,7 +5982,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -6200,7 +6200,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -6418,7 +6418,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -6636,7 +6636,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -6854,7 +6854,7 @@ test('renders as expected with two inactive buttons without vertical padding wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -7072,7 +7072,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -7290,7 +7290,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -7508,7 +7508,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -7726,7 +7726,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -7944,7 +7944,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -8162,7 +8162,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -8380,7 +8380,7 @@ test('renders as expected with two inactive buttons without radius width fits co
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -8596,7 +8596,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -8814,7 +8814,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -9032,7 +9032,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -9250,7 +9250,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -9468,7 +9468,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -9686,7 +9686,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -9904,7 +9904,7 @@ test('renders as expected with two inactive buttons without borders width fits c
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -10112,7 +10112,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -10326,7 +10326,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -10540,7 +10540,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -10754,7 +10754,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -10968,7 +10968,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -11182,7 +11182,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -11396,7 +11396,7 @@ test('renders as expected with three inactive buttons width fits content distrib
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -11647,7 +11647,7 @@ test('renders as expected with three buttons, the left of which is active width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -11898,7 +11898,7 @@ test('renders as expected with three buttons, the left of which is disabled widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -12149,7 +12149,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -12400,7 +12400,7 @@ test('renders as expected with three buttons, the middle of which is active widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -12651,7 +12651,7 @@ test('renders as expected with three buttons, the middle of which is disabled wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -12902,7 +12902,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -13153,7 +13153,7 @@ test('renders as expected with three buttons, the right of which is active width
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -13404,7 +13404,7 @@ test('renders as expected with three buttons, the right of which is disabled wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -13655,7 +13655,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -13906,7 +13906,7 @@ test('renders as expected with three inactive buttons without horizontal padding
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -14154,7 +14154,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -14402,7 +14402,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -14650,7 +14650,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -14898,7 +14898,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -15146,7 +15146,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -15394,7 +15394,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -15642,7 +15642,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -15890,7 +15890,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -16138,7 +16138,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -16386,7 +16386,7 @@ test('renders as expected with three inactive buttons without vertical padding w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -16634,7 +16634,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -16882,7 +16882,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -17130,7 +17130,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -17378,7 +17378,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -17626,7 +17626,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -17874,7 +17874,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -18122,7 +18122,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -18370,7 +18370,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -18618,7 +18618,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -18866,7 +18866,7 @@ test('renders as expected with three inactive buttons without radius width fits 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -19113,7 +19113,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -19362,7 +19362,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -19611,7 +19611,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -19860,7 +19860,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -20111,7 +20111,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -20362,7 +20362,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -20613,7 +20613,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -20862,7 +20862,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -21111,7 +21111,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -21360,7 +21360,7 @@ test('renders as expected with three inactive buttons without borders width fits
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -21593,7 +21593,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -21838,7 +21838,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -22083,7 +22083,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -22328,7 +22328,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -22573,7 +22573,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -22818,7 +22818,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -23063,7 +23063,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -23308,7 +23308,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -23553,7 +23553,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -23798,7 +23798,7 @@ test('raises the change event when the first of three buttons is pressed width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -23953,7 +23953,7 @@ test('raises the change event when the second of three buttons is pressed width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -24108,7 +24108,7 @@ test('raises the change event when the third of three buttons is pressed width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -24263,7 +24263,7 @@ test('excludes null width fits content distribution proportional', () => {
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -24515,7 +24515,7 @@ test('throws the expected error when a non-element is present width fits content
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -24672,7 +24672,7 @@ test('throws the expected error when an unexpected element is present width fits
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -24829,7 +24829,7 @@ test('renders as expected with one inactive button which does not require margin
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -25011,7 +25011,7 @@ test('renders as expected with three inactive buttons which do not require margi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -25257,7 +25257,7 @@ test('renders as expected with one inactive button width fills container distrib
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -25442,7 +25442,7 @@ test('raises the change event when a single button is pressed width fills contai
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -25589,7 +25589,7 @@ test('renders as expected with one active button width fills container distribut
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -25774,7 +25774,7 @@ test('renders as expected with one disabled button width fills container distrib
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -25959,7 +25959,7 @@ test('renders as expected with one disabled and active button width fills contai
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -26144,7 +26144,7 @@ test('renders as expected with one inactive button without horizontal padding wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -26328,7 +26328,7 @@ test('renders as expected with one active button without horizontal padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -26512,7 +26512,7 @@ test('renders as expected with one disabled button without horizontal padding wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -26696,7 +26696,7 @@ test('renders as expected with one disabled and active button without horizontal
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -26880,7 +26880,7 @@ test('renders as expected with one inactive button without vertical padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -27064,7 +27064,7 @@ test('renders as expected with one active button without vertical padding width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -27248,7 +27248,7 @@ test('renders as expected with one disabled button without vertical padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -27432,7 +27432,7 @@ test('renders as expected with one disabled and active button without vertical p
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -27616,7 +27616,7 @@ test('renders as expected with one inactive button without radius width fills co
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -27800,7 +27800,7 @@ test('renders as expected with one active button without radius width fills cont
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -27984,7 +27984,7 @@ test('renders as expected with one disabled button without radius width fills co
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -28168,7 +28168,7 @@ test('renders as expected with one disabled and active button without radius wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -28352,7 +28352,7 @@ test('renders as expected with one inactive button without borders width fills c
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -28532,7 +28532,7 @@ test('renders as expected with one active button without borders width fills con
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -28712,7 +28712,7 @@ test('renders as expected with one disabled button without borders width fills c
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -28892,7 +28892,7 @@ test('renders as expected with one disabled and active button without borders wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -29072,7 +29072,7 @@ test('renders as expected with two inactive buttons width fills container distri
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -29296,7 +29296,7 @@ test('renders as expected with two buttons, the left of which is active width fi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -29520,7 +29520,7 @@ test('renders as expected with two buttons, the left of which is disabled width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -29744,7 +29744,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -29968,7 +29968,7 @@ test('renders as expected with two buttons, the right of which is active width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -30192,7 +30192,7 @@ test('renders as expected with two buttons, the right of which is disabled width
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -30416,7 +30416,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -30640,7 +30640,7 @@ test('renders as expected with two inactive buttons without horizontal padding w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -30862,7 +30862,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -31084,7 +31084,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -31306,7 +31306,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -31528,7 +31528,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -31750,7 +31750,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -31972,7 +31972,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -32194,7 +32194,7 @@ test('renders as expected with two inactive buttons without vertical padding wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -32416,7 +32416,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -32638,7 +32638,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -32860,7 +32860,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -33082,7 +33082,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -33304,7 +33304,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -33526,7 +33526,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -33748,7 +33748,7 @@ test('renders as expected with two inactive buttons without radius width fills c
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -33968,7 +33968,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -34190,7 +34190,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -34412,7 +34412,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -34634,7 +34634,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -34856,7 +34856,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -35078,7 +35078,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -35300,7 +35300,7 @@ test('renders as expected with two inactive buttons without borders width fills 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -35512,7 +35512,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -35730,7 +35730,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -35948,7 +35948,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -36166,7 +36166,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -36384,7 +36384,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -36602,7 +36602,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -36820,7 +36820,7 @@ test('renders as expected with three inactive buttons width fills container dist
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -37077,7 +37077,7 @@ test('renders as expected with three buttons, the left of which is active width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -37334,7 +37334,7 @@ test('renders as expected with three buttons, the left of which is disabled widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -37591,7 +37591,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -37848,7 +37848,7 @@ test('renders as expected with three buttons, the middle of which is active widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -38105,7 +38105,7 @@ test('renders as expected with three buttons, the middle of which is disabled wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -38362,7 +38362,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -38619,7 +38619,7 @@ test('renders as expected with three buttons, the right of which is active width
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -38876,7 +38876,7 @@ test('renders as expected with three buttons, the right of which is disabled wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -39133,7 +39133,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -39390,7 +39390,7 @@ test('renders as expected with three inactive buttons without horizontal padding
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -39644,7 +39644,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -39898,7 +39898,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -40152,7 +40152,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -40406,7 +40406,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -40660,7 +40660,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -40914,7 +40914,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -41168,7 +41168,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -41422,7 +41422,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -41676,7 +41676,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -41930,7 +41930,7 @@ test('renders as expected with three inactive buttons without vertical padding w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -42184,7 +42184,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -42438,7 +42438,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -42692,7 +42692,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -42946,7 +42946,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -43200,7 +43200,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -43454,7 +43454,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -43708,7 +43708,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -43962,7 +43962,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -44216,7 +44216,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -44470,7 +44470,7 @@ test('renders as expected with three inactive buttons without radius width fills
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -44723,7 +44723,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -44978,7 +44978,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -45233,7 +45233,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -45488,7 +45488,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -45745,7 +45745,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -46002,7 +46002,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -46259,7 +46259,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -46514,7 +46514,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -46769,7 +46769,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -47024,7 +47024,7 @@ test('renders as expected with three inactive buttons without borders width fill
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -47263,7 +47263,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -47514,7 +47514,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -47765,7 +47765,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -48016,7 +48016,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -48267,7 +48267,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -48518,7 +48518,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -48769,7 +48769,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -49020,7 +49020,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -49271,7 +49271,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -49522,7 +49522,7 @@ test('raises the change event when the first of three buttons is pressed width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -49677,7 +49677,7 @@ test('raises the change event when the second of three buttons is pressed width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -49832,7 +49832,7 @@ test('raises the change event when the third of three buttons is pressed width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -49987,7 +49987,7 @@ test('excludes null width fills container distribution proportional', () => {
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -50245,7 +50245,7 @@ test('throws the expected error when a non-element is present width fills contai
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -50402,7 +50402,7 @@ test('throws the expected error when an unexpected element is present width fill
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -50559,7 +50559,7 @@ test('renders as expected with one inactive button which does not require margin
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -50743,7 +50743,7 @@ test('renders as expected with three inactive buttons which do not require margi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -50995,7 +50995,7 @@ test('renders as expected with one inactive button width fills container distrib
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -51181,7 +51181,7 @@ test('raises the change event when a single button is pressed width fills contai
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -51328,7 +51328,7 @@ test('renders as expected with one active button width fills container distribut
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -51514,7 +51514,7 @@ test('renders as expected with one disabled button width fills container distrib
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -51700,7 +51700,7 @@ test('renders as expected with one disabled and active button width fills contai
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -51886,7 +51886,7 @@ test('renders as expected with one inactive button without horizontal padding wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -52071,7 +52071,7 @@ test('renders as expected with one active button without horizontal padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -52256,7 +52256,7 @@ test('renders as expected with one disabled button without horizontal padding wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -52441,7 +52441,7 @@ test('renders as expected with one disabled and active button without horizontal
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -52626,7 +52626,7 @@ test('renders as expected with one inactive button without vertical padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -52811,7 +52811,7 @@ test('renders as expected with one active button without vertical padding width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -52996,7 +52996,7 @@ test('renders as expected with one disabled button without vertical padding widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -53181,7 +53181,7 @@ test('renders as expected with one disabled and active button without vertical p
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -53366,7 +53366,7 @@ test('renders as expected with one inactive button without radius width fills co
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -53551,7 +53551,7 @@ test('renders as expected with one active button without radius width fills cont
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -53736,7 +53736,7 @@ test('renders as expected with one disabled button without radius width fills co
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -53921,7 +53921,7 @@ test('renders as expected with one disabled and active button without radius wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -54106,7 +54106,7 @@ test('renders as expected with one inactive button without borders width fills c
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -54287,7 +54287,7 @@ test('renders as expected with one active button without borders width fills con
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -54468,7 +54468,7 @@ test('renders as expected with one disabled button without borders width fills c
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -54649,7 +54649,7 @@ test('renders as expected with one disabled and active button without borders wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -54830,7 +54830,7 @@ test('renders as expected with two inactive buttons width fills container distri
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -55056,7 +55056,7 @@ test('renders as expected with two buttons, the left of which is active width fi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -55282,7 +55282,7 @@ test('renders as expected with two buttons, the left of which is disabled width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -55508,7 +55508,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -55734,7 +55734,7 @@ test('renders as expected with two buttons, the right of which is active width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -55960,7 +55960,7 @@ test('renders as expected with two buttons, the right of which is disabled width
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -56186,7 +56186,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -56412,7 +56412,7 @@ test('renders as expected with two inactive buttons without horizontal padding w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -56636,7 +56636,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -56860,7 +56860,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -57084,7 +57084,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -57308,7 +57308,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -57532,7 +57532,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -57756,7 +57756,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -57980,7 +57980,7 @@ test('renders as expected with two inactive buttons without vertical padding wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -58204,7 +58204,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -58428,7 +58428,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -58652,7 +58652,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -58876,7 +58876,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -59100,7 +59100,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -59324,7 +59324,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -59548,7 +59548,7 @@ test('renders as expected with two inactive buttons without radius width fills c
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -59770,7 +59770,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -59994,7 +59994,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -60218,7 +60218,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -60442,7 +60442,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -60666,7 +60666,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -60890,7 +60890,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -61114,7 +61114,7 @@ test('renders as expected with two inactive buttons without borders width fills 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -61328,7 +61328,7 @@ test('renders as expected with two buttons, the left of which is active, without
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -61548,7 +61548,7 @@ test('renders as expected with two buttons, the left of which is disabled, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -61768,7 +61768,7 @@ test('renders as expected with two buttons, the left of which is disabled and ac
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -61988,7 +61988,7 @@ test('renders as expected with two buttons, the right of which is active, withou
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -62208,7 +62208,7 @@ test('renders as expected with two buttons, the right of which is disabled, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -62428,7 +62428,7 @@ test('renders as expected with two buttons, the right of which is disabled and a
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -62648,7 +62648,7 @@ test('renders as expected with three inactive buttons width fills container dist
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -62908,7 +62908,7 @@ test('renders as expected with three buttons, the left of which is active width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -63168,7 +63168,7 @@ test('renders as expected with three buttons, the left of which is disabled widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -63428,7 +63428,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -63688,7 +63688,7 @@ test('renders as expected with three buttons, the middle of which is active widt
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -63948,7 +63948,7 @@ test('renders as expected with three buttons, the middle of which is disabled wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -64208,7 +64208,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -64468,7 +64468,7 @@ test('renders as expected with three buttons, the right of which is active width
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -64728,7 +64728,7 @@ test('renders as expected with three buttons, the right of which is disabled wid
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -64988,7 +64988,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -65248,7 +65248,7 @@ test('renders as expected with three inactive buttons without horizontal padding
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -65505,7 +65505,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -65762,7 +65762,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -66019,7 +66019,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -66276,7 +66276,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -66533,7 +66533,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -66790,7 +66790,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -67047,7 +67047,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -67304,7 +67304,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -67561,7 +67561,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 0,
@@ -67818,7 +67818,7 @@ test('renders as expected with three inactive buttons without vertical padding w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -68075,7 +68075,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -68332,7 +68332,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -68589,7 +68589,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -68846,7 +68846,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -69103,7 +69103,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -69360,7 +69360,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -69617,7 +69617,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -69874,7 +69874,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -70131,7 +70131,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -70388,7 +70388,7 @@ test('renders as expected with three inactive buttons without radius width fills
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -70644,7 +70644,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -70902,7 +70902,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -71160,7 +71160,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -71418,7 +71418,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -71678,7 +71678,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -71938,7 +71938,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -72198,7 +72198,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -72456,7 +72456,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -72714,7 +72714,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -72972,7 +72972,7 @@ test('renders as expected with three inactive buttons without borders width fill
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -73214,7 +73214,7 @@ test('renders as expected with three buttons, the left of which is active, witho
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -73468,7 +73468,7 @@ test('renders as expected with three buttons, the left of which is disabled, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -73722,7 +73722,7 @@ test('renders as expected with three buttons, the left of which is disabled and 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -73976,7 +73976,7 @@ test('renders as expected with three buttons, the middle of which is active, wit
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -74230,7 +74230,7 @@ test('renders as expected with three buttons, the middle of which is disabled, w
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -74484,7 +74484,7 @@ test('renders as expected with three buttons, the middle of which is disabled an
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -74738,7 +74738,7 @@ test('renders as expected with three buttons, the right of which is active, with
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -74992,7 +74992,7 @@ test('renders as expected with three buttons, the right of which is disabled, wi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -75246,7 +75246,7 @@ test('renders as expected with three buttons, the right of which is disabled and
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -75500,7 +75500,7 @@ test('raises the change event when the first of three buttons is pressed width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -75655,7 +75655,7 @@ test('raises the change event when the second of three buttons is pressed width 
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -75810,7 +75810,7 @@ test('raises the change event when the third of three buttons is pressed width f
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -75965,7 +75965,7 @@ test('excludes null width fills container distribution even', () => {
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -76226,7 +76226,7 @@ test('throws the expected error when a non-element is present width fills contai
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -76383,7 +76383,7 @@ test('throws the expected error when an unexpected element is present width fill
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -76540,7 +76540,7 @@ test('renders as expected with one inactive button which does not require margin
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -76725,7 +76725,7 @@ test('renders as expected with three inactive buttons which do not require margi
     | 'Example Value B'
     | 'Example Value C'
     | 'Example Value D'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -76982,7 +76982,7 @@ test('renders as expected with multiple active buttons', () => {
     | 'Example Value D'
     | 'Example Value E'
     | 'Example Value F'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -77295,7 +77295,7 @@ test('raises the change event when an additional button is pressed', () => {
     | 'Example Value D'
     | 'Example Value E'
     | 'Example Value F'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
@@ -77458,7 +77458,7 @@ test('raises the change event when a selected button is pressed', () => {
     | 'Example Value D'
     | 'Example Value E'
     | 'Example Value F'
-  const Component = createSplitButtonComponent<ExampleType, ExampleValue>({
+  const Component = createHorizontalSplitButtonComponent<ExampleType, ExampleValue>({
     fontFamily: 'Example Font Family',
     fontSize: 44,
     horizontalPadding: 54,
