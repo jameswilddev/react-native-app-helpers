@@ -98,12 +98,14 @@ test('renders as expected with a value', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -172,6 +174,7 @@ test('renders as expected with a value', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected without a value', () => {
@@ -266,12 +269,14 @@ test('renders as expected without a value', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -341,6 +346,7 @@ test('renders as expected without a value', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when disabled with a value', () => {
@@ -435,12 +441,14 @@ test('renders as expected when disabled with a value', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -510,6 +518,7 @@ test('renders as expected when disabled with a value', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when disabled without a value', () => {
@@ -604,12 +613,14 @@ test('renders as expected when disabled without a value', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -679,6 +690,7 @@ test('renders as expected when disabled without a value', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('can be focused when valid', async () => {
@@ -773,12 +785,14 @@ test('can be focused when valid', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -859,6 +873,7 @@ test('can be focused when valid', async () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('can be focused when invalid', async () => {
@@ -953,12 +968,14 @@ test('can be focused when invalid', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -1039,6 +1056,7 @@ test('can be focused when invalid', async () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('can be blurred', async () => {
@@ -1133,12 +1151,14 @@ test('can be blurred', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -1229,6 +1249,7 @@ test('can be blurred', async () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('can be disabled during edit', async () => {
@@ -1323,12 +1344,14 @@ test('can be disabled during edit', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -1369,6 +1392,7 @@ test('can be disabled during edit', async () => {
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -1439,6 +1463,7 @@ test('can be disabled during edit', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(undefined, false)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('can be disabled during edit when starting invalid', async () => {
@@ -1533,12 +1558,14 @@ test('can be disabled during edit when starting invalid', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -1579,6 +1606,7 @@ test('can be disabled during edit when starting invalid', async () => {
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -1649,6 +1677,7 @@ test('can be disabled during edit when starting invalid', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(undefined, false)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('can be re-enabled following edit', async () => {
@@ -1743,12 +1772,14 @@ test('can be re-enabled following edit', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -1789,6 +1820,7 @@ test('can be re-enabled following edit', async () => {
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -1807,6 +1839,7 @@ test('can be re-enabled following edit', async () => {
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -1876,6 +1909,7 @@ test('can be re-enabled following edit', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(3, false)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('does not lose pending changes on update', async () => {
@@ -1970,12 +2004,14 @@ test('does not lose pending changes on update', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2016,6 +2052,7 @@ test('does not lose pending changes on update', async () => {
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2086,6 +2123,7 @@ test('does not lose pending changes on update', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(3, false)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('resets the value on external changes', () => {
@@ -2180,12 +2218,14 @@ test('resets the value on external changes', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2204,6 +2244,7 @@ test('resets the value on external changes', () => {
       value={4}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2272,6 +2313,7 @@ test('resets the value on external changes', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('ignores external changes to the value when an edit is in progress', async () => {
@@ -2366,12 +2408,14 @@ test('ignores external changes to the value when an edit is in progress', async 
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2412,6 +2456,7 @@ test('ignores external changes to the value when an edit is in progress', async 
       value={4}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2482,6 +2527,7 @@ test('ignores external changes to the value when an edit is in progress', async 
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(3, false)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('allows valid incomplete edits', async () => {
@@ -2576,12 +2622,14 @@ test('allows valid incomplete edits', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2674,6 +2722,7 @@ test('allows valid incomplete edits', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(3, false)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('allows valid incomplete edits', async () => {
@@ -2768,12 +2817,14 @@ test('allows valid incomplete edits', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -2870,6 +2921,7 @@ test('allows valid incomplete edits', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(3, true)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('allows valid incomplete edits', async () => {
@@ -2964,12 +3016,14 @@ test('allows valid incomplete edits', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -3066,6 +3120,7 @@ test('allows valid incomplete edits', async () => {
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).toHaveBeenCalledTimes(1)
   expect(onSubmit).toHaveBeenCalledWith(3)
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('allows invalid incomplete edits', async () => {
@@ -3160,12 +3215,14 @@ test('allows invalid incomplete edits', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -3258,6 +3315,7 @@ test('allows invalid incomplete edits', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(undefined, false)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('allows invalid incomplete edits', async () => {
@@ -3352,12 +3410,14 @@ test('allows invalid incomplete edits', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -3454,6 +3514,7 @@ test('allows invalid incomplete edits', async () => {
   expect(onChange).toHaveBeenCalledTimes(1)
   expect(onChange).toHaveBeenCalledWith(undefined, true)
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('allows invalid incomplete edits', async () => {
@@ -3548,12 +3609,14 @@ test('allows invalid incomplete edits', async () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -3649,6 +3712,7 @@ test('allows invalid incomplete edits', async () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('renders as expected when the border width does not change', () => {
@@ -3743,12 +3807,14 @@ test('renders as expected when the border width does not change', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -3817,6 +3883,7 @@ test('renders as expected when the border width does not change', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('passes down secureTextEntry', () => {
@@ -3911,12 +3978,14 @@ test('passes down secureTextEntry', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry
       disabled={false}
       autoFocus={false}
@@ -3985,6 +4054,7 @@ test('passes down secureTextEntry', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders with a left icon', () => {
@@ -4079,12 +4149,14 @@ test('renders with a left icon', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -4161,6 +4233,7 @@ test('renders with a left icon', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders with a right icon', () => {
@@ -4255,12 +4328,14 @@ test('renders with a right icon', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -4337,6 +4412,7 @@ test('renders with a right icon', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders with left and right icons', () => {
@@ -4431,12 +4507,14 @@ test('renders with left and right icons', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -4520,6 +4598,7 @@ test('renders with left and right icons', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a left icon without a value', () => {
@@ -4614,12 +4693,14 @@ test('renders as expected with a left icon without a value', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -4697,6 +4778,7 @@ test('renders as expected with a left icon without a value', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a left icon without a value', () => {
@@ -4791,12 +4873,14 @@ test('renders as expected with a left icon without a value', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -4874,6 +4958,7 @@ test('renders as expected with a left icon without a value', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with left and right icons without a value', () => {
@@ -4968,12 +5053,14 @@ test('renders as expected with left and right icons without a value', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -5058,6 +5145,7 @@ test('renders as expected with left and right icons without a value', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a left icon when focused and valid', async () => {
@@ -5152,12 +5240,14 @@ test('renders as expected with a left icon when focused and valid', async () => 
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -5246,6 +5336,7 @@ test('renders as expected with a left icon when focused and valid', async () => 
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('renders as expected with a right icon when focused and valid', async () => {
@@ -5340,12 +5431,14 @@ test('renders as expected with a right icon when focused and valid', async () =>
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -5434,6 +5527,7 @@ test('renders as expected with a right icon when focused and valid', async () =>
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('renders as expected with a right icon when focused and valid', async () => {
@@ -5528,12 +5622,14 @@ test('renders as expected with a right icon when focused and valid', async () =>
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -5629,6 +5725,7 @@ test('renders as expected with a right icon when focused and valid', async () =>
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('renders as expected with a left icon when focused and invalid', async () => {
@@ -5723,12 +5820,14 @@ test('renders as expected with a left icon when focused and invalid', async () =
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -5817,6 +5916,7 @@ test('renders as expected with a left icon when focused and invalid', async () =
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('renders as expected with a right icon when focused and invalid', async () => {
@@ -5911,12 +6011,14 @@ test('renders as expected with a right icon when focused and invalid', async () 
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -6005,6 +6107,7 @@ test('renders as expected with a right icon when focused and invalid', async () 
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('renders as expected with left and right icons when focused and invalid', async () => {
@@ -6099,12 +6202,14 @@ test('renders as expected with left and right icons when focused and invalid', a
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -6200,6 +6305,7 @@ test('renders as expected with left and right icons when focused and invalid', a
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).toHaveBeenCalledTimes(1)
 })
 
 test('renders without horizontal padding', () => {
@@ -6294,12 +6400,14 @@ test('renders without horizontal padding', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -6367,6 +6475,7 @@ test('renders without horizontal padding', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders with a left icon without horizontal padding', () => {
@@ -6461,12 +6570,14 @@ test('renders with a left icon without horizontal padding', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -6541,6 +6652,7 @@ test('renders with a left icon without horizontal padding', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders with a right icon without horizontal padding', () => {
@@ -6635,12 +6747,14 @@ test('renders with a right icon without horizontal padding', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -6715,6 +6829,7 @@ test('renders with a right icon without horizontal padding', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders with left and right icons without horizontal padding', () => {
@@ -6809,12 +6924,14 @@ test('renders with left and right icons without horizontal padding', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -6896,6 +7013,7 @@ test('renders with left and right icons without horizontal padding', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected without vertical padding', () => {
@@ -6990,12 +7108,14 @@ test('renders as expected without vertical padding', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -7063,6 +7183,7 @@ test('renders as expected without vertical padding', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected without borders', () => {
@@ -7145,12 +7266,14 @@ test('renders as expected without borders', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -7217,6 +7340,7 @@ test('renders as expected without borders', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when a state does not alter border thickness', () => {
@@ -7311,12 +7435,14 @@ test('renders as expected when a state does not alter border thickness', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -7385,6 +7511,7 @@ test('renders as expected when a state does not alter border thickness', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected without a radius', () => {
@@ -7479,12 +7606,14 @@ test('renders as expected without a radius', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -7552,6 +7681,7 @@ test('renders as expected without a radius', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders when disabled with a left icon', () => {
@@ -7646,12 +7776,14 @@ test('renders when disabled with a left icon', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -7729,6 +7861,7 @@ test('renders when disabled with a left icon', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders when disabled with a right icon', () => {
@@ -7823,12 +7956,14 @@ test('renders when disabled with a right icon', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -7906,6 +8041,7 @@ test('renders when disabled with a right icon', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders when disabled with left and right icons', () => {
@@ -8000,12 +8136,14 @@ test('renders when disabled with left and right icons', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -8090,6 +8228,7 @@ test('renders when disabled with left and right icons', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when disabled with a left icon without a value', () => {
@@ -8184,12 +8323,14 @@ test('renders as expected when disabled with a left icon without a value', () =>
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -8267,6 +8408,7 @@ test('renders as expected when disabled with a left icon without a value', () =>
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when disabled with a right icon without a value', () => {
@@ -8361,12 +8503,14 @@ test('renders as expected when disabled with a right icon without a value', () =
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -8444,6 +8588,7 @@ test('renders as expected when disabled with a right icon without a value', () =
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when disabled with left and right icons without a value', () => {
@@ -8538,12 +8683,14 @@ test('renders as expected when disabled with left and right icons without a valu
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled
       autoFocus={false}
@@ -8628,6 +8775,7 @@ test('renders as expected when disabled with left and right icons without a valu
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('allows introspection when used in a higher-order component', () => {
@@ -8722,11 +8870,14 @@ test('allows introspection when used in a higher-order component', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
+
   const ParentComponent: React.FunctionComponent = () => (
     <InputComponent
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={true}
@@ -8851,12 +9002,14 @@ test('does nothing when auto-focus is enabled', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={true}
@@ -8925,6 +9078,7 @@ test('does nothing when auto-focus is enabled', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('focuses the text input on layout when the ref is ready', () => {
@@ -9019,12 +9173,14 @@ test('focuses the text input on layout when the ref is ready', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
       <Component
         value={6}
         onChange={onChange}
         onSubmit={onSubmit}
+        onFocus={onFocus}
         secureTextEntry={false}
         disabled={false}
         autoFocus={true}
@@ -9051,6 +9207,7 @@ test('focuses the text input on layout when the ref is ready', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('does not focus the text input a second time', () => {
@@ -9145,12 +9302,14 @@ test('does not focus the text input a second time', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={true}
@@ -9169,6 +9328,7 @@ test('does not focus the text input a second time', () => {
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={true}
@@ -9195,6 +9355,7 @@ test('does not focus the text input a second time', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a value when focus is to be retained', () => {
@@ -9289,12 +9450,14 @@ test('renders as expected with a value when focus is to be retained', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -9363,6 +9526,7 @@ test('renders as expected with a value when focus is to be retained', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected without a value when focus is to be retained', () => {
@@ -9457,12 +9621,14 @@ test('renders as expected without a value when focus is to be retained', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={undefined}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -9532,6 +9698,7 @@ test('renders as expected without a value when focus is to be retained', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when middle-aligned', () => {
@@ -9626,12 +9793,14 @@ test('renders as expected when middle-aligned', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -9701,6 +9870,7 @@ test('renders as expected when middle-aligned', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected when right-aligned', () => {
@@ -9795,12 +9965,14 @@ test('renders as expected when right-aligned', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={false}
@@ -9870,6 +10042,7 @@ test('renders as expected when right-aligned', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('handles a change from auto focus to non-auto focus to auto focus', () => {
@@ -9964,12 +10137,14 @@ test('handles a change from auto focus to non-auto focus to auto focus', () => {
   )
   const onChange = jest.fn()
   const onSubmit = jest.fn()
+  const onFocus = jest.fn()
 
   const renderer = TestRenderer.create(
     <Component
       value={6}
       onChange={onChange}
       onSubmit={onSubmit}
+      onFocus={onFocus}
       secureTextEntry={false}
       disabled={false}
       autoFocus={true}
@@ -9988,6 +10163,7 @@ test('handles a change from auto focus to non-auto focus to auto focus', () => {
     value={6}
     onChange={onChange}
     onSubmit={onSubmit}
+    onFocus={onFocus}
     secureTextEntry={false}
     disabled={false}
     autoFocus={false}
@@ -10006,6 +10182,7 @@ test('handles a change from auto focus to non-auto focus to auto focus', () => {
     value={6}
     onChange={onChange}
     onSubmit={onSubmit}
+    onFocus={onFocus}
     secureTextEntry={false}
     disabled={false}
     autoFocus={true}
@@ -10032,4 +10209,5 @@ test('handles a change from auto focus to non-auto focus to auto focus', () => {
 
   expect(onChange).not.toHaveBeenCalled()
   expect(onSubmit).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })

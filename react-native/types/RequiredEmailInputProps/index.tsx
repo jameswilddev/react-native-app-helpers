@@ -16,6 +16,11 @@ export interface RequiredEmailInputProps {
   onChange: (parsed: undefined | string, complete: boolean) => void
 
   /**
+   * Invoked when the user focuses the box.
+   */
+  onFocus: () => void
+
+  /**
  * When true, the text box is rendered semi-transparently and does not accept
  * focus or input.
  */

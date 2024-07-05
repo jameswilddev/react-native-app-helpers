@@ -116,6 +116,7 @@ const ExampleScreen = () => {
         onSubmit={(value) => {
           setSubmittedValue(value);
         }}
+        onFocus={() => {}}
         secureTextEntry={false}
         disabled={false}
         autoFocus={false}

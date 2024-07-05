@@ -104,6 +104,7 @@ const ExampleScreen = () => {
             setIncompleteValue(value);
           }
         }}
+        onFocus={() => {}}
         disabled={false}
         placeholder="Shown when no text has been entered"
         match="Must match this to be valid."

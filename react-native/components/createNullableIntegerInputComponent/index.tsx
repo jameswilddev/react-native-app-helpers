@@ -69,12 +69,13 @@ export const createNullableIntegerInputComponent = (
     alignment
   )
 
-  const NullableIntegerInput: React.FunctionComponent<NullableIntegerInputProps> = ({ value, onChange, disabled, placeholder, autoFocus }) => (
+  const NullableIntegerInput: React.FunctionComponent<NullableIntegerInputProps> = ({ value, onChange, onFocus, disabled, placeholder, autoFocus }) => (
     <NullableIntegerInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       value={value}
       onChange={onChange}
+      onFocus={onFocus}
       disabled={disabled}
       placeholder={placeholder}
       context={null}

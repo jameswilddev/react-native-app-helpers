@@ -64,12 +64,13 @@ export const createRequiredIntegerInputComponent = (
     alignment
   )
 
-  const RequiredIntegerInput: React.FunctionComponent<RequiredIntegerInputProps> = ({ value, onChange, disabled, placeholder, autoFocus }) => (
+  const RequiredIntegerInput: React.FunctionComponent<RequiredIntegerInputProps> = ({ value, onChange, onFocus, disabled, placeholder, autoFocus }) => (
     <RequiredIntegerInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       value={value}
       onChange={onChange}
+      onFocus={onFocus}
       disabled={disabled}
       placeholder={placeholder}
       context={null}

@@ -60,12 +60,13 @@ export const createRequiredTextInputComponent = (
     'left'
   )
 
-  const RequiredTextInput: React.FunctionComponent<RequiredTextInputProps> = ({ value, onChange, disabled, placeholder, unique, autoFocus }) => (
+  const RequiredTextInput: React.FunctionComponent<RequiredTextInputProps> = ({ value, onChange, onFocus, disabled, placeholder, unique, autoFocus }) => (
     <RequiredTextInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       value={value}
       onChange={onChange}
+      onFocus={onFocus}
       disabled={disabled}
       placeholder={placeholder}
       context={unique ?? []}

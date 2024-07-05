@@ -16,6 +16,11 @@ export interface RequiredFloatInputProps {
   onChange: (parsed: undefined | number, complete: boolean) => void
 
   /**
+   * Invoked when the user focuses the box.
+   */
+  onFocus: () => void
+
+  /**
  * When true, the text box is rendered semi-transparently and does not accept
  * focus or input.
  */

@@ -80,6 +80,7 @@ test('renders as expected without bounds', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createNullableTextInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -92,6 +93,7 @@ test('renders as expected without bounds', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -116,6 +118,7 @@ test('renders as expected without bounds', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -194,6 +197,7 @@ test('renders as expected without bounds', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a minimum length', () => {
@@ -270,6 +274,7 @@ test('renders as expected with a minimum length', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createNullableTextInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -282,6 +287,7 @@ test('renders as expected with a minimum length', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -306,6 +312,7 @@ test('renders as expected with a minimum length', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -418,6 +425,7 @@ test('renders as expected with a minimum length', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a maximum length', () => {
@@ -494,6 +502,7 @@ test('renders as expected with a maximum length', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createNullableTextInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -506,6 +515,7 @@ test('renders as expected with a maximum length', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -530,6 +540,7 @@ test('renders as expected with a maximum length', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -642,6 +653,7 @@ test('renders as expected with a maximum length', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('passes down an empty array when unique is undefined', () => {
@@ -718,6 +730,7 @@ test('passes down an empty array when unique is undefined', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createNullableTextInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -730,6 +743,7 @@ test('passes down an empty array when unique is undefined', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={undefined}
@@ -742,6 +756,7 @@ test('passes down an empty array when unique is undefined', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: [],
@@ -751,6 +766,7 @@ test('passes down an empty array when unique is undefined', () => {
   })
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('passes down an empty array when unique is not given', () => {
@@ -827,6 +843,7 @@ test('passes down an empty array when unique is not given', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createNullableTextInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -839,6 +856,7 @@ test('passes down an empty array when unique is not given', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       autoFocus={false}
@@ -850,6 +868,7 @@ test('passes down an empty array when unique is not given', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: [],
@@ -859,6 +878,7 @@ test('passes down an empty array when unique is not given', () => {
   })
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with auto focus', () => {
@@ -935,6 +955,7 @@ test('renders as expected with auto focus', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createNullableTextInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -947,6 +968,7 @@ test('renders as expected with auto focus', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -971,6 +993,7 @@ test('renders as expected with auto focus', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -1049,4 +1072,5 @@ test('renders as expected with auto focus', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })

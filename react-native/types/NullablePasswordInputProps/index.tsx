@@ -16,6 +16,11 @@ export interface NullablePasswordInputProps {
   onChange: (parsed: undefined | null | string, complete: boolean) => void
 
   /**
+   * Invoked when the user focuses the box.
+   */
+  onFocus: () => void
+
+  /**
  * When true, the password box is rendered semi-transparently and does not
  * accept focus or input.
  */

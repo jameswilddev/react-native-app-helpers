@@ -11,7 +11,8 @@ import { createSearchableSelectChildrenComponent } from '.'
 import {
   type ControlStyle,
   Hitbox,
-  unwrapRenderedFunctionComponent
+  unwrapRenderedFunctionComponent,
+  nop
 } from '../../../..'
 
 type TestValue = 10 | 20 | 30 | 40
@@ -166,6 +167,7 @@ test('renders as expected with an absent selected value', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Placeholder',
@@ -478,6 +480,7 @@ test('renders as expected with a present selected value', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Option B Label',
@@ -819,6 +822,7 @@ test('renders as expected when matches are found for user input', async () => {
             rightIcon: null,
             value: '  \n  \t \r  ReD    \n \n \r \t  APPle \t \n \r',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Option B Label',
@@ -990,6 +994,7 @@ test('renders as expected when matches are not found for user input', async () =
             rightIcon: null,
             value: '  \n  \t \r  GReeN    \n \n \r \t  APPle \t \n \r',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Option B Label',
@@ -1665,6 +1670,7 @@ test('renders as expected when horizontal padding is not present', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Option B Label',
@@ -2001,6 +2007,7 @@ test('renders as expected when vertical padding is not present', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Option B Label',

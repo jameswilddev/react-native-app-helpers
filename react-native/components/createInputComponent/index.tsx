@@ -33,6 +33,11 @@ type Instance<TValue, TContext> = React.FunctionComponent<{
   onChange: (parsed: undefined | TValue, complete: boolean) => void
 
   /**
+   * Invoked when the user focuses the box.
+   */
+  onFocus: () => void
+
+  /**
    * When true, the text value is starred out rather than being rendered (for
    * password fields).
    */
@@ -393,6 +398,7 @@ export function createInputComponent<TValue, TContext> (
     rightIcon,
     value,
     onChange,
+    onFocus,
     secureTextEntry,
     disabled,
     autoFocus,
@@ -555,6 +561,7 @@ export function createInputComponent<TValue, TContext> (
           onFocus={() => {
             focused.current = true
             refresh()
+            onFocus()
           }}
           onBlur={() => {
             focused.current = false

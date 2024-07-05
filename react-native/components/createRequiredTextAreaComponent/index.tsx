@@ -58,12 +58,13 @@ export const createRequiredTextAreaComponent = (
     'left'
   )
 
-  const RequiredTextArea: React.FunctionComponent<RequiredTextAreaProps> = ({ value, onChange, disabled, placeholder, autoFocus }) => (
+  const RequiredTextArea: React.FunctionComponent<RequiredTextAreaProps> = ({ value, onChange, onFocus, disabled, placeholder, autoFocus }) => (
     <RequiredTextInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       value={value}
       onChange={onChange}
+      onFocus={onFocus}
       disabled={disabled}
       placeholder={placeholder}
       context={null}

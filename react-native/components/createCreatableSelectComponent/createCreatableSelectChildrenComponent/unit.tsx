@@ -11,7 +11,8 @@ import { createCreatableSelectChildrenComponent } from '.'
 import {
   type ControlStyle,
   Hitbox,
-  unwrapRenderedFunctionComponent
+  unwrapRenderedFunctionComponent,
+  nop
 } from '../../../..'
 
 type TestValue = 10 | 20 | 30 | 40
@@ -170,6 +171,7 @@ test('renders as expected with an absent selected value', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             autoFocus: true,
@@ -487,6 +489,7 @@ test('renders as expected with a present selected value', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             autoFocus: true,
@@ -829,6 +832,7 @@ test('renders as expected when exact matches are found for user input', async ()
             rightIcon: null,
             value: ' EXamPLE   \n OPTION \n  \t \r  ReD    \n \n \r \t  APPle \t \n \r  C label \n\n \r \t ',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             autoFocus: true,
@@ -1027,6 +1031,7 @@ test('renders as expected when partial matches are found for user input', async 
             rightIcon: null,
             value: '  \n  \t \r  ReD    \n \n \r \t  APPle \t \n \r',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             autoFocus: true,
@@ -1216,6 +1221,7 @@ test('renders as expected when matches are not found for user input', async () =
             rightIcon: null,
             value: '  \n  \t \r  GReeN    \n \n \r \t  APPle \t \n \r',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             autoFocus: true,
@@ -2056,6 +2062,7 @@ test('renders as expected when horizontal padding is not present', async () => {
             rightIcon: null,
             value: '  \n  \t \r  ReD    \n \n \r \t  APPle \t \n \r',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             autoFocus: true,
@@ -2251,6 +2258,7 @@ test('renders as expected when vertical padding is not present', async () => {
             rightIcon: null,
             value: '  \n  \t \r  ReD    \n \n \r \t  APPle \t \n \r',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             autoFocus: true,

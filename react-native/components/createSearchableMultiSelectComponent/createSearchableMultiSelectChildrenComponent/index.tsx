@@ -10,6 +10,7 @@ import {
 import type { ControlStyle } from '../../../types/ControlStyle'
 import { createInputComponent } from '../../createInputComponent'
 import { Hitbox } from '../../Hitbox'
+import { nop } from '../../../utilities/nop'
 
 type Instance<T extends null | boolean | number | string> = React.FunctionComponent<{
   readonly options: ReadonlyArray<{
@@ -200,6 +201,7 @@ export const createSearchableMultiSelectChildrenComponent = <
               setFilter(parsed)
             }
           }}
+          onFocus={nop}
           secureTextEntry={false}
           disabled={false}
           autoFocus={true}

@@ -9,6 +9,7 @@ import {
 import * as TestRenderer from 'react-test-renderer'
 import { createSearchableMultiSelectChildrenComponent } from '.'
 import { Hitbox } from '../../Hitbox'
+import { nop } from '../../../utilities/nop'
 
 type TestValue = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 | 110 | 120
 
@@ -194,6 +195,7 @@ test('renders as expected without a filter', async () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Placeholder',
@@ -572,6 +574,7 @@ test('filters the list down to only those matching the user\'s input', async () 
             rightIcon: null,
             value: '  \n  \t \r  ReD    \n \n \r \t  APPle \t \n \r',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Placeholder',
@@ -1581,6 +1584,7 @@ test('renders as expected without horizontal padding', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Placeholder',
@@ -1965,6 +1969,7 @@ test('renders as expected without vertical padding', () => {
             rightIcon: null,
             value: '',
             onChange: expect.any(Function),
+            onFocus: nop,
             secureTextEntry: false,
             disabled: false,
             placeholder: 'Example Placeholder',

@@ -80,6 +80,7 @@ test('renders as expected without bounds', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredFloatInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -96,6 +97,7 @@ test('renders as expected without bounds', () => {
     <Component
       value={124}
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       autoFocus={false}
       placeholder="Example Placeholder"
@@ -120,6 +122,7 @@ test('renders as expected without bounds', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 124,
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: null,
@@ -217,6 +220,7 @@ test('renders as expected without bounds', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with an inclusive lower bound', () => {
@@ -293,6 +297,7 @@ test('renders as expected with an inclusive lower bound', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredFloatInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -309,6 +314,7 @@ test('renders as expected with an inclusive lower bound', () => {
     <Component
       value={124}
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       autoFocus={false}
       placeholder="Example Placeholder"
@@ -333,6 +339,7 @@ test('renders as expected with an inclusive lower bound', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 124,
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: null,
@@ -432,6 +439,7 @@ test('renders as expected with an inclusive lower bound', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with an exclusive lower bound', () => {
@@ -508,6 +516,7 @@ test('renders as expected with an exclusive lower bound', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredFloatInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -524,6 +533,7 @@ test('renders as expected with an exclusive lower bound', () => {
     <Component
       value={124}
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       autoFocus={false}
       placeholder="Example Placeholder"
@@ -548,6 +558,7 @@ test('renders as expected with an exclusive lower bound', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 124,
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: null,
@@ -647,6 +658,7 @@ test('renders as expected with an exclusive lower bound', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with an inclusive upper bound', () => {
@@ -723,6 +735,7 @@ test('renders as expected with an inclusive upper bound', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredFloatInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -739,6 +752,7 @@ test('renders as expected with an inclusive upper bound', () => {
     <Component
       value={124}
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       autoFocus={false}
       placeholder="Example Placeholder"
@@ -763,6 +777,7 @@ test('renders as expected with an inclusive upper bound', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 124,
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: null,
@@ -862,6 +877,7 @@ test('renders as expected with an inclusive upper bound', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with an exclusive upper bound', () => {
@@ -938,6 +954,7 @@ test('renders as expected with an exclusive upper bound', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredFloatInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -954,6 +971,7 @@ test('renders as expected with an exclusive upper bound', () => {
     <Component
       value={124}
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       autoFocus={false}
       placeholder="Example Placeholder"
@@ -978,6 +996,7 @@ test('renders as expected with an exclusive upper bound', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 124,
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: null,
@@ -1077,6 +1096,7 @@ test('renders as expected with an exclusive upper bound', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with fixed decimal places', () => {
@@ -1153,6 +1173,7 @@ test('renders as expected with fixed decimal places', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredFloatInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -1169,6 +1190,7 @@ test('renders as expected with fixed decimal places', () => {
     <Component
       value={124}
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       autoFocus={false}
       placeholder="Example Placeholder"
@@ -1193,6 +1215,7 @@ test('renders as expected with fixed decimal places', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 124,
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: null,
@@ -1296,6 +1319,7 @@ test('renders as expected with fixed decimal places', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with auto focus', () => {
@@ -1372,6 +1396,7 @@ test('renders as expected with auto focus', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredFloatInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -1388,6 +1413,7 @@ test('renders as expected with auto focus', () => {
     <Component
       value={124}
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       autoFocus={true}
       placeholder="Example Placeholder"
@@ -1412,6 +1438,7 @@ test('renders as expected with auto focus', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 124,
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: null,
@@ -1509,4 +1536,5 @@ test('renders as expected with auto focus', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })

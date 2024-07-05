@@ -80,6 +80,7 @@ test('renders as expected without bounds', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredEmailInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -92,6 +93,7 @@ test('renders as expected without bounds', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -116,6 +118,7 @@ test('renders as expected without bounds', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -200,6 +203,7 @@ test('renders as expected without bounds', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a minimum length', () => {
@@ -276,6 +280,7 @@ test('renders as expected with a minimum length', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredEmailInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -288,6 +293,7 @@ test('renders as expected with a minimum length', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -312,6 +318,7 @@ test('renders as expected with a minimum length', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -430,6 +437,7 @@ test('renders as expected with a minimum length', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with a maximum length', () => {
@@ -506,6 +514,7 @@ test('renders as expected with a maximum length', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredEmailInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -518,6 +527,7 @@ test('renders as expected with a maximum length', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -542,6 +552,7 @@ test('renders as expected with a maximum length', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -660,6 +671,7 @@ test('renders as expected with a maximum length', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })
 
 test('renders as expected with auto focus', () => {
@@ -736,6 +748,7 @@ test('renders as expected with auto focus', () => {
     }
   }
   const onChange = jest.fn()
+  const onFocus = jest.fn()
   const Component = createRequiredEmailInputComponent(
     controlStyle,
     <Text>Example Left Icon</Text>,
@@ -748,6 +761,7 @@ test('renders as expected with auto focus', () => {
     <Component
       value="Example String"
       onChange={onChange}
+      onFocus={onFocus}
       disabled
       placeholder="Example Placeholder"
       unique={['Example Unique A', 'Example Unique B', 'Example Unique C']}
@@ -772,6 +786,7 @@ test('renders as expected with auto focus', () => {
     rightIcon: <Text>Example Right Icon</Text>,
     value: 'Example String',
     onChange,
+    onFocus,
     disabled: true,
     placeholder: 'Example Placeholder',
     context: ['Example Unique A', 'Example Unique B', 'Example Unique C'],
@@ -856,4 +871,5 @@ test('renders as expected with auto focus', () => {
   rendered.props.onSubmit()
 
   expect(onChange).not.toHaveBeenCalled()
+  expect(onFocus).not.toHaveBeenCalled()
 })

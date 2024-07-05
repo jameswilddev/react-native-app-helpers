@@ -85,12 +85,13 @@ export const createRequiredFloatInputComponent = (
     alignment
   )
 
-  const RequiredFloatInput: React.FunctionComponent<RequiredFloatInputProps> = ({ value, onChange, disabled, placeholder, autoFocus }) => (
+  const RequiredFloatInput: React.FunctionComponent<RequiredFloatInputProps> = ({ value, onChange, onFocus, disabled, placeholder, autoFocus }) => (
     <RequiredFloatInputComponent
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       value={value}
       onChange={onChange}
+      onFocus={onFocus}
       disabled={disabled}
       placeholder={placeholder}
       context={null}
