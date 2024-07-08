@@ -188,7 +188,11 @@ jest.mock('expo-secure-store', () => {
     async getItemAsync (key: string, options?: unknown): Promise<null | string> {
       if (options === undefined) {
         await new Promise<void>((resolve) => setTimeout(resolve, 50))
-        return encryptedStorage.get(key) ?? null
+        if (key === 'Test Error-Throwing Key') {
+          throw new Error('Test Error')
+        } else {
+          return encryptedStorage.get(key) ?? null
+        }
       } else {
         throw new Error(
           'expo-secure-store.getItemAsync\'s mock does not support options.'

@@ -1,6 +1,7 @@
 import * as SecureStore from 'expo-secure-store'
 import { EventEmitter } from 'events'
 import type { Json } from '../../types/Json'
+import type { ErrorReporterInterface } from '../../types/ErrorReporterInterface'
 
 /**
  * A wrapper around expo-secure-store which adds:
@@ -23,10 +24,12 @@ export class SessionStore<T extends Json> {
    *                         store.
    * @param secureStorageKey The key of the record to read from/write to
    *                         expo-secure-store.
+   * @param errorReporter    The error reporter to use.
    */
   constructor (
     private readonly initial: T,
-    private readonly secureStorageKey: string
+    private readonly secureStorageKey: string,
+    private readonly errorReporter: ErrorReporterInterface
   ) {}
 
   /**
@@ -64,7 +67,13 @@ export class SessionStore<T extends Json> {
     } else {
       this.unloaded = false
 
-      const raw = await SecureStore.getItemAsync(this.secureStorageKey)
+      let raw: null | string = null
+
+      try {
+        raw = await SecureStore.getItemAsync(this.secureStorageKey)
+      } catch (e) {
+        this.errorReporter.report(e)
+      }
 
       if (raw === null) {
         this.value = this.initial

@@ -7,14 +7,24 @@ A wrapper around `expo-secure-store` which adds:
 - Change events.
 - A synchronous read/write API (with asynchronous write-back).
 
+## Android decryption failure handling
+
+Expo on Android unfortunately has a tendency to lose the ability to decrypt the
+secure store.  It's not known why this is, but when it happens, the only
+workaround is to catch the exception thrown by `expo-secure-store` and continue
+as though the store is empty.
+
+For this reason, any exceptions thrown by `expo-secure-store` during the load
+phase are ignored.
+
 ## Usage
 
 ```tsx
-import type { SessionStore } from "react-native-app-helpers";
+import type { SessionStore, errorReporter } from "react-native-app-helpers";
 
 type Session = `Session A` | `Session B`;
 
-const store = new SessionStore<Session>(`Session A`, `SecureStorage Key`);
+const store = new SessionStore<Session>(`Session A`, `SecureStorage Key`, errorReporter);
 
 
 await store.load();
