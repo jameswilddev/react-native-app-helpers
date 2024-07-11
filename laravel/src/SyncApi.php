@@ -47,12 +47,12 @@ class SyncApi implements SyncApiInterface
 
   public function withConstant(
     string $name,
-    array $value,
+    callable $valueFactory,
   ): SyncApiConstant {
     $syncApiConstant = new SyncApiConstant(
       $this,
       $name,
-      $value,
+      $valueFactory,
     );
 
     $this->constants[] = $syncApiConstant;

@@ -53,13 +53,13 @@ class SyncApiMe implements SyncApiMeInterface
 
   function withConstant(
     string $name,
-    array $value,
+    callable $valueFactory,
   ): SyncApiConstant {
     return $this
       ->syncApi
       ->withConstant(
         $name,
-        $value,
+        $valueFactory,
       );
   }
 

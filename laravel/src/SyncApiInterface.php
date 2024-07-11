@@ -34,11 +34,11 @@ interface SyncApiInterface
   /**
    * Adds a new constant to this sync API.
    * @param string $name The name of the value to add.
-   * @param array $value The JSON-serializable value to add.
+   * @param array $valueFactory A factory for the JSON-serializable value to add.
    */
   function withConstant(
     string $name,
-    array $value,
+    callable $valueFactory,
   ): SyncApiConstant;
 
   /**

@@ -97,13 +97,13 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
   function withConstant(
     string $name,
-    array $value,
+    callable $valueFactory,
   ): SyncApiConstant {
     return $this
       ->syncApiCollection
       ->withConstant(
         $name,
-        $value,
+        $valueFactory,
       );
   }
 

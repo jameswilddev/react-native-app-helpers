@@ -14,16 +14,16 @@ class SyncApiConstant implements SyncApiConstantInterface
   private SyncApi $syncApi;
 
   private string $name;
-  public array $value;
+  public $valueFactory;
 
   public function __construct(
     SyncApi $syncApi,
     string $name,
-    array $value,
+    callable $valueFactory,
   ) {
     $this->syncApi = $syncApi;
     $this->name = $name;
-    $this->value = $value;
+    $this->valueFactory = $valueFactory;
   }
 
   function withMe(
@@ -52,13 +52,13 @@ class SyncApiConstant implements SyncApiConstantInterface
 
   function withConstant(
     string $name,
-    array $value,
+    callable $valueFactory,
   ): SyncApiConstant {
     return $this
       ->syncApi
       ->withConstant(
         $name,
-        $value,
+        $valueFactory,
       );
   }
 
@@ -102,7 +102,7 @@ class SyncApiConstant implements SyncApiConstantInterface
     Route::get(
       $this->generateKebabCasedName(),
       function () {
-        $data = $this->value;
+        $data = ($this->valueFactory)();
 
         return [
           'version' => $this->hashData($data),
