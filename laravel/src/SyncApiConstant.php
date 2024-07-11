@@ -98,23 +98,28 @@ class SyncApiConstant implements SyncApiConstantInterface
     return hash('sha1', json_encode($data));
   }
 
-  public function generateConstantRoutes(): void
+  public function getCachedValue()
   {
-    $kebabCasedName = $this->generateKebabCasedName();
-
-    Route::get(
-      $kebabCasedName,
-      function () use ($kebabCasedName) {
-        $data = Cache::remember(
-          'sync_api_constant_' . $kebabCasedName,
-          3600,
-          $this->valueFactory
-        );
+    return Cache::remember(
+      'sync-api-constant-' . $this->generateKebabCasedName(),
+      3600,
+      function () {
+        $data = ($this->valueFactory)();
 
         return [
-          'version' => $this->hashData($data),
           'data' => $data,
+          'version' => hash('sha1', json_encode($data)),
         ];
+      }
+    );
+  }
+
+  public function generateConstantRoutes(): void
+  {
+    Route::get(
+      $this->generateKebabCasedName(),
+      function () {
+        return $this->getCachedValue();
       },
     );
   }

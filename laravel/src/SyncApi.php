@@ -3,6 +3,7 @@
 namespace JamesWildDev\ReactNativeAppHelpers;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Arr;
 
 /**
  * Represents a sync API as a whole.  Use this to configure your API once, then
@@ -107,11 +108,7 @@ class SyncApi implements SyncApiInterface
       foreach ($this->constants as $constant) {
         $key = $constant->generateCamelCasedName();
 
-        $data = $constant->value;
-        ksort($data);
-        $version = hash('sha1', json_encode($data));
-
-        $singletons[$key] = compact('version');
+        $singletons[$key] = Arr::only($constant->getCachedValue(), 'version');
       }
 
       $collections = [];
