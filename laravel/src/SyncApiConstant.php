@@ -4,6 +4,7 @@ namespace JamesWildDev\ReactNativeAppHelpers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Represents a constant within a sync API.  Create instances using
@@ -99,10 +100,16 @@ class SyncApiConstant implements SyncApiConstantInterface
 
   public function generateConstantRoutes(): void
   {
+    $kebabCasedName = $this->generateKebabCasedName();
+
     Route::get(
-      $this->generateKebabCasedName(),
-      function () {
-        $data = ($this->valueFactory)();
+      $kebabCasedName,
+      function () use ($kebabCasedName) {
+        $data = Cache::remember(
+          'sync_api_constant_' . $kebabCasedName,
+          3600,
+          $this->valueFactory
+        );
 
         return [
           'version' => $this->hashData($data),
