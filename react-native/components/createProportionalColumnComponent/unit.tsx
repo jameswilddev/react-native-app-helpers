@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { Text, View } from 'react-native'
-import { createProportionalRowComponent, unwrapRenderedFunctionComponent } from '../../..'
+import { createProportionalColumnComponent, unwrapRenderedFunctionComponent } from '../../..'
 
-test('renders as expected without spacing when fitting content vertically and aligning to the top', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when fitting content horizontally and aligning to the left', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="top">
+    <Component width="fitsContent" horizontalAlignment="left">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -17,8 +17,8 @@ test('renders as expected without spacing when fitting content vertically and al
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'flex-start'
       }}
       pointerEvents="box-none"
@@ -55,11 +55,11 @@ test('renders as expected without spacing when fitting content vertically and al
   )
 })
 
-test('renders as expected with spacing when fitting content vertically and aligning to the top', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when fitting content horizontally and aligning to the left', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="top">
+    <Component width="fitsContent" horizontalAlignment="left">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -70,8 +70,8 @@ test('renders as expected with spacing when fitting content vertically and align
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'flex-start'
       }}
       pointerEvents="box-none"
@@ -111,11 +111,11 @@ test('renders as expected with spacing when fitting content vertically and align
   )
 })
 
-test('renders as expected without spacing when fitting content vertically and aligning to the center', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when fitting content horizontally and aligning to the center', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="centered">
+    <Component width="fitsContent" horizontalAlignment="centered">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -126,8 +126,8 @@ test('renders as expected without spacing when fitting content vertically and al
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'center'
       }}
       pointerEvents="box-none"
@@ -164,11 +164,11 @@ test('renders as expected without spacing when fitting content vertically and al
   )
 })
 
-test('renders as expected with spacing when fitting content vertically and aligning to the center', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when fitting content horizontally and aligning to the center', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="centered">
+    <Component width="fitsContent" horizontalAlignment="centered">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -179,8 +179,8 @@ test('renders as expected with spacing when fitting content vertically and align
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'center'
       }}
       pointerEvents="box-none"
@@ -220,11 +220,11 @@ test('renders as expected with spacing when fitting content vertically and align
   )
 })
 
-test('renders as expected without spacing when fitting content vertically and aligning to the bottom', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when fitting content horizontally and aligning to the right', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="bottom">
+    <Component width="fitsContent" horizontalAlignment="right">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -235,8 +235,8 @@ test('renders as expected without spacing when fitting content vertically and al
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'flex-end'
       }}
       pointerEvents="box-none"
@@ -273,11 +273,11 @@ test('renders as expected without spacing when fitting content vertically and al
   )
 })
 
-test('renders as expected with spacing when fitting content vertically and aligning to the bottom', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when fitting content horizontally and aligning to the right', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="bottom">
+    <Component width="fitsContent" horizontalAlignment="right">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -288,8 +288,8 @@ test('renders as expected with spacing when fitting content vertically and align
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'flex-end'
       }}
       pointerEvents="box-none"
@@ -329,11 +329,11 @@ test('renders as expected with spacing when fitting content vertically and align
   )
 })
 
-test('renders as expected without spacing when fitting content vertically and stretching to fit', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when fitting content horizontally and stretching to fit', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="stretched">
+    <Component width="fitsContent" horizontalAlignment="stretched">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -344,8 +344,8 @@ test('renders as expected without spacing when fitting content vertically and st
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'stretch'
       }}
       pointerEvents="box-none"
@@ -382,11 +382,11 @@ test('renders as expected without spacing when fitting content vertically and st
   )
 })
 
-test('renders as expected with spacing when fitting content vertically and stretching to fit', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when fitting content horizontally and stretching to fit', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fitsContent" verticalAlignment="stretched">
+    <Component width="fitsContent" horizontalAlignment="stretched">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -397,8 +397,8 @@ test('renders as expected with spacing when fitting content vertically and stret
   expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
     <View
       style={{
-        width: '100%',
-        flexDirection: 'row',
+        height: '100%',
+        flexDirection: 'column',
         alignItems: 'stretch'
       }}
       pointerEvents="box-none"
@@ -438,11 +438,11 @@ test('renders as expected with spacing when fitting content vertically and stret
   )
 })
 
-test('renders as expected without spacing when filling the container vertically and aligning to the top', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when filling the container horizontally and aligning to the left', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="top">
+    <Component width="fillsContainer" horizontalAlignment="left">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -455,7 +455,7 @@ test('renders as expected without spacing when filling the container vertically 
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'flex-start'
       }}
       pointerEvents="box-none"
@@ -492,11 +492,11 @@ test('renders as expected without spacing when filling the container vertically 
   )
 })
 
-test('renders as expected with spacing when filling the container vertically and aligning to the top', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when filling the container horizontally and aligning to the left', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="top">
+    <Component width="fillsContainer" horizontalAlignment="left">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -509,7 +509,7 @@ test('renders as expected with spacing when filling the container vertically and
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'flex-start'
       }}
       pointerEvents="box-none"
@@ -549,11 +549,11 @@ test('renders as expected with spacing when filling the container vertically and
   )
 })
 
-test('renders as expected without spacing when filling the container vertically and aligning to the center', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when filling the container horizontally and aligning to the center', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="centered">
+    <Component width="fillsContainer" horizontalAlignment="centered">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -566,7 +566,7 @@ test('renders as expected without spacing when filling the container vertically 
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center'
       }}
       pointerEvents="box-none"
@@ -603,11 +603,11 @@ test('renders as expected without spacing when filling the container vertically 
   )
 })
 
-test('renders as expected with spacing when filling the container vertically and aligning to the center', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when filling the container horizontally and aligning to the center', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="centered">
+    <Component width="fillsContainer" horizontalAlignment="centered">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -620,7 +620,7 @@ test('renders as expected with spacing when filling the container vertically and
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center'
       }}
       pointerEvents="box-none"
@@ -660,11 +660,11 @@ test('renders as expected with spacing when filling the container vertically and
   )
 })
 
-test('renders as expected without spacing when filling the container vertically and aligning to the bottom', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when filling the container horizontally and aligning to the right', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="bottom">
+    <Component width="fillsContainer" horizontalAlignment="right">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -677,7 +677,7 @@ test('renders as expected without spacing when filling the container vertically 
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'flex-end'
       }}
       pointerEvents="box-none"
@@ -714,11 +714,11 @@ test('renders as expected without spacing when filling the container vertically 
   )
 })
 
-test('renders as expected with spacing when filling the container vertically and aligning to the bottom', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when filling the container horizontally and aligning to the right', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="bottom">
+    <Component width="fillsContainer" horizontalAlignment="right">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -731,7 +731,7 @@ test('renders as expected with spacing when filling the container vertically and
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'flex-end'
       }}
       pointerEvents="box-none"
@@ -771,11 +771,11 @@ test('renders as expected with spacing when filling the container vertically and
   )
 })
 
-test('renders as expected without spacing when filling the container vertically and stretching to fit', () => {
-  const Component = createProportionalRowComponent(0, [27, 18, 33, 44])
+test('renders as expected without spacing when filling the container horizontally and stretching to fit', () => {
+  const Component = createProportionalColumnComponent(0, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="stretched">
+    <Component width="fillsContainer" horizontalAlignment="stretched">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -788,7 +788,7 @@ test('renders as expected without spacing when filling the container vertically 
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'stretch'
       }}
       pointerEvents="box-none"
@@ -825,11 +825,11 @@ test('renders as expected without spacing when filling the container vertically 
   )
 })
 
-test('renders as expected with spacing when filling the container vertically and stretching to fit', () => {
-  const Component = createProportionalRowComponent(23, [27, 18, 33, 44])
+test('renders as expected with spacing when filling the container horizontally and stretching to fit', () => {
+  const Component = createProportionalColumnComponent(23, [27, 18, 33, 44])
 
   const rendered = (
-    <Component height="fillsContainer" verticalAlignment="stretched">
+    <Component width="fillsContainer" horizontalAlignment="stretched">
       <Text>Example Panel A</Text>
       <Text>Example Panel B</Text>
       <Text>Example Panel C</Text>
@@ -842,7 +842,7 @@ test('renders as expected with spacing when filling the container vertically and
       style={{
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'stretch'
       }}
       pointerEvents="box-none"
