@@ -12,10 +12,13 @@ export class PictureHelper implements PictureHelperInterface {
    * @param fileStore        The file store in which pictures are to be stored.
    * @param permissionHelper The permission helper which will be used when
    *                         acquiring pictures.
+   * @param quality          The compression quality to use, where 0 is minimum
+   *                         and 1 is maximum.
    */
   constructor (
     private readonly fileStore: FileStoreInterface,
-    private readonly permissionHelper: PermissionHelper
+    private readonly permissionHelper: PermissionHelper,
+    private readonly quality: number
   ) {}
 
   async takePicture (
@@ -30,7 +33,7 @@ export class PictureHelper implements PictureHelperInterface {
       async () => {
         const result = await ImagePicker.launchCameraAsync({
           allowsEditing: true,
-          quality: 0.7,
+          quality: this.quality,
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           exif: false,
           base64: false,
@@ -70,7 +73,7 @@ export class PictureHelper implements PictureHelperInterface {
       async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
           allowsEditing: true,
-          quality: 0.7,
+          quality: this.quality,
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           exif: false,
           base64: false,
@@ -103,7 +106,7 @@ export class PictureHelper implements PictureHelperInterface {
       async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
           allowsEditing: true,
-          quality: 0.7,
+          quality: this.quality,
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           exif: false,
           base64: false,

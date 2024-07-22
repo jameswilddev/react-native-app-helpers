@@ -7,7 +7,7 @@ Provides helpers for working with pictures.
 ```tsx
 import type { PictureHelper } from "react-native-app-helpers";
 
-const pictureHelper = new PictureHelper(fileStore, permissionHelper);
+const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.7);
 
 // Do NOT save to media library.
 await permissionHelper.takePicture(

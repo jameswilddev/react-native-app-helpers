@@ -27,7 +27,7 @@ test('take picture without saving to media library permission denied', async () 
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     false,
@@ -78,7 +78,7 @@ test('take picture saving to media library permission denied', async () => {
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     true,
@@ -133,7 +133,7 @@ test('take picture without saving to media library cancelled', async () => {
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     false,
@@ -149,7 +149,7 @@ test('take picture without saving to media library cancelled', async () => {
   expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchCameraAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -196,7 +196,7 @@ test('take picture without saving to media library none selected', async () => {
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     false,
@@ -212,7 +212,7 @@ test('take picture without saving to media library none selected', async () => {
   expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchCameraAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -258,7 +258,7 @@ test('take picture saving to media library cancelled', async () => {
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     true,
@@ -274,7 +274,7 @@ test('take picture saving to media library cancelled', async () => {
   expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchCameraAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -321,7 +321,7 @@ test('take picture saving to media library none selected', async () => {
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     true,
@@ -337,7 +337,7 @@ test('take picture saving to media library none selected', async () => {
   expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchCameraAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -384,7 +384,7 @@ test('take picture without saving to media library successful', async () => {
   const onCancel = jest.fn()
   const onSuccess = jest.fn().mockResolvedValue(undefined)
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     false,
@@ -403,7 +403,7 @@ test('take picture without saving to media library successful', async () => {
   expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchCameraAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -460,7 +460,7 @@ test('take picture saving to media library successful', async () => {
   const onCancel = jest.fn()
   const onSuccess = jest.fn().mockResolvedValue(undefined)
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.takePicture(
     true,
@@ -479,7 +479,7 @@ test('take picture saving to media library successful', async () => {
   expect(ImagePicker.launchCameraAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchCameraAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -527,7 +527,7 @@ test('select one picture from media library permission denied', async () => {
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.selectOnePictureFromMediaLibrary(
     onPermissionDenied,
@@ -581,7 +581,7 @@ test('select one picture from media library cancelled', async () => {
   const onCancel = jest.fn()
   const onSuccess = jest.fn().mockResolvedValue(undefined)
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.selectOnePictureFromMediaLibrary(
     onPermissionDenied,
@@ -597,7 +597,7 @@ test('select one picture from media library cancelled', async () => {
   expect(ImagePicker.launchImageLibraryAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchImageLibraryAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -644,7 +644,7 @@ test('select one picture from media library no assets', async () => {
   const onCancel = jest.fn()
   const onSuccess = jest.fn().mockResolvedValue(undefined)
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.selectOnePictureFromMediaLibrary(
     onPermissionDenied,
@@ -660,7 +660,7 @@ test('select one picture from media library no assets', async () => {
   expect(ImagePicker.launchImageLibraryAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchImageLibraryAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -707,7 +707,7 @@ test('select one picture from media library successful', async () => {
   const onCancel = jest.fn()
   const onSuccess = jest.fn().mockResolvedValue(undefined)
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.selectOnePictureFromMediaLibrary(
     onPermissionDenied,
@@ -726,7 +726,7 @@ test('select one picture from media library successful', async () => {
   expect(ImagePicker.launchImageLibraryAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchImageLibraryAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -769,7 +769,7 @@ test('select multiple pictures from media library permission denied', async () =
   const onCancel = jest.fn().mockResolvedValue(undefined)
   const onSuccess = jest.fn()
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.selectMultiplePicturesFromMediaLibrary(
     onPermissionDenied,
@@ -823,7 +823,7 @@ test('select multiple pictures from media library cancelled', async () => {
   const onCancel = jest.fn()
   const onSuccess = jest.fn().mockResolvedValue(undefined)
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.selectMultiplePicturesFromMediaLibrary(
     onPermissionDenied,
@@ -839,7 +839,7 @@ test('select multiple pictures from media library cancelled', async () => {
   expect(ImagePicker.launchImageLibraryAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchImageLibraryAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
@@ -900,7 +900,7 @@ test('select multiple pictures from media library successful', async () => {
   const onCancel = jest.fn()
   const onSuccess = jest.fn().mockResolvedValue(undefined)
 
-  const pictureHelper = new PictureHelper(fileStore, permissionHelper)
+  const pictureHelper = new PictureHelper(fileStore, permissionHelper, 0.35)
 
   await pictureHelper.selectMultiplePicturesFromMediaLibrary(
     onPermissionDenied,
@@ -921,7 +921,7 @@ test('select multiple pictures from media library successful', async () => {
   expect(ImagePicker.launchImageLibraryAsync).toHaveBeenCalledTimes(1)
   expect(ImagePicker.launchImageLibraryAsync).toBeCalledWith({
     allowsEditing: true,
-    quality: 0.7,
+    quality: 0.35,
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     exif: false,
     base64: false,
