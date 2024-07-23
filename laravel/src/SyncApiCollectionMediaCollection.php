@@ -70,7 +70,7 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
   public function withMediaCollection(
     string $name,
     int $syncCapabilities,
-    ?callable $onUpsertOrDelete,
+    ?callable $onUpsertOrDelete = null,
   ): SyncApiCollectionMediaCollection {
     return $this->syncApiCollection->withMediaCollection(
       $name,

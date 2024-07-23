@@ -18,6 +18,6 @@ interface SyncApiCollectionInterface extends SyncApiInterface
   function withMediaCollection(
     string $name,
     int $syncCapabilities,
-    ?callable $onUpsertOrDelete,
+    ?callable $onUpsertOrDelete = null,
   ): SyncApiCollectionMediaCollection;
 }

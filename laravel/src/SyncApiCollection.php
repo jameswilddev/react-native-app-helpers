@@ -54,7 +54,7 @@ class SyncApiCollection implements SyncApiCollectionInterface
   public function withMediaCollection(
     string $name,
     int $syncCapabilities,
-    ?callable $onUpsertOrDelete,
+    ?callable $onUpsertOrDelete = null,
   ): SyncApiCollectionMediaCollection {
     $syncApiCollectionMediaCollection = new SyncApiCollectionMediaCollection(
       $this,
