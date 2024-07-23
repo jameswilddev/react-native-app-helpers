@@ -21,6 +21,8 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
   private string $routeFragment;
 
+  private array $onUpsertOrDelete;
+
   private function getMediaUuidField(): string
   {
     if (config('react-native-sync')) {
@@ -56,20 +58,24 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
     string $name,
     int $syncCapabilities,
     ?string $routeFragment,
+    ?callable $onUpsertOrDelete,
   ) {
     $this->syncApiCollection = $syncApiCollection;
     $this->name = $name;
     $this->syncCapabilities = $syncCapabilities;
     $this->routeFragment = $routeFragment ?? Str::kebab(Str::pluralStudly(class_basename($this->syncApiCollection->modelClass)));
+    $this->onUpsertOrDelete = $onUpsertOrDelete === null ? [] : [$onUpsertOrDelete];
   }
 
   public function withMediaCollection(
     string $name,
     int $syncCapabilities,
+    ?callable $onUpsertOrDelete,
   ): SyncApiCollectionMediaCollection {
     return $this->syncApiCollection->withMediaCollection(
       $name,
       $syncCapabilities,
+      $onUpsertOrDelete,
     );
   }
 
@@ -200,11 +206,15 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
               $extension = '';
             }
 
-            $model
+            $media = $model
               ->addMediaFromString($data)
               ->usingName($mediaUuid . $extension)
               ->withProperties(['uuid' => $mediaUuid])
               ->toMediaCollection($this->name);
+
+            foreach ($this->onUpsertOrDelete as $callback) {
+              $callback($media);
+            }
           }
         } else {
           throw new ModelNotFoundException();
@@ -237,6 +247,10 @@ class SyncApiCollectionMediaCollection implements SyncApiCollectionMediaCollecti
 
             if ($media !== null) {
               $media->delete();
+
+              foreach ($this->onUpsertOrDelete as $callback) {
+                $callback($media);
+              }
             }
           } else {
             throw new ModelNotFoundException();

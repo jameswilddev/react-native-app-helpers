@@ -47,17 +47,21 @@ class SyncApiCollection implements SyncApiCollectionInterface
    * @param string $name                      The name of the media collection.
    * @param int $syncCapabilities             The actions available to API
    *                                          consumers.
+   * @param callable $onUpsertOrDelete        Invoked when media is upserted or
+   *                                          deleted.
    * @return SyncApiCollectionMediaCollection The created media collection.
    */
   public function withMediaCollection(
     string $name,
     int $syncCapabilities,
+    ?callable $onUpsertOrDelete,
   ): SyncApiCollectionMediaCollection {
     $syncApiCollectionMediaCollection = new SyncApiCollectionMediaCollection(
       $this,
       $name,
       $syncCapabilities,
       $this->routeFragment,
+      $onUpsertOrDelete,
     );
 
     $this->syncApiCollectionMediaCollections[] = $syncApiCollectionMediaCollection;
