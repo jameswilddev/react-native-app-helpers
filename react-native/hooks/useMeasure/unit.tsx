@@ -168,3 +168,116 @@ test('executes the callback once when the layout is computed, the ref is given a
 
   renderer.unmount()
 })
+
+for (const discardedUpdateScenario of [
+  {
+    name: 'when x is undefined',
+    x: undefined,
+    y: 40,
+    width: 640,
+    height: 320,
+    pageX: 18,
+    pageY: 72
+  },
+  {
+    name: 'when y is undefined',
+    x: 20,
+    y: undefined,
+    width: 640,
+    height: 320,
+    pageX: 18,
+    pageY: 72
+  },
+  {
+    name: 'when width is undefined',
+    x: 20,
+    y: 40,
+    width: undefined,
+    height: 320,
+    pageX: 18,
+    pageY: 72
+  },
+  {
+    name: 'when height is undefined',
+    x: 20,
+    y: 40,
+    width: 640,
+    height: undefined,
+    pageX: 18,
+    pageY: 72
+  },
+  {
+    name: 'when pageX is undefined',
+    x: 20,
+    y: 40,
+    width: 640,
+    height: 320,
+    pageX: undefined,
+    pageY: 72
+  },
+  {
+    name: 'when pageY is undefined',
+    x: 20,
+    y: 40,
+    width: 640,
+    height: 320,
+    pageX: 18,
+    pageY: undefined
+  }
+]) {
+  describe(discardedUpdateScenario.name, () => {
+    test('executes the callback once when the ref is given, the layout is computed and measurement completes', () => {
+      const onMeasure = jest.fn()
+      let ref: React.RefCallback<View>
+      const measure = jest.fn()
+      let onLayout: (event: LayoutChangeEvent) => void
+      const Component: React.FunctionComponent = () => {
+        const [_ref, _onLayout] = useMeasure(onMeasure)
+        ref = _ref
+        onLayout = _onLayout
+        return <View />
+      }
+      const renderer = TestRenderer.create(<Component />)
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      ref!({ measure } as unknown as View)
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      onLayout!({} as unknown as LayoutChangeEvent)
+
+      measure.mock.calls[0][0](discardedUpdateScenario.x, discardedUpdateScenario.y, discardedUpdateScenario.width, discardedUpdateScenario.height, discardedUpdateScenario.pageX, discardedUpdateScenario.pageY)
+
+      expect(onMeasure).not.toHaveBeenCalled()
+      expect(measure).toHaveBeenCalledTimes(1)
+
+      renderer.unmount()
+    })
+
+    test('executes the callback once when the layout is computed, the ref is given and measurement completes', () => {
+      const onMeasure = jest.fn()
+      let ref: React.RefCallback<View>
+      const measure = jest.fn()
+      let onLayout: (event: LayoutChangeEvent) => void
+      const Component: React.FunctionComponent = () => {
+        const [_ref, _onLayout] = useMeasure(onMeasure)
+        ref = _ref
+        onLayout = _onLayout
+        return <View />
+      }
+      const renderer = TestRenderer.create(<Component />)
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      onLayout!({} as unknown as LayoutChangeEvent)
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      ref!({ measure } as unknown as View)
+
+      measure.mock.calls[0][0](discardedUpdateScenario.x, discardedUpdateScenario.y, discardedUpdateScenario.width, discardedUpdateScenario.height, discardedUpdateScenario.pageX, discardedUpdateScenario.pageY)
+
+      expect(onMeasure).not.toHaveBeenCalled()
+      expect(measure).toHaveBeenCalledTimes(1)
+
+      renderer.unmount()
+    })
+  })
+}

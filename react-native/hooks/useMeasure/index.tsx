@@ -19,6 +19,15 @@ export function useMeasure<T extends NativeMethods> (
   const element = React.useRef<null | T>(null)
   const queuedLayout = React.useRef(false)
 
+  const wrapped = (x: undefined | number, y: undefined | number, width: undefined | number, height: undefined | number, pageX: undefined | number, pageY: undefined | number): void => {
+    // According to types/documentation, these are never undefined.  In
+    // practice, however, they have been observed to be undefined multiple
+    // times.
+    if (x !== undefined && y !== undefined && width !== undefined && height !== undefined && pageX !== undefined && pageY !== undefined) {
+      onMeasure(x, y, width, height, pageX, pageY)
+    }
+  }
+
   return [
     (_element) => {
       element.current = _element
@@ -26,14 +35,14 @@ export function useMeasure<T extends NativeMethods> (
       if (queuedLayout.current) {
         queuedLayout.current = false
 
-        _element?.measure(onMeasure)
+        _element?.measure(wrapped)
       }
     },
     () => {
       if (element.current === null) {
         queuedLayout.current = true
       } else {
-        element.current.measure(onMeasure)
+        element.current.measure(wrapped)
       }
     }
   ]
