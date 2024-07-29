@@ -7,7 +7,8 @@ import type {
 
 /**
  * A React hook which executes a callback when an element's dimensions are first
- * known or change.
+ * known or change.  You MUST set collapsable to false on the associated view
+ * for this to work reliably on Android.
  * @param onMeasure The callback executed when the element's dimensions are
  *                  first known or change.
  * @returns         A "ref" callback and "onLayout" callback to pass to the

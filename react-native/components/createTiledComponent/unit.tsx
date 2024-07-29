@@ -12,6 +12,7 @@ test('renders as expected without any children', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -42,6 +43,7 @@ test('renders as expected without any children', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -67,6 +69,7 @@ test('renders as expected with less than one row', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -97,6 +100,7 @@ test('renders as expected with less than one row', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -159,6 +163,7 @@ test('renders as expected with exactly one row', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -189,6 +194,7 @@ test('renders as expected with exactly one row', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -271,6 +277,7 @@ test('renders as expected with less than two rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -301,6 +308,7 @@ test('renders as expected with less than two rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -421,6 +429,7 @@ test('renders as expected with exactly two rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -451,6 +460,7 @@ test('renders as expected with exactly two rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -592,6 +602,7 @@ test('renders as expected with less than three rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -622,6 +633,7 @@ test('renders as expected with less than three rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -801,6 +813,7 @@ test('renders as expected with exactly three rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -831,6 +844,7 @@ test('renders as expected with exactly three rows', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -1029,6 +1043,7 @@ test('renders as expected without column spacing', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -1059,6 +1074,7 @@ test('renders as expected without column spacing', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -1251,6 +1267,7 @@ test('renders as expected without row spacing', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -1281,6 +1298,7 @@ test('renders as expected without row spacing', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -1473,6 +1491,7 @@ test('renders as expected without an aspect ratio or row spacing', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -1503,6 +1522,7 @@ test('renders as expected without an aspect ratio or row spacing', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',
@@ -1686,6 +1706,7 @@ test('renders as expected without an aspect ratio', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none'
@@ -1716,6 +1737,7 @@ test('renders as expected without an aspect ratio', async () => {
     rendered: expect.objectContaining({
       type: View,
       props: {
+        collapsable: false,
         onLayout: expect.any(Function),
         style: { width: '100%', flexDirection: 'row', flexWrap: 'wrap' },
         pointerEvents: 'box-none',

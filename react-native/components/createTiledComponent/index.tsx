@@ -57,6 +57,7 @@ export const createTiledComponent = (
     if (sizing === null) {
       return (
         <View
+          collapsable={false}
           ref={ref}
           onLayout={onLayout}
           style={globalStyles.outerView}
@@ -103,6 +104,7 @@ export const createTiledComponent = (
 
       return (
         <View
+          collapsable={false}
           ref={ref}
           onLayout={onLayout}
           style={globalStyles.outerView}

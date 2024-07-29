@@ -3,6 +3,9 @@
 A React hook which executes a callback when an element's dimensions are first
 known or change.
 
+You MUST set collapsable to false on the associated view for this to work
+reliably on Android.
+
 ## Usage
 
 ```tsx
@@ -14,7 +17,7 @@ const ExampleScreen = () => {
   });
 
   return (
-    <Button ref={ref} onLayout={onLayout} />
+    <View collapsable={false} ref={ref} onLayout={onLayout} />
   );
 };
 ```
