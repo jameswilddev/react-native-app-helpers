@@ -42,6 +42,7 @@ import { createTextComponent } from "react-native-app-helpers";
 - [createInputComponent](./react-native/components/createInputComponent/readme.md)
 - [createLimitedHeightComponent](./react-native/components/createLimitedHeightComponent/readme.md)
 - [createLimitedWidthComponent](./react-native/components/createLimitedWidthComponent/readme.md)
+- [createMigratorManagerComponent](./react-native/components/createMigratorManagerComponent/readme.md)
 - [createMinimumHeightComponent](./react-native/components/createMinimumHeightComponent/readme.md)
 - [createMinimumWidthComponent](./react-native/components/createMinimumWidthComponent/readme.md)
 - [createNullableEmailInputComponent](./react-native/components/createNullableEmailInputComponent/readme.md)

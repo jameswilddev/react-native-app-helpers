@@ -10,7 +10,8 @@ import { Migrator, MigratableState } from "react-native-app-helpers";
 type State = { readonly items: ReadonlyArray<number> }
 
 const state: MigratableState<State> = {
-  executedMigrationUuids: ['1b69c28f-454e-4511-aa05-596fe5ae23a8']
+  executedMigrationUuids: ['1b69c28f-454e-4511-aa05-596fe5ae23a8'],
+  items: [],
 }
 
 const migrator = new Migrator<State>([

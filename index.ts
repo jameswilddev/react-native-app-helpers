@@ -23,6 +23,7 @@ export { createImageBackgroundComponent } from './react-native/components/create
 export { createInputComponent } from './react-native/components/createInputComponent'
 export { createLimitedHeightComponent } from './react-native/components/createLimitedHeightComponent'
 export { createLimitedWidthComponent } from './react-native/components/createLimitedWidthComponent'
+export { createMigratorManagerComponent } from './react-native/components/createMigratorManagerComponent'
 export { createMinimumHeightComponent } from './react-native/components/createMinimumHeightComponent'
 export { createMinimumWidthComponent } from './react-native/components/createMinimumWidthComponent'
 export { createNullableEmailInputComponent } from './react-native/components/createNullableEmailInputComponent'
