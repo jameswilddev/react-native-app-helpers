@@ -9,7 +9,8 @@ test('renders single-line', () => {
     37,
     '#34AE17',
     'left',
-    false
+    false,
+    null
   )
 
   const rendered = <Component>Test Content</Component>
@@ -22,7 +23,10 @@ test('renders single-line', () => {
         lineHeight: 51.8,
         color: '#34AE17',
         textAlign: 'left',
-        flexShrink: 1
+        flexShrink: 1,
+        textDecorationLine: 'none',
+        textDecorationStyle: undefined,
+        textDecorationColor: undefined
       }}
       numberOfLines={1}
     >
@@ -37,7 +41,8 @@ test('renders multi-line', () => {
     37,
     '#34AE17',
     'left',
-    true
+    true,
+    null
   )
 
   const rendered = <Component>Test Content</Component>
@@ -50,9 +55,204 @@ test('renders multi-line', () => {
         lineHeight: 51.8,
         color: '#34AE17',
         textAlign: 'left',
-        flexShrink: 1
+        flexShrink: 1,
+        textDecorationLine: 'none',
+        textDecorationStyle: undefined,
+        textDecorationColor: undefined
       }}
       numberOfLines={0}
+    >
+      Test Content
+    </Text>
+  )
+})
+
+test('renders underlined', () => {
+  const Component = createTextComponent(
+    'Test Font Family',
+    37,
+    '#34AE17',
+    'left',
+    false,
+    { underline: true, strikethrough: false, style: 'solid', color: 'blue' }
+  )
+
+  const rendered = <Component>Test Content</Component>
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Text
+      style={{
+        fontFamily: 'Test Font Family',
+        fontSize: 37,
+        lineHeight: 51.8,
+        color: '#34AE17',
+        textAlign: 'left',
+        flexShrink: 1,
+        textDecorationLine: 'underline',
+        textDecorationStyle: 'solid',
+        textDecorationColor: 'blue'
+      }}
+      numberOfLines={1}
+    >
+      Test Content
+    </Text>
+  )
+})
+
+test('renders strikethrough', () => {
+  const Component = createTextComponent(
+    'Test Font Family',
+    37,
+    '#34AE17',
+    'left',
+    false,
+    { underline: false, strikethrough: true, style: 'solid', color: 'blue' }
+  )
+
+  const rendered = <Component>Test Content</Component>
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Text
+      style={{
+        fontFamily: 'Test Font Family',
+        fontSize: 37,
+        lineHeight: 51.8,
+        color: '#34AE17',
+        textAlign: 'left',
+        flexShrink: 1,
+        textDecorationLine: 'line-through',
+        textDecorationStyle: 'solid',
+        textDecorationColor: 'blue'
+      }}
+      numberOfLines={1}
+    >
+      Test Content
+    </Text>
+  )
+})
+
+test('renders underlined strikethrough', () => {
+  const Component = createTextComponent(
+    'Test Font Family',
+    37,
+    '#34AE17',
+    'left',
+    false,
+    { underline: true, strikethrough: true, style: 'solid', color: 'blue' }
+  )
+
+  const rendered = <Component>Test Content</Component>
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Text
+      style={{
+        fontFamily: 'Test Font Family',
+        fontSize: 37,
+        lineHeight: 51.8,
+        color: '#34AE17',
+        textAlign: 'left',
+        flexShrink: 1,
+        textDecorationLine: 'underline line-through',
+        textDecorationStyle: 'solid',
+        textDecorationColor: 'blue'
+      }}
+      numberOfLines={1}
+    >
+      Test Content
+    </Text>
+  )
+})
+
+test('renders double', () => {
+  const Component = createTextComponent(
+    'Test Font Family',
+    37,
+    '#34AE17',
+    'left',
+    false,
+    { underline: true, strikethrough: false, style: 'double', color: 'blue' }
+  )
+
+  const rendered = <Component>Test Content</Component>
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Text
+      style={{
+        fontFamily: 'Test Font Family',
+        fontSize: 37,
+        lineHeight: 51.8,
+        color: '#34AE17',
+        textAlign: 'left',
+        flexShrink: 1,
+        textDecorationLine: 'underline',
+        textDecorationStyle: 'double',
+        textDecorationColor: 'blue'
+      }}
+      numberOfLines={1}
+    >
+      Test Content
+    </Text>
+  )
+})
+
+test('renders dotted', () => {
+  const Component = createTextComponent(
+    'Test Font Family',
+    37,
+    '#34AE17',
+    'left',
+    false,
+    { underline: true, strikethrough: false, style: 'dotted', color: 'blue' }
+  )
+
+  const rendered = <Component>Test Content</Component>
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Text
+      style={{
+        fontFamily: 'Test Font Family',
+        fontSize: 37,
+        lineHeight: 51.8,
+        color: '#34AE17',
+        textAlign: 'left',
+        flexShrink: 1,
+        textDecorationLine: 'underline',
+        textDecorationStyle: 'dotted',
+        textDecorationColor: 'blue'
+      }}
+      numberOfLines={1}
+    >
+      Test Content
+    </Text>
+  )
+})
+
+test('renders dashed', () => {
+  const Component = createTextComponent(
+    'Test Font Family',
+    37,
+    '#34AE17',
+    'left',
+    false,
+    { underline: true, strikethrough: false, style: 'dashed', color: 'blue' }
+  )
+
+  const rendered = <Component>Test Content</Component>
+
+  expect(unwrapRenderedFunctionComponent(rendered)).toEqual(
+    <Text
+      style={{
+        fontFamily: 'Test Font Family',
+        fontSize: 37,
+        lineHeight: 51.8,
+        color: '#34AE17',
+        textAlign: 'left',
+        flexShrink: 1,
+        textDecorationLine: 'underline',
+        textDecorationStyle: 'dashed',
+        textDecorationColor: 'blue'
+      }}
+      numberOfLines={1}
     >
       Test Content
     </Text>
@@ -65,7 +265,8 @@ test('renders with onPress undefined', () => {
     37,
     '#34AE17',
     'left',
-    false
+    false,
+    null
   )
 
   const rendered = <Component onPress={undefined}>Test Content</Component>
@@ -78,7 +279,10 @@ test('renders with onPress undefined', () => {
         lineHeight: 51.8,
         color: '#34AE17',
         textAlign: 'left',
-        flexShrink: 1
+        flexShrink: 1,
+        textDecorationLine: 'none',
+        textDecorationStyle: undefined,
+        textDecorationColor: undefined
       }}
       numberOfLines={1}
     >
@@ -93,7 +297,8 @@ test('renders with onPress set', () => {
     37,
     '#34AE17',
     'left',
-    false
+    false,
+    null
   )
   const onPress = jest.fn()
 
@@ -107,7 +312,10 @@ test('renders with onPress set', () => {
         lineHeight: 51.8,
         color: '#34AE17',
         textAlign: 'left',
-        flexShrink: 1
+        flexShrink: 1,
+        textDecorationLine: 'none',
+        textDecorationStyle: undefined,
+        textDecorationColor: undefined
       }}
       numberOfLines={1}
       onPress={expect.any(Function)}
@@ -125,7 +333,8 @@ test('executes the press callback once when hitboxes are enabled', () => {
     37,
     '#34AE17',
     'left',
-    false
+    false,
+    null
   )
   const onPress = jest.fn()
 
@@ -149,7 +358,8 @@ test('does not execute the press callback when hitboxes are disabled', () => {
     37,
     '#34AE17',
     'left',
-    false
+    false,
+    null
   )
   const onPress = jest.fn()
 

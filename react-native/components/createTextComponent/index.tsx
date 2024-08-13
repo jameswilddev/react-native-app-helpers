@@ -12,6 +12,8 @@ import type { TextProps } from '../../types/TextProps'
  * @param multiLine When true, text will wrap across multiple lines when it does
  *                  not fit within the available width.  When false, text will
  *                  be truncated with an ellipsis.
+ * @param decoration When null, the text is not decorated.  Otherwise, a
+ *                   description of the decoration to apply.
  * @returns A new React component which can be used to render text.
  */
 export const createTextComponent = (
@@ -19,7 +21,27 @@ export const createTextComponent = (
   fontSize: number,
   color: ColorValue,
   alignment: 'left' | 'center' | 'right',
-  multiLine: boolean
+  multiLine: boolean,
+  decoration: null | (({
+    readonly underline: true
+    readonly strikethrough: true
+  } | {
+    readonly underline: false
+    readonly strikethrough: true
+  } | {
+    readonly underline: true
+    readonly strikethrough: false
+  }) & {
+    /**
+     * The style of the text decoration to apply.
+     */
+    readonly style: 'solid' | 'double' | 'dotted' | 'dashed'
+
+    /**
+     * The color of hte xt d
+     */
+    readonly color: ColorValue
+  })
 ): React.FunctionComponent<TextProps> => {
   const styles = StyleSheet.create({
     text: {
@@ -28,7 +50,10 @@ export const createTextComponent = (
       lineHeight: fontSize * 1.4,
       color,
       textAlign: alignment,
-      flexShrink: 1
+      flexShrink: 1,
+      textDecorationLine: decoration === null ? 'none' : (decoration.strikethrough ? (decoration.underline ? 'underline line-through' : 'line-through') : 'underline'),
+      textDecorationColor: decoration === null ? undefined : decoration.color,
+      textDecorationStyle: decoration === null ? undefined : decoration.style
     }
   })
 
