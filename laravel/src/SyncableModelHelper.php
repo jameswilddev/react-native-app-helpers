@@ -3,7 +3,7 @@
 namespace JamesWildDev\ReactNativeAppHelpers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 /**
  * Helpers for working with syncable models.
@@ -77,7 +77,7 @@ final class SyncableModelHelper
 
 
       if ($query->where('uuid', $uuid)->exists()) {
-        throw new UnauthorizedException();
+        throw new AuthorizationException();
       } else {
         return null;
       }
