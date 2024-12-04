@@ -3,82 +3,141 @@
 namespace JamesWildDev\ReactNativeAppHelpers;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 /**
  * Represents a sync API as a whole.  Use this to configure your API once, then
  * invoke its methods to generate routes, etc.
  */
-class SyncApi
+class SyncApi implements SyncApiInterface
 {
-  private array $singletons = [];
+  private array $mes = [];
+  private array $enums = [];
+  private array $constants = [];
   private array $collections = [];
 
-  /**
-   * Adds a new singleton to this sync API.
-   * @param string $name              The name of the singleton, e.g. "Units of
-   *                                  Measure".
-   * @param string $jsonResourceClass A Laravel JsonResource class which
-   *                                  generates the value to be provided to the
-   *                                  mobile application.  This must be stable;
-   *                                  that is, its result must be identical
-   *                                  unless the data really has changed,
-   *                                  including ordering of associative arrays.
-   */
-  public function addSingleton(
-    string $name,
-    string $jsonResourceClass,
-  ): self {
-    $this->singletons[] = compact('name', 'jsonResourceClass');
-
-    return $this;
-  }
-
-  /**
-   * Adds a new collection of Models to this sync API.
-   * @param string $modelClass      The Laravel Model class of which the
-   *                                collection is composed.
-   * @param string $controllerClass The Laravel Controller class which includes
-   *                                both "show" (to retrieve a single Model) and
-   *                                "update" to (create or update a single
-   *                                Model), where the Resource returned by
-   *                                "show" and the FormRequest accepted by
-   *                                "update" are compatible.
-   */
-  public function addCollection(
+  public function withMe(
     string $modelClass,
-    string $controllerClass,
-  ): self {
-    $this->collections[] = compact('modelClass', 'controllerClass');
+    string $resourceClass,
+  ): SyncApiMe {
+    $syncApiMe = new SyncApiMe(
+      $this,
+      $modelClass,
+      $resourceClass,
+    );
 
-    return $this;
+    $this->mes[] = $syncApiMe;
+
+    return $syncApiMe;
   }
 
-  /**
-   * Invoke this method in a routes file to generate routes for all singletons
-   * and collections as well as a "preflight" route which can be used to query
-   * for changes to sync.
-   *
-   * This must be called in a context in which the request would be authorized!
-   */
+  public function withEnum(
+    string $enumClass,
+    string $resourceClass,
+  ): SyncApiEnum {
+    $syncApiEnum = new SyncApiEnum(
+      $this,
+      $enumClass,
+      $resourceClass,
+    );
+
+    $this->enums[] = $syncApiEnum;
+
+    return $syncApiEnum;
+  }
+
+  public function withConstant(
+    string $name,
+    callable $valueFactory,
+  ): SyncApiConstant {
+    $syncApiConstant = new SyncApiConstant(
+      $this,
+      $name,
+      $valueFactory,
+    );
+
+    $this->constants[] = $syncApiConstant;
+
+    return $syncApiConstant;
+  }
+
+  public function withCollection(
+    string $modelClass,
+    string $scopeName,
+    ?string $resourceClass = null,
+    ?string $controllerClass = null,
+    ?string $routeFragment = null,
+  ): SyncApiCollection {
+    $syncApiCollection = new SyncApiCollection(
+      $this,
+      $modelClass,
+      $scopeName,
+      $resourceClass,
+      $controllerClass,
+      $routeFragment,
+    );
+
+    $this->collections[] = $syncApiCollection;
+
+    return $syncApiCollection;
+  }
+
   public function generateRoutes(): void
   {
     Route::get('preflight', function () {
+      $singletons = [];
+
+      foreach ($this->mes as $me) {
+        $key = $me->generateCamelCasedName();
+
+        $data = $me->generateData();
+        $version = $me->hashData($data);
+
+        $singletons[$key] = compact('version');
+      }
+
+      foreach ($this->enums as $enum) {
+        $key = $enum->generateCamelCasedName();
+
+        $data = $enum->generateData();
+        $version = $enum->hashData($data);
+
+        $singletons[$key] = compact('version');
+      }
+
+      foreach ($this->constants as $constant) {
+        $key = $constant->generateCamelCasedName();
+
+        $singletons[$key] = Arr::only($constant->getCachedValue(), 'version');
+      }
+
+      $collections = [];
+
+      foreach ($this->collections as $collection) {
+        $json = $collection->generatePreflightCollection();
+
+        if ($json !== null) {
+          $collections[$collection->generateCamelCasedName()] = $json;
+        }
+      }
+
+      return compact('singletons', 'collections');
     });
 
-    foreach ($this->singletons as $singleton) {
-      $name = $singleton['name'];
-      $jsonResourceClass = $singleton['jsonResourceClass'];
+    foreach ($this->mes as $me) {
+      $me->generateMeRoutes();
+    }
 
-      Route::get(Str::kebab($name), fn () => new $jsonResourceClass());
+    foreach ($this->enums as $enum) {
+      $enum->generateEnumRoutes();
+    }
+
+    foreach ($this->constants as $constant) {
+      $constant->generateConstantRoutes();
     }
 
     foreach ($this->collections as $collection) {
-      $modelClass = $collection['modelClass'];
-      $controllerClass = $collection['controllerClass'];
-
-      Route::get(Str::kebab(Str::pluralStudly(class_basename($modelClass))) . '/{' . Str::camel(class_basename($modelClass)) . ':uuid}', [$controllerClass, 'show']);
-      Route::put(Str::kebab(Str::pluralStudly(class_basename($modelClass))) . '/{' . Str::camel(class_basename($modelClass)) . ':uuid}', [$controllerClass, 'update']);
+      $collection->generateCollectionRoutes();
     }
   }
 }
