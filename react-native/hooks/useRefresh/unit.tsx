@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import * as TestRenderer from 'react-test-renderer'
 import { useRefresh } from '../../..'
 
@@ -11,10 +11,9 @@ test('does not refresh the component before the returned function is invoked', (
     const refresh = useRefresh()
 
     return (
-      <Button
-        onPress={refresh}
-        title={`${invocations.current} Invocation(s)`}
-      />
+      <TouchableOpacity onPress={refresh}>
+        <Text>{`${invocations.current} Invocation(s)`}</Text>
+      </TouchableOpacity>
     )
   }
 
@@ -23,7 +22,11 @@ test('does not refresh the component before the returned function is invoked', (
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: '1 Invocation(s)'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: '1 Invocation(s)'
+          })
+        })
       })
     })
   )
@@ -39,10 +42,9 @@ test('refreshes the component the first time that the returned function is invok
     const refresh = useRefresh()
 
     return (
-      <Button
-        onPress={refresh}
-        title={`${invocations.current} Invocation(s)`}
-      />
+      <TouchableOpacity onPress={refresh}>
+        <Text>{`${invocations.current} Invocation(s)`}</Text>
+      </TouchableOpacity>
     )
   }
 
@@ -57,7 +59,11 @@ test('refreshes the component the first time that the returned function is invok
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: '2 Invocation(s)'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: '2 Invocation(s)'
+          })
+        })
       })
     })
   )
@@ -73,10 +79,9 @@ test('refreshes the component the second time that the returned function is invo
     const refresh = useRefresh()
 
     return (
-      <Button
-        onPress={refresh}
-        title={`${invocations.current} Invocation(s)`}
-      />
+      <TouchableOpacity onPress={refresh}>
+        <Text>{`${invocations.current} Invocation(s)`}</Text>
+      </TouchableOpacity>
     )
   }
 
@@ -97,7 +102,11 @@ test('refreshes the component the second time that the returned function is invo
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: '3 Invocation(s)'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: '3 Invocation(s)'
+          })
+        })
       })
     })
   )
