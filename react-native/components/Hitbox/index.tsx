@@ -4,6 +4,7 @@ import {
   type MeasureOnSuccessCallback,
   type StyleProp,
   TouchableOpacity,
+  type View,
   type ViewStyle
 } from 'react-native'
 import { useMeasure } from '../../hooks/useMeasure'
@@ -48,7 +49,7 @@ export const Hitbox: Component & {
    */
   enabled: boolean
 } = (({ disabled, style, onMeasure, onPress, children }) => {
-  let ref: undefined | React.RefCallback<TouchableOpacity>
+  let ref: undefined | React.RefCallback<View>
   let onLayout: undefined | ((event: LayoutChangeEvent) => void)
 
   if (onMeasure === undefined) {
