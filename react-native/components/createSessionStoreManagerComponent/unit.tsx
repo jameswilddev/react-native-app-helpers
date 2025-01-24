@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto'
 import * as React from 'react'
-import { Button, Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import * as TestRenderer from 'react-test-renderer'
 import { createSessionStoreManagerComponent, SessionStore } from '../../..'
 
@@ -15,12 +15,13 @@ test('displays the loading screen', async () => {
     <SessionStoreManager
       loading={<Text>Loading</Text>}
       ready={(session, setSession) => (
-        <Button
-          title={`Session contains ${session.value}`}
+        <TouchableOpacity
           onPress={() => {
             setSession({ value: session.value + 1 })
           }}
-        />
+        >
+          <Text>{`Session contains ${session.value}`}</Text>
+        </TouchableOpacity>
       )}
     />
   )
@@ -52,12 +53,13 @@ test('shows the ready screen once given time to load', async () => {
     <SessionStoreManager
       loading={<Text>Loading</Text>}
       ready={(session, setSession) => (
-        <Button
-          title={`Session contains ${session.value}`}
+        <TouchableOpacity
           onPress={() => {
             setSession({ value: session.value + 1 })
           }}
-        />
+        >
+          <Text>{`Session contains ${session.value}`}</Text>
+        </TouchableOpacity>
       )}
     />
   )
@@ -69,7 +71,11 @@ test('shows the ready screen once given time to load', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'Session contains 5'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'Session contains 5'
+          })
+        })
       })
     })
   )
@@ -91,12 +97,13 @@ test('re-renders when the session is changed externally once', async () => {
     <SessionStoreManager
       loading={<Text>Loading</Text>}
       ready={(session, setSession) => (
-        <Button
-          title={`Session contains ${session.value}`}
+        <TouchableOpacity
           onPress={() => {
             setSession({ value: session.value + 1 })
           }}
-        />
+        >
+          <Text>{`Session contains ${session.value}`}</Text>
+        </TouchableOpacity>
       )}
     />
   )
@@ -109,7 +116,11 @@ test('re-renders when the session is changed externally once', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'Session contains 6'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'Session contains 6'
+          })
+        })
       })
     })
   )
@@ -131,12 +142,13 @@ test('re-renders when the session is changed externally twice', async () => {
     <SessionStoreManager
       loading={<Text>Loading</Text>}
       ready={(session, setSession) => (
-        <Button
-          title={`Session contains ${session.value}`}
+        <TouchableOpacity
           onPress={() => {
             setSession({ value: session.value + 1 })
           }}
-        />
+        >
+          <Text>{`Session contains ${session.value}`}</Text>
+        </TouchableOpacity>
       )}
     />
   )
@@ -150,7 +162,11 @@ test('re-renders when the session is changed externally twice', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'Session contains 7'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'Session contains 7'
+          })
+        })
       })
     })
   )
@@ -172,12 +188,13 @@ test('re-renders when the session is changed internally once', async () => {
     <SessionStoreManager
       loading={<Text>Loading</Text>}
       ready={(session, setSession) => (
-        <Button
-          title={`Session contains ${session.value}`}
+        <TouchableOpacity
           onPress={() => {
             setSession({ value: session.value + 1 })
           }}
-        />
+        >
+          <Text>{`Session contains ${session.value}`}</Text>
+        </TouchableOpacity>
       )}
     />
   )
@@ -192,7 +209,11 @@ test('re-renders when the session is changed internally once', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'Session contains 6'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'Session contains 6'
+          })
+        })
       })
     })
   )
@@ -214,12 +235,13 @@ test('re-renders when the session is changed internally twice', async () => {
     <SessionStoreManager
       loading={<Text>Loading</Text>}
       ready={(session, setSession) => (
-        <Button
-          title={`Session contains ${session.value}`}
+        <TouchableOpacity
           onPress={() => {
             setSession({ value: session.value + 1 })
           }}
-        />
+        >
+          <Text>{`Session contains ${session.value}`}</Text>
+        </TouchableOpacity>
       )}
     />
   )
@@ -237,7 +259,11 @@ test('re-renders when the session is changed internally twice', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'Session contains 7'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'Session contains 7'
+          })
+        })
       })
     })
   )
