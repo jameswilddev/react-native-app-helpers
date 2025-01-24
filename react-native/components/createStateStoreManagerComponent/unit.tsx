@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto'
 import * as React from 'react'
-import { Button, Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import * as TestRenderer from 'react-test-renderer'
 import { createStateStoreManagerComponent, StateStore } from '../../..'
 
@@ -18,14 +18,15 @@ test('displays the loading screen', async () => {
       unloaded={<Text>Unloaded</Text>}
       loading={<Text>Loading</Text>}
       ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
+        <TouchableOpacity
           onPress={() => {
             setState({ value: state.value + 1 })
           }}
-        />
+        >
+          <Text>{`State contains ${state.value}`}</Text>
+        </TouchableOpacity>
       )}
-      unloading={<Text>Loading</Text>}
+      unloading={<Text>Unloading</Text>}
     />
   )
 
@@ -54,20 +55,21 @@ test('shows the ready screen once given time to load', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Unloading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -77,7 +79,11 @@ test('shows the ready screen once given time to load', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 5'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 5'
+          })
+        })
       })
     })
   )
@@ -97,20 +103,21 @@ test('re-renders when the state is changed externally once', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Unloading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -121,7 +128,11 @@ test('re-renders when the state is changed externally once', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 6'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 6'
+          })
+        })
       })
     })
   )
@@ -141,20 +152,21 @@ test('re-renders when the state is changed externally twice', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Unloading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -166,7 +178,11 @@ test('re-renders when the state is changed externally twice', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 7'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 7'
+          })
+        })
       })
     })
   )
@@ -186,20 +202,21 @@ test('re-renders when the state is changed internally once', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Unloading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -212,7 +229,11 @@ test('re-renders when the state is changed internally once', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 6'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 6'
+          })
+        })
       })
     })
   )
@@ -232,20 +253,21 @@ test('re-renders when the state is changed internally twice', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Unloading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -261,7 +283,11 @@ test('re-renders when the state is changed internally twice', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 7'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 7'
+          })
+        })
       })
     })
   )
@@ -280,20 +306,21 @@ test('does not try to load without a key', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={null}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={null}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   expect(renderer.toTree()?.rendered).toEqual(
@@ -313,20 +340,21 @@ test('starts unloading when the state key changes to null during loading', async
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   void TestRenderer.act(() => {
@@ -336,12 +364,13 @@ test('starts unloading when the state key changes to null during loading', async
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+          <TouchableOpacity
+          onPress={() => {
+            setState({ value: state.value + 1 })
+          }}
+        >
+          <Text>{`State contains ${state.value}`}</Text>
+        </TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -373,20 +402,21 @@ test('fully unloads when the state key changes to null during loading', async ()
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   void TestRenderer.act(() => {
@@ -396,12 +426,13 @@ test('fully unloads when the state key changes to null during loading', async ()
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+  <TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -437,20 +468,21 @@ test('starts unloading when the state key changes to null after loading', async 
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -464,12 +496,13 @@ test('starts unloading when the state key changes to null after loading', async 
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -501,20 +534,21 @@ test('fully unloads when the state key changes to null after loading', async () 
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKey}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -528,12 +562,13 @@ test('fully unloads when the state key changes to null after loading', async () 
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -573,20 +608,21 @@ test('starts reloading when the state key changes to another value during loadin
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKeyA}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKeyA}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   void TestRenderer.act(() => {
@@ -596,12 +632,13 @@ test('starts reloading when the state key changes to another value during loadin
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -641,20 +678,21 @@ test('starts reloading when the state key changes to another value during loadin
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKeyA}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKeyA}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   void TestRenderer.act(() => {
@@ -664,12 +702,13 @@ test('starts reloading when the state key changes to another value during loadin
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -713,20 +752,21 @@ test('fully reloads when the state key changes to another value during loading',
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKeyA}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKeyA}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   void TestRenderer.act(() => {
@@ -736,12 +776,13 @@ test('fully reloads when the state key changes to another value during loading',
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -759,7 +800,11 @@ test('fully reloads when the state key changes to another value during loading',
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 10'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 10'
+          })
+        })
       })
     })
   )
@@ -789,20 +834,21 @@ test('starts reloading when the state key changes to another value after loading
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKeyA}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKeyA}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -816,12 +862,13 @@ test('starts reloading when the state key changes to another value after loading
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -861,20 +908,21 @@ test('starts reloading when the state key changes to another value after loading
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKeyA}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKeyA}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -888,12 +936,13 @@ test('starts reloading when the state key changes to another value after loading
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -937,20 +986,21 @@ test('fully reloads when the state key changes to another value after loading', 
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={stateKeyA}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKeyA}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   await TestRenderer.act(async () => {
@@ -964,12 +1014,13 @@ test('fully reloads when the state key changes to another value after loading', 
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -987,7 +1038,11 @@ test('fully reloads when the state key changes to another value after loading', 
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 10'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 10'
+          })
+        })
       })
     })
   )
@@ -1013,20 +1068,21 @@ test('displays the loading screen from null', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={null}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Loading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   void TestRenderer.act(() => {
@@ -1036,12 +1092,13 @@ test('displays the loading screen from null', async () => {
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -1073,20 +1130,21 @@ test('shows the ready screen once given time to load from null', async () => {
   const StateStoreManager = createStateStoreManagerComponent(stateStore)
 
   const renderer = TestRenderer.create(
-    <StateStoreManager
-      stateKey={null}
-      unloaded={<Text>Unloaded</Text>}
-      loading={<Text>Loading</Text>}
-      ready={(state, setState) => (
-        <Button
-          title={`State contains ${state.value}`}
-          onPress={() => {
-            setState({ value: state.value + 1 })
-          }}
-        />
-      )}
-      unloading={<Text>Unloading</Text>}
-    />
+  <StateStoreManager
+    stateKey={stateKey}
+    unloaded={<Text>Unloaded</Text>}
+    loading={<Text>Loading</Text>}
+    ready={(state, setState) => (
+      <TouchableOpacity
+        onPress={() => {
+          setState({ value: state.value + 1 })
+        }}
+      >
+        <Text>{`State contains ${state.value}`}</Text>
+      </TouchableOpacity>
+    )}
+    unloading={<Text>Unloading</Text>}
+  />
   )
 
   void TestRenderer.act(() => {
@@ -1096,12 +1154,13 @@ test('shows the ready screen once given time to load from null', async () => {
         unloaded={<Text>Unloaded</Text>}
         loading={<Text>Loading</Text>}
         ready={(state, setState) => (
-          <Button
-            title={`State contains ${state.value}`}
-            onPress={() => {
-              setState({ value: state.value + 1 })
-            }}
-          />
+<TouchableOpacity
+  onPress={() => {
+    setState({ value: state.value + 1 })
+  }}
+>
+  <Text>{`State contains ${state.value}`}</Text>
+</TouchableOpacity>
         )}
         unloading={<Text>Unloading</Text>}
       />
@@ -1115,7 +1174,11 @@ test('shows the ready screen once given time to load from null', async () => {
   expect(renderer.toTree()?.rendered).toEqual(
     expect.objectContaining({
       props: expect.objectContaining({
-        title: 'State contains 5'
+        children: expect.objectContaining({
+          props: expect.objectContaining({
+            children: 'State contains 5'
+          })
+        })
       })
     })
   )
