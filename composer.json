@@ -7,11 +7,15 @@
     {
       "name": "jameswilddev",
       "email": "jameswilddev@outlook.com"
+    },
+    {
+      "name": "Stephen J Sullivan",
+      "email": "stephen@sulli.work"
     }
   ],
   "require": {
     "php": "^8.0",
-    "laravel/framework": "^8"
+    "laravel/framework": "^8|^9|^10|^11|^12"
   },
   "autoload": {
     "psr-4": {
@@ -24,7 +28,7 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "9.5.13",
+    "phpunit/phpunit": "^9.5",
     "vimeo/psalm": "4.19.0",
     "mockery/mockery": "1.5.0"
   }
