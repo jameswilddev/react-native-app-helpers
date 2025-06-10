@@ -2,6 +2,11 @@
 
 General tools we use to build React Native applications.
 
+**WARNING: Unit tests are currently disabled as `react-test-renderer` is no
+longer maintained and no longer functions, while its replacement
+`react-native-testing-library` doesn't appear to be kept up to date and as a
+consequence is also non-functional at the time of writing.**
+
 ## React Native
 
 ### Installation
