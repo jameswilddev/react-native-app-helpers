@@ -16,7 +16,7 @@ test('unwraps a wrapped element', () => {
 test('throws when given a class-typed element', () => {
   const rendered = <Text>Test Content</Text>
 
-  const act = (): JSX.Element => unwrapRenderedFunctionComponent(rendered)
+  const act = (): React.JSX.Element => unwrapRenderedFunctionComponent(rendered)
 
   expect(act).toThrowError('Can only unwrap rendered function components.')
 })
@@ -24,7 +24,7 @@ test('throws when given a class-typed element', () => {
 test('throws when given a string-typed element', () => {
   const rendered = <div>Test Content</div>
 
-  const act = (): JSX.Element => unwrapRenderedFunctionComponent(rendered)
+  const act = (): React.JSX.Element => unwrapRenderedFunctionComponent(rendered)
 
   expect(act).toThrowError('Can only unwrap rendered function components.')
 })

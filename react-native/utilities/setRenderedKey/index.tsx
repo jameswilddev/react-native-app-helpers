@@ -1,3 +1,5 @@
+import type * as React from 'react'
+
 /**
  * Sets the key of a rendered React element.
  * @param element The element in which the key is to be set.
@@ -9,9 +11,9 @@
  *                injected.
  */
 export const setRenderedKey = (
-  element: undefined | React.ReactNode | JSX.Element,
+  element: undefined | React.ReactNode | React.JSX.Element,
   key: string
-): undefined | React.ReactNode | JSX.Element => {
+): undefined | React.ReactNode | React.JSX.Element => {
   if (typeof element === 'object' && element !== null && 'key' in element) {
     return {
       ...element,

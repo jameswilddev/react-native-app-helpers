@@ -12,12 +12,12 @@ type Instance<TValue, TContext> = React.FunctionComponent<{
   /**
    * The icon to show on the left side, if any, else, null.
    */
-  readonly leftIcon: null | React.ReactNode | JSX.Element
+  readonly leftIcon: null | React.ReactNode | React.JSX.Element
 
   /**
    * The icon to show on the right side, if any, else, null.
    */
-  readonly rightIcon: null | React.ReactNode | JSX.Element
+  readonly rightIcon: null | React.ReactNode | React.JSX.Element
 
   /**
    * The value to edit.  When undefined, it is treated as an invalid empty

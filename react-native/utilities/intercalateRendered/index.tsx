@@ -11,9 +11,9 @@ import { setRenderedKey } from '../setRenderedKey'
  *                  pair of elements.
  */
 export const intercalateRendered = (
-  separator: React.ReactNode | JSX.Element,
-  between: undefined | React.ReactNode | JSX.Element
-): ReadonlyArray<React.ReactNode | JSX.Element> => {
+  separator: React.ReactNode | React.JSX.Element,
+  between: undefined | React.ReactNode | React.JSX.Element
+): ReadonlyArray<React.ReactNode | React.JSX.Element> => {
   const flattenedBetween = flattenRenderedToArray(between)
 
   if (flattenedBetween.length === 0) {
@@ -24,6 +24,8 @@ export const intercalateRendered = (
       element
     ])
 
+    // TODO: ESLint seems to think output is a promise.
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     output.shift()
 
     return output

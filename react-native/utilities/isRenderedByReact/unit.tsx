@@ -3,7 +3,7 @@ import { Text } from 'react-native'
 import { isRenderedByReact } from '../../..'
 
 describe('returns truthy for', () => {
-  const check = (description: string, value: undefined | React.ReactNode | JSX.Element): void => {
+  const check = (description: string, value: undefined | React.ReactNode | React.JSX.Element): void => {
     test(description, () => {
       expect(isRenderedByReact(value)).toBeTruthy()
     })
@@ -17,7 +17,7 @@ describe('returns truthy for', () => {
 })
 
 describe('returns falsy for', () => {
-  const check = (description: string, value: undefined | React.ReactNode | JSX.Element): void => {
+  const check = (description: string, value: undefined | React.ReactNode | React.JSX.Element): void => {
     test(description, () => {
       expect(isRenderedByReact(value)).toBeFalsy()
     })

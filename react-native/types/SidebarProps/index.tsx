@@ -5,15 +5,15 @@ export interface SidebarProps {
   /**
    * The element to show in the left sidebar.
    */
-  readonly left?: JSX.Element
+  readonly left?: React.JSX.Element
 
   /**
    * The element to show in the middle, with fluid width.
    */
-  readonly body?: JSX.Element
+  readonly body?: React.JSX.Element
 
   /**
    * The element to show in the right sidebar.
    */
-  readonly right?: JSX.Element
+  readonly right?: React.JSX.Element
 }

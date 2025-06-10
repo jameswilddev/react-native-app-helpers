@@ -10,14 +10,14 @@ export interface ButtonProps {
    * @param color The color of the icon.
    * @returns The icon to show, or null if no icon is to be shown.
    */
-  leftIcon?: undefined | ((color: ColorValue) => null | React.ReactNode | JSX.Element)
+  leftIcon?: undefined | ((color: ColorValue) => null | React.ReactNode | React.JSX.Element)
 
   /**
    * Renders the button's right icon.
    * @param color The color of the icon.
    * @returns The icon to show, or null if no icon is to be shown.
    */
-  rightIcon?: undefined | ((color: ColorValue) => null | React.ReactNode | JSX.Element)
+  rightIcon?: undefined | ((color: ColorValue) => null | React.ReactNode | React.JSX.Element)
 
   /**
    * Executed when the button is pressed.
@@ -36,5 +36,5 @@ export interface ButtonProps {
    */
   readonly children:
   | string
-  | ((color: ColorValue) => null | React.ReactNode | JSX.Element)
+  | ((color: ColorValue) => null | React.ReactNode | React.JSX.Element)
 }

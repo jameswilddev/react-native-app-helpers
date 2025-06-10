@@ -16,5 +16,5 @@ export interface ProportionalColumnProps<T extends readonly never[]> {
   /**
    * The contents of the rows, in order.
    */
-  readonly children: { readonly [TItem in keyof T]: null | JSX.Element }
+  readonly children: { readonly [TItem in keyof T]: null | React.JSX.Element }
 }

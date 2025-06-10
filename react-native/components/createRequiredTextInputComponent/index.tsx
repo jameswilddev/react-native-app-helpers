@@ -17,8 +17,8 @@ import type { RequiredTextInputProps } from '../../types/RequiredTextInputProps'
  */
 export const createRequiredTextInputComponent = (
   controlStyle: ControlStyle,
-  leftIcon: null | React.ReactNode | JSX.Element,
-  rightIcon: null | React.ReactNode | JSX.Element,
+  leftIcon: null | React.ReactNode | React.JSX.Element,
+  rightIcon: null | React.ReactNode | React.JSX.Element,
   minimumLength: null | number,
   maximumLength: null | number,
   autoCapitalize: 'none' | 'sentences' | 'words' | 'characters'

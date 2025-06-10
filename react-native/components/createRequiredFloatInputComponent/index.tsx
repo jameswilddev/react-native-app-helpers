@@ -26,8 +26,8 @@ import type { RequiredFloatInputProps } from '../../types/RequiredFloatInputProp
  */
 export const createRequiredFloatInputComponent = (
   controlStyle: ControlStyle,
-  leftIcon: null | React.ReactNode | JSX.Element,
-  rightIcon: null | React.ReactNode | JSX.Element,
+  leftIcon: null | React.ReactNode | React.JSX.Element,
+  rightIcon: null | React.ReactNode | React.JSX.Element,
   greaterThan: null | number,
   greaterThanOrEqualTo: null | number,
   lessThan: null | number,

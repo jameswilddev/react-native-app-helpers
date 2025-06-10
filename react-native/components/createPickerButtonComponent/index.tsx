@@ -243,7 +243,7 @@ export const createPickerButtonComponent = (
     rightIcon,
     onMeasure
   }) => {
-    const children: JSX.Element[] = []
+    const children: React.JSX.Element[] = []
 
     if (leftIcon !== undefined) {
       children.push(

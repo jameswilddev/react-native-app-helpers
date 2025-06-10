@@ -5,8 +5,8 @@
  * @throws When the given JSX element is not wrapping another JSX element.
  */
 export const unwrapRenderedFunctionComponent = (
-  element: JSX.Element
-): JSX.Element => {
+  element: React.JSX.Element
+): React.JSX.Element => {
   if (
     element.type instanceof Function &&
     Object.prototype.hasOwnProperty.call(element.type, 'arguments')

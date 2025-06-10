@@ -22,22 +22,22 @@ export const createFileStoreManagerComponent = (
   /**
    * A React element to display when nothing is to be loaded.
    */
-  readonly unloaded: null | JSX.Element
+  readonly unloaded: null | React.JSX.Element
 
   /**
    * A React element to display when loading is in progress.
    */
-  readonly loading: null | JSX.Element
+  readonly loading: null | React.JSX.Element
 
   /**
    * A React element to display when loading has completed.
    */
-  readonly ready: null | JSX.Element
+  readonly ready: null | React.JSX.Element
 
   /**
    * A React element to display when unloading is in progress.
    */
-  readonly unloading: null | JSX.Element
+  readonly unloading: null | React.JSX.Element
 }> => {
   return ({ subdirectoryName, unloaded, loading, ready, unloading }) => {
     const state = React.useRef<

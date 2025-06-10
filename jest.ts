@@ -15,11 +15,9 @@ jest.mock('react-native/Libraries/Linking/Linking', () => ({
   openURL: jest.fn()
 }))
 
-jest.mock('sentry-expo', () => {
+jest.mock('@sentry/react-native', () => {
   return {
-    Native: {
-      captureException: jest.fn()
-    }
+    captureException: jest.fn()
   }
 })
 

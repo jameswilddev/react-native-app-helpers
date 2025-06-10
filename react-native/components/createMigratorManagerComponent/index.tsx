@@ -28,12 +28,12 @@ export const createMigratorManagerComponent = <T extends Readonly<Record<string 
     /**
      * The JSX to display while the state is migrated.
      */
-    readonly migrating: JSX.Element
+    readonly migrating: React.JSX.Element
 
     /**
      * The JSX to display once the state is migrated.
      */
-    readonly ready: JSX.Element
+    readonly ready: React.JSX.Element
   }> => {
   return ({ state, setState, migrating, ready }) => {
     const executionRequired = migrator.executionRequired(state)

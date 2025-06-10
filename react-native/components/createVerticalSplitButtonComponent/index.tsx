@@ -208,7 +208,7 @@ export const createVerticalSplitButtonComponent = <
       buttonLabel: string,
       buttonDisabled: boolean,
       allButtonValues: readonly TValue[]
-    ) => JSX.Element;
+    ) => React.JSX.Element;
   } = {}
 
   for (const typeKey in splitButtonStyle.types) {
@@ -436,7 +436,7 @@ export const createVerticalSplitButtonComponent = <
       buttonLabel: string,
       buttonDisabled: boolean,
       allButtonValues: readonly TValue[]
-    ) => JSX.Element;
+    ) => React.JSX.Element;
   } = partialButtonFactories as {
     [TTypeItem in TType]: (
       value: readonly TValue[],
@@ -446,7 +446,7 @@ export const createVerticalSplitButtonComponent = <
       buttonLabel: string,
       buttonDisabled: boolean,
       allButtonValues: readonly TValue[]
-    ) => JSX.Element;
+    ) => React.JSX.Element;
   }
 
   const SplitButton: Instance<TValue> & {
@@ -461,7 +461,7 @@ export const createVerticalSplitButtonComponent = <
     return (
       <View style={styles.view}>
         {childrenArray
-          .filter((element): element is JSX.Element => element !== null)
+          .filter((element): element is React.JSX.Element => element !== null)
           .map((element, i) => {
             if (typeof element === 'object' && 'type' in element) {
               for (const typeKey in segments) {

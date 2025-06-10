@@ -4,7 +4,7 @@
  * @returns       The key extracted, or null if none was found.
  */
 export const getRenderedKey = (
-  element: undefined | React.ReactNode | JSX.Element
+  element: undefined | React.ReactNode | React.JSX.Element
 ): null | string => {
   if (
     typeof element === 'object' &&

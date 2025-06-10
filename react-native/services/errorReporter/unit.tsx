@@ -1,5 +1,5 @@
 import { errorReporter } from '../../..'
-const Sentry = jest.requireMock('sentry-expo')
+const Sentry = jest.requireMock('@sentry/react-native')
 
 test('report', () => {
   const originalLog = console.log

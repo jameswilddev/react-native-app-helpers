@@ -5,7 +5,7 @@ import { intercalateRendered } from '../../..'
 test('intercalates nothing', () => {
   const separator = <Text>Example Separator</Text>
 
-  const between: JSX.Element = <React.Fragment />
+  const between: React.JSX.Element = <React.Fragment />
 
   const flattened = intercalateRendered(separator, between)
 
@@ -15,7 +15,7 @@ test('intercalates nothing', () => {
 test('intercalates one', () => {
   const separator = <Text>Example Separator</Text>
 
-  const between: JSX.Element = <Text>Example Item A</Text>
+  const between: React.JSX.Element = <Text>Example Item A</Text>
 
   const flattened = intercalateRendered(separator, between)
 
@@ -25,7 +25,7 @@ test('intercalates one', () => {
 test('intercalates two', () => {
   const separator = <Text>Example Separator</Text>
 
-  const between: JSX.Element = (
+  const between: React.JSX.Element = (
     <React.Fragment>
       <Text>Example Item A</Text>
       <Text>Example Item B</Text>
@@ -44,7 +44,7 @@ test('intercalates two', () => {
 test('intercalates three', () => {
   const separator = <Text>Example Separator</Text>
 
-  const between: JSX.Element = (
+  const between: React.JSX.Element = (
     <React.Fragment>
       <Text>Example Item A</Text>
       <Text>Example Item B</Text>
@@ -66,7 +66,7 @@ test('intercalates three', () => {
 test('intercalates four', () => {
   const separator = <Text>Example Separator</Text>
 
-  const between: JSX.Element = (
+  const between: React.JSX.Element = (
     <React.Fragment>
       <Text>Example Item A</Text>
       <Text>Example Item B</Text>

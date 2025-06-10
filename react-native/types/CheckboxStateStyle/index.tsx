@@ -19,7 +19,7 @@ export interface CheckboxStateStyle {
   /**
    * The element shown inside the box.
    */
-  readonly boxChild: null | React.ReactNode | JSX.Element
+  readonly boxChild: null | React.ReactNode | React.JSX.Element
 
   /**
    * The border radius of the box.

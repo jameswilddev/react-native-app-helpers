@@ -1,5 +1,5 @@
 import type { ErrorReporterInterface } from '../../types/ErrorReporterInterface'
-import { Native } from 'sentry-expo'
+import { captureException } from '@sentry/react-native'
 
 /**
  * A wrapper around the console and Sentry for easier mocking in tests.
@@ -11,6 +11,6 @@ export const errorReporter: ErrorReporterInterface = {
    */
   report: (reason: any) => {
     console.error(reason)
-    Native.captureException(reason)
+    captureException(reason)
   }
 }

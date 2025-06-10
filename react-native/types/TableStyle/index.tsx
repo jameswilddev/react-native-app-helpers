@@ -79,17 +79,17 @@ export interface TableStyle {
       /**
        * The element to use where a cell for a basic column contains null.
        */
-      readonly null: null | React.ReactNode | JSX.Element
+      readonly null: null | React.ReactNode | React.JSX.Element
 
       /**
        * The element to use where a cell for a basic column contains false.
        */
-      readonly false: null | React.ReactNode | JSX.Element
+      readonly false: null | React.ReactNode | React.JSX.Element
 
       /**
        * The element to use where a cell for a basic column contains true.
        */
-      readonly true: null | React.ReactNode | JSX.Element
+      readonly true: null | React.ReactNode | React.JSX.Element
     }
   }
 

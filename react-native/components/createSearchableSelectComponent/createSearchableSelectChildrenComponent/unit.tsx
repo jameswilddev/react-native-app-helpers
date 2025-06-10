@@ -1499,9 +1499,9 @@ test('accepts button presses within the flat list', () => {
       unhighlight: stub,
       updateProps: stub
     }
-  })
+  });
 
-  unselectedItem?.props.onPress()
+  (unselectedItem as { readonly props: { onPress: () => void } }).props.onPress()
 
   renderer.unmount()
   expect(onChange).toHaveBeenCalledTimes(1)

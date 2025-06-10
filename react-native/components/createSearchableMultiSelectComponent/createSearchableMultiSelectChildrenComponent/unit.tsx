@@ -726,9 +726,9 @@ test('selects items on press', () => {
       unhighlight: stub,
       updateProps: stub
     }
-  })
+  });
 
-  unselectedItem?.props.onPress()
+  (unselectedItem as { readonly props: { onPress: () => void } }).props.onPress()
 
   renderer.unmount()
   expect(onChange).toHaveBeenCalledTimes(1)
@@ -870,9 +870,9 @@ test('deselects items on press', () => {
       unhighlight: stub,
       updateProps: stub
     }
-  })
+  });
 
-  selectedItem?.props.onPress()
+  (selectedItem as { readonly props: { onPress: () => void } }).props.onPress()
 
   renderer.unmount()
   expect(onChange).toHaveBeenCalledTimes(1)

@@ -81,7 +81,7 @@ export function createProportionalRowComponent<T extends readonly never[]> (
   })
 
   const ProportionalRow: React.FunctionComponent<ProportionalRowProps<T>> = ({ height, verticalAlignment, children }) => {
-    const intercalatedChildren: Array<null | JSX.Element> = []
+    const intercalatedChildren: Array<null | React.JSX.Element> = []
 
     let index = 0
 

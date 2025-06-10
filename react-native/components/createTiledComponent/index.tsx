@@ -65,7 +65,7 @@ export const createTiledComponent = (
         />
       )
     } else {
-      const transformedChildren: JSX.Element[] = []
+      const transformedChildren: React.JSX.Element[] = []
 
       for (const child of flattenRenderedToArray(children)) {
         const style: ViewStyle = {}

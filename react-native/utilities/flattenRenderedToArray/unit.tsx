@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 import { flattenRenderedToArray } from '../../..'
 
 test('flattens elements', () => {
-  const rendered: JSX.Element = (
+  const rendered: React.JSX.Element = (
     <React.Fragment>
       <div>Example Content A</div>
       <View>

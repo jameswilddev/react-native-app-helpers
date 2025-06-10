@@ -81,7 +81,7 @@ export function createProportionalColumnComponent<T extends readonly never[]> (
   })
 
   const ProportionalColumn: React.FunctionComponent<ProportionalColumnProps<T>> = ({ width, horizontalAlignment, children }) => {
-    const intercalatedChildren: Array<null | JSX.Element> = []
+    const intercalatedChildren: Array<null | React.JSX.Element> = []
 
     let index = 0
 

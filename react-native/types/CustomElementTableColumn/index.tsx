@@ -40,7 +40,7 @@ export interface CustomElementTableColumn<
   render: (
     tableRow: TRow,
     context: TContext
-  ) => null | React.ReactNode | JSX.Element
+  ) => null | React.ReactNode | React.JSX.Element
 
   /**
    * Determines whether a search string occurs within this column on a given

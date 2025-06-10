@@ -9,11 +9,11 @@ import { isRenderedByReact } from '../isRenderedByReact'
  * @returns The elements within the given JSX element, flattened into an array.
  */
 export const flattenRenderedToArray = (
-  element: undefined | React.ReactNode | JSX.Element
-): ReadonlyArray<React.ReactNode | JSX.Element> => {
+  element: undefined | React.ReactNode | React.JSX.Element
+): ReadonlyArray<React.ReactNode | React.JSX.Element> => {
   const recurseChildren = (
-    child: undefined | React.ReactNode | JSX.Element
-  ): ReadonlyArray<React.ReactNode | JSX.Element> => {
+    child: undefined | React.ReactNode | React.JSX.Element
+  ): ReadonlyArray<React.ReactNode | React.JSX.Element> => {
     if (child === null || child === undefined) {
       return []
     } else if (Array.isArray(child)) {
@@ -37,7 +37,7 @@ export const flattenRenderedToArray = (
     }
   }
 
-  return recurseChildren(element).map((element, index) =>
-    setRenderedKey(element, String(index))
-  )
+  // TODO: ESLint seems to think this can return async for some reason, and keeps injecting async/await.
+  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  return recurseChildren(element).map((element, index) => setRenderedKey(element, String(index)))
 }

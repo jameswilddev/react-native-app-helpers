@@ -20,11 +20,11 @@ import type { Json } from '../../types/Json'
 export const createSessionStoreManagerComponent = <T extends Json>(
   sessionStore: SessionStore<T>
 ): React.FunctionComponent<{
-    readonly loading: null | JSX.Element
+    readonly loading: null | React.JSX.Element
     readonly ready: (
       session: T,
       setSession: (to: T) => void
-    ) => null | JSX.Element
+    ) => null | React.JSX.Element
   }> => {
   return ({ loading, ready }) => {
     const loaded = React.useRef(false)

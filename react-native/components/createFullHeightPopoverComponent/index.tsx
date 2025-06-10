@@ -41,7 +41,7 @@ type Instance = React.FunctionComponent<{
    * @param close Invoke to close the pop-over.
    * @returns     The contents of the pop-over.
    */
-  children: (close: () => void) => null | JSX.Element
+  children: (close: () => void) => null | React.JSX.Element
 }>
 
 /**

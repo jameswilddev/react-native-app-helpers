@@ -170,18 +170,18 @@ export const createOfflineTableComponent = <
     }
 
     if (style.header.verticalPadding !== 0) {
-      (basicHeaderInput[key] as ViewStyle).paddingVertical =
+      (basicHeaderInput[key]).paddingVertical =
         style.header.verticalPadding;
-      (customHeaderInput[key] as TextStyle).paddingVertical =
+      (customHeaderInput[key]).paddingVertical =
         style.header.verticalPadding
     }
 
     if (style.body.horizontalPadding !== 0) {
-      (basicHeaderInput[key] as ViewStyle).paddingHorizontal =
+      (basicHeaderInput[key]).paddingHorizontal =
         style.body.horizontalPadding / 2;
-      (customHeaderInput[key] as TextStyle).paddingHorizontal =
+      (customHeaderInput[key]).paddingHorizontal =
         style.body.horizontalPadding / 2;
-      (customCellInput[key] as ViewStyle).paddingHorizontal =
+      (customCellInput[key]).paddingHorizontal =
         style.body.horizontalPadding / 2;
       (oddRowCellInput[key] as ViewStyle).paddingHorizontal =
         style.body.horizontalPadding / 2;
@@ -190,27 +190,27 @@ export const createOfflineTableComponent = <
     }
 
     if (style.body.verticalPadding !== 0) {
-      (customCellInput[key] as ViewStyle).paddingVertical =
+      (customCellInput[key]).paddingVertical =
         style.body.verticalPadding;
-      (oddRowCellInput[key] as TextStyle).paddingVertical =
+      (oddRowCellInput[key]).paddingVertical =
         style.body.verticalPadding;
-      (evenRowCellInput[key] as TextStyle).paddingVertical =
+      (evenRowCellInput[key]).paddingVertical =
         style.body.verticalPadding
     }
 
     switch (column?.alignment) {
       case 'middle':
-        (customHeaderInput[key] as TextStyle).textAlign = 'center';
-        (customCellInput[key] as ViewStyle).alignItems = 'center';
-        (oddRowCellInput[key] as TextStyle).textAlign = 'center';
-        (evenRowCellInput[key] as TextStyle).textAlign = 'center'
+        (customHeaderInput[key]).textAlign = 'center';
+        (customCellInput[key]).alignItems = 'center';
+        (oddRowCellInput[key]).textAlign = 'center';
+        (evenRowCellInput[key]).textAlign = 'center'
         break
 
       case 'right':
-        (customHeaderInput[key] as TextStyle).textAlign = 'right';
-        (customCellInput[key] as ViewStyle).alignItems = 'flex-end';
-        (oddRowCellInput[key] as TextStyle).textAlign = 'right';
-        (evenRowCellInput[key] as TextStyle).textAlign = 'right'
+        (customHeaderInput[key]).textAlign = 'right';
+        (customCellInput[key]).alignItems = 'flex-end';
+        (oddRowCellInput[key]).textAlign = 'right';
+        (evenRowCellInput[key]).textAlign = 'right'
         break
     }
   }

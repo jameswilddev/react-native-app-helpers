@@ -16,8 +16,8 @@ import { createInputComponent } from '../createInputComponent'
  */
 export const createNullablePasswordInputComponent = (
   controlStyle: ControlStyle,
-  leftIcon: null | React.ReactNode | JSX.Element,
-  rightIcon: null | React.ReactNode | JSX.Element,
+  leftIcon: null | React.ReactNode | React.JSX.Element,
+  rightIcon: null | React.ReactNode | React.JSX.Element,
   minimumLength: null | number,
   maximumLength: null | number
 ): React.FunctionComponent<NullablePasswordInputProps> => {
