@@ -21,7 +21,7 @@ export class FileStore implements FileStoreInterface {
         this.loading = true
 
         const directory = new Directory(Paths.document, 'react-native-app-helpers', 'file-store', subdirectoryName)
-        directory.create({ intermediates: true })
+        directory.create({ intermediates: true, idempotent: true, overwrite: false })
 
         this.subdirectoryName = subdirectoryName
       } finally {
