@@ -1,3 +1,5 @@
+import { type Directory } from 'expo-file-system'
+
 /**
  * The methods made available by the FileStore implementation.
  */
@@ -20,7 +22,7 @@ export interface FileStoreInterface {
    * @throws     When the file store is not loaded.
    * @throws     When the file store is loading.
    */
-  generatePath: (uuid: string) => string
+  generatePath: (uuid: string) => ReadonlyArray<Directory | string>
 
   /**
    * Lists the UUIDs of all files which exist under the current subdirectory.

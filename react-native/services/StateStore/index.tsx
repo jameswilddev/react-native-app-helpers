@@ -1,4 +1,4 @@
-import * as FileSystem from 'expo-file-system'
+import { Directory, File, Paths } from 'expo-file-system'
 import { EventEmitter } from 'events'
 import type { Json } from '../../types/Json'
 import type { StateStoreInterface } from '../../types/StateStoreInterface'
@@ -18,7 +18,7 @@ interface StateStoreContent<T extends Json> {
  * @template T The type of JSON stored.
  */
 export class StateStore<T extends Json> implements StateStoreInterface<T> {
-  private fileUri: null | string = null
+  private fileUri: null | File = null
   private value: undefined | T = undefined
   private writeQueueLength: 0 | 1 | 2 = 0
   private resolveOnUnload: null | (() => void) = null
@@ -52,17 +52,15 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
     } else if (this.fileUri !== null) {
       throw new Error('The state store is already loading.')
     } else {
-      const directoryUri = `${FileSystem.documentDirectory}react-native-app-helpers/state-store`
-      const fileUri = `${directoryUri}/${key}`
+      const directoryUri = new Directory(Paths.document, 'react-native-app-helpers', 'state-store')
+      const fileUri = new File(directoryUri, key)
 
       this.fileUri = fileUri
 
-      await FileSystem.makeDirectoryAsync(directoryUri, {
-        intermediates: true
-      })
+      directoryUri.create({ intermediates: true, idempotent: true, overwrite: false })
 
-      if ((await FileSystem.getInfoAsync(fileUri)).exists) {
-        const raw = await FileSystem.readAsStringAsync(fileUri)
+      if (fileUri.exists) {
+        const raw = await fileUri.text()
 
         const content: StateStoreContent<T> = JSON.parse(raw)
 
@@ -94,12 +92,11 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
       const content: StateStoreContent<T> = {
         version: this.version,
         value: this.value as T
-      }
+      };
 
-      await FileSystem.writeAsStringAsync(
-        this.fileUri as string,
-        JSON.stringify(content)
-      )
+      // NOTE: Expo's developer team have removed atomic, asynchronous file
+      //       writing from the latest expo-file-system.
+      (this.fileUri as File).write(JSON.stringify(content))
 
       this.writeQueueLength--
 

@@ -719,30 +719,20 @@ export class Sync<
                     preflightResponseCollectionItem
                   })
 
-                  const statusCode = await this.request.returningFile(
+                  await this.request.returningFile(
                     'GET',
                     file.route,
                     { type: 'empty' },
                     {},
                     null,
-                    this.fileStore.generatePath(file.uuid),
-                    ['200'],
-                    ['404', '403']
+                    this.fileStore.generatePath(file.uuid)
                   )
 
-                  if (statusCode === '200') {
-                    this.logger.information(
-                      `Successfully pulled file "${file.uuid}" of "${stepKey}" "${uuid}".`
-                    )
+                  this.logger.information(
+                    `Successfully pulled file "${file.uuid}" of "${stepKey}" "${uuid}".`
+                  )
 
-                    completedFiles++
-                  } else {
-                    this.logger.warning(
-                      `The API returned status code "${statusCode}" during the pull of file "${file.uuid}" of "${stepKey}" "${uuid}", indicating that the user has lost access since the time of preflight; sync has been interrupted and will need to run again.`
-                    )
-
-                    return false
-                  }
+                  completedFiles++
                 }
 
                 return true

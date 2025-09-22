@@ -1,3 +1,5 @@
+import type { Directory } from 'expo-file-system'
+
 /**
  * A request body is to contain a file.
  */
@@ -10,5 +12,5 @@ export interface FileRequestBody {
   /**
    * The URI of the file to include in the request body.
    */
-  readonly fileUri: string
+  readonly fileUri: ReadonlyArray<string | Directory>
 }

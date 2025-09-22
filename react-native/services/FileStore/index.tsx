@@ -1,4 +1,4 @@
-import * as FileSystem from 'expo-file-system'
+import { Directory, File, Paths } from 'expo-file-system'
 import type { FileStoreInterface } from '../../types/FileStoreInterface'
 import type { UuidGenerator } from '../UuidGenerator'
 
@@ -20,10 +20,8 @@ export class FileStore implements FileStoreInterface {
       try {
         this.loading = true
 
-        await FileSystem.makeDirectoryAsync(
-          `${FileSystem.documentDirectory}react-native-app-helpers/file-store/${subdirectoryName}`,
-          { intermediates: true }
-        )
+        const directory = new Directory(Paths.document, 'react-native-app-helpers', 'file-store', subdirectoryName)
+        directory.create({ intermediates: true })
 
         this.subdirectoryName = subdirectoryName
       } finally {
@@ -34,13 +32,13 @@ export class FileStore implements FileStoreInterface {
     }
   }
 
-  generatePath (uuid: string): string {
+  generatePath (uuid: string): ReadonlyArray<Directory | string> {
     if (this.loading) {
       throw new Error('The file store is currently loading.')
     } else if (this.subdirectoryName === null) {
       throw new Error('The file store is not loaded.')
     } else {
-      return `${FileSystem.documentDirectory}react-native-app-helpers/file-store/${this.subdirectoryName}/${uuid}`
+      return [Paths.document, 'react-native-app-helpers', 'file-store', this.subdirectoryName, uuid]
     }
   }
 
@@ -53,9 +51,9 @@ export class FileStore implements FileStoreInterface {
       try {
         this.operationsInProgress++
 
-        return await FileSystem.readDirectoryAsync(
-          `${FileSystem.documentDirectory}react-native-app-helpers/file-store/${this.subdirectoryName}`
-        )
+        const directory = new Directory(Paths.document, 'react-native-app-helpers', 'file-store', this.subdirectoryName)
+
+        return (directory.list()).map(x => x.name)
       } finally {
         this.operationsInProgress--
       }
@@ -71,7 +69,8 @@ export class FileStore implements FileStoreInterface {
       try {
         this.operationsInProgress++
 
-        await FileSystem.deleteAsync(this.generatePath(uuid))
+        const file = new File(...this.generatePath(uuid))
+        file.delete()
       } finally {
         this.operationsInProgress--
       }
@@ -103,10 +102,9 @@ export class FileStore implements FileStoreInterface {
 
         const output = this.uuidGenerator.generate()
 
-        await FileSystem.moveAsync({
-          from: fileUri,
-          to: this.generatePath(output)
-        })
+        const file = new File(fileUri)
+
+        file.move(new File(...this.generatePath(output)))
 
         return output
       } finally {
@@ -126,10 +124,9 @@ export class FileStore implements FileStoreInterface {
 
         const output = this.uuidGenerator.generate()
 
-        await FileSystem.copyAsync({
-          from: fileUri,
-          to: this.generatePath(output)
-        })
+        const file = new File(fileUri)
+
+        file.copy(new File(...this.generatePath(output)))
 
         return output
       } finally {

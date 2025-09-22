@@ -1,3 +1,4 @@
+import type { Directory } from 'expo-file-system'
 import type { EmptyRequestBody } from '../EmptyRequestBody'
 import type { FileRequestBody } from '../FileRequestBody'
 import type { Json } from '../Json'
@@ -76,7 +77,6 @@ export interface RequestInterface {
   /**
    * Performs a request which returns a file.  NOTE: timeouts are not yet
    * available for this method.
-   * @template T                    The expected response status code(s).
    * @param method                  The HTTP method to use.
    * @param route                   The URL path relative to the base URL.
    * @param requestBody             The request body to send.
@@ -86,18 +86,16 @@ export interface RequestInterface {
    *                                request.
    * @param fileUri                 The URI to which the returned file is to be
    *                                downloaded.
-   * @param successfulStatusCodes   The status codes which indicate success.
-   * @param unsuccessfulStatusCodes The status codes which indicate failure.
-   * @returns                       The returned status code.
+   * @throws                        When the specified file already exists on
+   *                                disk.
+   * @throws                        When a non-2xx HTTP status code is returned.
    */
-  returningFile: <T extends string>(
+  returningFile: (
     method: 'GET',
     route: string,
     requestBody: EmptyRequestBody,
     queryParameters: QueryParameters,
     abortSignal: null,
-    fileUri: string,
-    successfulStatusCodes: readonly T[],
-    unsuccessfulStatusCodes: readonly T[]
-  ) => Promise<T>
+    fileUri: ReadonlyArray<Directory | string>
+  ) => Promise<void>
 }

@@ -1002,7 +1002,7 @@ test('get request file response empty', async () => {
   await request.withoutResponse(
     'PUT',
     'example/route',
-    { type: 'file', fileUri: 'Example File Uri' },
+    { type: 'file', fileUri: ['Example', 'File Uri'] },
     {
       'Example Query Parameter A Key': 'Example Query Parameter A Value',
       'Example Query Parameter B Key': 12.34,
@@ -1062,7 +1062,7 @@ test('get request file response empty external abort', async () => {
   const promise = request.withoutResponse(
     'PUT',
     'example/route',
-    { type: 'file', fileUri: 'Example File Uri' },
+    { type: 'file', fileUri: ['Example', 'File Uri'] },
     {
       'Example Query Parameter A Key': 'Example Query Parameter A Value',
       'Example Query Parameter B Key': 12.34,
@@ -1126,7 +1126,7 @@ test('get request file response empty external abort null', async () => {
   const promise = request.withoutResponse(
     'PUT',
     'example/route',
-    { type: 'file', fileUri: 'Example File Uri' },
+    { type: 'file', fileUri: ['Example', 'File Uri'] },
     {
       'Example Query Parameter A Key': 'Example Query Parameter A Value',
       'Example Query Parameter B Key': 12.34,
@@ -1715,7 +1715,7 @@ test('get request empty response file', async () => {
     fetch as unknown as GlobalFetch['fetch']
   )
 
-  const response = await request.returningFile(
+  await request.returningFile(
     'GET',
     'example/route',
     { type: 'empty' },
@@ -1726,12 +1726,8 @@ test('get request empty response file', async () => {
       'Example Query Parameter D Key': true
     },
     null,
-    'Example File Uri',
-    ['244', '123', '89'],
-    ['800', '222', '347', '844']
+    ['Example', 'File Uri']
   )
-
-  expect(response).toEqual('123')
 
   expect(FileSystem.downloadAsync).toBeCalledTimes(1)
   expect(FileSystem.downloadAsync).toBeCalledWith(
@@ -1763,7 +1759,7 @@ test('get request empty response file failure status code', async () => {
     fetch as unknown as GlobalFetch['fetch']
   )
 
-  const response = await request.returningFile(
+  await request.returningFile(
     'GET',
     'example/route',
     { type: 'empty' },
@@ -1774,12 +1770,8 @@ test('get request empty response file failure status code', async () => {
       'Example Query Parameter D Key': true
     },
     null,
-    'Example File Uri',
-    ['244', '123', '89'],
-    ['800', '222', '347', '844']
+    ['Example', 'File Uri']
   )
-
-  expect(response).toEqual('347')
 
   expect(FileSystem.downloadAsync).toBeCalledTimes(1)
   expect(FileSystem.downloadAsync).toBeCalledWith(
@@ -1826,9 +1818,7 @@ test('get request empty response file invalid status code', async () => {
       'Example Query Parameter D Key': true
     },
     null,
-    'Example File Uri',
-    ['244', '123', '89'],
-    ['800', '222', '347', '844']
+    ['Example', 'File Uri']
   )
 
   await expect(promise).rejects.toEqual(

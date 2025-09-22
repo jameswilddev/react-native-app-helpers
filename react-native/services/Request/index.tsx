@@ -1,4 +1,4 @@
-import * as FileSystem from 'expo-file-system'
+import { type Directory, File } from 'expo-file-system'
 import type { EmptyRequestBody } from '../../types/EmptyRequestBody'
 import type { FileRequestBody } from '../../types/FileRequestBody'
 import type { Json } from '../../types/Json'
@@ -6,14 +6,6 @@ import type { JsonRequestBody } from '../../types/JsonRequestBody'
 import type { QueryParameter } from '../../types/QueryParameter'
 import type { QueryParameters } from '../../types/QueryParameters'
 import type { RequestInterface } from '../../types/RequestInterface'
-
-class AbortError extends Error {
-  constructor () {
-    super('Aborted.')
-
-    this.name = 'AbortError'
-  }
-}
 
 /**
  * Allows HTTP/S requests to be made for JSON and files relative to a base URL.
@@ -157,8 +149,10 @@ export class Request implements RequestInterface {
   ): null | BodyInit {
     switch (requestBody.type) {
       case 'empty':
-      case 'file':
         return null
+
+      case 'file':
+        return new File(...requestBody.fileUri)
 
       case 'json':
         return JSON.stringify(requestBody.value)
@@ -176,54 +170,16 @@ export class Request implements RequestInterface {
     return await this.withTimeout(abortSignal, async (signal) => {
       const url = this.constructUrl(route, queryParameters)
 
-      let response: { readonly status: number }
-
-      switch (requestBody.type) {
-        case 'empty':
-        case 'json':
-          response = await this.fetch(url, {
-            signal,
-            method,
-            headers: {
-              ...this.commonHeaders(),
-              ...this.requestBodyHeaders(requestBody),
-              Accept: 'application/json' // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
-            },
-            body: this.requestBodyBody(requestBody)
-          })
-          break
-
-        case 'file': {
-          const task = FileSystem.createUploadTask(url, requestBody.fileUri, {
-            uploadType: FileSystem.FileSystemUploadType.BINARY_CONTENT,
-            headers: {
-              ...this.commonHeaders(),
-              ...this.requestBodyHeaders(requestBody),
-              Accept: 'application/json' // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
-            }
-          })
-
-          const eventListener = (): void => {
-            void task.cancelAsync()
-          }
-
-          try {
-            signal.addEventListener('abort', eventListener)
-
-            const result = await task.uploadAsync()
-
-            // NOTE: According to Expo's documentation, this should only return a value or undefined, but it has been observed to return null when the task is aborted.
-            if (result === undefined || result === null) {
-              throw new AbortError()
-            } else {
-              response = result
-            }
-          } finally {
-            signal.removeEventListener('abort', eventListener)
-          }
-          break
-        }
-      }
+      const response = await this.fetch(url, {
+        signal,
+        method,
+        headers: {
+          ...this.commonHeaders(),
+          ...this.requestBodyHeaders(requestBody),
+          Accept: 'application/json' // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
+        },
+        body: this.requestBodyBody(requestBody)
+      })
 
       this.checkStatusCode(method, url, response.status, expectedStatusCodes)
 
@@ -271,49 +227,24 @@ export class Request implements RequestInterface {
     })
   }
 
-  async returningFile<T extends string>(
-    method: 'GET',
+  async returningFile (
+    _method: 'GET',
     route: string,
     requestBody: EmptyRequestBody,
     queryParameters: QueryParameters,
 
-    // Not yet possible with FileSystem.downloadAsync.
+    // Not yet possible with File.downloadAsync.
     _abortSignal: null,
 
-    fileUri: string,
-    successfulStatusCodes: readonly T[],
-    unsuccessfulStatusCodes: readonly T[]
-  ): Promise<T> {
+    fileUri: ReadonlyArray<Directory | string>
+  ): Promise<void> {
     const url = this.constructUrl(route, queryParameters)
 
-    try {
-      const response = await FileSystem.downloadAsync(url, fileUri, {
-        headers: {
-          ...this.commonHeaders(),
-          ...this.requestBodyHeaders(requestBody)
-        }
-      })
-
-      this.checkStatusCode(method, url, response.status, [
-        ...successfulStatusCodes,
-        ...unsuccessfulStatusCodes
-      ])
-
-      // It's possible that the application will close before we hit this line,
-      // but this is the best we can do unfortunately.
-      if (unsuccessfulStatusCodes.includes(String(response.status) as T)) {
-        await FileSystem.deleteAsync(fileUri, { idempotent: true })
+    await File.downloadFileAsync(url, new File(...fileUri), {
+      headers: {
+        ...this.commonHeaders(),
+        ...this.requestBodyHeaders(requestBody)
       }
-
-      return String(response.status) as T
-    } catch (e) {
-      // It has been observed that FileSystem.downloadAsync will still create
-      // files for non-2xx status codes.  It's possible that the application
-      // will close before we hit this line, but this is the best we can do
-      // unfortunately.
-      await FileSystem.deleteAsync(fileUri, { idempotent: true })
-
-      throw e
-    }
+    })
   }
 }
