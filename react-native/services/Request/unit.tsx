@@ -1,4 +1,4 @@
-import { Request, type Json } from '../../..'
+import { Request, type Json, type UuidGeneratorInterface } from '../../..'
 import * as FileSystem from 'expo-file-system'
 
 class AbortError extends Error {
@@ -13,12 +13,17 @@ test('nothing happens', async () => {
   const authorizationHeaderFactory = jest.fn()
   const fetch = jest.fn()
 
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
+
   // eslint-disable-next-line no-new
   new Request(
     'example-base-url.com/example/sub/path/',
     1000,
     authorizationHeaderFactory,
-    fetch
+    fetch,
+    uuidGenerator
   )
 
   expect(authorizationHeaderFactory).not.toBeCalled()
@@ -26,6 +31,7 @@ test('nothing happens', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty missing protocol', async () => {
@@ -51,11 +57,15 @@ test('get request empty response empty missing protocol', async () => {
     return await promise
   })
 
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -92,6 +102,7 @@ test('get request empty response empty missing protocol', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty missing trailing slash', async () => {
@@ -116,11 +127,15 @@ test('get request empty response empty missing trailing slash', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -157,6 +172,7 @@ test('get request empty response empty missing trailing slash', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty no authorization', async () => {
@@ -181,11 +197,15 @@ test('get request empty response empty no authorization', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => null,
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -221,6 +241,7 @@ test('get request empty response empty no authorization', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty no abort signal', async () => {
@@ -245,11 +266,15 @@ test('get request empty response empty no abort signal', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
 
   const promise = request.withoutResponse(
@@ -285,6 +310,7 @@ test('get request empty response empty no abort signal', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty no query parameters', async () => {
@@ -309,11 +335,15 @@ test('get request empty response empty no query parameters', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -345,6 +375,7 @@ test('get request empty response empty no query parameters', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty no retained query parameters', async () => {
@@ -369,11 +400,15 @@ test('get request empty response empty no retained query parameters', async () =
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -410,6 +445,7 @@ test('get request empty response empty no retained query parameters', async () =
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty first query parameter dropped', async () => {
@@ -434,11 +470,15 @@ test('get request empty response empty first query parameter dropped', async () 
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -475,6 +515,7 @@ test('get request empty response empty first query parameter dropped', async () 
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty invalid status code', async () => {
@@ -499,11 +540,15 @@ test('get request empty response empty invalid status code', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -544,6 +589,7 @@ test('get request empty response empty invalid status code', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty external abort', async () => {
@@ -560,11 +606,15 @@ test('get request empty response empty external abort', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -602,6 +652,7 @@ test('get request empty response empty external abort', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response before timeout', async () => {
@@ -626,11 +677,15 @@ test('get request empty response before timeout', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -665,6 +720,7 @@ test('get request empty response before timeout', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response empty timeout', async () => {
@@ -681,11 +737,15 @@ test('get request empty response empty timeout', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -721,6 +781,7 @@ test('get request empty response empty timeout', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response empty', async () => {
@@ -745,11 +806,15 @@ test('get request json response empty', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -785,6 +850,7 @@ test('get request json response empty', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response empty external abort', async () => {
@@ -801,11 +867,15 @@ test('get request json response empty external abort', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -844,6 +914,7 @@ test('get request json response empty external abort', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response empty timeout', async () => {
@@ -860,11 +931,15 @@ test('get request json response empty timeout', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -901,6 +976,7 @@ test('get request json response empty timeout', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response empty invalid status code', async () => {
@@ -925,11 +1001,15 @@ test('get request json response empty invalid status code', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -971,6 +1051,7 @@ test('get request json response empty invalid status code', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request file response empty', async () => {
@@ -991,11 +1072,15 @@ test('get request file response empty', async () => {
     cancelAsync,
     uploadAsync
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -1031,6 +1116,7 @@ test('get request file response empty', async () => {
   expect(fetch).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request file response empty external abort', async () => {
@@ -1052,11 +1138,15 @@ test('get request file response empty external abort', async () => {
     cancelAsync,
     uploadAsync
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -1095,6 +1185,7 @@ test('get request file response empty external abort', async () => {
   expect(fetch).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request file response empty external abort null', async () => {
@@ -1116,11 +1207,15 @@ test('get request file response empty external abort null', async () => {
     cancelAsync,
     uploadAsync
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.withoutResponse(
@@ -1159,6 +1254,7 @@ test('get request file response empty external abort null', async () => {
   expect(fetch).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response json', async () => {
@@ -1168,11 +1264,15 @@ test('get request empty response json', async () => {
       example: ['json', 'response']
     })
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -1216,6 +1316,7 @@ test('get request empty response json', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response json external abort', async () => {
@@ -1232,11 +1333,15 @@ test('get request empty response json external abort', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1280,6 +1385,7 @@ test('get request empty response json external abort', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response json timeout', async () => {
@@ -1296,11 +1402,15 @@ test('get request empty response json timeout', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1342,6 +1452,7 @@ test('get request empty response json timeout', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response json invalid status code', async () => {
@@ -1366,11 +1477,15 @@ test('get request empty response json invalid status code', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -1417,6 +1532,7 @@ test('get request empty response json invalid status code', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response json', async () => {
@@ -1444,11 +1560,15 @@ test('get request json response json', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -1493,6 +1613,7 @@ test('get request json response json', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response json external abort', async () => {
@@ -1509,11 +1630,15 @@ test('get request json response json external abort', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1558,6 +1683,7 @@ test('get request json response json external abort', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response json timeout', async () => {
@@ -1574,11 +1700,15 @@ test('get request json response json timeout', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
   const promise = request.returningJson<{
@@ -1621,6 +1751,7 @@ test('get request json response json timeout', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request json response json invalid status code', async () => {
@@ -1645,11 +1776,15 @@ test('get request json response json invalid status code', async () => {
 
     return await promise
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
   const abortController = new AbortController()
 
@@ -1697,6 +1832,7 @@ test('get request json response json invalid status code', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(FileSystem.downloadAsync).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response file', async () => {
@@ -1708,11 +1844,15 @@ test('get request empty response file', async () => {
   ).mockResolvedValue({
     status: 123
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
 
   await request.returningFile(
@@ -1741,6 +1881,7 @@ test('get request empty response file', async () => {
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(fetch).not.toHaveBeenCalled()
   expect(FileSystem.deleteAsync).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response file failure status code', async () => {
@@ -1752,11 +1893,15 @@ test('get request empty response file failure status code', async () => {
   ).mockResolvedValue({
     status: 347
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
 
   await request.returningFile(
@@ -1789,6 +1934,7 @@ test('get request empty response file failure status code', async () => {
 
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(fetch).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })
 
 test('get request empty response file invalid status code', async () => {
@@ -1800,11 +1946,15 @@ test('get request empty response file invalid status code', async () => {
   ).mockResolvedValue({
     status: 889
   })
+  const uuidGenerator: UuidGeneratorInterface = {
+    generate: jest.fn()
+  }
   const request = new Request(
     'https://example-base-url.com/example/sub/path/',
     1000,
     () => 'Example Authorization Header',
-    fetch as unknown as GlobalFetch['fetch']
+    fetch as unknown as GlobalFetch['fetch'],
+    uuidGenerator
   )
 
   const promise = request.returningFile(
@@ -1843,4 +1993,5 @@ test('get request empty response file invalid status code', async () => {
 
   expect(FileSystem.createUploadTask).not.toHaveBeenCalled()
   expect(fetch).not.toHaveBeenCalled()
+  expect(uuidGenerator.generate).not.toHaveBeenCalled()
 })

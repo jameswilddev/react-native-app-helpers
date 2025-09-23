@@ -1,4 +1,4 @@
-import { type Directory, File } from 'expo-file-system'
+import { type Directory, File, Paths } from 'expo-file-system'
 import type { EmptyRequestBody } from '../../types/EmptyRequestBody'
 import type { FileRequestBody } from '../../types/FileRequestBody'
 import type { Json } from '../../types/Json'
@@ -6,6 +6,7 @@ import type { JsonRequestBody } from '../../types/JsonRequestBody'
 import type { QueryParameter } from '../../types/QueryParameter'
 import type { QueryParameters } from '../../types/QueryParameters'
 import type { RequestInterface } from '../../types/RequestInterface'
+import type { UuidGeneratorInterface } from '../../types/UuidGeneratorInterface'
 
 /**
  * Allows HTTP/S requests to be made for JSON and files relative to a base URL.
@@ -23,12 +24,15 @@ export class Request implements RequestInterface {
    *                                   otherwise, the returned string (e.g.
    *                                   "BEARER 1234") is taken as the
    *                                   Authorization header.
+   * @param fetch                      Expo's implementation of fetch().
+   * @param uuidGenerator              A generator of UUIDs.
    */
   constructor (
     baseUrl: string,
     private readonly timeoutMilliseconds: number,
     private readonly authorizationHeaderFactory: () => null | string,
-    private readonly fetch: GlobalFetch['fetch']
+    private readonly fetch: GlobalFetch['fetch'],
+    private readonly uuidGenerator: UuidGeneratorInterface
   ) {
     if (!/^[a-z]+:\/\//.test(baseUrl)) {
       baseUrl = `https://${baseUrl}`
@@ -151,11 +155,21 @@ export class Request implements RequestInterface {
       case 'empty':
         return null
 
-      case 'file':
-        return new File(...requestBody.fileUri)
+      case 'file': {
+        const original = new File(...requestBody.fileUri)
+        const temporaryCopy = new File(Paths.cache, `${this.uuidGenerator.generate()}.bin`)
+        original.copy(temporaryCopy)
+        return temporaryCopy
+      }
 
       case 'json':
         return JSON.stringify(requestBody.value)
+    }
+  }
+
+  private cleanUpBodyBody (body: null | BodyInit): void {
+    if (body instanceof File) {
+      body.delete()
     }
   }
 
@@ -169,17 +183,25 @@ export class Request implements RequestInterface {
   ): Promise<T> {
     return await this.withTimeout(abortSignal, async (signal) => {
       const url = this.constructUrl(route, queryParameters)
+      let body: null | BodyInit = null
+      let response: Response
 
-      const response = await this.fetch(url, {
-        signal,
-        method,
-        headers: {
-          ...this.commonHeaders(),
-          ...this.requestBodyHeaders(requestBody),
-          Accept: 'application/json' // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
-        },
-        body: this.requestBodyBody(requestBody)
-      })
+      try {
+        body = this.requestBodyBody(requestBody)
+
+        response = await this.fetch(url, {
+          signal,
+          method,
+          headers: {
+            ...this.commonHeaders(),
+            ...this.requestBodyHeaders(requestBody),
+            Accept: 'application/json' // If we do not do this, Laravel will redirect to / in the event of an error, hiding the returned validation error.
+          },
+          body
+        })
+      } finally {
+        this.cleanUpBodyBody(body)
+      }
 
       this.checkStatusCode(method, url, response.status, expectedStatusCodes)
 
@@ -206,17 +228,25 @@ export class Request implements RequestInterface {
     > {
     return await this.withTimeout(abortSignal, async (signal) => {
       const url = this.constructUrl(route, queryParameters)
+      let body: null | BodyInit = null
+      let response: Response
 
-      const response = await this.fetch(url, {
-        signal,
-        method,
-        headers: {
-          ...this.commonHeaders(),
-          ...this.requestBodyHeaders(requestBody),
-          Accept: 'application/json'
-        },
-        body: this.requestBodyBody(requestBody)
-      })
+      try {
+        body = this.requestBodyBody(requestBody)
+
+        response = await this.fetch(url, {
+          signal,
+          method,
+          headers: {
+            ...this.commonHeaders(),
+            ...this.requestBodyHeaders(requestBody),
+            Accept: 'application/json'
+          },
+          body
+        })
+      } finally {
+        this.cleanUpBodyBody(body)
+      }
 
       this.checkStatusCode(method, url, response.status, expectedStatusCodes as readonly string[])
 
