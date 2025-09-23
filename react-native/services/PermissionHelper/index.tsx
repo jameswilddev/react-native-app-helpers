@@ -17,12 +17,25 @@ export class PermissionHelper implements PermissionHelperInterface {
    *                    might only grant access to a small subset of resources.
    */
   async acquire (
-    permissions: ReadonlyArray<() => Promise<PermissionResponse>>,
+    permissions: ReadonlyArray<{
+      get: () => Promise<PermissionResponse>
+      request: () => Promise<PermissionResponse>
+    }>,
     onFailure: (showSettingsScreen: () => Promise<void>) => Promise<void>,
     onSuccess: () => Promise<void>
   ): Promise<void> {
-    for (const permission of permissions) {
-      if (!(await permission()).granted) {
+    for (const { get, request } of permissions) {
+      const got = await get()
+
+      if (!got.granted) {
+        if (got.canAskAgain) {
+          const requested = await request()
+
+          if (requested.granted) {
+            continue
+          }
+        }
+
         await onFailure(showSettingsScreen)
         return
       }

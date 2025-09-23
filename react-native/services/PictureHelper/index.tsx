@@ -28,7 +28,13 @@ export class PictureHelper implements PictureHelperInterface {
     onSuccess: (uuid: string) => Promise<void>
   ): Promise<void> {
     await this.permissionHelper.acquire(
-      [ImagePicker.requestCameraPermissionsAsync, ImagePicker.requestMediaLibraryPermissionsAsync],
+      [{
+        get: ImagePicker.getCameraPermissionsAsync,
+        request: ImagePicker.requestCameraPermissionsAsync
+      }, {
+        get: ImagePicker.getMediaLibraryPermissionsAsync,
+        request: ImagePicker.requestMediaLibraryPermissionsAsync
+      }],
       onPermissionDenied,
       async () => {
         const result = await ImagePicker.launchCameraAsync({
@@ -68,7 +74,10 @@ export class PictureHelper implements PictureHelperInterface {
     onSuccess: (uuid: string) => Promise<void>
   ): Promise<void> {
     await this.permissionHelper.acquire(
-      [ImagePicker.requestMediaLibraryPermissionsAsync],
+      [{
+        get: ImagePicker.getMediaLibraryPermissionsAsync,
+        request: ImagePicker.requestMediaLibraryPermissionsAsync
+      }],
       onPermissionDenied,
       async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
@@ -101,7 +110,10 @@ export class PictureHelper implements PictureHelperInterface {
     onSuccess: (uuids: readonly string[]) => Promise<void>
   ): Promise<void> {
     await this.permissionHelper.acquire(
-      [ImagePicker.requestMediaLibraryPermissionsAsync],
+      [{
+        get: ImagePicker.getMediaLibraryPermissionsAsync,
+        request: ImagePicker.requestMediaLibraryPermissionsAsync
+      }],
       onPermissionDenied,
       async () => {
         const result = await ImagePicker.launchImageLibraryAsync({

@@ -15,7 +15,10 @@ export interface PermissionHelperInterface {
    *                    might only grant access to a small subset of resources.
    */
   acquire: (
-    permissions: ReadonlyArray<() => Promise<PermissionResponse>>,
+    permissions: ReadonlyArray<{
+      get: () => Promise<PermissionResponse>
+      request: () => Promise<PermissionResponse>
+    }>,
     onFailure: (showSettingsScreen: () => Promise<void>) => Promise<void>,
     onSuccess: () => Promise<void>
   ) => Promise<void>
