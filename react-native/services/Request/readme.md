@@ -6,6 +6,7 @@ Allows HTTP/S requests to be made for JSON and files relative to a base URL.
 
 ```tsx
 import { Request } from "react-native-app-helpers";
+import { fetch } from "expo/fetch";
 
 const request = new Request(
   `https://your-base-url.com/with/optional/paths`,
