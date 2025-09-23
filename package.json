@@ -59,7 +59,7 @@
   "dependencies": {
     "@sentry/react-native": "~6.20.0",
     "events": "^3.3.0",
-    "expo": "^54.0.9",
+    "expo": "~54.0.10",
     "expo-constants": "~18.0.9",
     "expo-crypto": "~15.0.7",
     "expo-file-system": "~19.0.14",
