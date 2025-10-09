@@ -96,7 +96,7 @@ export class StateStore<T extends Json> implements StateStoreInterface<T> {
 
       // NOTE: Expo's developer team have removed atomic, asynchronous file
       //       writing from the latest expo-file-system.
-      (this.fileUri as File).write(JSON.stringify(content))
+      (this.fileUri as File).write(JSON.stringify(content), { encoding: 'utf8' })
 
       this.writeQueueLength--
 
